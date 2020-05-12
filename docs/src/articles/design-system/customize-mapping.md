@@ -20,9 +20,9 @@ While changing a single parameter is a simple process, changing semantic propert
 
 <hr>
 
-## Create a custom mapping
+## Create a mapping
 
-Let's create a file to define a custom mapping. In your project root, create a `custom-mapping.json`;
+Let's create a file to define a mapping. In your project root, create a `mapping.json`;
 
 ```json
 {
@@ -97,12 +97,12 @@ In case of default appearance has no `backgroundColor`, let's find a default var
     "Button": {
       "appearances": {
         "filled": {
-          // ...
-        },
-        "variantGroups": {
-          "status": {
-            "primary": {
-              "backgroundColor": "color-primary-default" // <-- Here we are!
+          "mapping": {},
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "backgroundColor": "color-primary-default" // <-- Here we are!
+              }
             }
           }
         }
@@ -112,7 +112,7 @@ In case of default appearance has no `backgroundColor`, let's find a default var
 }
 ```
 
-Now let's go back to our `custom-mapping.json` and modify `backgroundColor` to be `pink`
+Now let's go back to our `mapping.json` and modify `backgroundColor` to be `pink`
 
 ```json
 {
@@ -140,24 +140,30 @@ Now let's go back to our `custom-mapping.json` and modify `backgroundColor` to b
 
 ## Merge mappings
 
-The only thing we have to do is to pass our custom mapping to an `ApplicationProvider` component.
+The only thing we have to do is to pass our mapping to an `ApplicationProvider` component.
 
 ```js
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
-import { default as customMapping } from './path-to/custom-mapping.json'; // <-- import custom mapping
+import { default as mapping } from './path-to/mapping.json'; // <-- import mapping
 
-const App = () => (
+export default () => (
   <ApplicationProvider 
-    mapping={mapping}
-    customMapping={customMapping} // <-- apply custom mapping
-    theme={lightTheme}>
+    {...eva}
+    customMapping={mapping} // <-- apply mapping
+    theme={eva.light}>
   </ApplicationProvider>
 );
-
-export default App;
 ```
+
+<div class="note note-info">
+  <div class="note-body">
+   Custom Mapping is applied automatically in case of using `@ui-kitten/metro-config` package,
+   meaning there is no need to modify ApplicationProvider.
+   To check this, see if it used in metro.config.js. [Relative guide](guides/improving-performance).
+  </div>
+</div>
 
 Here we are. Now the default `backgroundColor` of a Button should be `pink`. Here is a result
 
@@ -177,9 +183,6 @@ You are also able to make one of the semantic parameters to be used by default. 
     "Button": {
       "meta": {
         "appearances": {
-          "filled": {
-            "default": false // <-- Previously was set to `true`
-          },
           "outline": {
             "default": true // <-- Set `outline` appearance to be default
           }

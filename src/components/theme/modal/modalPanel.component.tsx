@@ -6,8 +6,8 @@
 
 import React from 'react';
 import {
-  View,
   StyleSheet,
+  View,
   ViewProps,
 } from 'react-native';
 import {
@@ -15,9 +15,9 @@ import {
   ModalResolverProps,
 } from './modalResolver.component';
 import {
-  ModalService,
   ModalPresenting,
   ModalPresentingConfig,
+  ModalService,
 } from './modal.service';
 
 interface ModalPanelChild extends ModalPresentingConfig {
@@ -56,7 +56,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
   public show(element: React.ReactElement, config: ModalPresentingConfig): string {
     const key: string = this.generateUniqueComponentKey();
     const components: Map<string, ModalPanelChild> = this.state.components
-      .set(key, { ...config, element });
+                                                         .set(key, { ...config, element });
 
     this.setState({ components });
 
@@ -71,13 +71,11 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     }
 
     const childElement: React.ReactElement = panelChild.element;
-
     panelChild.element = React.cloneElement(childElement, childElement.props, children);
 
     const components: Map<string, ModalPanelChild> = this.state.components;
-    components.delete(identifier);
     components.set(identifier, panelChild);
-    this.setState({ components });
+    this.forceUpdate();
   }
 
   private generateUniqueComponentKey = (): string => {

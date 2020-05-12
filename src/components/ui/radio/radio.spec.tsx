@@ -1,146 +1,143 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 import {
-  render,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import {
   fireEvent,
-  waitForElement,
-  shallow,
-  RenderAPI,
+  render,
 } from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Radio,
-  RadioComponent,
   RadioProps,
 } from './radio.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
-
-const Mock = (props?: RadioProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
-    <ApplicationProvider
-      mapping={mapping}
-      theme={theme}>
-      <Radio {...props} />
-    </ApplicationProvider>
-  );
-};
-
-const renderComponent = (props?: RadioProps): RenderAPI => {
-  return render(
-    <Mock {...props}/>,
-  );
-};
-
-describe('@radio: matches snapshot', () => {
-
-  it('default', () => {
-    const component: RenderAPI = renderComponent();
-    const { output } = shallow(component.getByType(RadioComponent));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('checked', () => {
-    const component: RenderAPI = renderComponent({ checked: true });
-    const { output } = shallow(component.getByType(Radio));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('disabled', () => {
-    const component: RenderAPI = renderComponent({ disabled: true });
-    const { output } = shallow(component.getByType(Radio));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('checked disabled', () => {
-    const component: RenderAPI = renderComponent({
-      checked: true,
-      disabled: true,
-    });
-    const { output } = shallow(component.getByType(Radio));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('active', async () => {
-    const component: RenderAPI = renderComponent();
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
-    const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(Radio);
-    });
-    const { output: activeOutput } = shallow(active);
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
-    const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(Radio);
-    });
-    const { output: inactiveOutput } = shallow(inactive);
-
-    expect(activeOutput).toMatchSnapshot();
-    expect(inactiveOutput).toMatchSnapshot('default');
-  });
-
-  it('active checked', async () => {
-    const component: RenderAPI = renderComponent({ checked: true });
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
-    const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(Radio);
-    });
-    const { output: activeOutput } = shallow(active);
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
-    const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(Radio);
-    });
-    const { output: inactiveOutput } = shallow(inactive);
-
-    expect(activeOutput).toMatchSnapshot();
-    expect(inactiveOutput).toMatchSnapshot('checked');
-  });
-
-  it('with text (styled)', () => {
-    const component: RenderAPI = renderComponent({
-      text: 'Place your text',
-      textStyle: {
-        fontSize: 22,
-        lineHeight: 24,
-      },
-    });
-    const { output } = shallow(component.getByType(Radio));
-
-    expect(output).toMatchSnapshot();
-  });
-
-});
 
 describe('@radio: component checks', () => {
 
-  it('* emits onChange with correct args', () => {
-    const onChange = jest.fn();
+  const TestRadio = (props?: RadioProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <Radio {...props} />
+    </ApplicationProvider>
+  );
 
-    const component: RenderAPI = renderComponent({
-      checked: false,
-      onChange: onChange,
-    });
+  it('should request checking', () => {
+    const onCheckedChange = jest.fn();
+    const component = render(
+      <TestRadio
+        checked={false}
+        onChange={onCheckedChange}
+      />,
+    );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
+    fireEvent.press(component.queryByType(TouchableOpacity));
+    expect(onCheckedChange).toBeCalledWith(true);
+  });
 
-    expect(onChange).toBeCalledWith(true);
+  it('should request unchecking', () => {
+    const onCheckedChange = jest.fn();
+    const component = render(
+      <TestRadio
+        checked={true}
+        onChange={onCheckedChange}
+      />,
+    );
+
+    fireEvent.press(component.queryByType(TouchableOpacity));
+    expect(onCheckedChange).toBeCalledWith(false);
+  });
+
+  it('should render text', () => {
+    const component = render(
+      <TestRadio>I love Babel</TestRadio>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render text as component', () => {
+    const component = render(
+      <TestRadio>
+        {props => <Text {...props}>I love Babel</Text>}
+      </TestRadio>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should call onPressIn', () => {
+    const onPressIn = jest.fn();
+    const component = render(
+      <TestRadio onPressIn={onPressIn}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
+    expect(onPressIn).toBeCalled();
+  });
+
+  it('should call onPressOut', () => {
+    const onPressOut = jest.fn();
+    const component = render(
+      <TestRadio onPressOut={onPressOut}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
+    expect(onPressOut).toBeCalled();
+  });
+  it('should call onMouseEnter', () => {
+    const onMouseEnter = jest.fn();
+
+    const component = render(
+      <TestRadio onMouseEnter={onMouseEnter}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
+    expect(onMouseEnter).toBeCalled();
+  });
+
+  it('should call onMouseLeave', () => {
+    const onMouseLeave = jest.fn();
+
+    const component = render(
+      <TestRadio onMouseLeave={onMouseLeave}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
+    expect(onMouseLeave).toBeCalled();
+  });
+
+  it('should call onFocus', () => {
+    const onFocus = jest.fn();
+
+    const component = render(
+      <TestRadio onFocus={onFocus}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'focus');
+    expect(onFocus).toBeCalled();
+  });
+
+  it('should call onBlur', () => {
+    const onBlur = jest.fn();
+
+    const component = render(
+      <TestRadio onBlur={onBlur}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'blur');
+    expect(onBlur).toBeCalled();
   });
 
 });

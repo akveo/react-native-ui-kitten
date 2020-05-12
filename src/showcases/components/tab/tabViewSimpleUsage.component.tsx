@@ -1,11 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  Tab,
-  TabView,
-  Text,
-} from '@ui-kitten/components';
+import { Layout, Tab, TabView, Text } from '@ui-kitten/components';
 
 export const TabViewSimpleUsageShowcase = () => {
 
@@ -14,20 +9,20 @@ export const TabViewSimpleUsageShowcase = () => {
   return (
     <TabView
       selectedIndex={selectedIndex}
-      onSelect={setSelectedIndex}>
+      onSelect={index => setSelectedIndex(index)}>
       <Tab title='USERS'>
         <Layout style={styles.tabContainer}>
-          <Text>List of users.</Text>
+          <Text category='h5'>USERS</Text>
         </Layout>
       </Tab>
       <Tab title='ORDERS'>
         <Layout style={styles.tabContainer}>
-          <Text>List of orders.</Text>
+          <Text category='h5'>ORDERS</Text>
         </Layout>
       </Tab>
       <Tab title='TRANSACTIONS'>
         <Layout style={styles.tabContainer}>
-          <Text>List of transactions.</Text>
+          <Text category='h5'>TRANSACTIONS</Text>
         </Layout>
       </Tab>
     </TabView>
@@ -36,6 +31,8 @@ export const TabViewSimpleUsageShowcase = () => {
 
 const styles = StyleSheet.create({
   tabContainer: {
-    minHeight: 64,
+    height: 64,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

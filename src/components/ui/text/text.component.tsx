@@ -10,64 +10,87 @@ import {
   TextProps as RNTextProps,
 } from 'react-native';
 import {
+  EvaStatus,
+  Overwrite,
+ } from '../../devsupport';
+import {
   styled,
   StyledComponentProps,
-} from '@kitten/theme';
+} from '../../theme';
 
-type ChildElement = string | TextElement;
+type TextStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | 'alternative' | 'hint' | string;
+}>;
 
-export interface TextProps extends StyledComponentProps, RNTextProps {
-  category?: string;
-  status?: string;
+type ChildElement = React.ReactText | TextElement;
+
+export interface TextProps extends RNTextProps, TextStyledProps {
   children?: ChildElement | ChildElement[];
+  appearance?: 'default' | 'alternative' | 'hint' | string;
+  category?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 's1' | 's2' | 'p1' | 'p2' | 'c1' | 'c2' | 'label' | string;
+  status?: EvaStatus;
 }
 
 export type TextElement = React.ReactElement<TextProps>;
 
 /**
- * Styled `Text` component.
+ * Basic text writing.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `default`, `alternative`, `hint`.
- * Default is `default`.
+ * @property {ReactText | ReactElement<TextProps>} children - String or number to be rendered as text.
+ * Also can be ReactElement<TextProps> - nested Text component.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} appearance - Can be `default`, `alternative` or `hint`.
+ * Use `alternative` for displaying light text on a dark content and vice versa.
+ * Use `hint` for giving user a hint on something.
+ *
+ * @property {string} category - Can be `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `s1`, `s2`, `p1`, `p2`, `c1`, `c2`, `label`.
+ * Defaults to *p1*.
+ * Use *h* categories when needed to display headings.
+ * Use *s* categories when needed to display subtitles.
+ * Use *p* categories when needed to display regular text.
+ * Use *c* and *label* categories when needed to give user a hint on something.
+ *
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- *
- * @property {string} category - Determines the category of the component.
- * Can be `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `s1`, `s2`, `p1`, `p2`, `c1`, `c2`, `label`.
- * Default is `p1`.
- *
- * @property {string | ReactElement<TextProps>} children - Determines text of the component.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {TextProps} ...TextProps - Any props applied to Text component.
  *
- * @overview-example TextSimpleUsage
+ * @overview-example TextCategories
+ * Text has pre-defined set of styles for headings, subtitles, paragraphs, and more.
  *
  * @overview-example TextAppearances
+ * Also, it has 2 types of additional appearances:
+ * `hint` and `alternative`.
  *
- * @overview-example TextCategories
+ * Use hints when needed to give user a hint on action.
+ * And use alternative when needed to display light text in light themes (same for dark).
  *
  * @overview-example TextStatuses
  *
- * @example TextInlineStyling
+ * @overview-example TextStyling
+ * Text can be styled with `style` property.
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
+ * ```
+ * import { Text } from '@ui-kitten/components';
+ *
+ * <Text style={...}>Place your Text</Text>
+ * ```
  */
-export class TextComponent extends React.Component<TextProps> {
-
-  static styledComponentName: string = 'Text';
+@styled('Text')
+export class Text extends React.Component<TextProps> {
 
   public render(): React.ReactElement<RNTextProps> {
-    const { themedStyle, style, ...derivedProps } = this.props;
+    const { eva, style, ...textProps } = this.props;
 
     return (
       <RNText
-        {...derivedProps}
-        style={[themedStyle, style]}
+        {...textProps}
+        style={[eva.style, style]}
       />
     );
   }
 }
-
-export const Text = styled<TextProps>(TextComponent);

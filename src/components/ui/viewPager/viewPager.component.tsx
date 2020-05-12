@@ -14,58 +14,61 @@ import {
   PanResponderCallbacks,
   PanResponderGestureState,
   PanResponderInstance,
+  Platform,
   StyleSheet,
   View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { I18nLayoutService } from '../support/services';
+import {
+  ChildrenWithProps,
+  RTLService,
+} from '../../devsupport';
 
-type ChildElement = React.ReactElement;
-type ChildrenProp = ChildElement | ChildElement[];
-
-export interface ViewPagerProps extends ViewProps {
-  children: ChildrenProp;
+export interface ViewPagerProps<ChildrenProps = {}> extends ViewProps {
+  children?: ChildrenWithProps<ChildrenProps>;
   selectedIndex?: number;
+  onSelect?: (index: number) => void;
   shouldLoadComponent?: (index: number) => boolean;
   onOffsetChange?: (offset: number) => void;
-  onSelect?: (index: number) => void;
 }
 
 export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
 
 /**
- * `ViewPager` allows flipping through the "pages".
+ * A view with a set of swipeable pages.
  *
  * @extends React.Component
+ **
+ * @property {ReactNode} children - Page components to render within the view.
  *
- * @property {ReactElement | ReactElement[]} children - Determines children of the component.
+ * @property {number} selectedIndex - Index of currently selected view.
  *
- * @property {number} selectedIndex - Determines the index of selected "page".
+ * @property {(number) => void} onSelect - Called when view becomes visible.
  *
- * @property {(index: number) => boolean} shouldLoadComponent - Determines loading behavior particular page and can be
- * used for lazy loading.
+ * @property {(number) => boolean} shouldLoadComponent - A function to determine
+ * whether particular view should be rendered.
+ * Useful when providing "lazy" loading behavior.
  *
- * @property {(offset: number) => void} onOffsetChange - Fires on scroll event with current scroll offset.
- *
- * @property {(index: number) => void} onSelect - Fires on "page" select with corresponding index.
+ * @property {(number) => void} onOffsetChange - Called when scroll offset changes.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ViewPagerSimpleUsage
+ * Simple usage.
  *
  * @overview-example ViewPagerLazyLoading
- *
- * @example ViewPagerInlineStyling
+ * Each view can be loaded lazily by using `shouldLoadComponent` property.
  */
-export class ViewPager extends React.Component<ViewPagerProps> implements PanResponderCallbacks {
+export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProps<ChildrenProps>>
+  implements PanResponderCallbacks {
 
   static defaultProps: Partial<ViewPagerProps> = {
     selectedIndex: 0,
     shouldLoadComponent: (): boolean => true,
   };
 
-  private containerRef: React.RefObject<View> = React.createRef();
+  private containerRef = React.createRef<View>();
   private contentWidth: number = 0;
   private contentOffsetValue: number = 0;
   private contentOffset: Animated.Value = new Animated.Value(this.contentOffsetValue);
@@ -90,9 +93,8 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     const isHorizontalMove: boolean = Math.abs(state.dx) > 0 && Math.abs(state.dx) > Math.abs(state.dy);
 
     if (isHorizontalMove) {
-      const i18nOffset: number = I18nLayoutService.select(state.dx, -state.dx);
+      const i18nOffset: number = RTLService.select(state.dx, -state.dx);
       const nextSelectedIndex: number = this.props.selectedIndex - Math.sign(i18nOffset);
-
       return nextSelectedIndex >= 0 && nextSelectedIndex < this.getChildCount();
     }
 
@@ -100,7 +102,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
   };
 
   public onPanResponderMove = (event: GestureResponderEvent, state: PanResponderGestureState): void => {
-    const i18nOffset: number = I18nLayoutService.select(this.contentWidth, -this.contentWidth);
+    const i18nOffset: number = RTLService.select(this.contentWidth, -this.contentWidth);
     const selectedPageOffset: number = this.props.selectedIndex * i18nOffset;
 
     this.contentOffset.setValue(state.dx - selectedPageOffset);
@@ -108,7 +110,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
 
   public onPanResponderRelease = (event: GestureResponderEvent, state: PanResponderGestureState) => {
     if (Math.abs(state.vx) >= 0.5 || Math.abs(state.dx) >= 0.5 * this.contentWidth) {
-      const i18nOffset: number = I18nLayoutService.select(state.dx, -state.dx);
+      const i18nOffset: number = RTLService.select(state.dx, -state.dx);
       const index: number = i18nOffset > 0 ? this.props.selectedIndex - 1 : this.props.selectedIndex + 1;
       this.scrollToIndex({ index, animated: true });
     } else {
@@ -131,14 +133,11 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
 
   private onLayout = (event: LayoutChangeEvent): void => {
     this.contentWidth = event.nativeEvent.layout.width / this.getChildCount();
-
-    this.scrollToIndex({
-      index: this.props.selectedIndex,
-    });
+    this.scrollToIndex({ index: this.props.selectedIndex });
   };
 
   private onContentOffsetAnimationStateChanged = (state: { value: number }): void => {
-    this.contentOffsetValue = I18nLayoutService.select(-state.value, state.value);
+    this.contentOffsetValue = RTLService.select(-state.value, state.value);
 
     if (this.props.onOffsetChange) {
       this.props.onOffsetChange(this.contentOffsetValue);
@@ -157,14 +156,15 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     const animationDuration: number = params.animated ? 300 : 0;
 
     return Animated.timing(this.contentOffset, {
-      toValue: I18nLayoutService.select(-params.offset, params.offset),
+      toValue: RTLService.select(-params.offset, params.offset),
       easing: Easing.linear,
       duration: animationDuration,
+      useNativeDriver: Platform.OS !== 'web',
     });
   };
 
-  private renderComponentChild = (source: ChildElement, index: number): ChildElement => {
-    const contentView: ChildElement | null = this.props.shouldLoadComponent(index) ? source : null;
+  private renderComponentChild = (source: React.ReactElement<ChildrenProps>, index: number): React.ReactElement => {
+    const contentView = this.props.shouldLoadComponent(index) ? source : null;
 
     return (
       <View style={styles.contentContainer}>
@@ -173,7 +173,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     );
   };
 
-  private renderComponentChildren = (source: ChildrenProp): ChildElement[] => {
+  private renderComponentChildren = (source: ChildrenWithProps<ChildrenProps>): React.ReactElement[] => {
     return React.Children.map(source, this.renderComponentChild);
   };
 
@@ -191,11 +191,11 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, children, ...restProps } = this.props;
+    const { style, children, ...viewProps } = this.props;
 
     return (
       <Animated.View
-        {...restProps}
+        {...viewProps}
         style={[styles.container, style, this.getContainerStyle()]}
         onLayout={this.onLayout}
         {...this.panResponder.panHandlers}

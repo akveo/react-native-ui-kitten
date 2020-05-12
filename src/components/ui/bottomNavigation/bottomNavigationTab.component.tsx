@@ -6,38 +6,35 @@
 
 import React from 'react';
 import {
-  ImageStyle,
-  Platform,
-  StyleProp,
+  ImageProps,
+  NativeSyntheticEvent,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
+  TargetedEvent,
 } from 'react-native';
+import {
+  FalsyFC,
+  FalsyText,
+  RenderProp,
+  TouchableWeb,
+  TouchableWebElement,
+  TouchableWebProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import {
-  isValidString,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 
-type IconProp = (style: ImageStyle) => IconElement;
+type BottomNavigationTabStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-export interface BottomNavigationTabProps extends StyledComponentProps, TouchableOpacityProps {
-  title?: string;
-  titleStyle?: StyleProp<TextStyle>;
-  icon?: IconProp;
+export interface BottomNavigationTabProps extends TouchableWebProps, BottomNavigationTabStyledProps {
+  title?: RenderProp<TextProps> | React.ReactText;
+  icon?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
@@ -45,54 +42,42 @@ export interface BottomNavigationTabProps extends StyledComponentProps, Touchabl
 export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabProps>;
 
 /**
- * `BottomNavigationTab` component is a part of the `BottomNavigation` component.
- * `BottomNavigation` tabs should be wrapped in BottomNavigation to provide usable component.
- * See usage examples at `BottomNavigation` component documentation.
+ * A single tab within the BottomNavigation.
+ * Bottom tabs should be rendered within BottomNavigation to provide a usable navigation component.
  *
  * @extends React.Component
  *
- * @property {boolean} selected - Determines whether component is selected.
+ * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * to render within the tab.
+ * If it is a function, expected to return a Text.
  *
- * @property {string} title - Determines the title of the tab.
- *
- * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
- *
- * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the tab.
- *
- * @property {(selected: boolean) => void} onSelect - Triggered on select value.
+ * @property {(ImageProps) => ReactElement} icon - Function component
+ * to render within the tab.
+ * Expected to return an Image.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example BottomNavigationTabSimpleUsage
- *
- * @overview-example BottomNavigationTabWithIcon
- *
- * @example BottomNavigationTabInlineStyling
  */
-export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps>
-  implements WebEventResponderCallbacks {
 
-  static styledComponentName: string = 'BottomNavigationTab';
+@styled('BottomNavigationTab')
+export class BottomNavigationTab extends React.Component<BottomNavigationTabProps> {
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  // WebEventResponderCallbacks
-
-  public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.HOVER]);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
   private onPress = (): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(!this.props.selected);
-    }
+    this.props.onSelect && this.props.onSelect(!this.props.selected);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       iconWidth,
       iconHeight,
@@ -101,7 +86,6 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
       textMarginVertical,
       textFontFamily,
       textFontSize,
-      textLineHeight,
       textFontWeight,
       textColor,
       ...containerParameters
@@ -113,7 +97,6 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
         marginVertical: textMarginVertical,
         fontFamily: textFontFamily,
         fontSize: textFontSize,
-        lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
       },
@@ -126,51 +109,26 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
     };
   };
 
-  private renderIconElement = (style: ImageStyle): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      key: 1,
-      style: [style, styles.icon, iconElement.props.style],
-    });
-  };
-
-  private renderTitleElement = (style: TextStyle): TextElement => {
-    const { title, titleStyle } = this.props;
+  public render(): TouchableWebElement {
+    const { eva, style, title, icon, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <Text
-        key={2}
-        style={[style, styles.text, titleStyle]}>
-        {title}
-      </Text>
-    );
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { icon, title } = this.props;
-
-    return [
-      icon && this.renderIconElement(style.icon),
-      isValidString(title) && this.renderTitleElement(style.text),
-    ];
-  };
-
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, ...restProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const [iconElement, titleElement] = this.renderComponentChildren(componentStyles);
-
-    return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...restProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[container, styles.container, webStyles.container, style]}
+      <TouchableWeb
+        {...touchableProps}
+        style={[evaStyle.container, styles.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
         onPress={this.onPress}>
-        {iconElement}
-        {titleElement}
-      </TouchableOpacity>
+        <FalsyFC
+          style={evaStyle.icon}
+          component={icon}
+        />
+        <FalsyText
+          style={evaStyle.text}
+          component={title}
+        />
+      </TouchableWeb>
     );
   }
 }
@@ -180,15 +138,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {},
-  icon: {},
 });
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
-});
-
-export const BottomNavigationTab = styled<BottomNavigationTabProps>(BottomNavigationTabComponent);

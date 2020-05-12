@@ -1,69 +1,73 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  Button,
-  Layout,
-  Popover,
-  Select,
-  Text,
-} from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Avatar, Button, IndexPath, Layout, Popover, Select, SelectItem, Text } from '@ui-kitten/components';
 
-const PLACEMENTS = [
-  { text: 'top' },
-  { text: 'top start' },
-  { text: 'top end' },
-  { text: 'left' },
-  { text: 'left start' },
-  { text: 'left end' },
-  { text: 'right' },
-  { text: 'right start' },
-  { text: 'right end' },
-  { text: 'bottom' },
-  { text: 'bottom start' },
-  { text: 'bottom end' },
+const placements = [
+  'top',
+  'top start',
+  'top end',
+  'bottom',
+  'bottom start',
+  'bottom end',
+  'left',
+  'left start',
+  'left end',
+  'right',
+  'right start',
+  'right end',
 ];
-
-const PopoverContent = () => (
-  <Layout style={styles.popoverContent}>
-    <Text>Hi!</Text>
-  </Layout>
-);
 
 export const PopoverPlacementShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
-  const [placement, setPlacement] = React.useState(PLACEMENTS[0]);
+  const [placementIndex, setPlacementIndex] = React.useState(new IndexPath(4));
+  const placement = placements[placementIndex.row];
 
-  const togglePopover = () => {
-    setVisible(!visible);
+  const onPlacementSelect = (index) => {
+    setPlacementIndex(index);
   };
 
+  const renderToggleButton = () => (
+    <Button onPress={() => setVisible(true)}>
+      TOGGLE POPOVER
+    </Button>
+  );
+
+  const renderPlacementItem = (title) => (
+    <SelectItem title={title}/>
+  );
+
   return (
-    <Layout>
+    <React.Fragment>
 
       <Select
         placeholder='Select Placement'
-        data={PLACEMENTS}
-        selectedOption={placement}
-        onSelect={setPlacement}
-      />
+        value={placement}
+        selectedIndex={placementIndex}
+        onSelect={onPlacementSelect}>
+        {placements.map(renderPlacementItem)}
+      </Select>
 
       <View style={styles.buttonContainer}>
+
         <Popover
+          anchor={renderToggleButton}
           visible={visible}
-          placement={placement.text}
-          content={PopoverContent()}
-          onBackdropPress={togglePopover}>
-          <Button style={styles.button} onPress={togglePopover}>
-            TOGGLE POPOVER
-          </Button>
+          placement={placement}
+          onBackdropPress={() => setVisible(false)}>
+          <Layout style={styles.content}>
+            <Avatar
+              style={styles.avatar}
+              source={require('../../assets/icon.png')}/>
+            <Text>
+              Welcome to UI Kitten 😻
+            </Text>
+          </Layout>
         </Popover>
+
       </View>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 
@@ -71,14 +75,15 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 376,
+    marginVertical: 64,
   },
-  button: {
-    width: 192,
-  },
-  popoverContent: {
-    justifyContent: 'center',
+  content: {
+    flexDirection: 'row',
     alignItems: 'center',
-    padding: 24,
+    paddingHorizontal: 4,
+    paddingVertical: 8,
+  },
+  avatar: {
+    marginHorizontal: 4,
   },
 });

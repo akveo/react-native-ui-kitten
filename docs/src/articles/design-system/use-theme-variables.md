@@ -14,10 +14,10 @@ import { View } from 'react-native';
 import { withStyles } from '@ui-kitten/components';
 
 const AwesomeView = (props) => {
-  const { themedStyle, style, ...restProps } = props;
+  const { eva, style, ...restProps } = props;
     
   return (
-    <View {...restProps} style={[themedStyle.awesome, style]} />
+    <View {...restProps} style={[eva.style.awesome, style]} />
   );
 };
 

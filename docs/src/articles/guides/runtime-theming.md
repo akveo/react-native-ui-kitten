@@ -2,11 +2,10 @@
 
 UI Kitten supports of 2 built-in Eva Design System color schemes - Light and Dark. It is both possible to change the theme statically and dynamically during the runtime.
 
-<div class="note note-info">
+<div class="note note-warning">
   <div class="note-title">NOTE</div>
   <div class="note-body">
   This guide uses some code snippets implemented in previous tutorials.
-  Anyway, you can use the same method to configure theming in your app.
   </div>
 </div>
 
@@ -39,18 +38,15 @@ Open `App.js` and paste the code below.
 
 ```js
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { mapping, light, dark } from '@eva-design/eva';
 import { AppNavigator } from './navigation.component';
 import { ThemeContext } from './theme-context';
 
-const themes = { light, dark };
-
-const App = () => {
+export default () => {
 
   const [theme, setTheme] = React.useState('light');
-  const currentTheme = themes[theme];
 
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
@@ -58,18 +54,16 @@ const App = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <IconRegistry icons={EvaIconsPack}/>
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <ApplicationProvider mapping={mapping} theme={currentTheme}>
+        <ApplicationProvider {...eva} theme={eva[theme]}>
           <AppNavigator/>
         </ApplicationProvider>
       </ThemeContext.Provider>
-    </React.Fragment>
+    </>
   );
 };
-
-export default App;
 ```
 
 With the code above we modify our Application root to render `ThemeContext.Provider`. But let's take additional attention to some details:
@@ -90,7 +84,7 @@ Let's modify `home.component.js` to switch the theme by pressing a button.
 
 ```js
 import React from 'react';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native';
 import { Button, Layout } from '@ui-kitten/components';
 import { ThemeContext } from './theme-context';
 

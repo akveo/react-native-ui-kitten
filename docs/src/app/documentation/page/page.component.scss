@@ -11,7 +11,8 @@
   $settings-margin: nb-theme(settings-col-margin);
   $heading-light: nb-theme(color-fg-heading-light);
   $code-bg: #f1f2f3;
-  $code-fg: nb-theme(color-info-500);
+  $code-bg: nb-theme(background-basic-color-3);
+  $code-fg: nb-theme(color-primary-500);
   $code-block-bg: nb-theme(code-block-bg);
   $table-head-fg: #8994a3;
   $table-border: 1px solid #f1f2f3;
@@ -98,7 +99,7 @@
       ::ng-deep {
         .widget-block {
           display: block;
-          margin-bottom: 2rem;
+          margin: 2rem 0 2rem;
         }
 
         ngd-styles-table-block table {

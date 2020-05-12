@@ -1,40 +1,37 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  Toggle,
-} from '@ui-kitten/components';
+import { Layout, Toggle } from '@ui-kitten/components';
 
 export const ToggleStatesShowcase = () => {
 
-  const [checked, setChecked] = React.useState(false);
+  const [activeChecked, setActiveChecked] = React.useState(false);
 
-  const onCheckedChange = (isChecked) => {
-    setChecked(isChecked);
+  const onActiveCheckedChange = (isChecked) => {
+    setActiveChecked(isChecked);
   };
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Toggle
         style={styles.toggle}
-        text='Active'
-        checked={checked}
-        onChange={onCheckedChange}
-      />
+        checked={activeChecked}
+        onChange={onActiveCheckedChange}>
+        Active
+      </Toggle>
 
       <Toggle
         style={styles.toggle}
-        text='Disabled'
-        disabled={true}
-      />
+        disabled={true}>
+        Disabled
+      </Toggle>
 
       <Toggle
         style={styles.toggle}
-        text='Checked Disabled'
         checked={true}
-        disabled={true}
-      />
+        disabled={true}>
+        Checked Disabled
+      </Toggle>
 
     </Layout>
   );
@@ -46,6 +43,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   toggle: {
-    margin: 8,
+    margin: 2,
   },
 });

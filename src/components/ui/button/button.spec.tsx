@@ -1,136 +1,164 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
   ImageProps,
-  ImageSourcePropType,
+  Text,
   TouchableOpacity,
 } from 'react-native';
 import {
-  render,
   fireEvent,
-  shallow,
-  RenderAPI,
+  render,
 } from 'react-native-testing-library';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-  StyleType,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Button,
   ButtonProps,
 } from './button.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
-
-const Mock = (props?: ButtonProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
-    <ApplicationProvider
-      mapping={mapping}
-      theme={theme}>
-      <Button {...props} />
-    </ApplicationProvider>
-  );
-};
-
-const renderComponent = (props?: ButtonProps): RenderAPI => {
-  return render(
-    <Mock {...props} />,
-  );
-};
-
-describe('@button: matches snapshot', () => {
-
-  describe('* interaction', () => {
-
-    it('* stateless', () => {
-      const component: RenderAPI = renderComponent();
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-  });
-
-  describe('* appearance', () => {
-
-    const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-
-    const icon = (style: StyleType): React.ReactElement<ImageProps> => {
-      return (
-        <Image
-          source={iconSource}
-          style={style}
-        />
-      );
-    };
-
-    const text: React.ReactText = 'BUTTON';
-
-    it('* empty', () => {
-      const component: RenderAPI = renderComponent();
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* icon', () => {
-      const component: RenderAPI = renderComponent({ icon });
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* text', () => {
-      const component: RenderAPI = renderComponent({ children: text });
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* icon and text', () => {
-      const component: RenderAPI = renderComponent({
-        icon,
-        children: text,
-      });
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* icon and text (styled)', () => {
-      const component: RenderAPI = renderComponent({
-        icon,
-        children: text,
-        size: 'giant',
-        textStyle: {
-          fontSize: 32,
-          lineHeight: 34,
-        },
-      });
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-  });
-
-});
 
 describe('@button: component checks', () => {
 
-  it('* emits onPress', () => {
+  const TestButton = (props?: ButtonProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <Button {...props}/>
+    </ApplicationProvider>
+  );
+
+  it('should render text passed to children', () => {
+    const component = render(
+      <TestButton>I love Babel</TestButton>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render component passed to children', () => {
+    const component = render(
+      <TestButton>
+        {props => <Text {...props}>I love Babel</Text>}
+      </TestButton>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (props?: ImageProps) => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (props?: ImageProps) => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestButton
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should call onPress', () => {
     const onPress = jest.fn();
 
-    const component: RenderAPI = renderComponent({
-      onPress: onPress,
-    });
+    const component = render(
+      <TestButton onPress={onPress}/>,
+    );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onPress).toBeCalled();
+  });
+
+  it('should call onPressIn', () => {
+    const onPressIn = jest.fn();
+
+    const component = render(
+      <TestButton onPressIn={onPressIn}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
+    expect(onPressIn).toBeCalled();
+  });
+
+  it('should call onPressOut', () => {
+    const onPressOut = jest.fn();
+
+    const component = render(
+      <TestButton onPressOut={onPressOut}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
+    expect(onPressOut).toBeCalled();
+  });
+
+  it('should call onMouseEnter', () => {
+    const onMouseEnter = jest.fn();
+
+    const component = render(
+      <TestButton onMouseEnter={onMouseEnter}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
+    expect(onMouseEnter).toBeCalled();
+  });
+
+  it('should call onMouseLeave', () => {
+    const onMouseLeave = jest.fn();
+
+    const component = render(
+      <TestButton onMouseLeave={onMouseLeave}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
+    expect(onMouseLeave).toBeCalled();
+  });
+
+  it('should call onFocus', () => {
+    const onFocus = jest.fn();
+
+    const component = render(
+      <TestButton onFocus={onFocus}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'focus');
+    expect(onFocus).toBeCalled();
+  });
+
+  it('should call onBlur', () => {
+    const onBlur = jest.fn();
+
+    const component = render(
+      <TestButton onBlur={onBlur}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'blur');
+    expect(onBlur).toBeCalled();
   });
 
 });

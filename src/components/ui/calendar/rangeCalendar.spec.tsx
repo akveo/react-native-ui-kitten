@@ -2,106 +2,116 @@ import React from 'react';
 import {
   fireEvent,
   render,
-  RenderAPI,
 } from 'react-native-testing-library';
-import { ApplicationProvider } from '@kitten/theme';
+import {
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   RangeCalendar,
   RangeCalendarProps,
 } from './rangeCalendar.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
-import { CalendarRange } from '@kitten/ui/calendar/type';
-
-jest.useFakeTimers();
-
-const now: Date = new Date();
-
-interface State {
-  range: CalendarRange<Date>;
-}
-
-type TestAppProps = Omit<RangeCalendarProps<Date>, 'range' | 'onSelect'>;
-
-class TestApplication extends React.Component<TestAppProps, State> {
-
-  public state: State = {
-    range: {
-      startDate: null,
-      endDate: null,
-    },
-  };
-
-  private onSelect = (range: CalendarRange<Date>): void => {
-    this.setState({ range });
-  };
-
-  public render(): React.ReactNode {
-    return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={theme}>
-        <RangeCalendar
-          {...this.props}
-          range={this.state.range}
-          onSelect={this.onSelect}
-        />
-      </ApplicationProvider>
-    );
-  }
-}
+import { CalendarRange } from './type';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 describe('@range-calendar: component checks', () => {
 
-  it('* start range date selected properly', () => {
-    const expectedStartDate: Date = new Date(now.getFullYear(), now.getMonth(), 11);
-    const application: RenderAPI = render(<TestApplication/>);
-
-    fireEvent.press(application.getAllByText('11')[0]);
-    const { range } = application.getByType(RangeCalendar).props;
-
-    expect(range.startDate.toString()).toBe(expectedStartDate.toString());
+  /*
+   * Get rid of useNativeDriver warnings
+   */
+  beforeAll(() => {
+    jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
   });
 
-  it('* range selected works properly', () => {
-    const expectedStartDate: Date = new Date(now.getFullYear(), now.getMonth(), 11);
-    const expectedEndDate: Date = new Date(now.getFullYear(), now.getMonth(), 15);
-    const application: RenderAPI = render(<TestApplication/>);
-
-    fireEvent.press(application.getAllByText('11')[0]);
-    fireEvent.press(application.getAllByText('15')[0]);
-    const { range } = application.getByType(RangeCalendar).props;
-
-    expect(range.startDate.toString()).toBe(expectedStartDate.toString());
-    expect(range.endDate.toString()).toBe(expectedEndDate.toString());
+  afterAll(() => {
+    jest.restoreAllMocks();
   });
 
-  it('* range re-selected properly 1', () => {
-    const expectedStartDate: Date = new Date(now.getFullYear(), now.getMonth(), 19);
-    const application: RenderAPI = render(<TestApplication/>);
+  const now: Date = new Date();
 
-    fireEvent.press(application.getAllByText('11')[0]);
-    fireEvent.press(application.getAllByText('15')[0]);
-    fireEvent.press(application.getAllByText('19')[0]);
-    const { range } = application.getByType(RangeCalendar).props;
+  const TestRangeCalendar = React.forwardRef((
+    props: Partial<RangeCalendarProps>,
+    ref: React.Ref<RangeCalendar>) => {
 
-    expect(range.startDate.toString()).toBe(expectedStartDate.toString());
-    expect(range.endDate).toBeNull();
+    const [range, setRange] = React.useState<CalendarRange<Date>>(props.range || {});
+
+    const onSelect = (nextRange: CalendarRange<Date>): void => {
+      setRange(nextRange);
+      props.onSelect && props.onSelect(nextRange);
+    };
+
+    return (
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}>
+        <RangeCalendar
+          ref={ref}
+          {...props}
+          range={range}
+          onSelect={onSelect}
+        />
+      </ApplicationProvider>
+    );
   });
 
-  it('* range re-selected properly 2', () => {
-    const expectedStartDate: Date = new Date(now.getFullYear(), now.getMonth(), 8);
-    const application: RenderAPI = render(<TestApplication/>);
+  it('should call onSelect only with start date', () => {
+    const onSelect = jest.fn((range: CalendarRange<Date>) => {
+      expect(range).toEqual({
+        startDate: new Date(now.getFullYear(), now.getMonth(), 7),
+        endDate: null,
+      });
+    });
 
-    fireEvent.press(application.getAllByText('11')[0]);
-    fireEvent.press(application.getAllByText('15')[0]);
-    fireEvent.press(application.getAllByText('8')[0]);
-    const { range } = application.getByType(RangeCalendar).props;
+    const component = render(
+      <TestRangeCalendar onSelect={onSelect}/>,
+    );
 
-    expect(range.startDate.toString()).toBe(expectedStartDate.toString());
-    expect(range.endDate).toBeNull();
+    fireEvent.press(component.queryAllByText('7')[0]);
   });
 
+  it('should call onSelect with start and end dates if start date passed to props', () => {
+    const onSelect = jest.fn((range: CalendarRange<Date>) => {
+      expect(range).toEqual({
+        startDate: new Date(now.getFullYear(), now.getMonth(), 7),
+        endDate: new Date(now.getFullYear(), now.getMonth(), 8),
+      });
+    });
+
+    const component = render(
+      <TestRangeCalendar
+        range={{ startDate: new Date(now.getFullYear(), now.getMonth(), 7) }}
+        onSelect={onSelect}
+      />,
+    );
+
+    fireEvent.press(component.queryAllByText('8')[0]);
+  });
+
+  it('should call onSelect only with start date if start and end dates passed to props', () => {
+    const onSelect = jest.fn((range: CalendarRange<Date>) => {
+      expect(range).toEqual({
+        startDate: new Date(now.getFullYear(), now.getMonth(), 7),
+        endDate: null,
+      });
+    });
+
+    const initialRange: CalendarRange<Date> = {
+      startDate: new Date(now.getFullYear(), now.getMonth(), 7),
+      endDate: new Date(now.getFullYear(), now.getMonth(), 8),
+    };
+
+    const component = render(
+      <TestRangeCalendar
+        range={initialRange}
+        onSelect={onSelect}
+      />,
+    );
+
+    fireEvent.press(component.queryAllByText('7')[0]);
+  });
 });

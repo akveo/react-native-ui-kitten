@@ -1,52 +1,33 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Button,
-  Layout,
-  Modal,
-  Text,
-} from '@ui-kitten/components';
+import { Button, Card, Layout, Modal, Text } from '@ui-kitten/components';
 
 export const ModalSimpleUsageShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
-  const toggleModal = () => {
-    setVisible(!visible);
-  };
-
-  const renderModalElement = () => (
-    <Layout
-      level='3'
-      style={styles.modalContainer}>
-      <Text>Hi! This is modal</Text>
-      <Button onPress={toggleModal}>
-        DISMISS
-      </Button>
-    </Layout>
-  );
-
   return (
-    <Layout style={styles.container}>
-      <Button onPress={toggleModal}>
+    <Layout style={styles.container} level='1'>
+
+      <Button onPress={() => setVisible(true)}>
         TOGGLE MODAL
       </Button>
+
       <Modal visible={visible}>
-        {renderModalElement()}
+        <Card disabled={true}>
+          <Text>Welcome to UI Kitten 😻</Text>
+          <Button onPress={() => setVisible(false)}>
+            DISMISS
+          </Button>
+        </Card>
       </Modal>
+
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 256,
-    padding: 16,
-  },
-  modalContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 256,
-    padding: 16,
+    minHeight: 192,
   },
 });

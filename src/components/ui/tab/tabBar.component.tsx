@@ -13,56 +13,62 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  ChildrenWithProps,
+  Overwrite,
+} from '../../devsupport';
+import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import { TabElement } from './tab.component';
-import { TabIndicator } from '../support/components/tabIndicator.component';
+} from '../../theme';
+import {
+  TabElement,
+  TabProps,
+} from './tab.component';
+import { TabIndicator } from '../shared/tabIndicator.component';
 
-type ChildrenProp = TabElement | TabElement[];
+type TabBarStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-export interface TabBarProps extends StyledComponentProps, ViewProps {
-  children: ChildrenProp;
+export interface TabBarProps extends ViewProps, TabBarStyledProps {
+  children?: ChildrenWithProps<TabProps>;
   selectedIndex?: number;
-  indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
+  indicatorStyle?: StyleProp<ViewStyle>;
 }
 
 export type TabBarElement = React.ReactElement<TabBarProps>;
 
 /**
- * The `TabBar` component that manages `Tab` components.
+ * A bar with tabs styled by Eva.
+ * TabBar should contain Tab components to provide a useful navigation component.
  *
  * @extends React.Component
  *
- * @property {number} selectedIndex - Determines current tab index.
+ * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Tabs to be rendered within the bar.
  *
- * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
+ * @property {number} selectedIndex - Index of currently selected tab.
  *
- * @property {(index: number) => void} onSelect - Fires on tab select with corresponding index.
+ * @property {(number) => void} onSelect - Called when tab is pressed.
  *
- * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Determines tabs.
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Style of the indicator component.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example TabBarSimpleUsage
- *
- * @overview-example TabBarWithIcon
+ * In basic examples, tabs are wrapped within `TabBar`.
  *
  * @overview-example Using with React Navigation
- *
+ * TabBar can also be [configured with React Navigation](guides/configure-navigation)
+ * to provide a navigational component.
  * ```
  * import React from 'react';
- * import { SafeAreaView } from 'react-native';
  * import { NavigationContainer } from '@react-navigation/native';
  * import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
  * import { TabBar, Tab, Layout, Text } from '@ui-kitten/components';
  *
- * // React Navigation Top Tabs also requires installation of `react-native-tab-view`
- * // npm i react-native-tab-view
- *
- * const TopTab = createBottomTabNavigator();
+ * const { Navigator, Screen } = createBottomTabNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -76,27 +82,20 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *   </Layout>
  * );
  *
- * const TopTabBar = ({ navigation, state }) => {
- *
- *   const onSelect = (index) => {
- *     navigation.navigate(state.routeNames[index]);
- *   };
- *
- *   return (
- *     <SafeAreaView>
- *       <TabBar selectedIndex={state.index} onSelect={onSelect}>
- *         <Tab title='USERS'/>
- *         <Tab title='ORDERS'/>
- *       </BottomNavigation>
- *     </SafeAreaView>
- *   );
- * };
+ * const TopTabBar = ({ navigation, state }) => (
+ *   <TabBar
+ *     selectedIndex={state.index}
+ *     onSelect={index => navigation.navigate(state.routeNames[index])}>
+ *     <Tab title='USERS'/>
+ *     <Tab title='ORDERS'/>
+ *   </TabBar>
+ * );
  *
  * const TabNavigator = () => (
- *   <TopTab.Navigator tabBar={props => <TopTabBar {...props} />}>
- *     <TopTab.Screen name='Users' component={UsersScreen}/>
- *     <TopTab.Screen name='Orders' component={OrdersScreen}/>
- *   </TopTab.Navigator>
+ *   <Navigator tabBar={props => <TopTabBar {...props} />}>
+ *     <Screen name='Users' component={UsersScreen}/>
+ *     <Screen name='Orders' component={OrdersScreen}/>
+ *   </Navigator>
  * );
  *
  * export const AppNavigator = () => (
@@ -105,36 +104,45 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *   </NavigationContainer>
  * );
  * ```
+ *
+ * @overview-example TabBarAccessories
+ * Tabs also may contain [icons](guides/icon-packages), to provide a better user interfaces.
+ *
+ * @overview-example TabStyling
+ * Tab and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Tab, Text } from '@ui-kitten/components';
+ *
+ * <Tab
+ *   title={evaProps => <Text {...evaProps}>USERS</Text>}
+ * />
+ * ```
+ *
+ * @overview-example TabTheming
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class TabBarComponent extends React.Component<TabBarProps> {
-
-  static styledComponentName: string = 'TabBar';
+@styled('TabBar')
+export class TabBar extends React.Component<TabBarProps> {
 
   static defaultProps: Partial<TabBarProps> = {
     selectedIndex: 0,
   };
 
-  private tabIndicatorRef: React.RefObject<TabIndicator> = React.createRef();
+  private tabIndicatorRef = React.createRef<TabIndicator>();
 
   public scrollToIndex(params: { index: number, animated?: boolean }): void {
-    const { current: tabIndicator } = this.tabIndicatorRef;
-
-    tabIndicator.scrollToIndex(params);
+    this.tabIndicatorRef.current?.scrollToIndex(params);
   }
 
   public scrollToOffset(params: { offset: number, animated?: boolean }): void {
-    const { current: tabIndicator } = this.tabIndicatorRef;
-
-    tabIndicator.scrollToOffset(params);
+    this.tabIndicatorRef.current?.scrollToOffset(params);
   }
 
   private onTabSelect = (index: number): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(index);
-    }
+    this.props.onSelect && this.props.onSelect(index);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       indicatorHeight,
       indicatorBorderRadius,
@@ -166,26 +174,25 @@ export class TabBarComponent extends React.Component<TabBarProps> {
     });
   };
 
-  private renderTabElements = (source: ChildrenProp): TabElement[] => {
+  private renderTabElements = (source: ChildrenWithProps<TabProps>): TabElement[] => {
     return React.Children.map(source, this.renderTabElement);
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, indicatorStyle, selectedIndex, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-
+    const { eva, style, indicatorStyle, selectedIndex, children, ...viewProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
     const tabElements: TabElement[] = this.renderTabElements(children);
 
     return (
       <View>
         <View
-          {...derivedProps}
-          style={[componentStyle.container, styles.container, style]}>
+          {...viewProps}
+          style={[evaStyle.container, styles.container, style]}>
           {tabElements}
         </View>
         <TabIndicator
           ref={this.tabIndicatorRef}
-          style={[componentStyle.indicator, styles.indicator, indicatorStyle]}
+          style={[evaStyle.indicator, styles.indicator, indicatorStyle]}
           selectedPosition={selectedIndex}
           positions={tabElements.length}
         />
@@ -203,5 +210,3 @@ const styles = StyleSheet.create({
   },
   indicator: {},
 });
-
-export const TabBar = styled<TabBarProps>(TabBarComponent);

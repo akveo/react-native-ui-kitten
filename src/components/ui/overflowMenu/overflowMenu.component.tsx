@@ -7,37 +7,36 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
+  ChildrenWithProps,
+  Overwrite,
+} from '../../devsupport';
+import {
   styled,
-  StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 import {
   Menu,
   MenuElement,
   MenuProps,
 } from '../menu/menu.component';
-import { MenuItemType } from '../menu/menuItem.component';
+import { MenuItemProps } from '../menu/menuItem.component';
 import {
   Popover,
   PopoverElement,
   PopoverProps,
 } from '../popover/popover.component';
-import { Override } from '../support/typings';
 
-type PopoverContentProps = Omit<PopoverProps, 'content'>;
-export type OverflowMenuItemType = Omit<MenuItemType, 'subItems'>;
+type OverflowMenuPopoverProps = Overwrite<PopoverProps, {
+  children?: ChildrenWithProps<MenuItemProps>;
+}>;
 
-interface ComponentProps extends PopoverContentProps {
-  children: React.ReactElement;
-}
+export type OverflowMenuProps = MenuProps & OverflowMenuPopoverProps;
 
-type MenuBasedProps = Override<MenuProps, { data: OverflowMenuItemType[] }>;
-
-export type OverflowMenuProps = & StyledComponentProps & ComponentProps & MenuBasedProps;
 export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
 
 /**
- * OverflowMenu renders vertical list of menu items in a modal.
+ * Displays a menu relative to another view.
+ * Menu should contain MenuItem components to provide a useful component.
  *
  * @extends React.Component
  *
@@ -45,58 +44,86 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @method {() => void} hide - Sets menu invisible.
  *
- * @property {boolean} visible - Determines whether popover is visible or not.
+ * @property {ReactElement<MenuItemProps> | ReactElement<MenuItemProps>[]} children -
+ * items to be rendered within menu.
  *
- * @property {OverflowMenuItemType[]} data - Determines menu items.
+ * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
- * @property {ReactElement} children - Determines the element "above" which popover will be shown.
+ * @property {boolean} visible - Whether menu is visible.
+ * Defaults to false.
  *
- * @property {number} selectedIndex - Determines the index of currently selected item.
+ * @property {IndexPath} selectedIndex - Index of selected item.
+ * IndexPath `row: number, section?: number` - position of element in sectioned list.
+ * Updating this property is not required if marking items selected is not needed.
  *
- * @property {(index: number, event: GestureResponderEvent) => void} onSelect - Fires when selected item is changed.
+ * @property {(IndexPath) => void} onSelect - Called when item is pressed.
  *
- * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
+ * @property {() => void} onBackdropPress - Called when popover is visible and the underlying view was touched.
+ * Useful when needed to close the modal on outside touches.
+ *
+ * @property {string | PopoverPlacement} placement - Position of the options list relative to the `children`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
- * Default is `bottom`.
- * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ * Defaults to *bottom*.
  *
- * @property {boolean} fullWidth - Determines whether content element should have same width as child element.
+ * @property {boolean} fullWidth - Whether a menu should take the width of `anchor`.
  *
- * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
- *
- * @property {() => void} onBackdropPress - Determines component's behavior when the user is
- * tapping on back-drop.
- *
+ * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
+ **
  * @overview-example OverflowMenuSimpleUsage
+ * OverflowMenu accepts `MenuItem` components as child elements and is displayed relative to `anchor` view.
+ *
+ * @overview-example OverflowMenuIndexType
+ * Menu works with special index object - IndexPath.
+ * For non-grouped items in menu, there is only a `row` property.
+ * Otherwise, `row` is an index of item within the group, section - index of group in menu.
+ * ```
+ * interface IndexPath {
+ *   row: number;
+ *   section?: number;
+ * }
+ * ```
+ *
+ * @overview-example OverflowMenuNoMarkers
+ * Pressing of menu items can be handled without marking items.
  *
  * @overview-example OverflowMenuPlacement
+ * By default, menu is displayed to the bottom of `anchor` view, but it is configurable with `placement` property.
  *
- * @overview-example OverflowMenuWithIcons
+ * @overview-example OverflowMenuFullWidth
+ * Menu may take the full width of the anchor view by configuring `fullWidth` property.
  *
- * @overview-example OverflowMenuStyledBackdrop
+ * @overview-example OverflowMenuAccessories
+ * Menu items may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
+ * Within Eva it is expected to be an image or [svg icon](guides/icon-packages).
  *
  * @overview-example OverflowMenuWithDisabledItems
+ * Menu items may be disabled with `disabled` property.
+ *
+ * @overview-example OverflowMenuStyledBackdrop
+ * To style the underlying view, `backdropStyle` property may be used.
  *
  * @example OverflowMenuWithoutDivider
- *
- * @example OverflowMenuExternalSourceIcons
+ * To disable dividers within the menu, `appearance` property may be used.
  */
-class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
+@styled('OverflowMenu')
+export class OverflowMenu extends React.Component<OverflowMenuProps> {
 
-  static styledComponentName: string = 'OverflowMenu';
+  private popoverRef = React.createRef<Popover>();
 
-  private popoverRef: React.RefObject<Popover> = React.createRef();
+  private get itemsCount(): number {
+    return React.Children.count(this.props.children);
+  }
 
   public show = (): void => {
-    this.popoverRef.current.show();
+    this.popoverRef.current?.show();
   };
 
   public hide = (): void => {
-    this.popoverRef.current.hide();
+    this.popoverRef.current?.hide();
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { indicatorBackgroundColor, ...containerParameters } = source;
 
     return {
@@ -108,42 +135,41 @@ class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
   };
 
   private renderPopoverContentElement = (): MenuElement => {
-    const { themedStyle, indicatorStyle, children, data, style, ...restProps } = this.props;
+    const { eva, children, style, ...menuProps } = this.props;
 
     return (
       <Menu
-        {...restProps}
+        {...menuProps}
         style={styles.menu}
-        data={data}
-        initialNumToRender={data.length}
+        initialNumToRender={this.itemsCount}
         showsVerticalScrollIndicator={false}
-        bounces={false}
-      />
+        bounces={false}>
+        {this.props.children}
+      </Menu>
     );
   };
 
   public render(): PopoverElement {
-    const { style, themedStyle, indicatorStyle, children, appearance, ...restProps } = this.props;
-    const { container, indicator } = this.getComponentStyle(themedStyle);
-
+    const { eva, style, children, appearance, ...popoverProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
     const contentElement: MenuElement = this.renderPopoverContentElement();
 
     return (
       <Popover
-        {...restProps}
+        {...popoverProps}
         ref={this.popoverRef}
-        style={[container, style]}
-        content={contentElement}>
-        {children}
+        style={[styles.popover, evaStyle.container, style]}>
+        {contentElement}
       </Popover>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  popover: {
+    overflow: 'hidden',
+  },
   menu: {
     flexGrow: 0,
   },
 });
-
-export const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);

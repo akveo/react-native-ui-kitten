@@ -13,23 +13,25 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  FalsyFC,
+  RTLService,
+} from '../../devsupport';
+import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
-import { I18nLayoutService } from '../support/services';
 
 type AnimatedViewStyle = ViewStyle | any;
 
 export interface PopoverViewProps extends ViewProps, StyledComponentProps {
   contentContainerStyle?: StyleProp<AnimatedViewStyle>;
   placement?: PopoverPlacement | string;
-  indicator?: (style: StyleType) => React.ReactElement;
-  children: React.ReactElement;
+  indicator?: (props: ViewProps) => React.ReactElement;
 }
 
 export type PopoverViewElement = React.ReactElement<PopoverViewProps>;
@@ -37,9 +39,8 @@ export type PopoverViewElement = React.ReactElement<PopoverViewProps>;
 const INDICATOR_OFFSET: number = 8;
 const INDICATOR_WIDTH: number = 6;
 
-class PopoverViewComponent extends React.Component<PopoverViewProps> {
-
-  static styledComponentName: string = 'Popover';
+@styled('Popover')
+export class PopoverView extends React.Component<PopoverViewProps> {
 
   private get placement(): PopoverPlacement {
     return PopoverPlacements.parse(this.props.placement);
@@ -83,7 +84,7 @@ class PopoverViewComponent extends React.Component<PopoverViewProps> {
 
     let indicatorTranslate: number = isVertical ? -INDICATOR_OFFSET : INDICATOR_OFFSET;
     indicatorTranslate = isReverse ? -indicatorTranslate : indicatorTranslate;
-    const i18nVerticalIndicatorTranslate = I18nLayoutService.select(indicatorTranslate, -indicatorTranslate);
+    const i18nVerticalIndicatorTranslate = RTLService.select(indicatorTranslate, -indicatorTranslate);
     indicatorTranslate = isVertical ? i18nVerticalIndicatorTranslate : indicatorTranslate;
 
     const contentTransforms: TransformsStyle = {
@@ -113,39 +114,24 @@ class PopoverViewComponent extends React.Component<PopoverViewProps> {
     };
   };
 
-  private renderIndicatorElement = (style: StyleType, directionStyle: StyleType): React.ReactElement => {
-    const indicatorElement: React.ReactElement = this.props.indicator(style);
-
-    return React.cloneElement(indicatorElement, {
-      style: [style, directionStyle, indicatorElement.props.style],
-    });
-  };
-
-  private renderComponentChildren = (style: StyleType, directionStyle: StyleType): React.ReactNodeArray => {
-    return [
-      this.props.indicator && this.renderIndicatorElement(style.indicator, directionStyle.indicator),
-    ];
-  };
-
   public render(): React.ReactElement<ViewProps> {
-    const { style, contentContainerStyle, themedStyle, onLayout, ...props } = this.props;
-    const { content, ...componentStyle } = this.getComponentStyle(themedStyle);
-
+    const { eva, style, contentContainerStyle, onLayout, indicator, ...viewProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
     const directionStyle = this.getDirectionStyle();
-    const [indicatorElement]: React.ReactNodeArray = this.renderComponentChildren(componentStyle, directionStyle);
 
     return (
       <View
         style={[directionStyle.container, contentContainerStyle]}
         onLayout={onLayout}>
-        {indicatorElement}
+        <FalsyFC
+          style={[evaStyle.indicator, directionStyle.indicator]}
+          component={indicator}
+        />
         <View
-          {...props}
-          style={[content, directionStyle.content, style]}
+          {...viewProps}
+          style={[evaStyle.content, directionStyle.content, style]}
         />
       </View>
     );
   }
 }
-
-export const PopoverView = styled<PopoverViewProps>(PopoverViewComponent);

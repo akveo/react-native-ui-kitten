@@ -1,56 +1,23 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import {
-  ApplicationProvider,
-  Interaction,
-  styled,
-} from '@ui-kitten/components';
-import {
-  light,
-  mapping,
-} from '@eva-design/eva';
+import { Interaction, styled } from '@ui-kitten/components';
 
-/**
- * This example shows how styled component can apply custom properties like status or size.
- * Note that it is controlled by passing them outside, via props, but it is defined in mappings.
- *
- * Let's say we want to have a `status` property that can be `primary` (which is default) and `danger`.
- * Furthermore, we still want to control backgroundColor when it is pressed.
- *
- * The `variantGroups` key in `meta` defines all custom properties that can be applied by component.
- * Each key in variant group is a string value that can be passed to this prop.
- *
- * Note that we can move `backgroundColor` property from `mapping` to each status.
- */
-
-export const StyledComponentVariantsShowcase = () => (
-  <ApplicationProvider
-    mapping={mapping}
-    theme={light}
-    customMapping={{ components: { StyledComponent: styledComponentMapping } }}>
-
-    <StyledComponentShowcase status='danger'/>
-
-  </ApplicationProvider>
-);
-
+@styled('StyledComponent')
 class StyledComponent extends React.Component {
 
-  static styledComponentName = 'StyledComponent';
-
   onPressIn = () => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
   };
 
   onPressOut = () => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   render() {
     return (
       <TouchableOpacity
         activeOpacity={1.0}
-        style={this.props.themedStyle}
+        style={this.props.eva.style}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
       />
@@ -58,69 +25,74 @@ class StyledComponent extends React.Component {
   }
 }
 
-const StyledComponentShowcase = styled(StyledComponent);
+// mapping.json
+// {
+//   "StyledComponent": {
+//     "meta": {
+//       "parameters": {
+//         "width": {
+//           "type": "number"
+//         },
+//         "height": {
+//           "type": "number"
+//         },
+//         "backgroundColor": {
+//           "type": "string"
+//         }
+//       },
+//       "appearances": {
+//         "default": {
+//           "default": true
+//         }
+//       },
+//       "variantGroups": {
+//         "status": {
+//           "primary": {
+//             "default": true
+//           },
+//           "danger": {
+//             "default": false
+//           }
+//         }
+//       },
+//       "states": {
+//         "active": {
+//           "default": false,
+//             "priority": 0
+//         }
+//       }
+//     },
+//     "appearances": {
+//       "default": {
+//         "mapping": {
+//           "width": 40,
+//             "height": 40
+//         },
+//         "variantGroups": {
+//           "status": {
+//             "primary": {
+//               "backgroundColor": "color-primary-default",
+//                 "state": {
+//                 "active": {
+//                   "backgroundColor": "color-primary-active"
+//                 }
+//               }
+//             },
+//             "danger": {
+//               "backgroundColor": "color-danger-default",
+//                 "state": {
+//                 "active": {
+//                   "backgroundColor": "color-danger-active"
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
-const styledComponentMapping = {
-  meta: {
-    parameters: {
-      width: {
-        type: 'number',
-      },
-      height: {
-        type: 'number',
-      },
-      backgroundColor: {
-        type: 'string',
-      },
-    },
-    appearances: {
-      default: {
-        default: true,
-      },
-    },
-    variantGroups: {
-      status: {
-        primary: {
-          default: true,
-        },
-        danger: {
-          default: false,
-        },
-      },
-    },
-    states: {
-      active: {
-        default: false,
-        priority: 0,
-      },
-    },
-  },
-  appearances: {
-    default: {
-      mapping: {
-        width: 40,
-        height: 40,
-      },
-      variantGroups: {
-        status: {
-          primary: {
-            backgroundColor: 'color-primary-default',
-            state: {
-              active: {
-                backgroundColor: 'color-primary-active',
-              },
-            },
-          },
-          danger: {
-            backgroundColor: 'color-danger-default',
-            state: {
-              active: {
-                backgroundColor: 'color-danger-active',
-              },
-            },
-          },
-        },
-      },
-    },
-  },
-};
+export const StyledComponentVariantsShowcase = () => (
+  <StyledComponent status='danger'/>
+);

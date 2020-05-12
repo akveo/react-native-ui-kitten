@@ -7,127 +7,118 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  Platform,
-  StyleProp,
+  ImageProps,
+  NativeSyntheticEvent,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
+  TargetedEvent,
   View,
 } from 'react-native';
+import {
+  FalsyFC,
+  FalsyText,
+  PropsService,
+  RenderProp,
+  TouchableWeb,
+  TouchableWebProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import { TouchableIndexedProps } from '../support/typings/type';
-import {
-  allWithPrefix,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
+import { MenuItemDescriptor } from './menu.service';
 
-export interface MenuItemType {
-  title: string;
-  disabled?: boolean;
-  subItems?: MenuItemType[];
-  titleStyle?: StyleProp<TextStyle>;
-  menuIndex?: number;
-  icon?: (style: StyleType) => IconElement;
-  accessory?: (style: StyleType) => React.ReactElement;
-}
+type MenuItemStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | 'grouped' | string;
+}>;
 
-export interface MenuItemProps extends StyledComponentProps, TouchableIndexedProps, MenuItemType {
+type TouchableMenuItemProps = Overwrite<TouchableWebProps, {
+  onPress?: (descriptor: MenuItemDescriptor, event?: GestureResponderEvent) => void;
+}>;
+
+export interface MenuItemProps extends TouchableMenuItemProps, MenuItemStyledProps {
+  title?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
+  descriptor?: MenuItemDescriptor;
 }
 
 export type MenuItemElement = React.ReactElement<MenuItemProps>;
 
 /**
- * `MenuItem` is a support component for `Menu`.
+ * A single item in Menu.
+ * Items should be rendered within Menu or MenuGroup to provide a usable navigation component.
  *
  * @extends React.Component
  *
- * @property {string} title - Determines the title of the ListItem.
+ * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * to render within the item.
+ * If it is a function, expected to return a Text.
  *
- * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * to render to start of the *title*.
+ * Expected to return an Image.
  *
- * @property {(style: StyleType) => ReactElement} accessory - Determines the accessory of the component.
- *
- * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
- *
- * @property {MenuItemType[]} subItems - Determines the sub-items of the MenuItem.
- *
- * @property {(index: number, event: GestureResponderEvent) => void} onPress - Emits when component is pressed.
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * to render to end of the *title*.
+ * Expected to return an Image.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ *
+ * @overview-example MenuItemSimpleUsage
  */
-class MenuItemComponent extends React.Component<MenuItemProps> implements WebEventResponderCallbacks {
+@styled('MenuItem')
+export class MenuItem extends React.Component<MenuItemProps> {
 
-  static styledComponentName: string = 'MenuItem';
-
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.HOVER]);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
-  public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.FOCUSED]);
+    this.props.onFocus && this.props.onFocus(event);
   };
 
-  public onBlur = (): void => {
-    this.props.dispatch([]);
+  private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onBlur && this.props.onBlur(event);
   };
 
   private onPress = (event: GestureResponderEvent): void => {
-    if (this.props.onPress) {
-      this.props.onPress(this.props.menuIndex, event);
-    }
+    this.props.onPress && this.props.onPress(this.props.descriptor, event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(this.props.menuIndex, event);
-    }
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(this.props.menuIndex, event);
-    }
+    this.props.eva.dispatch([]);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
-  private onLongPress = (event: GestureResponderEvent): void => {
-    if (this.props.onLongPress) {
-      this.props.onLongPress(this.props.menuIndex, event);
-    }
-  };
+  private getComponentStyle = (style: StyleType) => {
+    const { paddingHorizontal, paddingVertical, paddingLeft, backgroundColor } = style;
 
-  private getComponentStyles = (style: StyleType): StyleType => {
-    const { paddingHorizontal, paddingVertical, backgroundColor } = style;
-
-    const titleStyles: StyleType = allWithPrefix(style, 'title');
-    const indicatorStyles: StyleType = allWithPrefix(style, 'indicator');
-    const iconStyles: StyleType = allWithPrefix(style, 'icon');
+    const titleStyles: StyleType = PropsService.allWithPrefix(style, 'title');
+    const indicatorStyles: StyleType = PropsService.allWithPrefix(style, 'indicator');
+    const iconStyles: StyleType = PropsService.allWithPrefix(style, 'icon');
 
     return {
       container: {
         paddingHorizontal: paddingHorizontal,
+        paddingLeft: paddingLeft,
         paddingVertical: paddingVertical,
         backgroundColor: backgroundColor,
       },
@@ -136,7 +127,6 @@ class MenuItemComponent extends React.Component<MenuItemProps> implements WebEve
         fontFamily: titleStyles.titleFontFamily,
         fontSize: titleStyles.titleFontSize,
         fontWeight: titleStyles.titleFontWeight,
-        lineHeight: titleStyles.titleLineHeight,
         color: titleStyles.titleColor,
       },
       indicator: {
@@ -152,58 +142,35 @@ class MenuItemComponent extends React.Component<MenuItemProps> implements WebEve
     };
   };
 
-  private renderIcon = (style: StyleType): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      style: [style, iconElement.props.style],
-    });
-  };
-
-  private renderTitle = (style: StyleType): TextElement => {
-    const { title, titleStyle } = this.props;
-
-    return (
-      <Text style={[style, titleStyle]}>{title}</Text>
-    );
-  };
-
-  private renderAccessory = (style: StyleType): IconElement => {
-    return this.props.accessory(style);
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { title, icon, accessory } = this.props;
-
-    return [
-      icon && this.renderIcon(style.icon),
-      title && this.renderTitle(style.title),
-      accessory && this.renderAccessory(style.icon),
-    ];
-  };
-
   public render(): React.ReactNode {
-    const { themedStyle, style, ...restProps } = this.props;
-    const { container, indicator, ...restStyles } = this.getComponentStyles(themedStyle);
-    const [iconElement, textElement, accessoryElement] = this.renderComponentChildren(restStyles);
+    const { eva, style, title, accessoryLeft, accessoryRight, children, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...restProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[styles.container, container, webStyles.container, style]}
+      <TouchableWeb
+        {...touchableProps}
+        style={[styles.container, evaStyle.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}
-        onLongPress={this.onLongPress}>
-        <View style={[styles.indicator, indicator]}/>
-        <View style={styles.subContainer}>
-          {iconElement}
-          {textElement}
-        </View>
-        {accessoryElement}
-      </TouchableOpacity>
+        onPressOut={this.onPressOut}>
+        <View style={[StyleSheet.absoluteFill, evaStyle.indicator]}/>
+        <FalsyFC
+          style={evaStyle.icon}
+          component={accessoryLeft}
+        />
+        <FalsyText
+          style={[evaStyle.title, styles.title]}
+          component={title}
+        />
+        <FalsyFC
+          style={evaStyle.icon}
+          component={accessoryRight}
+        />
+      </TouchableWeb>
     );
   }
 }
@@ -214,21 +181,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  subContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  indicator: {
-    ...StyleSheet.absoluteFillObject,
-    zIndex: 2,
+  title: {
+    flex: 1,
+    textAlign: 'left',
   },
 });
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
-});
-
-export const MenuItem = styled<MenuItemProps>(MenuItemComponent);

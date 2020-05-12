@@ -1,169 +1,105 @@
-import { KeyExtractorType } from './select.component';
-import { SelectOptionType } from './selectOption.component';
+import React from 'react';
+import { IndexPath } from '../../devsupport';
+import { SelectItemElement } from './selectItem.component';
 
-type Options = SelectOptionType | SelectOptionType[];
-
-interface SelectStrategy<T = Options> {
-  select: (option: SelectOptionType, selectedOptions: T) => T;
-  isSelected: (option: SelectOptionType, selectedOptions: T) => boolean;
-  toStringOptions: (options: T) => string;
+export interface SelectItemDescriptor {
+  multiSelect: boolean;
+  index: IndexPath;
+  groupIndices?: IndexPath[];
 }
 
-interface SelectServiceOptions {
-  multiSelect?: boolean;
-  keyExtractor?: (option: SelectOptionType) => string;
-}
+const SEPARATOR: string = ', ';
 
 export class SelectService {
 
-  private strategy: SelectStrategy;
+  public selectItem = (multiSelect: boolean,
+                       descriptor: SelectItemDescriptor,
+                       selected: IndexPath[]): IndexPath | IndexPath[] => {
 
-  constructor(options: SelectServiceOptions = {}) {
-    const { multiSelect, keyExtractor } = options;
-    this.strategy = multiSelect ? new MultiSelectStrategy(keyExtractor) : new SingleSelectStrategy(
-      keyExtractor);
-  }
-
-  public select = (option: SelectOptionType, selectedOptions: Options): Options => {
-    return this.strategy.select(option, selectedOptions);
+    if (multiSelect) {
+      return this.createMultiSelectIndices(descriptor, selected);
+    }
+    return descriptor.index;
   };
 
-  public isSelected = (option: SelectOptionType, options: Options): boolean => {
-    return this.strategy.isSelected(option, options);
-  };
-
-  public toStringOptions = (options: Options): string => {
-    return options && this.strategy.toStringOptions(options);
-  };
-
-  static isGroup = (option: SelectOptionType): boolean => {
-    return option.items && option.items.length > 0;
-  };
-
-  static toStringOption = (option: SelectOptionType): string => {
-    return option.text;
-  };
-
-  static isEqualOptions = (lhs: SelectOptionType,
-                           rhs: SelectOptionType,
-                           keyExtractor?: KeyExtractorType): boolean => {
-
-    if (keyExtractor) {
-      return (lhs && rhs) && keyExtractor(lhs) === keyExtractor(rhs);
+  public toStringSelected = (selected: IndexPath[]): string => {
+    if (!Array.isArray(selected)) {
+      return '';
     }
 
-    return lhs === rhs;
-  };
-}
+    const options: string[] = selected.map((index: IndexPath): string => {
+      return `Option ${index.toString()}`;
+    });
 
-class SingleSelectStrategy implements SelectStrategy<SelectOptionType> {
-
-  constructor(private keyExtractor: KeyExtractorType) {
-  }
-
-  public select = (option: SelectOptionType): SelectOptionType => {
-    return option;
+    return options.join(SEPARATOR);
   };
 
-  public isSelected = (option: SelectOptionType, selectedOption: SelectOptionType): boolean => {
-    if (SelectService.isGroup(option)) {
-      return option.items.some(groupOption => this.isSelected(groupOption, selectedOption));
+  public isSelected = (descriptor: SelectItemDescriptor, selected: IndexPath[]): boolean => {
+    if (descriptor.multiSelect && this.isGroup(descriptor)) {
+      return this.containsSomeFromGroup(descriptor.index, selected);
     }
-    return SelectService.isEqualOptions(selectedOption, option, this.keyExtractor);
+    return this.contains(descriptor.index, selected);
   };
 
-  public toStringOptions = (option: SelectOptionType): string => {
-    return SelectService.toStringOption(option);
-  };
-}
-
-class MultiSelectStrategy implements SelectStrategy<SelectOptionType[]> {
-
-  constructor(private keyExtractor: KeyExtractorType) {
-  }
-
-  public select = (option: SelectOptionType,
-                   selectedOptions: SelectOptionType[] = []): SelectOptionType[] => {
-
-    if (SelectService.isGroup(option)) {
-      return this.selectOptionGroup(option, selectedOptions);
-    } else {
-      return this.selectOption(option, selectedOptions);
-    }
+  public isDisabled = (descriptor: SelectItemDescriptor): boolean => {
+    return !descriptor.multiSelect && this.isGroup(descriptor);
   };
 
-  public isSelected = (option: SelectOptionType,
-                       selectedOptions: SelectOptionType[] = []): boolean => {
+  public createDescriptorForElement = (element: SelectItemElement,
+                                       multiSelect: boolean,
+                                       index: number): SelectItemDescriptor => {
 
-    return this.isOptionSelected(option, selectedOptions);
+    const groupIndices = React.Children.map(element.props.children, ((child: SelectItemElement, row: number) => {
+      return new IndexPath(row, index);
+    }));
+
+    return { multiSelect, groupIndices, index: new IndexPath(index) };
   };
 
-  public toStringOptions = (options: SelectOptionType[] = []): string => {
-    return options.map(SelectService.toStringOption).join(', ');
+  public createDescriptorForNestedElement = (element: SelectItemElement,
+                                             descriptor: SelectItemDescriptor,
+                                             index: number): SelectItemDescriptor => {
+
+    return {
+      ...descriptor,
+      index: new IndexPath(index, descriptor.index.row),
+      groupIndices: [],
+    };
   };
 
-  private selectOptionGroup = (option: SelectOptionType,
-                               selectedOptions: SelectOptionType[]): SelectOptionType[] => {
-
-    if (this.isGroupSelected(option, selectedOptions)) {
-      return this.removeOptionGroup(option, selectedOptions);
-    } else {
-      return this.addOptionGroup(option, selectedOptions);
-    }
+  private createMultiSelectIndices = (descriptor: SelectItemDescriptor, selected: IndexPath[]): IndexPath[] => {
+    const isIndexSelected: boolean = this.isSelected(descriptor, selected);
+    return !isIndexSelected ? this.addIndex(descriptor, selected) : this.removeIndex(descriptor, selected);
   };
 
-  private selectOption = (option: SelectOptionType,
-                          selectedOptions: SelectOptionType[]): SelectOptionType[] => {
-
-    if (this.isOptionSelected(option, selectedOptions)) {
-      return this.removeOption(selectedOptions, option);
-    } else {
-      return this.addOption(option, selectedOptions);
-    }
+  private isGroup = (descriptor: SelectItemDescriptor): boolean => {
+    return descriptor.groupIndices && descriptor.groupIndices.length > 0;
   };
 
-  private isGroupSelected = (group: SelectOptionType,
-                             selectedOptions: SelectOptionType[]): boolean => {
+  private createGroupIndices = (descriptor: SelectItemDescriptor): IndexPath[] => {
+    return this.isGroup(descriptor) ? descriptor.groupIndices : [descriptor.index];
+  };
 
-    return selectedOptions.some((selectedOption: SelectOptionType): boolean => {
-      return this.isOptionSelected(selectedOption, group.items);
+  private addIndex = (descriptor: SelectItemDescriptor, selected: IndexPath[]): IndexPath[] => {
+    return [...selected, ...this.createGroupIndices(descriptor)];
+  };
+
+  private removeIndex = (descriptor: SelectItemDescriptor, selected: IndexPath[]): IndexPath[] => {
+    const groupIndices: IndexPath[] = this.createGroupIndices(descriptor);
+    return selected.filter((selectedIndex: IndexPath): boolean => {
+      return !this.contains(selectedIndex, groupIndices);
     });
   };
 
-  private isOptionSelected = (option: SelectOptionType,
-                              selectedOptions: SelectOptionType[]): boolean => {
-
-    return selectedOptions.some((selectedOption: SelectOptionType): boolean => {
-      return SelectService.isEqualOptions(selectedOption, option, this.keyExtractor);
+  private contains = (index: IndexPath, selected: IndexPath[]): boolean => {
+    return selected.some((selectedIndex: IndexPath): boolean => {
+      return selectedIndex.equals(index);
     });
   };
 
-  private addOptionGroup = (option: SelectOptionType,
-                            selectedOptions: SelectOptionType[]): SelectOptionType[] => {
-
-    const options: SelectOptionType[] = option.items.filter(groupOption => !groupOption.disabled);
-
-    return selectedOptions.concat(options);
-  };
-
-  private addOption = (option: SelectOptionType,
-                       selectedOptions: SelectOptionType[]) => {
-
-    return selectedOptions.concat(option);
-  };
-
-  private removeOptionGroup = (option: SelectOptionType,
-                               selectedOptions: SelectOptionType[]): SelectOptionType[] => {
-
-    return option.items.reduce(this.removeOption, selectedOptions);
-  };
-
-  private removeOption = (selectedOptions: SelectOptionType[],
-                          option: SelectOptionType): SelectOptionType[] => {
-
-    return selectedOptions.filter((selectedOption: SelectOptionType): boolean => {
-      return !SelectService.isEqualOptions(selectedOption, option, this.keyExtractor);
+  private containsSomeFromGroup = (index: IndexPath, selected: IndexPath[]): boolean => {
+    return selected.some((selectedIndex: IndexPath): boolean => {
+      return selectedIndex.section === index.row;
     });
   };
 }
-

@@ -120,7 +120,7 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should get i18n day of week names', () => {
-    dateService = new NativeDateService('zh', { i18n});
+    dateService = new NativeDateService('zh', { i18n });
     expect(dateService.getDayOfWeekNames(TranslationWidth.SHORT)).toEqual(i18n.dayNames.short);
   });
 

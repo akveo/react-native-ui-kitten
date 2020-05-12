@@ -1,138 +1,92 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
-  Image,
-  ViewProps,
-  View,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
+  fireEvent,
   render,
-  RenderAPI,
 } from 'react-native-testing-library';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Card,
   CardProps,
-  CardFooterElement,
-  CardHeaderElement,
 } from './card.component';
-import { CardHeader } from './cardHeader.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
-import { Button, Text } from '@kitten/ui';
-import { ReactTestInstance } from 'react-test-renderer';
-
-const bodyText: string = 'A nebula is an interstellar cloud of dust.';
-const headerImageUri: string = 'https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg';
-
-export const CardBodyContent = (): React.ReactElement<ViewProps> => {
-  return (
-    <View>
-      <Text>
-        {bodyText}
-      </Text>
-    </View>
-  );
-};
-
-const Mock = (props?: Partial<CardProps>): React.ReactElement<ApplicationProviderProps> => {
-  return (
-    <ApplicationProvider
-      mapping={mapping}
-      theme={theme}>
-      <Card
-        {...props}
-        children={<CardBodyContent/>}
-      />
-    </ApplicationProvider>
-  );
-};
 
 describe('@card: component checks', () => {
 
-  it('* header title renders properly', () => {
-    const title: string = 'Title';
-    const Header = (): CardHeaderElement => (
-      <CardHeader title={title}/>
-    );
-    const element: RenderAPI = render(<Mock header={Header}/>);
-    const textElement: ReactTestInstance = element.getByText(title);
+  const TestCard = (props?: Partial<CardProps>) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <Card {...props} />
+    </ApplicationProvider>
+  );
 
-    expect(textElement).toBeTruthy();
-    expect(textElement.props.children).toBe(title);
+  it('should render component passed to children', () => {
+    const component = render(
+      <TestCard>
+        <Text>I love Babel</Text>
+      </TestCard>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('* header description renders properly', () => {
-    const description: string = 'Description';
-    const Header = (): CardHeaderElement => (
-      <CardHeader description={description}/>
+  it('should render component passed to header prop', () => {
+    const component = render(
+      <TestCard header={props => <Text {...props}>Test Card Header</Text>}/>,
     );
-    const element: RenderAPI = render(<Mock header={Header}/>);
-    const textElement: ReactTestInstance = element.getByText(description);
 
-    expect(textElement).toBeTruthy();
-    expect(textElement.props.children).toBe(description);
+    expect(component.queryByText('Test Card Header')).toBeTruthy();
   });
 
-  it('* custom header renders properly', () => {
-    const Header = (): CardHeaderElement => (
-      <View>
-        <Image
-          source={{ uri: headerImageUri }}
-          style={{ width: '100%', height: 200 }}
-        />
-      </View>
+  it('should render component passed to footer prop', () => {
+    const component = render(
+      <TestCard footer={props => <Text {...props}>Test Card Footer</Text>}/>,
     );
-    const element: RenderAPI = render(<Mock header={Header}/>);
-    const imageElement: ReactTestInstance = element.getByType(Image);
 
-    expect(imageElement.props.source.uri).toBe(headerImageUri);
-    expect(imageElement).toBeTruthy();
+    expect(component.queryByText('Test Card Footer')).toBeTruthy();
   });
 
-  it('* body element renders properly', () => {
-    const element: RenderAPI = render(<Mock/>);
+  it('should call onPress', () => {
+    const onPress = jest.fn();
+    const component = render(
+      <TestCard onPress={onPress}/>,
+    );
 
-    const bodyTextElement: ReactTestInstance = element.getByText(bodyText);
-
-    expect(bodyTextElement).toBeTruthy();
-    expect(bodyTextElement.props.children).toBe(bodyText);
+    fireEvent.press(component.queryByType(TouchableOpacity));
+    expect(onPress).toBeCalled();
   });
 
-  it(' footer renders properly', () => {
-    const Footer = (): CardFooterElement => (
-      <View>
-        <Button size='small'>
-          Accept
-        </Button>
-        <Button size='small' status='basic'>
-          Cancel
-        </Button>
-      </View>
+  it('should call onPressIn', () => {
+    const onPressIn = jest.fn();
+    const component = render(
+      <TestCard onPressIn={onPressIn}/>,
     );
-    const element: RenderAPI = render(<Mock footer={Footer}/>);
 
-    expect(element.getAllByType(Button)[0]).toBeTruthy();
-    expect(element.getAllByType(Button)[1]).toBeTruthy();
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
+    expect(onPressIn).toBeCalled();
   });
 
-  it('statuses works properly', () => {
-    const expectedAccentHeight: number = 4;
-    const Header = (): CardHeaderElement => (
-      <CardHeader title='Title'/>
-    );
-    const element: RenderAPI = render(
-      <Mock
-        header={Header}
-        status='danger'
-      />,
+  it('should call onPressOut', () => {
+    const onPressOut = jest.fn();
+    const component = render(
+      <TestCard onPressOut={onPressOut}/>,
     );
 
-    expect(element.getByType(CardHeader).props.accentStyle.height).toBe(expectedAccentHeight);
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
+    expect(onPressOut).toBeCalled();
   });
 });
 

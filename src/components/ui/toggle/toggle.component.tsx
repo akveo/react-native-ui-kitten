@@ -9,126 +9,112 @@ import {
   Animated,
   Easing,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PanResponder,
   PanResponderCallbacks,
   PanResponderGestureState,
   PanResponderInstance,
-  Platform,
-  StyleProp,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
+  TargetedEvent,
   View,
   ViewProps,
 } from 'react-native';
+import {
+  EvaStatus,
+  FalsyText,
+  RenderProp,
+  RTLService,
+  TouchableWeb,
+  TouchableWebProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { CheckMark } from '../support/components/checkmark.component';
-import {
-  I18nLayoutService,
-  WebEventResponder,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
+import { CheckMark } from '../shared/checkmark.component';
 
-export interface ToggleProps extends StyledComponentProps, TouchableOpacityProps {
+type ToggleStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export interface ToggleProps extends TouchableWebProps, ToggleStyledProps {
+  children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
-  disabled?: boolean;
-  status?: string;
-  size?: string;
-  text?: string;
-  textStyle?: StyleProp<TextStyle>;
   onChange?: (checked: boolean) => void;
+  status?: EvaStatus;
 }
 
 export type ToggleElement = React.ReactElement<ToggleProps>;
 
 /**
- * Styled `Toggle` component.
+ * Switches toggle the state of a single setting on or off.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.
- * Default is `false`.
+ * @property {boolean} checked - Whether component is checked.
+ * Defaults to *false*.
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false.
+ * @property {(boolean) => void} onChange - Called when toggle
+ * should switch it's value.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * to render near the toggle.
+ * If it is a function, expected to return a Text.
+ *
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
- *
- * @property {string} text - Determines text of the component.
- *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
- *
- * @property {(checked: boolean) => void} onChange - Fires when selection state is changed.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ToggleSimpleUsage
  *
  * @overview-example ToggleStates
+ * Toggle can be checked or disabled.
  *
  * @overview-example ToggleStatus
+ * Toggle may marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
- * @example ToggleInlineStyling
+ * @overview-example ToggleStyling
+ * Toggle and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Toggle, Text } from '@ui-kitten/components';
+ *
+ * <Toggle>
+ *   {evaProps => <Text {...evaProps}>Place your Text</Text>}
+ * </Toggle>
+ * ```
+ *
+ * @overview-example ToggleTheming
+ * In most cases this is redundant, if [custom theme is configured](docs/guides/branding).
  */
-export class ToggleComponent extends React.Component<ToggleProps> implements PanResponderCallbacks {
-
-  static styledComponentName: string = 'Toggle';
+@styled('Toggle')
+export class Toggle extends React.Component<ToggleProps> implements PanResponderCallbacks {
 
   private panResponder: PanResponderInstance;
   private thumbWidthAnimation: Animated.Value;
   private thumbTranslateAnimation: Animated.Value;
   private ellipseScaleAnimation: Animated.Value;
   private thumbTranslateAnimationActive: boolean;
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   constructor(props: ToggleProps) {
     super(props);
 
-    const { checked, themedStyle } = props;
+    const { checked, eva } = props;
 
-    this.thumbWidthAnimation = new Animated.Value(themedStyle.thumbWidth);
+    this.thumbWidthAnimation = new Animated.Value(eva.style.thumbWidth);
     this.thumbTranslateAnimation = new Animated.Value(0);
     this.ellipseScaleAnimation = new Animated.Value(checked ? 0.01 : 1.0);
     this.thumbTranslateAnimationActive = false;
 
     this.panResponder = PanResponder.create(this);
   }
-
-  public onMouseEnter = (): void => {
-    if (!this.props.disabled) {
-      this.props.dispatch([Interaction.HOVER]);
-    }
-  };
-
-  public onMouseLeave = (): void => {
-    if (!this.props.disabled) {
-      this.props.dispatch([]);
-    }
-  };
-
-  public onFocus = (): void => {
-    if (!this.props.disabled) {
-      this.props.dispatch([Interaction.FOCUSED]);
-    }
-  };
-
-  public onBlur = (): void => {
-    if (!this.props.disabled) {
-      this.props.dispatch([]);
-    }
-  };
 
   // PanResponderCallbacks
 
@@ -152,14 +138,14 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     return false;
   };
 
-  public onPanResponderGrant = (): void => {
-    const { checked, disabled, themedStyle } = this.props;
+  public onPanResponderGrant = (event: GestureResponderEvent): void => {
+    const { checked, disabled, eva } = this.props;
 
     if (disabled) {
       return;
     }
 
-    this.onPressIn();
+    this.onPressIn(event);
 
     if (this.thumbTranslateAnimationActive) {
       this.thumbTranslateAnimationActive = false;
@@ -167,7 +153,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       return;
     }
 
-    this.animateThumbWidth(themedStyle.thumbWidth * 1.2);
+    this.animateThumbWidth(eva.style.thumbWidth * 1.2);
     this.animateEllipseScale(checked ? 1 : 0.01);
   };
 
@@ -175,8 +161,8 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     return true;
   };
 
-  public onPanResponderRelease = (e: GestureResponderEvent, gestureState: PanResponderGestureState): void => {
-    const { checked, disabled, themedStyle } = this.props;
+  public onPanResponderRelease = (event: GestureResponderEvent, gestureState: PanResponderGestureState): void => {
+    const { checked, disabled, eva } = this.props;
 
     if (!disabled) {
       if ((!checked && gestureState.dx > -5) || (checked && gestureState.dx < 5)) {
@@ -186,16 +172,72 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       }
     }
 
-    this.animateThumbWidth(themedStyle.thumbWidth);
-    this.onPressOut();
+    this.animateThumbWidth(eva.style.thumbWidth);
+    this.onPressOut(event);
   };
 
-  private onPressIn = (): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+  public onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
+    this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseLeave(event);
+    }
   };
 
-  private onPressOut = (): void => {
-    this.props.dispatch([]);
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
+    this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(event);
+    }
+  };
+
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
+    this.props.eva.dispatch([Interaction.FOCUSED]);
+
+    if (this.props.onFocus) {
+      this.props.onFocus(event);
+    }
+  };
+
+  private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
+    this.props.eva.dispatch([]);
+
+    if (this.props.onBlur) {
+      this.props.onBlur(event);
+    }
+  };
+
+  private onPressIn = (event: GestureResponderEvent): void => {
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+
+    if (this.props.onPressIn) {
+      this.props.onPressIn(event);
+    }
+  };
+
+  private onPressOut = (event: GestureResponderEvent): void => {
+    this.props.eva.dispatch([]);
+
+    if (this.props.onPressOut) {
+      this.props.onPressOut(event);
+    }
   };
 
   private onPress = (): void => {
@@ -204,7 +246,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     }
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { checked, disabled } = this.props;
 
     const {
@@ -219,7 +261,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       textMarginHorizontal,
       textFontSize,
       textFontWeight,
-      textLineHeight,
       textFontFamily,
       textColor,
       iconWidth,
@@ -231,7 +272,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     } = source;
 
     return {
-      toggleContainer: {},
       ellipseContainer: {
         borderColor: borderColor,
         backgroundColor: backgroundColor,
@@ -262,7 +302,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         marginHorizontal: textMarginHorizontal,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
-        lineHeight: textLineHeight,
         fontFamily: textFontFamily,
         color: textColor,
       },
@@ -280,9 +319,10 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.thumbTranslateAnimationActive = true;
 
     Animated.timing(this.thumbTranslateAnimation, {
-      toValue: I18nLayoutService.select(value, -value),
+      toValue: RTLService.select(value, -value),
       duration: 150,
       easing: Easing.linear,
+      useNativeDriver: false,
     }).start(() => {
       this.thumbTranslateAnimationActive = false;
       callback();
@@ -294,6 +334,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       toValue: value,
       duration: 150,
       easing: Easing.linear,
+      useNativeDriver: false,
     }).start(callback);
   };
 
@@ -302,6 +343,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       toValue: value,
       duration: 200,
       easing: Easing.linear,
+      useNativeDriver: false,
     }).start(callback);
   };
 
@@ -323,47 +365,36 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       callback(!this.props.checked);
     });
 
-    this.animateThumbWidth(this.props.themedStyle.thumbWidth);
-  };
-
-  private renderTextElement = (style: StyleType): TextElement => {
-    return (
-      <Text style={[style, this.props.textStyle]}>
-        {this.props.text}
-      </Text>
-    );
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    return [
-      this.props.text && this.renderTextElement(style.text),
-    ];
+    this.animateThumbWidth(this.props.eva.style.thumbWidth);
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, checked, ...restProps } = this.props;
-
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-    const [textElement] = this.renderComponentChildren(componentStyle);
+    const { eva, style, checked, children, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
         {...this.panResponder.panHandlers}
         style={[styles.container, style]}>
-        <TouchableOpacity
-          activeOpacity={1.0}
-          {...restProps}
-          {...this.webEventResponder.eventHandlers}
-          style={[componentStyle.toggleContainer, webStyles.toggleContainer, styles.toggleContainer]}>
-          <View style={[componentStyle.highlight, styles.highlight]}/>
-          <Animated.View style={[componentStyle.ellipseContainer, styles.ellipseContainer]}>
-            <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
-            <Animated.View style={[componentStyle.thumb, styles.thumb]}>
-              <CheckMark {...componentStyle.icon} />
+        <TouchableWeb
+          {...touchableProps}
+          style={styles.toggleContainer}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}>
+          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <Animated.View style={[evaStyle.ellipseContainer, styles.ellipseContainer]}>
+            <Animated.View style={[evaStyle.ellipse, styles.ellipse]}/>
+            <Animated.View style={[evaStyle.thumb, styles.thumb]}>
+              <CheckMark {...evaStyle.icon} />
             </Animated.View>
           </Animated.View>
-        </TouchableOpacity>
-        {textElement}
+        </TouchableWeb>
+        <FalsyText
+          style={evaStyle.text}
+          component={children}
+        />
       </View>
     );
   }
@@ -397,12 +428,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  toggleContainer: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
-});
-
-export const Toggle = styled<ToggleProps>(ToggleComponent);

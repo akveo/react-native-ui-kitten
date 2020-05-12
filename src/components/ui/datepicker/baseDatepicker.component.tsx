@@ -1,54 +1,57 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   GestureResponderEvent,
   ImageProps,
-  ImageStyle,
   StyleProp,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
   TouchableOpacityProps,
   View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
 import {
+  EvaInputSize,
+  EvaStatus,
+  FalsyFC,
+  FalsyText,
+  RenderProp,
+  TouchableWithoutFeedback,
+} from '../../devsupport';
+import {
   Interaction,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import { Popover } from '../popover/popover.component';
+} from '../../theme';
 import { BaseCalendarProps } from '../calendar/baseCalendar.component';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
 import { NativeDateService } from '../calendar/service/nativeDate.service';
-import { isValidString } from '../support/services';
+import { Popover } from '../popover/popover.component';
 import {
   PopoverPlacement,
   PopoverPlacements,
 } from '../popover/type';
-
-type IconProp = (style: StyleType) => IconElement;
+import { TextProps } from '../text/text.component';
 
 export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   TouchableOpacityProps,
   BaseCalendarProps<D> {
 
   controlStyle?: StyleProp<ViewStyle>;
-  label?: string;
-  caption?: string;
-  captionIcon?: IconProp;
-  icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
-  status?: string;
-  size?: string;
-  placeholder?: string;
-  labelStyle?: StyleProp<TextStyle>;
-  captionStyle?: StyleProp<TextStyle>;
+  label?: RenderProp<TextProps> | React.ReactText;
+  caption?: RenderProp<TextProps> | React.ReactText;
+  captionIcon?: RenderProp<Partial<ImageProps>>;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  status?: EvaStatus;
+  size?: EvaInputSize;
+  placeholder?: RenderProp<TextProps> | React.ReactText;
   placement?: PopoverPlacement | string;
   backdropStyle?: StyleProp<ViewStyle>;
   onFocus?: () => void;
@@ -71,14 +74,14 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     visible: false,
   };
 
-  private popoverRef: React.RefObject<Popover> = React.createRef();
+  private popoverRef = React.createRef<Popover>();
 
   public show = (): void => {
-    this.popoverRef.current.show();
+    this.popoverRef.current?.show();
   };
 
   public hide = (): void => {
-    this.popoverRef.current.hide();
+    this.popoverRef.current?.hide();
   };
 
   public focus = (): void => {
@@ -95,16 +98,15 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   public abstract clear(): void;
 
-  protected abstract getComponentTitle(): string;
+  protected abstract getComponentTitle(): RenderProp<TextProps> | React.ReactText;
 
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
 
-  private getComponentStyle = (style: StyleType): StyleType => {
+  private getComponentStyle = (style: StyleType) => {
     const {
       textMarginHorizontal,
       textFontFamily,
       textFontSize,
-      textLineHeight,
       textFontWeight,
       textColor,
       placeholderColor,
@@ -114,14 +116,14 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       iconTintColor,
       labelColor,
       labelFontSize,
-      labelLineHeight,
       labelMarginBottom,
       labelFontWeight,
+      labelFontFamily,
       captionMarginTop,
       captionColor,
       captionFontSize,
-      captionLineHeight,
       captionFontWeight,
+      captionFontFamily,
       captionIconWidth,
       captionIconHeight,
       captionIconMarginRight,
@@ -140,7 +142,6 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         fontFamily: textFontFamily,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
-        lineHeight: textLineHeight,
         color: textColor,
       },
       placeholder: {
@@ -156,7 +157,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       label: {
         color: labelColor,
         fontSize: labelFontSize,
-        lineHeight: labelLineHeight,
+        fontFamily: labelFontFamily,
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
       },
@@ -169,7 +170,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       captionLabel: {
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
-        lineHeight: captionLineHeight,
+        fontFamily: captionFontFamily,
         color: captionColor,
       },
       popover: {
@@ -181,42 +182,27 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   private onPress = (event: GestureResponderEvent): void => {
     this.setPickerVisible();
-
-    if (this.props.onPress) {
-      this.props.onPress(event);
-    }
+    this.props.onPress && this.props.onPress(event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.eva.dispatch([]);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
   private onPickerVisible = (): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onFocus) {
-      this.props.onFocus();
-    }
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+    this.props.onFocus && this.props.onFocus();
   };
 
   private onPickerInvisible = (): void => {
-    this.props.dispatch([]);
-
-    if (this.props.onBlur) {
-      this.props.onBlur();
-    }
+    this.props.eva.dispatch([]);
+    this.props.onBlur && this.props.onBlur();
   };
 
   private setPickerVisible = (): void => {
@@ -227,117 +213,74 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     this.setState({ visible: false }, this.onPickerInvisible);
   };
 
-  private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
-    const iconElement: React.ReactElement<ImageProps> = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      style: [style, iconElement.props.style],
-    });
-  };
-
-  private renderLabelElement = (style: TextStyle): TextElement => {
+  private renderInputElement = (props, evaStyle): React.ReactElement => {
     return (
-      <Text
-        key={1}
-        style={[style, styles.label, this.props.labelStyle]}>
-        {this.props.label}
-      </Text>
-    );
-  };
-
-  private renderCaptionElement = (style: TextStyle): TextElement => {
-    return (
-      <Text
-        key={2}
-        style={[style, styles.captionLabel, this.props.captionStyle]}>
-        {this.props.caption}
-      </Text>
-    );
-  };
-
-  private renderCaptionIconElement = (style: ImageStyle): IconElement => {
-    const iconElement: IconElement = this.props.captionIcon(style);
-
-    return React.cloneElement(iconElement, {
-      key: 3,
-      style: [style, iconElement.props.style],
-    });
-  };
-
-  private renderTextElement = (style: StyleType): TextElement => {
-    return (
-      <Text
-        style={style}
-        numberOfLines={1}
-        ellipsizeMode='tail'>
-        {this.getComponentTitle()}
-      </Text>
-    );
-  };
-
-  private renderControlChildren = (style: StyleType): React.ReactNodeArray => {
-    return [
-      this.props.icon && this.renderIconElement(style.icon),
-      this.renderTextElement(style.text),
-    ];
-  };
-
-  private renderControlElement = (style: StyleType): React.ReactElement<TouchableOpacityProps> => {
-    const { themedStyle, controlStyle, ...restProps } = this.props;
-    const [iconElement, textElement] = this.renderControlChildren(style);
-
-    return (
-      <TouchableOpacity
-        {...restProps}
-        activeOpacity={1.0}
-        style={[styles.control, style.control, controlStyle]}
+      <TouchableWithoutFeedback
+        {...props}
+        style={[evaStyle.control, styles.control, this.props.controlStyle]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {textElement}
-        {iconElement}
-      </TouchableOpacity>
+        <FalsyFC
+          style={evaStyle.icon}
+          component={this.props.accessoryLeft}
+        />
+        <FalsyText
+          style={evaStyle.text}
+          numberOfLines={1}
+          ellipsizeMode='tail'
+          component={this.getComponentTitle()}
+        />
+        <FalsyFC
+          style={evaStyle.icon}
+          component={this.props.accessoryRight}
+        />
+      </TouchableWithoutFeedback>
     );
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactElement[] => {
-    return [
-      this.renderCalendar(),
-      isValidString(this.props.label) && this.renderLabelElement(style.label),
-      this.renderControlElement(style),
-      isValidString(this.props.caption) && this.renderCaptionElement(style.captionLabel),
-      this.props.captionIcon && this.renderCaptionIconElement(style.captionIcon),
-    ];
-  };
-
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, placement, backdropStyle } = this.props;
-    const { popover, ...componentStyle }: StyleType = this.getComponentStyle(themedStyle);
+    const {
+      eva,
+      style,
+      backdropStyle,
+      controlStyle,
+      placement,
+      label,
+      accessoryLeft,
+      accessoryRight,
+      caption,
+      captionIcon,
+      ...touchableProps
+    } = this.props;
 
-    const [
-      calendarElement,
-      labelElement,
-      controlElement,
-      captionElement,
-      captionIconElement,
-    ] = this.renderComponentChildren(componentStyle);
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View style={style}>
-        {labelElement}
+        <FalsyText
+          style={[evaStyle.label, styles.label]}
+          component={label}
+        />
         <Popover
           ref={this.popoverRef}
-          style={[popover, styles.popover]}
+          style={[evaStyle.popover, styles.popover]}
           backdropStyle={backdropStyle}
           placement={placement}
           visible={this.state.visible}
-          content={calendarElement}
+          anchor={() => this.renderInputElement(touchableProps, evaStyle)}
           onBackdropPress={this.setPickerInvisible}>
-          {controlElement}
+          {this.renderCalendar()}
         </Popover>
-        <View style={[componentStyle.captionContainer, styles.captionContainer]}>
-          {captionIconElement}
-          {captionElement}
+        <View style={[evaStyle.captionContainer, styles.captionContainer]}>
+          <FalsyFC
+            style={evaStyle.captionIcon}
+            component={captionIcon}
+          />
+          <FalsyText
+            style={[evaStyle.captionLabel, styles.captionLabel]}
+            component={caption}
+          />
         </View>
       </View>
     );

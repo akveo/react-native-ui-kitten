@@ -1,88 +1,74 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  CheckBox,
-  Layout,
-} from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { CheckBox, Layout } from '@ui-kitten/components';
 
-const useCheckboxChanges = (initialCheck = false) => {
+const useCheckboxState = (initialCheck = false) => {
   const [checked, setChecked] = React.useState(initialCheck);
-
-  const onChange = (isChecked) => {
-    setChecked(isChecked);
-  };
-
-  return {
-    checked,
-    onChange,
-  };
+  return { checked, onChange: setChecked };
 };
 
 export const CheckboxStatusShowcase = () => {
 
-  const primaryCheckboxChanges = useCheckboxChanges();
-  const successCheckboxChanges = useCheckboxChanges();
-  const infoCheckboxChanges = useCheckboxChanges();
-  const warningCheckboxChanges = useCheckboxChanges();
-  const dangerCheckboxChanges = useCheckboxChanges();
-  const basicCheckboxChanges = useCheckboxChanges();
-  const controlCheckboxChanges = useCheckboxChanges();
+  const primaryCheckboxState = useCheckboxState();
+  const successCheckboxState = useCheckboxState();
+  const infoCheckboxState = useCheckboxState();
+  const warningCheckboxState = useCheckboxState();
+  const dangerCheckboxState = useCheckboxState();
+  const basicCheckboxState = useCheckboxState();
+  const controlCheckboxState = useCheckboxState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <CheckBox
         style={styles.checkbox}
         status='primary'
-        text='Primary'
-        {...primaryCheckboxChanges}
-      />
+        {...primaryCheckboxState}>
+        Primary
+      </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='success'
-        text='Success'
-        {...successCheckboxChanges}
-      />
+        {...successCheckboxState}>
+        Success
+      </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='info'
-        text='Info'
-        {...infoCheckboxChanges}
-      />
+        {...infoCheckboxState}>
+        Info
+      </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='warning'
-        text='Warning'
-        {...warningCheckboxChanges}
-      />
+        {...warningCheckboxState}>
+        Warning
+      </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='danger'
-        text='Danger'
-        {...dangerCheckboxChanges}
-      />
+        {...dangerCheckboxState}>
+        Danger
+      </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='basic'
-        text='Basic'
-        {...basicCheckboxChanges}
-      />
+        {...basicCheckboxState}>
+        Basic
+      </CheckBox>
 
       <View style={styles.controlContainer}>
         <CheckBox
           style={styles.checkbox}
           status='control'
-          text='Control'
-          {...controlCheckboxChanges}
-        />
+          {...controlCheckboxState}>
+          Control
+        </CheckBox>
       </View>
 
     </Layout>
@@ -93,14 +79,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 8,
   },
   checkbox: {
-    margin: 8,
+    margin: 2,
   },
   controlContainer: {
     borderRadius: 4,
-    margin: 8,
+    margin: 2,
+    padding: 6,
     backgroundColor: '#3366FF',
   },
 });

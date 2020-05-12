@@ -17,11 +17,9 @@ docs/src/examples.json
 docs/src/assets/playground-build/
 docs/src/assets/examples-build/
 
-# env
-src/doc-showcase/env/index.js
-
-#config
-config/
+# showcases
+src/showcases/env/index.js
+src/showcases/web-build/
 
 .expo
 dist

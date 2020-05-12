@@ -1,20 +1,16 @@
 import React from 'react';
-import {
-  Layout,
-  Text,
-  StyleService,
-  useStyleSheet,
-} from '@ui-kitten/components';
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { View } from 'react-native';
 
 export const UseStyleSheetSimpleUsageShowcase = () => {
   const styles = useStyleSheet(themedStyles);
 
   return (
-    <Layout style={styles.container}>
+    <View style={styles.container}>
       <Text category='h4' status='control'>
         I use success color as background!
       </Text>
-    </Layout>
+    </View>
   );
 };
 

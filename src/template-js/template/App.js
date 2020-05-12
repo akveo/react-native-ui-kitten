@@ -21,23 +21,20 @@ import {
   Text,
 } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import {
-  mapping,
-  light as theme,
-} from '@eva-design/eva';
+import * as eva from '@eva-design/eva';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
  * https://akveo.github.io/eva-icons
  */
-const HeartIcon = (style) => (
-  <Icon {...style} name='heart'/>
+const HeartIcon = (props) => (
+  <Icon {...props} name='heart'/>
 );
 
-const App = () => (
+export default () => (
   <>
     <IconRegistry icons={EvaIconsPack}/>
-    <ApplicationProvider mapping={mapping} theme={theme}>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <Layout style={styles.container}>
         <Text style={styles.text} category='h1'>
           Welcome to UI Kitten 😻
@@ -46,9 +43,9 @@ const App = () => (
           Start with editing App.js to configure your App
         </Text>
         <Text style={styles.text} appearance='hint'>
-          For example, try changing theme to Dark by simply changing an import
+          For example, try changing theme to Dark by using eva.dark
         </Text>
-        <Button style={styles.likeButton} icon={HeartIcon}>
+        <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
           LIKE
         </Button>
       </Layout>
@@ -69,5 +66,3 @@ const styles = StyleSheet.create({
     marginVertical: 16,
   },
 });
-
-export default App;

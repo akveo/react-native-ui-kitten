@@ -1,18 +1,14 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
-import {
-  Autocomplete,
-  Layout,
-} from '@ui-kitten/components';
+import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
-const requestData = () => fetch(`https://facebook.github.io/react-native/movies.json`);
+const requestData = () => fetch('https://reactnative.dev/movies.json');
 const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400);
 
 export const AutocompleteAsyncShowcase = () => {
 
   const [query, setQuery] = React.useState(null);
-  const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState([]);
 
   const updateData = () => {
     requestDataWithDebounce()
@@ -24,30 +20,32 @@ export const AutocompleteAsyncShowcase = () => {
 
   React.useEffect(updateData, [query]);
 
-  const onSelect = ({ title }) => {
-    setQuery(title);
+  const onSelect = (index: number) => {
+    setQuery(data[index].title);
+  };
+
+  const onChangeText = (nextQuery) => {
+    setQuery(nextQuery);
   };
 
   const applyFilter = (options) => {
-    // can be avoided if filtration is done on server
     return options.filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
   };
 
+  const renderOption = (item, index) => (
+    <AutocompleteItem
+      key={index}
+      title={item.title}
+    />
+  );
+
   return (
-    <Layout style={styles.container}>
-      <Autocomplete
-        placeholder='Start typing to fetch options'
-        value={query}
-        data={data}
-        onChangeText={setQuery}
-        onSelect={onSelect}
-      />
-    </Layout>
+    <Autocomplete
+      placeholder='For example, Star Wars'
+      value={query}
+      onChangeText={onChangeText}
+      onSelect={onSelect}>
+      {data.map(renderOption)}
+    </Autocomplete>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    minHeight: 228,
-  },
-});

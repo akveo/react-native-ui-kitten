@@ -16,79 +16,104 @@ import { MappingContext } from '../mapping/mappingContext';
 import { ThemeContext } from '../theme/themeContext';
 import { ThemeType } from '../theme/theme.service';
 
-interface PrivateProps<T> {
+interface PrivateRefProps<T = React.ReactInstance> {
   forwardedRef?: React.Ref<T>;
+}
+
+export interface EvaProp {
+  theme?: ThemeType;
+  style?: StyleType;
+  dispatch?: (interaction: Interaction[]) => void;
 }
 
 export interface StyledComponentProps {
   appearance?: string;
-  theme?: ThemeType;
-  themedStyle?: StyleType;
-  dispatch?: (interaction: Interaction[]) => void;
+  eva?: EvaProp;
 }
 
 interface State {
   interaction: Interaction[];
 }
 
-export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps & P>;
+type WrappedComponentProps = any;
+// TODO: Better types. React.ComponentType<WrappedComponentProps>?
+type WrappedComponent = any;
+type StyledComponent = any;
 
 /**
- * `styled` is a High Order Function which is used to apply style mapping on component.
+ * `@styled` is a High Order Function to apply style mapping on a component.
+ * Used by all UI Kitten components and can be used when building custom components with Eva.
  *
- * Requires component to have `styledComponentName` string property which defines
- * corresponding component name in mapping. (e.g 'Button' for Button component).
- * Returns component class which can be used as styled component.
+ * @property {string} appearance - Appearance of component. Default is provided by mapping.
  *
- * @property {string} appearance - Determines style appearance of component. Default is provided by mapping.
+ * @property {EvaProp} eva - Additional property injected to all `styled` components. Includes following properties:
+ * `theme` - current theme,
+ * `style` - style provided by Eva,
+ * `dispatch` - Function for requesting styles from Eva for current component state.
  *
- * @property {ThemeType} theme - Determines theme used to style component.
- *
- * @property {StyleType} themedStyle - Determines component style for it's current state.
- *
- * @property {(interaction: Interaction[]) => void} dispatch - Determines function
- * for dispatching current state of component. This is designed to be used as style request function.
- * Calls component re-render if style for requested state differ from current.
- *
- * @param Component - Type: {ComponentType}. Determines class or functional component to be styled.
+ * @param name - Type: {string}. Name of the component in mapping.json.
  *
  * @overview-example StyledComponentSimpleUsage
+ * The below examples demonstrate how components can be styled with Eva.
+ * See [the guide](design-system/custom-component-mapping) for more details.
+ *
+ * @overview-example StyledComponentEvaProp
+ * A styled function injects `eva` property into props of decorated component, where
+ * theme - a current theme,
+ * styles - a styles object provided by Eva
+ * dispatch - a function to request styles for a particular state.
+ *
+ * ```
+ * interface EvaProp {
+ *   theme: ThemeType;
+ *   style: StyleType;
+ *   dispatch: (interaction: Interaction[]) => void;
+ * }
+ * ```
  *
  * @overview-example StyledComponentStates
+ * Styled components may describe its style for a particular state.
+ *
+ * Let's say we don't like the standard behavior of TouchableOpacity when it's pressed and
+ * we want the component to change it's color rather being highlighted.
+ *
+ * We define an active state in `meta` key and in mapping, so that component will change `backgroundColor`,
+ * when `active` is requested. To do this, we call `dispatch` function when Touchable is pressed.
+ * Then, when touch is released, we request nothing, which stands for `default`.
  *
  * @overview-example StyledComponentVariants
+ * Now let's say we want to have a `status` property to make component change its color, for example,
+ * within the forms validation. Furthermore, we want to control its color for both statuses when it is pressed.
+ *
+ * The `variantGroups` key in `meta` defines all properties that can be applied by component.
+ * Each key in variant group is a string value that can be passed to component props.
  */
-export const styled = <P extends object>(Component: React.ComponentType<P>): StyledComponentClass<P> => {
+export const styled = (name: string): StyledComponent => {
+  return (component: WrappedComponent): StyledComponent => {
+    return styleInjector(component, name);
+  };
+};
 
-  // @ts-ignore
-  if (!Component.styledComponentName) {
-    console.warn('Styled components should specify corresponding style name.');
+const styleInjector = (Component: WrappedComponent, name: string): StyledComponent => {
+
+  if (!name) {
+    console.warn('Components annotated with @styled function should also have its in mapping.json.');
     return null;
   }
 
-  type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
-  type WrappedProps = StyledComponentProps & P;
-  type WrappingElement = React.ReactElement<WrappingProps>;
-  type WrappedElement = React.ReactElement<WrappedProps>;
-  type WrappedElementInstance = React.ReactInstance;
-
-  class Wrapper extends React.Component<WrappingProps, State> {
+  class Wrapper extends React.Component<PrivateRefProps, State> {
 
     public state: State = {
       interaction: [],
     };
 
     private init: boolean = false;
-
-    // Yes. This is not static because it is calculated once we got some meta from style context.
-    private defaultProps: StyledComponentProps;
+    private defaultProps: WrappedComponentProps;
     private service: StyleConsumerService;
 
     private onInit = (style: ThemeStyleType, theme: ThemeType): void => {
-      // @ts-ignore
-      this.service = new StyleConsumerService(Component.styledComponentName, style, theme);
+      this.service = new StyleConsumerService(name, style);
       this.defaultProps = this.service.createDefaultProps();
-
       this.init = true;
     };
 
@@ -96,37 +121,42 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
       this.setState({ interaction });
     };
 
-    private withStyledProps = (source: P,
-                               style: ThemeStyleType,
-                               theme: ThemeType): WrappedProps => {
-      const { interaction } = this.state;
+    private withEvaProp = (sourceProps: WrappedComponentProps,
+                           sourceStyle: ThemeStyleType,
+                           theme: ThemeType): StyledComponentProps => {
 
-      const props: WrappingProps = { ...this.defaultProps, ...source };
+      const props: WrappedComponentProps = { ...this.defaultProps, ...sourceProps };
+      const style: StyleType = this.service.createStyleProp(props, sourceStyle, theme, this.state.interaction);
 
-      return this.service.withStyledProps(props, style, theme, interaction);
+      return {
+        ...props,
+        eva: {
+          theme,
+          style,
+          dispatch: this.onDispatch,
+        },
+      };
     };
 
-    private renderWrappedElement = (style: ThemeStyleType, theme: ThemeType): WrappedElement => {
+    private renderWrappedElement = (style: ThemeStyleType, theme: ThemeType): React.ReactElement => {
       if (!this.init) {
         this.onInit(style, theme);
       }
 
       const { forwardedRef, ...restProps } = this.props;
-      const props: P & StyledComponentProps = this.withStyledProps(restProps as P, style, theme);
 
       return (
         <Component
-          {...props}
+          {...this.withEvaProp(restProps as any, style, theme)}
           ref={forwardedRef}
-          dispatch={this.onDispatch}
         />
       );
     };
 
-    public render(): React.ReactNode {
+    public render(): React.ReactElement {
       return (
-        <MappingContext.Consumer>{(style: ThemeStyleType): WrappedElement => (
-          <ThemeContext.Consumer>{(theme: ThemeType): WrappedElement => {
+        <MappingContext.Consumer>{(style: ThemeStyleType): React.ReactElement => (
+          <ThemeContext.Consumer>{(theme: ThemeType): React.ReactElement => {
             return this.renderWrappedElement(style, theme);
           }}</ThemeContext.Consumer>
         )}</MappingContext.Consumer>
@@ -134,11 +164,8 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
     }
   }
 
-  const WrappingElement = (props: WrappingProps,
-                           ref: React.Ref<WrappedElementInstance>): WrappingElement => {
+  const WrappingElement = (props: WrappedComponentProps, ref: React.Ref<React.ReactInstance>): React.ReactElement => {
     return (
-      // @ts-ignore
-
       <Wrapper
         {...props}
         forwardedRef={ref}
@@ -146,13 +173,9 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
     );
   };
 
-  const ResultComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement);
-
+  const ResultComponent = React.forwardRef<React.ReactInstance, PrivateRefProps>(WrappingElement);
   ResultComponent.displayName = Component.displayName || Component.name;
-
-  // @ts-ignore
   hoistNonReactStatics(ResultComponent, Component);
 
-  // @ts-ignore
   return ResultComponent;
 };

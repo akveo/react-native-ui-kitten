@@ -7,14 +7,14 @@
 import React from 'react';
 import {
   StyleSheet,
-  TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
+import { TouchableWithoutFeedback } from '../../../../devsupport';
 import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../../../theme';
 import { CalendarDateInfo } from '../../type';
 
 type ChildrenProp<D> = (date: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
@@ -34,9 +34,8 @@ export interface CalendarPickerCellProps<D> extends StyledComponentProps, Toucha
 
 export type CalendarPickerCellElement<D> = React.ReactElement<CalendarPickerCellProps<D>>;
 
-class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellProps<D>> {
-
-  static styledComponentName: string = 'CalendarCell';
+@styled('CalendarCell')
+export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellProps<D>> {
 
   public shouldComponentUpdate(nextProps: CalendarPickerCellProps<D>): boolean {
     if (nextProps.shouldComponentUpdate) {
@@ -46,9 +45,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
   }
 
   private onPress = (): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(this.props.date);
-    }
+    this.props.onSelect && this.props.onSelect(this.props.date);
   };
 
   private getContainerBorderRadius = (borderRadius: number): StyleType => {
@@ -74,14 +71,13 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
     return {};
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       contentBorderWidth,
       contentBorderRadius,
       contentBorderColor,
       contentBackgroundColor,
       contentTextFontSize,
-      contentTextLineHeight,
       contentTextFontWeight,
       contentTextColor,
       contentTextFontFamily,
@@ -103,32 +99,30 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
       contentText: {
         fontSize: contentTextFontSize,
         fontWeight: contentTextFontWeight,
-        lineHeight: contentTextLineHeight,
         color: contentTextColor,
         fontFamily: contentTextFontFamily,
       },
     };
   };
 
-  private renderContentElement = (source: ChildrenProp<D>, style: StyleType): React.ReactElement => {
+  private renderContentElement = (source: ChildrenProp<D>, evaStyle): React.ReactElement => {
     return source && source(this.props.date, {
-      container: style.contentContainer,
-      text: style.contentText,
+      container: evaStyle.contentContainer,
+      text: evaStyle.contentText,
     });
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, date, bounding, children, ...restProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const { eva, style, date, bounding, children, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        onPress={this.onPress}
-        {...restProps}
-        style={[container, styles.container, style]}>
-        {this.renderContentElement(children, componentStyles)}
-      </TouchableOpacity>
+      <TouchableWithoutFeedback
+        {...touchableProps}
+        style={[evaStyle.container, styles.container, style]}
+        onPress={this.onPress}>
+        {this.renderContentElement(children, evaStyle)}
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -138,5 +132,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export const CalendarPickerCell = styled(CalendarPickerCellComponent);

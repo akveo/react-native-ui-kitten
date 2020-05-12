@@ -20,6 +20,9 @@ export const pulse = animation(
   selector: 'ngd-stacked-example-block',
   template: `
     <div *ngIf="isLiveExample">
+      <td>
+        <div *ngIf="content.shortDescription" ngdDescription>{{ content.shortDescription }}</div>
+      </td>
       <ngd-live-example-block [hidden]="!isLive"
                               [@exampleState]="isLive ? 'live': 'code'"
                               [content]="content"

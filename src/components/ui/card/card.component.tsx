@@ -7,225 +7,158 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  StyleProp,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
   View,
-  ViewStyle,
+  ViewProps,
 } from 'react-native';
+import {
+  EvaStatus,
+  FalsyFC,
+  RenderProp,
+  TouchableWeb,
+  TouchableWebElement,
+  TouchableWebProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Divider,
-  DividerElement,
-} from '../divider/divider.component';
-import { CardHeaderElement } from './cardHeader.component';
-import { allWithPrefix } from '../support/services';
+} from '../../theme';
+import { Divider } from '../divider/divider.component';
 
-interface HeaderStyles {
-  style: StyleProp<ViewStyle>;
-  accent: StyleProp<ViewStyle>;
-  title: StyleProp<TextStyle>;
-  description: StyleProp<TextStyle>;
-}
+type CardStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'filled' | 'outline' | string;
+}>;
 
-type HeaderProp = React.ReactElement | CardHeaderElement;
-type FooterProp = React.ReactElement;
-export type CardFooterElement = FooterProp;
-
-export interface CardProps extends StyledComponentProps, TouchableOpacityProps {
-  appearance?: string;
-  status?: string;
-  children: React.ReactNode;
-  header?: () => HeaderProp;
-  footer?: () => FooterProp;
+export interface CardProps extends TouchableWebProps, CardStyledProps {
+  children?: React.ReactNode;
+  header?: RenderProp<ViewProps>;
+  footer?: RenderProp<ViewProps>;
+  accent?: RenderProp<ViewProps>;
+  status?: EvaStatus;
 }
 
 export type CardElement = React.ReactElement<CardProps>;
 
 /**
- * Styled `Card` component is a basic content container component.
+ * Cards contain content and actions about a single subject.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
+ * @property {ReactNode} children - Component to render within the card.
+ *
+ * @property {(ViewProps) => ReactElement} header - Function component
+ * to render above the content.
+ *
+ * @property {(ViewProps) => ReactElement} footer - Function component
+ * to render below the content.
+ *
+ * @property {(ViewProps) => ReactElement} accent - Function component
+ * to render above the card.
+ * Accents may change it's color depending on *status* property.
+ *
+ * @property {string} appearance - Appearance of the component.
  * Can be `filled` or `outline`.
- * Default is `outline`.
+ * Defaults to *outline*.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
- *
- * @property {ReactNode} children - Determines text of the component.
- *
- * @property {() => ReactElement | ReactElement<CardHeaderProps>} header - Determines header of the component.
- *
- * @property {() => ReactElement} footer - Determines footer of the component.
+ * Defaults to *basic*.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example CardSimpleUsage
+ * In basic example, card accepts content view as child element.
  *
- * @overview-example CardWithHeaderAndFooter
- *
- * @overview-example CardCustomHeader
+ * @overview-example CardAccessories
+ * It also may have header and footer by configuring `header` and `footer` properties.
  *
  * @overview-example CardStatuses
  */
-class CardComponent extends React.Component<CardProps> {
-
-  static styledComponentName: string = 'Card';
+@styled('Card')
+export class Card extends React.Component<CardProps> {
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.eva.dispatch([]);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
-      backgroundColor,
-      borderRadius,
-      borderWidth,
-      borderColor,
+      bodyPaddingVertical,
+      bodyPaddingHorizontal,
+      accentHeight,
+      accentBackgroundColor,
+      headerPaddingVertical,
+      headerPaddingHorizontal,
+      footerPaddingVertical,
+      footerPaddingHorizontal,
+      ...containerParameters
     } = source;
 
-    const headerStyles: StyleType = allWithPrefix(source, 'header');
-    const bodyStyles: StyleType = allWithPrefix(source, 'body');
-    const footerStyles: StyleType = allWithPrefix(source, 'footer');
-    const accentStyles: StyleType = allWithPrefix(source, 'accent');
-    const titleStyles: StyleType = allWithPrefix(source, 'title');
-    const descriptionStyles: StyleType = allWithPrefix(source, 'description');
-
     return {
-      container: {
-        backgroundColor: backgroundColor,
-        borderRadius: borderRadius,
-        borderWidth: borderWidth,
-        borderColor: borderColor,
-      },
-      header: {
-        paddingVertical: headerStyles.headerPaddingVertical,
-        paddingHorizontal: headerStyles.headerPaddingHorizontal,
-      },
+      container: containerParameters,
       body: {
-        paddingVertical: bodyStyles.bodyPaddingVertical,
-        paddingHorizontal: bodyStyles.bodyPaddingHorizontal,
-      },
-      footer: {
-        paddingVertical: footerStyles.footerPaddingVertical,
-        paddingHorizontal: footerStyles.footerPaddingHorizontal,
-      },
-      title: {
-        fontFamily: titleStyles.titleFontFamily,
-        fontSize: titleStyles.titleFontSize,
-        fontWeight: titleStyles.titleFontWeight,
-        lineHeight: titleStyles.titleLineHeight,
-        color: titleStyles.titleColor,
-        marginHorizontal: titleStyles.titleMarginHorizontal,
-      },
-      description: {
-        fontFamily: descriptionStyles.titleFontFamily,
-        fontSize: descriptionStyles.titleFontSize,
-        fontWeight: descriptionStyles.titleFontWeight,
-        lineHeight: descriptionStyles.titleLineHeight,
-        color: descriptionStyles.descriptionColor,
-        marginHorizontal: descriptionStyles.descriptionMarginHorizontal,
+        paddingVertical: bodyPaddingVertical,
+        paddingHorizontal: bodyPaddingHorizontal,
       },
       accent: {
-        backgroundColor: accentStyles.accentBackgroundColor,
-        height: accentStyles.accentHeight,
+        height: accentHeight,
+        backgroundColor: accentBackgroundColor,
+      },
+      header: {
+        paddingHorizontal: headerPaddingHorizontal,
+        paddingVertical: headerPaddingVertical,
+      },
+      footer: {
+        paddingHorizontal: footerPaddingHorizontal,
+        paddingVertical: footerPaddingVertical,
       },
     };
   };
 
-  private renderDivider = (): DividerElement => {
+  private renderStatusAccent = (evaStyle): React.ReactElement => {
     return (
-      <Divider/>
+      <View style={evaStyle}/>
     );
   };
 
-  private renderHeader = (headerStyles: HeaderStyles): HeaderProp => {
-    const header: HeaderProp = this.props.header();
-
-    return React.cloneElement(header, {
-      headerStyle: [styles.header, headerStyles.style, header.props.style],
-      accentStyle: headerStyles.accent,
-      titleStyle: headerStyles.title,
-      descriptionStyle: headerStyles.description,
-      onPress: this.props.onPress,
-      onPressIn: this.onPressIn,
-      onPressOut: this.onPressOut,
-    });
-  };
-
-  private renderFooter = (style: StyleType): FooterProp => {
-    const footer: FooterProp = this.props.footer();
-
-    return React.cloneElement(footer, {
-      style: [style, styles.footer, footer.props.style],
-    });
-  };
-
-  private renderBody = (style: StyleType): React.ReactNode => {
-    return (
-      <View style={[styles.body, style]}>
-        {this.props.children}
-      </View>
-    );
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { header, footer } = this.props;
-
-    const headerStyles: HeaderStyles = {
-      style: style.header,
-      accent: style.accent,
-      title: style.title,
-      description: style.description,
-    };
-
-    return [
-      header && this.renderHeader(headerStyles),
-      this.renderBody(style.body),
-      footer && this.renderFooter(style.footer),
-    ];
-  };
-
-  public render(): CardElement {
-    const { themedStyle, style, children, ...restProps } = this.props;
-    const { container, ...childrenStyles } = this.getComponentStyle(themedStyle);
-    const [header, body, footer] = this.renderComponentChildren(childrenStyles);
+  public render(): TouchableWebElement {
+    const { eva, style, children, accent, header, footer, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...restProps}
-        style={[container, styles.container, style]}
+      <TouchableWeb
+        {...touchableProps}
+        style={[styles.container, evaStyle.container, style]}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {header}
-        {header && this.renderDivider()}
-        {body}
-        {footer && this.renderDivider()}
-        {footer}
-      </TouchableOpacity>
+        <FalsyFC
+          style={evaStyle.accent}
+          fallback={this.renderStatusAccent(evaStyle.accent)}
+          component={accent}
+        />
+        <FalsyFC
+          style={[styles.transparent, evaStyle.header]}
+          component={header}
+        />
+        {header && <Divider/>}
+        <View style={evaStyle.body}>
+          {children}
+        </View>
+        {footer && <Divider/>}
+        <FalsyFC
+          style={[styles.transparent, evaStyle.footer]}
+          component={footer}
+        />
+      </TouchableWeb>
     );
   }
 }
@@ -233,17 +166,8 @@ class CardComponent extends React.Component<CardProps> {
 const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
-    justifyContent: 'space-between',
   },
-  header: {
-    backgroundColor: 'transparent',
-  },
-  body: {
-    backgroundColor: 'transparent',
-  },
-  footer: {
+  transparent: {
     backgroundColor: 'transparent',
   },
 });
-
-export const Card = styled<CardProps>(CardComponent);

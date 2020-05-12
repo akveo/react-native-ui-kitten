@@ -7,51 +7,39 @@
 import React from 'react';
 import {
   ListRenderItemInfo,
-  StyleSheet,
   NativeSyntheticEvent,
+  StyleSheet,
+  TextInputFocusEventData,
   TextInputSubmitEditingEventData,
   View,
 } from 'react-native';
+import { ChildrenWithProps } from '../../devsupport';
 import {
   Input,
-  InputComponent,
   InputElement,
   InputProps,
 } from '../input/input.component';
-import {
-  List,
-  ListElement,
-  ListProps,
-} from '../list/list.component';
-import {
-  ListItem,
-  ListItemElement,
-} from '../list/listItem.component';
+import { List } from '../list/list.component';
 import {
   Popover,
   PopoverElement,
 } from '../popover/popover.component';
-import { InputFocusEvent } from '../support/typings';
 import { PopoverPlacement } from '../popover/type';
+import {
+  AutocompleteItemElement,
+  AutocompleteItemProps,
+} from './autocompleteItem.component';
 
-export interface AutocompleteOption {
-  title: string;
+export interface AutocompleteProps extends InputProps {
+  children?: ChildrenWithProps<AutocompleteItemProps>;
+  onSelect?: (index: number) => void;
+  placement?: string;
 }
 
-export interface AutocompleteProps<O extends Option = Option> extends InputProps {
-  data?: O[];
-  placeholderData?: O[];
-  onSelect?: (option: O) => void;
-  renderItem?: (info: ListRenderItemInfo<O>) => React.ReactElement;
-  placement?: PopoverPlacement | string;
-}
-
-export type AutocompleteElement<O extends Option = Option> = React.ReactElement<AutocompleteProps<O>>;
-
-type Option = AutocompleteOption;
+export type AutocompleteElement = React.ReactElement<AutocompleteProps>;
 
 interface State {
-  optionsVisible: boolean;
+  listVisible: boolean;
 }
 
 /**
@@ -63,179 +51,171 @@ interface State {
  *
  * @method {() => void} hide - Sets data list invisible.
  *
- * @method {() => void} focus - Focuses Autocomplete and sets data list visible.
+ * @method {() => void} focus - Focuses an input field and sets data list visible.
  *
- * @method {() => void} blur - Removes focus from Autocomplete and sets data list invisible.
- * This is the opposite of `focus()`.
+ * @method {() => void} blur - Removes focus from input field and sets data list invisible.
  *
- * @method {() => boolean} isFocused - Returns true if the Autocomplete is currently focused and visible.
+ * @method {() => boolean} isFocused - Returns true if the input field is currently focused.
  *
- * @method {() => void} clear - Removes all text from the Autocomplete.
+ * @method {() => void} clear - Removes all text from the input field.
  *
- * @property {AutocompleteOption[]} data - Options displayed in component.
- * Each option can be any type, but should contain `title` property.
+ * @property {ReactElement<AutocompleteItemProps> | ReactElement<AutocompleteItemProps>[]} children -
+ * Options displayed within list.
  *
- * @property {AutocompleteOption[]} placeholderData - Options displayed in component
- * when data is nullable of empty.
+ * @property {(number) => void} onSelect - Called when option is pressed.
  *
- * @property {(option: AutocompleteOption) => void} onSelect - Emits when option is pressed.
+ * @property {string} status - Status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Defaults to *basic*.
+ * Useful for giving user a hint on the input validity.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {(info: ListRenderItemInfo<AutocompleteOption>) => ReactElement} renderItem - Takes an
- * item from data and renders it into the list. If not provided, ListItem is rendered.
+ * @property {string} size - Size of the component.
+ * Can be `small`, `medium` or `large`.
+ * Defaults to *medium*.
  *
- * @property {string | PopoverPlacement} placement - Determines the actual placement of the popover.
+ * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
+ * to render to top of the input field.
+ * If it is a function, expected to return a Text.
+ *
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * to render to start of the text.
+ * Expected to return an Image.
+ *
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * to render to end of the text.
+ * Expected to return an Image.
+ *
+ * @property {string | PopoverPlacement} placement - Position of the options list relative to the input field.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
- * Default is `bottom`.
- * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ * Defaults to *bottom*.
+ *
+ * @property {() => void} onFocus - Called when options list becomes visible.
+ *
+ * @property {() => void} onBlur - Called when options list becomes invisible.
  *
  * @property {InputProps} ...InputProps - Any props applied to Input component.
  *
  * @overview-example AutocompleteSimpleUsage
+ * Autocomplete may contain options to be rendered within suggestions list.
+ * Options should be provided by passing them to children.
  *
- * @overview-example AutocompleteStates
- *
- * @overview-example AutocompleteStatus
- *
- * @overview-example AutocompleteSize
- *
- * @overview-example AutocompleteWithIcon
- *
- * @overview-example AutocompleteWithLabel
+ * @overview-example AutocompleteAccessories
+ * Autocomplete may contain accessories by passing `accessoryLeft` or `accessoryRight` props.
+ * By default, we expect it to be images.
  *
  * @example AutocompleteHandleKeyboard
+ * On mobile devices, options may be overlapped by keyboard.
+ * It can be handled with `placement` property.
  *
  * @example AutocompleteAsync
+ * For requesting a real-world data by typing, http requests may be sent with debounce.
  */
-export class Autocomplete<O extends Option = Option> extends React.Component<AutocompleteProps<O>, State> {
+export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
   public state: State = {
-    optionsVisible: false,
+    listVisible: false,
   };
 
-  private popoverRef: React.RefObject<Popover> = React.createRef();
-  private inputRef: React.RefObject<InputComponent> = React.createRef();
+  private popoverRef = React.createRef<Popover>();
+  private inputRef = React.createRef<Input>();
 
-  private get data(): O[] {
-    const hasData: boolean = this.props.data && this.props.data.length > 0;
-    return hasData && this.props.data || this.props.placeholderData;
+  private get data(): any[] {
+    return React.Children.toArray(this.props.children || []);
   }
 
   public show = (): void => {
-    this.popoverRef.current.show();
+    this.popoverRef.current?.show();
   };
 
   public hide = (): void => {
-    this.popoverRef.current.hide();
+    this.popoverRef.current?.hide();
   };
 
   public focus = (): void => {
-    this.inputRef.current.focus();
+    this.inputRef.current?.focus();
   };
 
   public blur = (): void => {
-    this.inputRef.current.blur();
+    this.inputRef.current?.blur();
   };
 
   public isFocused = (): boolean => {
-    return this.inputRef.current.isFocused();
+    return this.inputRef.current?.isFocused();
   };
 
   public clear = (): void => {
-    this.inputRef.current.clear();
+    this.inputRef.current?.clear();
   };
 
-  private onInputFocus = (e: InputFocusEvent): void => {
-    this.setState({ optionsVisible: true });
-
-    if (this.props.onFocus) {
-      this.props.onFocus(e);
-    }
+  private onInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
+    this.setOptionsListVisible();
+    this.props.onFocus && this.props.onFocus(event);
   };
 
   private onInputSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
-    this.setState({ optionsVisible: false });
-
-    if (this.props.onSubmitEditing) {
-      this.props.onSubmitEditing(e);
-    }
+    this.setOptionsListInvisible();
+    this.props.onSubmitEditing && this.props.onSubmitEditing(e);
   };
+
 
   private onBackdropPress = (): void => {
-    this.setState({ optionsVisible: false });
-    this.inputRef.current.blur();
+    this.blur();
+    this.setOptionsListInvisible();
   };
 
-  private onOptionPress = (index: number): void => {
+  private onItemPress = (index: number): void => {
     if (this.props.onSelect) {
-      this.props.onSelect(this.props.data[index]);
-      this.setState({ optionsVisible: false });
+      this.setOptionsListInvisible();
+      this.props.onSelect(index);
     }
   };
 
-  private renderOptionElement = (info: ListRenderItemInfo<O>): ListItemElement => {
-    return (
-      <ListItem
-        title={info.item.title}
-        onPress={this.onOptionPress}
-      />
-    );
+  private setOptionsListVisible = (): void => {
+    const hasData: boolean = this.data.length > 0;
+    hasData && this.setState({ listVisible: true });
   };
 
-  private renderCustomOptionElement = (info: ListRenderItemInfo<O>): React.ReactElement => {
-    return (
-      <ListItem onPress={this.onOptionPress}>
-        {this.props.renderItem(info)}
-      </ListItem>
-    );
+  private setOptionsListInvisible = (): void => {
+    this.setState({ listVisible: false });
   };
 
-  private renderOptionListElement(props: Partial<ListProps>): ListElement {
-    return (
-      <List
-        style={styles.optionList}
-        {...props}
-        data={this.data}
-        bounces={false}
-        renderItem={props.renderItem && this.renderCustomOptionElement || this.renderOptionElement}
-      />
-    );
-  }
-
-  private renderInputElement = (props: Partial<InputProps>): InputElement => {
-    return (
-      <Input
-        ref={this.inputRef}
-        {...props}
-        onFocus={this.onInputFocus}
-        onSubmitEditing={this.onInputSubmitEditing}
-      />
-    );
+  private renderItem = (info: ListRenderItemInfo<AutocompleteItemElement>): AutocompleteItemElement => {
+    return React.cloneElement(info.item, { onPress: () => this.onItemPress(info.index) });
   };
 
-  private renderComponentChildren = (props: AutocompleteProps): React.ReactElement[] => {
-    const { data, renderItem, placeholderData, ...inputProps } = props;
-    return [
-      this.renderInputElement(inputProps),
-      this.renderOptionListElement({ data, renderItem }),
-    ];
+  private renderInputElement = (props: InputProps): InputElement => {
+    return (
+      <View>
+        <Input
+          {...props}
+          ref={this.inputRef}
+          onFocus={this.onInputFocus}
+          onSubmitEditing={this.onInputSubmitEditing}
+        />
+      </View>
+    );
   };
 
   public render(): PopoverElement {
-    const [inputElement, listElement]: React.ReactElement[] = this.renderComponentChildren(this.props);
+    const { placement, children, ...inputProps } = this.props;
 
     return (
       <Popover
         ref={this.popoverRef}
         style={styles.popover}
-        placement={this.props.placement}
-        visible={this.state.optionsVisible}
+        placement={placement}
+        visible={this.state.listVisible}
         fullWidth={true}
-        content={listElement}
+        anchor={() => this.renderInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}>
-        <View>
-          {inputElement}
-        </View>
+        <List
+          style={styles.list}
+          data={this.data}
+          bounces={false}
+          renderItem={this.renderItem}
+        />
       </Popover>
     );
   }
@@ -246,7 +226,7 @@ const styles = StyleSheet.create({
     maxHeight: 192,
     overflow: 'hidden',
   },
-  optionList: {
+  list: {
     flexGrow: 0,
     overflow: 'hidden',
   },

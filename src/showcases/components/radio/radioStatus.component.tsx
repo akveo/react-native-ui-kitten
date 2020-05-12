@@ -1,88 +1,74 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  Layout,
-  Radio,
-} from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Layout, Radio } from '@ui-kitten/components';
 
-const useRadioChanges = (initialCheck = false) => {
+const useRadioState = (initialCheck = false) => {
   const [checked, setChecked] = React.useState(initialCheck);
-
-  const onCheckedChange = (isChecked) => {
-    setChecked(isChecked);
-  };
-
-  return {
-    checked,
-    onChange: onCheckedChange,
-  };
+  return { checked, onChange: setChecked };
 };
 
 export const RadioStatusShowcase = () => {
 
-  const primaryRadioChanges = useRadioChanges();
-  const successRadioChanges = useRadioChanges();
-  const infoRadioChanges = useRadioChanges();
-  const warningRadioChanges = useRadioChanges();
-  const dangerRadioChanges = useRadioChanges();
-  const basicRadioChanges = useRadioChanges();
-  const controlRadioChanges = useRadioChanges();
+  const primaryRadioState = useRadioState();
+  const successRadioState = useRadioState();
+  const infoRadioState = useRadioState();
+  const warningRadioState = useRadioState();
+  const dangerRadioState = useRadioState();
+  const basicRadioState = useRadioState();
+  const controlRadioState = useRadioState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Radio
         style={styles.radio}
         status='primary'
-        text='Primary'
-        {...primaryRadioChanges}
-      />
+        {...primaryRadioState}>
+        Primary
+      </Radio>
 
       <Radio
         style={styles.radio}
         status='success'
-        text='Success'
-        {...successRadioChanges}
-      />
+        {...successRadioState}>
+        Success
+      </Radio>
 
       <Radio
         style={styles.radio}
         status='info'
-        text='Info'
-        {...infoRadioChanges}
-      />
+        {...infoRadioState}>
+        Info
+      </Radio>
 
       <Radio
         style={styles.radio}
         status='warning'
-        text='Warning'
-        {...warningRadioChanges}
-      />
+        {...warningRadioState}>
+        Warning
+      </Radio>
 
       <Radio
         style={styles.radio}
         status='danger'
-        text='Danger'
-        {...dangerRadioChanges}
-      />
+        {...dangerRadioState}>
+        Danger
+      </Radio>
 
       <Radio
         style={styles.radio}
         status='basic'
-        text='Basic'
-        {...basicRadioChanges}
-      />
+        {...basicRadioState}>
+        Basic
+      </Radio>
 
       <View style={styles.controlContainer}>
         <Radio
           style={styles.radio}
           status='control'
-          text='Control'
-          {...controlRadioChanges}
-        />
+          {...controlRadioState}>
+          Control
+        </Radio>
       </View>
 
     </Layout>
@@ -95,12 +81,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   radio: {
-    margin: 8,
+    margin: 2,
   },
   controlContainer: {
     borderRadius: 4,
-    margin: 8,
-    padding: 8,
+    margin: 2,
+    padding: 6,
     backgroundColor: '#3366FF',
   },
 });

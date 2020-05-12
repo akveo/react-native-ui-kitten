@@ -1,7 +1,14 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import {
   Animated,
   Easing,
   EasingFunction,
+  Platform,
   ViewStyle,
 } from 'react-native';
 import {
@@ -28,6 +35,7 @@ const DEFAULT_CONFIG: SpinnerAnimationConfig = {
   duration: 2400,
   easing: Easing.linear,
   cycles: -1,
+  useNativeDriver: Platform.OS !== 'web',
 };
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
@@ -51,15 +59,15 @@ export class SpinnerAnimation extends Animation<SpinnerAnimationConfig, SpinnerA
   private animationFrames: number[];
   private arcSize: number;
 
-  protected get animation(): Animated.CompositeAnimation {
-    return Animated.timing(this.animationValue, { toValue: 1.0, ...this.config });
-  }
-
   constructor(arcSize: number, config?: SpinnerAnimationConfig) {
     super({ ...DEFAULT_CONFIG, ...config });
     this.arcSize = arcSize;
     this.animationValue = new Animated.Value(0);
     this.animationFrames = this.createFrameRange(this.config.duration);
+  }
+
+  protected get animation(): Animated.CompositeAnimation {
+    return Animated.timing(this.animationValue, { toValue: 1.0, ...this.config });
   }
 
   public start(callback?: Animated.EndCallback) {

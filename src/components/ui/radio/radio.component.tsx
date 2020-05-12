@@ -7,124 +7,131 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  Insets,
-  Platform,
-  StyleProp,
+  NativeSyntheticEvent,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
+  TargetedEvent,
   View,
-  ViewStyle,
 } from 'react-native';
+import {
+  EvaStatus,
+  FalsyText,
+  RenderProp,
+  TouchableWeb,
+  TouchableWebElement,
+  TouchableWebProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import {
-  isValidString,
-  WebEventResponder,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 
-export interface RadioProps extends StyledComponentProps, TouchableOpacityProps {
-  textStyle?: StyleProp<TextStyle>;
-  text?: string;
+type RadioStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export interface RadioProps extends TouchableWebProps, RadioStyledProps {
+  children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
-  status?: string;
-  onChange?: (selected: boolean) => void;
+  onChange?: (checked: boolean) => void;
+  status?: EvaStatus;
 }
 
 export type RadioElement = React.ReactElement<RadioProps>;
 
 /**
- * Styled `Radio` component.
+ * Radio buttons allow the user to select one option from a set.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.
- * Default is `false`.
+ * @property {boolean} checked - Whether component is checked.
+ * Defaults to *false*.
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false`.
+ * @property {(boolean) => void} onChange - Called when radio
+ * should switch it's value.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * to render near the checkbox.
+ * If it is a function, expected to return a Text.
+ *
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
- *
- * @property {string} text - Determines text of the component.
- *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
- *
- * @property {(selected: boolean) => void} onChange - Triggered on onChange value.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example RadioSimpleUsage
  *
+ * @overview-example RadioGroupSimpleUsage
+ * Radios should be passed to RadioGroup child elements to provide a usable component.
+ *
  * @overview-example RadioStates
+ * A single Radio can be checked or disabled.
  *
  * @overview-example RadioStatus
+ * Or marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
- * @example RadioInlineStyling
+ * @overview-example RadioStyling
+ * Radio and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Radio, Text } from '@ui-kitten/components';
+ *
+ * <Radio>
+ *   {evaProps => <Text {...evaProps}>Place your Text</Text>}
+ * </Radio>
+ * ```
+ *
+ * @overview-example RadioTheming
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class RadioComponent extends React.Component<RadioProps> {
+@styled('Radio')
+export class Radio extends React.Component<RadioProps> {
 
-  static styledComponentName: string = 'Radio';
-
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.HOVER]);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
-  public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.FOCUSED]);
+    this.props.onFocus && this.props.onFocus(event);
   };
 
-  public onBlur = (): void => {
-    this.props.dispatch([]);
+  private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onBlur && this.props.onBlur(event);
   };
 
   private onPress = (): void => {
-    if (this.props.onChange) {
-      this.props.onChange(!this.props.checked);
-    }
+    this.props.onChange && this.props.onChange(!this.props.checked);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.eva.dispatch([]);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       textMarginHorizontal,
       textFontFamily,
       textFontSize,
       textFontWeight,
-      textLineHeight,
       textColor,
       iconWidth,
       iconHeight,
@@ -138,14 +145,11 @@ export class RadioComponent extends React.Component<RadioProps> {
     } = source;
 
     return {
-      container: {},
-      highlightContainer: {},
       selectContainer: containerParameters,
       text: {
         marginHorizontal: textMarginHorizontal,
         fontFamily: textFontFamily,
         fontSize: textFontSize,
-        lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
       },
@@ -164,76 +168,32 @@ export class RadioComponent extends React.Component<RadioProps> {
     };
   };
 
-  private createHitSlopInsets = (style: StyleProp<ViewStyle>): Insets => {
-    const flatStyle: ViewStyle = StyleSheet.flatten(style);
-
-    // @ts-ignore `width` is restricted to be a number
-    const value: number = 40 - flatStyle.width;
-
-    return {
-      left: value,
-      top: value,
-      right: value,
-      bottom: value,
-    };
-  };
-
-  private renderTextElement = (style: StyleType): TextElement => {
-    const { text, textStyle } = this.props;
+  public render(): TouchableWebElement {
+    const { eva, style, children, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <Text
-        key={0}
-        style={[style, styles.text, textStyle]}>
-        {text}
-      </Text>
-    );
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { text } = this.props;
-
-    return [
-      isValidString(text) && this.renderTextElement(style.text),
-    ];
-  };
-
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, disabled, ...derivedProps } = this.props;
-
-    const {
-      container,
-      highlightContainer,
-      selectContainer,
-      icon,
-      highlight,
-      ...componentStyles
-    } = this.getComponentStyle(themedStyle);
-
-    const selectContainerStyle: StyleProp<ViewStyle> = [selectContainer, styles.selectContainer];
-    const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
-
-    const [textElement] = this.renderComponentChildren(componentStyles);
-
-    return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...derivedProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[container, styles.container, webStyles.container, style]}
-        disabled={disabled}
-        hitSlop={hitSlopInsets}
+      <TouchableWeb
+        {...touchableProps}
+        style={[styles.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={[highlightContainer, styles.highlightContainer]}>
-          <View style={[highlight, styles.highlight]}/>
-          <View style={selectContainerStyle}>
-            <View style={[icon, styles.icon]}/>
+        <View style={styles.highlightContainer}>
+          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <View style={[evaStyle.selectContainer, styles.selectContainer]}>
+            <View style={evaStyle.icon}/>
           </View>
         </View>
-        {textElement}
-      </TouchableOpacity>
+        <FalsyText
+          style={evaStyle.text}
+          component={children}
+        />
+      </TouchableWeb>
     );
   }
 }
@@ -251,19 +211,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  icon: {},
   highlight: {
     position: 'absolute',
   },
-  text: {},
 });
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
-});
-
-
-export const Radio = styled<RadioProps>(RadioComponent);

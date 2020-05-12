@@ -1,264 +1,185 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
   ImageProps,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
-  render,
-  fireEvent,
-  RenderAPI,
-} from 'react-native-testing-library';
-import {
-  ApplicationProvider,
-  StyleType,
-} from '@kitten/theme';
-import { Menu } from './menu.component';
-import {
-  MenuItemType,
-  MenuItem,
-} from './menuItem.component';
-import { MenuService } from './menu.service';
-import {
+  light,
   mapping,
-  theme,
-} from '../support/tests';
+} from '@eva-design/eva';
+import {
+  fireEvent,
+  render,
+} from 'react-native-testing-library';
+import { ApplicationProvider } from '../../theme';
+import {
+  Menu,
+  MenuProps,
+} from './menu.component';
+import {
+  MenuItem,
+  MenuItemProps,
+} from './menuItem.component';
+import { IndexPath } from '../../devsupport';
+import { MenuGroup } from './menuGroup.component';
 
-jest.useFakeTimers();
+describe('@menu-item: component checks', () => {
 
-const Icon = (style: StyleType): React.ReactElement<ImageProps> => (
-  <Image
-    style={style}
-    source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-  />
-);
+  const TestMenuItem = (props?: MenuItemProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <MenuItem {...props}/>
+    </ApplicationProvider>
+  );
 
-const data: MenuItemType[] = [
-  { title: 'Option 1', icon: Icon },
-  { title: 'Option 2', disabled: true },
-  {
-    title: 'Option 3',
-    subItems: [
-      { title: 'Option 31', disabled: true },
-      { title: 'Option 32' },
-      { title: 'Option 33' },
-    ],
-  },
-  { title: 'Option 4', icon: Icon },
-  { title: 'Option 5' },
-  { title: 'Option 6' },
-  { title: 'Option 8' },
-  { title: 'Option 9' },
-];
-
-interface State {
-  selectedIndex: number;
-}
-
-class TestApplication extends React.Component<any, State> {
-
-  public state: State = {
-    selectedIndex: null,
-  };
-
-  private onSelect = (selectedIndex: number): void => {
-    this.setState({ selectedIndex });
-  };
-
-  public render(): React.ReactNode {
-    return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={theme}>
-        <Menu
-          data={data}
-          selectedIndex={this.state.selectedIndex}
-          onSelect={this.onSelect}
-        />
-      </ApplicationProvider>
+  it('should render text passed to title prop', () => {
+    const component = render(
+      <TestMenuItem title='I love Babel'/>,
     );
-  }
-}
 
-describe('@ menu component checks', () => {
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
 
-  it('* menu item onPress prop checks', () => {
+  it('should render component passed to title prop', () => {
+    const component = render(
+      <TestMenuItem title={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+
+  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestMenuItem
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should call onPress', () => {
     const onPress = jest.fn();
-    const title: string = 'Option';
-
-    const menuItem: RenderAPI = render(
-      <ApplicationProvider mapping={mapping} theme={theme}>
-        <MenuItem
-          title={title}
-          onPress={onPress}
-        />
-      </ApplicationProvider>,
+    const component = render(
+      <TestMenuItem onPress={onPress}/>,
     );
 
-    fireEvent(menuItem.getAllByText(title)[0], 'press');
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onPress).toHaveBeenCalled();
   });
 
-  it('* menu item onPressIn prop checks', () => {
+  it('should call onPressIn', () => {
     const onPressIn = jest.fn();
-    const title: string = 'Option';
-
-    const menuItem: RenderAPI = render(
-      <ApplicationProvider mapping={mapping} theme={theme}>
-        <MenuItem
-          title={title}
-          onPressIn={onPressIn}
-        />
-      </ApplicationProvider>,
+    const component = render(
+      <TestMenuItem onPressIn={onPressIn}/>,
     );
 
-    fireEvent(menuItem.getAllByText(title)[0], 'pressIn');
-
-    expect(onPressIn).toHaveBeenCalled();
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
+    expect(onPressIn).toBeCalled();
   });
 
-  it('* menu item onPressOut prop checks', () => {
+  it('should call onPressOut', () => {
     const onPressOut = jest.fn();
-    const title: string = 'Option';
-
-    const menuItem: RenderAPI = render(
-      <ApplicationProvider mapping={mapping} theme={theme}>
-        <MenuItem
-          title={title}
-          onPressOut={onPressOut}
-        />
-      </ApplicationProvider>,
+    const component = render(
+      <TestMenuItem onPressOut={onPressOut}/>,
     );
 
-    fireEvent(menuItem.getAllByText(title)[0], 'pressOut');
-
-    expect(onPressOut).toHaveBeenCalled();
-  });
-
-  it('* menu item onLongPress prop checks', () => {
-    const onLongPress = jest.fn();
-    const title: string = 'Option';
-
-    const menuItem: RenderAPI = render(
-      <ApplicationProvider mapping={mapping} theme={theme}>
-        <MenuItem
-          title={title}
-          onLongPress={onLongPress}
-        />
-      </ApplicationProvider>,
-    );
-
-    fireEvent(menuItem.getAllByText(title)[0], 'press');
-    fireEvent(menuItem.getAllByText(title)[0], 'pressIn');
-    fireEvent(menuItem.getAllByText(title)[0], 'pressOut');
-    fireEvent(menuItem.getAllByText(title)[0], 'longPress');
-
-    expect(onLongPress).toHaveBeenCalled();
-  });
-
-  it('* menu onSelect works properly', () => {
-    const application: RenderAPI = render(
-      <TestApplication/>,
-    );
-
-    fireEvent.press(application.getAllByText('Option 1')[0]);
-
-    const { selectedIndex } = application.getByType(Menu).props;
-
-    expect(selectedIndex).toBe(0);
-  });
-
-  it('* menu-item text renders properly', () => {
-    const item: MenuItemType = { title: 'Option 1' };
-    const application: RenderAPI = render(
-      <TestApplication/>,
-    );
-
-    const { children } = application.getAllByText(item.title)[0].props;
-
-    expect(children).toBe(item.title);
-  });
-
-  it('* menu-item icon renders properly', () => {
-    const expectedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/star.png';
-    const application: RenderAPI = render(
-      <TestApplication/>,
-    );
-
-    const { source } = application.getAllByType(Image)[0].props;
-
-    expect(source.uri).toBe(expectedUri);
-  });
-
-  it('* group menu works properly', () => {
-    const expectedSelectedItem: MenuItemType = { title: 'Option 32' };
-    const application: RenderAPI = render(
-      <TestApplication/>,
-    );
-
-    fireEvent.press(application.getAllByText('Option 3')[0]);
-    const { selectedIndex: selectedIndex1 } = application.getByType(Menu).props;
-    expect(selectedIndex1).toBeNull();
-
-    fireEvent.press(application.getAllByText('Option 32')[0]);
-    const { selectedIndex: selectedIndex2 } = application.getByType(Menu).props;
-    expect(selectedIndex2).toBe(3);
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
+    expect(onPressOut).toBeCalled();
   });
 
 });
 
-describe('@ menu-service checks', () => {
+describe('@menu: component checks', () => {
 
-  const stringify = (obj: any): string => JSON.stringify(obj);
+  const TestMenu = (props: MenuProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <Menu {...props}/>
+    </ApplicationProvider>
+  );
 
-  const menuData: MenuItemType[] = [
-    { title: 'Item 1' },
-    {
-      title: 'Item 2',
-      subItems: [
-        { title: 'Item 21' },
-        { title: 'Item 22' },
-        { title: 'Item 23' },
-      ],
-    },
-    { title: 'Item 3' },
-  ];
+  it('should render two menu items passed to children', () => {
+    const component = render(
+      <TestMenu>
+        <MenuItem title='Option 1'/>
+        <MenuItem title='Option 2'/>
+      </TestMenu>,
+    );
 
-  it('* setIndexes method', () => {
-    const expectedMenuItems: MenuItemType[] = [
-      {
-        title: 'Item 1',
-        menuIndex: 0,
-      },
-      {
-        title: 'Item 2',
-        subItems: [
-          {
-            title: 'Item 21',
-            menuIndex: 1,
-          },
-          {
-            title: 'Item 22',
-            menuIndex: 2,
-          },
-          {
-            title: 'Item 23',
-            menuIndex: 3,
-          },
-        ],
-      },
-      {
-        title: 'Item 3',
-        menuIndex: 4,
-      },
-    ];
-    const service: MenuService = new MenuService();
-    const result: MenuItemType[] = service.setIndexes(menuData);
-
-    expect(stringify(result)).toBe(stringify(expectedMenuItems));
+    expect(component.queryByText('Option 1')).toBeTruthy();
+    expect(component.queryByText('Option 2')).toBeTruthy();
   });
 
-});
+  it('should call onSelect with non-grouped index', () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(1);
+      expect(index.section).toBeFalsy();
+    });
 
+    const component = render(
+      <TestMenu onSelect={onSelect}>
+        <MenuItem title='Option 1'/>
+        <MenuItem title='Option 2'/>
+      </TestMenu>,
+    );
+
+    fireEvent.press(component.queryByText('Option 2'));
+  });
+
+  it('should call onSelect with grouped index', () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(0);
+      expect(index.section).toEqual(1);
+    });
+
+    const component = render(
+      <TestMenu onSelect={onSelect}>
+        <MenuGroup title='Group 1'>
+          <MenuItem title='Option 1.1'/>
+          <MenuItem title='Option 1.2'/>
+        </MenuGroup>
+        <MenuGroup title='Group 2'>
+          <MenuItem title='Option 2.1'/>
+          <MenuItem title='Option 2.2'/>
+        </MenuGroup>
+      </TestMenu>,
+    );
+
+    fireEvent.press(component.queryByText('Option 2.1'));
+  });
+});
 
 

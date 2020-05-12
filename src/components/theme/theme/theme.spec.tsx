@@ -1,123 +1,143 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   TouchableOpacity,
   View,
-  ViewProps,
 } from 'react-native';
 import {
   fireEvent,
-  waitForElement,
   render,
   RenderAPI,
+  waitForElement,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
-import {
-  ThemeProvider,
-  ThemeProviderProps,
-} from './themeProvider.component';
-import {
-  ThemedComponentProps,
-  withStyles,
-} from './withStyles';
+import { ThemeProvider } from './themeProvider.component';
+import { withStyles } from './withStyles';
 import {
   ThemeService,
   ThemeType,
 } from './theme.service';
-import {
-  theme,
-  themeInverse,
-} from '../support/tests';
 
-const themeConsumerTestId: string = '@theme/consumer';
-const themeChangeTouchableTestId: string = '@theme/btnChangeTheme';
+const theme = {
+  defaultColor: '#000000',
+  disabledColor: '#646464',
+  activeColor: '#3366FF',
+  refValue: '$defaultColor',
+  doubleRefValue: '$refValue',
+};
 
-const json = (object: any): string => JSON.stringify(object);
+describe('@theme: service checks', () => {
 
-class Mock extends React.Component<ViewProps & ThemedComponentProps> {
+  it('finds theme value properly', async () => {
+    const themeValue = ThemeService.getValue('defaultColor', theme);
+    const undefinedValue = ThemeService.getValue('undefined', theme);
 
-  public render(): React.ReactElement<ViewProps> {
+    expect(themeValue).toEqual(theme.defaultColor);
+    expect(undefinedValue).toBeFalsy();
+  });
+
+  it('finds referencing theme value properly', async () => {
+    const themeValue = ThemeService.getValue('refValue', theme);
+    expect(themeValue).toEqual(theme.defaultColor);
+  });
+
+  it('finds multiple referencing theme value properly', async () => {
+    const themeValue = ThemeService.getValue('doubleRefValue', theme);
+    expect(themeValue).toEqual(theme.defaultColor);
+  });
+});
+
+describe('@theme: ui component checks', () => {
+
+  const themeConsumerTestId: string = '@theme/consumer';
+  const themeChangeTouchableTestId: string = '@theme/btnChangeTheme';
+
+  const Sample = (props) => (
+    <View
+      {...props}
+      testID={themeConsumerTestId}
+    />
+  );
+
+  const ThemeChangingComponent = (props: { theme: ThemeType, themeInverse: ThemeType }) => {
+    const [currentTheme, setCurrentTheme] = React.useState(props.theme);
+
+    const ThemedComponent = withStyles(Sample);
+
     return (
-      <View
-        {...this.props}
-        testID={themeConsumerTestId}
-      />
-    );
-  }
-}
-
-interface ActionMockProps {
-  theme: ThemeType;
-  themeInverse: ThemeType;
-}
-
-class ActionMock extends React.Component<ActionMockProps> {
-
-  public state = {
-    theme: this.props.theme,
-  };
-
-  private onThemeChangeTouchablePress = () => {
-    this.setState({
-      theme: this.props.themeInverse,
-    });
-  };
-
-  public render(): React.ReactElement<ViewProps> {
-    const ThemedComponent = withStyles(Mock);
-
-    return (
-      <View>
-        <ThemeProvider {...this.state}>
+      <React.Fragment>
+        <ThemeProvider theme={currentTheme}>
           <ThemedComponent/>
         </ThemeProvider>
         <TouchableOpacity
           testID={themeChangeTouchableTestId}
-          onPress={this.onThemeChangeTouchablePress}
+          onPress={() => setCurrentTheme(props.themeInverse)}
         />
-      </View>
+      </React.Fragment>
     );
-  }
-}
+  };
 
-interface OverrideMockProps {
-  theme: ThemeType;
-  themeInverse: ThemeType;
-}
-
-class OverrideMock extends React.Component<OverrideMockProps> {
-
-  public render(): React.ReactElement<ThemeProviderProps> {
-    const ThemedComponent1 = withStyles(Mock);
-    const ThemedComponent2 = withStyles(Mock);
-
-    return (
-      <ThemeProvider theme={this.props.theme}>
-        <ThemedComponent1/>
-        <ThemeProvider theme={this.props.themeInverse}>
-          <ThemedComponent2/>
-        </ThemeProvider>
-      </ThemeProvider>
-    );
-  }
-}
-
-describe('@theme: ui component checks', () => {
-
-  it('* static methods are copied over', () => {
+  it('static methods are copied over', () => {
     // @ts-ignore: test-case
-    Mock.staticMethod = function () {
+    Sample.staticMethod = function () {
     };
-    const ThemedComponent = withStyles(Mock);
+    const ThemedComponent = withStyles(Sample);
 
     // @ts-ignore: test-case
-    expect(ThemedComponent.staticMethod).not.toBeUndefined();
+    expect(ThemedComponent.staticMethod).not.toBeFalsy();
   });
 
-  it('* receives custom props', () => {
-    const ThemedComponent = withStyles(Mock, (value: ThemeType) => ({
-      container: {
-        backgroundColor: value['gray-primary'],
-      },
+  it('receives compiled theme', () => {
+    const ThemedComponent = withStyles(Sample);
+
+    const component: RenderAPI = render(
+      <ThemeProvider theme={theme}>
+        <ThemedComponent/>
+      </ThemeProvider>,
+    );
+
+    const themedComponent: ReactTestInstance = component.getByTestId(themeConsumerTestId);
+
+    expect(themedComponent.props.eva.theme).toEqual({
+      defaultColor: '#000000',
+      disabledColor: '#646464',
+      activeColor: '#3366FF',
+      refValue: '#000000',
+      doubleRefValue: '#000000',
+    });
+  });
+
+  it('receives custom theme', () => {
+    const ThemedComponent = withStyles(Sample);
+
+    const component: RenderAPI = render(
+      <ThemeProvider theme={{
+        ...theme,
+        defaultColor: '#ffffff',
+      }}>
+        <ThemedComponent/>
+      </ThemeProvider>,
+    );
+
+    const themedComponent: ReactTestInstance = component.getByTestId(themeConsumerTestId);
+
+    expect(themedComponent.props.eva.theme).toEqual({
+      defaultColor: '#ffffff',
+      disabledColor: '#646464',
+      activeColor: '#3366FF',
+      refValue: '#ffffff',
+      doubleRefValue: '#ffffff',
+    });
+  });
+
+  it('receives style prop', () => {
+    const ThemedComponent = withStyles(Sample, contextTheme => ({
+      container: { backgroundColor: contextTheme.defaultColor },
     }));
 
     const component: RenderAPI = render(
@@ -128,16 +148,19 @@ describe('@theme: ui component checks', () => {
 
     const themedComponent: ReactTestInstance = component.getByTestId(themeConsumerTestId);
 
-    const { themedStyle } = themedComponent.props;
-
-    expect(themedStyle.container.backgroundColor).toEqual(theme['gray-primary']);
+    expect(themedComponent.props.eva.style).toEqual({
+      container: { backgroundColor: '#000000' },
+    });
   });
 
-  it('* able to change theme', async () => {
+  it('receives new theme when it is changed', async () => {
     const component: RenderAPI = render(
-      <ActionMock
+      <ThemeChangingComponent
         theme={theme}
-        themeInverse={themeInverse}
+        themeInverse={{
+          ...theme,
+          defaultColor: '#ffffff',
+        }}
       />,
     );
 
@@ -149,28 +172,6 @@ describe('@theme: ui component checks', () => {
       return component.getByTestId(themeConsumerTestId);
     });
 
-    const { theme: themeProp } = themedComponent.props;
-
-    expect(json(themeProp)).toEqual(json(themeInverse));
+    expect(themedComponent.props.eva.theme.defaultColor).toEqual('#ffffff');
   });
-
-  it('* able to override theme', () => {
-    const component: RenderAPI = render(
-      <OverrideMock
-        theme={theme}
-        themeInverse={themeInverse}
-      />,
-    );
-
-    const themedComponents: ReactTestInstance[] = component.getAllByType(Mock);
-
-    expect(themedComponents.length).toBeGreaterThan(1);
-
-    const { theme: theme1 } = themedComponents[0].props;
-    const { theme: theme2 } = themedComponents[1].props;
-
-    expect(theme1).toEqual(ThemeService.create(theme));
-    expect(theme2).toEqual(ThemeService.create(themeInverse));
-  });
-
 });

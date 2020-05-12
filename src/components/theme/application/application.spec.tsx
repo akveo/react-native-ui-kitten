@@ -1,100 +1,44 @@
 import React from 'react';
-import {
-  View,
-  Button,
-} from 'react-native';
-import {
-  fireEvent,
-  render,
-  RenderAPI,
-  shallow,
-} from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
-import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-} from './applicationProvider.component';
-import { ThemeType } from '../theme/theme.service';
-import {
-  mapping,
-  theme,
-  themeInverse,
-} from '../support/tests';
+import { render } from 'react-native-testing-library';
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider } from './applicationProvider.component';
 
-describe('@app: application wrapper check', () => {
+it('should be able to provide styles to all `styled` components in the library', () => {
+  const component = render(
+    <ApplicationProvider
+      mapping={eva.mapping}
+      theme={eva.light}
+    />,
+  );
 
-  interface TestAppState {
-    theme: ThemeType;
-  }
+  const { instance } = component.getByType(ApplicationProvider);
+  const styleKeys = Object.keys(instance.state.styles);
 
-  class TestApp extends React.Component<any, TestAppState> {
-
-    public state: TestAppState = {
-      theme: theme,
-    };
-
-    private onSwitchTheme = (): void => {
-      this.setState({ theme: themeInverse });
-    };
-
-    public render(): React.ReactNode {
-      return (
-        <View>
-          <Button title='Switch Theme' onPress={this.onSwitchTheme}/>
-          <Mock
-            mapping={mapping}
-            theme={this.state.theme}
-          />
-        </View>
-      );
-    }
-  }
-
-  const Mock = (props?: ApplicationProviderProps): React.ReactElement<ApplicationProviderProps> => {
-    return (
-      <ApplicationProvider {...props} />
-    );
-  };
-
-  it('* renders properly', () => {
-    const component: RenderAPI = render(
-      <Mock
-        mapping={mapping}
-        theme={theme}
-      />,
-    );
-
-    const { output } = shallow(component.getByType(ApplicationProvider));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* contains style property in state', () => {
-    const component: RenderAPI = render(
-      <Mock
-        mapping={mapping}
-        theme={theme}
-      />,
-    );
-
-    const componentInstance: ReactTestInstance = component.getByType(ApplicationProvider);
-    const { state } = componentInstance.instance;
-
-    expect(state.styles).toMatchSnapshot();
-  });
-
-
-  it('* theme switching checks', () => {
-    const application: RenderAPI = render(<TestApp/>);
-    fireEvent(application.getByType(Button), 'press');
-    const { output } = shallow(application.getByType(ApplicationProvider));
-
-    const stringify = (obj: any): string => {
-      return JSON.stringify(obj);
-    };
-
-    // @ts-ignore just for theme prop changing
-    expect(stringify(output.props.theme)).toBe(JSON.stringify(themeInverse));
-  });
-
+  expect(styleKeys).toContain('Avatar');
+  expect(styleKeys).toContain('BottomNavigation');
+  expect(styleKeys).toContain('BottomNavigationTab');
+  expect(styleKeys).toContain('Button');
+  expect(styleKeys).toContain('ButtonGroup');
+  expect(styleKeys).toContain('Card');
+  expect(styleKeys).toContain('Calendar');
+  expect(styleKeys).toContain('CheckBox');
+  expect(styleKeys).toContain('Divider');
+  expect(styleKeys).toContain('Drawer');
+  expect(styleKeys).toContain('Input');
+  expect(styleKeys).toContain('Layout');
+  expect(styleKeys).toContain('List');
+  expect(styleKeys).toContain('ListItem');
+  expect(styleKeys).toContain('Menu');
+  expect(styleKeys).toContain('OverflowMenu');
+  expect(styleKeys).toContain('Select');
+  expect(styleKeys).toContain('Spinner');
+  expect(styleKeys).toContain('Tab');
+  expect(styleKeys).toContain('TabBar');
+  expect(styleKeys).toContain('Text');
+  expect(styleKeys).toContain('Toggle');
+  expect(styleKeys).toContain('Tooltip');
+  expect(styleKeys).toContain('TopNavigation');
+  expect(styleKeys).toContain('TopNavigationAction');
 });
+
+
