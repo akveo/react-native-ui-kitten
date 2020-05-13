@@ -19,7 +19,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 export interface DatepickerProps<D = Date> extends BaseDatepickerProps<D>, CalendarProps<D> {
-  autoDismiss: boolean;
+  autoDismiss?: boolean;
 }
 
 export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>;
