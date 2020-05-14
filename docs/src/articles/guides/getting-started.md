@@ -6,22 +6,20 @@ This guide will help you to initialize the application with UI Kitten from a scr
 
 ## New Apps
 
-This guide will help you to init an application using UI Kitten template project. First, make sure you have the latest React Native CLI installed: 
+This guide will help you to init an application using UI Kitten template project.
+First, make sure you have the right React Native CLI installed: 
 
  ```bash
-npm un -g react-native-cli && npm i -g @react-native-community/cli npx
+npm un -g react-native-cli && npm i -g @react-native-community/cli
 ```
 
 ### Create a New Project
 
 ```bash
 npx react-native init MyApp --template @ui-kitten/template-js
-```
 
-Or, if you want to init with TypeScript:
-
-```bash
-npx react-native init MyApp --template @ui-kitten/template-ts
+// Wish Typescript?
+// npx react-native init MyApp --template @ui-kitten/template-ts
 ```
 
 ### Start your App
@@ -30,6 +28,9 @@ By following command-line instructions after successful init, go to the project 
 
 ```bash
 npm run ios
+
+// Using Yarn?
+// yarn ios
 ``` 
 
 That's it! By moving to the [next guide](guides/configure-navigation) you will learn how to configure navigation in React Native App.
@@ -46,9 +47,16 @@ If you have an existing code base and want to use UI Kitten in your project, fol
 
 ```bash
 npm i @ui-kitten/components @eva-design/eva react-native-svg
+
+// Using Yarn?
+// yarn add @ui-kitten/components @eva-design/eva react-native-svg
 ```
 
-We also need to complete installation for iOS by linking react-native-svg.
+<div class="note note-warning">
+  <div class="note-body">If you use Expo, you should use `expo install react-native-svg@9.13.6` to install svg package.</div>
+</div>
+
+Within non-expo environment, we also need to complete installation for iOS by linking react-native-svg.
 
 ```bash
 cd ios && pod install
@@ -63,8 +71,8 @@ Wrap the root component of your App into `ApplicationProvider` component. In you
 
 ```jsx
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -72,13 +80,11 @@ const HomeScreen = () => (
   </Layout>
 );
 
-const App = () => (
-  <ApplicationProvider mapping={mapping} theme={lightTheme}>
+export default () => (
+  <ApplicationProvider {...eva} theme={eva.light}>
     <HomeScreen />
   </ApplicationProvider>
 );
-
-export default App;
 ```
 
 That's it. UI Kitten is ready now. Next, you might be interested in [branding](guides/branding) the application with Eva Design System.

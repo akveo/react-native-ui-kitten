@@ -8,144 +8,148 @@ import React from 'react';
 import { SvgProps } from 'react-native-svg';
 import {
   GestureResponderEvent,
-  Insets,
-  Platform,
-  StyleProp,
+  NativeSyntheticEvent,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
+  TargetedEvent,
   View,
-  ViewStyle,
 } from 'react-native';
+import {
+  EvaStatus,
+  FalsyText,
+  RenderProp,
+  TouchableWeb,
+  TouchableWebElement,
+  TouchableWebProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 import {
   CheckMark,
   CheckMarkProps,
-  CheckMarkElement,
-} from '../support/components/checkmark.component';
+} from '../shared/checkmark.component';
 import {
   Minus,
-  MinusElement,
   MinusProps,
-} from '../support/components/minus.component';
-import {
-  isValidString,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../shared/minus.component';
 
-export interface CheckBoxProps extends StyledComponentProps, TouchableOpacityProps {
-  textStyle?: StyleProp<TextStyle>;
-  text?: string;
+type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
+  children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
-  indeterminate?: boolean;
-  status?: string;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
+  indeterminate?: boolean;
+  status?: EvaStatus;
 }
 
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
 
-type IconElement = CheckMarkElement | MinusElement;
-
 /**
- * Styled `CheckBox` component.
+ * Checkboxes allow the user to select one or more items from a set.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.`
- * Default is `false`.
+ * @property {boolean} checked - Whether component is checked.
+ * Defaults to *false*.
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false.
+ * @property {(checked: boolean, indeterminate: boolean) => void} onChange - Called when checkbox
+ * should switch it's value.
+ * Called with *checked* and *indeterminate* values.
+ * If *indeterminate* was provided, it should be changed to the value passed in this function.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {boolean} indeterminate - Whether checked status is indeterminate.
+ * Will set indeterminate to false when the checked property is changed.
+ * Defaults to *false*.
+ *
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * to render near the checkbox.
+ * If it is a function, expected to return a Text.
+ *
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
- *
- * @property {string} text - Determines text of the component.
- *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
- *
- * @property {(checked: boolean) => void} onChange - Fires on checkbox value change.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example CheckboxSimpleUsage
  *
  * @overview-example CheckboxStates
+ * CheckBoxes can be checked or disabled.
  *
  * @overview-example CheckboxIndeterminate
+ * An extra state is `indeterminate`, which may be useful for grouping inner checkboxes.
+ * Indeterminate will be set to `false` when the checked state is changed.
  *
  * @overview-example CheckboxStatus
+ * Checkboxes may also be marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
- * @example CheckboxInlineStyling
+ * @overview-example CheckboxStyling
+ * CheckBox and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { CheckBox, Text } from '@ui-kitten/components';
+ *
+ * <CheckBox>
+ *   {evaProps => <Text {...evaProps}>Place your Text</Text>}
+ * </CheckBox>
+ * ```
+ *
+ * @overview-example CheckboxTheming
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEventResponderCallbacks {
+@styled('CheckBox')
+export class CheckBox extends React.Component<CheckBoxProps> {
 
-  static styledComponentName: string = 'CheckBox';
-
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  // WebEventResponderCallbacks
-
-  public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.HOVER]);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
-  public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.FOCUSED]);
+    this.props.onFocus && this.props.onFocus(event);
   };
 
-  public onBlur = (): void => {
-    this.props.dispatch([]);
+  private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onBlur && this.props.onBlur(event);
   };
 
   private onPress = (): void => {
-    this.props.dispatch([]);
-
-    if (this.props.onChange) {
-      this.props.onChange(!this.props.checked, false);
-    }
+    this.props.eva.dispatch([]);
+    this.props.onChange && this.props.onChange(!this.props.checked, false);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.eva.dispatch([]);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       textMarginHorizontal,
       textFontFamily,
       textFontSize,
       textFontWeight,
-      textLineHeight,
       textColor,
       iconWidth,
       iconHeight,
@@ -159,15 +163,12 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
     } = source;
 
     return {
-      container: {},
-      highlightContainer: {},
       selectContainer: containerParameters,
       text: {
         marginHorizontal: textMarginHorizontal,
         fontFamily: textFontFamily,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
-        lineHeight: textLineHeight,
         color: textColor,
       },
       icon: {
@@ -186,79 +187,40 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
     };
   };
 
-  private createHitSlopInsets = (style: StyleProp<ViewStyle>): Insets => {
-    const { width } = StyleSheet.flatten(style);
-
-    // @ts-ignore: `width` is restricted to be a number
-    const value: number = 40 - width;
-
-    return {
-      left: value,
-      top: value,
-      right: value,
-      bottom: value,
-    };
-  };
-
-  private renderTextElement = (style: TextStyle): TextElement => {
-    const { text, textStyle } = this.props;
-
-    return (
-      <Text style={[style, styles.text, textStyle]}>{text}</Text>
-    );
-  };
-
-  private renderIconElement = (style: SvgProps): IconElement => {
+  private renderIconElement = (style: SvgProps): React.ReactElement<SvgProps> => {
     const Icon: React.ComponentType<MinusProps | CheckMarkProps> = this.props.indeterminate ? Minus : CheckMark;
     return (
       <Icon {...style} />
     );
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { text } = this.props;
-
-    return [
-      this.renderIconElement(style.icon),
-      isValidString(text) && this.renderTextElement(style.text),
-    ];
-  };
-
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, disabled, text, ...derivedProps } = this.props;
-
-    const {
-      container,
-      highlightContainer,
-      highlight,
-      selectContainer,
-      ...componentStyle
-    } = this.getComponentStyle(themedStyle);
-
-    const selectContainerStyle: StyleProp<ViewStyle> = [selectContainer, styles.selectContainer];
-    const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
-
-    const [iconElement, textElement] = this.renderComponentChildren(componentStyle);
+  public render(): TouchableWebElement {
+    const { eva, style, disabled, children, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...derivedProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[container, styles.container, webStyles.container, style]}
+      <TouchableWeb
+        {...touchableProps}
+        style={[styles.container, style]}
         disabled={disabled}
-        hitSlop={hitSlopInsets}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={[highlightContainer, styles.highlightContainer]}>
-          <View style={[highlight, styles.highlight]}/>
-          <View style={selectContainerStyle}>
-            {iconElement}
+        <View style={styles.highlightContainer}>
+          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <View style={[evaStyle.selectContainer, styles.selectContainer]}>
+            {this.renderIconElement(evaStyle.icon)}
           </View>
         </View>
-        {textElement}
-      </TouchableOpacity>
+        <FalsyText
+          style={evaStyle.text}
+          component={children}
+        />
+      </TouchableWeb>
     );
   }
 }
@@ -279,15 +241,4 @@ const styles = StyleSheet.create({
   highlight: {
     position: 'absolute',
   },
-  icon: {},
-  text: {},
 });
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
-});
-
-export const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);

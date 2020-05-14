@@ -7,140 +7,154 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageStyle,
-  Platform,
-  StyleProp,
+  ImageProps,
+  NativeSyntheticEvent,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
+  TargetedEvent,
 } from 'react-native';
+import {
+  EvaSize,
+  EvaStatus,
+  FalsyFC,
+  FalsyText,
+  RenderProp,
+  TouchableWeb,
+  TouchableWebElement,
+  TouchableWebProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import {
-  isValidString,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 
-type IconProp = (style: ImageStyle) => IconElement;
+type ButtonStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'filled' | 'outline' | 'ghost' | string;
+}>;
 
-export interface ButtonProps extends StyledComponentProps, TouchableOpacityProps {
-  textStyle?: StyleProp<TextStyle>;
-  icon?: IconProp;
-  status?: string;
-  size?: string;
-  children?: string;
+export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
+  children?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  status?: EvaStatus;
+  size?: EvaSize;
 }
 
 export type ButtonElement = React.ReactElement<ButtonProps>;
 
 /**
- * Styled `Button` component.
+ * Buttons allow users to take actions, and make choices, with a single tap.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * to render within the button.
+ * If it is a function, expected to return a Text.
+ *
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * to render to start of the text.
+ * Expected to return an Image.
+ *
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * to render to end of the text.
+ * Expected to return an Image.
+ *
+ * @property {string} appearance - Appearance of the component.
  * Can be `filled`, `outline` or `ghost`.
- * Default is `filled`.
+ * Defaults to *filled*.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `primary`.
+ * Defaults to *primary*.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {string} size - Determines the size of the component.
+ * @property {string} size - Size of the component.
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Default is `medium`.
- *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false`.
- *
- * @property {string} children - Determines text of the component.
- *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
- *
- * @property {(style: ImageStyle) => ReactElement} icon - Determines icon of the component.
+ * Defaults to *medium*.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ButtonSimpleUsage
+ * Default button size is `medium` and status color is `primary`.
  *
  * @overview-example ButtonStates
+ * Button can be disabled with `disabled` property.
  *
  * @overview-example ButtonAppearances
+ * Within Eva Design System, it can be `filled`, `outline` or `ghost`.
  *
- * @overview-example ButtonStatus
+ * @overview-example ButtonAccessories
+ * Also, it may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
+ * Within Eva it is expected to be an image or [svg icon](guides/icon-packages).
  *
  * @overview-example ButtonSize
+ * Buttons can be resized by using `size` property.
+ *
+ * @overview-example ButtonStatus
+ * Or marked with `status` property.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
  * @overview-example ButtonOutline
+ * Status can be combined with `outline` appearance.
  *
  * @overview-example ButtonGhost
+ * As well as for `ghost`.
  *
- * @overview-example ButtonWithIcon
+ * @overview-example ButtonStyling
+ * Button and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Button, Text } from '@ui-kitten/components';
+ *
+ * <Button style={...}>
+ *   {evaProps => <Text {...evaProps}>BUTTON</Text>}
+ * </Button>
+ * ```
+ *
+ * @overview-example ButtonTheming
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class ButtonComponent extends React.Component<ButtonProps> implements WebEventResponderCallbacks {
 
-  static styledComponentName: string = 'Button';
+@styled('Button')
+export class Button extends React.Component<ButtonProps> {
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  // WebEventResponderCallbacks
-
-  public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.HOVER]);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
-  public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.FOCUSED]);
+    this.props.onFocus && this.props.onFocus(event);
   };
 
-  public onBlur = (): void => {
-    this.props.dispatch([]);
-  };
-
-  private onPress = (event: GestureResponderEvent): void => {
-    if (this.props.onPress) {
-      this.props.onPress(event);
-    }
+  private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onBlur && this.props.onBlur(event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.eva.dispatch([]);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       textColor,
       textFontFamily,
       textFontSize,
-      textLineHeight,
       textFontWeight,
       textMarginHorizontal,
       iconWidth,
@@ -156,7 +170,6 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
         color: textColor,
         fontFamily: textFontFamily,
         fontSize: textFontSize,
-        lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         marginHorizontal: textMarginHorizontal,
       },
@@ -169,51 +182,33 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
     };
   };
 
-  private renderTextElement = (style: TextStyle): TextElement => {
-    return (
-      <Text
-        key={1}
-        style={[style, styles.text, this.props.textStyle]}>
-        {this.props.children}
-      </Text>
-    );
-  };
-
-  private renderIconElement = (style: ImageStyle): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      key: 2,
-      style: [style, styles.icon, iconElement.props.style],
-    });
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { icon, children } = this.props;
-
-    return [
-      icon && this.renderIconElement(style.icon),
-      isValidString(children) && this.renderTextElement(style.text),
-    ];
-  };
-
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, ...containerProps } = this.props;
-    const { container, ...childStyles } = this.getComponentStyle(themedStyle);
-    const [iconElement, textElement] = this.renderComponentChildren(childStyles);
+  public render(): TouchableWebElement {
+    const { eva, style, accessoryLeft, accessoryRight, children, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...containerProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[container, styles.container, webStyles.container, style]}
-        onPress={this.onPress}
+      <TouchableWeb
+        {...touchableProps}
+        style={[evaStyle.container, styles.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {iconElement}
-        {textElement}
-      </TouchableOpacity>
+        <FalsyFC
+          style={evaStyle.icon}
+          component={accessoryLeft}
+        />
+        <FalsyText
+          style={evaStyle.text}
+          component={children}
+        />
+        <FalsyFC
+          style={evaStyle.icon}
+          component={accessoryRight}
+        />
+      </TouchableWeb>
     );
   }
 }
@@ -224,15 +219,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {},
-  icon: {},
 });
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
-});
-
-export const Button = styled<ButtonProps>(ButtonComponent);

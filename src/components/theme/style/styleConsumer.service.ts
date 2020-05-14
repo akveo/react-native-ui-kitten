@@ -18,6 +18,7 @@ import {
 import { ThemeType } from '../theme/theme.service';
 
 const SEPARATOR_MAPPING_ENTRY: string = '.';
+const DOC_ROOT: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
 
 interface StyleInfo {
   appearance: string;
@@ -38,14 +39,12 @@ export class StyleConsumerService {
     });
 
     if (!this.meta) {
-      const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
-
       const message: string = [
         `\n${this.name}: unsupported configuration.`,
         'Using UI Kitten components is only possible with configuring ApplicationProvider.',
-        `📖 Documentation: ${docRoot}/guides/getting-started#manual-installation`,
+        `📖 Documentation: ${DOC_ROOT}/guides/getting-started#manual-installation`,
         '\nIn case you have all in place, there might be an incorrect usage of a "styled" function.',
-        `📖 Documentation: ${docRoot}/design-system/custom-component-mapping`,
+        `📖 Documentation: ${DOC_ROOT}/design-system/custom-component-mapping`,
       ].join('\n');
 
       console.error(message);
@@ -60,33 +59,29 @@ export class StyleConsumerService {
     return { appearance, ...variants, ...states };
   }
 
-  public withStyledProps<P extends object>(source: P,
+  public createStyleProp<P extends object>(source: P,
                                            style: StyleType,
                                            theme: ThemeType,
-                                           interaction: Interaction[]): P & StyledComponentProps {
+                                           interaction: Interaction[]): StyleType {
 
-    const styleInfo: StyleInfo = this.getStyleInfo(source, interaction);
-
+    const styleInfo: StyleInfo = this.getStyleInfo(source, this.withValidInteraction(interaction));
     const generatedMapping: StyleType = this.getGeneratedStyleMapping(style, styleInfo);
 
     if (!generatedMapping) {
-      const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
-
       const message: string = [
         `${this.name}: unsupported configuration.`,
-        `Check one of the following prop values ${JSON.stringify(styleInfo, null, 2)}`,
-        `📖 Documentation: ${docRoot}/components/${this.name.toLowerCase()}/api`,
+        `Check one of the following prop values: ${JSON.stringify(styleInfo, null, 2)}`,
+        `📖 Documentation: ${DOC_ROOT}/components/${this.name.toLowerCase()}/api`,
       ].join('\n');
 
       console.warn(message);
 
-      return this.withStyledProps({ ...source, ...this.createDefaultProps() }, style, theme, interaction);
+      return this.createStyleProp({ ...source, ...this.createDefaultProps() }, style, theme, interaction);
     }
 
     const mapping: StyleType = this.withValidParameters(generatedMapping);
-    const themedStyle: StyleType = StyleService.createThemedEntry(mapping, theme);
 
-    return { ...source, theme, themedStyle };
+    return StyleService.createThemedEntry(mapping, theme);
   }
 
   private getGeneratedStyleMapping<P extends StyledComponentProps>(style: StyleType, info: StyleInfo): StyleType {
@@ -97,6 +92,24 @@ export class StyleConsumerService {
 
       return componentStyles.styles[query];
     });
+  }
+
+  private withValidInteraction(interaction: Interaction[]): Interaction[] {
+    const validInteractions: Interaction[] = interaction.filter((key: Interaction) => {
+      return Object.keys(this.meta.states).includes(key);
+    });
+
+    if (validInteractions.length < interaction.length) {
+      const message: string = [
+        `${this.name}: unsupported configuration.`,
+        `Check one of the following dispatched interactions: ${interaction}`,
+        `📖 Documentation: ${DOC_ROOT}/design-system/custom-component-mapping`,
+      ].join('\n');
+
+      console.warn(message);
+    }
+
+    return validInteractions;
   }
 
   private withValidParameters(mapping: StyleType): StyleType {
@@ -110,13 +123,11 @@ export class StyleConsumerService {
     });
 
     if (invalidParameters.length !== 0) {
-      const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
-
       const message: string = [
         `${this.name}: unsupported configuration.`,
         `Unable to apply ${invalidParameters}`,
         'There might be an incorrect usage of mapping',
-        `📖 Documentation: ${docRoot}/design-system/custom-component-mapping`,
+        `📖 Documentation: ${DOC_ROOT}/design-system/custom-component-mapping`,
       ].join('\n');
 
       console.warn(message);

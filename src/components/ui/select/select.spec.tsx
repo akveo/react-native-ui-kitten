@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
@@ -8,229 +14,547 @@ import {
   fireEvent,
   render,
   RenderAPI,
+  waitForElement,
 } from 'react-native-testing-library';
 import {
-  ApplicationProvider,
-  StyleType,
-} from '@kitten/theme';
-import { Select } from './select.component';
-import { SelectOptionType } from './selectOption.component';
-import {
+  light,
   mapping,
-  theme,
-} from '../support/tests';
-import { SelectService } from './select.service';
+} from '@eva-design/eva';
+import { Text } from '../text/text.component';
+import { IndexPath } from '../../devsupport';
+import { ApplicationProvider } from '../../theme';
+import {
+  Select,
+  SelectProps,
+} from './select.component';
+import { SelectGroup } from './selectGroup.component';
+import {
+  SelectItem,
+  SelectItemProps,
+} from '../select/selectItem.component';
+import { CheckBox } from '../checkbox/checkbox.component';
 
-jest.useFakeTimers();
+/*
+ * Mock UIManager since Select relies on native measurements
+ * Mock Animated for testing animation callbacks
+ */
+jest.mock('react-native', () => {
+  const ActualReactNative = jest.requireActual('react-native');
 
-const iconClosedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
-const iconOpenedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png';
-
-const data: SelectOptionType[] = [
-  { text: 'Option 1' },
-  { text: 'Option 2', disabled: true },
-  {
-    text: 'Option 3',
-    items: [
-      { text: 'Option 31', disabled: true },
-      { text: 'Option 32' },
-      { text: 'Option 33' },
-    ],
-  },
-  { text: 'Option 4' },
-  { text: 'Option 5', textStyle: { color: 'red' } },
-  { text: 'Option 6' },
-  { text: 'Option 8' },
-  { text: 'Option 9' },
-];
-
-interface Props {
-  selectLabel?: string;
-  selectPlaceholder?: string;
-  labelStyle?: StyleType;
-  placeholderStyle?: StyleType;
-  controlStyle?: StyleType;
-  onSelectPress?: () => void;
-  onSelectPressIn?: () => void;
-  onSelectPressOut?: () => void;
-  onSelectLongPress?: () => void;
-  onMultiSelectPress?: () => void;
-}
-
-class TestApplication extends React.Component<Props> {
-
-  private renderIcon = (style: StyleType, visible: boolean): React.ReactElement<ImageProps> => {
-    const uri: string = visible ? iconOpenedUri : iconClosedUri;
-
-    return (
-      <Image
-        source={{ uri }}
-        style={style}
-      />
-    );
+  ActualReactNative.UIManager.measureInWindow = (node, callback) => {
+    callback(0, 0, 42, 42);
   };
 
-  public render(): React.ReactNode {
-    const {
-      onSelectPress,
-      onMultiSelectPress,
-      selectLabel,
-      selectPlaceholder,
-      onSelectPressIn,
-      onSelectPressOut,
-      onSelectLongPress,
-    } = this.props;
+  ActualReactNative.Animated = {
+    ...ActualReactNative.Animated,
+    timing: () => ({
+      start: (callback) => {
+        callback();
+      },
+    }),
+  };
+
+  return ActualReactNative;
+});
+
+describe('@select-item: component checks', () => {
+
+  const TestSelectItem = (props?: SelectItemProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <SelectItem {...props} />
+    </ApplicationProvider>
+  );
+
+  it('should render text passed to title prop', () => {
+    const component = render(
+      <TestSelectItem title='I love Babel'/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render component passed to title prop', () => {
+    const component = render(
+      <TestSelectItem title={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestSelectItem
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should call onPress', () => {
+    const onPress = jest.fn();
+    const component = render(
+      <TestSelectItem onPress={onPress}/>,
+    );
+
+    fireEvent.press(component.queryByType(TouchableOpacity));
+    expect(onPress).toHaveBeenCalled();
+  });
+
+
+  it('should call onPressIn', () => {
+    const onPressIn = jest.fn();
+    const component = render(
+      <TestSelectItem onPressIn={onPressIn}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
+    expect(onPressIn).toHaveBeenCalled();
+  });
+
+  it('should call onPressOut', () => {
+    const onPressOut = jest.fn();
+    const component = render(
+      <TestSelectItem onPressOut={onPressOut}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
+    expect(onPressOut).toHaveBeenCalled();
+  });
+});
+
+describe('@select: component checks', () => {
+
+  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
+    const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
+
+    const onSelect = (index: IndexPath | IndexPath[]) => {
+      setSelectedIndex(index);
+      props.onSelect && props.onSelect(index);
+    };
 
     return (
-      <ApplicationProvider mapping={mapping} theme={theme}>
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}>
         <Select
-          label={selectLabel}
-          placeholder={selectPlaceholder}
-          data={data}
-          icon={this.renderIcon}
-          onPress={onSelectPress}
-          onPressIn={onSelectPressIn}
-          onPressOut={onSelectPressOut}
-          onLongPress={onSelectLongPress}
-          onSelect={() => {
-          }}
-        />
-        <Select
-          label={selectLabel}
-          placeholder={selectPlaceholder}
-          data={data}
-          multiSelect={true}
-          icon={this.renderIcon}
-          onPress={onMultiSelectPress}
-          onSelect={() => {
-          }}
-        />
+          ref={ref}
+          {...props}
+          selectedIndex={selectedIndex}
+          onSelect={onSelect}>
+          <SelectItem title='Option 1'/>
+          <SelectItem title='Option 2'/>
+        </Select>
       </ApplicationProvider>
     );
-  }
-}
-
-describe('@select: service checks', () => {
-
-  const options: SelectOptionType[] = [
-    { text: 'Option 1' },
-    { text: 'Option 2' },
-    { text: 'Option 3' },
-  ];
-
-  const groupOptions: SelectOptionType[] = [
-    {
-      text: 'Group', items: [
-        { text: 'Option 1' },
-        { text: 'Option 2' },
-      ],
-    },
-  ];
-
-  it('* should select single value', () => {
-    const service = new SelectService();
-    const selectedOption = service.select(options[0], []);
-
-    expect(selectedOption).toEqual({ text: 'Option 1' });
   });
 
-  it('* should change selected value', () => {
-    const service = new SelectService();
-    const selectedOption = service.select(options[1], [options[0]]);
+  /*
+   * In this test:
+   * [0] for modal control touchable
+   * [1] for modal backdrop
+   * ...rest for options
+   */
+  const touchables = {
+    findControlTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[0],
+    findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[1],
+    findOptionTouchable: (api: RenderAPI, index: number) => api.queryAllByType(TouchableOpacity)[index + 2],
+  };
 
-    expect(selectedOption).toEqual({ text: 'Option 2' });
+  it('should render placeholder', () => {
+    const component = render(
+      <TestSelect placeholder='I love Babel'/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('* should select single from group', () => {
-    const service = new SelectService();
-    const selectedOption = service.select(groupOptions[0].items[0], []);
+  it('should render placeholder as component', () => {
+    const component = render(
+      <TestSelect placeholder={props => <Text {...props}>I love Babel</Text>}/>,
+    );
 
-    expect(selectedOption).toEqual({ text: 'Option 1' });
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('* should select all from group', () => {
-    const service = new SelectService();
-    const selectedOption = service.select(groupOptions[0], []);
+  it('should render label', () => {
+    const component = render(
+      <TestSelect label='I love Babel'/>,
+    );
 
-    expect(selectedOption).toEqual(groupOptions[0]);
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('* should change selected value from group', () => {
-    const service = new SelectService();
-    const selectedOption = service.select(groupOptions[0].items[0], groupOptions[0]);
+  it('should render label as component', () => {
+    const component = render(
+      <TestSelect label={props => <Text {...props}>I love Babel</Text>}/>,
+    );
 
-    expect(selectedOption).toEqual({ text: 'Option 1' });
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('* should select multiple values', () => {
-    const service = new SelectService({ multiSelect: true });
-    const selectedOption = service.select(options[1], [options[0]]);
+  it('should render caption', () => {
+    const component = render(
+      <TestSelect caption='I love Babel'/>,
+    );
 
-    expect(selectedOption).toEqual([{ text: 'Option 1' }, { text: 'Option 2' }]);
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render caption as component', () => {
+    const component = render(
+      <TestSelect caption={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestSelect
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should not render options when not focused', () => {
+    const component = render(
+      <TestSelect/>,
+    );
+
+    expect(component.queryByText('Option 1')).toBeFalsy();
+    expect(component.queryByText('Option 2')).toBeFalsy();
+  });
+
+  it('should render options when becomes focused', async () => {
+    const component = render(
+      <TestSelect/>,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    const firstOption = await waitForElement(() => component.queryByText('Option 1'));
+    const secondOption = component.queryByText('Option 2');
+
+    expect(firstOption).toBeTruthy();
+    expect(secondOption).toBeTruthy();
+  });
+
+  it('should hide options when backdrop is pressed', async () => {
+    const component = render(
+      <TestSelect/>,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+
+    const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
+    fireEvent.press(backdrop);
+
+    const firstOption = await waitForElement(() => touchables.findOptionTouchable(component, 0));
+    const secondOption = component.queryByText('Option 2');
+
+    expect(firstOption).toBeFalsy();
+    expect(secondOption).toBeFalsy();
+  });
+
+  it('should call onSelect with single option index', async () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(1);
+      expect(index.section).toBeFalsy();
+    });
+
+    const component = render(
+      <TestSelect onSelect={onSelect}/>,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    await waitForElement(() => null);
+
+    fireEvent.press(touchables.findOptionTouchable(component, 1));
+  });
+
+  it('should call onSelect with array of indices', async () => {
+    const onSelect = jest.fn((indices: IndexPath[]) => {
+      const [firstIndex, secondIndex, ...restIndices] = indices;
+
+      expect(firstIndex.row).toEqual(0);
+      expect(firstIndex.section).toBeFalsy();
+      expect(secondIndex.row).toEqual(1);
+      expect(secondIndex.section).toBeFalsy();
+      expect(restIndices.length).toEqual(0);
+    });
+
+    const component = render(
+      <TestSelect
+        multiSelect={true}
+        selectedIndex={[new IndexPath(0)]}
+        onSelect={onSelect}
+      />,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    const optionTouchable = await waitForElement(() => component.queryByText('Option 2'));
+
+    fireEvent.press(optionTouchable);
+  });
+
+  it('should render checkboxes when multiselect', async () => {
+    const component = render(
+      <TestSelect multiSelect={true}/>,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    const checkboxes = await waitForElement(() => component.queryAllByType(CheckBox));
+
+    expect(checkboxes.length).toEqual(2);
+  });
+
+  it('should call onSelect when pressing checkbox', async () => {
+    const onSelect = jest.fn((indices: IndexPath[]) => {
+      expect(indices[0].row).toEqual(1);
+    });
+
+    const component = render(
+      <TestSelect
+        multiSelect={true}
+        onSelect={onSelect}
+      />,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    const option2Checkbox = await waitForElement(() => component.queryAllByType(CheckBox)[1]);
+
+    fireEvent.press(option2Checkbox);
+  });
+
+  it('should call onFocus', async () => {
+    const onFocus = jest.fn();
+
+    const component = render(
+      <TestSelect onFocus={onFocus}/>,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    await waitForElement(() => expect(onFocus).toHaveBeenCalled());
+  });
+
+  it('should call onBlur', async () => {
+    const onBlur = jest.fn();
+    const component = render(
+      <TestSelect onBlur={onBlur}/>,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    await waitForElement(() => null);
+
+    fireEvent.press(touchables.findBackdropTouchable(component));
+    await waitForElement(() => expect(onBlur).toHaveBeenCalled());
+  });
+
+  it('should call onPressIn', () => {
+    const onPressIn = jest.fn();
+
+    const component = render(
+      <TestSelect onPressIn={onPressIn}/>,
+    );
+
+    fireEvent(touchables.findControlTouchable(component), 'pressIn');
+    expect(onPressIn).toHaveBeenCalled();
+  });
+
+  it('should call onPressOut', () => {
+    const onPressOut = jest.fn();
+
+    const component = render(
+      <TestSelect onPressOut={onPressOut}/>,
+    );
+
+    fireEvent(touchables.findControlTouchable(component), 'pressOut');
+    expect(onPressOut).toHaveBeenCalled();
+  });
+
+  it('should be able to call focus with ref', async () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    render(
+      <TestSelect ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.focus).toBeTruthy();
+    componentRef.current.focus();
+  });
+
+  it('should be able to call blur with ref', async () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    render(
+      <TestSelect ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.blur).toBeTruthy();
+    componentRef.current.blur();
+  });
+
+  it('should be able to call isFocused with ref', () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    render(
+      <TestSelect ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.isFocused).toBeTruthy();
+    componentRef.current.isFocused();
+  });
+
+  it('should be able to call clear with ref', () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    render(
+      <TestSelect ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.clear).toBeTruthy();
+    componentRef.current.clear();
+  });
+
+  it('should be able to call show with ref', () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    render(
+      <TestSelect ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.show).toBeTruthy();
+    componentRef.current.show();
+  });
+
+  it('should be able to call hide with ref', async () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    render(
+      <TestSelect ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.hide).toBeTruthy();
+    componentRef.current.hide();
   });
 
 });
 
-describe('@select component checks', () => {
+describe('@select: component checks with groups', () => {
 
-  const message: string = [
-    'Unfortunately, there is no way to test Select since it relies on native code to perform measuring.',
-    'However, most use cases are covered with tests of List and the Input element of Select',
-  ].join('\n');
+  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
+    const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
-  console.info(message);
+    const onSelect = (index: IndexPath | IndexPath[]) => {
+      setSelectedIndex(index);
+      props.onSelect && props.onSelect(index);
+    };
 
-  it('* select onPress have been called', () => {
-    const onSelectPress = jest.fn();
-    const onMultiSelectPress = jest.fn();
-    const application: RenderAPI = render(
-      <TestApplication
-        onSelectPress={onSelectPress}
-        onMultiSelectPress={onMultiSelectPress}
-      />,
+    return (
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}>
+        <Select
+          ref={ref}
+          {...props}
+          selectedIndex={selectedIndex}
+          onSelect={onSelect}>
+          <SelectGroup title='Group 1'>
+            <SelectItem title='Option 1.1'/>
+            <SelectItem title='Option 1.2'/>
+          </SelectGroup>
+          <SelectGroup title='Group 2'>
+            <SelectItem title='Option 2.1'/>
+            <SelectItem title='Option 2.2'/>
+          </SelectGroup>
+        </Select>
+      </ApplicationProvider>
     );
-
-    fireEvent.press(application.getAllByType(Select)[0]);
-    fireEvent.press(application.getAllByType(Select)[1]);
-    expect(onSelectPress).toHaveBeenCalled();
-    expect(onMultiSelectPress).toHaveBeenCalled();
   });
 
-  it('* select onPress* handling', () => {
-    const onSelectPressIn = jest.fn();
-    const onSelectPressOut = jest.fn();
-    const onSelectLongPress = jest.fn();
-    const application: RenderAPI = render(
-      <TestApplication
-        onSelectPressIn={onSelectPressIn}
-        onSelectPressOut={onSelectPressOut}
-        onSelectLongPress={onSelectLongPress}
-      />,
+  const touchables = {
+    findControlTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[0],
+  };
+
+  it('should select single option in group', async () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(1);
+      expect(index.section).toEqual(0);
+    });
+
+    const component = render(
+      <TestSelect onSelect={onSelect}/>,
     );
 
-    fireEvent(application.getAllByType(TouchableOpacity)[0], 'pressIn');
-    fireEvent(application.getAllByType(TouchableOpacity)[0], 'pressOut');
-    fireEvent(application.getAllByType(TouchableOpacity)[0], 'longPress');
+    fireEvent.press(touchables.findControlTouchable(component));
+    const option12Touchable = await waitForElement(() => component.getByText('Option 1.2'));
 
-    expect(onSelectPressIn).toHaveBeenCalled();
-    expect(onSelectPressOut).toHaveBeenCalled();
-    expect(onSelectLongPress).toHaveBeenCalled();
+    fireEvent.press(option12Touchable);
   });
 
-  it('* text props checks', () => {
-    const passedLabel: string = 'Label';
-    const passedPlaceholder: string = 'Placeholder';
-    const application: RenderAPI = render(
-      <TestApplication
-        selectLabel={passedLabel}
-        selectPlaceholder={passedPlaceholder}
+  it('should select options group', async () => {
+    const onSelect = jest.fn((indices: IndexPath[]) => {
+      const [firstIndex, secondIndex, ...restIndices] = indices;
+
+      expect(firstIndex.row).toEqual(0);
+      expect(firstIndex.section).toEqual(1);
+      expect(secondIndex.row).toEqual(1);
+      expect(secondIndex.section).toEqual(1);
+      expect(restIndices.length).toEqual(0);
+    });
+
+    const component = render(
+      <TestSelect
+        multiSelect={true}
+        onSelect={onSelect}
       />,
     );
 
-    const label: string = application.getAllByText(passedLabel)[0].props.children;
-    const placeholder: string = application.getAllByText(passedPlaceholder)[0].props.children;
+    fireEvent.press(touchables.findControlTouchable(component));
+    const group2Touchable = await waitForElement(() => component.getByText('Group 2'));
 
-    expect(label).toBe(passedLabel);
-    expect(placeholder).toBe(passedPlaceholder);
+    fireEvent.press(group2Touchable);
   });
 });
+
+

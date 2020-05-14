@@ -8,11 +8,7 @@ import { Inject, Injectable } from '@angular/core';
 
 import { NgdTabbedService } from './tabbed.service';
 import { NgdTextService } from './text.service';
-import {
-  DOCS,
-  STRUCTURE,
-  EXAMPLES_STRUCTURE,
-} from '../../app.options';
+import { DOCS, EXAMPLES_STRUCTURE, STRUCTURE } from '../../app.options';
 
 @Injectable()
 export class NgdStructureService {
@@ -95,8 +91,9 @@ export class NgdStructureService {
 
   protected getComponents(item: any, preparedDocs: any) {
     return item.source
-      .map(source => preparedDocs.classes.find((data) => data.name === source))
-      .map(component => this.prepareComponent(component, item));
+               .map(source => preparedDocs.classes.find((data) => data.name === source))
+               .filter(Boolean)
+               .map(component => this.prepareComponent(component, item));
   }
 
   protected prepareComponent(component: any, structureItem?: any) {
@@ -108,7 +105,7 @@ export class NgdStructureService {
     let images: string[] = [];
     if (structureItem && structureItem.overview) {
       const imagesObj: any = structureItem.overview
-        .find((item: any) => item.name === component.name);
+                                          .find((item: any) => item.name === component.name);
       images = imagesObj ? imagesObj.images : [];
     }
 
@@ -150,11 +147,15 @@ export class NgdStructureService {
     return {
       id: example.description,
       name: example.description.split(/(?=[A-Z])/).join(' '),
-      files: [{
-        path: helper.path,
-        code: helper.code,
-        extension: helper.path.slice(helper.path.length - 3),
-      }],
+      description: example.description,
+      shortDescription: example.shortDescription,
+      files: [
+        {
+          path: helper.path,
+          code: helper.code,
+          extension: helper.path.slice(helper.path.length - 3),
+        },
+      ],
       code: helper.code,
       url: `/assets/playground-build/#/${helper.name}`,
     };

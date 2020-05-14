@@ -1,100 +1,77 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
-  ImageSourcePropType,
   StyleSheet,
 } from 'react-native';
+import { render } from 'react-native-testing-library';
 import {
-  render,
-  RenderAPI,
-  shallow,
-} from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
-import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Avatar,
   AvatarProps,
 } from './avatar.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
-
-const Mock = (props?: AvatarProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
-    <ApplicationProvider
-      mapping={mapping}
-      theme={theme}>
-      <Avatar {...props} />
-    </ApplicationProvider>
-  );
-};
-
-const renderComponent = (props?: AvatarProps): RenderAPI => {
-  return render(
-    <Mock {...props} />,
-  );
-};
-
-const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-
-describe('@avatar: matches snapshot', () => {
-
-  describe('* appearance', () => {
-
-    it('* default', () => {
-      const component: RenderAPI = renderComponent({
-        source: iconSource,
-      });
-
-      const { output } = shallow(component.getByType(Avatar));
-
-      expect(output).toMatchSnapshot();
-    });
-
-  });
-
-});
 
 describe('@avatar: component checks', () => {
 
-  it('* round shape styled properly', () => {
-    const component: RenderAPI = renderComponent({
-      source: iconSource,
-      shape: 'round',
-    });
+  const TestAvatar = (props: Partial<AvatarProps>) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <Avatar
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+        {...props}
+      />
+    </ApplicationProvider>
+  );
 
-    const avatar: ReactTestInstance = component.getByType(Image);
+  it('should render image', () => {
+    const component = render(
+      <TestAvatar/>,
+    );
 
+    const avatar = component.queryByType(Image);
+
+    expect(avatar).toBeTruthy();
+    expect(avatar.props.source).toEqual({ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' });
+  });
+
+  it('should be round', () => {
+    const component = render(
+      <TestAvatar shape='round'/>,
+    );
+
+    const avatar = component.queryByType(Image);
     const { borderRadius, height } = StyleSheet.flatten(avatar.props.style);
 
     expect(borderRadius).toEqual(height / 2);
   });
 
-  it('* rounded shape styled properly', () => {
-    const component: RenderAPI = renderComponent({
-      source: iconSource,
-      shape: 'rounded',
-    });
+  it('should be rounded', () => {
+    const component = render(
+      <TestAvatar shape='rounded'/>,
+    );
 
-    const avatar: ReactTestInstance = component.getByType(Image);
-
+    const avatar = component.queryByType(Image);
     const { borderRadius, height } = StyleSheet.flatten(avatar.props.style);
 
     expect(borderRadius).toBeLessThan(height);
   });
 
-  it('* square shape', () => {
-    const component: RenderAPI = renderComponent({
-      source: iconSource,
-      shape: 'square',
-    });
+  it('should be square', () => {
+    const component = render(
+      <TestAvatar shape='square'/>,
+    );
 
-    const avatar: ReactTestInstance = component.getByType(Image);
-
+    const avatar = component.queryByType(Image);
     const { borderRadius } = StyleSheet.flatten(avatar.props.style);
 
     expect(borderRadius).toEqual(0);

@@ -1,9 +1,14 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   TouchableOpacity,
   View,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 import {
   fireEvent,
@@ -12,265 +17,246 @@ import {
   waitForElement,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
-import {
-  StyleProvider,
-  StyleProviderProps,
-} from './styleProvider.component';
+import { StyleProvider } from './styleProvider.component';
 import {
   styled,
   StyledComponentProps,
 } from './styled';
 import { StyleConsumerService } from './styleConsumer.service';
 import {
-  StyleService,
   Interaction,
+  StyleService,
 } from './style.service';
-import {
-  ThemeService,
-  ThemeType,
-} from '../theme/theme.service';
-import {
-  styles,
-  theme,
-  themeInverse,
-} from '../support/tests';
 
-const styleConsumerTestId = '@style/consumer';
-const styleTouchableTestId = '@style/touchable';
+const theme = {
+  defaultColor: '#000000',
+  disabledColor: '#646464',
+  activeColor: '#3366FF',
+  refValue: '$defaultColor',
+  doubleRefValue: '$refValue',
+};
 
-interface ThemeChangingProviderProps extends StyleProviderProps {
-  themeInverse: ThemeType;
-}
-
-class ThemeChangingProvider extends React.Component<ThemeChangingProviderProps> {
-
-  public state = {
-    styles: this.props.styles,
-    theme: this.props.theme,
-  };
-
-  private onTouchablePress = () => {
-    this.setState({
-      theme: this.props.themeInverse,
-    });
-  };
-
-  public render(): React.ReactElement<ThemeChangingProviderProps> {
-    return (
-      <StyleProvider {...this.state}>
-        <TouchableOpacity
-          testID={styleTouchableTestId}
-          onPress={this.onTouchablePress}>
-          {this.props.children}
-        </TouchableOpacity>
-      </StyleProvider>
-    );
-  }
-}
-
-interface TestComponentProps extends StyledComponentProps, ViewProps {
-  disabled?: boolean;
-}
-
-class Test extends React.Component<TestComponentProps> {
-  static styledComponentName: string = 'Radio';
-
-  static defaultProps: Partial<TestComponentProps> = {
-    testID: styleConsumerTestId,
-  };
-
-  public render(): React.ReactElement<ViewProps> {
-    return (
-      <View testID={this.props.testID}/>
-    );
-  }
-}
-
-class NonStyledComponent extends React.Component<TestComponentProps> {
-  public render(): React.ReactElement<ViewProps> {
-    return undefined;
-  }
-}
-
-
-const json = (value: any): string => JSON.stringify(value);
+const computedMapping = {
+  Test: {
+    meta: {
+      scope: 'all',
+      parameters: {
+        width: {
+          type: 'number',
+        },
+        height: {
+          type: 'number',
+        },
+        backgroundColor: {
+          type: 'string',
+        },
+      },
+      appearances: {
+        default: {
+          default: true,
+        },
+      },
+      variantGroups: {},
+      states: {
+        disabled: {
+          default: false,
+          priority: 0,
+          scope: 'all',
+        },
+        active: {
+          default: false,
+          priority: 1,
+          scope: 'all',
+        },
+      },
+    },
+    styles: {
+      'default': {
+        width: 4,
+        height: 4,
+        backgroundColor: 'defaultColor',
+      },
+      'default.disabled': {
+        width: 4,
+        height: 4,
+        backgroundColor: 'disabledColor',
+      },
+      'default.active': {
+        width: 4,
+        height: 4,
+        backgroundColor: 'activeColor',
+      },
+    },
+  },
+};
 
 describe('@style: consumer service methods check', () => {
 
-  // @ts-ignore
-  const service: StyleConsumerService = new StyleConsumerService('Radio', styles);
+  const service: StyleConsumerService = new StyleConsumerService('Test', computedMapping);
 
-  describe('* style mapping', () => {
+  it('should create valid default props', () => {
+    const value: StyledComponentProps = service.createDefaultProps();
 
-    const derivedProps: StyledComponentProps & any = {
+    expect(value).toEqual({
       appearance: 'default',
-      disabled: true,
-    };
-
-    it('creates valid default props', () => {
-      const value: StyledComponentProps = service.createDefaultProps();
-
-      expect(json(value)).toEqual(json({
-        appearance: 'default',
-        size: 'medium',
-      }));
     });
-
-    it('creates valid themedStyle prop', () => {
-      const defaultProps: StyledComponentProps = service.createDefaultProps();
-
-      const props: StyledComponentProps = {
-        ...defaultProps,
-        ...derivedProps,
-      };
-
-      // @ts-ignore
-      const value: StyledComponentProps = service.withStyledProps(props, styles, theme, [Interaction.ACTIVE]);
-
-      expect(value.themedStyle).toMatchSnapshot();
-    });
-
   });
 
+  it('should create valid style prop', () => {
+    const props: StyledComponentProps = service.createDefaultProps();
+    const style = service.createStyleProp(props, computedMapping, theme, []);
+
+    expect(style).toEqual({
+      width: 4,
+      height: 4,
+      backgroundColor: theme.defaultColor,
+    });
+  });
 });
 
-describe('@style-sheet: service checks', () => {
+describe('@style-service: service method checks', () => {
 
-  it('finds theme value properly', async () => {
-    const themeValue = ThemeService.getValue('gray-100', theme);
-    const undefinedValue = ThemeService.getValue('undefined', theme);
-
-    expect(themeValue).toEqual(theme['gray-100']);
-    expect(undefinedValue).toBeUndefined();
-  });
-
-  it('finds referencing theme value properly', async () => {
-    const themeValue = ThemeService.getValue('referencing', theme);
-
-    expect(themeValue).toEqual(theme['gray-100']);
-  });
-
-  it('finds multiple referencing theme value properly', async () => {
-    const themeValue = ThemeService.getValue('double-referencing', theme);
-
-    expect(themeValue).toEqual(theme['gray-100']);
-  });
-
-  it('finds referencing theme value properly (initial reference)', async () => {
-    const themeValue = ThemeService.getValue('referencing', theme);
-
-    expect(themeValue).toEqual(theme['gray-100']);
-  });
-
-  it('* creates themedStyle property for mapping properly', () => {
+  it('should apply theme on mapping', () => {
     const mapping = {
-      prop1: 'blue-primary',
-      prop2: 'blue-dark',
-      prop3: 'gray-primary',
-      prop4: 42,
+      prop1: 'defaultColor',
+      prop2: 'refValue',
+      prop3: 'doubleRefValue',
     };
 
-    const value = StyleService.createThemedEntry(mapping as ViewStyle, theme);
-    expect(value).toMatchSnapshot();
+    const value = StyleService.createThemedEntry(mapping, theme);
+
+    expect(value).toEqual({
+      prop1: theme.defaultColor,
+      prop2: theme.defaultColor,
+      prop3: theme.defaultColor,
+    });
   });
 
 });
 
 describe('@style: ui component checks', () => {
 
-  it('* returns null if has no static `styledComponentName` property', () => {
-    const styledComponent = styled(NonStyledComponent);
+  const styleConsumerTestId = '@style/consumer';
+  const styleTouchableTestId = '@style/touchable';
 
-    expect(styledComponent).toBeNull();
+  @styled('Test')
+  class Test extends React.Component<{ disabled?: boolean }> {
+
+    static someStaticValueToCopy: string = 'Test';
+
+    public render(): React.ReactElement<ViewProps> {
+      return (
+        <View {...this.props} testID='@style/consumer'/>
+      );
+    }
+  }
+
+  @styled(null)
+  class NonStyledTest extends React.Component {
+
+    public render(): React.ReactElement<ViewProps> {
+      return (
+        <View {...this.props} testID='@style/consumer'/>
+      );
+    }
+  }
+
+  it('static methods are copied over', async () => {
+    expect(Test.someStaticValueToCopy).not.toBeFalsy();
   });
 
-  it('* static methods are copied over', async () => {
-    // @ts-ignore: test-case
-    Test.staticMethod = function () {
-    };
-    const StyleConsumer = styled<TestComponentProps>(Test);
-
-    // @ts-ignore: test-case
-    expect(StyleConsumer.staticMethod).not.toBeUndefined();
-  });
-
-  it('* receives custom props', async () => {
-    const StyleConsumer = styled<TestComponentProps>(Test);
-
+  it('receives custom props', async () => {
     const component: RenderAPI = render(
-      <StyleProvider styles={styles} theme={theme}>
-        <StyleConsumer/>
+      <StyleProvider styles={computedMapping} theme={theme}>
+        <Test/>
       </StyleProvider>,
     );
 
     const styledComponent = component.getByTestId(styleConsumerTestId);
 
-    expect(styledComponent.props.appearance).not.toBeNull();
-    expect(styledComponent.props.appearance).not.toBeUndefined();
-    expect(styledComponent.props.theme).not.toBeNull();
-    expect(styledComponent.props.theme).not.toBeUndefined();
-    expect(styledComponent.props.themedStyle).not.toBeNull();
-    expect(styledComponent.props.themedStyle).not.toBeUndefined();
-    expect(styledComponent.props.dispatch).not.toBeNull();
-    expect(styledComponent.props.dispatch).not.toBeUndefined();
+    expect(styledComponent.props.appearance).not.toBeFalsy();
+    expect(styledComponent.props.eva.theme).not.toBeFalsy();
+    expect(styledComponent.props.eva.style).not.toBeFalsy();
+    expect(styledComponent.props.eva.dispatch).not.toBeFalsy();
   });
 
-  it('* default appearance styled properly', async () => {
-    const StyleConsumer = styled<TestComponentProps>(Test);
-
+  it('default appearance styled properly', async () => {
     const component: RenderAPI = render(
-      <StyleProvider styles={styles} theme={theme}>
-        <StyleConsumer/>
+      <StyleProvider styles={computedMapping} theme={theme}>
+        <Test/>
       </StyleProvider>,
     );
 
     const withStateProp: RenderAPI = render(
-      <StyleProvider styles={styles} theme={theme}>
-        <StyleConsumer disabled={true}/>
+      <StyleProvider styles={computedMapping} theme={theme}>
+        <Test disabled={true}/>
       </StyleProvider>,
     );
 
     const styledComponent: ReactTestInstance = component.getByTestId(styleConsumerTestId);
-    const withAppearanceComponent: ReactTestInstance = withStateProp.getByTestId(styleConsumerTestId);
+    const withStateComponent: ReactTestInstance = withStateProp.getByTestId(styleConsumerTestId);
 
-    expect(styledComponent.props.themedStyle).toMatchSnapshot();
-    expect(withAppearanceComponent.props.themedStyle).toMatchSnapshot();
+    expect(styledComponent.props.eva.style).toEqual({
+      width: 4,
+      height: 4,
+      backgroundColor: theme.defaultColor,
+    });
+
+    expect(withStateComponent.props.eva.style).toEqual({
+      width: 4,
+      height: 4,
+      backgroundColor: theme.disabledColor,
+    });
   });
 
-  it('* dispatch action works properly', async () => {
-    const StyleConsumer = styled<TestComponentProps>(Test);
-
+  it('dispatch action works properly', async () => {
     const component: RenderAPI = render(
-      <StyleProvider styles={styles} theme={theme}>
-        <StyleConsumer/>
+      <StyleProvider styles={computedMapping} theme={theme}>
+        <Test/>
       </StyleProvider>,
     );
 
     const styledComponent = component.getByTestId(styleConsumerTestId);
-    styledComponent.props.dispatch([Interaction.ACTIVE]);
+    styledComponent.props.eva.dispatch([Interaction.ACTIVE]);
 
     const styledComponentChanged = await waitForElement(() => {
       return component.getByTestId(styleConsumerTestId);
     });
 
-    expect(styledComponentChanged.props.themedStyle).toMatchSnapshot();
+    expect(styledComponentChanged.props.eva.style).toEqual({
+      width: 4,
+      height: 4,
+      backgroundColor: theme.activeColor,
+    });
   });
 
-  it('* provides correct styles on theme change', async () => {
-    const StyleConsumer = styled<TestComponentProps>(Test);
+  it('provides correct styles on theme change', async () => {
+
+    const ThemeChangingProvider = (props) => {
+      const [currentTheme, setCurrentTheme] = React.useState(props.theme);
+
+      return (
+        <StyleProvider styles={props.styles} theme={currentTheme}>
+          <TouchableOpacity
+            testID={styleTouchableTestId}
+            onPress={() => setCurrentTheme(props.themeInverse)}>
+            {props.children}
+          </TouchableOpacity>
+        </StyleProvider>
+      );
+    };
 
     const component: RenderAPI = render(
       <ThemeChangingProvider
-        styles={styles}
+        styles={computedMapping}
         theme={theme}
-        themeInverse={themeInverse}>
-        <StyleConsumer/>
+        themeInverse={{
+          ...theme,
+          defaultColor: '#ffffff',
+        }}>
+        <Test/>
       </ThemeChangingProvider>,
     );
-
-    const styledComponent: ReactTestInstance = component.getByTestId(styleConsumerTestId);
-
-    expect(styledComponent.props.themedStyle).toMatchSnapshot();
 
     const touchableComponent: ReactTestInstance = component.getByTestId(styleTouchableTestId);
 
@@ -280,7 +266,9 @@ describe('@style: ui component checks', () => {
       return component.getByTestId(styleConsumerTestId);
     });
 
-    expect(styledComponentChanged.props.themedStyle).toMatchSnapshot();
+    expect(styledComponentChanged.props.eva.style).toEqual({
+      ...computedMapping.Test.styles.default,
+      backgroundColor: '#ffffff',
+    });
   });
-
 });

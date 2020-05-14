@@ -1,25 +1,22 @@
 import React from 'react';
-import {
-  Button,
-  Tooltip,
-} from '@ui-kitten/components';
+import { Button, Tooltip } from '@ui-kitten/components';
 
 export const TooltipSimpleUsageShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
-  const toggleTooltip = () => {
-    setVisible(!visible);
-  };
+  const renderToggleButton = () => (
+    <Button onPress={() => setVisible(true)}>
+      TOGGLE TOOLTIP
+    </Button>
+  );
 
   return (
     <Tooltip
+      anchor={renderToggleButton}
       visible={visible}
-      text='Hi!'
-      onBackdropPress={toggleTooltip}>
-      <Button onPress={toggleTooltip}>
-        TOGGLE TOOLTIP
-      </Button>
+      onBackdropPress={() => setVisible(false)}>
+      Welcome to UI Kitten 😻
     </Tooltip>
   );
 };

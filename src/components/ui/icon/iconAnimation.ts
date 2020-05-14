@@ -1,10 +1,16 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { ViewStyle } from 'react-native';
 import {
   Animation,
+  AnimationConfig,
   PulseAnimation,
   ShakeAnimation,
   ZoomAnimation,
-  AnimationConfig,
 } from '../animation';
 
 export type IconAnimation = Animation<any, ViewStyle>;

@@ -1,22 +1,25 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
   ImageProps,
-  ImageSourcePropType,
+  Text,
   TouchableOpacity,
 } from 'react-native';
 import {
-  render,
   fireEvent,
-  shallow,
-  RenderAPI,
+  render,
 } from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-  StyleType,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   List,
   ListProps,
@@ -25,224 +28,167 @@ import {
   ListItem,
   ListItemProps,
 } from './listItem.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
-
-const data: any[] = Array(8);
-
-const Mock = (props?: ListProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
-    <ApplicationProvider
-      mapping={mapping}
-      theme={theme}>
-      <List {...props} />
-    </ApplicationProvider>
-  );
-};
-
-const ItemMock = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
-  return (
-    <ListItem {...props} />
-  );
-};
-
-describe('@list: component checks', () => {
-
-  it('* renders proper amount of data', () => {
-    const item = () => {
-      return (
-        <ItemMock title='Title'/>
-      );
-    };
-
-    const component: RenderAPI = render(
-      <Mock
-        data={data}
-        renderItem={item}
-      />,
-    );
-
-    const items: ReactTestInstance[] = component.getAllByType(ListItem);
-
-    expect(items.length).toEqual(8);
-  });
-
-});
-
-describe('@list-item: template matches snapshot', () => {
-
-  const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-
-  it('* title', () => {
-    const item = () => {
-      return (
-        <ItemMock title='Title'/>
-      );
-    };
-
-    const component: RenderAPI = render(
-      <Mock
-        data={data}
-        renderItem={item}
-      />,
-    );
-
-    const items: ReactTestInstance[] = component.getAllByType(ListItem);
-    const { output } = shallow(items[0]);
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* description', () => {
-    const item = () => {
-      return (
-        <ItemMock description='Description'/>
-      );
-    };
-
-    const component: RenderAPI = render(
-      <Mock
-        data={data}
-        renderItem={item}
-      />,
-    );
-
-    const items: ReactTestInstance[] = component.getAllByType(ListItem);
-    const { output } = shallow(items[0]);
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* text styles', () => {
-    const item = () => {
-      return (
-        <ItemMock
-          title='Title'
-          titleStyle={{
-            fontSize: 22,
-            lineHeight: 24,
-          }}
-          description='Description'
-          descriptionStyle={{
-            color: 'blue',
-            letterSpacing: 6,
-          }}
-        />
-      );
-    };
-
-    const component: RenderAPI = render(
-      <Mock
-        data={data}
-        renderItem={item}
-      />,
-    );
-
-    const items: ReactTestInstance[] = component.getAllByType(ListItem);
-    const { output } = shallow(items[0]);
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* with icon', () => {
-    const item = () => {
-      return (
-        <ItemMock
-          title='Title'
-          description='Description'
-          icon={icon}
-        />
-      );
-    };
-
-    const icon = (style: StyleType): React.ReactElement<ImageProps> => {
-      return (
-        <Image
-          style={style}
-          source={iconSource}
-        />
-      );
-    };
-
-    const component: RenderAPI = render(
-      <Mock
-        data={data}
-        renderItem={item}
-      />,
-    );
-
-    const items: ReactTestInstance[] = component.getAllByType(ListItem);
-    const { output } = shallow(items[0]);
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* with accessory', () => {
-    const item = () => {
-      return (
-        <ItemMock
-          title='Title'
-          description='Description'
-          accessory={accessory}
-        />
-      );
-    };
-
-    const accessory = (style: StyleType): React.ReactElement<ImageProps> => {
-      return (
-        <Image
-          style={style}
-          source={iconSource}
-        />
-      );
-    };
-
-    const component: RenderAPI = render(
-      <Mock
-        data={data}
-        renderItem={item}
-      />,
-    );
-
-    const items: ReactTestInstance[] = component.getAllByType(ListItem);
-    const { output } = shallow(items[0]);
-
-    expect(output).toMatchSnapshot();
-  });
-
-});
 
 describe('@list-item: component checks', () => {
 
-  it('* emits onPress with correct args', async () => {
-    const pressIndex: number = 0;
+  const TestListItem = (props?: ListItemProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <ListItem {...props} />
+    </ApplicationProvider>
+  );
 
-    const onPress = jest.fn((index: number) => {
-      expect(index).toEqual(pressIndex);
-    });
+  it('should render text passed to title prop', () => {
+    const component = render(
+      <TestListItem title='I love Babel'/>,
+    );
 
-    const item = () => {
-      return (
-        <ItemMock
-          title='Title'
-          onPress={onPress}
-        />
-      );
-    };
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
 
-    const component: RenderAPI = render(
-      <Mock
-        data={data}
-        renderItem={item}
+  it('should render component passed to title prop', () => {
+    const component = render(
+      <TestListItem title={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render text passed to description prop', () => {
+    const component = render(
+      <TestListItem description='I love Babel'/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render component passed to description prop', () => {
+    const component = render(
+      <TestListItem description={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestListItem
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(ListItem);
-    const touchable: ReactTestInstance = items[pressIndex].findByType(TouchableOpacity);
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
 
-    fireEvent.press(touchable);
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should call onPressIn', () => {
+    const onPressIn = jest.fn();
+    const component = render(
+      <TestListItem onPressIn={onPressIn}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
+    expect(onPressIn).toHaveBeenCalled();
+  });
+
+  it('should call onPressOut', () => {
+    const onPressOut = jest.fn();
+    const component = render(
+      <TestListItem onPressOut={onPressOut}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
+    expect(onPressOut).toHaveBeenCalled();
+  });
+});
+
+describe('@list: component checks', () => {
+
+  const TestList = React.forwardRef((props: Partial<ListProps>, ref: React.Ref<List>) =>
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <List
+        ref={ref}
+        data={new Array(2)}
+        renderItem={() => <ListItem/>}
+        {...props}
+      />
+    </ApplicationProvider>,
+  );
+
+  it('should render 2 list items', () => {
+    const component = render(
+      <TestList/>,
+    );
+
+    expect(component.queryAllByType(ListItem).length).toEqual(2);
+  });
+
+  it('should call renderItem once per visible item', () => {
+    const renderItem = jest.fn();
+    render(
+      <TestList
+        data={new Array(11)}
+        renderItem={renderItem}
+      />,
+    );
+
+    expect(renderItem).toHaveBeenCalledTimes(10);
+  });
+
+  it('should be able to call scrollToEnd with ref', () => {
+    const componentRef = React.createRef<List>();
+    render(
+      <TestList
+        ref={componentRef}
+        data={new Array(11)}
+      />,
+    );
+
+    expect(componentRef.current.scrollToEnd).toBeTruthy();
+    componentRef.current.scrollToEnd({});
+  });
+
+  it('should be able to call scrollToIndex with ref', () => {
+    const componentRef = React.createRef<List>();
+    render(
+      <TestList ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.scrollToIndex).toBeTruthy();
+    componentRef.current.scrollToIndex({ index: 0 });
+  });
+
+  it('should be able to call scrollToIndex with ref', () => {
+    const componentRef = React.createRef<List>();
+    render(
+      <TestList ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.scrollToOffset).toBeTruthy();
+    componentRef.current.scrollToOffset({ offset: 0 });
   });
 
 });

@@ -8,28 +8,19 @@ import React from 'react';
 import {
   FlatList,
   FlatListProps,
-  ListRenderItemInfo,
-  StyleSheet,
-  ViewStyle,
 } from 'react-native';
+import { Overwrite } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
-  StyleType,
-} from '@kitten/theme';
-import { ListItemProps } from './listItem.component';
+} from '../../theme';
 
-// this is basically needed to avoid generics in required props
-type ItemType = any;
-type ListItemElement = React.ReactElement;
-type RenderItemProp = (info: ListRenderItemInfo<ItemType>, style: StyleType) => ListItemElement;
+type ListStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-interface ComponentProps {
-  renderItem: RenderItemProp;
-}
-
-export type ListProps = StyledComponentProps & FlatListProps<ItemType> & ComponentProps;
-export type ListElement = React.ReactElement<ListProps>;
+export type ListProps<ItemT = any> = FlatListProps<ItemT> & ListStyledProps;
+export type ListElement<ItemT = any> = React.ReactElement<ListProps<ItemT>>;
 
 export interface BaseScrollParams {
   animated?: boolean;
@@ -49,87 +40,61 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
 }
 
 /**
- * `List` component is a performant interface for rendering simple, flat lists. Extends `FlatList`. Renders list of
- * `ListItem` components or custom content.
+ * Performant interface for rendering simple, flat lists.
  *
  * @extends React.Component
  *
- * @property {(info: ListRenderItemInfo<ItemT>, style: StyleType) => ReactElement} renderItem - Takes an
- * item from data and renders it into the list.
+ * @property {any[]} data - An array of anything to be rendered within the list
+ *
+ * @property {(ListRenderItemInfo<ItemT>) => ReactElement} renderItem - Takes an
+ * item from *data* and renders it into the list.
  *
  * @property {FlatListProps} ...FlatListProps - Any props applied to FlatList component.
  *
  * @overview-example ListSimpleUsage
+ * Lists should render ListItem components by providing them through `renderItem` property
+ * to provide a useful component.
  *
- * @overview-example ListCompositeItem
+ * @overview-example ListDividers
+ * It is a good idea to separate items with `Divider` component.
  *
- * @example ListInlineStyling
- * ```
+ * @overview-example ListAccessories
+ * Items may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
+ *
+ * @overview-example ListCustomItem
+ * Using ListItem is helpful for basic lists, but not required. For example, `Card` may be used.
  */
-export class ListComponent extends React.Component<ListProps> {
+@styled('List')
+export class List<ItemT = any> extends React.Component<ListProps> {
 
-  static styledComponentName: string = 'List';
-
-  private listRef: React.RefObject<FlatList<ItemType>> = React.createRef();
+  private listRef = React.createRef<FlatList>();
 
   public scrollToEnd = (params?: BaseScrollParams): void => {
-    this.listRef.current.scrollToEnd(params);
+    this.listRef.current?.scrollToEnd(params);
   };
 
   public scrollToIndex = (params: ScrollToIndexParams): void => {
-    this.listRef.current.scrollToIndex(params);
+    this.listRef.current?.scrollToIndex(params);
   };
 
   public scrollToOffset(params: ScrollToOffsetParams): void {
-    this.listRef.current.scrollToOffset(params);
+    this.listRef.current?.scrollToOffset(params);
   }
 
-  private getComponentStyle = (source: StyleType): StyleType => {
-    return {
-      container: source,
-      item: {},
-    };
-  };
-
-  private getItemStyle = (source: StyleType, index: number): ViewStyle => {
-    const { item } = source;
-
-    return item;
-  };
-
-  private keyExtractor = (item: ItemType, index: number): string => {
+  private keyExtractor = (item: ItemT, index: number): string => {
     return index.toString();
   };
 
-  private renderItem = (info: ListRenderItemInfo<ItemType>): ListItemElement => {
-    const itemStyle: StyleType = this.getItemStyle(this.props.themedStyle, info.index);
-    const itemElement: React.ReactElement<ListItemProps> = this.props.renderItem(info, itemStyle);
-
-    return React.cloneElement(itemElement, {
-      style: [itemStyle, styles.item, itemElement.props.style],
-      index: info.index,
-    });
-  };
-
-  public render(): React.ReactElement<FlatListProps<ItemType>> {
-    const { style, themedStyle, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+  public render(): React.ReactElement {
+    const { eva, style, keyExtractor, ...flatListProps } = this.props;
 
     return (
       <FlatList
-        keyExtractor={this.keyExtractor}
-        {...derivedProps}
+        keyExtractor={keyExtractor || this.keyExtractor}
+        {...flatListProps}
         ref={this.listRef}
-        style={[componentStyle.container, styles.container, style]}
-        renderItem={this.renderItem}
+        style={[eva.style, style]}
       />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  item: {},
-});
-
-export const List = styled<ListProps>(ListComponent);

@@ -232,6 +232,23 @@ export const structure = [
   },
   {
     type: 'section',
+    name: 'Migration',
+    children: [
+      {
+        type: 'page',
+        name: '4.x-5.0.0 Migration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'migration/4.x-5.0.0-migration.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
     name: 'Components',
     children: [
       {
@@ -250,15 +267,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Application Provider',
-        icon: 'application-provider.svg',
-        source: [
-          'ApplicationProvider',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Styled Component',
+        name: 'Using Mapping',
         icon: 'styled.svg',
         source: [
           'styled',
@@ -266,7 +275,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Themed Component',
+        name: 'Using Theme',
         icon: 'with-styles.svg',
         source: [
           'useTheme',
@@ -280,16 +289,10 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Text',
-        icon: 'text.svg',
+        name: 'Application Provider',
+        icon: 'application-provider.svg',
         source: [
-          'Text',
-        ],
-        overview: [
-          {
-            name: 'Text',
-            images: ['text.png'],
-          },
+          'ApplicationProvider',
         ],
       },
       {
@@ -302,34 +305,18 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Card',
-        icon: 'card.svg',
+        name: 'Text',
+        icon: 'text.svg',
         source: [
-          'Card',
-          'CardHeader',
+          'Text',
         ],
       },
       {
         type: 'tabs',
-        name: 'Menu',
-        icon: 'menu.svg',
+        name: 'Divider',
+        icon: 'icon.svg',
         source: [
-          'Menu',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'List',
-        icon: 'list.svg',
-        source: [
-          'List',
-          'ListItem',
-        ],
-        overview: [
-          {
-            name: 'List',
-            images: ['list.png'],
-          },
+          'Divider',
         ],
       },
       {
@@ -339,11 +326,22 @@ export const structure = [
         source: [
           'Icon',
         ],
-        overview: [
-          {
-            name: 'Icon',
-            images: ['icon.png'],
-          },
+      },
+      {
+        type: 'tabs',
+        name: 'Card',
+        icon: 'card.svg',
+        source: [
+          'Card',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'List',
+        icon: 'list.svg',
+        source: [
+          'List',
+          'ListItem',
         ],
       },
       {
@@ -367,17 +365,31 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Bottom Navigation',
+        name: 'Top Tabs',
+        icon: 'tab.svg',
+        source: [
+          'TabBar',
+          'TabView',
+          'Tab',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Bottom Tabs',
         icon: 'bottom-navigation.svg',
         source: [
           'BottomNavigation',
           'BottomNavigationTab',
         ],
-        overview: [
-          {
-            name: 'BottomNavigation',
-            images: ['bottom-navigation.png'],
-          },
+      },
+      {
+        type: 'tabs',
+        name: 'Menu',
+        icon: 'menu.svg',
+        source: [
+          'Menu',
+          'MenuGroup',
+          'MenuItem',
         ],
       },
       {
@@ -386,13 +398,8 @@ export const structure = [
         icon: 'drawer.svg',
         source: [
           'Drawer',
-          'DrawerHeaderFooter',
-        ],
-        overview: [
-          {
-            name: 'Drawer',
-            images: ['drawer.png'],
-          },
+          'DrawerGroup',
+          'DrawerItem',
         ],
       },
       {
@@ -404,38 +411,8 @@ export const structure = [
         ],
       },
       {
-        type: 'tabs',
-        name: 'Tab View',
-        icon: 'tab.svg',
-        source: [
-          'TabView',
-          'TabBar',
-          'Tab',
-        ],
-        overview: [
-          {
-            name: 'TabBar',
-            images: ['tab-menu.png'],
-          },
-        ],
-      },
-      {
         type: 'group',
         name: 'Forms',
-      },
-      {
-        type: 'tabs',
-        name: 'Input',
-        icon: 'input.svg',
-        source: [
-          'Input',
-        ],
-        overview: [
-          {
-            name: 'Input',
-            images: ['input.png'],
-          },
-        ],
       },
       {
         type: 'tabs',
@@ -443,12 +420,6 @@ export const structure = [
         icon: 'button.svg',
         source: [
           'Button',
-        ],
-        overview: [
-          {
-            name: 'Button',
-            images: ['button.png'],
-          },
         ],
       },
       {
@@ -458,12 +429,6 @@ export const structure = [
         source: [
           'ButtonGroup',
         ],
-        overview: [
-          {
-            name: 'ButtonGroup',
-            images: ['button-group.png'],
-          },
-        ],
       },
       {
         type: 'tabs',
@@ -472,11 +437,14 @@ export const structure = [
         source: [
           'CheckBox',
         ],
-        overview: [
-          {
-            name: 'CheckBox',
-            images: ['checkbox.png'],
-          },
+      },
+      {
+        type: 'tabs',
+        name: 'Radio',
+        icon: 'radio.svg',
+        source: [
+          'Radio',
+          'RadioGroup',
         ],
       },
       {
@@ -486,26 +454,13 @@ export const structure = [
         source: [
           'Toggle',
         ],
-        overview: [
-          {
-            name: 'Toggle',
-            images: ['toggle.png'],
-          },
-        ],
       },
       {
         type: 'tabs',
-        name: 'Radio',
-        icon: 'radio.svg',
+        name: 'Input',
+        icon: 'input.svg',
         source: [
-          'RadioGroup',
-          'Radio',
-        ],
-        overview: [
-          {
-            name: 'Radio',
-            images: ['radio.png'],
-          },
+          'Input',
         ],
       },
       {
@@ -514,22 +469,8 @@ export const structure = [
         icon: 'select.svg',
         source: [
           'Select',
-        ],
-        overview: [],
-      },
-      {
-        type: 'tabs',
-        name: 'Datepicker',
-        icon: 'datepicker.svg',
-        source: [
-          'Datepicker',
-          'RangeDatepicker',
-        ],
-        overview: [
-          {
-            name: 'Datepicker',
-            images: [],
-          },
+          'SelectGroup',
+          'SelectItem',
         ],
       },
       {
@@ -539,11 +480,14 @@ export const structure = [
         source: [
           'Autocomplete',
         ],
-        overview: [
-          {
-            name: 'Autocomplete',
-            images: [],
-          },
+      },
+      {
+        type: 'tabs',
+        name: 'Datepicker',
+        icon: 'datepicker.svg',
+        source: [
+          'Datepicker',
+          'RangeDatepicker',
         ],
       },
       {
@@ -565,12 +509,6 @@ export const structure = [
         source: [
           'Popover',
         ],
-        overview: [
-          {
-            name: 'Popover',
-            images: ['popover.png'],
-          },
-        ],
       },
       {
         type: 'tabs',
@@ -579,12 +517,6 @@ export const structure = [
         source: [
           'Tooltip',
         ],
-        overview: [
-          {
-            name: 'Tooltip',
-            images: ['tooltip.png'],
-          },
-        ],
       },
       {
         type: 'tabs',
@@ -592,12 +524,7 @@ export const structure = [
         icon: 'menu.svg',
         source: [
           'OverflowMenu',
-        ],
-        overview: [
-          {
-            name: 'OverflowMenu',
-            images: ['overflow-menu.png'],
-          },
+          'MenuItem',
         ],
       },
       {
@@ -611,12 +538,6 @@ export const structure = [
         source: [
           'Avatar',
         ],
-        overview: [
-          {
-            name: 'Avatar',
-            images: ['avatar.png'],
-          },
-        ],
       },
       {
         type: 'tabs',
@@ -624,12 +545,6 @@ export const structure = [
         icon: 'spinner.svg',
         source: [
           'Spinner',
-        ],
-        overview: [
-          {
-            name: 'Spinner',
-            images: ['spinner.png'],
-          },
         ],
       },
       {
@@ -639,12 +554,6 @@ export const structure = [
         source: [
           'Calendar',
           'RangeCalendar',
-        ],
-        overview: [
-          {
-            name: 'Calendar',
-            images: [],
-          },
         ],
       },
     ],

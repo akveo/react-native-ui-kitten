@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { DateService } from './date.service';
 import { CalendarRange } from '../type';
 
@@ -33,6 +39,6 @@ export class RangeDateService<D> {
   }
 
   private createRangeForStartEnd(date: D): CalendarRange<D> {
-    return { startDate: date, endDate: null};
+    return { startDate: date, endDate: null };
   }
 }

@@ -1,17 +1,32 @@
 import React from 'react';
-import { Button } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
+import { Button, Layout, Text } from '@ui-kitten/components';
 
 export const ButtonSimpleUsageShowcase = () => {
 
-  const [pressCounter, setPressCounter] = React.useState(0);
-
-  const onPress = () => {
-    setPressCounter(pressCounter + 1);
-  };
+  const [counter, setCounter] = React.useState(0);
 
   return (
-    <Button onPress={onPress}>
-      {`PRESSED ${pressCounter} TIMES`}
-    </Button>
+    <Layout style={styles.container} level='1'>
+
+      <Button onPress={() => setCounter(counter + 1)}>
+        BUTTON
+      </Button>
+
+      <Text style={styles.text}>
+        Pressed {counter} times
+      </Text>
+
+    </Layout>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  text: {
+    marginHorizontal: 8,
+  },
+});

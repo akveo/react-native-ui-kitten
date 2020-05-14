@@ -5,11 +5,17 @@
  */
 
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  StyleSheet,
-  ViewProps,
-} from 'react-native';
-import { ModalService } from '@kitten/theme';
+  Frame,
+  MeasureElement,
+  MeasuringElement,
+  Point,
+  RenderProp,
+  Overwrite,
+} from '../../devsupport';
+import { ModalService } from '../../theme';
+import { ModalProps } from '../modal/modal.component';
 import {
   PopoverView,
   PopoverViewElement,
@@ -21,19 +27,13 @@ import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
-import {
-  MeasureElement,
-  MeasuringElement,
-} from '../measure/measure.component';
-import { ModalProps } from '../modal/modal.component';
-import {
-  Frame,
-  Point,
-} from '../measure/type';
 
-export interface PopoverProps extends PopoverViewProps, ModalProps {
-  content: React.ReactElement;
-  children: React.ReactElement;
+type PopoverModalProps = Overwrite<ModalProps, {
+  children?: React.ReactElement;
+}>;
+
+export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
+  anchor: RenderProp;
   fullWidth?: boolean;
 }
 
@@ -41,48 +41,51 @@ export type PopoverElement = React.ReactElement<PopoverProps>;
 
 interface State {
   childFrame: Frame;
-  contentFrame: Frame;
+  anchorFrame: Frame;
   forceMeasure: boolean;
 }
 
-const POINT_OUTSCREEN: Point = new Point(-999, -999);
-
 /**
- * Displays content in a Modal positioned relative to child component.
- * Supports automatic positioning.
+ * Displays a content positioned relative to another view.
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets `content` element visible.
+ * @method {() => void} show - Sets `content` component visible.
  *
- * @method {() => void} hide - Sets `content` element invisible.
+ * @method {() => void} hide - Sets `content` component invisible.
  *
- * @property {boolean} visible - Determines whether popover is visible or not.
+ * @property {boolean} visible - Whether content component is visible.
+ * Defaults to false.
  *
- * @property {ReactElement} content - Determines the content of the popover.
+ * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
- * @property {ReactElement} children - Determines the element "above" which popover will be shown.
+ * @property {ReactElement} children - A component displayed within the popover.
  *
- * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
+ * @property {() => void} onBackdropPress - Called when popover is visible and the underlying view was touched.
+ * Useful when needed to close the modal on outside touches.
+ *
+ * @property {boolean} fullWidth - Whether a content component should take the width of `anchor`.
+ *
+ * @property {string | PopoverPlacement} placement - Position of the content component relative to the `anchor`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
- * Default is `bottom`.
- * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ * Defaults to *bottom*.
  *
- * @property {boolean} fullWidth - Determines whether content element should have same width as child element.
- *
- * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
- *
- * @property {() => void} onBackdropPress - Determines component's behavior when the user is
- * tapping on back-drop.
+ * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example PopoverSimpleUsage
+ * Popover accepts it's content as child element and is displayed relative to `anchor` view.
  *
  * @overview-example PopoverPlacement
+ * By default, it is displayed to the bottom of `anchor` view, but it is configurable with `placement` property.
+ *
+ * @overview-example PopoverFullWidth
+ * Popover may take the full width of the anchor view by configuring `fullWidth` property.
  *
  * @overview-example PopoverStyledBackdrop
+ * To style the underlying view, `backdropStyle` property may be used.
  */
 export class Popover extends React.Component<PopoverProps, State> {
 
@@ -92,12 +95,12 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   public state: State = {
     childFrame: Frame.zero(),
-    contentFrame: Frame.zero(),
+    anchorFrame: Frame.zero(),
     forceMeasure: false,
   };
 
   private modalId: string;
-  private contentPosition: Point = POINT_OUTSCREEN;
+  private contentPosition: Point = Point.outscreen();
   private placementService: PopoverPlacementService = new PopoverPlacementService();
 
   private actualPlacement: PopoverPlacement = this.preferredPlacement;
@@ -113,7 +116,10 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   private get backdropConfig() {
     const { onBackdropPress, backdropStyle } = this.props;
-    return { onBackdropPress, backdropStyle };
+    return {
+      onBackdropPress,
+      backdropStyle,
+    };
   }
 
   public show = (): void => {
@@ -131,7 +137,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     }
 
     if (this.modalId && !this.props.visible) {
-      this.contentPosition = POINT_OUTSCREEN;
+      this.contentPosition = Point.outscreen();
       this.hide();
     }
   }
@@ -153,10 +159,10 @@ export class Popover extends React.Component<PopoverProps, State> {
     }
   };
 
-  private onContentMeasure = (contentFrame: Frame): void => {
-    this.state.contentFrame = contentFrame;
+  private onContentMeasure = (anchorFrame: Frame): void => {
+    this.state.anchorFrame = anchorFrame;
 
-    const placementOptions: PlacementOptions = this.findPlacementOptions(contentFrame, this.state.childFrame);
+    const placementOptions: PlacementOptions = this.findPlacementOptions(anchorFrame, this.state.childFrame);
     this.actualPlacement = this.placementService.find(this.preferredPlacement, placementOptions);
 
     const displayFrame: Frame = this.actualPlacement.frame(placementOptions);
@@ -173,7 +179,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   };
 
   private renderContentElement = (): React.ReactElement => {
-    const contentElement: React.ReactElement = this.props.content;
+    const contentElement: React.ReactElement = this.props.children;
     const fullWidthStyle = { width: this.state.childFrame.size.width };
 
     return React.cloneElement(contentElement, {
@@ -205,7 +211,7 @@ export class Popover extends React.Component<PopoverProps, State> {
       <MeasureElement
         force={this.state.forceMeasure}
         onMeasure={this.onChildMeasure}>
-        {this.props.children}
+        {this.props.anchor()}
       </MeasureElement>
     );
   }

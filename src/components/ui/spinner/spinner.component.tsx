@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Animated,
@@ -7,15 +13,31 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  EvaSize,
+  EvaStatus,
+  Size,
+  Overwrite,
+} from '../../devsupport';
+import {
   styled,
   StyledComponentProps,
-  StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 import {
   SpinnerAnimation,
   SpinnerAnimationStyle,
 } from './animation';
-import { Size } from '../measure/type';
+
+type SpinnerStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export interface SpinnerProps extends ViewProps, SpinnerStyledProps {
+  animating?: boolean;
+  status?: EvaStatus;
+  size?: EvaSize;
+}
+
+export type SpinnerElement = React.ReactElement<SpinnerProps>;
 
 interface ArcElementStyle {
   container: ViewStyle;
@@ -23,40 +45,40 @@ interface ArcElementStyle {
   overflow?: ViewStyle;
 }
 
-export interface SpinnerProps extends StyledComponentProps, ViewProps {
-  animating?: boolean;
-  size?: string;
-  status?: string;
-}
-
-export type SpinnerElement = React.ReactElement<SpinnerProps>;
-
 /**
- * Styled `Spinner` component. Designed to be used as `ActivityIndicator` component
+ * Displays a loading state of a page or a section.
  *
  * @extends React.Component
  *
- * @property {boolean} animating - Determines whether component is animating. Default is `true`.
+ * @property {boolean} animating - Whether component is animating.
+ * Default is *true*.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `primary`.
+ * Defaults to *primary*.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {string} size - Determines the size of the component.
+ * @property {string} size - Size of the component.
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Default is `medium`.
+ * Defaults to *medium*.
  *
  * @overview-example SpinnerSimpleUsage
+ * Default Spinner status is `primary` and size is `medium`.
  *
  * @overview-example SpinnerSizes
+ * To resize Spinner, a `size` property may be used.
  *
  * @overview-example SpinnerStatuses
+ * A color can be changed with `status` property
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
+ *
+ * @overview-example SpinnerTheming
+ * Styling of Spinner is possible with [configuring a custom theme](guides/branding).
  *
  * @example SpinnerDataLoading
  */
-export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
-
-  static styledComponentName: string = 'Spinner';
+@styled('Spinner')
+export class Spinner extends React.PureComponent<SpinnerProps> {
 
   static defaultProps: Partial<SpinnerProps> = {
     animating: true,
@@ -65,7 +87,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
   private animation: SpinnerAnimation = new SpinnerAnimation(this.containerSize.height);
 
   private get containerSize(): Size {
-    const { width, height } = StyleSheet.flatten([this.props.themedStyle, this.props.style]);
+    const { width, height } = StyleSheet.flatten([this.props.eva.style, this.props.style]);
     // @ts-ignore: width and height are restricted to be a number
     return new Size(width, height);
   }
@@ -100,7 +122,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
     this.animation.stop();
   };
 
-  private getComponentStyle = (source: SpinnerAnimationStyle): StyleType => {
+  private getComponentStyle = (source: SpinnerAnimationStyle) => {
     const start: ArcElementStyle = {
       container: source.container,
       arc: source.start,
@@ -119,11 +141,11 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
     const arcSize: Size = new Size(size.width, size.height / 2);
 
     return (
-      <Animated.View style={[style.container, styles.absolute, size]}>
+      <Animated.View style={[StyleSheet.absoluteFill, style.container, size]}>
         <View style={[styles.noOverflow, style.overflow, arcSize]}>
           <Animated.View style={[style.arc, size]}>
             <View style={[styles.noOverflow, arcSize]}>
-              <View style={[this.props.themedStyle, this.props.style]}/>
+              <View style={[this.props.eva.style, this.props.style]}/>
             </View>
           </Animated.View>
         </View>
@@ -133,22 +155,19 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
 
   public render(): React.ReactElement<ViewProps> {
     const containerSize: Size = this.containerSize;
-    const { start, end } = this.getComponentStyle(this.animation.toProps());
+    const evaStyle = this.getComponentStyle(this.animation.toProps());
 
     return (
       <View style={containerSize}>
-        {this.renderArcElement(start, containerSize)}
-        {this.renderArcElement(end, containerSize)}
+        {this.renderArcElement(evaStyle.start, containerSize)}
+        {this.renderArcElement(evaStyle.end, containerSize)}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  absolute: StyleSheet.absoluteFillObject,
   noOverflow: {
     overflow: 'hidden',
   },
 });
-
-export const Spinner = styled<SpinnerProps>(SpinnerComponent);

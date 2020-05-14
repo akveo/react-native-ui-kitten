@@ -1,9 +1,6 @@
 import React from 'react';
-import {
-  Tab,
-  TabView,
-  Text,
-} from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
+import { Layout, Tab, TabView, Text } from '@ui-kitten/components';
 
 export const TabViewLazyLoadingShowcase = () => {
 
@@ -15,16 +12,30 @@ export const TabViewLazyLoadingShowcase = () => {
     <TabView
       selectedIndex={selectedIndex}
       shouldLoadComponent={shouldLoadComponent}
-      onSelect={setSelectedIndex}>
+      onSelect={index => setSelectedIndex(index)}>
       <Tab title='USERS'>
-        <Text>List of users.</Text>
+        <Layout style={styles.tabContainer}>
+          <Text category='h5'>USERS</Text>
+        </Layout>
       </Tab>
       <Tab title='ORDERS'>
-        <Text>List of orders.</Text>
+        <Layout style={styles.tabContainer}>
+          <Text category='h5'>ORDERS</Text>
+        </Layout>
       </Tab>
       <Tab title='TRANSACTIONS'>
-        <Text>ORDERS</Text>
+        <Layout style={styles.tabContainer}>
+          <Text category='h5'>TRANSACTIONS</Text>
+        </Layout>
       </Tab>
     </TabView>
   );
 };
+
+const styles = StyleSheet.create({
+  tabContainer: {
+    height: 64,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

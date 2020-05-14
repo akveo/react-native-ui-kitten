@@ -8,15 +8,13 @@
     "jsx": "react",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
     "sourceMap": true,
     "declaration": true,
     "skipLibCheck": true,
     "paths": {
       "@ui-kitten/*": [
         "./src/*"
-      ],
-      "@kitten/*": [
-        "./src/components/*"
       ]
     }
   },
@@ -29,7 +27,6 @@
     "./src/template-ts",
     "./src/showcases",
     "./**/*.spec.ts",
-    "./**/*.spec.tsx",
-    "./**/*.snap"
+    "./**/*.spec.tsx"
   ]
 }

@@ -12,48 +12,69 @@ import {
   StyleSheet,
 } from 'react-native';
 import {
+  EvaSize,
+  Overwrite,
+} from '../../devsupport';
+import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 
-export interface AvatarProps extends StyledComponentProps, ImageProps {
-  shape?: string;
-  size?: string;
-}
+type AvatarStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export type AvatarProps<P = ImageProps> = AvatarStyledProps & P & {
+  shape?: 'round' | 'rounded' | 'square' | string;
+  size?: EvaSize;
+  /**
+   * We use `any` here to prevent ts complains for most of the libraries that use
+   * React.ComponentType & SomeType to describe static / instance methods for the components.
+   */
+  ImageComponent?: React.ComponentType<P> & any;
+};
 
 export type AvatarElement = React.ReactElement<AvatarProps>;
 
 /**
- * `Avatar` is a styled `Image` component.
+ * An Image with additional styles provided by Eva.
  *
  * @extends React.Component
  *
- * @property {string} shape - Determines the shape of the component.
+ * @property {string} shape - Shape of the component.
  * Can be `round`, `rounded` or `square`.
- * Default is `round`.
+ * Defaults to *round*.
  *
- * @property {string} size - Determines the size of the component.
+ * @property {string} size - Size of the component.
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Default is `medium`.
+ * Defaults to *medium*.
  *
- * @property {ImageProps} ...ImageProps - Any props applied to Image component.
+ * @property {React.ComponentType} ImageComponent - A component to render.
+ * Defaults to Image.
+ *
+ * @property {P = ImageProps} ...P - Any props that may be accepted by the component passed to ImageComponent property.
  *
  * @overview-example AvatarSimpleUsage
  *
  * @overview-example AvatarSize
+ * Avatar can be resized by passing `size` property.
  *
  * @overview-example AvatarShape
+ * Also, it may have different shape configurable with `shape` property.
  *
- * @example AvatarRemoteImages
- *
- * @example AvatarInlineStyling
+ * @overview-example AvatarImageComponent
+ * Avatar may have different root component to render images.
+ * This might be helpful when needed to improve image loading with 3rd party image libraries.
  */
-export class AvatarComponent extends React.Component<AvatarProps> {
+@styled('Avatar')
+export class Avatar extends React.Component<AvatarProps> {
 
-  static styledComponentName: string = 'Avatar';
+  static defaultProps: Partial<AvatarProps> = {
+    ImageComponent: Image,
+  };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { roundCoefficient, ...containerParameters } = source;
 
     // @ts-ignore: avoid checking `containerParameters`
@@ -71,17 +92,21 @@ export class AvatarComponent extends React.Component<AvatarProps> {
     };
   };
 
-  public render(): React.ReactElement<ImageProps> {
-    const { themedStyle, ...restProps } = this.props;
-    const componentStyle: ImageStyle = this.getComponentStyle(themedStyle);
+  public render(): React.ReactElement {
+    const { eva, ImageComponent, ...imageProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <Image
-        {...restProps}
-        style={componentStyle}
+      <ImageComponent
+        {...imageProps}
+        style={[styles.image, evaStyle]}
       />
     );
   }
 }
 
-export const Avatar = styled<AvatarProps>(AvatarComponent);
+const styles = StyleSheet.create({
+  image: {
+    overflow: 'hidden',
+  },
+});

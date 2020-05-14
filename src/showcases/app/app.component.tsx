@@ -1,5 +1,6 @@
 import React from 'react';
 import { Updates } from 'expo';
+import { enableScreens } from 'react-native-screens';
 import * as eva from '@eva-design/eva';
 import * as material from '@eva-design/material';
 import {
@@ -27,6 +28,8 @@ const storedMapping: string = localStorage.getItem('mapping');
 const isMappingKey: boolean = Object.keys(mappings).includes(storedMapping);
 
 const mapping: AppMapping = isMappingKey ? (storedMapping as AppMapping) : AppMapping.eva;
+
+enableScreens();
 
 export default (): React.ReactElement => {
 

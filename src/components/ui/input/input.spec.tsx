@@ -1,279 +1,201 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
   ImageProps,
-  ImageSourcePropType,
+  Text,
   TextInput,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import {
   fireEvent,
   render,
-  RenderAPI,
-  shallow,
 } from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-  StyleType,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Input,
   InputProps,
 } from './input.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
 
-const Mock = (props?: InputProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
+describe('@input: component checks', () => {
+
+  const TestInput = React.forwardRef((props: InputProps, ref: React.Ref<Input>) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={theme}>
-      <Input {...props}/>
+      theme={light}>
+      <Input ref={ref} {...props}/>
     </ApplicationProvider>
-  );
-};
+  ));
 
-const renderComponent = (props?: InputProps): RenderAPI => {
-  return render(
-    <Mock {...props} />,
-  );
-};
-
-const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-
-describe('@input: native methods', () => {
-
-  const RefMock = React.forwardRef((props: InputProps, ref: React.Ref<TextInput>) => {
-    return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={theme}>
-        <Input ref={ref} {...props}/>
-      </ApplicationProvider>
-    );
-  });
-
-  it('* focus', () => {
-    const componentRef: React.RefObject<TextInput> = React.createRef();
+  it('should be able to call focus via ref', () => {
+    const componentRef: React.RefObject<Input> = React.createRef();
     render(
-      <RefMock ref={componentRef}/>,
+      <TestInput ref={componentRef}/>,
     );
 
     expect(componentRef.current.focus).toBeTruthy();
   });
 
-  it('* blur', () => {
-    const componentRef: React.RefObject<TextInput> = React.createRef();
+  it('should be able to call blur via ref', () => {
+    const componentRef: React.RefObject<Input> = React.createRef();
     render(
-      <RefMock ref={componentRef}/>,
+      <TestInput ref={componentRef}/>,
     );
 
     expect(componentRef.current.blur).toBeTruthy();
   });
 
-  it('* isFocused', () => {
-    const componentRef: React.RefObject<TextInput> = React.createRef();
+  it('should be able to call isFocused via ref', () => {
+    const componentRef: React.RefObject<Input> = React.createRef();
     render(
-      <RefMock ref={componentRef}/>,
+      <TestInput ref={componentRef}/>,
     );
 
     expect(componentRef.current.isFocused).toBeTruthy();
   });
 
-  it('* clear', () => {
-    const componentRef: React.RefObject<TextInput> = React.createRef();
+  it('should be able to call clear via ref', () => {
+    const componentRef: React.RefObject<Input> = React.createRef();
     render(
-      <RefMock ref={componentRef}/>,
+      <TestInput ref={componentRef}/>,
     );
 
     expect(componentRef.current.clear).toBeTruthy();
   });
-});
 
-describe('@input: matches snapshot', () => {
+  it('should set TextInput editable to false by passing disabled prop', () => {
+    const component = render(
+      <TestInput disabled={true}/>,
+    );
 
-  describe('* interaction', () => {
-
-    it('* stateless', () => {
-      const component: RenderAPI = renderComponent();
-
-      const { output } = shallow(component.getByType(Input));
-
-      expect(output).toMatchSnapshot();
-    });
-
+    const textInput = component.queryByType(TextInput);
+    expect(textInput.props.editable).toEqual(false);
   });
 
-  describe('* appearance', () => {
+  it('should render placeholder', () => {
+    const component = render(
+      <TestInput placeholder='I love Babel'/>,
+    );
 
-    it('* icon', () => {
-      const icon = (style: StyleType): React.ReactElement<ImageProps> => {
-        return (
-          <Image
-            style={style}
-            source={iconSource}
-          />
-        );
-      };
-
-      const component: RenderAPI = renderComponent({ icon });
-
-      const { output } = shallow(component.getByType(Input));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* label + caption', () => {
-      const captionIcon = (style: StyleType): React.ReactElement<ImageProps> => {
-        return (
-          <Image
-            style={style}
-            source={iconSource}
-          />
-        );
-      };
-      const label: string = 'Label';
-      const caption: string = 'Caption Text';
-
-      const component: RenderAPI = renderComponent({
-        label,
-        caption,
-        captionIcon,
-      });
-
-      const { output } = shallow(component.getByType(Input));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* text styled', () => {
-      const captionIcon = (style: StyleType): React.ReactElement<ImageProps> => {
-        return (
-          <Image
-            style={style}
-            source={iconSource}
-          />
-        );
-      };
-      const label: string = 'Label';
-      const caption: string = 'Caption Text';
-
-      const component: RenderAPI = renderComponent({
-        label,
-        caption,
-        captionIcon,
-        textStyle: {
-          fontSize: 24,
-          lineHeight: 26,
-        },
-        labelStyle: { color: 'blue' },
-        captionTextStyle: {
-          letterSpacing: 8,
-          fontFamily: 'opensans-bold',
-        },
-      });
-
-      const { output } = shallow(component.getByType(Input));
-
-      expect(output).toMatchSnapshot();
-    });
-
+    expect(component.queryByPlaceholder('I love Babel')).toBeTruthy();
   });
 
-});
+  it('should render text passed to label prop', () => {
+    const component = render(
+      <TestInput label='I love Babel'/>,
+    );
 
-interface InputListenerState {
-  text: string;
-}
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
 
-class InputListener extends React.Component<InputProps, InputListenerState> {
+  it('should render component passed to label prop', () => {
+    const component = render(
+      <TestInput label={props => <Text {...props}>I love Babel</Text>}/>,
+    );
 
-  public state: InputListenerState = {
-    text: '',
-  };
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
 
-  private onChangeText = (text: string) => {
-    this.setState({ text });
-  };
+  it('should render text passed to caption prop', () => {
+    const component = render(
+      <TestInput caption='I love Babel'/>,
+    );
 
-  public render(): React.ReactNode {
-    return (
-      <Mock
-        {...this.props}
-        value={this.state.text}
-        onChangeText={this.onChangeText}
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render component passed to caption prop', () => {
+    const component = render(
+      <TestInput caption={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render component passed to captionIcon prop', () => {
+    const CaptionIcon = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
       />
     );
-  }
-}
 
-describe('@input: component checks', () => {
+    const component = render(
+      <TestInput captionIcon={CaptionIcon}/>,
+    );
 
-  it('* emits onChangeText', () => {
-    const onChangeText = jest.fn();
+    const captionIcon = component.queryByType(Image);
 
-    const component: RenderAPI = renderComponent({ onChangeText });
-
-    fireEvent.changeText(component.getByType(TextInput), 'it works!');
-
-    expect(onChangeText).toBeCalledWith('it works!');
+    expect(captionIcon).toBeTruthy();
+    expect(captionIcon.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
   });
 
-  it('* emits onFocus', () => {
+  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestInput
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should request text change', () => {
+    const onChangeText = jest.fn();
+    const component = render(
+      <TestInput onChangeText={onChangeText}/>,
+    );
+
+    fireEvent.changeText(component.queryByType(TextInput), 'I love Babel');
+    expect(onChangeText).toBeCalledWith('I love Babel');
+  });
+
+  it('should call onFocus', () => {
     const onFocus = jest.fn();
+    const component = render(
+      <TestInput onFocus={onFocus}/>,
+    );
 
-    const component: RenderAPI = renderComponent({ onFocus });
-
-    fireEvent(component.getByType(TextInput), 'focus');
-
+    fireEvent(component.queryByType(TextInput), 'focus');
     expect(onFocus).toBeCalled();
   });
 
-  it('* emits onBlur', () => {
+  it('should call onBlur', () => {
     const onBlur = jest.fn();
-
-    const component: RenderAPI = renderComponent({ onBlur });
-
-    fireEvent(component.getByType(TextInput), 'blur');
-
-    expect(onBlur).toBeCalled();
-  });
-
-  it('* emits onIconPress', () => {
-    const icon = (style: StyleType): React.ReactElement<ImageProps> => {
-      return (
-        <Image
-          style={style}
-          source={iconSource}
-        />
-      );
-    };
-
-    const onIconPress = jest.fn();
-
-    const component: RenderAPI = renderComponent({ icon, onIconPress });
-
-    fireEvent.press(component.getByType(TouchableWithoutFeedback));
-
-    expect(onIconPress).toBeCalled();
-  });
-
-  it('* changes text', () => {
-    const component: RenderAPI = render(
-      <InputListener/>,
+    const component = render(
+      <TestInput onBlur={onBlur}/>,
     );
 
-    const input: ReactTestInstance = component.getByType(TextInput);
-
-    fireEvent.changeText(input, 'it works!');
-
-    const updatedInput: ReactTestInstance = component.getByType(TextInput);
-
-    expect(updatedInput.props.value).toEqual('it works!');
+    fireEvent(component.queryByType(TextInput), 'blur');
+    expect(onBlur).toBeCalled();
   });
-
 });

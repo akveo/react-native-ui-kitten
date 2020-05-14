@@ -1,11 +1,13 @@
 # Icon Packages
 
-Starting from UI Kitten 4.2, we introduce an icons module built on top of <a href="https://hubs.ly/H0n6Df50" target="_blank">Eva Icons</a>. Eva Icons is a pack of beautifully crafted Open Source icons for common actions and items. If you're not interested in using Eva Icons, learn how to integrate [3rd party Icon packages](guides/icon-packages#3rd-party-icon-packages).
+<a href="https://hubs.ly/H0n6Df50" target="_blank">Eva Icons</a> is a pack of beautifully crafted Open Source icons for common actions and items.
+UI Kitten has its own module to run runs it in React Native, adopting for better usage with UI Kitten components.
+If you're not interested in using Eva Icons, learn how to integrate [3rd party Icon packages](guides/icon-packages#3rd-party-icon-packages).
 
-<div class="note note-info">
+<div class="note note-warning">
   <div class="note-title">NOTE</div>
   <div class="note-body">
-  You might not be interested in this guide, if you have initialized the app using UI Kitten template since it already includes Eva Icons. Anyway, if you want to know how to use 3rd party icon packages like `react-native-vector-icons`, use this guide to make it work in your app.
+  You might not be interested in this guide, if you have initialized the app using UI Kitten template since it already includes Eva Icons.
   </div>
 </div>
 
@@ -17,16 +19,30 @@ Let's start with installing Eva Icons and it's required dependencies.
 
 ```bash
 npm i @ui-kitten/eva-icons react-native-svg
+
+// Using Yarn?
+// yarn add @ui-kitten/eva-icons react-native-svg
 ```
 
-We also need to complete installation for iOS by linking react-native-svg.
+<div class="note note-warning">
+  <div class="note-body">If you use Expo, you should use `expo install react-native-svg` to install svg package.</div>
+</div>
+
+Within non-expo environment, we also need to complete installation for iOS by linking react-native-svg.
 
 ```bash
 cd ios && pod install
 ```
 
 Now you should have all in place. We need to restart the bundler to apply the changes.
-Go back to the root application directory, shut down the current bundler process and call `npm start -- --reset-cache`.
+Go back to the root application directory, shut down the current bundler and restart with clearing cache.
+
+```bash
+npm start -- --reset-cache
+
+// Using Expo?
+// expo start -c
+```
 
 ### Register Icons
 
@@ -34,26 +50,24 @@ Open `App.js` and paste the code below.
 
 ```jsx
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { mapping, light as lightTheme } from '@eva-design/eva';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text catetory='h1'>HOME</Text>
+    <Text category='h1'>HOME</Text>
   </Layout>
 );
 
-const App = () => (
-  <React.Fragment>
+export default () => (
+  <>
     <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <HomeScreen />
     </ApplicationProvider>
-  </React.Fragment>
+  </>
 );
-
-export default App;
 ```
 
 That's it. Let's see how it can be used in the project.
@@ -64,12 +78,12 @@ That's it. Let's see how it can be used in the project.
 import React from 'react';
 import { Button, Icon } from '@ui-kitten/components';
 
-export const FacebookIcon = (style) => (
-  <Icon name='facebook' {...style} />
+const FacebookIcon = (props) => (
+  <Icon name='facebook' {...props} />
 );
 
 export const LoginButton = () => (
-  <Button icon={FacebookIcon}>Login with Facebook</Button>
+  <Button accessoryLeft={FacebookIcon}>Login with Facebook</Button>
 );
 ```
 
@@ -121,6 +135,7 @@ function FeatherIcon({ name, style }) {
   return (
     <Icon name={name} size={height} color={tintColor} style={iconStyle} />
   );
+}
 ```
 
 With the code above we create a Proxy object, that will direct requested icon to render `FeatherIcon` by requested name.
@@ -131,26 +146,24 @@ Open `App.js` and paste the code below.
 
 ```jsx
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
 import { FeatherIconsPack } from './feather-icons';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text catetory='h1'>HOME</Text>
+    <Text category='h1'>HOME</Text>
   </Layout>
 );
 
-const App = () => (
-  <React.Fragment>
+export default () => (
+  <>
     <IconRegistry icons={FeatherIconsPack} />
-    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <HomeScreen />
     </ApplicationProvider>
-  <React.Fragment />
+  </>
 );
-
-export default App;
 ```
 
 That's it. Let's see how it can be used in the project.
@@ -161,12 +174,12 @@ That's it. Let's see how it can be used in the project.
 import React from 'react';
 import { Button, Icon } from '@ui-kitten/components';
 
-export const FacebookIcon = (style) => (
-  <Icon name='facebook' {...style} />
+export const FacebookIcon = (props) => (
+  <Icon name='facebook' {...props} />
 );
 
 export const LoginButton = () => (
-  <Button icon={FacebookIcon}>Login with Facebook</Button>
+  <Button accessoryLeft={FacebookIcon}>Login with Facebook</Button>
 );
 ```
 
@@ -218,27 +231,25 @@ By passing an array of icon packs, we can register it in the application:
 
 ```jsx
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
 import { FeatherIconsPack } from './feather-icons'; // <-- Import Feather icons
 import { MaterialIconsPack } from './material-icons'; // <-- Import Material icons
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text catetory='h1'>HOME</Text>
+    <Text category='h1'>HOME</Text>
   </Layout>
 );
 
-const App = () => (
-  <React.Fragment>
+export default () => (
+  <>
     <IconRegistry icons={[FeatherIconsPack, MaterialIconsPack]}/>
-    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <HomeScreen />
     </ApplicationProvider>
-  </React.Fragment>
+  </>
 );
-
-export default App;
 ```
 
 ### Usage
@@ -249,12 +260,12 @@ When using multiple icon packages, you're able to choose an icon library with si
 import React from 'react';
 import { Button, Icon } from '@ui-kitten/components';
 
-export const HomeIcon = (style) => (
-  <Icon {...style} name='home' pack='material' />
+export const HomeIcon = (props) => (
+  <Icon {...props} name='home' pack='material' />
 );
 
 export const HomeButton = () => (
-  <Button icon={HomeIcon}>Home</Button>
+  <Button accessoryLeft={HomeIcon}>Home</Button>
 );
 ```
 
@@ -281,8 +292,8 @@ import React from 'react';
 import { Image } from 'react-native';
 
 const IconProvider = (source) => ({
-  toReactElement: ({ animation, ...style }) => (
-    <Image style={style} source={source}/>
+  toReactElement: ({ animation, ...props }) => (
+    <Image {...props} source={source}/>
   ),
 });
 
@@ -302,27 +313,25 @@ By passing an array of icon packs, we can register it in the application:
 
 ```jsx
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { mapping, light as lightTheme } from '@eva-design/eva';
 import { AssetIconsPack } from './asset-icons'; // <-- Import Feather icons
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text catetory='h1'>HOME</Text>
+    <Text category='h1'>HOME</Text>
   </Layout>
 );
 
-const App = () => (
-  <React.Fragment>
+export default () => (
+  <>
     <IconRegistry icons={[EvaIconsPack, AssetIconsPack]}/>
-    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <HomeScreen />
     </ApplicationProvider>
-  </React.Fragment>
+  </>
 );
-
-export default App;
 ```
 
 ### Usage
@@ -333,12 +342,12 @@ When using multiple icon packages, you're able to choose an icon library with si
 import React from 'react';
 import { Button, Icon } from '@ui-kitten/components';
 
-export const GithubIcon = (style) => (
-  <Icon {...style} name='github' pack='assets' />
+export const GithubIcon = (props) => (
+  <Icon {...props} name='github' pack='assets' />
 );
 
 export const GithubButton = () => (
-  <Button icon={GithubIcon}>View Github</Button>
+  <Button accessoryLeft={GithubIcon}>View Github</Button>
 );
 ```
 

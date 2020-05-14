@@ -1,9 +1,13 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Animated,
-  StyleProp,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 import {
   getIconAnimation,
@@ -30,10 +34,7 @@ export type IconProps<T = WrappedElementProps> = T & {
 export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<T>>;
 
 /**
- * `Icon` component with animation support. Allows to render any ReactElement registered for a specific name.
- * Starting from UI Kitten 4.2, there is `@ui-kitten/eva-icons` module
- * that renders any icon from eva-icons package in `svg` format.
- * It allows easily use icons in any component that has `icon` prop
+ * Animated Icon component.
  *
  * @extends React.Component
  *
@@ -41,27 +42,39 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
  *
  * @method {() => void} stopAnimation - Toggle animation to stop.
  *
- * @property {string} name - Name of registered icon.
+ * @property {string} name - A name of icon registered in a specific pack.
  *
- * @property {string} pack - Name of icon pack that is able to provide an icon for specified name.
+ * @property {string} pack - A name of icon pack registered in IconRegistry that is able to provide
+ * an icon for a given name.
  *
- * @property {string} animation - Animation name. Available `zoom`, `pulse` and `shake`. Default is `zoom`.
+ * @property {string} animation - Animation name. Can be `zoom`, `pulse` and `shake`.
+ * Defaults to *zoom*.
  *
- * @property {AnimationConfig} animationConfig - Determines animation config. Extends `Animated.AnimationConfig`.
+ * @property {AnimationConfig} animationConfig - Animation config.
+ *
+ * @property {any} ...props - Accepts any props
+ * depending on the component registered in IconRegistry for a given `name` property.
+ * In case of using `@ui-kitten/eva-icons` package, Icon accepts any props for react-native-svg component.
  *
  * @overview-example IconSimpleUsage
+ * Icon component provides a simple way to render image by requesting it from an icon set.
+ * Icons come with [additional packages](guides/icon-packages),
+ * that should be configured before using component.
+ * We recommend using [Eva Icons](https://akveo.github.io/eva-icons),
+ * to provide a full consistency with Eva Design System.
  *
- * @overview-example IconWithinButton
- *
- * @overview-example IconWithinInput
- *
- * @overview-example IconExternalSource
+ * @overview-example IconWithinComponents
+ * All UI Kitten components that may contain inner views have support for Eva Icons.
+ * When using icons as nested components, icon styles are handled by Eva.
  *
  * @overview-example IconAnimation
+ * Icons have 3 types of animations: `zoom`, `pulse` and `shake`.
  *
- * @example IconAnimationInfinite
+ * @overview-example IconTheming
+ * In particular cases, Icon should be styled in a different way.
+ * In case of using Eva Icons it renders [svg images](https://github.com/react-native-community/react-native-svg).
  *
- * @example IconInlineStyling
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 export class Icon<T> extends React.Component<IconProps<T>> {
 
@@ -88,17 +101,13 @@ export class Icon<T> extends React.Component<IconProps<T>> {
     this.animation.stop();
   };
 
-  private getComponentStyle = (): StyleProp<ViewStyle> => {
-    return this.animation.toProps();
-  };
-
   public render(): React.ReactElement<ViewProps> {
-    const { name, pack, ...restProps } = this.props;
+    const { name, pack, animation, ...iconProps } = this.props;
     const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
 
     return (
-      <Animated.View {...this.getComponentStyle()}>
-        {registeredIcon.icon.toReactElement(restProps as T)}
+      <Animated.View {...this.animation.toProps()}>
+        {registeredIcon.icon.toReactElement(iconProps as T)}
       </Animated.View>
     );
   }

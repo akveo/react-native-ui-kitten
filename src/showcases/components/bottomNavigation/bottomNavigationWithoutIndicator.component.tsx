@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  BottomNavigation,
-  BottomNavigationTab,
-} from '@ui-kitten/components';
+import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 
 export const BottomNavigationWithoutIndicatorShowcase = () => {
 
@@ -12,7 +9,7 @@ export const BottomNavigationWithoutIndicatorShowcase = () => {
     <BottomNavigation
       appearance='noIndicator'
       selectedIndex={selectedIndex}
-      onSelect={setSelectedIndex}>
+      onSelect={index => setSelectedIndex(index)}>
       <BottomNavigationTab title='USERS'/>
       <BottomNavigationTab title='ORDERS'/>
       <BottomNavigationTab title='TRANSACTIONS'/>

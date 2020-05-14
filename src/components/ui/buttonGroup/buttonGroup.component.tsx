@@ -12,62 +12,78 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  ChildrenWithProps,
+  EvaSize,
+  EvaStatus,
+  Overwrite,
+} from '../../devsupport';
+import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import { ButtonElement } from '../button/button.component';
+} from '../../theme';
+import {
+  ButtonElement,
+  ButtonProps,
+} from '../button/button.component';
 
-type ChildrenProp = ButtonElement | ButtonElement[];
+type ButtonGroupStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'filled' | 'outline' | string;
+}>;
 
-export interface ButtonGroupProps extends StyledComponentProps, ViewProps {
-  size?: string;
-  status?: string;
-  children: ChildrenProp;
+export interface ButtonGroupProps extends ViewProps, ButtonGroupStyledProps {
+  children: ChildrenWithProps<ButtonProps>;
+  status?: EvaStatus;
+  size?: EvaSize;
 }
 
 export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
 
 /**
- * Renders a group of `Buttons`.
+ * A group of buttons with additional styles provided by Eva.
+ * ButtonGroup should contain Button components to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
+ * @property {ReactElement<ButtonProps> | ReactElement<ButtonProps>[]} children -
+ * Buttons to be rendered within the group.
+ *
+ * @property {string} appearance - Appearance of the component.
  * Can be `filled` or `outline`.
- * Default is `filled`.
+ * Defaults to *filled*.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `primary`.
+ * Defaults to *primary*.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {string} size - Determines the size of the component.
+ * @property {string} size - Size of the component.
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Default is `medium`.
- *
- * @property {{ReactElement<ButtonProps> | ReactElement<ButtonProps>[]} children - Determines buttons in group.
+ * Defaults to *medium*.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ButtonGroupSimpleUsage
+ * Button Group accepts buttons as child elements.
  *
  * @overview-example ButtonGroupAppearance
+ * Appearance passed to group is also applied for grouped buttons.
  *
  * @overview-example ButtonGroupStatus
+ * Same for status.
  *
  * @overview-example ButtonGroupSize
+ * And size.
  *
  * @overview-example ButtonGroupOutline
  *
  * @overview-example ButtonGroupWithIcons
- *
- * @example ButtonGroupInlineStyling
  */
-class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 
-  static styledComponentName: string = 'ButtonGroup';
+@styled('ButtonGroup')
+export class ButtonGroup extends React.Component<ButtonGroupProps> {
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { dividerBackgroundColor, dividerWidth, ...containerParameters } = source;
 
     return {
@@ -119,23 +135,21 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
     });
   };
 
-  private renderButtonElements = (source: ChildrenProp, style: StyleType): ButtonElement[] => {
+  private renderButtonElements = (source: ChildrenWithProps<ButtonProps>, style: StyleType): ButtonElement[] => {
     return React.Children.map(source, (element: ButtonElement, index: number): ButtonElement => {
       return this.renderButtonElement(element, index, style);
     });
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-
-    const buttonElements: ButtonElement[] = this.renderButtonElements(children, componentStyle);
+    const { eva, style, children, ...viewProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
-        {...derivedProps}
-        style={[componentStyle.container, styles.container, style]}>
-        {buttonElements}
+        {...viewProps}
+        style={[evaStyle.container, styles.container, style]}>
+        {this.renderButtonElements(children, evaStyle)}
       </View>
     );
   }
@@ -151,5 +165,3 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
 });
-
-export const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);

@@ -9,7 +9,7 @@ export const InputSimpleUsageShowcase = () => {
     <Input
       placeholder='Place your Text'
       value={value}
-      onChangeText={setValue}
+      onChangeText={nextValue => setValue(nextValue)}
     />
   );
 };

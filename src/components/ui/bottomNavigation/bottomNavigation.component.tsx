@@ -13,58 +13,69 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  ChildrenWithProps,
+  Overwrite,
+} from '../../devsupport';
+import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import { BottomNavigationTabElement } from './bottomNavigationTab.component';
+} from '../../theme';
+import {
+  BottomNavigationTabElement,
+  BottomNavigationTabProps,
+} from './bottomNavigationTab.component';
 import {
   TabIndicator,
   TabIndicatorElement,
-} from '../support/components/tabIndicator.component';
+} from '../shared/tabIndicator.component';
 
-type ChildrenProp = BottomNavigationTabElement | BottomNavigationTabElement[];
+type BottomNavigationStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | 'noIndicator' | string;
+}>;
 
-export interface BottomNavigationProps extends StyledComponentProps, ViewProps {
-  children: ChildrenProp;
+export interface BottomNavigationProps extends ViewProps, BottomNavigationStyledProps {
+  children?: ChildrenWithProps<BottomNavigationTabProps>;
   selectedIndex?: number;
-  indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
+  indicatorStyle?: StyleProp<ViewStyle>;
 }
 
 export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
 
 /**
- * `BottomNavigation` component is designed to be a Bottom Tab Bar.
- * Can be used for navigation.
+ * A bar with tabs styled by Eva.
+ * BottomNavigation should contain BottomNavigationTab components to provide a usable navigation component.
  *
  * @extends React.Component
  *
- * @property {number} selectedIndex - Determines index of the selected tab.
+ * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Tabs to be rendered within the bar.
  *
- * @property {string} appearance - Determines the appearance of the component.
+ * @property {number} selectedIndex - Index of currently selected tab.
+ *
+ * @property {(number) => void} onSelect - Called when tab is pressed.
+ *
+ * @property {string} appearance - Appearance of the component.
  * Can be `default` or `noIndicator`.
  *
- * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Determines tabs of the Bottom Navigation.
- *
- * @property {StyleProp<ViewStyle>} indicatorStyle - Determines styles of the indicator.
- *
- * @property {(index: number) => void} onSelect - Triggered on select value.
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Styles of the indicator.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example BottomNavigationSimpleUsage
+ * In basic examples, tabs are wrapped within `BottomNavigation`.
  *
  * @overview-example Using with React Navigation
+ * BottomNavigation can also be [configured with React Navigation](guides/configure-navigation)
+ * to provide a navigational component.
  *
  * ```
  * import React from 'react';
- * import { SafeAreaView } from 'react-native';
  * import { NavigationContainer } from '@react-navigation/native';
  * import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
  * import { BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
  *
- * const BottomTab = createBottomTabNavigator();
+ * const { Navigator, Screen } = createBottomTabNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -78,27 +89,20 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *   </Layout>
  * );
  *
- * const BottomTabBar = ({ navigation, state }) => {
- *
- *   const onSelect = (index) => {
- *     navigation.navigate(state.routeNames[index]);
- *   };
- *
- *   return (
- *     <SafeAreaView>
- *       <BottomNavigation selectedIndex={state.index} onSelect={onSelect}>
- *         <BottomNavigationTab title='USERS'/>
- *         <BottomNavigationTab title='ORDERS'/>
- *       </BottomNavigation>
- *     </SafeAreaView>
- *   );
- * };
+ * const BottomTabBar = ({ navigation, state }) => (
+ *   <BottomNavigation
+ *     selectedIndex={state.index}
+ *     onSelect={index => navigation.navigate(state.routeNames[index])}>
+ *     <BottomNavigationTab title='USERS'/>
+ *     <BottomNavigationTab title='ORDERS'/>
+ *   </BottomNavigation>
+ * );
  *
  * const TabNavigator = () => (
- *   <BottomTab.Navigator tabBar={props => <BottomTabBar {...props} />}>
- *     <BottomTab.Screen name='Users' component={UsersScreen}/>
- *     <BottomTab.Screen name='Orders' component={OrdersScreen}/>
- *   </BottomTab.Navigator>
+ *   <Navigator tabBar={props => <BottomTabBar {...props} />}>
+ *     <Screen name='Users' component={UsersScreen}/>
+ *     <Screen name='Orders' component={OrdersScreen}/>
+ *   </Navigator>
  * );
  *
  * export const AppNavigator = () => (
@@ -108,32 +112,41 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * );
  * ```
  *
+ * @overview-example BottomNavigationAccessories
+ * Tabs also may contain [icons](guides/icon-packages) to provide a better user interfaces.
+ *
+ * @overview-example BottomNavigationTabStyling
+ * Tabs and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { BottomNavigationTab, Text } from '@ui-kitten/components';
+ *
+ * <BottomNavigationTab
+ *   title={evaProps => <Text {...evaProps}>USERS</Text>}
+ * />
+ * ```
+ * @overview-example BottomNavigationTabTheming
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
+ *
  * @example BottomNavigationWithoutIndicator
- *
- * @overview-example BottomNavigationWithIcons
- *
- * @example BottomNavigationInlineStyling
+ * To remove indicator, `appearance` property may be used.
  */
-export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
 
-  static styledComponentName: string = 'BottomNavigation';
+@styled('BottomNavigation')
+export class BottomNavigation extends React.Component<BottomNavigationProps> {
 
   static defaultProps: Partial<BottomNavigationProps> = {
     selectedIndex: 0,
   };
 
   private onTabSelect = (index: number): void => {
-    if (this.props.onSelect && this.props.selectedIndex !== index) {
-      this.props.onSelect(index);
-    }
+    this.props.onSelect && this.props.onSelect(index);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { indicatorHeight, indicatorBackgroundColor, ...containerParameters } = source;
 
     return {
       container: containerParameters,
-      item: {},
       indicator: {
         height: indicatorHeight,
         backgroundColor: indicatorBackgroundColor,
@@ -163,13 +176,12 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     });
   };
 
-  private renderTabElements = (source: ChildrenProp): BottomNavigationTabElement[] => {
+  private renderTabElements = (source: ChildrenWithProps<BottomNavigationTabProps>): BottomNavigationTabElement[] => {
     return React.Children.map(source, this.renderTabElement);
   };
 
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const tabElements: BottomNavigationTabElement[] = this.renderTabElements(this.props.children);
-
     const hasIndicator: boolean = style.indicator.height > 0;
 
     return [
@@ -179,15 +191,14 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, ...derivedProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-
-    const [indicatorElement, ...tabElements] = this.renderComponentChildren(componentStyles);
+    const { eva, style, ...viewProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
+    const [indicatorElement, ...tabElements] = this.renderComponentChildren(evaStyle);
 
     return (
       <View
-        {...derivedProps}
-        style={[container, styles.container, style]}>
+        {...viewProps}
+        style={[evaStyle.container, styles.container, style]}>
         {indicatorElement}
         {tabElements}
       </View>
@@ -206,5 +217,3 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
-
-export const BottomNavigation = styled<BottomNavigationProps>(BottomNavigationComponent);

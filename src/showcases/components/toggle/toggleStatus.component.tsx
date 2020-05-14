@@ -1,88 +1,79 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  Layout,
-  Toggle,
-} from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Layout, Toggle } from '@ui-kitten/components';
 
-const useToggleChanges = (initialCheck = false) => {
-  const [checked, setChecked] = React.useState(initialCheck);
+const useToggleState = (initialState = false) => {
+  const [checked, setChecked] = React.useState(initialState);
 
   const onCheckedChange = (isChecked) => {
     setChecked(isChecked);
   };
 
-  return {
-    checked,
-    onChange: onCheckedChange,
-  };
+  return { checked, onChange: onCheckedChange };
 };
 
 export const ToggleStatusShowcase = () => {
 
-  const primaryToggleChanges = useToggleChanges();
-  const successToggleChanges = useToggleChanges();
-  const infoToggleChanges = useToggleChanges();
-  const warningToggleChanges = useToggleChanges();
-  const dangerToggleChanges = useToggleChanges();
-  const basicToggleChanges = useToggleChanges();
-  const controlToggleChanges = useToggleChanges();
+  const primaryToggleState = useToggleState();
+  const successToggleState = useToggleState();
+  const infoToggleState = useToggleState();
+  const warningToggleState = useToggleState();
+  const dangerToggleState = useToggleState();
+  const basicToggleState = useToggleState();
+  const controlToggleState = useToggleState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Toggle
         style={styles.toggle}
-        text='Primary'
         status='primary'
-        {...primaryToggleChanges}
-      />
+        {...primaryToggleState}>
+        Primary
+      </Toggle>
 
       <Toggle
         style={styles.toggle}
-        text='Success'
         status='success'
-        {...successToggleChanges}
-      />
+        {...successToggleState}>
+        Success
+      </Toggle>
 
       <Toggle
         style={styles.toggle}
-        text='Info'
         status='info'
-        {...infoToggleChanges}
-      />
+        {...infoToggleState}>
+        Info
+      </Toggle>
 
       <Toggle
         style={styles.toggle}
-        text='Warning'
         status='warning'
-        {...warningToggleChanges}
-      />
+        {...warningToggleState}>
+        Warning
+      </Toggle>
 
       <Toggle
         style={styles.toggle}
-        text='Danger'
         status='danger'
-        {...dangerToggleChanges}
-      />
+        {...dangerToggleState}>
+        Danger
+      </Toggle>
 
       <Toggle
         style={styles.toggle}
-        text='Basic'
         status='basic'
-        {...basicToggleChanges}
-      />
+        {...basicToggleState}>
+        Basic
+      </Toggle>
 
       <View style={styles.controlContainer}>
         <Toggle
           style={styles.toggle}
-          text='Control'
           status='control'
-          {...controlToggleChanges}
-        />
+          {...controlToggleState}>
+          Control
+        </Toggle>
       </View>
 
     </Layout>
@@ -95,11 +86,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   toggle: {
-    margin: 8,
+    margin: 2,
   },
   controlContainer: {
     borderRadius: 4,
     margin: 8,
+    padding: 6,
     backgroundColor: '#3366FF',
   },
 });

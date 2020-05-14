@@ -6,7 +6,7 @@
   // colors
   $action-bg: white;
   $action-fg: nb-theme(color-fg-heading-light);
-  $block-bg-default: #edf0f4;
+  $block-bg-default: nb-theme(background-basic-color-3);
   $block-bg-cosmic: #1b1b38;
   $block-fg-cosmic: #e8e9fa;
   $block-bg-corporate: #edf0f4;
@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   padding: 0.5rem 1rem 2.5rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   position: relative;
 
   .header {
@@ -24,7 +24,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.875rem;
+    margin-bottom: 1rem;
   }
 
   .title-caption {
@@ -62,7 +62,7 @@
 
   .action-item {
     background-color: $action-bg;
-    border-radius: 0.375rem;
+    border-radius: 0.25rem;
     height: 100%;
     line-height: 1;
     border: none;

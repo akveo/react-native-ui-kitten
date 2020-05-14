@@ -1,23 +1,26 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
-  View,
-  ImageProps,
-  ImageSourcePropType,
   Image,
-  Animated,
+  ImageProps,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
   render,
   RenderAPI,
-  shallow,
 } from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-  StyleType,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Tab,
   TabProps,
@@ -30,165 +33,144 @@ import {
   TabView,
   TabViewProps,
 } from './tabView.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
-import { ViewPager } from '../viewPager/viewPager.component';
 
 describe('@tab: component checks', () => {
 
-  const Mock = (props?: TabProps): React.ReactElement<ApplicationProviderProps> => {
-    return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={theme}>
-        <Tab {...props} />
-      </ApplicationProvider>
+  const TestTab = (props?: TabProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <Tab {...props} />
+    </ApplicationProvider>
+  );
+
+  it('should render image passed to icon prop', () => {
+    const Icon = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
     );
-  };
 
-  it('* empty', () => {
-    const component: RenderAPI = render(
-      <Mock/>,
+    const component = render(
+      <TestTab icon={Icon}/>,
     );
 
-    const { output } = shallow(component.getByType(Tab));
+    const image = component.queryByType(Image);
 
-    expect(output).toMatchSnapshot();
+    expect(image).toBeTruthy();
+    expect(image.props.source).toEqual({ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' });
   });
 
-  it('* title', () => {
-    const component: RenderAPI = render(
-      <Mock title='title'/>,
+  it('should render string passed to title prop', () => {
+    const component = render(
+      <TestTab title='I love Babel'/>,
     );
 
-    const { output } = shallow(component.getByType(Tab));
-
-    expect(output).toMatchSnapshot();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('* icon', () => {
-    const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-
-    const icon = (style: StyleType): React.ReactElement<ImageProps> => {
-      return (
-        <Image
-          style={style}
-          source={iconSource}
-        />
-      );
-    };
-
-    const component: RenderAPI = render(
-      <Mock icon={icon}/>,
+  it('should render component passed to title prop', () => {
+    const component = render(
+      <TestTab title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const { output } = shallow(component.getByType(Tab));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* title (styled)', () => {
-    const component: RenderAPI = render(
-      <Mock
-        title='title'
-        titleStyle={{
-          fontSize: 24,
-          color: 'tomato',
-        }}
-      />,
-    );
-
-    const { output } = shallow(component.getByType(Tab));
-
-    expect(output).toMatchSnapshot();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
 });
 
 describe('@tab-bar: component checks', () => {
 
-  const childTestId0: string = '@tab-bar/child-0';
-  const childTestId1: string = '@tab-bar/child-1';
+  const TestTabBar = (props?: Partial<TabBarProps>) => {
+    const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
-  const Mock = (props?: TabBarProps): React.ReactElement<ApplicationProviderProps> => {
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={theme}>
-        <TabBar {...props}>
-          {props.children}
+        theme={light}>
+        <TabBar
+          selectedIndex={selectedIndex}
+          onSelect={setSelectedIndex}>
+          <Tab title='Tab 0'/>
+          <Tab title='Tab 1'/>
         </TabBar>
       </ApplicationProvider>
     );
   };
 
-  const ChildMock = Tab;
+  const touchables = {
+    findTabTouchable: (api: RenderAPI, index: number) => api.queryAllByType(TouchableOpacity)[index],
+  };
 
-  it('* emits onSelect with correct args', () => {
-    const onSelect = jest.fn();
-
+  it('should render 2 tabs passed to children', () => {
     const component = render(
-      <Mock onSelect={onSelect}>
-        <ChildMock testID={childTestId0}/>
-        <ChildMock testID={childTestId1}/>
-      </Mock>,
+      <TestTabBar/>,
     );
 
-    const child1 = component.getByTestId(childTestId1);
+    expect(component.queryAllByType(Tab).length).toEqual(2);
+  });
 
-    fireEvent(child1, 'select');
+  it('should set tab selected by passing selectedIndex prop', () => {
+    const component = render(
+      <TestTabBar selectedIndex={1}/>,
+    );
 
-    expect(onSelect).toBeCalledWith(1);
+    expect(component.queryAllByType(Tab)[1].props.selected).toEqual(true);
+  });
+
+  it('should set tab selected by pressing it', () => {
+    const component = render(
+      <TestTabBar/>,
+    );
+
+    fireEvent.press(touchables.findTabTouchable(component, 1));
+    expect(component.queryAllByType(Tab)[1].props.selected).toEqual(true);
   });
 
 });
 
 describe('@tab-view: component checks', () => {
 
-  const Mock = (props?: TabViewProps): React.ReactElement<ApplicationProviderProps> => {
-    return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={theme}>
-        <TabView {...props}>
-          {props.children}
-        </TabView>
-      </ApplicationProvider>
-    );
-  };
+  const TestTabView = (props?: TabViewProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <TabView {...props}>
+        <Tab>
+          <Text>Tab 0</Text>
+        </Tab>
+        <Tab>
+          <Text>Tab 1</Text>
+        </Tab>
+      </TabView>
+    </ApplicationProvider>
+  );
 
-  const ChildMock = (props?: TabProps): React.ReactElement<TabProps> => {
-    return (
-      <Tab {...props} />
-    );
-  };
-
-  it('* shouldLoadComponent disables child loading', () => {
-    const disabledComponentIndex: number = 1;
-
-    const shouldLoadComponent = jest.fn((...args: any[]) => {
-      const index: number = args[0];
-      return index !== disabledComponentIndex;
-    });
-
-    const component: RenderAPI = render(
-      <Mock shouldLoadComponent={shouldLoadComponent}>
-        <ChildMock>
-          <View/>
-        </ChildMock>
-        <ChildMock>
-          <View/>
-        </ChildMock>
-      </Mock>,
+  it('should render 2 tabs passed to children', () => {
+    const component = render(
+      <TestTabView/>,
     );
 
-    const viewPager: ReactTestInstance = component.getByType(ViewPager);
-    const containerView: ReactTestInstance = viewPager.findByType(Animated.View);
-    const unloadedChild: ReactTestInstance = containerView.props.children[disabledComponentIndex];
+    expect(component.queryAllByType(Tab).length).toEqual(2);
+  });
 
-    expect(unloadedChild.props.children).toBeNull();
+  it('should render 2 content elements passed to tab children', () => {
+    const component = render(
+      <TestTabView/>,
+    );
+
+    expect(component.queryByText('Tab 0')).toBeTruthy();
+    expect(component.queryByText('Tab 1')).toBeTruthy();
+  });
+
+  it('should not render content elements if disabled by shouldLoadComponent prop', () => {
+    const component = render(
+      <TestTabView shouldLoadComponent={index => index !== 1}/>,
+    );
+
+    expect(component.queryByText('Tab 0')).toBeTruthy();
+    expect(component.queryByText('Tab 1')).toBeFalsy();
   });
 });
 

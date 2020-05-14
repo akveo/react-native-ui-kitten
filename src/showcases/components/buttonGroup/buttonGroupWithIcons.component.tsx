@@ -1,35 +1,30 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Button,
-  ButtonGroup,
-  Icon,
-  Layout,
-} from '@ui-kitten/components';
+import { Button, ButtonGroup, Icon, Layout } from '@ui-kitten/components';
 
-const StarIcon = (style) => (
-  <Icon {...style} name='star'/>
+const StarIcon = (props) => (
+  <Icon {...props} name='star'/>
 );
 
 export const ButtonGroupWithIconsShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <ButtonGroup style={styles.buttonGroup}>
-      <Button icon={StarIcon}/>
-      <Button icon={StarIcon}/>
-      <Button icon={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
     </ButtonGroup>
 
     <ButtonGroup style={styles.buttonGroup} appearance='outline' status='success'>
-      <Button icon={StarIcon}/>
-      <Button icon={StarIcon}/>
-      <Button icon={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
     </ButtonGroup>
 
     <ButtonGroup style={styles.buttonGroup} status='danger'>
-      <Button icon={StarIcon}/>
-      <Button icon={StarIcon}/>
-      <Button icon={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
+      <Button accessoryLeft={StarIcon}/>
     </ButtonGroup>
 
   </Layout>
@@ -41,6 +36,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   buttonGroup: {
-    margin: 8,
+    margin: 2,
   },
 });

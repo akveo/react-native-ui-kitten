@@ -6,6 +6,29 @@ Before we start, let's pretend we want to create a `CircleButton` component.
 
 <hr>
 
+## Requirements
+
+For better developer experience, `@babel/plugin-proposal-decorators` module should be installed and configured.
+```bash
+npm i -D @babel/plugin-proposal-decorators
+
+// Using Yarn?
+yarn add -D @babel/plugin-proposal-decorators
+```
+
+Then, make sure to configure Babel with installed plugin. In babel.config.js:
+```js
+module.exports = {
+  // Whatever was previously specified
+
+  plugins: [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }]
+  ]
+};
+```
+
+<hr>
+
 ## Prepare the boilerplate
 
 In this step, we'll create a component and it's initial mapping.
@@ -16,22 +39,19 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { styled } from '@ui-kitten/components';
 
-class CircleButton extends React.Component {
-  static styledComponentName = 'CircleButton'; // <-- This is important!
-  
+@styled('CircleButton')
+export class CircleButton extends React.Component {
   render() {
-    const { themedStyle, style, ...restProps } = this.props;
+    const { eva, style, ...restProps } = this.props;
     
     return (
-      <TouchableOpacity style={[themedStyle, style]} {...restProps} />
+      <TouchableOpacity style={[eva.style, style]} {...restProps} />
     );
   }
 }
-
-export default styled(CircleButton);
 ```
 
-Create a custom mapping:
+Create a mapping:
 
 ```json
 {
@@ -61,30 +81,36 @@ And pass it to an `ApplicationProvider` component:
 
 ```js
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
-import { default as customMapping } from './path-to/custom-mapping.json'; // <-- Import custom mapping
-import CircleButton from './path-to/CircleButton'; // <-- Import custom component
+import { default as mapping } from './path-to/mapping.json'; // <-- Import mapping
+import { CircleButton } from './path-to/CircleButton'; // <-- Import component
 
-const App = () => (
-  <ApplicationProvider 
-    mapping={mapping}
-    customMapping={customMapping}
-    theme={lightTheme}>
-    <Layout style={{padding: 64, alignItems: 'center'}}>
+export default () => (
+  <ApplicationProvider
+    {...eva}
+    customMapping={mapping}
+    theme={eva.light}>
+    <Layout style={{ padding: 64, alignItems: 'center' }}>
       <CircleButton />
     </Layout>
   </ApplicationProvider>
 );
-
-export default App;
 ```
+
+<div class="note note-info">
+  <div class="note-body">
+   Custom Mapping is applied automatically in case of using `@ui-kitten/metro-config` package,
+   meaning there is no need to modify ApplicationProvider.
+   To check this, see if it used in metro.config.js. [Relative guide](guides/improving-performance).
+  </div>
+</div>
 
 <hr>
 
 ## Start with an idea
 
-The main idea of `CircleButton` component is that is going to be a circle. This means we need to provide some dimension styles and a `borderRadius` to make it round. Go back to `custom-mapping.json` and paste the following:
+The main idea of `CircleButton` component is that is going to be a circle. This means we need to provide some dimension styles and a `borderRadius` to make it round. Go back to `mapping.json` and paste the following:
 
 ```json
 {
@@ -156,12 +182,12 @@ The example above demonstrates how you can create a really simple configuration.
         "filled": {
           "mapping": {
             // ...
-          }
-        },
-        "variantGroups": {
-          "shape": {
-            "rounded": { // <-- Describes a `rounded` variant parameters
-              "borderRadius": 16
+          },
+          "variantGroups": {
+            "shape": {
+              "rounded": { // <-- Describes a `rounded` variant parameters
+                "borderRadius": 16
+              }
             }
           }
         }
@@ -175,23 +201,21 @@ What we did is that we added a rounded [variant](design-system/design-system-glo
 
 ```js
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
-import { default as customMapping } from './path-to/custom-mapping.json';
-import CircleButton from './path-to/CircleButton';
+import { default as mapping } from './path-to/mapping.json';
+import { CircleButton } from './path-to/CircleButton';
 
-const App = () => (
-  <ApplicationProvider 
-    mapping={mapping}
-    customMapping={customMapping}
-    theme={lightTheme}>
+export default () => (
+  <ApplicationProvider
+    {...eva}
+    customMapping={mapping}
+    theme={eva.light}>
     <Layout style={{padding: 64, alignItems: 'center'}}>
       <CircleButton shape='rounded'/> // <-- Apply `rounded` shape variant
     </Layout>
   </ApplicationProvider>
 );
-
-export default App;
 ```
 
 And this is how it looks:
@@ -225,10 +249,10 @@ The other great example of the flexibility of using mappings is that you can pro
                 "backgroundColor": "color-primary-active"
               }
             }
+          },
+          "variantGroups": {
+            // ...
           }
-        },
-        "variantGroups": {
-          // ...
         }
       }
     }
@@ -243,26 +267,27 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { styled, Interaction } from '@ui-kitten/components';
 
-class CircleButton extends React.Component {
-  static styledComponentName = 'CircleButton';
+@styled('CircleButton')
+export class CircleButton extends React.Component {
   
   onPressIn = () => {
     // Dispatch an `active` state to High Order Component
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
   };
   
   onPressOut = () => {
     // Go back to the default state
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
   
   render() {
-    const { themedStyle, style, ...restProps } = this.props;
+    const { eva, style, ...restProps } = this.props;
     
     return (
       <TouchableOpacity 
         {...restProps}
-        style={[themedStyle, style]}
+        activeOpacity={1.0}
+        style={[eva.style, style]}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
       />

@@ -24,7 +24,7 @@ Steps to reproduce the behavior:
 ## Link to runnable example or repository (highly encouraged)
 
 <!--
-Please provide either a [codesandbox demo](https://codesandbox.io/s/ui-kitten-welcome-x8q8z) or a minimal repository on GitHub.
+Please provide either a [snack demo](https://snack.expo.io/@ui-kitten/playground) or a minimal repository on GitHub.
 This will help us to resolve it faster.
 -->
 
