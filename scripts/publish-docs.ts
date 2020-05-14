@@ -7,6 +7,7 @@ import {
 
 gulp.task('publish-docs', gulp.series(
   rebuild,
+  createDocsDirs,
   addLanding,
   copyOldVersion,
   copyLatestStableVersion,
@@ -16,6 +17,11 @@ gulp.task('publish-docs', gulp.series(
 function rebuild(done: GulpCompletionCallback): void {
   execSync('npm run clean', { cwd: DOCS_DIR });
   execSync('npm run build:prod', { cwd: DOCS_DIR });
+  done();
+}
+
+function createDocsDirs(done: GulpCompletionCallback): void {
+  execSync('npm run docs:dirs', { cwd: DOCS_DIR });
   done();
 }
 
