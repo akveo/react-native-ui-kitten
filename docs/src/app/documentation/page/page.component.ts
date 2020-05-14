@@ -39,6 +39,10 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
       .some((item) => ['markdown', 'component', 'tabbed'].includes(item.block));
   }
 
+  get isTabs() {
+    return this.currentItem && this.currentItem.type === 'tabs';
+  }
+
   ngOnInit() {
     this.handlePageNavigation();
     this.window.history.scrollRestoration = 'manual';
