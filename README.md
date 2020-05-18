@@ -88,6 +88,6 @@ We're always happy to receive your feedback!
 [link:akveo-medium]: https://medium.com/akveo-engineering
 [link:akveo-twitter]: https://twitter.com/akveo_inc
 [link:akveo-facebook]: https://www.facebook.com/akveo
-[link:ui-kitten-bundles]: https://hubs.ly/H0n6Ddn0
-[link:ui-kitten-bundle-java]: https://hubs.ly/H0n6C-00
-[link:ui-kitten-bundle-dotnet-core]: https://hubs.ly/H0n6C-10
+[link:ui-kitten-bundles]: https://hubs.ly/H0qwQnw0
+[link:ui-kitten-bundle-java]: https://hubs.ly/H0qwPQW0
+[link:ui-kitten-bundle-dotnet-core]: https://hubs.ly/H0qwQsC0
