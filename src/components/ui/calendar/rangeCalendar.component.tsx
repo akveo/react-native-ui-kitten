@@ -74,6 +74,10 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * to render instead of default year cell.
  * Called with a date for this cell and styles provided by Eva.
  *
+ * @property {(D) => void} onVisibleDateChange - Called when
+ * dates in visible date selection component changed. You should only focus on
+ * `newDate`'s year and month, date is not useful.
+ *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example RangeCalendarSimpleUsage

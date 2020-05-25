@@ -52,6 +52,7 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
+  onVisibleDateChange?: (newDate: D) => void
   eva?: EvaProp;
 }
 
@@ -97,6 +98,14 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   private get max(): D {
     return this.props.max || this.dateService.getYearEnd(this.dateService.today());
+  }
+
+  componentDidUpdate(prevProps: Readonly<BaseCalendarProps<D> & P>, prevState: Readonly<State<D>>) {
+    if( this.state.viewMode.id === CalendarViewModes.DATE.id) {
+      if(!this.props.onVisibleDateChange) return;
+      this.props.onVisibleDateChange(this.createViewModeVisibleDate(1))
+      return;
+    }
   }
 
   public scrollToToday = (): void => {
