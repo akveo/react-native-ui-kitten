@@ -27,7 +27,7 @@ type WrappedElementProps = any;
 export type IconProps<T = WrappedElementProps> = T & {
   name: string;
   pack?: string;
-  animation?: keyof IconAnimationRegistry;
+  animation?: keyof IconAnimationRegistry | null;
   animationConfig?: AnimationConfig;
 };
 
@@ -47,7 +47,7 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
  * @property {string} pack - A name of icon pack registered in IconRegistry that is able to provide
  * an icon for a given name.
  *
- * @property {string} animation - Animation name. Can be `zoom`, `pulse` and `shake`.
+ * @property {string} animation - Animation name. Can be `zoom`, `pulse`, `shake` or null.
  * Defaults to *zoom*.
  *
  * @property {AnimationConfig} animationConfig - Animation config.
@@ -82,7 +82,7 @@ export class Icon<T> extends React.Component<IconProps<T>> {
     animation: 'zoom',
   };
 
-  private readonly animation: IconAnimation;
+  private readonly animation: IconAnimation | null;
 
   constructor(props: IconProps<T>) {
     super(props);
@@ -90,24 +90,29 @@ export class Icon<T> extends React.Component<IconProps<T>> {
   }
 
   public componentWillUnmount(): void {
-    this.animation.release();
+    this.animation?.release();
   }
 
   public startAnimation = (callback?: Animated.EndCallback): void => {
-    this.animation.start(callback);
+    this.animation?.start(callback);
   };
 
   public stopAnimation = (): void => {
-    this.animation.stop();
+    this.animation?.stop();
   };
 
   public render(): React.ReactElement<ViewProps> {
     const { name, pack, animation, ...iconProps } = this.props;
     const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
+    const iconElement = registeredIcon.icon.toReactElement(iconProps as T);
+
+    if (!this.animation) {
+      return iconElement;
+    }
 
     return (
       <Animated.View {...this.animation.toProps()}>
-        {registeredIcon.icon.toReactElement(iconProps as T)}
+        {iconElement}
       </Animated.View>
     );
   }

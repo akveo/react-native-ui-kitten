@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  Animated,
   View,
   ViewProps,
 } from 'react-native';
@@ -111,7 +112,7 @@ describe('@icon: component checks', () => {
     }).toThrowError();
   });
 
-  it('* should throw while rendering icon from not registered pack', () => {
+  it('should throw while rendering icon from not registered pack', () => {
     expect(() => {
       render(
         <Icon name='home' pack='not-registered-pack'/>,
@@ -119,4 +120,11 @@ describe('@icon: component checks', () => {
     }).toThrowError();
   });
 
+  it('should render without an animation if animation is null', () => {
+    const component = render(
+      <Icon name='home' animation={null} />,
+    );
+
+    expect(() => component.UNSAFE_getByType(Animated.View)).toThrow();
+  });
 });
