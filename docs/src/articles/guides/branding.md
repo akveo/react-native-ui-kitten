@@ -1,6 +1,6 @@
 # Branding
 
-UI Kitten supports 2 visual themes provided by Eva Design System: Light an Dark.
+UI Kitten supports 2 visual themes provided by Eva Design System: Light and Dark.
 Both of them are designed to use as default themes in your products and may be used as a core theme,
 when needed to build a custom, branded solution.
 
