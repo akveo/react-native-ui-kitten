@@ -32,6 +32,7 @@ import {
   WebEventResponderInstance,
   Overwrite,
   LiteralUnion,
+  TouchableWithoutFeedback,
 } from '../../devsupport';
 import {
   Interaction,
@@ -278,7 +279,9 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View style={evaStyle.container}>
+      <TouchableWithoutFeedback
+        style={evaStyle.container}
+        onPress={this.focus}>
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
@@ -313,7 +316,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={caption}
           />
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
