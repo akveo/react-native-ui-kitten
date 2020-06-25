@@ -7,22 +7,18 @@
 import React from 'react';
 import {
   ImageProps,
-  StyleProp,
   StyleSheet,
   View,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 import {
   FalsyFC,
   FalsyText,
   RenderProp,
   Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
-  StyledComponentProps,
   StyleType,
 } from '../../theme';
 import {
@@ -33,15 +29,11 @@ import {
 import { PopoverIndicator } from '../popover/popoverIndicator.component';
 import { TextProps } from '../text/text.component';
 
-type TooltipStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
-
 type TooltipPopoverProps = Overwrite<PopoverProps, {
   children: RenderProp<TextProps> | React.ReactText;
 }>;
 
-export interface TooltipProps extends TooltipPopoverProps, TooltipStyledProps {
+export interface TooltipProps extends TooltipPopoverProps {
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
 }
