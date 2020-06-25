@@ -31,6 +31,7 @@ import {
   WebEventResponderCallbacks,
   WebEventResponderInstance,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -41,7 +42,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type InputStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface InputProps extends TextInputProps, InputStyledProps {

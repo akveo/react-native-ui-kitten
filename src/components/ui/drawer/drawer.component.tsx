@@ -10,6 +10,7 @@ import {
   FalsyFC,
   RenderProp,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -22,7 +23,7 @@ import {
 } from '../menu/menu.component';
 
 type DrawerStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'noDivider' | string;
+  appearance?: LiteralUnion<'default' | 'noDivider'>;
 }>;
 
 export interface DrawerProps extends MenuProps, DrawerStyledProps {

@@ -12,22 +12,22 @@ import {
 import {
   EvaStatus,
   Overwrite,
- } from '../../devsupport';
+  LiteralUnion,
+} from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
 
 type TextStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'alternative' | 'hint' | string;
+  appearance?: LiteralUnion<'default' | 'alternative' | 'hint'>;
 }>;
 
 type ChildElement = React.ReactText | TextElement;
 
 export interface TextProps extends RNTextProps, TextStyledProps {
   children?: ChildElement | ChildElement[];
-  appearance?: 'default' | 'alternative' | 'hint' | string;
-  category?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 's1' | 's2' | 'p1' | 'p2' | 'c1' | 'c2' | 'label' | string;
+  category?: LiteralUnion<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 's1' | 's2' | 'p1' | 'p2' | 'c1' | 'c2' | 'label'>;
   status?: EvaStatus;
 }
 

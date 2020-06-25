@@ -19,6 +19,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -29,7 +30,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type BottomNavigationTabStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default' | string>;
 }>;
 
 export interface BottomNavigationTabProps extends TouchableWebProps, BottomNavigationTabStyledProps {

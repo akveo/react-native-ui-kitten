@@ -9,14 +9,14 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from '../../devsupport';
+import { Overwrite, LiteralUnion } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
 
 type DividerStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export type DividerProps = ViewProps & DividerStyledProps;

@@ -18,6 +18,7 @@ import {
   FalsyText,
   RenderProp,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -33,7 +34,7 @@ import { PopoverIndicator } from '../popover/popoverIndicator.component';
 import { TextProps } from '../text/text.component';
 
 type TooltipStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 type TooltipPopoverProps = Overwrite<PopoverProps, {
@@ -161,7 +162,7 @@ export class Tooltip extends React.Component<TooltipProps> {
   private renderPopoverIndicatorElement = (props: ViewProps): React.ReactElement => {
     const evaStyle = this.getComponentStyle(this.props.eva.style);
     return (
-      <PopoverIndicator {...props} style={[props.style, evaStyle.indicator]}/>
+      <PopoverIndicator {...props} style={[props.style, evaStyle.indicator]} />
     );
   };
 

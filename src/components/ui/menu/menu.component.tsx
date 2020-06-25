@@ -10,6 +10,7 @@ import {
   ChildrenWithProps,
   IndexPath,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -31,7 +32,7 @@ import {
 } from './menu.service';
 
 type MenuStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'noDivider' | string;
+  appearance?: LiteralUnion<'default' | 'noDivider'>;
 }>;
 
 type MenuListProps = Omit<ListProps, 'data' | 'renderItem'>;
