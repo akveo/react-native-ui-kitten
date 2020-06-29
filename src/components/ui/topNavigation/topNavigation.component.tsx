@@ -13,7 +13,7 @@ import {
 import {
   FalsyFC,
   FalsyText,
-  RenderProp,
+  RenderType,
   Overwrite,
 } from '../../devsupport';
 import {
@@ -28,10 +28,10 @@ type TopNavigationStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps {
-  title?: RenderProp<TextProps> | React.ReactText;
-  subtitle?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp;
-  accessoryRight?: RenderProp;
+  title?: RenderType<TextProps> | React.ReactText;
+  subtitle?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType;
+  accessoryRight?: RenderType;
   alignment?: AlignmentProp;
 }
 

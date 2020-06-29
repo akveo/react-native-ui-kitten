@@ -7,11 +7,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
+  FalsyFC,
   Frame,
   MeasureElement,
   MeasuringElement,
   Point,
-  RenderProp,
+  RenderType,
   Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
@@ -33,7 +34,7 @@ type PopoverModalProps = Overwrite<ModalProps, {
 }>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
-  anchor: RenderProp;
+  anchor: RenderType;
   fullWidth?: boolean;
 }
 
@@ -211,7 +212,7 @@ export class Popover extends React.Component<PopoverProps, State> {
       <MeasureElement
         force={this.state.forceMeasure}
         onMeasure={this.onChildMeasure}>
-        {this.props.anchor()}
+        <FalsyFC component={this.props.anchor} />
       </MeasureElement>
     );
   }

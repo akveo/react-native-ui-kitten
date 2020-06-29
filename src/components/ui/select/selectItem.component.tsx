@@ -16,7 +16,7 @@ import {
   FalsyFC,
   FalsyText,
   PropsService,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -44,9 +44,9 @@ type TouchableSelectProps = Overwrite<TouchableWebProps, {
 }>;
 
 export interface SelectItemProps extends TouchableSelectProps, SelectItemStyledProps {
-  title?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  title?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<Partial<ImageProps>>;
   selected?: boolean;
   descriptor?: SelectItemDescriptor;
 }

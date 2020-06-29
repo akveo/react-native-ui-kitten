@@ -15,7 +15,7 @@ import {
 import {
   EvaStatus,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -34,7 +34,7 @@ type RadioStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface RadioProps extends TouchableWebProps, RadioStyledProps {
-  children?: RenderProp<TextProps> | React.ReactText;
+  children?: RenderType<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   status?: EvaStatus;

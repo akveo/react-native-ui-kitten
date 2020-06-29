@@ -17,7 +17,7 @@ import {
   EvaStatus,
   FalsyFC,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -36,9 +36,9 @@ type ButtonStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
-  children?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  children?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<Partial<ImageProps>>;
   status?: EvaStatus;
   size?: EvaSize;
 }

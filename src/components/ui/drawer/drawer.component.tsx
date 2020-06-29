@@ -8,7 +8,7 @@ import React from 'react';
 import { ViewProps } from 'react-native';
 import {
   FalsyFC,
-  RenderProp,
+  RenderType,
   Overwrite,
 } from '../../devsupport';
 import {
@@ -26,8 +26,8 @@ type DrawerStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface DrawerProps extends MenuProps, DrawerStyledProps {
-  header?: RenderProp<ViewProps>;
-  footer?: RenderProp<ViewProps>;
+  header?: RenderType<ViewProps>;
+  footer?: RenderType<ViewProps>;
 }
 
 export type DrawerElement = React.ReactElement<DrawerProps>;

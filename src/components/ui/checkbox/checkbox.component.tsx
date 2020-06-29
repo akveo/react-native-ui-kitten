@@ -16,7 +16,7 @@ import {
 import {
   EvaStatus,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -43,7 +43,7 @@ type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
-  children?: RenderProp<TextProps> | React.ReactText;
+  children?: RenderType<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
   indeterminate?: boolean;

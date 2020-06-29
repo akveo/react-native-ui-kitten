@@ -26,7 +26,7 @@ import {
   FalsyText,
   FlexStyleProps,
   PropsService,
-  RenderProp,
+  RenderType,
   WebEventResponder,
   WebEventResponderCallbacks,
   WebEventResponderInstance,
@@ -48,11 +48,11 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   status?: EvaStatus;
   size?: EvaSize;
   disabled?: boolean;
-  label?: RenderProp<TextProps> | React.ReactText;
-  caption?: RenderProp<TextProps> | React.ReactText;
-  captionIcon?: RenderProp<Partial<ImageProps>>;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  label?: RenderType<TextProps> | React.ReactText;
+  caption?: RenderType<TextProps> | React.ReactText;
+  captionIcon?: RenderType<Partial<ImageProps>>;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
 }
 

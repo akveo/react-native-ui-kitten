@@ -15,7 +15,7 @@ import {
   RangeCalendarElement,
   RangeCalendarProps,
 } from '../calendar/rangeCalendar.component';
-import { RenderProp } from '@ui-kitten/components/devsupport';
+import { RenderType } from '@ui-kitten/components/devsupport';
 import { TextProps } from '@ui-kitten/components';
 
 export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> & RangeCalendarProps<D>;
@@ -161,7 +161,7 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
 
   // BaseDatepickerComponent
 
-  protected getComponentTitle(): RenderProp<TextProps> | React.ReactText {
+  protected getComponentTitle(): RenderType<TextProps> | React.ReactText {
     const { startDate, endDate } = this.props.range;
 
     if (startDate || endDate) {

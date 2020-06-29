@@ -14,7 +14,7 @@ import {
 import {
   FalsyFC,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -34,8 +34,8 @@ type TabStyledProps = Overwrite<StyledComponentProps, {
 
 export interface TabProps extends TouchableWebProps, TabStyledProps {
   children?: React.ReactElement;
-  title?: RenderProp<TextProps> | React.ReactText;
-  icon?: RenderProp<Partial<ImageProps>>;
+  title?: RenderType<TextProps> | React.ReactText;
+  icon?: RenderType<Partial<ImageProps>>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }

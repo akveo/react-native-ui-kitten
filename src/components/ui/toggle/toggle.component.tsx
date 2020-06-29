@@ -22,7 +22,7 @@ import {
 import {
   EvaStatus,
   FalsyText,
-  RenderProp,
+  RenderType,
   RTLService,
   TouchableWeb,
   TouchableWebProps,
@@ -42,7 +42,7 @@ type ToggleStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface ToggleProps extends TouchableWebProps, ToggleStyledProps {
-  children?: RenderProp<TextProps> | React.ReactText;
+  children?: RenderType<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   status?: EvaStatus;

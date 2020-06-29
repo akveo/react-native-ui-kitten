@@ -17,7 +17,7 @@ import {
   FalsyFC,
   FalsyText,
   PropsService,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebProps,
   Overwrite,
@@ -40,9 +40,9 @@ type TouchableMenuItemProps = Overwrite<TouchableWebProps, {
 }>;
 
 export interface MenuItemProps extends TouchableMenuItemProps, MenuItemStyledProps {
-  title?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  title?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<Partial<ImageProps>>;
   selected?: boolean;
   descriptor?: MenuItemDescriptor;
 }

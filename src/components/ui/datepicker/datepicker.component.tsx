@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { RenderProp } from '../../devsupport';
+import { RenderType } from '../../devsupport';
 import { styled } from '../../theme';
 import {
   BaseDatepickerComponent,
@@ -209,7 +209,7 @@ export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProp
 
   // BaseDatepickerComponent
 
-  protected getComponentTitle(): RenderProp<TextProps> | React.ReactText {
+  protected getComponentTitle(): RenderType<TextProps> | React.ReactText {
     if (this.props.date) {
       return this.props.dateService.format(this.props.date, null);
     } else {

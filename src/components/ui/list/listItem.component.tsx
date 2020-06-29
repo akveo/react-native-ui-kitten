@@ -16,7 +16,7 @@ import {
 import {
   FalsyFC,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -35,10 +35,10 @@ type ListItemStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface ListItemProps extends TouchableWebProps, ListItemStyledProps {
-  title?: RenderProp<TextProps> | React.ReactText;
-  description?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<ViewProps>;
+  title?: RenderType<TextProps> | React.ReactText;
+  description?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<ViewProps>;
   children?: React.ReactNode;
 }
 

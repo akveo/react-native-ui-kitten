@@ -14,7 +14,7 @@ import {
 import {
   EvaStatus,
   FalsyFC,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -34,9 +34,9 @@ type CardStyledProps = Overwrite<StyledComponentProps, {
 
 export interface CardProps extends TouchableWebProps, CardStyledProps {
   children?: React.ReactNode;
-  header?: RenderProp<ViewProps>;
-  footer?: RenderProp<ViewProps>;
-  accent?: RenderProp<ViewProps>;
+  header?: RenderType<ViewProps>;
+  footer?: RenderType<ViewProps>;
+  accent?: RenderType<ViewProps>;
   status?: EvaStatus;
 }
 

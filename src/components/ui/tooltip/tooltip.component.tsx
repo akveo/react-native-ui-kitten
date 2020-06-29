@@ -16,7 +16,7 @@ import {
 import {
   FalsyFC,
   FalsyText,
-  RenderProp,
+  RenderType,
   Overwrite,
 } from '../../devsupport';
 import {
@@ -37,12 +37,12 @@ type TooltipStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 type TooltipPopoverProps = Overwrite<PopoverProps, {
-  children: RenderProp<TextProps> | React.ReactText;
+  children: RenderType<TextProps> | React.ReactText;
 }>;
 
 export interface TooltipProps extends TooltipPopoverProps, TooltipStyledProps {
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<Partial<ImageProps>>;
 }
 
 export type TooltipElement = React.ReactElement<TooltipProps>;

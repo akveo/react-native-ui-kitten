@@ -26,7 +26,7 @@ import {
   FalsyFC,
   FalsyText,
   IndexPath,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -59,13 +59,13 @@ export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   children?: ChildrenWithProps<SelectItemProps | SelectGroupProps>;
   selectedIndex?: IndexPath | IndexPath[];
   onSelect?: (index: IndexPath | IndexPath[]) => void;
-  value?: RenderProp<TextProps> | React.ReactText;
+  value?: RenderType<TextProps> | React.ReactText;
   multiSelect?: boolean;
-  placeholder?: RenderProp<TextProps> | React.ReactText;
-  label?: RenderProp<TextProps> | React.ReactText;
-  caption?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  placeholder?: RenderType<TextProps> | React.ReactText;
+  label?: RenderType<TextProps> | React.ReactText;
+  caption?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<Partial<ImageProps>>;
   status?: EvaStatus;
   size?: EvaInputSize;
 }
