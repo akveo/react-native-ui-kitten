@@ -78,7 +78,7 @@ describe('@popover: component checks', () => {
         <Popover
           ref={ref}
           visible={visible}
-          anchor={AnchorButton}
+          anchor={AnchorButton()}
           {...props}>
           <Text>I love Babel</Text>
         </Popover>

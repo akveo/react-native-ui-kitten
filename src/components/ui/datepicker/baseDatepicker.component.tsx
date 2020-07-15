@@ -268,7 +268,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
           backdropStyle={backdropStyle}
           placement={placement}
           visible={this.state.visible}
-          anchor={() => this.renderInputElement(touchableProps, evaStyle)}
+          anchor={this.renderInputElement(touchableProps, evaStyle)}
           onBackdropPress={this.setPickerInvisible}>
           {this.renderCalendar()}
         </Popover>

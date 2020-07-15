@@ -16,7 +16,7 @@ export const PopoverStyledBackdropShowcase = () => {
     <Popover
       backdropStyle={styles.backdrop}
       visible={visible}
-      anchor={renderToggleButton}
+      anchor={renderToggleButton()}
       onBackdropPress={() => setVisible(false)}>
       <Layout style={styles.content}>
         <Avatar

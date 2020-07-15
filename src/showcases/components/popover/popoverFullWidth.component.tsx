@@ -15,7 +15,7 @@ export const PopoverFullWidthShowcase = () => {
   return (
     <Popover
       visible={visible}
-      anchor={renderToggleButton}
+      anchor={renderToggleButton()}
       fullWidth={true}
       onBackdropPress={() => setVisible(false)}>
       <Layout style={styles.content}>

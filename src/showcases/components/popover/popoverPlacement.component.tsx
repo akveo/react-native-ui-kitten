@@ -51,7 +51,7 @@ export const PopoverPlacementShowcase = () => {
       <View style={styles.buttonContainer}>
 
         <Popover
-          anchor={renderToggleButton}
+          anchor={renderToggleButton()}
           visible={visible}
           placement={placement}
           onBackdropPress={() => setVisible(false)}>

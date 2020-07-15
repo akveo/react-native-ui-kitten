@@ -12,8 +12,8 @@ import {
   MeasureElement,
   MeasuringElement,
   Point,
-  RenderType,
   Overwrite,
+  RenderType,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
 import { ModalProps } from '../modal/modal.component';
