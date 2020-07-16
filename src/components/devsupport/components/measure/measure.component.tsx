@@ -60,15 +60,15 @@ export const MeasureElement = (props: MeasureElementProps): MeasuringElement => 
     return bindToWindow(boundFrame, window);
   };
 
-  const onUIManagerMeasure = (x: number, y: number, w: number, h: number): void => {
-    const frame: Frame = bindToWindow(new Frame(x, y, w, h), Frame.window());
-    props.onMeasure(frame);
-  };
+  const measureSelf = React.useCallback((): void => {
+    const onUIManagerMeasure = (x: number, y: number, w: number, h: number): void => {
+      const frame: Frame = bindToWindow(new Frame(x, y, w, h), Frame.window());
+      props.onMeasure(frame);
+    };
 
-  const measureSelf = (): void => {
     const node: number = findNodeHandle(ref.current);
     UIManager.measureInWindow(node, onUIManagerMeasure);
-  };
+  }, [props.onMeasure]);
 
   if (props.force) {
     measureSelf();
