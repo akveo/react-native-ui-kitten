@@ -20,6 +20,7 @@ import { CalendarRange } from './type';
 
 export interface RangeCalendarProps<D = Date> extends StyledComponentProps, BaseCalendarProps<D> {
   range?: CalendarRange<D>;
+  visibleDate?: D;
   onSelect?: (range: CalendarRange<D>) => void;
 }
 
@@ -74,6 +75,8 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * to render instead of default year cell.
  * Called with a date for this cell and styles provided by Eva.
  *
+ * @property {D} visibleDate - Sets the visibleDate of the calendar. Defaults to today's date.
+ *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example RangeCalendarSimpleUsage
@@ -110,9 +113,15 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
   }
 
   // BaseCalendarComponent
-
   protected createDates(date: D): DateBatch<D> {
     return this.dataService.createDayPickerData(date, this.props.range);
+  }
+
+  public UNSAFE_componentWillReceiveProps(nextProps: Readonly<BaseCalendarProps<D> & RangeCalendarProps<D>>,
+                                   nextContext: any): void {
+    if (this.props.visibleDate && this.props.visibleDate !== nextProps.visibleDate) {
+      this.setState({visibleDate: this.dateService.getMonthStart(nextProps.visibleDate)});
+    }
   }
 
   protected selectedDate(): D {
