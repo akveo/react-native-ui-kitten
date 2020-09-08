@@ -77,17 +77,17 @@ We're always happy to receive your feedback!
 [badge:github-actions]: https://github.com/akveo/react-native-ui-kitten/workflows/Build/badge.svg
 [badge:coveralls]: https://coveralls.io/repos/github/akveo/react-native-ui-kitten/badge.svg?branch=master
 
-[link:eva]: https://hubs.ly/H0n6Dd90
+[link:eva]: https://eva.design?utm_campaign=eva_design%20-%20home%20-%20ui_kitten%20github&utm_source=ui_kitten&utm_medium=referral&utm_content=kitten_github_readme
 [link:github-actions]: https://github.com/akveo/react-native-ui-kitten/actions
 [link:coveralls]: https://coveralls.io/github/akveo/react-native-ui-kitten?branch=master
-[link:doc-homepage]: https://hubs.ly/H0n6CZJ0
-[link:doc-where-start]: https://hubs.ly/H0n6Ddg0
+[link:doc-homepage]: https://akveo.github.io/react-native-ui-kitten?utm_campaign=ui_kitten%20-%20home%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=homepage_link
+[link:doc-where-start]: https://akveo.github.io/react-native-ui-kitten/docs/getting-started/where-to-start?utm_campaign=ui_kitten%20-%20home%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=where_to_start_docs_link
 [link:kitten-tricks]: https://github.com/akveo/kittenTricks
 [link:eva-icons]: https://github.com/akveo/eva-icons
-[link:akveo-homepage]: https://hubs.ly/H0n6Dd50
+[link:akveo-homepage]: https://www.akveo.com?utm_campaign=services%20-%20homepage%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=ui_kitten_readme
 [link:akveo-medium]: https://medium.com/akveo-engineering
 [link:akveo-twitter]: https://twitter.com/akveo_inc
 [link:akveo-facebook]: https://www.facebook.com/akveo
-[link:ui-kitten-bundles]: https://hubs.ly/H0qwQnw0
-[link:ui-kitten-bundle-java]: https://hubs.ly/H0qwPQW0
-[link:ui-kitten-bundle-dotnet-core]: https://hubs.ly/H0qwQsC0
+[link:ui-kitten-bundles]: https://store.akveo.com/collections/mobile-bundles?utm_campaign=akveo_store%20-%20mobile%20bundles%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=banner&utm_content=mobile_bundles_banner
+[link:ui-kitten-bundle-java]: https://store.akveo.com/products/java-mobile-starter-bundle?utm_campaign=akveo_store%20-%20mobile%20bundles%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=java_bundle_link
+[link:ui-kitten-bundle-dotnet-core]: https://store.akveo.com/products/net-core-mobile-starter-bundle?utm_campaign=akveo_store%20-%20mobile%20bundles%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=dotnet_bundle_link
