@@ -80,7 +80,7 @@ We determined that default appearance is `filled` and default variant for a `sta
       "appearances": {
         "filled": {
           "mapping": {
-            // ... <-- A parameter of iterest should be declared here
+            // ... <-- A parameter of interest should be declared here
           }
         }
       }
