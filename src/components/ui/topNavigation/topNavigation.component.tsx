@@ -4,30 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  ViewProps,
-} from 'react-native';
-import {
-  FalsyFC,
-  FalsyText,
-  RenderProp,
-  Overwrite,
-} from '../../devsupport';
-import {
-  styled,
+import React from "react";
+import { StyleSheet, View, ViewProps } from "react-native";
+import { FalsyFC, FalsyText, RenderProp, Overwrite } from "../../devsupport";
+import { styled, StyledComponentProps, StyleType } from "../../theme";
+import { TextProps } from "../text/text.component";
+
+type TopNavigationStyledProps = Overwrite<
   StyledComponentProps,
-  StyleType,
-} from '../../theme';
-import { TextProps } from '../text/text.component';
+  {
+    appearance?: "default" | "control" | string;
+  }
+>;
 
-type TopNavigationStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'control' | string;
-}>;
-
-export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps {
+export interface TopNavigationProps
+  extends ViewProps,
+    TopNavigationStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   subtitle?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp;
@@ -37,7 +29,7 @@ export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps 
 
 export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
 
-type AlignmentProp = 'start' | 'center';
+type AlignmentProp = "start" | "center";
 
 /**
  * TopNavigation provides a heading component for the entire page.
@@ -95,11 +87,10 @@ type AlignmentProp = 'start' | 'center';
  * />
  * ```
  */
-@styled('TopNavigation')
+@styled("TopNavigation")
 export class TopNavigation extends React.Component<TopNavigationProps> {
-
   private getAlignmentDependentStyles = (alignment: AlignmentProp) => {
-    if (alignment === 'center') {
+    if (alignment === "center") {
       return {
         container: styles.containerCentered,
         titleContainer: styles.titleContainerCentered,
@@ -146,30 +137,44 @@ export class TopNavigation extends React.Component<TopNavigationProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, title, subtitle, alignment, accessoryLeft, accessoryRight, ...viewProps } = this.props;
+    const {
+      eva,
+      style,
+      title,
+      subtitle,
+      alignment,
+      accessoryLeft,
+      accessoryRight,
+      ...viewProps
+    } = this.props;
 
     const evaStyles = this.getComponentStyle(eva.style);
     const alignmentStyles = this.getAlignmentDependentStyles(alignment);
 
     return (
       <View
-        style={[evaStyles.container, styles.container, alignmentStyles.container, style]}
-        {...viewProps}>
+        style={[
+          evaStyles.container,
+          styles.container,
+          alignmentStyles.container,
+          style,
+        ]}
+        {...viewProps}
+      >
         <View style={styles.leftControlContainer}>
-          <FalsyFC component={accessoryLeft}/>
+          <FalsyFC component={accessoryLeft} />
         </View>
-        <View style={alignmentStyles.titleContainer}>
-          <FalsyText
-            style={evaStyles.title}
-            component={title}
-          />
-          <FalsyText
-            style={evaStyles.subtitle}
-            component={subtitle}
-          />
+        <View style={[alignmentStyles.titleContainer, styles.titleContainer]}>
+          <FalsyText style={evaStyles.title} component={title} />
+          <FalsyText style={evaStyles.subtitle} component={subtitle} />
         </View>
-        <View style={[styles.rightControlsContainer, alignmentStyles.rightControlsContainer]}>
-          <FalsyFC component={accessoryRight}/>
+        <View
+          style={[
+            styles.rightControlsContainer,
+            alignmentStyles.rightControlsContainer,
+          ]}
+        >
+          <FalsyFC component={accessoryRight} />
         </View>
       </View>
     );
@@ -178,27 +183,31 @@ export class TopNavigation extends React.Component<TopNavigationProps> {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   containerCentered: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   titleContainerCentered: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  titleContainer: {
+    flexDirection: "row",
+    flex: 1,
   },
   leftControlContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     zIndex: 1,
   },
   rightControlsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     zIndex: 1,
   },
   rightControlsContainerStart: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    flex: 0,
+    justifyContent: "flex-end",
   },
 });
