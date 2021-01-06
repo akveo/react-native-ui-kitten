@@ -158,7 +158,7 @@ export class TopNavigation extends React.Component<TopNavigationProps> {
         <View style={styles.leftControlContainer}>
           <FalsyFC component={accessoryLeft}/>
         </View>
-        <View style={[alignmentStyles.titleContainer, styles.titleContainer]}>
+        <View style={alignmentStyles.titleContainer || styles.titleContainer}>
           <FalsyText
             style={evaStyles.title}
             component={title}
