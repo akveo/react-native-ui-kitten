@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, BackHandler, NativeEventSubscription, Platform } from 'react-native';
 import {
   Frame,
   MeasureElement,
@@ -99,6 +99,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     forceMeasure: false,
   };
 
+  private backHandler: NativeEventSubscription;
   private modalId: string;
   private contentPosition: Point = Point.outscreen();
   private placementService: PopoverPlacementService = new PopoverPlacementService();
@@ -130,6 +131,11 @@ export class Popover extends React.Component<PopoverProps, State> {
     this.modalId = ModalService.hide(this.modalId);
   };
 
+  private backAction = (): boolean => {
+    this.hide();
+    return false;
+  };
+
   public componentDidUpdate(prevProps: PopoverProps): void {
     if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
@@ -142,7 +148,16 @@ export class Popover extends React.Component<PopoverProps, State> {
     }
   }
 
+  public componentDidMount(): void {
+    if(Platform.OS === 'android') {
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.backAction);
+    }
+  }
+
   public componentWillUnmount(): void {
+    if(Platform.OS === 'android') {
+      this.backHandler.remove();
+    }
     this.hide();
   }
 
