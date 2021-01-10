@@ -99,7 +99,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     forceMeasure: false,
   };
 
-  private backHandler: NativeEventSubscription;
+  private hardwareBackSubscription: NativeEventSubscription;
   private modalId: string;
   private contentPosition: Point = Point.outscreen();
   private placementService: PopoverPlacementService = new PopoverPlacementService();
@@ -131,7 +131,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     this.modalId = ModalService.hide(this.modalId);
   };
 
-  private backAction = (): boolean => {
+  private onHardwareBackPress = (): boolean => {
     this.hide();
     return false;
   };
@@ -150,14 +150,12 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   public componentDidMount(): void {
     if(Platform.OS === 'android') {
-      this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.backAction);
+      this.hardwareBackSubscription = BackHandler.addEventListener('hardwareBackPress', this.onHardwareBackPress);
     }
   }
 
   public componentWillUnmount(): void {
-    if(Platform.OS === 'android') {
-      this.backHandler.remove();
-    }
+    this.hardwareBackSubscription?.remove();
     this.hide();
   }
 
