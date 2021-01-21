@@ -8,6 +8,7 @@ export const IconAnimationShowcase = () => {
   const pulseIconRef = React.useRef();
   const shakeIconRef = React.useRef();
   const infiniteAnimationIconRef = React.useRef();
+  const noAnimationIconRef = React.useRef();
 
   React.useEffect(() => {
     infiniteAnimationIconRef.current.startAnimation();
@@ -50,6 +51,15 @@ export const IconAnimationShowcase = () => {
     />
   );
 
+  const renderNoAnimationIcon = (props) => (
+    <Icon
+      {...props}
+      ref={noAnimationIconRef}
+      animation={null}
+      name='eye'
+    />
+  );
+
   return (
     <Layout style={styles.container} level='1'>
 
@@ -84,6 +94,14 @@ export const IconAnimationShowcase = () => {
         style={styles.button}
         accessoryRight={renderInfiniteAnimationIcon}>
         INFINITE
+      </Button>
+
+      <Button
+        appearance='ghost'
+        status='warning'
+        style={styles.button}
+        accessoryRight={renderNoAnimationIcon}>
+        NO ANIMATION
       </Button>
 
     </Layout>

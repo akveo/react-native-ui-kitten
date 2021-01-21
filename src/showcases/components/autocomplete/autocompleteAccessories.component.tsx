@@ -22,7 +22,7 @@ export const AutocompleteAccessoriesShowcase = () => {
   const [data, setData] = React.useState(movies);
 
   const onSelect = (index) => {
-    setValue(movies[index].title);
+    setValue(data[index].title);
   };
 
   const onChangeText = (query) => {

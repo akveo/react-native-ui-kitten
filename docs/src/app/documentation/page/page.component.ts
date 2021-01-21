@@ -5,7 +5,7 @@
  */
 
 import { Component, Inject, NgZone, OnDestroy, OnInit, ViewChild, AfterContentChecked } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, publishReplay, refCount, tap, takeWhile } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
@@ -31,16 +31,13 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private structureService: NgdStructureService,
-              private titleService: Title) {
+              private titleService: Title,
+              private metaTagsService: Meta) {
   }
 
   get showSettings() {
     return this.currentItem && this.currentItem.children
       .some((item) => ['markdown', 'component', 'tabbed'].includes(item.block));
-  }
-
-  get isTabs() {
-    return this.currentItem && this.currentItem.type === 'tabs';
   }
 
   ngOnInit() {
@@ -70,7 +67,9 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
         }),
         filter(item => item),
         tap((item: any) => {
-          this.titleService.setTitle(`UI Kitten - ${item.name}`);
+          this.titleService.setTitle(`UI Kitten - ${item.title}`);
+          this.metaTagsService.updateTag({ name: 'description', content: item.description });
+          this.metaTagsService.updateTag({ name: 'keywords', content: item.keywords })
         }),
         publishReplay(),
         refCount(),

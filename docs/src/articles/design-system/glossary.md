@@ -18,7 +18,7 @@ Semantic property defines a set of parameters applied to a UI component using a 
 
 ## Appearance
 
-Appearance is a semantic property that define the high level view of related component: it's dimensions, shape and main colors. Appearance property can optionally contain a `variantGroups` and `state` keys to describe how component should be styled when other semantic properties are applied to a component or a user interacts with a component. In terms of Eva Design System, there should be at least one appearance property which is going to be used by default. Also it's possible to have more than one appearance to style a component. In this case, any non-default appearance will inherit default appearance.
+Appearance is a semantic property that define the high level view of related component: its dimensions, shape and main colors. Appearance property can optionally contain a `variantGroups` and `state` keys to describe how component should be styled when other semantic properties are applied to a component or a user interacts with a component. In terms of Eva Design System, there should be at least one appearance property which is going to be used by default. Also it's possible to have more than one appearance to style a component. In this case, any non-default appearance will inherit default appearance.
 
 ```json
 {

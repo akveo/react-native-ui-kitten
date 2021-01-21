@@ -258,8 +258,16 @@
 
     .fixed-panel {
       position: fixed;
-      top: 7.5rem;
+      top: 6rem;
       width: inherit;
+      overflow-y: auto;
+      height: calc(100vh - 6rem);
+      padding: 1.5rem 1.5rem 0;
+
+      @include nb-scrollbars(
+          nb-theme(sidebar-scrollbar-color),
+          nb-theme(sidebar-scrollbar-background-color),
+          nb-theme(sidebar-scrollbar-width));
     }
   }
 }
