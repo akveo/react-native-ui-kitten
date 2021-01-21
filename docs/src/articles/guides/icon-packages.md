@@ -1,6 +1,6 @@
 # Icon Packages
 
-<a href="https://hubs.ly/H0n6Df50" target="_blank">Eva Icons</a> is a pack of beautifully crafted Open Source icons for common actions and items.
+<a href="https://akveo.github.io/eva-icons?utm_campaign=eva_icons%20-%20home%20-%20ui_kitten%20docs&utm_source=ui_kitten&utm_medium=referral&utm_content=icons_tutorial_based_on" target="_blank">Eva Icons</a> is a pack of beautifully crafted Open Source icons for common actions and items.
 UI Kitten has its own module to run it in React Native, adopting for better usage with UI Kitten components.
 If you're not interested in using Eva Icons, learn how to integrate [3rd party Icon packages](guides/icon-packages#3rd-party-icon-packages).
 
@@ -91,7 +91,7 @@ As a result, you should have a Button looking similar to this:
 
 ![image](assets/images/articles/guides/sample-icon-button.png)
 
-The complete list of available icons could be found on <a href="https://hubs.ly/H0n6C_60" target="_blank">Eva Icons page</a>.
+The complete list of available icons could be found on <a href="https://akveo.github.io/eva-icons?utm_campaign=eva_icons%20-%20home%20-%20ui_kitten%20docs&utm_source=ui_kitten&utm_medium=referral&utm_content=icons_tutorial_found_on" target="_blank">Eva Icons page</a>.
 
 <hr>
 
