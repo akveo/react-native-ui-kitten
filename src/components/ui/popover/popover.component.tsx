@@ -5,7 +5,12 @@
  */
 
 import React from 'react';
-import { StyleSheet, BackHandler, NativeEventSubscription, Platform } from 'react-native';
+import {
+  StyleSheet,
+  BackHandler,
+  NativeEventSubscription,
+  Platform 
+} from 'react-native';
 import {
   Frame,
   MeasureElement,
