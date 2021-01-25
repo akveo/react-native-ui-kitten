@@ -261,5 +261,23 @@ describe('@calendar: component checks', () => {
     fireEvent.press(component.getByText('7'));
   });
 
+  it('should call onMonthChange function', async () => {
+
+    const onMonthChange = jest.fn();
+
+    const component = render(
+      <TestCalendar onMonthChange={onMonthChange} />
+    );
+
+    const navigationPrevButton = component.queryAllByType(TouchableOpacity)[1];
+    const navigationNextButton = component.queryAllByType(TouchableOpacity)[2];
+
+    fireEvent.press(navigationPrevButton);
+    expect(onMonthChange).toBeCalledTimes(1);
+
+    fireEvent.press(navigationNextButton);
+    expect(onMonthChange).toBeCalledTimes(2);
+
+  });
 
 });
