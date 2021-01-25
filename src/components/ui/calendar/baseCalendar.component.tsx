@@ -52,6 +52,7 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
+  onMonthChange?: (date: D) => void;
   eva?: EvaProp;
 }
 
@@ -190,6 +191,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     this.setState({
       viewMode: this.state.viewMode.pickNext(),
       visibleDate: nextVisibleDate,
+    }, () => {
+      this.props.onMonthChange && this.props.onMonthChange(this.state.visibleDate);
     });
   };
 
@@ -215,12 +218,16 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   private onHeaderNavigationLeftPress = (): void => {
     this.setState({
       visibleDate: this.createViewModeVisibleDate(-1),
+    }, () => {
+      this.props.onMonthChange && this.state.viewMode.id === 'DATE' && this.props.onMonthChange(this.state.visibleDate);
     });
   };
 
   private onHeaderNavigationRightPress = (): void => {
     this.setState({
       visibleDate: this.createViewModeVisibleDate(1),
+    }, () => {
+      this.props.onMonthChange && this.state.viewMode.id === 'DATE' && this.props.onMonthChange(this.state.visibleDate);
     });
   };
 
