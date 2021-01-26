@@ -263,20 +263,20 @@ describe('@calendar: component checks', () => {
 
   it('should call onMonthChange function', async () => {
 
-    const onMonthChange = jest.fn();
+    const onVisibleDateChange = jest.fn();
 
     const component = render(
-      <TestCalendar onMonthChange={onMonthChange} />
+      <TestCalendar onVisibleDateChange={onVisibleDateChange} />
     );
 
     const navigationPrevButton = component.queryAllByType(TouchableOpacity)[1];
     const navigationNextButton = component.queryAllByType(TouchableOpacity)[2];
 
     fireEvent.press(navigationPrevButton);
-    expect(onMonthChange).toBeCalledTimes(1);
+    expect(onVisibleDateChange).toBeCalledTimes(1);
 
     fireEvent.press(navigationNextButton);
-    expect(onMonthChange).toBeCalledTimes(2);
+    expect(onVisibleDateChange).toBeCalledTimes(2);
 
   });
 
