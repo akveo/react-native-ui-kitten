@@ -149,7 +149,7 @@ export class Menu extends React.Component<MenuProps> {
     const descriptor = this.service.createDescriptorForElement(info.item, info.index);
     const selected: boolean = this.isItemSelected(descriptor);
 
-    return this.cloneItemWithProps(info.item, { descriptor, selected, onPress: this.onItemPress });
+    return this.cloneItemWithProps(info.item, { descriptor, selected, onItemPress: this.onItemPress });
   };
 
   public render(): ListElement {

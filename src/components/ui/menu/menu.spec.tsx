@@ -180,6 +180,32 @@ describe('@menu: component checks', () => {
 
     fireEvent.press(component.queryByText('Option 2.1'));
   });
+
+  it('should fire onPress event for group & item separately', () => {
+
+    const onGroupPress = jest.fn();
+    const onItemPress = jest.fn();
+
+    const component = render(
+      <TestMenu>
+        <MenuGroup onPress={onGroupPress} title='Group 1'>
+          <MenuItem onPress={onItemPress} title='Option 1.1'/>
+          <MenuItem title='Option 1.2'/>
+        </MenuGroup>
+        <MenuGroup title='Group 2'>
+          <MenuItem title='Option 2.1'/>
+          <MenuItem title='Option 2.2'/>
+        </MenuGroup>
+      </TestMenu>,
+    );
+
+    fireEvent.press(component.queryByText('Group 1'));
+    expect(onGroupPress).toBeCalledTimes(1);
+
+    fireEvent.press(component.queryByText('Option 1.1'));
+    expect(onItemPress).toBeCalledTimes(1);
+
+  });
 });
 
 

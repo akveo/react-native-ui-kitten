@@ -36,7 +36,7 @@ type MenuItemStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 type TouchableMenuItemProps = Overwrite<TouchableWebProps, {
-  onPress?: (descriptor: MenuItemDescriptor, event?: GestureResponderEvent) => void;
+  onPress?: () => void;
 }>;
 
 export interface MenuItemProps extends TouchableMenuItemProps, MenuItemStyledProps {
@@ -45,6 +45,7 @@ export interface MenuItemProps extends TouchableMenuItemProps, MenuItemStyledPro
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
   descriptor?: MenuItemDescriptor;
+  onItemPress?: (descriptor: MenuItemDescriptor, event?: GestureResponderEvent) => void;
 }
 
 export type MenuItemElement = React.ReactElement<MenuItemProps>;
@@ -95,7 +96,8 @@ export class MenuItem extends React.Component<MenuItemProps> {
   };
 
   private onPress = (event: GestureResponderEvent): void => {
-    this.props.onPress && this.props.onPress(this.props.descriptor, event);
+    this.props.onPress && this.props.onPress();
+    this.props.onItemPress && this.props.onItemPress(this.props.descriptor, event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {

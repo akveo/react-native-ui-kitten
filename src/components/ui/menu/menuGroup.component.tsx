@@ -97,6 +97,10 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     return { appearance: 'grouped' };
   }
 
+  private onGroupItemPress = (): void => {
+    this.props.onPress && this.props.onPress();
+  };
+
   private onPress = (): void => {
     if (this.hasSubmenu) {
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
@@ -172,7 +176,8 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
         <MenuItem
           accessoryRight={this.renderAccessoryIfNeeded}
           {...itemProps}
-          onPress={this.onPress}
+          onPress={this.onGroupItemPress}
+          onItemPress={this.onPress}
         />
         {this.renderGroupedItemsIfNeeded({})}
       </React.Fragment>
