@@ -32,6 +32,7 @@ import {
   CalendarDateInfo,
   CalendarViewMode,
   CalendarViewModes,
+  CalendarViewModeId
 } from './type';
 import { DateService } from './service/date.service';
 import { NativeDateService } from './service/nativeDate.service';
@@ -52,7 +53,7 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
-  onVisibleDateChange?: (date: D, viewMode: CalendarViewMode) => void;
+  onVisibleDateChange?: (date: D, viewModeId: CalendarViewModeId) => void;
   eva?: EvaProp;
 }
 
@@ -192,7 +193,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       viewMode: this.state.viewMode.pickNext(),
       visibleDate: nextVisibleDate,
     }, () => {
-      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode);
+      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
@@ -207,7 +208,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       viewMode: this.state.viewMode.pickNext(),
       visibleDate: nextVisibleDate,
     }, () => {
-      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode);
+      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
@@ -221,7 +222,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     this.setState({
       visibleDate: this.createViewModeVisibleDate(-1),
     }, () => {
-      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode);
+      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
@@ -229,7 +230,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     this.setState({
       visibleDate: this.createViewModeVisibleDate(1),
     }, () => {
-      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode);
+      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
