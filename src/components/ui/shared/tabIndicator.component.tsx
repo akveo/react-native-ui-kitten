@@ -36,7 +36,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
   }
 
   public shouldComponentUpdate(nextProps: TabIndicatorProps): boolean {
-    return this.props.selectedPosition !== nextProps.selectedPosition;
+    return this.props.selectedPosition !== nextProps.selectedPosition || this.props.style !== nextProps.style;
   }
 
   public componentDidUpdate() {
