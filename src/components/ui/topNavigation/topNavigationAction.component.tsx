@@ -88,6 +88,10 @@ export class TopNavigationAction extends React.Component<TopNavigationActionProp
     this.props.onPressOut && this.props.onPressOut(event);
   };
 
+  componentDidMount() {
+    this.props.disabled && this.props.eva.dispatch([Interaction.HOVER]);
+  }
+
   private getComponentStyle = (source: StyleType) => {
     const {
       iconTintColor,
