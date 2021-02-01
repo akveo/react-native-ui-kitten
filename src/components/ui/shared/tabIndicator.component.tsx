@@ -35,10 +35,6 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
   }
 
-  public shouldComponentUpdate(nextProps: TabIndicatorProps): boolean {
-    return this.props.selectedPosition !== nextProps.selectedPosition || this.props.style !== nextProps.style;
-  }
-
   public componentDidUpdate() {
     const { selectedPosition: index } = this.props;
 
@@ -92,7 +88,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
       toValue: RTLService.select(params.offset, -params.offset),
       duration: 200,
       easing: Easing.linear,
-      useNativeDriver: Platform.OS !== 'web',
+      useNativeDriver: false,
     });
   };
 
