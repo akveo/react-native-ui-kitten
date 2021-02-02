@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { ListRenderItemInfo } from 'react-native';
+import { ListRenderItemInfo, GestureResponderEvent } from 'react-native';
 import {
   ChildrenWithProps,
   IndexPath,
@@ -127,6 +127,7 @@ export class Menu extends React.Component<MenuProps> {
   };
 
   private onItemPress = (descriptor: MenuItemDescriptor): void => {
+    console.log('press');
     this.props.onSelect && this.props.onSelect(descriptor.index);
   };
 
@@ -142,14 +143,19 @@ export class Menu extends React.Component<MenuProps> {
       return this.cloneItemWithProps(el, { ...props, selected, descriptor });
     });
 
-    return React.cloneElement(element, { ...props, ...element.props }, nestedElements);
+    return React.cloneElement(element, { ...element.props, ...props }, nestedElements);
   };
 
   private renderItem = (info: ListRenderItemInfo<MenuItemElement>): React.ReactElement => {
     const descriptor = this.service.createDescriptorForElement(info.item, info.index);
     const selected: boolean = this.isItemSelected(descriptor);
 
-    return this.cloneItemWithProps(info.item, { descriptor, selected, onItemPress: this.onItemPress });
+    return this.cloneItemWithProps(info.item, { descriptor, selected,
+      onPress: (event: GestureResponderEvent): void => {
+        info.item.props.onPress && info.item.props.onPress(event, descriptor);
+        this.onItemPress(descriptor);
+      },
+    });
   };
 
   public render(): ListElement {

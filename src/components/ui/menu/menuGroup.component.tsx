@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ViewProps,
   ViewStyle,
+  GestureResponderEvent
 } from 'react-native';
 import {
   ChildrenWithProps,
@@ -97,14 +98,11 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     return { appearance: 'grouped' };
   }
 
-  private onGroupItemPress = (): void => {
-    this.props.onPress && this.props.onPress();
-  };
-
-  private onPress = (): void => {
+  private onPress = (event: GestureResponderEvent): void => {
     if (this.hasSubmenu) {
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue).start();
+      this.props.onPress && this.props.onPress(event, this.props.descriptor);
     }
   };
 
@@ -176,8 +174,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
         <MenuItem
           accessoryRight={this.renderAccessoryIfNeeded}
           {...itemProps}
-          onPress={this.onGroupItemPress}
-          onItemPress={this.onPress}
+          onPress={this.onPress}
         />
         {this.renderGroupedItemsIfNeeded({})}
       </React.Fragment>
