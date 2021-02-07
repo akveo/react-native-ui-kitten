@@ -127,7 +127,6 @@ export class Menu extends React.Component<MenuProps> {
   };
 
   private onItemPress = (descriptor: MenuItemDescriptor): void => {
-    console.log('press');
     this.props.onSelect && this.props.onSelect(descriptor.index);
   };
 
