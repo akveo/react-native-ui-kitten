@@ -11,6 +11,7 @@ import {
   View,
   ViewProps,
   ViewStyle,
+  Dimensions,
 } from 'react-native';
 import {
   Frame,
@@ -93,7 +94,15 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     this.modalId = ModalService.hide(this.modalId);
   };
 
+  public forceRender = (): void => {
+    if(this.props.visible) {
+      this.hide();
+      this.show();
+    }
+  }
+
   public componentDidMount(): void {
+    Dimensions.addEventListener('change', this.forceRender);
     if (!this.modalId && this.props.visible) {
       this.show();
       return;
@@ -117,6 +126,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   }
 
   public componentWillUnmount(): void {
+    Dimensions.removeEventListener('change', this.forceRender);
     this.hide();
   }
 
