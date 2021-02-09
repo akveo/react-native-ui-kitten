@@ -49,8 +49,10 @@ const VIEW_MODE_YEAR: CalendarViewMode = {
   },
 };
 
+export type CalendarViewModeId = 'DATE' | 'MONTH' | 'YEAR';
+
 export interface CalendarViewMode {
-  id: string;
+  id: CalendarViewModeId;
   navigationNext: () => CalendarViewMode;
   pickNext: () => CalendarViewMode;
 }

@@ -59,8 +59,7 @@
   display: -ms-flexbox;
   display: flex;
   min-width: 180px;
-  margin-top: 0px;
-  margin-left: 0px;
+  margin: 0.5rem;
   padding: 16px 32px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -82,6 +81,7 @@
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .button-giant-primary-default:hover {
@@ -135,7 +135,7 @@
   display: -ms-flexbox;
   display: flex;
   min-width: 180px;
-  margin-left: 16px;
+  margin: 0.5rem;
   padding: 16px 32px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -154,6 +154,7 @@
   line-height: 24px;
   font-weight: 700;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .button-giant-primary-ghost:hover {
@@ -200,11 +201,12 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 40px;
+  margin: 1.5rem -0.5rem -0.5rem;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .text-paragraph-1 {
@@ -2407,9 +2409,6 @@
 }
 
 @media (max-width: 479px) {
-  .button-giant-primary-default {
-    margin-left: 0px;
-  }
   .hero-section {
     padding-right: 24px;
     padding-left: 24px;
@@ -2420,10 +2419,6 @@
   }
   .text-heading-1.alternative.center {
     font-size: 48px;
-  }
-  .button-giant-primary-ghost {
-    margin-top: 24px;
-    margin-left: 0px;
   }
   .buttons {
     -webkit-box-orient: vertical;
