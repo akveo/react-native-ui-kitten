@@ -65,7 +65,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {string} value - A value displayed in input field.
  *
- * @property {string} onChangeText - Called when the value should be changed.
+ * @property {(string) => void} onChangeText - Called when the value should be changed.
  *
  * @property {() => void} onFocus - Called when input field becomes focused.
  *

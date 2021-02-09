@@ -3,6 +3,7 @@ import { task } from 'gulp';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { isAbsolute, join, resolve, sep } from "path";
 export const DOCS_DIST = './docs/dist';
+export const DOCS_SITE_URL = 'https://akveo.github.io/react-native-ui-kitten/';
 
 task('create-docs-dirs', (done) => {
   const docsStructure = flatten('docs', routesTree(DOCS));
@@ -11,12 +12,58 @@ task('create-docs-dirs', (done) => {
   done();
 });
 
+task('create-sitemap', (done) => {
+  const docsPages = flattenLeafs('docs', routesTree(DOCS));
+  createSitemap(docsPages);
+
+  done();
+});
+
+
+function createSitemap(docsPages) {
+  const sitemap = getSitemap(docsPages);
+  writeFileSync(join(DOCS_DIST, 'sitemap.xml'), sitemap);
+}
+
+function getSitemap(docsPages) {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>${DOCS_SITE_URL}</loc>
+      </url>
+      ${getUrlTags(docsPages)}
+     </urlset>`;
+}
+
+function getUrlTags(docsPages) {
+  return docsPages.map(pageUrl => {
+    return `
+     <url>
+       <loc>${DOCS_SITE_URL}${pageUrl}</loc>
+     </url>`;
+  }).join('');
+}
 
 function flatten(root, arr) {
   let res: any[] = [];
   arr.forEach((item: any) => {
     const path = `${root}/${item.path}`;
     res.push(path);
+    if (item.children) {
+      res = res.concat(flatten(path, item.children));
+    }
+  });
+
+  return res;
+}
+
+function flattenLeafs(root, arr) {
+  let res: any[] = [];
+  arr.forEach((item: any) => {
+    const path = `${root}/${item.path}`;
+    if (!item.children || item.children.length === 0) {
+      res.push(path);
+    }
     if (item.children) {
       res = res.concat(flatten(path, item.children));
     }
