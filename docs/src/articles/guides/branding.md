@@ -31,7 +31,7 @@ and are used by each component in its default state.
 For instance, buttons in its default state are primary, and Inputs are basic.
 Inputs become primary when the user starts interacting.
 
-The easiest way to create UI Kitten theme is to use <a href="https://hubs.ly/H0n6DdP0" target="_blank">Eva Colors</a> - a deep learning color generator.
+The easiest way to create UI Kitten theme is to use <a href="https://colors.eva.design?utm_campaign=eva_colors%20-%20home%20-%20kitten_docs&utm_source=ui_kitten&utm_medium=referral&utm_content=branding_article_link" target="_blank">Eva Colors</a> - a deep learning color generator.
 Start with picking the primary color. Our choice is orange.
 
 ![image](assets/images/articles/guides/branding-pick-color.gif)
@@ -70,7 +70,7 @@ With a single step by configuring primary color, we made UI Kitten components be
 Backgrounds and borders are controlled with Basic color.
 
 There are 11 shades of Basic color. In order to change backgrounds properly, each of them should be configured.
-To do this, we may get back to <a href="https://hubs.ly/H0n6DdP0" target="_blank">Eva Colors</a>.
+To do this, we may get back to <a href="https://colors.eva.design?utm_campaign=eva_colors%20-%20home%20-%20kitten_docs&utm_source=ui_kitten&utm_medium=referral&utm_content=branding_article_link" target="_blank">Eva Colors</a>.
 Start with choosing the lightest shade of the background (usually, it is completely white in light themes)
 and move down accurately by picking darker shades. Paste each color into `theme.json` like in the example below.
 ```json
