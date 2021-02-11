@@ -221,9 +221,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         ...containerParameters,
         ...inputContainerStyle,
       },
-      captionContainer: {
-        marginTop: captionMarginTop,
-      },
       text: {
         marginHorizontal: textMarginHorizontal,
         fontFamily: textFontFamily,
