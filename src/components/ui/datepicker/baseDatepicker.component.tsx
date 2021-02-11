@@ -134,9 +134,6 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
     return {
       control: controlParameters,
-      captionContainer: {
-        marginTop: captionMarginTop,
-      },
       text: {
         marginHorizontal: textMarginHorizontal,
         fontFamily: textFontFamily,
@@ -272,7 +269,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
           onBackdropPress={this.setPickerInvisible}>
           {this.renderCalendar()}
         </Popover>
-        <View style={[evaStyle.captionContainer, styles.captionContainer]}>
+        <View style={styles.captionContainer}>
           <FalsyFC
             style={evaStyle.captionIcon}
             component={captionIcon}
