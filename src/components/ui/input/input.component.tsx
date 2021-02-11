@@ -299,7 +299,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <View style={[evaStyle.captionContainer, styles.captionContainer]}>
+        <View style={styles.captionContainer}>
           <FalsyFC
             style={evaStyle.captionIcon}
             component={captionIcon}
