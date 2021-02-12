@@ -32,7 +32,9 @@ import {
   CalendarDateInfo,
   CalendarViewMode,
   CalendarViewModes,
+  CalendarViewModeId,
 } from './type';
+import { TranslationWidth } from './i18n/type';
 import { DateService } from './service/date.service';
 import { NativeDateService } from './service/nativeDate.service';
 import {
@@ -52,6 +54,7 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
+  onVisibleDateChange?: (date: D, viewModeId: CalendarViewModeId) => void;
   eva?: EvaProp;
 }
 
@@ -65,13 +68,6 @@ interface State<D> {
 const PICKER_ROWS: number = 4;
 const PICKER_COLUMNS: number = 3;
 const VIEWS_IN_PICKER: number = PICKER_ROWS * PICKER_COLUMNS;
-
-const FORMAT_DAY: string = 'D';
-const FORMAT_MONTH: string = 'MMM';
-const FORMAT_YEAR: string = 'YYYY';
-const FORMAT_HEADER_DATE: string = 'MMMM YYYY';
-const FORMAT_HEADER_MONTH: string = 'YYYY';
-const FORMAT_HEADER_YEAR: string = 'YYYY';
 
 export abstract class BaseCalendarComponent<P, D = Date> extends React.Component<BaseCalendarProps<D> & P, State<D>> {
 
@@ -190,6 +186,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     this.setState({
       viewMode: this.state.viewMode.pickNext(),
       visibleDate: nextVisibleDate,
+    }, () => {
+      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
@@ -203,6 +201,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     this.setState({
       viewMode: this.state.viewMode.pickNext(),
       visibleDate: nextVisibleDate,
+    }, () => {
+      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
@@ -215,12 +215,16 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   private onHeaderNavigationLeftPress = (): void => {
     this.setState({
       visibleDate: this.createViewModeVisibleDate(-1),
+    }, () => {
+      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
   private onHeaderNavigationRightPress = (): void => {
     this.setState({
       visibleDate: this.createViewModeVisibleDate(1),
+    }, () => {
+      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
@@ -288,14 +292,16 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   private createViewModeHeaderTitle = (date: D, viewMode: CalendarViewMode): string => {
     switch (viewMode.id) {
       case CalendarViewModes.DATE.id: {
-        return this.dateService.format(date, FORMAT_HEADER_DATE);
+        const month: string = this.props.dateService.getMonthName(date, TranslationWidth.LONG);
+        const year: number = this.props.dateService.getYear(date);
+        return `${month} ${year}`;
       }
       case CalendarViewModes.MONTH.id: {
-        return this.dateService.format(date, FORMAT_HEADER_MONTH);
+        return `${this.dateService.getYear(date)}`;
       }
       case CalendarViewModes.YEAR.id: {
-        const minDateFormat: string = this.dateService.format(this.min, FORMAT_HEADER_YEAR);
-        const maxDateFormat: string = this.dateService.format(this.max, FORMAT_HEADER_YEAR);
+        const minDateFormat: number = this.dateService.getYear(this.min);
+        const maxDateFormat: number = this.dateService.getYear(this.max);
 
         return `${minDateFormat} - ${maxDateFormat}`;
       }
@@ -328,7 +334,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       <CalendarDateContent
         style={evaStyle.container}
         textStyle={evaStyle.text}>
-        {this.dateService.format(date, FORMAT_DAY)}
+        {this.dateService.getDate(date)}
       </CalendarDateContent>
     );
   };
@@ -338,7 +344,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       <CalendarDateContent
         style={evaStyle.container}
         textStyle={evaStyle.text}>
-        {this.dateService.format(date, FORMAT_MONTH)}
+        {this.dateService.getMonthName(date, TranslationWidth.SHORT)}
       </CalendarDateContent>
     );
   };
@@ -348,7 +354,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       <CalendarDateContent
         style={evaStyle.container}
         textStyle={evaStyle.text}>
-        {this.dateService.format(date, FORMAT_YEAR)}
+        {this.dateService.getYear(date)}
       </CalendarDateContent>
     );
   };

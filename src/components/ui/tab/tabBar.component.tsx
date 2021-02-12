@@ -68,7 +68,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
  * import { TabBar, Tab, Layout, Text } from '@ui-kitten/components';
  *
- * const { Navigator, Screen } = createBottomTabNavigator();
+ * const { Navigator, Screen } = createMaterialTopTabNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
