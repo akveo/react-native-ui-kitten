@@ -33,8 +33,12 @@ import {
   PopoverPlacements,
 } from './type';
 
+interface PopoverModalChildrenProps extends React.ReactElement {
+  ref?: any
+}
+
 type PopoverModalProps = Overwrite<ModalProps, {
-  children?: React.ReactElement;
+  children?: PopoverModalChildrenProps;
 }>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {

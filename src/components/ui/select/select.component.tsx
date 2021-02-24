@@ -74,6 +74,7 @@ export type SelectElement = React.ReactElement<SelectProps>;
 
 interface State {
   listVisible: boolean;
+  ref: any;
 }
 
 const CHEVRON_DEG_COLLAPSED: number = -180;
@@ -222,10 +223,12 @@ export class Select extends React.Component<SelectProps, State> {
 
   public state: State = {
     listVisible: false,
+    ref: React.createRef<List>(),
   };
 
   private service: SelectService = new SelectService();
   private popoverRef = React.createRef<Popover>();
+  private listRef = React.createRef<List>();
   private expandAnimation: Animated.Value = new Animated.Value(0);
 
   private get isMultiSelect(): boolean {
@@ -285,8 +288,24 @@ export class Select extends React.Component<SelectProps, State> {
   };
 
   private onPress = (): void => {
+    // console.log(this.state.ref);
     this.setOptionsListVisible();
+    console.log(this.state.ref);
+    this.state.ref.current?.scrollToEnd();
   };
+
+  private asd = (ref: any): void => {
+    this.setState({ ref: {
+      current: ref
+    } });
+  };
+
+  public componentDidUpdate() {
+    console.log(this.state.ref);
+    setTimeout(() => {
+      this.state.ref.current?.scrollToEnd();
+    }, 1000);
+  }
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
@@ -500,6 +519,7 @@ export class Select extends React.Component<SelectProps, State> {
           anchor={() => this.renderInputElement(touchableProps, evaStyle)}
           onBackdropPress={this.onBackdropPress}>
           <List
+            ref={this.asd}
             style={styles.list}
             data={this.data}
             bounces={false}
