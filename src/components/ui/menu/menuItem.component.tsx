@@ -36,7 +36,7 @@ type MenuItemStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 type TouchableMenuItemProps = Overwrite<TouchableWebProps, {
-  onPress?: (event: GestureResponderEvent, descriptor: MenuItemDescriptor) => void;
+  onPress?: (descriptor: MenuItemDescriptor, event?: GestureResponderEvent) => void;
 }>;
 
 export interface MenuItemProps extends TouchableMenuItemProps, MenuItemStyledProps {
@@ -95,7 +95,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
   };
 
   private onPress = (event: GestureResponderEvent): void => {
-    this.props.onPress && this.props.onPress(event, this.props.descriptor);
+    this.props.onPress && this.props.onPress(this.props.descriptor, event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
@@ -157,7 +157,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={[StyleSheet.absoluteFill, evaStyle.indicator]} />
+        <View style={[StyleSheet.absoluteFill, evaStyle.indicator]}/>
         <FalsyFC
           style={evaStyle.icon}
           component={accessoryLeft}

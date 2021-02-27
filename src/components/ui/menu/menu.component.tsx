@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { ListRenderItemInfo, GestureResponderEvent } from 'react-native';
+import { GestureResponderEvent, ListRenderItemInfo } from 'react-native';
 import {
   ChildrenWithProps,
   IndexPath,
@@ -141,20 +141,30 @@ export class Menu extends React.Component<MenuProps> {
 
       return this.cloneItemWithProps(el, { ...props, selected, descriptor });
     });
+    let onPress;
+    const { onPress: elementOnPress } = element.props;
+    const { onPress: menuOnPress } = props;
+    if (elementOnPress) {
+      onPress = elementOnPress;
+    }
+    if (menuOnPress) {
+      onPress = menuOnPress;
+    }
+    if (elementOnPress && menuOnPress) {
+      onPress = (event, descriptor) => {
+        elementOnPress();
+        menuOnPress(event, descriptor);
+      };
+    }
 
-    return React.cloneElement(element, { ...element.props, ...props }, nestedElements);
+    return React.cloneElement(element, { ...element.props, ...props, onPress }, nestedElements);
   };
 
   private renderItem = (info: ListRenderItemInfo<MenuItemElement>): React.ReactElement => {
     const descriptor = this.service.createDescriptorForElement(info.item, info.index);
     const selected: boolean = this.isItemSelected(descriptor);
 
-    return this.cloneItemWithProps(info.item, { descriptor, selected,
-      onPress: (event: GestureResponderEvent): void => {
-        info.item.props.onPress && info.item.props.onPress(event, descriptor);
-        this.onItemPress(descriptor);
-      },
-    });
+    return this.cloneItemWithProps(info.item, { descriptor, selected, onPress: this.onItemPress });
   };
 
   public render(): ListElement {

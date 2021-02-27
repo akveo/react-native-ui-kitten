@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   ImageProps,
   StyleSheet,
   ViewProps,
   ViewStyle,
-  GestureResponderEvent
 } from 'react-native';
 import {
   ChildrenWithProps,
@@ -98,11 +98,11 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     return { appearance: 'grouped' };
   }
 
-  private onPress = (event: GestureResponderEvent): void => {
+  private onPress = (): void => {
     if (this.hasSubmenu) {
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue).start();
-      this.props.onPress && this.props.onPress(event, this.props.descriptor);
+      this.props.onPress && this.props.onPress(this.props.descriptor);
     }
   };
 
