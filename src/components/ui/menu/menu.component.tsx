@@ -153,7 +153,7 @@ export class Menu extends React.Component<MenuProps> {
     if (elementOnPress && menuOnPress) {
       onPress = (event, descriptor) => {
         elementOnPress();
-        menuOnPress(event, descriptor);
+        descriptor && menuOnPress(event, descriptor);
       };
     }
 
