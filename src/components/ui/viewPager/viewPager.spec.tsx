@@ -14,6 +14,10 @@ import {
 
 describe('@view-pager: component checks', () => {
 
+  const getComponentProps = (component) => {
+    return component._fiber.pendingProps;
+  };
+
   const TestViewPager = (props?: ViewPagerProps): React.ReactElement<ViewPagerProps> => (
     <ViewPager {...props}/>
   );
@@ -52,6 +56,29 @@ describe('@view-pager: component checks', () => {
 
     expect(component.queryByText('Tab 0')).toBeTruthy();
     expect(component.queryByText('Tab 1')).toBeFalsy();
+  });
+
+  it('should disable swipe gesture when swipeEnabled is false', () => {
+    const component = render(
+      <TestViewPager swipeEnabled={false}>
+        <Text>Tab 0</Text>
+        <Text>Tab 1</Text>
+      </TestViewPager>,
+    );
+
+    const viewPager = component.UNSAFE_queryByType(ViewPager);
+
+    expect(getComponentProps(viewPager).onStartShouldSetResponder).toBeFalsy();
+    expect(getComponentProps(viewPager).onMoveShouldSetResponder).toBeFalsy();
+    expect(getComponentProps(viewPager).onMoveShouldSetResponderCapture).toBeFalsy();
+    expect(getComponentProps(viewPager).onResponderGrant).toBeFalsy();
+    expect(getComponentProps(viewPager).onResponderReject).toBeFalsy();
+    expect(getComponentProps(viewPager).onResponderRelease).toBeFalsy();
+    expect(getComponentProps(viewPager).onResponderStart).toBeFalsy();
+    expect(getComponentProps(viewPager).onResponderMove).toBeFalsy();
+    expect(getComponentProps(viewPager).onResponderEnd).toBeFalsy();
+    expect(getComponentProps(viewPager).onResponderTerminate).toBeFalsy();
+    expect(getComponentProps(viewPager).onResponderTerminationRequest).toBeFalsy();
   });
 
 });
