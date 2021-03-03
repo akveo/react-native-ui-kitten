@@ -197,12 +197,8 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   public render(): React.ReactElement<ViewProps> {
     const { style, children, swipeEnabled, ...viewProps } = this.props;
 
-    const animatedViewProps = swipeEnabled ? {
-      ...viewProps,
-      ...this.panResponder.panHandlers,
-    } : {
-      ...viewProps,
-    };
+    const panResponderConfig = swipeEnabled ? this.panResponder.panHandlers : null;
+    const animatedViewProps = { ...viewProps, ...panResponderConfig  };
 
     return (
       <Animated.View
