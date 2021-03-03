@@ -128,7 +128,6 @@ export class Menu extends React.Component<MenuProps> {
 
   private onItemPress = (descriptor: MenuItemDescriptor): void => {
     this.props.onSelect && this.props.onSelect(descriptor.index);
-    console.log('item pressed');
   };
 
   private isItemSelected = (descriptor: MenuItemDescriptor): boolean => {
