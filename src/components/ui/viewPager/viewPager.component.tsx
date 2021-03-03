@@ -28,6 +28,7 @@ import {
 export interface ViewPagerProps<ChildrenProps = {}> extends ViewProps {
   children?: ChildrenWithProps<ChildrenProps>;
   selectedIndex?: number;
+  swipeEnabled?: boolean;
   onSelect?: (index: number) => void;
   shouldLoadComponent?: (index: number) => boolean;
   onOffsetChange?: (offset: number) => void;
@@ -43,6 +44,8 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * @property {ReactNode} children - Page components to render within the view.
  *
  * @property {number} selectedIndex - Index of currently selected view.
+ *
+ * @property {boolean} swipeEnabled - Disable swipe gesture, but keeping animations.
  *
  * @property {(number) => void} onSelect - Called when view becomes visible.
  *
@@ -65,6 +68,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
 
   static defaultProps: Partial<ViewPagerProps> = {
     selectedIndex: 0,
+    swipeEnabled: true,
     shouldLoadComponent: (): boolean => true,
   };
 
@@ -191,14 +195,16 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, children, ...viewProps } = this.props;
+    const { style, children, swipeEnabled, ...viewProps } = this.props;
+
+    const panResponderConfig = swipeEnabled ? this.panResponder.panHandlers : null;
+    const animatedViewProps = { ...viewProps, ...panResponderConfig  };
 
     return (
       <Animated.View
-        {...viewProps}
+        {...animatedViewProps}
         style={[styles.container, style, this.getContainerStyle()]}
         onLayout={this.onLayout}
-        {...this.panResponder.panHandlers}
         // @ts-ignore
         ref={this.containerRef}>
         {this.renderComponentChildren(children)}
