@@ -31,6 +31,8 @@ import {
 import { IndexPath } from '../../devsupport';
 import { MenuGroup } from './menuGroup.component';
 
+jest.useFakeTimers();
+
 describe('@menu-item: component checks', () => {
 
   const TestMenuItem = (props?: MenuItemProps) => (
@@ -182,12 +184,49 @@ describe('@menu: component checks', () => {
   });
 
   it('should fire onPress event for group & item separately', () => {
+    const onFirstSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(0);
+      expect(index.section).toBeFalsy();
+    });
 
+    const onSecondSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(1);
+      expect(index.section).toBeFalsy();
+    });
+
+    const firstMenuComponent = render(
+      <TestMenu onSelect={onFirstSelect}>
+        <MenuGroup title='Group 1'>
+          <MenuItem title='Option 1.1'/>
+          <MenuItem title='Option 1.2'/>
+        </MenuGroup>
+        <MenuItem title='Option 1'/>
+      </TestMenu>
+    );
+
+    const secondMenuComponent = render(
+      <TestMenu onSelect={onSecondSelect}>
+        <MenuItem title='Option 1'/>
+        <MenuGroup title='Group 2'>
+          <MenuItem title='Option 2.1'/>
+          <MenuItem title='Option 2.2'/>
+        </MenuGroup>
+        <MenuItem title='Option 3'/>
+      </TestMenu>
+    );
+
+    fireEvent.press(firstMenuComponent.queryByText('Group 1'));
+
+    fireEvent.press(secondMenuComponent.queryByText('Group 2'));
+  });
+
+  it('should fire onPress event for group & item separately', () => {
     const onGroupPress = jest.fn();
     const onItemPress = jest.fn();
+    const onSelect = jest.fn();
 
     const component = render(
-      <TestMenu>
+      <TestMenu onSelect={onSelect}>
         <MenuGroup onPress={onGroupPress} title='Group 1'>
           <MenuItem onPress={onItemPress} title='Option 1.1'/>
           <MenuItem title='Option 1.2'/>
@@ -205,6 +244,7 @@ describe('@menu: component checks', () => {
     fireEvent.press(component.queryByText('Option 1.1'));
     expect(onItemPress).toBeCalledTimes(1);
 
+    expect(onSelect).toBeCalledTimes(2);
   });
 });
 
