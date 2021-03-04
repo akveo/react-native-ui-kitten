@@ -183,19 +183,14 @@ describe('@menu: component checks', () => {
     fireEvent.press(component.queryByText('Option 2.1'));
   });
 
-  it('should fire onPress event for group & item separately', () => {
-    const onFirstSelect = jest.fn((index: IndexPath) => {
+  it('should fire onPress on group with row = 0, section = undefined', () => {
+    const onSelect = jest.fn((index: IndexPath) => {
       expect(index.row).toEqual(0);
       expect(index.section).toBeFalsy();
     });
 
-    const onSecondSelect = jest.fn((index: IndexPath) => {
-      expect(index.row).toEqual(1);
-      expect(index.section).toBeFalsy();
-    });
-
-    const firstMenuComponent = render(
-      <TestMenu onSelect={onFirstSelect}>
+    const component = render(
+      <TestMenu onSelect={onSelect}>
         <MenuGroup title='Group 1'>
           <MenuItem title='Option 1.1'/>
           <MenuItem title='Option 1.2'/>
@@ -204,8 +199,17 @@ describe('@menu: component checks', () => {
       </TestMenu>
     );
 
-    const secondMenuComponent = render(
-      <TestMenu onSelect={onSecondSelect}>
+    fireEvent.press(component.queryByText('Group 1'));
+  });
+
+  it('should fire onPress on group with row = 1, section = undefined', () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(1);
+      expect(index.section).toBeFalsy();
+    });
+
+    const component = render(
+      <TestMenu onSelect={onSelect}>
         <MenuItem title='Option 1'/>
         <MenuGroup title='Group 2'>
           <MenuItem title='Option 2.1'/>
@@ -215,9 +219,7 @@ describe('@menu: component checks', () => {
       </TestMenu>
     );
 
-    fireEvent.press(firstMenuComponent.queryByText('Group 1'));
-
-    fireEvent.press(secondMenuComponent.queryByText('Group 2'));
+    fireEvent.press(component.queryByText('Group 2'));
   });
 
   it('should fire onPress event for group & item separately', () => {
