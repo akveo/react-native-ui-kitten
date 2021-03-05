@@ -8,13 +8,7 @@ import {
   DateService,
   TranslationWidth,
 } from '@ui-kitten/components';
-// @ts-ignore
-import _moment, {
-  default as _rollupMoment,
-  Moment,
-} from 'moment';
-
-const moment = _rollupMoment || _moment;
+import moment, { Moment } from 'moment';
 
 export class MomentDateService extends DateService<Moment> {
 
