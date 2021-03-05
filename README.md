@@ -86,7 +86,7 @@ We're always happy to receive your feedback!
 [link:eva-icons]: https://github.com/akveo/eva-icons
 [link:akveo-homepage]: https://www.akveo.com?utm_campaign=services%20-%20homepage%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=ui_kitten_readme
 [link:akveo-medium]: https://medium.com/akveo-engineering
-[link:akveo-twitter]: https://twitter.com/akveo_inc
+[link:akveo-twitter]: https://twitter.com/akveo
 [link:akveo-facebook]: https://www.facebook.com/akveo
 [link:ui-kitten-bundles]: https://store.akveo.com/collections/mobile-bundles?utm_campaign=akveo_store%20-%20mobile%20bundles%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=banner&utm_content=mobile_bundles_banner
 [link:ui-kitten-bundle-java]: https://store.akveo.com/products/java-mobile-starter-bundle?utm_campaign=akveo_store%20-%20mobile%20bundles%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=java_bundle_link

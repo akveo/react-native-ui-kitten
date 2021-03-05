@@ -17,6 +17,7 @@
     "clean": "rimraf dist",
     "landing": "cp -r src/landing/ dist/",
     "docs:dirs": "gulp create-docs-dirs",
+    "docs:sitemap": "gulp create-sitemap",
     "build:prod": "npm run build -- docs --prod --aot --base-href '/react-native-ui-kitten/docs/'",
     "gh-pages": "npm run ngh -- --dir ./dist"
   },

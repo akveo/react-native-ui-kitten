@@ -16,7 +16,7 @@ import { Text } from '../../text/text.component';
 
 export interface CalendarDateContentProps extends ViewProps {
   textStyle?: StyleProp<TextStyle>;
-  children: string;
+  children: React.ReactText;
 }
 
 export type CalendarDateContentElement = React.ReactElement<CalendarDateContentProps>;
