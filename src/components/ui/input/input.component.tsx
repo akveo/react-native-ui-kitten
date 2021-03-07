@@ -91,10 +91,6 @@ export type InputElement = React.ReactElement<InputProps>;
  * to render to end of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} captionIcon - Function component
- * to render to start of the *caption*.
- * Expected to return an Image.
- *
  * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Defaults to *basic*.
