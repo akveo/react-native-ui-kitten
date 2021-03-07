@@ -50,7 +50,6 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
   caption?: RenderProp<TextProps | ViewProps>;
-  captionIcon?: RenderProp<Partial<ImageProps>>;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
@@ -267,7 +266,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       caption,
       accessoryLeft,
       accessoryRight,
-      captionIcon,
       ...textInputProps
     } = this.props;
 
