@@ -49,7 +49,7 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   size?: EvaSize;
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
-  caption?: RenderProp<TextProps> | React.ReactText;
+  caption?: RenderProp<TextProps | ViewProps>;
   captionIcon?: RenderProp<Partial<ImageProps>>;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
@@ -299,16 +299,10 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <View style={styles.captionContainer}>
-          <FalsyFC
-            style={evaStyle.captionIcon}
-            component={captionIcon}
-          />
-          <FalsyText
-            style={[evaStyle.captionLabel, styles.captionLabel]}
-            component={caption}
-          />
-        </View>
+        <FalsyFC
+          style={evaStyle.captionLabel}
+          component={caption} 
+        />
       </View>
     );
   }
@@ -320,19 +314,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  captionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   text: {
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 'auto',
   },
   label: {
-    textAlign: 'left',
-  },
-  captionLabel: {
     textAlign: 'left',
   },
 });
