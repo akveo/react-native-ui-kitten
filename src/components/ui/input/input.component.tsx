@@ -49,7 +49,7 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   size?: EvaSize;
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
-  caption?: RenderProp<TextProps | ViewProps>;
+  caption?: RenderProp;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
@@ -79,9 +79,8 @@ export type InputElement = React.ReactElement<InputProps>;
  * to render above the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - String, number or a function component
- * to render below the input field.
- * If it is a function, expected to return a Text.
+ * @property {ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * Expected to return View
  *
  * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
@@ -294,7 +293,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
           />
         </View>
         <FalsyFC
-          style={evaStyle.captionLabel}
           component={caption} 
         />
       </View>
