@@ -136,13 +136,18 @@ export class Menu extends React.Component<MenuProps> {
 
   private cloneItemWithProps = (element: React.ReactElement, props: MenuItemProps): React.ReactElement => {
     const nestedElements = React.Children.map(element.props.children, (el: MenuItemElement, index: number) => {
-      const descriptor = this.service.createDescriptorForNestedElement(el, props.descriptor, index);
+      const descriptor = this.service.createDescriptorForNestedElement(props.descriptor, index);
       const selected: boolean = this.isItemSelected(descriptor);
 
       return this.cloneItemWithProps(el, { ...props, selected, descriptor });
     });
 
-    return React.cloneElement(element, { ...props, ...element.props }, nestedElements);
+    const onPress = (event, descriptor) => {
+      element.props.onPress && element.props.onPress();
+      props.onPress(event, descriptor);
+    };
+
+    return React.cloneElement(element, { ...element.props, ...props, onPress }, nestedElements);
   };
 
   private renderItem = (info: ListRenderItemInfo<MenuItemElement>): React.ReactElement => {
