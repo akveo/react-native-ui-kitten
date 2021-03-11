@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React, { createContext } from 'react';
 import merge from 'lodash.merge';
 import { SchemaProcessor } from '@eva-design/processor';
 import {
@@ -25,9 +25,13 @@ interface EvaBuildtimeProcessingProps {
   styles: ThemeStyleType;
 }
 
+interface ProviderProps {
+  topInsetEnabled?: boolean;
+}
+
 type EvaProcessingProps = EvaRuntimeProcessingProps | EvaBuildtimeProcessingProps;
 
-export type ApplicationProviderProps = EvaProcessingProps & ThemeProviderProps;
+export type ApplicationProviderProps = EvaProcessingProps & ThemeProviderProps & ProviderProps;
 export type ApplicationProviderElement = React.ReactElement<ApplicationProviderProps>;
 
 interface State {
@@ -55,6 +59,9 @@ interface State {
  * @property {ThemeStyleType} styles - Styles compiled by bootstrapping Eva packages.
  * If provided, will replace runtime styles processing.
  * Usually, can be provided by `@ui-kitten/metro-config` package.
+ * 
+ * @property {boolean} topInsetEnabled - Applies an additional margin to modal components.
+ * Designed to be provided when StatusBar is translucent.
  *
  * @overview-example Simple Usage
  * ApplicationProvider is designed to be the root component of the application.
@@ -94,6 +101,9 @@ interface State {
  * );
  * ```
  */
+
+export const ApplicationContext = createContext({ topInsetEnabled: false });
+
 export class ApplicationProvider extends React.Component<ApplicationProviderProps, State> {
 
   public state: State = {
@@ -118,13 +128,15 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
 
   public render(): React.ReactNode {
     return (
-      <StyleProvider
-        theme={this.props.theme}
-        styles={this.state.styles}>
-        <ModalPanel>
-          {this.props.children}
-        </ModalPanel>
-      </StyleProvider>
+      <ApplicationContext.Provider value={{topInsetEnabled: this.props?.topInsetEnabled || false}}>
+        <StyleProvider
+          theme={this.props.theme}
+          styles={this.state.styles}>
+          <ModalPanel>
+            {this.props.children}
+          </ModalPanel>
+        </StyleProvider>
+      </ApplicationContext.Provider>
     );
   }
 }
