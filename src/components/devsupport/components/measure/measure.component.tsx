@@ -4,12 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   findNodeHandle,
   UIManager,
+  StatusBar,
 } from 'react-native';
 import { Frame } from './type';
+import { ApplicationContext } from '../../../theme/application/applicationProvider.component';
 
 export interface MeasureElementProps<P = any> {
   force?: boolean;
@@ -44,6 +46,7 @@ export type MeasuringElement<P = any> = React.ReactElement;
 export const MeasureElement = (props: MeasureElementProps): MeasuringElement => {
 
   const ref = React.useRef<any>();
+  const { topInsetEnabled } = useContext(ApplicationContext);
 
   const bindToWindow = (frame: Frame, window: Frame): Frame => {
     if (frame.origin.x < window.size.width) {
@@ -61,7 +64,8 @@ export const MeasureElement = (props: MeasureElementProps): MeasuringElement => 
   };
 
   const onUIManagerMeasure = (x: number, y: number, w: number, h: number): void => {
-    const frame: Frame = bindToWindow(new Frame(x, y, w, h), Frame.window());
+    const originY = topInsetEnabled && StatusBar.currentHeight ? y + StatusBar.currentHeight : y;
+    const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
     props.onMeasure(frame);
   };
 
