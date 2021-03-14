@@ -61,6 +61,7 @@ import {
 class ModalServiceType {
 
   panel: ModalPresenting | null = null;
+  private topInsets: boolean = false;
 
   public mount(panel: ModalPresenting | null): void {
     this.panel = panel;
@@ -86,6 +87,14 @@ class ModalServiceType {
     if (this.panel) {
       return this.panel.hide(identifier);
     }
+  }
+
+  public setTopInsetsState(state: boolean): void {
+    this.topInsets = state;
+  };
+
+  get getTopInsetsState(): boolean {
+    return this.topInsets;
   }
 }
 

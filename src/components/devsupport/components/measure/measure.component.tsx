@@ -8,8 +8,10 @@
  import {
    findNodeHandle,
    UIManager,
+   StatusBar,
  } from 'react-native';
  import { Frame } from './type';
+ import { ModalService } from '../../../theme/modal/modal.service';
  
  export interface MeasureElementProps<P = any> {
    force?: boolean;
@@ -61,7 +63,8 @@
    };
  
    const onUIManagerMeasure = (x: number, y: number, w: number, h: number): void => {
-     const frame: Frame = bindToWindow(new Frame(x, y, w, h), Frame.window());
+     const originY = ModalService.getTopInsetsState ? y + StatusBar.currentHeight || 0 : y;
+     const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
      props.onMeasure(frame);
    };
  
