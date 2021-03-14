@@ -49,7 +49,7 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   size?: EvaSize;
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
-  caption?: RenderProp;
+  caption?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
@@ -292,9 +292,11 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <FalsyFC
-          component={caption} 
-        />
+        {typeof caption === "function" ? (
+          <FalsyFC style={evaStyle.captionLabel} component={caption} />
+        ) : (
+          <FalsyText style={evaStyle.captionLabel} component={caption} />
+        )}
       </View>
     );
   }
