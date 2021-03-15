@@ -15,6 +15,7 @@
  
  export interface MeasureElementProps<P = any> {
    force?: boolean;
+   shouldUseTopInsets: boolean;
    onMeasure: (frame: Frame) => void;
    children: React.ReactElement<P>;
  }
@@ -34,7 +35,7 @@
   *   ...
   * };
   *
-  * <MeasureElement onMeasure={onMeasure}>
+  * <MeasureElement shouldUseTopInsets={ModalService.getShouldUseTopInsets} onMeasure={onMeasure}>
   *   <ElementToMeasure />
   * </MeasureElement>
   * ```
@@ -63,7 +64,7 @@
    };
  
    const onUIManagerMeasure = (x: number, y: number, w: number, h: number): void => {
-     const originY = ModalService.getTopInsetsState ? y + StatusBar.currentHeight || 0 : y;
+     const originY = props.shouldUseTopInsets ? y + StatusBar.currentHeight || 0 : y;
      const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
      props.onMeasure(frame);
    };

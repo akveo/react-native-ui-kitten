@@ -140,7 +140,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
 
   private renderMeasuringContentElement = (): MeasuringElement => {
     return (
-      <MeasureElement onMeasure={this.onContentMeasure}>
+      <MeasureElement shouldUseTopInsets={ModalService.getShouldUseTopInsets} onMeasure={this.onContentMeasure}>
         {this.renderContentElement()}
       </MeasureElement>
     );
