@@ -292,11 +292,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        {typeof caption === "function" ? (
-          <FalsyFC style={evaStyle.captionLabel} component={caption} />
-        ) : (
-          <FalsyText style={evaStyle.captionLabel} component={caption} />
-        )}
+        <FalsyText style={evaStyle.captionLabel} component={caption} />
       </View>
     );
   }
