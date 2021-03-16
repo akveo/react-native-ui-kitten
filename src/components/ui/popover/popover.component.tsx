@@ -218,7 +218,9 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   private renderMeasuringPopoverElement = (): MeasuringElement => {
     return (
-      <MeasureElement shouldUseTopInsets={ModalService.getShouldUseTopInsets} onMeasure={this.onContentMeasure}>
+      <MeasureElement 
+        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
+        onMeasure={this.onContentMeasure}>
         {this.renderPopoverElement()}
       </MeasureElement>
     );
