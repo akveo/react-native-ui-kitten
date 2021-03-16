@@ -202,10 +202,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       captionFontSize,
       captionFontWeight,
       captionFontFamily,
-      captionIconWidth,
-      captionIconHeight,
-      captionIconMarginRight,
-      captionIconTintColor,
       ...containerParameters
     } = source;
 
@@ -237,12 +233,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
         fontFamily: labelFontFamily,
-      },
-      captionIcon: {
-        width: captionIconWidth,
-        height: captionIconHeight,
-        tintColor: captionIconTintColor,
-        marginRight: captionIconMarginRight,
       },
       captionLabel: {
         fontSize: captionFontSize,
@@ -292,7 +282,10 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <FalsyText style={evaStyle.captionLabel} component={caption} />
+        <FalsyText 
+          style={evaStyle.captionLabel} 
+          component={caption}
+        />
       </View>
     );
   }

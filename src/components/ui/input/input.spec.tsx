@@ -119,15 +119,15 @@ describe('@input: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render component passed to caption prop', () => {
+  it('should render text passed to caption prop', () => {
     const component = render(
-      <TestInput caption={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestInput caption='I love Babel' />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render component passed to captionIcon prop', () => {
+  it('should render component passed to caption prop', () => {
     const Caption = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
