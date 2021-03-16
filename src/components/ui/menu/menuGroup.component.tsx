@@ -147,7 +147,9 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   private renderMeasuringGroupedItems = (evaStyle): MeasuringElement => {
     return (
-      <MeasureElement shouldUseTopInsets={ModalService.getShouldUseTopInsets} onMeasure={this.onSubmenuMeasure}>
+      <MeasureElement 
+        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
+        onMeasure={this.onSubmenuMeasure}>
         {this.renderGroupedItems(evaStyle)}
       </MeasureElement>
     );
