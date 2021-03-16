@@ -107,13 +107,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * to render to end of the text.
  * Expected to return an Image.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - String, number or a function component
- * to render to bottom of the input field.
- * If it is a function, expected to return a Text.
- *
- * @property {(ImageProps) => ReactElement} captionIcon - Function component
- * to render to start of the *caption*.
- * Expected to return an Image.
+ * @property {ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * Expected to return View.
  *
  * @property {() => void} onFocus - Called when picker becomes visible.
  *

@@ -80,7 +80,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * If it is a function, expected to return a Text.
  *
  * @property {ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
- * Expected to return View
+ * Expected to return View.
  *
  * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
@@ -283,7 +283,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
           />
         </View>
         <FalsyText 
-          style={evaStyle.captionLabel} 
+          style={[evaStyle.captionLabel, styles.captionLabel]} 
           component={caption}
         />
       </View>
@@ -303,6 +303,9 @@ const styles = StyleSheet.create({
     flexBasis: 'auto',
   },
   label: {
+    textAlign: 'left',
+  },
+  captionLabel: {
     textAlign: 'left',
   },
 });
