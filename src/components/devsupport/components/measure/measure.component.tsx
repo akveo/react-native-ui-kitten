@@ -19,10 +19,6 @@ export interface MeasureElementProps<P = any> {
   children: React.ReactElement<P>;
 }
 
-interface MeasureElementDefaultProps {
-  shouldUseTopInsets: boolean;
-}
-
 export type MeasuringElement<P = any> = React.ReactElement;
  
 /**
@@ -49,7 +45,7 @@ export type MeasuringElement<P = any> = React.ReactElement;
  * but `force` property may be used to measure any time it's needed.
  * DON'T USE THIS FLAG IF THE COMPONENT RENDERS FIRST TIME OR YOU KNOW `onLayout` WILL BE CALLED.
  */
-export const MeasureElement = (props: MeasureElementProps): MeasuringElement => {
+export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringElement => {
 
   const ref = React.useRef<any>();
 
@@ -86,8 +82,6 @@ export const MeasureElement = (props: MeasureElementProps): MeasuringElement => 
   return React.cloneElement(props.children, { ref, onLayout: measureSelf });
 };
 
-const defaultProps: MeasureElementDefaultProps = {
-  shouldUseTopInsets: false
-};
-
-MeasureElement.defaultProps = defaultProps;
+MeasureElement.defaultProps = {
+  shouldUseTopInsets: false,
+}
