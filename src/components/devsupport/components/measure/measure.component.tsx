@@ -14,9 +14,13 @@ import { Frame } from './type';
  
 export interface MeasureElementProps<P = any> {
   force?: boolean;
-  shouldUseTopInsets: boolean;
+  shouldUseTopInsets?: boolean;
   onMeasure: (frame: Frame) => void;
   children: React.ReactElement<P>;
+}
+
+interface MeasureElementDefaultProps {
+  shouldUseTopInsets: boolean;
 }
 
 export type MeasuringElement<P = any> = React.ReactElement;
@@ -81,3 +85,9 @@ export const MeasureElement = (props: MeasureElementProps): MeasuringElement => 
 
   return React.cloneElement(props.children, { ref, onLayout: measureSelf });
 };
+
+const defaultProps: MeasureElementDefaultProps = {
+  shouldUseTopInsets: false
+};
+
+MeasureElement.defaultProps = defaultProps;
