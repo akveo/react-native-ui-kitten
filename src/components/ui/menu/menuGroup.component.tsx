@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   ImageProps,
   StyleSheet,
   ViewProps,
@@ -20,6 +21,7 @@ import {
   MenuItemProps,
 } from './menuItem.component';
 import { ModalService } from '../../theme';
+import { MenuItemDescriptor } from './menu.service';
 
 export interface MenuGroupProps extends MenuItemProps {
   children?: ChildrenWithProps<MenuItemProps>;
@@ -98,10 +100,11 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     return { appearance: 'grouped' };
   }
 
-  private onPress = (): void => {
+  private onPress = (descriptor: MenuItemDescriptor, event: GestureResponderEvent): void => {
     if (this.hasSubmenu) {
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue).start();
+      this.props.onPress && this.props.onPress(descriptor, event);
     }
   };
 
