@@ -13,6 +13,7 @@ export const CheckboxIndeterminateShowcase = () => {
     setReadChecked(checked);
     setWriteChecked(checked);
     setAllChecked(checked);
+    updateGroup(checked, checked);
   };
 
   const onReadCheckedChange = (checked) => {
