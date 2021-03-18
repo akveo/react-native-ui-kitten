@@ -89,11 +89,11 @@ class ModalServiceType {
     }
   }
 
-  set setShouldUseTopInsets(state: boolean) {
+  public set setShouldUseTopInsets(state: boolean) {
     this.shouldUseTopInsets = state;
   };
 
-  get getShouldUseTopInsets(): boolean {
+  public get getShouldUseTopInsets(): boolean {
     return this.shouldUseTopInsets;
   }
 }
