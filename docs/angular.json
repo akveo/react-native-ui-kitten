@@ -23,7 +23,8 @@
               "src/404.html",
               "src/favicon.ico",
               "src/favicon.png",
-              "src/google46533d2e7a851062.html"
+              "src/google46533d2e7a851062.html",
+              "src/robots.txt"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",

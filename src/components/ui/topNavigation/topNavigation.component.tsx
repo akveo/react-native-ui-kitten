@@ -158,7 +158,7 @@ export class TopNavigation extends React.Component<TopNavigationProps> {
         <View style={styles.leftControlContainer}>
           <FalsyFC component={accessoryLeft}/>
         </View>
-        <View style={alignmentStyles.titleContainer}>
+        <View style={alignmentStyles.titleContainer || styles.titleContainer}>
           <FalsyText
             style={evaStyles.title}
             component={title}
@@ -189,6 +189,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  titleContainer: {
+    flexDirection: 'row',
+    flex: 1
+  },
   leftControlContainer: {
     flexDirection: 'row',
     zIndex: 1,
@@ -198,7 +202,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   rightControlsContainerStart: {
-    flex: 1,
+    flex: 0,
     justifyContent: 'flex-end',
   },
 });

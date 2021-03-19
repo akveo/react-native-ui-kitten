@@ -31,6 +31,8 @@ import {
 import { IndexPath } from '../../devsupport';
 import { MenuGroup } from './menuGroup.component';
 
+jest.useFakeTimers();
+
 describe('@menu-item: component checks', () => {
 
   const TestMenuItem = (props?: MenuItemProps) => (
@@ -179,6 +181,72 @@ describe('@menu: component checks', () => {
     );
 
     fireEvent.press(component.queryByText('Option 2.1'));
+  });
+
+  it('should fire onPress on group with row = 0, section = undefined', () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(0);
+      expect(index.section).toBeFalsy();
+    });
+
+    const component = render(
+      <TestMenu onSelect={onSelect}>
+        <MenuGroup title='Group 1'>
+          <MenuItem title='Option 1.1'/>
+          <MenuItem title='Option 1.2'/>
+        </MenuGroup>
+        <MenuItem title='Option 1'/>
+      </TestMenu>
+    );
+
+    fireEvent.press(component.queryByText('Group 1'));
+  });
+
+  it('should fire onPress on group with row = 1, section = undefined', () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(1);
+      expect(index.section).toBeFalsy();
+    });
+
+    const component = render(
+      <TestMenu onSelect={onSelect}>
+        <MenuItem title='Option 1'/>
+        <MenuGroup title='Group 2'>
+          <MenuItem title='Option 2.1'/>
+          <MenuItem title='Option 2.2'/>
+        </MenuGroup>
+        <MenuItem title='Option 3'/>
+      </TestMenu>
+    );
+
+    fireEvent.press(component.queryByText('Group 2'));
+  });
+
+  it('should fire onPress event for group & item separately', () => {
+    const onGroupPress = jest.fn();
+    const onItemPress = jest.fn();
+    const onSelect = jest.fn();
+
+    const component = render(
+      <TestMenu onSelect={onSelect}>
+        <MenuGroup onPress={onGroupPress} title='Group 1'>
+          <MenuItem onPress={onItemPress} title='Option 1.1'/>
+          <MenuItem title='Option 1.2'/>
+        </MenuGroup>
+        <MenuGroup title='Group 2'>
+          <MenuItem title='Option 2.1'/>
+          <MenuItem title='Option 2.2'/>
+        </MenuGroup>
+      </TestMenu>,
+    );
+
+    fireEvent.press(component.queryByText('Group 1'));
+    expect(onGroupPress).toBeCalledTimes(1);
+
+    fireEvent.press(component.queryByText('Option 1.1'));
+    expect(onItemPress).toBeCalledTimes(1);
+
+    expect(onSelect).toBeCalledTimes(2);
   });
 });
 

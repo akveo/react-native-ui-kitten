@@ -17,16 +17,16 @@ describe('@date-fns: service checks', () => {
 
   it('* should parse date according to the MM.dd.yyyy format', () => {
     const date = '06.15.2018';
-    expect(dateService.parse(date, '')).toEqual(new Date(2018, 5, 15));
+    expect(dateService.parse(date, 'MM.dd.yyyy')).toEqual(new Date(2018, 5, 15));
   });
 
   it('* should not format if date isn\'t passed', () => {
-    expect(() => dateService.format(undefined, 'DD.MM.YYYY')).not.toThrow();
-    expect(dateService.format(undefined, 'DD.MM.YYYY')).toEqual('');
+    expect(() => dateService.format(undefined, 'dd.MM.YYYY')).not.toThrow();
+    expect(dateService.format(undefined, 'dd.MM.YYYY')).toEqual('');
   });
 
   describe('service global config', () => {
-    const FORMAT: string = 'MM-DD-YYYY';
+    const FORMAT: string = 'MM-dd-yyyy';
     const year: number = 2010;
     const monthIndex: number = 10;
     const month: number = monthIndex + 1;
@@ -35,14 +35,9 @@ describe('@date-fns: service checks', () => {
     const formattedDate: string = `${month}-${day}-${year}`;
 
     beforeEach(() => {
-      dateService = new DateFnsService(
-        'en',
-        {
-          format: FORMAT,
-          parseOptions: {},
-          formatOptions: {},
-        },
-      );
+      dateService = new DateFnsService('en', {
+        format: FORMAT,
+      });
     });
 
     it('* should use format from global config if isn\'t passed as parameter', () => {
@@ -65,7 +60,7 @@ describe('@date-fns: service checks', () => {
     });
 
     it('* should pass formatOptions to format function', () => {
-      expect(dateService.format(date, 'DD/MM/YYYY')).toEqual('20/11/2010');
+      expect(dateService.format(date, 'dd/MM/yyyy')).toEqual('20/11/2010');
     });
   });
 });
