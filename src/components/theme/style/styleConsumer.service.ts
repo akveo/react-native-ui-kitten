@@ -236,13 +236,7 @@ export class StyleConsumerService {
       ...info.states,
     ];
 
-    const matches: string[] = source.filter((key: string): boolean => {
-      const keyQuery: string[] = key.split(SEPARATOR_MAPPING_ENTRY);
-
-      return this.compareArrays(query, keyQuery);
-    });
-
-    return matches[0];
+    return source.find((value) => this.compareArrays(query, value.split(SEPARATOR_MAPPING_ENTRY)));
   }
 
   /**
