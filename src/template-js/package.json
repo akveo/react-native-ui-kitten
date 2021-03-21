@@ -1,5 +1,5 @@
 {
-  "name": "@ui-kitten/template-ts",
+  "name": "@ui-kitten/template-js",
   "description": "React Native template project with UI Kitten and TypeScript",
   "version": "5.0.0",
   "author": "akveo <contact@akveo.com>",
