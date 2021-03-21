@@ -1,6 +1,6 @@
 {
-  "name": "@ui-kitten/template-js",
-  "description": "React Native template project with UI Kitten",
+  "name": "@ui-kitten/template-ts",
+  "description": "React Native template project with UI Kitten and TypeScript",
   "version": "5.0.0",
   "author": "akveo <contact@akveo.com>",
   "license": "MIT",
@@ -8,6 +8,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
   "keywords": [
     "react-native",
