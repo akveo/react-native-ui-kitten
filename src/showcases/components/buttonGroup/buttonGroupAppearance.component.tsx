@@ -17,6 +17,12 @@ export const ButtonGroupAppearanceShowcase = () => (
       <Button>R</Button>
     </ButtonGroup>
 
+    <ButtonGroup style={styles.buttonGroup} appearance='ghost'>
+      <Button>L</Button>
+      <Button>M</Button>
+      <Button>R</Button>
+    </ButtonGroup>
+
   </Layout>
 );
 

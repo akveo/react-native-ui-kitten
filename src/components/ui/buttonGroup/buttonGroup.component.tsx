@@ -28,7 +28,7 @@ import {
 } from '../button/button.component';
 
 type ButtonGroupStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'filled' | 'outline' | string;
+  appearance?: 'filled' | 'outline' | 'ghost' | string;
 }>;
 
 export interface ButtonGroupProps extends ViewProps, ButtonGroupStyledProps {
@@ -49,7 +49,7 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * Buttons to be rendered within the group.
  *
  * @property {string} appearance - Appearance of the component.
- * Can be `filled` or `outline`.
+ * Can be `filled`, `outline` or `ghost`.
  * Defaults to *filled*.
  *
  * @property {string} status - Status of the component.
