@@ -10,6 +10,8 @@ import {
   StyleSheet,
   View,
   ViewProps,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import {
   EvaStatus,
@@ -38,6 +40,9 @@ export interface CardProps extends TouchableWebProps, CardStyledProps {
   footer?: RenderProp<ViewProps>;
   accent?: RenderProp<ViewProps>;
   status?: EvaStatus;
+  headerStyle: StyleProp<ViewStyle>;
+  bodyStyle: StyleProp<ViewStyle>;
+  footerStyle: StyleProp<ViewStyle>;
 }
 
 export type CardElement = React.ReactElement<CardProps>;
@@ -66,6 +71,12 @@ export type CardElement = React.ReactElement<CardProps>;
  * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Defaults to *basic*.
+ * 
+ * @property {StyleProp<ViewStyle>} headerStyle - Styles applied for header component.
+ * 
+ * @property {StyleProp<ViewStyle>} bodyStyle - Styles applied for children component.
+ * 
+ * @property {StyleProp<ViewStyle>} footerStyle - Styles applied for footer component.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -131,7 +142,18 @@ export class Card extends React.Component<CardProps> {
   };
 
   public render(): TouchableWebElement {
-    const { eva, style, children, accent, header, footer, ...touchableProps } = this.props;
+    const { 
+      eva, 
+      style, 
+      children, 
+      accent, 
+      header, 
+      footer, 
+      headerStyle, 
+      bodyStyle, 
+      footerStyle, 
+      ...touchableProps
+    } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -146,16 +168,16 @@ export class Card extends React.Component<CardProps> {
           component={accent}
         />
         <FalsyFC
-          style={[styles.transparent, evaStyle.header]}
+          style={[styles.transparent, evaStyle.header, headerStyle]}
           component={header}
         />
         {header && <Divider/>}
-        <View style={evaStyle.body}>
+        <View style={[evaStyle.body, bodyStyle]}>
           {children}
         </View>
         {footer && <Divider/>}
         <FalsyFC
-          style={[styles.transparent, evaStyle.footer]}
+          style={[styles.transparent, evaStyle.footer, footerStyle]}
           component={footer}
         />
       </TouchableWeb>
