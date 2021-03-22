@@ -218,7 +218,9 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   private renderMeasuringPopoverElement = (): MeasuringElement => {
     return (
-      <MeasureElement onMeasure={this.onContentMeasure}>
+      <MeasureElement 
+        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
+        onMeasure={this.onContentMeasure}>
         {this.renderPopoverElement()}
       </MeasureElement>
     );
@@ -227,6 +229,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   public render(): React.ReactElement {
     return (
       <MeasureElement
+        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         force={this.state.forceMeasure}
         onMeasure={this.onChildMeasure}>
         {this.props.anchor()}
