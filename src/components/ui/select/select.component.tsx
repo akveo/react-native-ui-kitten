@@ -345,7 +345,6 @@ export class Select extends React.Component<SelectProps, State> {
       labelMarginBottom,
       labelFontWeight,
       labelFontFamily,
-      captionMarginTop,
       captionColor,
       captionFontSize,
       captionFontWeight,
@@ -391,7 +390,6 @@ export class Select extends React.Component<SelectProps, State> {
         color: labelColor,
       },
       caption: {
-        marginTop: captionMarginTop,
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
         fontFamily: captionFontFamily,

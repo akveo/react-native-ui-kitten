@@ -46,7 +46,6 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   controlStyle?: StyleProp<ViewStyle>;
   label?: RenderProp<TextProps> | React.ReactText;
   caption?: RenderProp<TextProps> | React.ReactText;
-  captionIcon?: RenderProp<Partial<ImageProps>>;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;
@@ -124,19 +123,12 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       captionFontSize,
       captionFontWeight,
       captionFontFamily,
-      captionIconWidth,
-      captionIconHeight,
-      captionIconMarginRight,
-      captionIconTintColor,
       popoverWidth,
       ...controlParameters
     } = style;
 
     return {
       control: controlParameters,
-      captionContainer: {
-        marginTop: captionMarginTop,
-      },
       text: {
         marginHorizontal: textMarginHorizontal,
         fontFamily: textFontFamily,
@@ -160,12 +152,6 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         fontFamily: labelFontFamily,
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
-      },
-      captionIcon: {
-        width: captionIconWidth,
-        height: captionIconHeight,
-        tintColor: captionIconTintColor,
-        marginRight: captionIconMarginRight,
       },
       captionLabel: {
         fontSize: captionFontSize,
@@ -250,7 +236,6 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       accessoryLeft,
       accessoryRight,
       caption,
-      captionIcon,
       ...touchableProps
     } = this.props;
 
@@ -272,16 +257,10 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
           onBackdropPress={this.setPickerInvisible}>
           {this.renderCalendar()}
         </Popover>
-        <View style={[evaStyle.captionContainer, styles.captionContainer]}>
-          <FalsyFC
-            style={evaStyle.captionIcon}
-            component={captionIcon}
-          />
-          <FalsyText
-            style={[evaStyle.captionLabel, styles.captionLabel]}
-            component={caption}
-          />
-        </View>
+        <FalsyText
+          style={[evaStyle.captionLabel, styles.captionLabel]}
+          component={caption}
+        />
       </View>
     );
   }
@@ -298,10 +277,6 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'left',
-  },
-  captionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   captionLabel: {
     textAlign: 'left',
