@@ -1,11 +1,12 @@
 import React from "react";
+import { StyleType } from '../../../theme';
 
 export type RenderProp<Props = {}> = (props?: Props) => React.ReactElement;
 
 export type FalsyNodeProps<Props = {}> = Props & {
   fallback?: React.ReactElement;
   children?: React.ReactElement;
-  style?: React.CSSProperties | React.CSSProperties[];
+  style?: StyleType;
 };
 
 /**
