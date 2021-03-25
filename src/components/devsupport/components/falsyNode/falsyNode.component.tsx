@@ -9,13 +9,12 @@ export type FalsyNodeProps<Props = {}> = Props & {
 };
 
 /**
- * Helper component for optional properties that should render a component.
+ * Helper component for optional properties that should render cloned component.
  *
  * Accepts props of a component that is expected to be rendered,
- * and `component` which may be a string, a function, null or undefined.
+ * and `children` which may be React Element only.
  *
- * If it is a function, will call it with props passed to this component.
- * Otherwise, will return null.
+ * If it is a React Element, will call it with props passed to this component.
  *
  * @property {RenderProp} children - React jsx component to be rendered.
  * @property {React.ReactElement} fallback - Element to render if children is null or undefined.
@@ -52,7 +51,7 @@ export class FalsyNode<Props = {}> extends React.Component<FalsyNodeProps<Props>
   };
 
   public render(): React.ReactElement {
-    const { children, fallback, ...props } = this.props;
+    const { children, fallback } = this.props;
 
     if (!children) {
       return fallback || null;
