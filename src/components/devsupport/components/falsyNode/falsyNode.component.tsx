@@ -44,6 +44,7 @@ export class FalsyNode<Props = {}> extends React.Component<FalsyNodeProps<Props>
   private renderChildElement = (source: ChildElement, props: any): ChildElement => {
     return React.cloneElement(source, {
       ...props,
+      ...source.props,
       style: [this.props?.style, source.props.style],
     });
   };
