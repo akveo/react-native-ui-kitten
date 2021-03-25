@@ -3,6 +3,7 @@ export {
   RenderProp,
 } from './components/falsyFC/falsyFC.component';
 export { FalsyText } from './components/falsyText/falsyText.component';
+export { FalsyNode } from './components/falsyNode/falsyNode.component';
 export {
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,

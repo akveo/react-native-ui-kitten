@@ -14,6 +14,7 @@ import {
 import {
   EvaStatus,
   FalsyFC,
+  FalsyNode,
   RenderProp,
   TouchableWeb,
   TouchableWebElement,
@@ -33,7 +34,7 @@ type CardStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface CardProps extends TouchableWebProps, CardStyledProps {
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   header?: RenderProp<ViewProps>;
   footer?: RenderProp<ViewProps>;
   accent?: RenderProp<ViewProps>;
@@ -150,9 +151,9 @@ export class Card extends React.Component<CardProps> {
           component={header}
         />
         {header && <Divider/>}
-        <View style={evaStyle.body}>
+        <FalsyNode style={evaStyle.body}>
           {children}
-        </View>
+        </FalsyNode>
         {footer && <Divider/>}
         <FalsyFC
           style={[styles.transparent, evaStyle.footer]}
