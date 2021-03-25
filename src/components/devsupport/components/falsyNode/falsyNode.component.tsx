@@ -41,23 +41,24 @@ type ChildrenProp = ChildElement | ChildElement[];
 
 export class FalsyNode<Props = {}> extends React.Component<FalsyNodeProps<Props>> {
 
-  private renderChildElement = (source: ChildElement): ChildElement => {
+  private renderChildElement = (source: ChildElement, props: Props): ChildElement => {
     return React.cloneElement(source, {
+      ...props,
       style: [this.props?.style, source.props.style],
     });
   };
 
-  private renderComponentChildren = (source: ChildrenProp): ChildElement[] => {
-    return React.Children.map(source, this.renderChildElement);
+  private renderComponentChildren = (source: ChildrenProp, props: Props): ChildElement[] => {
+    return React.Children.map(source, child => this.renderChildElement(child, props));
   };
 
   public render(): React.ReactElement {
-    const { children, fallback } = this.props;
+    const { children, fallback, ...props } = this.props;
 
     if (!children) {
       return fallback || null;
     }
 
-    return <>{this.renderComponentChildren(children)}</>;
+    return <>{this.renderComponentChildren(children, props)}</>;
   }
 }
