@@ -25,6 +25,7 @@ import {
   FalsyFC,
   FalsyText,
   FlexStyleProps,
+  FlexViewCrossStyleProps,
   PropsService,
   RenderProp,
   WebEventResponder,
@@ -181,7 +182,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
   private getComponentStyle = (source: StyleType) => {
     const flatStyles: ViewStyle = StyleSheet.flatten(this.props.style);
-    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexStyleProps);
+    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
 
     const {
       textMarginHorizontal,
