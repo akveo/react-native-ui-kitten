@@ -32,6 +32,8 @@ import {
   WebEventResponderCallbacks,
   WebEventResponderInstance,
   Overwrite,
+  LiteralUnion,
+  TouchableWithoutFeedback,
 } from '../../devsupport';
 import {
   Interaction,
@@ -42,7 +44,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type InputStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface InputProps extends TextInputProps, InputStyledProps {
@@ -51,7 +53,6 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
   caption?: RenderProp<TextProps> | React.ReactText;
-  captionIcon?: RenderProp<Partial<ImageProps>>;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
@@ -81,9 +82,8 @@ export type InputElement = React.ReactElement<InputProps>;
  * to render above the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - String, number or a function component
- * to render below the input field.
- * If it is a function, expected to return a Text.
+ * @property {ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * Expected to return View.
  *
  * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
@@ -91,10 +91,6 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {(ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
- * Expected to return an Image.
- *
- * @property {(ImageProps) => ReactElement} captionIcon - Function component
- * to render to start of the *caption*.
  * Expected to return an Image.
  *
  * @property {string} status - Status of the component.
@@ -209,10 +205,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       captionFontSize,
       captionFontWeight,
       captionFontFamily,
-      captionIconWidth,
-      captionIconHeight,
-      captionIconMarginRight,
-      captionIconTintColor,
       ...containerParameters
     } = source;
 
@@ -221,9 +213,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       inputContainer: {
         ...containerParameters,
         ...inputContainerStyle,
-      },
-      captionContainer: {
-        marginTop: captionMarginTop,
       },
       text: {
         marginHorizontal: textMarginHorizontal,
@@ -248,12 +237,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         fontWeight: labelFontWeight,
         fontFamily: labelFontFamily,
       },
-      captionIcon: {
-        width: captionIconWidth,
-        height: captionIconHeight,
-        tintColor: captionIconTintColor,
-        marginRight: captionIconMarginRight,
-      },
       captionLabel: {
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
@@ -271,14 +254,15 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       caption,
       accessoryLeft,
       accessoryRight,
-      captionIcon,
       ...textInputProps
     } = this.props;
 
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View style={evaStyle.container}>
+      <TouchableWithoutFeedback
+        style={evaStyle.container}
+        onPress={this.focus}>
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
@@ -303,17 +287,11 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <View style={[evaStyle.captionContainer, styles.captionContainer]}>
-          <FalsyFC
-            style={evaStyle.captionIcon}
-            component={captionIcon}
-          />
-          <FalsyText
-            style={[evaStyle.captionLabel, styles.captionLabel]}
-            component={caption}
-          />
-        </View>
-      </View>
+        <FalsyText 
+          style={[evaStyle.captionLabel, styles.captionLabel]} 
+          component={caption}
+        />
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -323,10 +301,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-  },
-  captionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   text: {
     flexGrow: 1,

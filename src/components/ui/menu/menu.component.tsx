@@ -10,11 +10,9 @@ import {
   ChildrenWithProps,
   IndexPath,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
-import {
-  styled,
-  StyledComponentProps,
-} from '../../theme';
+import { styled } from '../../theme';
 import { Divider } from '../divider/divider.component';
 import {
   List,
@@ -30,13 +28,13 @@ import {
   MenuService,
 } from './menu.service';
 
-type MenuStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'noDivider' | string;
+type MenuStyledProps = Overwrite<ListProps, {
+  appearance?: LiteralUnion<'default' | 'noDivider'>;
 }>;
 
-type MenuListProps = Omit<ListProps, 'data' | 'renderItem'>;
+type MenuListProps = Omit<MenuStyledProps, 'data' | 'renderItem'>;
 
-export interface MenuProps extends MenuListProps, MenuStyledProps {
+export interface MenuProps extends MenuListProps {
   children?: ChildrenWithProps<MenuItemProps>;
   selectedIndex?: IndexPath;
   onSelect?: (index: IndexPath) => void;

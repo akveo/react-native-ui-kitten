@@ -21,6 +21,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -39,7 +40,7 @@ import {
 } from '../shared/minus.component';
 
 type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default' | string>;
 }>;
 
 export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
@@ -211,7 +212,7 @@ export class CheckBox extends React.Component<CheckBoxProps> {
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <View style={styles.highlightContainer}>
-          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <View style={[evaStyle.highlight, styles.highlight]} />
           <View style={[evaStyle.selectContainer, styles.selectContainer]}>
             {this.renderIconElement(evaStyle.icon)}
           </View>

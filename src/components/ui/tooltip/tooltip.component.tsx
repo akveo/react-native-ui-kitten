@@ -7,11 +7,9 @@
 import React from 'react';
 import {
   ImageProps,
-  StyleProp,
   StyleSheet,
   View,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 import {
   FalsyFC,
@@ -21,7 +19,6 @@ import {
 } from '../../devsupport';
 import {
   styled,
-  StyledComponentProps,
   StyleType,
 } from '../../theme';
 import {
@@ -32,15 +29,11 @@ import {
 import { PopoverIndicator } from '../popover/popoverIndicator.component';
 import { TextProps } from '../text/text.component';
 
-type TooltipStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
-}>;
-
 type TooltipPopoverProps = Overwrite<PopoverProps, {
   children: RenderProp<TextProps> | React.ReactText;
 }>;
 
-export interface TooltipProps extends TooltipPopoverProps, TooltipStyledProps {
+export interface TooltipProps extends TooltipPopoverProps {
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
 }
@@ -161,7 +154,7 @@ export class Tooltip extends React.Component<TooltipProps> {
   private renderPopoverIndicatorElement = (props: ViewProps): React.ReactElement => {
     const evaStyle = this.getComponentStyle(this.props.eva.style);
     return (
-      <PopoverIndicator {...props} style={[props.style, evaStyle.indicator]}/>
+      <PopoverIndicator {...props} style={[props.style, evaStyle.indicator]} />
     );
   };
 
