@@ -17,6 +17,7 @@ import {
   EvaStatus,
   Size,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -28,7 +29,7 @@ import {
 } from './animation';
 
 type SpinnerStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface SpinnerProps extends ViewProps, SpinnerStyledProps {
@@ -145,7 +146,7 @@ export class Spinner extends React.PureComponent<SpinnerProps> {
         <View style={[styles.noOverflow, style.overflow, arcSize]}>
           <Animated.View style={[style.arc, size]}>
             <View style={[styles.noOverflow, arcSize]}>
-              <View style={[this.props.eva.style, this.props.style]}/>
+              <View style={[this.props.eva.style, this.props.style]} />
             </View>
           </Animated.View>
         </View>

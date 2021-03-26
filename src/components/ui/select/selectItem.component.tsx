@@ -21,6 +21,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -36,7 +37,7 @@ import { TextProps } from '../text/text.component';
 import { SelectItemDescriptor } from './select.service';
 
 type SelectItemStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'grouped' | string;
+  appearance?: LiteralUnion<'default' | 'grouped'>;
 }>;
 
 type TouchableSelectProps = Overwrite<TouchableWebProps, {

@@ -31,6 +31,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -52,7 +53,7 @@ import {
 } from './select.service';
 
 type SelectStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface SelectProps extends TouchableWebProps, SelectStyledProps {
@@ -443,7 +444,7 @@ export class Select extends React.Component<SelectProps, State> {
     const { tintColor, ...svgStyle } = evaStyle;
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown style={svgStyle} fill={tintColor}/>
+        <ChevronDown style={svgStyle} fill={tintColor} />
       </Animated.View>
     );
   };

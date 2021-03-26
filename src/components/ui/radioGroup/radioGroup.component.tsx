@@ -12,6 +12,7 @@ import {
 import {
   ChildrenWithProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -24,7 +25,7 @@ import {
 } from '../radio/radio.component';
 
 type RadioGroupStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface RadioGroupProps extends ViewProps, RadioGroupStyledProps {

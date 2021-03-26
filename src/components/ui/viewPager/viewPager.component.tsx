@@ -78,6 +78,10 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   private contentOffset: Animated.Value = new Animated.Value(this.contentOffsetValue);
   private panResponder: PanResponderInstance = PanResponder.create(this);
 
+  private get children(): React.ReactElement<ChildrenProps>[] {
+    return React.Children.toArray(this.props.children).filter(Boolean) as React.ReactElement<ChildrenProps>[];
+  }
+
   public componentDidMount(): void {
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
   }
@@ -93,19 +97,19 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     this.contentOffset.removeAllListeners();
   }
 
-  public onMoveShouldSetPanResponder = (event: GestureResponderEvent, state: PanResponderGestureState): boolean => {
+  public onMoveShouldSetPanResponder = (_event: GestureResponderEvent, state: PanResponderGestureState): boolean => {
     const isHorizontalMove: boolean = Math.abs(state.dx) > 0 && Math.abs(state.dx) > Math.abs(state.dy);
 
     if (isHorizontalMove) {
       const i18nOffset: number = RTLService.select(state.dx, -state.dx);
       const nextSelectedIndex: number = this.props.selectedIndex - Math.sign(i18nOffset);
-      return nextSelectedIndex >= 0 && nextSelectedIndex < this.getChildCount();
+      return nextSelectedIndex >= 0 && nextSelectedIndex < this.children.length;
     }
 
     return false;
   };
 
-  public onPanResponderMove = (event: GestureResponderEvent, state: PanResponderGestureState): void => {
+  public onPanResponderMove = (_event: GestureResponderEvent, state: PanResponderGestureState): void => {
     const i18nOffset: number = RTLService.select(this.contentWidth, -this.contentWidth);
     const selectedPageOffset: number = this.props.selectedIndex * i18nOffset;
 
@@ -125,7 +129,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
 
   public scrollToIndex(params: { index: number, animated?: boolean }): void {
     const { index, ...rest } = params;
-    const childCount = this.getChildCount() - 1;
+    const childCount = this.children.length - 1;
     const offset: number = this.contentWidth * (index < 0 ? 0 : index > childCount ? childCount : index);
 
     this.scrollToOffset({ offset, ...rest });
@@ -136,7 +140,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   };
 
   private onLayout = (event: LayoutChangeEvent): void => {
-    this.contentWidth = event.nativeEvent.layout.width / this.getChildCount();
+    this.contentWidth = event.nativeEvent.layout.width / this.children.length;
     this.scrollToIndex({ index: this.props.selectedIndex });
   };
 
@@ -148,7 +152,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     }
   };
 
-  private onContentOffsetAnimationStateEnd = (result: { finished: boolean }): void => {
+  private onContentOffsetAnimationStateEnd = (_result: { finished: boolean }): void => {
     const selectedIndex: number = this.contentOffsetValue / this.contentWidth;
 
     if (selectedIndex !== this.props.selectedIndex && this.props.onSelect) {
@@ -167,6 +171,15 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     });
   };
 
+  private getContainerStyle = (): ViewStyle => {
+    return {
+      width: `${100 * this.children.length}%`,
+
+      // @ts-ignore: RN has no types for `Animated` styles
+      transform: [{ translateX: this.contentOffset }],
+    };
+  };
+
   private renderComponentChild = (source: React.ReactElement<ChildrenProps>, index: number): React.ReactElement => {
     const contentView = this.props.shouldLoadComponent(index) ? source : null;
 
@@ -177,21 +190,8 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     );
   };
 
-  private renderComponentChildren = (source: ChildrenWithProps<ChildrenProps>): React.ReactElement[] => {
-    return React.Children.map(source, this.renderComponentChild);
-  };
-
-  private getChildCount = (): number => {
-    return React.Children.count(this.props.children);
-  };
-
-  private getContainerStyle = (): ViewStyle => {
-    return {
-      width: `${100 * this.getChildCount()}%`,
-
-      // @ts-ignore: RN has no types for `Animated` styles
-      transform: [{ translateX: this.contentOffset }],
-    };
+  private renderComponentChildren = (): React.ReactElement[] => {
+    return React.Children.map(this.children, this.renderComponentChild);
   };
 
   public render(): React.ReactElement<ViewProps> {
@@ -207,7 +207,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
         onLayout={this.onLayout}
         // @ts-ignore
         ref={this.containerRef}>
-        {this.renderComponentChildren(children)}
+        {this.renderComponentChildren()}
       </Animated.View>
     );
   }

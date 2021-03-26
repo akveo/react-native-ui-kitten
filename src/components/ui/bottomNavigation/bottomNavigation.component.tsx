@@ -15,6 +15,7 @@ import {
 import {
   ChildrenWithProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -31,7 +32,7 @@ import {
 } from '../shared/tabIndicator.component';
 
 type BottomNavigationStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'noIndicator' | string;
+  appearance?: LiteralUnion<'default' | 'noIndicator'>;
 }>;
 
 export interface BottomNavigationProps extends ViewProps, BottomNavigationStyledProps {

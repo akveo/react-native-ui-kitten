@@ -21,6 +21,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -31,7 +32,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type ListItemStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface ListItemProps extends TouchableWebProps, ListItemStyledProps {

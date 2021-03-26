@@ -22,6 +22,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -32,7 +33,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type ButtonStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'filled' | 'outline' | 'ghost' | string;
+  appearance?: LiteralUnion<'filled' | 'outline' | 'ghost'>;
 }>;
 
 export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {

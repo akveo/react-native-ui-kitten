@@ -31,6 +31,7 @@ import {
   AutocompleteItem,
   AutocompleteItemProps,
 } from './autocompleteItem.component';
+import { TouchableWithoutFeedback } from '../../devsupport';
 
 /*
  * Mock UIManager since Autocomplete relies on native measurements
@@ -198,16 +199,6 @@ describe('@autocomplete: component checks', () => {
     );
   });
 
-  /*
-   * In this test:
-   * [0] for modal backdrop
-   * ...rest for options
-   */
-  const touchables = {
-    findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[0],
-    findOptionTouchable: (api: RenderAPI, index: number) => api.queryAllByType(TouchableOpacity)[index + 1],
-  };
-
   it('should render TextInput', () => {
     const component = render(
       <TestAutocomplete/>,
@@ -281,7 +272,7 @@ describe('@autocomplete: component checks', () => {
     fireEvent(component.queryByType(TextInput), 'focus');
     await waitForElement(() => null);
 
-    fireEvent.press(touchables.findOptionTouchable(component, 1));
+    fireEvent.press(component.queryAllByType(TouchableWithoutFeedback)[2]);
     expect(onSelect).toBeCalledWith(1);
   });
 
@@ -292,10 +283,10 @@ describe('@autocomplete: component checks', () => {
 
     fireEvent(component.queryByType(TextInput), 'focus');
 
-    const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
+    const backdrop = await waitForElement(() => component.queryAllByType(TouchableWithoutFeedback)[1]);
     fireEvent.press(backdrop);
 
-    const firstOption = await waitForElement(() => touchables.findOptionTouchable(component, 0));
+    const firstOption = await waitForElement(() => component.queryAllByType(TouchableWithoutFeedback)[2]);
     const secondOption = component.queryByText('Option 2');
 
     expect(firstOption).toBeFalsy();
