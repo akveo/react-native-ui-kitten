@@ -67,6 +67,14 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  * @property {(D, NamedStyles) => ReactElement} renderYear - Function component
  * to render instead of default year cell.
  * Called with a date for this cell and styles provided by Eva.
+ * 
+ * @property {(CalendarViewMode) => void} renderArrowLeft - Function component
+ * to render instead of default left arrow.
+ * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
+ * 
+ * @property {(CalendarViewMode) => void} renderArrowRight - Function component
+ * to render instead of default right arrow.
+ * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
  *
  * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next month / year.
  * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
