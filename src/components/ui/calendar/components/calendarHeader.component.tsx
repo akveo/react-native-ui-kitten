@@ -12,6 +12,7 @@ import {
   TextStyle,
   View,
   ViewProps,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 import { RTLService } from '../../../devsupport';
@@ -41,6 +42,8 @@ export interface CalendarHeaderProps extends ViewProps {
   onTitlePress?: () => void;
   onNavigationLeftPress?: () => void;
   onNavigationRightPress?: () => void;
+  arrowLeft?: React.ReactElement | null;
+  arrowRight?: React.ReactElement | null;
 }
 
 export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
@@ -82,19 +85,45 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
     );
   };
 
+  private renderLeftArrow = (): React.ReactElement => {
+    if(this.props.arrowLeft) {
+      return (
+        <TouchableWithoutFeedback onPress={this.props.onNavigationLeftPress}>
+          {this.props.arrowLeft}
+        </TouchableWithoutFeedback>
+      )
+    }
+    return (
+      <Button
+        appearance='ghost'
+        accessoryRight={this.renderLeftIcon}
+        onPress={this.props.onNavigationLeftPress}
+      />
+    );
+  };
+
+  private renderRightArrow = (): React.ReactElement => {
+    if(this.props.arrowRight) {
+      return (
+        <TouchableWithoutFeedback onPress={this.props.onNavigationRightPress}>
+          {this.props.arrowRight}
+        </TouchableWithoutFeedback>
+      )
+    }
+    return (
+      <Button
+        appearance='ghost'
+        accessoryRight={this.renderRightIcon}
+        onPress={this.props.onNavigationRightPress}
+      />
+    );
+  };
+
   private renderLateralNavigationControls = (): React.ReactElement<ViewProps> => {
     return (
       <View style={styles.subContainer}>
-        <Button
-          appearance='ghost'
-          accessoryRight={this.renderLeftIcon}
-          onPress={this.props.onNavigationLeftPress}
-        />
-        <Button
-          appearance='ghost'
-          accessoryRight={this.renderRightIcon}
-          onPress={this.props.onNavigationRightPress}
-        />
+        {this.renderLeftArrow()}
+        {this.renderRightArrow()}
       </View>
     );
   };
