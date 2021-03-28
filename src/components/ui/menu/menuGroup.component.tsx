@@ -25,6 +25,7 @@ import { MenuItemDescriptor } from './menu.service';
 
 export interface MenuGroupProps extends MenuItemProps {
   children?: ChildrenWithProps<MenuItemProps>;
+  expanded?: boolean;
 }
 
 export type MenuGroupElement = React.ReactElement<MenuGroupProps>;
@@ -58,6 +59,9 @@ const POSITION_OUTSCREEN: Point = Point.outscreen();
  * @property {(ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the *title*.
  * Expected to return an Image.
+ * 
+ * @property {boolean} expanded - Boolean value to render expanded group by default.
+ * It true - menu group will be expanded by default.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -110,12 +114,16 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   private onSubmenuMeasure = (frame: Frame): void => {
     this.setState({ submenuHeight: frame.size.height });
+    if (this.props.expanded) {
+      const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
+      this.createExpandAnimation(expandValue, 0).start();
+    }
   };
 
-  private createExpandAnimation = (toValue: number): Animated.CompositeAnimation => {
+  private createExpandAnimation = (toValue: number, duration?: number): Animated.CompositeAnimation => {
     return Animated.timing(this.expandAnimation, {
       toValue: toValue,
-      duration: CHEVRON_ANIM_DURATION,
+      duration: duration || CHEVRON_ANIM_DURATION,
       useNativeDriver: false,
     });
   };
