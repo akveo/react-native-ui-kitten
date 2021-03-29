@@ -44,7 +44,7 @@ export class FalsyNode<Props = {}> extends React.Component<FalsyNodeProps<Props>
     return React.cloneElement(source, {
       ...props,
       ...source.props,
-      style: PropsService.mergeStyles([this.props?.style, source.props?.style]),
+      style: PropsService.mergeObjectsWithArrays([this.props?.style, source.props?.style]),
     });
   };
 

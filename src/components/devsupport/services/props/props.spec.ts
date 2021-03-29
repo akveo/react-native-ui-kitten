@@ -51,11 +51,11 @@ describe('@props: service checks', () => {
     });
   });
 
-  it('should merge styles in appropriate style object', () => {
+  it('should merge object & array of objects in appropriate object', () => {
     const stylesArray = [{color: 'blue'}, {backgroundColor: 'black'}];
     const styles = {color: 'red'};
 
-    const mergedStyles = PropsService.mergeStyles([stylesArray, styles]);
+    const mergedStyles = PropsService.mergeObjectsWithArrays([stylesArray, styles]);
     expect(mergedStyles).toEqual({
       color: 'red',
       backgroundColor: 'black',

@@ -102,7 +102,7 @@ export interface RestProps {
 export type AllOfProps = Partial<Props>;
 export type AllWithRestProps = Partial<Props> & RestProps;
 
-type StylesToMap = StyleType[] | [StyleType[]];
+type ObjectsToMerge = Object[] | [Object[]];
 
 class NativePropsService {
   /**
@@ -163,18 +163,18 @@ class NativePropsService {
   }
 
   /**
-   * Merge styles passed to array parameter.
+   * Merge objects & array of objects passed to array parameter.
    *
-   * @param {Partial<StylesToMap>} styles - array styles which need to be merged.
+   * @param {Partial<ObjectsToMerge>} objects - array which needs to be merged.
    *
-   * @return {StyleType} - merged object with styles inside.
+   * @return {Object} - merged object with merged values inside.
    */
-  public mergeStyles = (styles: Partial<StylesToMap>): StyleType => {
+  public mergeObjectsWithArrays = (objects: Partial<ObjectsToMerge>): Object => {
     return Object.assign({}, 
-      ...styles.map(currentStyle =>
-         Array.isArray(currentStyle)
-          ? Object.assign({}, ...currentStyle.map(style => style))
-          : currentStyle));
+      ...objects.map(currentObject =>
+         Array.isArray(currentObject)
+          ? Object.assign({}, ...currentObject.map(obj => obj))
+          : currentObject));
   };
 }
 
