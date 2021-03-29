@@ -25,7 +25,7 @@ import { MenuItemDescriptor } from './menu.service';
 
 export interface MenuGroupProps extends MenuItemProps {
   children?: ChildrenWithProps<MenuItemProps>;
-  expanded?: boolean;
+  initialExpanded?: boolean;
 }
 
 export type MenuGroupElement = React.ReactElement<MenuGroupProps>;
@@ -60,7 +60,7 @@ const POSITION_OUTSCREEN: Point = Point.outscreen();
  * to render to end of the *title*.
  * Expected to return an Image.
  * 
- * @property {boolean} expanded - Boolean value to render expanded group by default.
+ * @property {boolean} initialExpanded - Boolean value to render expanded group by default.
  * It true - menu group will be expanded by default.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
@@ -114,7 +114,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   private onSubmenuMeasure = (frame: Frame): void => {
     this.setState({ submenuHeight: frame.size.height });
-    if (this.props.expanded) {
+    if (this.props.initialExpanded) {
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue, 0).start();
     }
