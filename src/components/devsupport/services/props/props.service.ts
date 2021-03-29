@@ -102,6 +102,8 @@ export interface RestProps {
 export type AllOfProps = Partial<Props>;
 export type AllWithRestProps = Partial<Props> & RestProps;
 
+type StylesToMap = StyleType[] | [StyleType[]];
+
 class NativePropsService {
   /**
    * Retrieves all props included in `from` array
@@ -159,6 +161,21 @@ class NativePropsService {
                    };
                  }, {});
   }
+
+  /**
+   * Merge styles passed to array parameter.
+   *
+   * @param {Partial<StylesToMap>} styles - array styles which need to be merged.
+   *
+   * @return {StyleType} - merged object with styles inside.
+   */
+  public mergeStyles = (styles: Partial<StylesToMap>): StyleType => {
+    return Object.assign({}, 
+      ...styles.map(currentStyle =>
+         Array.isArray(currentStyle)
+          ? Object.assign({}, ...currentStyle.map(style => style))
+          : currentStyle));
+  };
 }
 
 export const PropsService = new NativePropsService();

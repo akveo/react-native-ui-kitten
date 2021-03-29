@@ -151,9 +151,10 @@ export class Card extends React.Component<CardProps> {
           component={header}
         />
         {header && <Divider/>}
-        <FalsyNode style={evaStyle.body}>
-          {children}
-        </FalsyNode>
+        <FalsyNode 
+          style={evaStyle.body}
+          component={children} 
+        />
         {footer && <Divider/>}
         <FalsyFC
           style={[styles.transparent, evaStyle.footer]}

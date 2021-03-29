@@ -51,4 +51,15 @@ describe('@props: service checks', () => {
     });
   });
 
+  it('should merge styles in appropriate style object', () => {
+    const stylesArray = [{color: 'blue'}, {backgroundColor: 'black'}];
+    const styles = {color: 'red'};
+
+    const mergedStyles = PropsService.mergeStyles([stylesArray, styles]);
+    expect(mergedStyles).toEqual({
+      color: 'red',
+      backgroundColor: 'black',
+    })
+  });
+
 });

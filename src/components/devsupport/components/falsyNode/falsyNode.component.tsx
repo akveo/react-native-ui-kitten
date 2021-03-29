@@ -1,11 +1,11 @@
 import React from "react";
+import { PropsService } from '../../services/props/props.service';
 import { StyleType } from '../../../theme';
 
 export type RenderProp<Props = {}> = (props?: Props) => React.ReactElement;
 
 export type FalsyNodeProps<Props = {}> = Props & {
-  fallback?: React.ReactElement;
-  children?: React.ReactElement;
+  component?: React.ReactElement;
   style?: StyleType;
 };
 
@@ -17,7 +17,7 @@ export type FalsyNodeProps<Props = {}> = Props & {
  *
  * If it is a React Element, will call it with props passed to this component.
  *
- * @property {RenderProp} children - React jsx component to be rendered.
+ * @property {RenderProp} component - React jsx component to be rendered.
  * @property {React.ReactElement} fallback - Element to render if children is null or undefined.
  *
  * @example Will render nothing.
@@ -40,12 +40,11 @@ type ChildElement = React.ReactElement;
 type ChildrenProp = ChildElement | ChildElement[];
 
 export class FalsyNode<Props = {}> extends React.Component<FalsyNodeProps<Props>> {
-
   private renderChildElement = (source: ChildElement, props: any): ChildElement => {
     return React.cloneElement(source, {
       ...props,
       ...source.props,
-      style: [this.props?.style, source.props.style],
+      style: PropsService.mergeStyles([this.props?.style, source.props?.style]),
     });
   };
 
@@ -54,12 +53,12 @@ export class FalsyNode<Props = {}> extends React.Component<FalsyNodeProps<Props>
   };
 
   public render(): React.ReactElement {
-    const { children, fallback, ...props } = this.props;
+    const { component, ...props } = this.props;
 
-    if (!children) {
-      return fallback || null;
+    if (!component) {
+      return null;
     }
 
-    return <>{this.renderComponentChildren(children, props)}</>;
+    return <>{this.renderComponentChildren(component, props)}</>;
   }
 }
