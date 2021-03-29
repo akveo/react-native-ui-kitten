@@ -16,6 +16,7 @@ import {
   EvaSize,
   EvaStatus,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -28,7 +29,7 @@ import {
 } from '../button/button.component';
 
 type ButtonGroupStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'filled' | 'outline' | 'ghost' | string;
+  appearance?: LiteralUnion<'filled' | 'outline' | 'ghost'>;
 }>;
 
 export interface ButtonGroupProps extends ViewProps, ButtonGroupStyledProps {

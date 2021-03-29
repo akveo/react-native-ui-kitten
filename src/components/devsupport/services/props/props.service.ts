@@ -91,6 +91,16 @@ export const FlexStyleProps: string[] = [
   'direction',
 ];
 
+const FlexViewCrossStyleValues = [
+  'borderBottomWidth',
+  'borderLeftWidth',
+  'borderRightWidth',
+  'borderTopWidth',
+  'borderWidth',
+];
+
+export const FlexViewCrossStyleProps: string[] = FlexStyleProps.filter((el) => !FlexViewCrossStyleValues.includes(el));
+
 export interface Props {
   [key: string]: any;
 }

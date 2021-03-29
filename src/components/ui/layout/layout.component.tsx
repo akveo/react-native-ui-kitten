@@ -9,19 +9,19 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from '../../devsupport';
+import { Overwrite, LiteralUnion } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
 
 type LayoutStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface LayoutProps extends ViewProps, LayoutStyledProps {
   children?: React.ReactNode;
-  level?: '1' | '2' | '3' | '4' | string;
+  level?: LiteralUnion<'1' | '2' | '3' | '4'>;
 }
 
 export type LayoutElement = React.ReactElement<LayoutProps>;

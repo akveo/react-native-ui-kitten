@@ -14,6 +14,7 @@ import {
 import {
   EvaSize,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -22,7 +23,7 @@ import {
 } from '../../theme';
 
 type AvatarStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export type AvatarProps<P = ImageProps> = AvatarStyledProps & P & {

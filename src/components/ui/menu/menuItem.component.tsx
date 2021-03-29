@@ -21,6 +21,7 @@ import {
   TouchableWeb,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -32,7 +33,7 @@ import { TextProps } from '../text/text.component';
 import { MenuItemDescriptor } from './menu.service';
 
 type MenuItemStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'grouped' | string;
+  appearance?: LiteralUnion<'default' | 'grouped'>;
 }>;
 
 type TouchableMenuItemProps = Overwrite<TouchableWebProps, {
@@ -157,7 +158,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={[StyleSheet.absoluteFill, evaStyle.indicator]}/>
+        <View style={[StyleSheet.absoluteFill, evaStyle.indicator]} />
         <FalsyFC
           style={evaStyle.icon}
           component={accessoryLeft}

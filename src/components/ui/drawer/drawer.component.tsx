@@ -9,11 +9,9 @@ import { ViewProps } from 'react-native';
 import {
   FalsyFC,
   RenderProp,
-  Overwrite,
 } from '../../devsupport';
 import {
   styled,
-  StyledComponentProps,
   StyleType,
 } from '../../theme';
 import {
@@ -21,11 +19,7 @@ import {
   MenuProps,
 } from '../menu/menu.component';
 
-type DrawerStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'noDivider' | string;
-}>;
-
-export interface DrawerProps extends MenuProps, DrawerStyledProps {
+export interface DrawerProps extends MenuProps {
   header?: RenderProp<ViewProps>;
   footer?: RenderProp<ViewProps>;
 }

@@ -149,6 +149,13 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.inputRef.current?.clear();
   };
 
+  public componentDidUpdate(prevProps: AutocompleteProps): void {
+    const isChildCountChanged: boolean = this.data.length !== React.Children.count(prevProps.children);
+    const shouldBecomeVisible: boolean = !this.state.listVisible && this.isFocused() && isChildCountChanged;
+
+    shouldBecomeVisible && this.setState({ listVisible: shouldBecomeVisible });
+  }
+
   private onInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.setOptionsListVisible();
     this.props.onFocus && this.props.onFocus(event);
@@ -158,7 +165,6 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.setOptionsListInvisible();
     this.props.onSubmitEditing && this.props.onSubmitEditing(e);
   };
-
 
   private onBackdropPress = (): void => {
     this.blur();
