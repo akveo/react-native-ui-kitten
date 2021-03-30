@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import {
   Animated,
   GestureResponderEvent,
@@ -60,8 +60,8 @@ const POSITION_OUTSCREEN: Point = Point.outscreen();
  * to render to end of the *title*.
  * Expected to return an Image.
  * 
- * @property {boolean} initialExpanded - Boolean value to render expanded group by default.
- * It true - menu group will be expanded by default.
+ * @property {boolean} initialExpanded - Boolean value to render to initially expand a group.
+ * If true - menu group will be expanded by default.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
