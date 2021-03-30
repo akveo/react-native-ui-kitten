@@ -2,10 +2,10 @@ import React from "react";
 import { PropsService } from '../../services/props/props.service';
 import { StyleType } from '../../../theme';
 
-export type RenderProp<Props = {}> = (props?: Props) => React.ReactElement;
+export type RenderComponent = React.ReactElement | React.ReactElement[];
 
 export type FalsyNodeProps<Props = {}> = Props & {
-  component?: React.ReactElement;
+  component?: RenderComponent;
   style?: StyleType;
 };
 
@@ -13,12 +13,11 @@ export type FalsyNodeProps<Props = {}> = Props & {
  * Helper component for optional properties that should render cloned component.
  *
  * Accepts props of a component that is expected to be rendered,
- * and `children` which may be React Element only.
+ * and `component` which may be React Element only.
  *
  * If it is a React Element, will call it with props passed to this component.
  *
- * @property {RenderProp} component - React jsx component to be rendered.
- * @property {React.ReactElement} fallback - Element to render if children is null or undefined.
+ * @property {RenderComponent} component - React jsx component to be rendered.
  *
  * @example Will render nothing.
  * ```
@@ -30,7 +29,7 @@ export type FalsyNodeProps<Props = {}> = Props & {
  * const Title = () => (
  *   <FalsyNode
  *     style={{ color: 'red' }}
- *     component={props => <Text {...props}>Title</Text>}
+ *     component={<Text>Title</Text>}
  *   />
  * );
  * ```

@@ -34,7 +34,7 @@ type CardStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface CardProps extends TouchableWebProps, CardStyledProps {
-  children?: React.ReactElement;
+  children?: React.ReactElement | React.ReactElement[];
   header?: RenderProp<ViewProps>;
   footer?: RenderProp<ViewProps>;
   accent?: RenderProp<ViewProps>;
