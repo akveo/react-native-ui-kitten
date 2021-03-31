@@ -431,17 +431,11 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   };
 
   private renderArrowLeft = () => {
-    if(this.props.renderArrowLeft) {
-      return this.props.renderArrowLeft(this.state.viewMode.id);
-    }
-    return null;
+    return this.props.renderArrowLeft(this.state.viewMode.id);
   }
 
   private renderArrowRight = () => {
-    if(this.props.renderArrowRight) {
-      return this.props.renderArrowRight(this.state.viewMode.id);
-    }
-    return null;
+    return this.props.renderArrowRight(this.state.viewMode.id);
   }
 
   private renderHeaderElement = (evaStyle): CalendarHeaderElement => {
@@ -457,8 +451,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
         onTitlePress={this.onPickerNavigationPress}
         onNavigationLeftPress={this.onHeaderNavigationLeftPress}
         onNavigationRightPress={this.onHeaderNavigationRightPress}
-        arrowLeft={this.renderArrowLeft()}
-        arrowRight={this.renderArrowRight()}
+        arrowLeft={this.props.renderArrowLeft && this.renderArrowLeft}
+        arrowRight={this.props.renderArrowRight && this.renderArrowRight}
       />
     );
   };
