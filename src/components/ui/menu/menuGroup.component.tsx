@@ -69,6 +69,13 @@ const POSITION_OUTSCREEN: Point = Point.outscreen();
  */
 export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
+  private initialExpanded: boolean;
+
+  constructor(props) {
+    super(props);
+    this.initialExpanded = this.props.initialExpanded || false;
+  }
+
   public state: State = {
     submenuHeight: 1,
   };
@@ -114,9 +121,10 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   private onSubmenuMeasure = (frame: Frame): void => {
     this.setState({ submenuHeight: frame.size.height });
-    if (this.props.initialExpanded) {
+    if (this.initialExpanded) {
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue, 0).start();
+      this.initialExpanded = false
     }
   };
 
@@ -180,6 +188,8 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   public render(): React.ReactNode {
     const { children, ...itemProps } = this.props;
+
+    console.log(this.initialExpanded);
 
     return (
       <React.Fragment>
