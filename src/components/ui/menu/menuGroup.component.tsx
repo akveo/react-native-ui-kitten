@@ -145,7 +145,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown {...evaProps} fill={style.tintColor}/>
+        <ChevronDown {...evaProps} fill={style.tintColor as string}/>
       </Animated.View>
     );
   };
