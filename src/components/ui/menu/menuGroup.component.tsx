@@ -73,13 +73,19 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   constructor(props) {
     super(props);
-    this.initialExpanded = this.props.initialExpanded || false;
+    this.initialExpanded = false;
   }
 
   public state: State = {
     submenuHeight: 1,
   };
   private expandAnimation: Animated.Value = new Animated.Value(0);
+
+  public componentDidMount() {
+    if(this.props.initialExpanded) {
+      this.initialExpanded = true;
+    }
+  }
 
   private get hasSubmenu(): boolean {
     return React.Children.count(this.props.children) > 0;
