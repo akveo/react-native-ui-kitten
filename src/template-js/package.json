@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/template-js",
   "description": "React Native template project with UI Kitten",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "author": "akveo <contact@akveo.com>",
   "license": "MIT",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",

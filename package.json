@@ -1,6 +1,6 @@
 {
   "name": "ui-kitten",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "private": true,
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
@@ -29,8 +29,8 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-decorators": "^7.6.2",
-    "@eva-design/eva": "^2.0.0",
-    "@eva-design/material": "^2.0.0",
+    "@eva-design/eva": "^2.1.0",
+    "@eva-design/material": "^2.1.0",
     "@types/gulp": "ts3.8",
     "@types/gulp-replace": "ts3.8",
     "@types/jest": "ts3.8",
