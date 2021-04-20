@@ -1,3 +1,24 @@
+## 5.1.0 (2021-04-16)
+
+### :rocket: Highlights:
+* Added `onMonthChange` function to the Calendar component ([d70d978](https://github.com/akveo/react-native-ui-kitten/commit/d70d978))
+* Added `ghost` appearance for ButtonGroup component (#1382) ([849fb48](https://github.com/akveo/react-native-ui-kitten/commit/849fb48)), closes [#1382](https://github.com/akveo/react-native-ui-kitten/issues/1382)
+* Improved input component caption structure (#1349) ([862a12f](https://github.com/akveo/react-native-ui-kitten/commit/862a12f)), closes [#1349](https://github.com/akveo/react-native-ui-kitten/issues/1349)
+* ModalService can adjust position of items if StatusBar on Android is translucent  (#1372) ([407356e](https://github.com/akveo/react-native-ui-kitten/commit/407356e)), closes [#1372](https://github.com/akveo/react-native-ui-kitten/issues/1372) [#743](https://github.com/akveo/react-native-ui-kitten/issues/743)
+* ViewPager now has `swipeEnabled` prop ([c9e791f](https://github.com/akveo/react-native-ui-kitten/commit/c9e791f))
+
+### :rocket: Features
+* Update input styles when view & flex props are intersects each other (#1351) ([b9dbd58](https://github.com/akveo/react-native-ui-kitten/commit/b9dbd58)), closes [#1351](https://github.com/akveo/react-native-ui-kitten/issues/1351)
+
+### :bug: Bug Fixes
+* **Modal**: Add change orientation event with modal render (#1346) ([15fb285](https://github.com/akveo/react-native-ui-kitten/commit/15fb285)), closes [#1346](https://github.com/akveo/react-native-ui-kitten/issues/1346)
+* **Datepicker**: Make `autodismiss` prop optional ([123eb2b](https://github.com/akveo/react-native-ui-kitten/commit/123eb2b))
+* **Popover**: Popover now reacts to Android hardware back button press ([2a103ed](https://github.com/akveo/react-native-ui-kitten/commit/2a103ed))
+* **ViewPager**: Now skips if page is null ([c49753b](https://github.com/akveo/react-native-ui-kitten/pull/1165/commits/c49753b22167e9d182db7cedc5c8825d0fe3b5b2))
+* **Input**: Fixed cases when input does not detect press around the edges ([e992b66](https://github.com/akveo/react-native-ui-kitten/pull/1165/commits/e992b66fa27036bc85407a830c1cfca0708247a0))
+* **Autocomplete**: Async Autocomplete does not show options initially ([2ca80e1](https://github.com/akveo/react-native-ui-kitten/pull/1165/commits/2ca80e1caffd30ddde9f2d183e34d67b01f9e514))
+
+
 ## 5.0.0 (2020-05-12)
 
 ### :star: Highlights
