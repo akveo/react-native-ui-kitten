@@ -218,6 +218,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         onBackdropPress={this.onBackdropPress}>
         <List
           style={styles.list}
+          keyboardShouldPersistTaps='always'
           data={this.data}
           bounces={false}
           renderItem={this.renderItem}
