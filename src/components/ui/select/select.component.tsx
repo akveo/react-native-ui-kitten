@@ -69,6 +69,7 @@ export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;
   size?: EvaInputSize;
+  testID?: React.ReactText;
 }
 
 export type SelectElement = React.ReactElement<SelectProps>;
@@ -455,6 +456,7 @@ export class Select extends React.Component<SelectProps, State> {
 
     return (
       <TouchableWeb
+        testID={props.testID}
         style={[styles.input, evaStyle.input]}
         onPress={this.onPress}
         onMouseEnter={this.onMouseEnter}

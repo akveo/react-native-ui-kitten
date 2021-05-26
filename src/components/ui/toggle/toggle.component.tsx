@@ -370,11 +370,12 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, checked, children, ...touchableProps } = this.props;
+    const { eva, style, checked, children, testID, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
+        testID={testID}
         {...this.panResponder.panHandlers}
         style={[styles.container, style]}>
         <TouchableWeb
