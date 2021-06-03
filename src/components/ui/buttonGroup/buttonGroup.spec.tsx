@@ -52,6 +52,19 @@ describe('@button-group: component checks', () => {
     expect(buttonAppearance).toEqual('outline');
   });
 
+  it('should render ghost buttons', () => {
+    const component = render(
+      <TestButtonGroup appearance='ghost'/>,
+    );
+
+    const buttons = component.getAllByType(Button);
+    const buttonAppearance: string = buttons.reduce((current: string, child: ReactTestInstance): string => {
+      return child.props.appearance;
+    }, 'ghost');
+
+    expect(buttonAppearance).toEqual('ghost');
+  });
+
   it('should render giant buttons', () => {
     const component = render(
       <TestButtonGroup size='giant'/>,

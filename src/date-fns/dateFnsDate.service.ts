@@ -5,49 +5,45 @@
  */
 
 import {
-  I18nConfig,
   NativeDateService,
   NativeDateServiceOptions,
 } from '@ui-kitten/components';
-// @ts-ignore
-import dateFnsParse, { default as rollupParse } from 'date-fns/parse';
-// @ts-ignore
-import dateFnsFormat, { default as rollupFormat } from 'date-fns/format';
-
-const parse = rollupParse || dateFnsParse;
-const formatDate = rollupFormat || dateFnsFormat;
+import dateFnsParse from 'date-fns/parse';
+import dateFnsFormat from 'date-fns/format';
 
 export interface DateFnsOptions extends NativeDateServiceOptions {
-  parseOptions: {};
-  formatOptions: {};
+  parseOptions?: {};
+  formatOptions?: {};
 }
+
+const DEFAULT_OPTIONS: DateFnsOptions = {
+  format: 'dd/MM/yyyy',
+  parseOptions: {
+    useAdditionalDayOfYearTokens: true,
+    useAdditionalWeekYearTokens: true,
+  },
+  formatOptions: {
+    useAdditionalDayOfYearTokens: true,
+    useAdditionalWeekYearTokens: true,
+  },
+};
 
 export class DateFnsService extends NativeDateService {
 
-  protected options: Partial<DateFnsOptions> = {
-    format: `DD/MM/YYYY`,
-  };
-
   constructor(locale: string = 'en', options?: DateFnsOptions) {
-    super(locale, options);
-    this.options = options || this.options;
+    super(locale, { ...DEFAULT_OPTIONS, ...options });
   }
 
   public format(date: Date, format: string): string {
     if (date) {
-      return formatDate(date, format || this.options.format, this.options.formatOptions);
+      return dateFnsFormat(date, format || this.options.format, (this.options as DateFnsOptions).formatOptions);
     }
 
     return '';
   }
 
   public parse(date: string, format: string): Date {
-    // Parse format is not supported in current version of date-fns
-    return this.parseDate(date);
-  }
-
-  private parseDate(date: string): Date {
-    return parse(date);
+    return dateFnsParse(date, format || this.options.format, new Date(), (this.options as DateFnsOptions).parseOptions);
   }
 
   public getId(): string {

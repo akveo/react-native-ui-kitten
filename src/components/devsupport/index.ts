@@ -33,6 +33,7 @@ export {
   PropsService,
   TextStyleProps,
   FlexStyleProps,
+  FlexViewCrossStyleProps,
 } from './services/props/props.service';
 
 export * from './typings';

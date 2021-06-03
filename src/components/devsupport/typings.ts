@@ -3,9 +3,15 @@ import { ReactElement } from 'react';
 export type ChildrenProp<Element extends ReactElement = ReactElement> = Element | Element[];
 export type ChildrenWithProps<Props = {}> = ChildrenProp<ReactElement<Props>>;
 
-export type EvaStatus = 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
-export type EvaSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant' | string;
-export type EvaInputSize = 'small' | 'medium' | 'large' | string;
+
+/*
+ * https://github.com/microsoft/TypeScript/issues/29729#issuecomment-505826972
+ */
+export type LiteralUnion<T extends U, U = string> = T | (U & {});
+
+export type EvaStatus = LiteralUnion<'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control'>;
+export type EvaSize = LiteralUnion<'tiny' | 'small' | 'medium' | 'large' | 'giant'>;
+export type EvaInputSize = LiteralUnion<'small' | 'medium' | 'large'>;
 
 export class IndexPath {
 

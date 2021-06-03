@@ -27,6 +27,7 @@ import {
   TouchableWeb,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -38,7 +39,7 @@ import { TextProps } from '../text/text.component';
 import { CheckMark } from '../shared/checkmark.component';
 
 type ToggleStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface ToggleProps extends TouchableWebProps, ToggleStyledProps {
@@ -383,9 +384,9 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
           onMouseLeave={this.onMouseLeave}
           onFocus={this.onFocus}
           onBlur={this.onBlur}>
-          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <View style={[evaStyle.highlight, styles.highlight]} />
           <Animated.View style={[evaStyle.ellipseContainer, styles.ellipseContainer]}>
-            <Animated.View style={[evaStyle.ellipse, styles.ellipse]}/>
+            <Animated.View style={[evaStyle.ellipse, styles.ellipse]} />
             <Animated.View style={[evaStyle.thumb, styles.thumb]}>
               <CheckMark {...evaStyle.icon} />
             </Animated.View>

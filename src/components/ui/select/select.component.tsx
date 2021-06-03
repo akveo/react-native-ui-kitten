@@ -31,6 +31,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -52,7 +53,7 @@ import {
 } from './select.service';
 
 type SelectStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface SelectProps extends TouchableWebProps, SelectStyledProps {
@@ -344,7 +345,6 @@ export class Select extends React.Component<SelectProps, State> {
       labelMarginBottom,
       labelFontWeight,
       labelFontFamily,
-      captionMarginTop,
       captionColor,
       captionFontSize,
       captionFontWeight,
@@ -390,7 +390,6 @@ export class Select extends React.Component<SelectProps, State> {
         color: labelColor,
       },
       caption: {
-        marginTop: captionMarginTop,
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
         fontFamily: captionFontFamily,
@@ -445,7 +444,7 @@ export class Select extends React.Component<SelectProps, State> {
     const { tintColor, ...svgStyle } = evaStyle;
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown style={svgStyle} fill={tintColor}/>
+        <ChevronDown style={svgStyle} fill={tintColor} />
       </Animated.View>
     );
   };

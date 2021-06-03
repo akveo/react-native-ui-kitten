@@ -133,9 +133,9 @@ describe('@range-datepicker: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render captionIcon', async () => {
+  it('should render caption', async () => {
     const component = render(
-      <TestRangeDatepicker captionIcon={props => <View {...props} testID='caption icon'/>}/>,
+      <TestRangeDatepicker caption={props => <View {...props} testID='caption icon'/>}/>,
     );
 
     expect(component.queryByTestId('caption icon')).toBeTruthy();

@@ -9,14 +9,14 @@ import {
   FlatList,
   FlatListProps,
 } from 'react-native';
-import { Overwrite } from '../../devsupport';
+import { Overwrite, LiteralUnion } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
 
 type ListStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export type ListProps<ItemT = any> = FlatListProps<ItemT> & ListStyledProps;

@@ -15,6 +15,7 @@ import {
 import {
   ChildrenWithProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -28,7 +29,7 @@ import {
 import { TabIndicator } from '../shared/tabIndicator.component';
 
 type TabBarStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface TabBarProps extends ViewProps, TabBarStyledProps {

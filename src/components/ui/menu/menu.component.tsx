@@ -10,11 +10,9 @@ import {
   ChildrenWithProps,
   IndexPath,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
-import {
-  styled,
-  StyledComponentProps,
-} from '../../theme';
+import { styled } from '../../theme';
 import { Divider } from '../divider/divider.component';
 import {
   List,
@@ -30,13 +28,13 @@ import {
   MenuService,
 } from './menu.service';
 
-type MenuStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'noDivider' | string;
+type MenuStyledProps = Overwrite<ListProps, {
+  appearance?: LiteralUnion<'default' | 'noDivider'>;
 }>;
 
-type MenuListProps = Omit<ListProps, 'data' | 'renderItem'>;
+type MenuListProps = Omit<MenuStyledProps, 'data' | 'renderItem'>;
 
-export interface MenuProps extends MenuListProps, MenuStyledProps {
+export interface MenuProps extends MenuListProps {
   children?: ChildrenWithProps<MenuItemProps>;
   selectedIndex?: IndexPath;
   onSelect?: (index: IndexPath) => void;
@@ -136,13 +134,18 @@ export class Menu extends React.Component<MenuProps> {
 
   private cloneItemWithProps = (element: React.ReactElement, props: MenuItemProps): React.ReactElement => {
     const nestedElements = React.Children.map(element.props.children, (el: MenuItemElement, index: number) => {
-      const descriptor = this.service.createDescriptorForNestedElement(el, props.descriptor, index);
+      const descriptor = this.service.createDescriptorForNestedElement(props.descriptor, index);
       const selected: boolean = this.isItemSelected(descriptor);
 
       return this.cloneItemWithProps(el, { ...props, selected, descriptor });
     });
 
-    return React.cloneElement(element, { ...props, ...element.props }, nestedElements);
+    const onPress = (event, descriptor) => {
+      element.props.onPress && element.props.onPress();
+      props.onPress(event, descriptor);
+    };
+
+    return React.cloneElement(element, { ...element.props, ...props, onPress }, nestedElements);
   };
 
   private renderItem = (info: ListRenderItemInfo<MenuItemElement>): React.ReactElement => {
