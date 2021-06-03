@@ -25,12 +25,15 @@ import {
   FalsyFC,
   FalsyText,
   FlexStyleProps,
+  FlexViewCrossStyleProps,
   PropsService,
   RenderProp,
   WebEventResponder,
   WebEventResponderCallbacks,
   WebEventResponderInstance,
   Overwrite,
+  LiteralUnion,
+  TouchableWithoutFeedback,
 } from '../../devsupport';
 import {
   Interaction,
@@ -41,7 +44,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type InputStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface InputProps extends TextInputProps, InputStyledProps {
@@ -179,7 +182,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
   private getComponentStyle = (source: StyleType) => {
     const flatStyles: ViewStyle = StyleSheet.flatten(this.props.style);
-    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexStyleProps);
+    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
 
     const {
       textMarginHorizontal,
@@ -257,7 +260,9 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View style={evaStyle.container}>
+      <TouchableWithoutFeedback
+        style={evaStyle.container}
+        onPress={this.focus}>
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
@@ -286,7 +291,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
           style={[evaStyle.captionLabel, styles.captionLabel]} 
           component={caption}
         />
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

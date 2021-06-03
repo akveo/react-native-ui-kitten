@@ -18,6 +18,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -27,7 +28,7 @@ import {
 } from '../../theme';
 
 type TopNavigationActionStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'control' | string;
+  appearance?: LiteralUnion<'default' | 'control'>;
 }>;
 
 export interface TopNavigationActionProps extends TouchableWebProps, TopNavigationActionStyledProps {

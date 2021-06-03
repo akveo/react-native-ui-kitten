@@ -20,6 +20,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -30,7 +31,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type RadioStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface RadioProps extends TouchableWebProps, RadioStyledProps {
@@ -184,9 +185,9 @@ export class Radio extends React.Component<RadioProps> {
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <View style={styles.highlightContainer}>
-          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <View style={[evaStyle.highlight, styles.highlight]} />
           <View style={[evaStyle.selectContainer, styles.selectContainer]}>
-            <View style={evaStyle.icon}/>
+            <View style={evaStyle.icon} />
           </View>
         </View>
         <FalsyText
