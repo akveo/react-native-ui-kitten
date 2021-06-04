@@ -315,9 +315,6 @@ const styles = StyleSheet.create({
   captionLabel: {
     textAlign: 'left',
   },
-  container: {
-
-  },
 });
 
 const platformStyles = StyleSheet.create({
