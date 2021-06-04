@@ -69,7 +69,6 @@ export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;
   size?: EvaInputSize;
-  testID?: React.ReactText;
 }
 
 export type SelectElement = React.ReactElement<SelectProps>;
