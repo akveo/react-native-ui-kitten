@@ -102,7 +102,7 @@ export class Icon<T> extends React.Component<IconProps<T>> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { name, pack, animation, ...iconProps } = this.props;
+    const { name, pack, animation, animationConfig, ...iconProps } = this.props;
     const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
     const iconElement = registeredIcon.icon.toReactElement(iconProps as T);
 
