@@ -243,9 +243,9 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View 
-      style={style}
-      testID={testID}>
+      <View
+        style={style}
+        testID={testID}>
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
