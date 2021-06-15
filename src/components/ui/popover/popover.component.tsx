@@ -9,7 +9,8 @@ import {
   StyleSheet,
   BackHandler,
   NativeEventSubscription,
-  Platform 
+  Platform,
+  StatusBar
 } from 'react-native';
 import {
   Frame,
@@ -241,5 +242,8 @@ export class Popover extends React.Component<PopoverProps, State> {
 const styles = StyleSheet.create({
   popoverView: {
     position: 'absolute',
+    get marginTop() {
+      return StatusBar.currentHeight
+    }
   },
 });
