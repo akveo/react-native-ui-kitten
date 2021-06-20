@@ -8,6 +8,8 @@ import {
   FlexStyle,
   StyleProp,
   StyleSheet,
+  Platform,
+  StatusBar
 } from 'react-native';
 import {
   Frame,
@@ -158,6 +160,8 @@ export interface PopoverPlacement {
   fits(frame: Frame, other: Frame): boolean;
 }
 
+const androidSpecificOffset = Platform.OS === 'android' ? StatusBar.currentHeight : 0;
+
 export class PopoverPlacements {
 
   static RIGHT_START: PopoverPlacement = new class implements PopoverPlacement {
@@ -168,7 +172,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y,
+        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -205,7 +209,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y,
+        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -242,7 +246,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height,
+        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -279,7 +283,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height,
+        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -321,7 +325,7 @@ export class PopoverPlacements {
 
       return new Frame(
         x,
-        origin.y,
+        origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -367,7 +371,7 @@ export class PopoverPlacements {
 
       return new Frame(
         x,
-        origin.y,
+        origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -408,7 +412,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x - (options.other.size.width - size.width) / 2 + options.offsets.origin.x,
-        origin.y,
+        origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -445,7 +449,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x - (options.other.size.width - size.width) / 2 + options.offsets.origin.x,
-        origin.y,
+        origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -482,7 +486,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x + (options.other.size.width - size.width) / 2 - options.offsets.size.width,
-        origin.y,
+        origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -519,7 +523,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x + (options.other.size.width - size.width) / 2 - options.offsets.size.width,
-        origin.y,
+        origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -561,7 +565,7 @@ export class PopoverPlacements {
 
       return new Frame(
         x,
-        origin.y - options.offsets.size.height,
+        origin.y - options.offsets.size.height + androidSpecificOffset,
         size.width,
         size.height,
       );
@@ -608,7 +612,7 @@ export class PopoverPlacements {
 
       return new Frame(
         x,
-        origin.y + options.offsets.origin.y,
+        origin.y + options.offsets.origin.y + androidSpecificOffset,
         size.width,
         size.height,
       );
