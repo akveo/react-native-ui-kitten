@@ -159,9 +159,7 @@ export class Spinner extends React.PureComponent<SpinnerProps> {
     const evaStyle = this.getComponentStyle(this.animation.toProps());
 
     return (
-      <View
-        testID={this.props.testID}
-        style={containerSize}>
+      <View style={containerSize}>
         {this.renderArcElement(evaStyle.start, containerSize)}
         {this.renderArcElement(evaStyle.end, containerSize)}
       </View>

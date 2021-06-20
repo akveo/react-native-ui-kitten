@@ -254,7 +254,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       caption,
       accessoryLeft,
       accessoryRight,
-      testID,
       ...textInputProps
     } = this.props;
 
@@ -262,7 +261,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
     return (
       <TouchableWithoutFeedback
-        testID={testID}
         style={evaStyle.container}
         onPress={this.focus}>
         <FalsyText

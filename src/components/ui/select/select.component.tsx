@@ -455,7 +455,6 @@ export class Select extends React.Component<SelectProps, State> {
 
     return (
       <TouchableWeb
-        testID={props.testID}
         style={[styles.input, evaStyle.input]}
         onPress={this.onPress}
         onMouseEnter={this.onMouseEnter}

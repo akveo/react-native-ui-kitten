@@ -205,14 +205,13 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   };
 
   public render(): PopoverElement {
-    const { placement, children, testID, ...inputProps } = this.props;
+    const { placement, children, ...inputProps } = this.props;
 
     return (
       <Popover
         ref={this.popoverRef}
         style={styles.popover}
         placement={placement}
-        testID={testID}
         visible={this.state.listVisible}
         fullWidth={true}
         anchor={() => this.renderInputElement(inputProps)}
