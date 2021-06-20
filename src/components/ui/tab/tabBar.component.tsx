@@ -180,12 +180,12 @@ export class TabBar extends React.Component<TabBarProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, indicatorStyle, selectedIndex, children, ...viewProps } = this.props;
+    const { eva, style, testID, indicatorStyle, selectedIndex, children, ...viewProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
     const tabElements: TabElement[] = this.renderTabElements(children);
 
     return (
-      <View>
+      <View testID={testID}>
         <View
           {...viewProps}
           style={[evaStyle.container, styles.container, style]}>
