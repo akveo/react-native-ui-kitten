@@ -8,7 +8,6 @@ import React from 'react';
 import {
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -81,9 +80,7 @@ describe('@radio: component checks', () => {
   it('should render text from JSX component', () => {
     const component = render(
       <TestRadio>
-        <View>
-          <Text>I love Babel</Text>
-        </View>
+        <Text>I love Babel</Text>
       </TestRadio>,
     );
 

@@ -8,7 +8,6 @@ import React from 'react';
 import {
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -107,11 +106,7 @@ describe('@checkbox component checks', () => {
   });
 
   it('should render ReactElement passed to prop', () => {
-    const renderComponent = (
-      <View>
-        <Text>I love Babel</Text>
-      </View>
-    );
+    const renderComponent = <Text>I love Babel</Text>;
 
     const component = render(
       <TestCheckBox>
