@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {
   FalsyFC,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -32,7 +32,7 @@ type TopNavigationActionStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface TopNavigationActionProps extends TouchableWebProps, TopNavigationActionStyledProps {
-  icon?: RenderProp<Partial<ImageProps>>;
+  icon?: RenderType<Partial<ImageProps>>;
 }
 
 export type TopNavigationActionElement = React.ReactElement<TopNavigationActionProps>;
@@ -44,7 +44,7 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @extends React.Component
  *
- * @property {(ImageProps) => ReactElement} icon - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} icon - Function component
  * to render within the action.
  * Expected to return an Image.
  *

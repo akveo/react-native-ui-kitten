@@ -8,6 +8,7 @@ import React from 'react';
 import {
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -67,10 +68,22 @@ describe('@radio: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render text as component', () => {
+  it('should render text from function component', () => {
     const component = render(
       <TestRadio>
         {props => <Text {...props}>I love Babel</Text>}
+      </TestRadio>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render text from JSX component', () => {
+    const component = render(
+      <TestRadio>
+        <View>
+          <Text>I love Babel</Text>
+        </View>
       </TestRadio>,
     );
 

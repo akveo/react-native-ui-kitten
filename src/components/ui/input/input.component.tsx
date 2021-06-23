@@ -24,10 +24,9 @@ import {
   EvaStatus,
   FalsyFC,
   FalsyText,
-  FlexStyleProps,
   FlexViewCrossStyleProps,
   PropsService,
-  RenderProp,
+  RenderType,
   WebEventResponder,
   WebEventResponderCallbacks,
   WebEventResponderInstance,
@@ -51,10 +50,10 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   status?: EvaStatus;
   size?: EvaSize;
   disabled?: boolean;
-  label?: RenderProp<TextProps> | React.ReactText;
-  caption?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  label?: RenderType<TextProps> | React.ReactText;
+  caption?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
 }
 
@@ -78,18 +77,18 @@ export type InputElement = React.ReactElement<InputProps>;
  * @property {boolean} disabled - Whether input field is disabled.
  * This property overrides `editable` property of TextInput.
  *
- * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} label - String, number or a function component
  * to render above the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} caption - Function component to render below Input view.
  * Expected to return View.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} accessoryRight - Function component
  * to render to end of the text.
  * Expected to return an Image.
  *

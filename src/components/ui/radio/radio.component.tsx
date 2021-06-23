@@ -15,7 +15,7 @@ import {
 import {
   EvaStatus,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -35,7 +35,7 @@ type RadioStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface RadioProps extends TouchableWebProps, RadioStyledProps {
-  children?: RenderProp<TextProps> | React.ReactText;
+  children?: RenderType<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   status?: EvaStatus;
@@ -54,7 +54,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * @property {(boolean) => void} onChange - Called when radio
  * should switch it's value.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} children - String, number or a function component
  * to render near the checkbox.
  * If it is a function, expected to return a Text.
  *

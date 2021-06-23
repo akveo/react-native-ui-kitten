@@ -16,7 +16,7 @@ import {
 import {
   FalsyFC,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -36,10 +36,10 @@ type ListItemStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface ListItemProps extends TouchableWebProps, ListItemStyledProps {
-  title?: RenderProp<TextProps> | React.ReactText;
-  description?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<ViewProps>;
+  title?: RenderType<TextProps> | React.ReactText;
+  description?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<ViewProps>;
   children?: React.ReactNode;
 }
 
@@ -51,19 +51,19 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} title - String, number or a function component
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} description - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} description - String, number or a function component
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ViewProps) => ReactElement} accessoryRight - Function component
+ * @property {(ViewProps) => ReactElement | ReactElement} accessoryRight - Function component
  * to render to end of the text.
  *
  * @property {ReactNode} children - Component to render within the item.

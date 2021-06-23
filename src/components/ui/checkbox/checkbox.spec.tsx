@@ -8,6 +8,7 @@ import React from 'react';
 import {
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -104,6 +105,22 @@ describe('@checkbox component checks', () => {
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
+
+  it('should render ReactElement passed to prop', () => {
+    const renderComponent = (
+      <View>
+        <Text>I love Babel</Text>
+      </View>
+    );
+
+    const component = render(
+      <TestCheckBox>
+        {renderComponent}
+      </TestCheckBox>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  })
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();

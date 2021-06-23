@@ -15,7 +15,7 @@ import {
   RangeCalendarElement,
   RangeCalendarProps,
 } from '../calendar/rangeCalendar.component';
-import { RenderProp } from '@ui-kitten/components/devsupport';
+import { RenderType } from '@ui-kitten/components/devsupport';
 import { TextProps } from '@ui-kitten/components';
 
 export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> & RangeCalendarProps<D>;
@@ -86,23 +86,23 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Can be `small`, `medium` or `large`.
  * Defaults to *medium*.
  *
- * @property {ReactText | (TextProps) => ReactElement} placeholder - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} placeholder - String, number or a function component
  * to render when input field is empty.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} label - String, number or a function component
  * to render to top of the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} accessoryRight - Function component
  * to render to end of the text.
  * Expected to return an Image.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} caption - Function component to render below Input view.
  * Expected to return View.
  *
  * @property {() => void} onFocus - Called when picker becomes visible.
@@ -156,7 +156,7 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
 
   // BaseDatepickerComponent
 
-  protected getComponentTitle(): RenderProp<TextProps> | React.ReactText {
+  protected getComponentTitle(): RenderType<TextProps> | React.ReactText {
     const { startDate, endDate } = this.props.range;
 
     if (startDate || endDate) {

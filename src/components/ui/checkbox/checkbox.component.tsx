@@ -16,7 +16,7 @@ import {
 import {
   EvaStatus,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -44,7 +44,7 @@ type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
-  children?: RenderProp<TextProps> | React.ReactText;
+  children?: RenderType<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
   indeterminate?: boolean;
@@ -70,7 +70,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * Will set indeterminate to false when the checked property is changed.
  * Defaults to *false*.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} children - String, number or a function component
  * to render near the checkbox.
  * If it is a function, expected to return a Text.
  *

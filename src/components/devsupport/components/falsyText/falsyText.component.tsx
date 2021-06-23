@@ -1,12 +1,12 @@
 import React from 'react';
-import { RenderProp } from '../falsyFC/falsyFC.component';
+import { RenderType } from '../falsyFC/falsyFC.component';
 import {
   Text,
   TextProps,
 } from '../../../ui/text/text.component';
 
 export interface FalsyTextProps extends Omit<TextProps, 'children'> {
-  component?: RenderProp<TextProps> | React.ReactText;
+  component?: RenderType<TextProps> | React.ReactText;
 }
 
 /**
@@ -55,6 +55,10 @@ export class FalsyText extends React.Component<FalsyTextProps> {
 
     if (!component) {
       return null;
+    }
+
+    if (React.isValidElement(component)) {
+      return React.cloneElement(component, textProps as TextProps);
     }
 
     if (typeof component === 'function') {

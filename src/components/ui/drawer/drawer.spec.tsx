@@ -47,7 +47,7 @@ describe('@drawer-item: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render component passed to title prop', () => {
+  it('should render function component passed to title prop', () => {
     const component = render(
       <TestDrawerItem title={props => <Text {...props}>I love Babel</Text>}/>,
     );
@@ -55,7 +55,15 @@ describe('@drawer-item: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+  it('should render pure JSX component passed to title prop', () => {
+    const component = render(
+      <TestDrawerItem title={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render function components passed to accessoryLeft or accessoryRight props', () => {
     const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
@@ -66,6 +74,35 @@ describe('@drawer-item: component checks', () => {
     const AccessoryRight = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestDrawerItem
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should render pure JSX components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (
+      <Image
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (
+      <Image
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
       />
     );
@@ -120,7 +157,7 @@ describe('@drawer: component checks', () => {
     expect(items.length).toEqual(2);
   });
 
-  it('should render component passed to header prop', () => {
+  it('should render function component passed to header prop', () => {
     const component = render(
       <TestDrawer header={() => <Text>I love Babel</Text>}/>,
     );
@@ -128,9 +165,25 @@ describe('@drawer: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render component passed to footer prop', () => {
+  it('should render pure JSX component passed to header prop', () => {
+    const component = render(
+      <TestDrawer header={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render function component passed to footer prop', () => {
     const component = render(
       <TestDrawer footer={() => <Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render pure JSX component passed to footer prop', () => {
+    const component = render(
+      <TestDrawer footer={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();

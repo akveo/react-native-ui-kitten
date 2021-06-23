@@ -14,7 +14,7 @@ import {
 import {
   FalsyFC,
   FalsyText,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -34,8 +34,8 @@ type BottomNavigationTabStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface BottomNavigationTabProps extends TouchableWebProps, BottomNavigationTabStyledProps {
-  title?: RenderProp<TextProps> | React.ReactText;
-  icon?: RenderProp<Partial<ImageProps>>;
+  title?: RenderType<TextProps> | React.ReactText;
+  icon?: RenderType<Partial<ImageProps>>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
@@ -48,11 +48,11 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} title - String, number or a function component
  * to render within the tab.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} icon - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} icon - Function component
  * to render within the tab.
  * Expected to return an Image.
  *

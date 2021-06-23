@@ -17,7 +17,7 @@ import {
   FalsyFC,
   FalsyText,
   PropsService,
-  RenderProp,
+  RenderType,
   TouchableWeb,
   TouchableWebProps,
   Overwrite,
@@ -41,9 +41,9 @@ type TouchableMenuItemProps = Overwrite<TouchableWebProps, {
 }>;
 
 export interface MenuItemProps extends TouchableMenuItemProps, MenuItemStyledProps {
-  title?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp<Partial<ImageProps>>;
-  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  title?: RenderType<TextProps> | React.ReactText;
+  accessoryLeft?: RenderType<Partial<ImageProps>>;
+  accessoryRight?: RenderType<Partial<ImageProps>>;
   selected?: boolean;
   descriptor?: MenuItemDescriptor;
 }
@@ -56,15 +56,15 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactText | (TextProps) => ReactElement | ReactElement} title - String, number or a function component
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} accessoryLeft - Function component
  * to render to start of the *title*.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {(ImageProps) => ReactElement | ReactElement} accessoryRight - Function component
  * to render to end of the *title*.
  * Expected to return an Image.
  *
