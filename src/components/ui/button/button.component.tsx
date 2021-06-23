@@ -17,7 +17,7 @@ import {
   EvaStatus,
   FalsyFC,
   FalsyText,
-  RenderType,
+  RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -37,9 +37,9 @@ type ButtonStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
-  children?: RenderType<TextProps> | React.ReactText;
-  accessoryLeft?: RenderType<Partial<ImageProps>>;
-  accessoryRight?: RenderType<Partial<ImageProps>>;
+  children?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;
   size?: EvaSize;
 }
@@ -51,15 +51,15 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement | ReactElement} children - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} children - String, number or a function component
  * to render within the button.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement | ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement | ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
  * Expected to return an Image.
  *

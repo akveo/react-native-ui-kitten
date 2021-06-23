@@ -17,7 +17,7 @@ import {
   MeasuringElement,
   Point,
   FalsyFC,
-  RenderType,
+  RenderProp,
   Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
@@ -39,7 +39,7 @@ type PopoverModalProps = Overwrite<ModalProps, {
 }>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
-  anchor: RenderType;
+  anchor: RenderProp;
   fullWidth?: boolean;
 }
 
@@ -63,7 +63,7 @@ interface State {
  * @property {boolean} visible - Whether content component is visible.
  * Defaults to false.
  *
- * @property {() => ReactElement | ReactElement} anchor - A component relative to which content component will be shown.
+ * @property {ReactElement | () => ReactElement} anchor - A component relative to which content component will be shown.
  *
  * @property {ReactElement} children - A component displayed within the popover.
  *

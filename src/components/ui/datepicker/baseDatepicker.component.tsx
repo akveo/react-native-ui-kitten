@@ -20,7 +20,7 @@ import {
   EvaStatus,
   FalsyFC,
   FalsyText,
-  RenderType,
+  RenderProp,
   TouchableWithoutFeedback,
 } from '../../devsupport';
 import {
@@ -44,13 +44,13 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   BaseCalendarProps<D> {
 
   controlStyle?: StyleProp<ViewStyle>;
-  label?: RenderType<TextProps> | React.ReactText;
-  caption?: RenderType<TextProps> | React.ReactText;
-  accessoryLeft?: RenderType<Partial<ImageProps>>;
-  accessoryRight?: RenderType<Partial<ImageProps>>;
+  label?: RenderProp<TextProps> | React.ReactText;
+  caption?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;
   size?: EvaInputSize;
-  placeholder?: RenderType<TextProps> | React.ReactText;
+  placeholder?: RenderProp<TextProps> | React.ReactText;
   placement?: PopoverPlacement | string;
   backdropStyle?: StyleProp<ViewStyle>;
   onFocus?: () => void;
@@ -97,7 +97,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   public abstract clear(): void;
 
-  protected abstract getComponentTitle(): RenderType<TextProps> | React.ReactText;
+  protected abstract getComponentTitle(): RenderProp<TextProps> | React.ReactText;
 
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import { RenderType } from '../falsyFC/falsyFC.component';
+import { RenderProp } from '../falsyFC/falsyFC.component';
 import {
   Text,
   TextProps,
 } from '../../../ui/text/text.component';
 
 export interface FalsyTextProps extends Omit<TextProps, 'children'> {
-  component?: RenderType<TextProps> | React.ReactText;
+  component?: RenderProp<TextProps> | React.ReactText;
 }
 
 /**

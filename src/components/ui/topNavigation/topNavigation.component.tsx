@@ -13,7 +13,7 @@ import {
 import {
   FalsyFC,
   FalsyText,
-  RenderType,
+  RenderProp,
   Overwrite,
   LiteralUnion,
 } from '../../devsupport';
@@ -29,10 +29,10 @@ type TopNavigationStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps {
-  title?: RenderType<TextProps> | React.ReactText;
-  subtitle?: RenderType<TextProps> | React.ReactText;
-  accessoryLeft?: RenderType;
-  accessoryRight?: RenderType;
+  title?: RenderProp<TextProps> | React.ReactText;
+  subtitle?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp;
+  accessoryRight?: RenderProp;
   alignment?: AlignmentProp;
 }
 
@@ -45,18 +45,18 @@ type AlignmentProp = 'start' | 'center';
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement | ReactElement} title - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the top navigation.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement | ReactElement} subtitle - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} subtitle - String, number or a function component
  * to render within the top navigation.
  * If it is a function, expected to return a Text.
  *
- * @property {() => ReactElement | ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | () => ReactElement} accessoryLeft - Function component
  * to render to the left edge the top navigation.
  *
- * @property {() => ReactElement | ReactElement} accessoryRight - Function component
+ * @property {ReactElement | () => ReactElement} accessoryRight - Function component
  * to render to the right edge the top navigation.
  *
  * @property {string} appearance - Appearance of the component.

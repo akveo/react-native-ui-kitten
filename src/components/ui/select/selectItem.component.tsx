@@ -16,7 +16,7 @@ import {
   FalsyFC,
   FalsyText,
   PropsService,
-  RenderType,
+  RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -45,9 +45,9 @@ type TouchableSelectProps = Overwrite<TouchableWebProps, {
 }>;
 
 export interface SelectItemProps extends TouchableSelectProps, SelectItemStyledProps {
-  title?: RenderType<TextProps> | React.ReactText;
-  accessoryLeft?: RenderType<Partial<ImageProps>>;
-  accessoryRight?: RenderType<Partial<ImageProps>>;
+  title?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
   descriptor?: SelectItemDescriptor;
 }
@@ -60,15 +60,15 @@ export type SelectItemElement = React.ReactElement<SelectItemProps>;
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement | ReactElement} title - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement | ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the *title*.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement | ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the *title*.
  * Expected to return an Image.
  *

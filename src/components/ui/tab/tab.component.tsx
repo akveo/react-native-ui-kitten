@@ -14,7 +14,7 @@ import {
 import {
   FalsyFC,
   FalsyText,
-  RenderType,
+  RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -35,8 +35,8 @@ type TabStyledProps = Overwrite<StyledComponentProps, {
 
 export interface TabProps extends TouchableWebProps, TabStyledProps {
   children?: React.ReactElement;
-  title?: RenderType<TextProps> | React.ReactText;
-  icon?: RenderType<Partial<ImageProps>>;
+  title?: RenderProp<TextProps> | React.ReactText;
+  icon?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
@@ -51,11 +51,11 @@ export type TabElement = React.ReactElement<TabProps>;
  *
  * @property {ReactElement} children - A component displayed below the tab.
  *
- * @property {ReactText | (TextProps) => ReactElement | ReactElement} title - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the tab.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement | ReactElement} icon - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} icon - Function component
  * to render within the tab.
  * Expected to return an Image.
  *

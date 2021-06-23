@@ -8,7 +8,7 @@ import React from 'react';
 import { ViewProps } from 'react-native';
 import {
   FalsyFC,
-  RenderType,
+  RenderProp,
 } from '../../devsupport';
 import {
   styled,
@@ -20,8 +20,8 @@ import {
 } from '../menu/menu.component';
 
 export interface DrawerProps extends MenuProps {
-  header?: RenderType<ViewProps>;
-  footer?: RenderType<ViewProps>;
+  header?: RenderProp<ViewProps>;
+  footer?: RenderProp<ViewProps>;
 }
 
 export type DrawerElement = React.ReactElement<DrawerProps>;
@@ -35,10 +35,10 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * @property {ReactElement<DrawerItemProps> | ReactElement<DrawerItemProps>[]} children -
  * items to be rendered within drawer.
  * 
- * @property {(ViewProps) => ReactElement | ReactElement} header - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} header - Function component
  * to render above the content.
  *
- * @property {(ViewProps) => ReactElement | ReactElement} footer - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} footer - Function component
  * to render below the content.
  *
  * @property {IndexPath} selectedIndex - Index of selected item.

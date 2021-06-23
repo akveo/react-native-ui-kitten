@@ -1,11 +1,11 @@
 import React from 'react';
 
-type RenderProp<Props = {}> = (props?: Props) => React.ReactElement;
+type RenderFCProp<Props = {}> = (props?: Props) => React.ReactElement;
 
-export type RenderType<Props = {}> = RenderProp<Props> | React.ReactElement
+export type RenderProp<Props = {}> = RenderFCProp<Props> | React.ReactElement
 
 export type FalsyFCProps<Props = {}> = Props & {
-  component?: RenderType<Props>;
+  component?: RenderProp<Props>;
   fallback?: React.ReactElement;
 };
 
@@ -18,7 +18,7 @@ export type FalsyFCProps<Props = {}> = Props & {
  * If it is a function, will call it with props passed to this component.
  * Otherwise, will return null.
  *
- * @property {RenderType} component - Function component to be rendered.
+ * @property {RenderProp} component - Function component to be rendered.
  * @property {React.ReactElement} fallback - Element to render if children is null or undefined.
  *
  * @example Will render nothing.
@@ -49,6 +49,6 @@ export class FalsyFC<Props = {}> extends React.Component<FalsyFCProps<Props>> {
       return React.cloneElement(component, props);
     }
 
-    return React.createElement(component as RenderProp<Props>, props as Props);
+    return React.createElement(component as RenderFCProp<Props>, props as Props);
   }
 }

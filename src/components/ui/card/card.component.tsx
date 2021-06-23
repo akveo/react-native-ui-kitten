@@ -14,7 +14,7 @@ import {
 import {
   EvaStatus,
   FalsyFC,
-  RenderType,
+  RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
@@ -35,9 +35,9 @@ type CardStyledProps = Overwrite<StyledComponentProps, {
 
 export interface CardProps extends TouchableWebProps, CardStyledProps {
   children?: React.ReactNode;
-  header?: RenderType<ViewProps>;
-  footer?: RenderType<ViewProps>;
-  accent?: RenderType<ViewProps>;
+  header?: RenderProp<ViewProps>;
+  footer?: RenderProp<ViewProps>;
+  accent?: RenderProp<ViewProps>;
   status?: EvaStatus;
 }
 
@@ -50,13 +50,13 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @property {ReactNode} children - Component to render within the card.
  *
- * @property {(ViewProps) => ReactElement | ReactElement} header - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} header - Function component
  * to render above the content.
  *
- * @property {(ViewProps) => ReactElement | ReactElement} footer - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} footer - Function component
  * to render below the content.
  *
- * @property {(ViewProps) => ReactElement | ReactElement} accent - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} accent - Function component
  * to render above the card.
  * Accents may change it's color depending on *status* property.
  *
