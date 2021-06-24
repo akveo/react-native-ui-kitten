@@ -70,7 +70,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * Will set indeterminate to false when the checked property is changed.
  * Defaults to *false*.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} children - String, number or a function component
  * to render near the checkbox.
  * If it is a function, expected to return a Text.
  *

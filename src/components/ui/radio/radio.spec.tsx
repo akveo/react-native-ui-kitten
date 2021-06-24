@@ -67,10 +67,20 @@ describe('@radio: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render text as component', () => {
+  it('should render text from function component', () => {
     const component = render(
       <TestRadio>
         {props => <Text {...props}>I love Babel</Text>}
+      </TestRadio>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render text from JSX component', () => {
+    const component = render(
+      <TestRadio>
+        <Text>I love Babel</Text>
       </TestRadio>,
     );
 
