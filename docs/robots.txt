@@ -1,1 +1,0 @@
-Sitemap: https://akveo.github.io/react-native-ui-kitten/sitemap.xml
