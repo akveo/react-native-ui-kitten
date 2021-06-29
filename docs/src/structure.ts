@@ -643,7 +643,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Modal Service',
-        icon: 'dialog.svg',
+        icon: 'dialog-service.svg',
         source: [
           'ModalServiceType',
         ],
