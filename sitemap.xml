@@ -32,9 +32,6 @@
        <loc>https://akveo.github.io/react-native-ui-kitten/docs/guides/improving-performance</loc>
      </url>
      <url>
-       <loc>https://akveo.github.io/react-native-ui-kitten/docs/guides/statusbar-support-android</loc>
-     </url>
-     <url>
        <loc>https://akveo.github.io/react-native-ui-kitten/docs/design-system/eva-design-system-intro</loc>
      </url>
      <url>
@@ -444,21 +441,6 @@
      </url>
      <url>
        <loc>https://akveo.github.io/react-native-ui-kitten/docs/components/modal/examples</loc>
-     </url>
-     <url>
-       <loc>https://akveo.github.io/react-native-ui-kitten/docs/components/modal-service</loc>
-     </url>
-     <url>
-       <loc>https://akveo.github.io/react-native-ui-kitten/docs/components/modal-service/overview</loc>
-     </url>
-     <url>
-       <loc>https://akveo.github.io/react-native-ui-kitten/docs/components/modal-service/api</loc>
-     </url>
-     <url>
-       <loc>https://akveo.github.io/react-native-ui-kitten/docs/components/modal-service/theme</loc>
-     </url>
-     <url>
-       <loc>https://akveo.github.io/react-native-ui-kitten/docs/components/modal-service/examples</loc>
      </url>
      <url>
        <loc>https://akveo.github.io/react-native-ui-kitten/docs/components/popover</loc>
