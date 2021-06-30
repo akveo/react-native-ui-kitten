@@ -25,6 +25,8 @@ const customMappingWatchOptions = {
  * @param metroConfig - configuration of Metro Bundler used in project.
  * @link https://facebook.github.io/metro/docs/configuration
  *
+ * @param enableWatcher - if the custom mapping file should be watched for changes (disable in CI/CD environments)
+ *
  * @returns a combination of two metro configurations.
  *
  * @example Usage
@@ -42,7 +44,7 @@ const customMappingWatchOptions = {
  * });
  * ```
  */
-export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): MetroConfigType => {
+export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType, enableWatcher: boolean = true): MetroConfigType => {
 
   const handleMetroEvent = (event): void => {
     const reporter = metroConfig && metroConfig.reporter || defaultMetroConfig.reporter;
@@ -57,7 +59,7 @@ export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): Met
       const customMappingPath: string = ProjectService.resolvePath(evaConfig.customMappingPath);
       const customMappingExists: boolean = Fs.existsSync(customMappingPath);
 
-      if (customMappingExists) {
+      if (customMappingExists && enableWatcher) {
         Fs.watchFile(customMappingPath, customMappingWatchOptions, () => {
           BootstrapService.run(evaConfig);
         });
