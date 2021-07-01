@@ -117,6 +117,14 @@ describe('@range-datepicker: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
+  it('should render label as pure JSX component', async () => {
+    const component = render(
+      <TestRangeDatepicker label={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
   it('should render caption as string', async () => {
     const component = render(
       <TestRangeDatepicker caption='I love Babel'/>,
@@ -141,6 +149,14 @@ describe('@range-datepicker: component checks', () => {
     expect(component.queryByTestId('caption icon')).toBeTruthy();
   });
 
+  it('should render caption as pure JSX component', async () => {
+    const component = render(
+      <TestRangeDatepicker caption={<View testID='caption icon'/>}/>,
+    );
+
+    expect(component.queryByTestId('caption icon')).toBeTruthy();
+  });
+
   it('should render component passed to accessoryLeft prop', async () => {
     const component = render(
       <TestRangeDatepicker accessoryLeft={props => <View {...props} testID='accessory left'/>}/>,
@@ -149,9 +165,25 @@ describe('@range-datepicker: component checks', () => {
     expect(component.queryByTestId('accessory left')).toBeTruthy();
   });
 
+  it('should render pure JSX component passed to accessoryLeft prop', async () => {
+    const component = render(
+      <TestRangeDatepicker accessoryLeft={<View testID='accessory left'/>}/>,
+    );
+
+    expect(component.queryByTestId('accessory left')).toBeTruthy();
+  });
+
   it('should render component passed to accessoryRight prop', async () => {
     const component = render(
       <TestRangeDatepicker accessoryRight={props => <View {...props} testID='accessory right'/>}/>,
+    );
+
+    expect(component.queryByTestId('accessory right')).toBeTruthy();
+  });
+
+  it('should render pure JSX component passed to accessoryRight prop', async () => {
+    const component = render(
+      <TestRangeDatepicker accessoryRight={<View testID='accessory right'/>}/>,
     );
 
     expect(component.queryByTestId('accessory right')).toBeTruthy();

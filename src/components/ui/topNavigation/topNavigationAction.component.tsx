@@ -44,7 +44,7 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @extends React.Component
  *
- * @property {(ImageProps) => ReactElement} icon - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} icon - Function component
  * to render within the action.
  * Expected to return an Image.
  *

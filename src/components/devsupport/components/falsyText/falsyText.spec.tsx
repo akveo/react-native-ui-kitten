@@ -79,3 +79,22 @@ it('should be able to render components with hooks', function () {
 
   expect(textComponent).toBeTruthy();
 });
+
+it('should be able to render valid element', function () {
+  const ComponentWithHooks = (props) => {
+    return <Text {...props}>I love Babel</Text>;
+  };
+
+  const component = render(
+    <FalsyText
+      style={{ color: 'red' }}
+      component={<ComponentWithHooks />}
+    />,
+  );
+
+  const textComponent = component.getByText('I love Babel');
+  expect(textComponent).toBeTruthy();
+  expect(textComponent.props.style).toEqual({
+    color: 'red',
+  });
+});

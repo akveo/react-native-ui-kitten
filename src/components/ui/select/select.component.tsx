@@ -112,7 +112,7 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * where row - index of item in group, section - index of group in list.
  * Called with array if *multiSelect* was set to true.
  *
- * @property {ReactText | (TextProps) => ReactElement} value - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} value - String, number or a function component
  * to render for the selected options.
  * By default, calls *toString()* for each index in selectedIndex property.
  * If it is a function, expected to return a Text.
@@ -121,23 +121,23 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * If true, calls onSelect with IndexPath[] in arguments.
  * Otherwise, with IndexPath in arguments.
  *
- * @property {ReactText | (TextProps) => ReactElement} placeholder - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function component
  * to render when there is no selected option.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} label - String, number or a function component
  * to render above input field.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} caption - String, number or a function component
  * to render below the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
  * Expected to return an Image.
  *

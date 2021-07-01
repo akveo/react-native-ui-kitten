@@ -105,6 +105,18 @@ describe('@checkbox component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
+  it('should render ReactElement passed to prop', () => {
+    const renderComponent = <Text>I love Babel</Text>;
+
+    const component = render(
+      <TestCheckBox>
+        {renderComponent}
+      </TestCheckBox>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  })
+
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
     const component = render(
