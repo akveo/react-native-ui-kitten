@@ -6,6 +6,7 @@ import ProjectService from './project.service';
  *
  * @param {EvaMappingPackageName} evaPackage - the name of the eva package.
  * @param {string} customMappingPath - relative path to custom mapping.
+ * @param {boolean} watch - watch custom mapping file for changes (defaults to true)
  *
  * @example Config for @eva-design/eva package with custom mapping
  * ```
@@ -18,6 +19,7 @@ import ProjectService from './project.service';
 export interface EvaConfig {
   evaPackage: EvaMappingPackageName;
   customMappingPath?: string;
+  watch?: boolean;
 }
 
 export type EvaMappingPackageName = '@eva-design/eva' | '@eva-design/material';
