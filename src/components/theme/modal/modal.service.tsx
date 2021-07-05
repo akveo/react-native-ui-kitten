@@ -83,7 +83,6 @@ import {
  * );
  * 
  * export default () => {
- *   const isStatusBarOffsetSupported = ModalService.getShouldUseTopInsets //returns true
  * 
  *   return (
  *     <ApplicationProvider {...eva} theme={eva.light}>
