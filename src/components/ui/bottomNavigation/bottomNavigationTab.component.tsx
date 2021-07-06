@@ -48,11 +48,11 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the tab.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} icon - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} icon - Function component
  * to render within the tab.
  * Expected to return an Image.
  *

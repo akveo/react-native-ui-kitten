@@ -34,6 +34,12 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * @property {ReactElement<DrawerItemProps> | ReactElement<DrawerItemProps>[]} children -
  * items to be rendered within drawer.
+ * 
+ * @property {ReactElement | (ViewProps) => ReactElement} header - Function component
+ * to render above the content.
+ *
+ * @property {ReactElement | (ViewProps) => ReactElement} footer - Function component
+ * to render below the content.
  *
  * @property {IndexPath} selectedIndex - Index of selected item.
  * IndexPath `row: number, section?: number` - position of element in sectioned list.

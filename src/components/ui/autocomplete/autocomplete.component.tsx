@@ -24,7 +24,6 @@ import {
   Popover,
   PopoverElement,
 } from '../popover/popover.component';
-import { PopoverPlacement } from '../popover/type';
 import {
   AutocompleteItemElement,
   AutocompleteItemProps,
@@ -205,19 +204,21 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   };
 
   public render(): PopoverElement {
-    const { placement, children, ...inputProps } = this.props;
+    const { placement, children, testID, ...inputProps } = this.props;
 
     return (
       <Popover
         ref={this.popoverRef}
         style={styles.popover}
         placement={placement}
+        testID={testID}
         visible={this.state.listVisible}
         fullWidth={true}
-        anchor={() => this.renderInputElement(inputProps)}
+        anchor={this.renderInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}>
         <List
           style={styles.list}
+          keyboardShouldPersistTaps='always'
           data={this.data}
           bounces={false}
           renderItem={this.renderItem}

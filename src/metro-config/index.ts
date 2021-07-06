@@ -57,7 +57,7 @@ export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): Met
       const customMappingPath: string = ProjectService.resolvePath(evaConfig.customMappingPath);
       const customMappingExists: boolean = Fs.existsSync(customMappingPath);
 
-      if (customMappingExists) {
+      if (customMappingExists && (evaConfig.watch || evaConfig.watch === undefined)) {
         Fs.watchFile(customMappingPath, customMappingWatchOptions, () => {
           BootstrapService.run(evaConfig);
         });

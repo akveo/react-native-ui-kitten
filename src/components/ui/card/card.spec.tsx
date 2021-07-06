@@ -43,7 +43,7 @@ describe('@card: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render component passed to header prop', () => {
+  it('should render function component passed to header prop', () => {
     const component = render(
       <TestCard header={props => <Text {...props}>Test Card Header</Text>}/>,
     );
@@ -51,12 +51,44 @@ describe('@card: component checks', () => {
     expect(component.queryByText('Test Card Header')).toBeTruthy();
   });
 
-  it('should render component passed to footer prop', () => {
+  it('should render JSX component passed to header prop', () => {
+    const component = render(
+      <TestCard header={<Text>Test Card Header</Text>}/>,
+    );
+
+    expect(component.queryByText('Test Card Header')).toBeTruthy();
+  });
+
+  it('should render function component passed to footer prop', () => {
     const component = render(
       <TestCard footer={props => <Text {...props}>Test Card Footer</Text>}/>,
     );
 
     expect(component.queryByText('Test Card Footer')).toBeTruthy();
+  });
+
+  it('should render JSX component passed to footer prop', () => {
+    const component = render(
+      <TestCard footer={<Text>Test Card Footer</Text>}/>,
+    );
+
+    expect(component.queryByText('Test Card Footer')).toBeTruthy();
+  });
+
+  it('should render function component passed to accent prop', () => {
+    const component = render(
+      <TestCard accent={props => <Text {...props}>Test Card Accent</Text>}/>,
+    );
+
+    expect(component.queryByText('Test Card Accent')).toBeTruthy();
+  });
+
+  it('should render JSX component passed to accent prop', () => {
+    const component = render(
+      <TestCard footer={<Text>Test Card Accent</Text>}/>,
+    );
+
+    expect(component.queryByText('Test Card Accent')).toBeTruthy();
   });
 
   it('should call onPress', () => {

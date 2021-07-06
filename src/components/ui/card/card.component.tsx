@@ -50,13 +50,13 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @property {ReactNode} children - Component to render within the card.
  *
- * @property {(ViewProps) => ReactElement} header - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} header - Function component
  * to render above the content.
  *
- * @property {(ViewProps) => ReactElement} footer - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} footer - Function component
  * to render below the content.
  *
- * @property {(ViewProps) => ReactElement} accent - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} accent - Function component
  * to render above the card.
  * Accents may change it's color depending on *status* property.
  *

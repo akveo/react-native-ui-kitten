@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   fireEvent,
   render,
@@ -76,10 +76,22 @@ describe('@toggle: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render text as component', () => {
+  it('should render text as function component', () => {
     const component = render(
       <TestToggle>
         {props => <Text {...props}>I love Babel</Text>}
+      </TestToggle>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render pure JSX component', () => {
+    const component = render(
+      <TestToggle>
+        <View>
+          <Text>I love Babel</Text>
+        </View>
       </TestToggle>,
     );
 

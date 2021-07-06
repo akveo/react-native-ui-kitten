@@ -54,7 +54,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * @property {(boolean) => void} onChange - Called when radio
  * should switch it's value.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} children - String, number or a function component
  * to render near the checkbox.
  * If it is a function, expected to return a Text.
  *

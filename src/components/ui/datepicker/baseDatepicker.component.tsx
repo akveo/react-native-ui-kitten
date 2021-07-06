@@ -229,6 +229,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     const {
       eva,
       style,
+      testID,
       backdropStyle,
       controlStyle,
       placement,
@@ -242,7 +243,9 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View style={style}>
+      <View
+        style={style}
+        testID={testID}>
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
@@ -253,7 +256,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
           backdropStyle={backdropStyle}
           placement={placement}
           visible={this.state.visible}
-          anchor={() => this.renderInputElement(touchableProps, evaStyle)}
+          anchor={this.renderInputElement(touchableProps, evaStyle)}
           onBackdropPress={this.setPickerInvisible}>
           {this.renderCalendar()}
         </Popover>

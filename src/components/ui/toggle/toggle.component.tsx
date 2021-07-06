@@ -62,7 +62,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * @property {(boolean) => void} onChange - Called when toggle
  * should switch it's value.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} children - String, number or a function component
  * to render near the toggle.
  * If it is a function, expected to return a Text.
  *
@@ -370,11 +370,12 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, checked, children, ...touchableProps } = this.props;
+    const { eva, style, checked, children, testID, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
+        testID={testID}
         {...this.panResponder.panHandlers}
         style={[styles.container, style]}>
         <TouchableWeb

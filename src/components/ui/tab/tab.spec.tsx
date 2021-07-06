@@ -44,10 +44,27 @@ describe('@tab: component checks', () => {
     </ApplicationProvider>
   );
 
-  it('should render image passed to icon prop', () => {
+  it('should render function image component passed to icon prop', () => {
     const Icon = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const component = render(
+      <TestTab icon={Icon}/>,
+    );
+
+    const image = component.queryByType(Image);
+
+    expect(image).toBeTruthy();
+    expect(image.props.source).toEqual({ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' });
+  });
+
+  it('should render JSX image component passed to icon prop', () => {
+    const Icon = (
+      <Image
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
       />
     );
@@ -70,9 +87,17 @@ describe('@tab: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render component passed to title prop', () => {
+  it('should render function component passed to title prop', () => {
     const component = render(
       <TestTab title={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render pure JSX component passed to title prop', () => {
+    const component = render(
+      <TestTab title={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();

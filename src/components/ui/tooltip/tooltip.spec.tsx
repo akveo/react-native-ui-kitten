@@ -79,12 +79,20 @@ describe('@tooltip: component checks', () => {
     findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[1],
   };
 
-  it('should render element passed to `anchor` prop', () => {
+  it('should render function element passed to `anchor` prop', () => {
     const component = render(
       <TestTooltip/>,
     );
 
     expect(touchables.findToggleButton(component)).toBeTruthy();
+  });
+
+  it('should render JSX element passed to `anchor` prop', () => {
+    const component = render(
+      <TestTooltip anchor={<Text>I love Babel</Text>} />,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy()
   });
 
   it('should not render content when not visible', async () => {
@@ -115,6 +123,25 @@ describe('@tooltip: component checks', () => {
     const component = render(
       <TestTooltip>
         {props => <Text {...props}>I love Babel</Text>}
+      </TestTooltip>,
+    );
+
+    fireEvent.press(touchables.findToggleButton(component));
+
+    const text = await waitForElement(() => component.queryByText('I love Babel'));
+    expect(text).toBeTruthy();
+  });
+
+  it('should render content as pure JSX component when becomes visible', async () => {
+    const childrenComponent = (
+      <View>
+        <Text>I love Babel</Text>
+      </View>
+    )
+
+    const component = render(
+      <TestTooltip>
+        {childrenComponent}
       </TestTooltip>,
     );
 
