@@ -49,20 +49,20 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @method {() => void} hide - Sets Tooltip invisible.
  *
- * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
+ * @property {ReactElement | () => ReactElement} anchor - A component relative to which content component will be shown.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} children - String, number or a function component
  * to render within the tooltip.
  * If it is a function, expected to return a Text.
  *
  * @property {boolean} visible - Whether content component is visible.
  * Defaults to false.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
  * Expected to return an Image.
  *

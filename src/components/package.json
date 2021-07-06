@@ -28,6 +28,6 @@
     "fecha": "3.0.3"
   },
   "peerDependencies": {
-    "react-native-svg": "^9.13.6"
+    "react-native-svg": "*"
   }
 }

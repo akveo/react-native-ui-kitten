@@ -45,18 +45,18 @@ type AlignmentProp = 'start' | 'center';
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the top navigation.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} subtitle - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} subtitle - String, number or a function component
  * to render within the top navigation.
  * If it is a function, expected to return a Text.
  *
- * @property {() => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | () => ReactElement} accessoryLeft - Function component
  * to render to the left edge the top navigation.
  *
- * @property {() => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | () => ReactElement} accessoryRight - Function component
  * to render to the right edge the top navigation.
  *
  * @property {string} appearance - Appearance of the component.

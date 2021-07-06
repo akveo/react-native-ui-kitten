@@ -24,7 +24,6 @@ import {
   EvaStatus,
   FalsyFC,
   FalsyText,
-  FlexStyleProps,
   FlexViewCrossStyleProps,
   PropsService,
   RenderProp,
@@ -78,18 +77,18 @@ export type InputElement = React.ReactElement<InputProps>;
  * @property {boolean} disabled - Whether input field is disabled.
  * This property overrides `editable` property of TextInput.
  *
- * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} label - String, number or a function component
  * to render above the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
  * Expected to return View.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
  * Expected to return an Image.
  *

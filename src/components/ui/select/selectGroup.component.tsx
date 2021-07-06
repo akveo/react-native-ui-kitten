@@ -26,15 +26,15 @@ export type SelectGroupElement = React.ReactElement<SelectItemProps>;
  * @property {ReactElement<SelectItemProps> | ReactElement<SelectItemProps>[]} children -
  * items to be rendered within group.
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the group.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the *title*.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the *title*.
  * Expected to return an Image.
  *
