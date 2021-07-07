@@ -21,6 +21,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -39,7 +40,7 @@ import {
 } from '../shared/minus.component';
 
 type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default' | string>;
 }>;
 
 export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
@@ -69,7 +70,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * Will set indeterminate to false when the checked property is changed.
  * Defaults to *false*.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} children - String, number or a function component
  * to render near the checkbox.
  * If it is a function, expected to return a Text.
  *
@@ -211,7 +212,7 @@ export class CheckBox extends React.Component<CheckBoxProps> {
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <View style={styles.highlightContainer}>
-          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <View style={[evaStyle.highlight, styles.highlight]} />
           <View style={[evaStyle.selectContainer, styles.selectContainer]}>
             {this.renderIconElement(evaStyle.icon)}
           </View>

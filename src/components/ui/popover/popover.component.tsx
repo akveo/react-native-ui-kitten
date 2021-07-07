@@ -5,12 +5,18 @@
  */
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  BackHandler,
+  NativeEventSubscription,
+  Platform 
+} from 'react-native';
 import {
   Frame,
   MeasureElement,
   MeasuringElement,
   Point,
+  FalsyFC,
   RenderProp,
   Overwrite,
 } from '../../devsupport';
@@ -57,7 +63,7 @@ interface State {
  * @property {boolean} visible - Whether content component is visible.
  * Defaults to false.
  *
- * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
+ * @property {ReactElement | () => ReactElement} anchor - A component relative to which content component will be shown.
  *
  * @property {ReactElement} children - A component displayed within the popover.
  *
@@ -99,6 +105,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     forceMeasure: false,
   };
 
+  private hardwareBackSubscription: NativeEventSubscription;
   private modalId: string;
   private contentPosition: Point = Point.outscreen();
   private placementService: PopoverPlacementService = new PopoverPlacementService();
@@ -130,6 +137,11 @@ export class Popover extends React.Component<PopoverProps, State> {
     this.modalId = ModalService.hide(this.modalId);
   };
 
+  private onHardwareBackPress = (): boolean => {
+    this.hide();
+    return false;
+  };
+
   public componentDidUpdate(prevProps: PopoverProps): void {
     if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
@@ -142,7 +154,14 @@ export class Popover extends React.Component<PopoverProps, State> {
     }
   }
 
+  public componentDidMount(): void {
+    if(Platform.OS === 'android') {
+      this.hardwareBackSubscription = BackHandler.addEventListener('hardwareBackPress', this.onHardwareBackPress);
+    }
+  }
+
   public componentWillUnmount(): void {
+    this.hardwareBackSubscription?.remove();
     this.hide();
   }
 
@@ -200,7 +219,9 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   private renderMeasuringPopoverElement = (): MeasuringElement => {
     return (
-      <MeasureElement onMeasure={this.onContentMeasure}>
+      <MeasureElement 
+        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
+        onMeasure={this.onContentMeasure}>
         {this.renderPopoverElement()}
       </MeasureElement>
     );
@@ -209,9 +230,10 @@ export class Popover extends React.Component<PopoverProps, State> {
   public render(): React.ReactElement {
     return (
       <MeasureElement
+        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         force={this.state.forceMeasure}
         onMeasure={this.onChildMeasure}>
-        {this.props.anchor()}
+          <FalsyFC component={this.props.anchor} />
       </MeasureElement>
     );
   }

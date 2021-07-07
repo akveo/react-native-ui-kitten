@@ -18,6 +18,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -27,7 +28,7 @@ import {
 } from '../../theme';
 
 type TopNavigationActionStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'control' | string;
+  appearance?: LiteralUnion<'default' | 'control'>;
 }>;
 
 export interface TopNavigationActionProps extends TouchableWebProps, TopNavigationActionStyledProps {
@@ -43,7 +44,7 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @extends React.Component
  *
- * @property {(ImageProps) => ReactElement} icon - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} icon - Function component
  * to render within the action.
  * Expected to return an Image.
  *

@@ -24,7 +24,6 @@ import {
   Popover,
   PopoverElement,
 } from '../popover/popover.component';
-import { PopoverPlacement } from '../popover/type';
 import {
   AutocompleteItemElement,
   AutocompleteItemProps,
@@ -149,6 +148,13 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.inputRef.current?.clear();
   };
 
+  public componentDidUpdate(prevProps: AutocompleteProps): void {
+    const isChildCountChanged: boolean = this.data.length !== React.Children.count(prevProps.children);
+    const shouldBecomeVisible: boolean = !this.state.listVisible && this.isFocused() && isChildCountChanged;
+
+    shouldBecomeVisible && this.setState({ listVisible: shouldBecomeVisible });
+  }
+
   private onInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.setOptionsListVisible();
     this.props.onFocus && this.props.onFocus(event);
@@ -158,7 +164,6 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.setOptionsListInvisible();
     this.props.onSubmitEditing && this.props.onSubmitEditing(e);
   };
-
 
   private onBackdropPress = (): void => {
     this.blur();
@@ -199,19 +204,21 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   };
 
   public render(): PopoverElement {
-    const { placement, children, ...inputProps } = this.props;
+    const { placement, children, testID, ...inputProps } = this.props;
 
     return (
       <Popover
         ref={this.popoverRef}
         style={styles.popover}
         placement={placement}
+        testID={testID}
         visible={this.state.listVisible}
         fullWidth={true}
-        anchor={() => this.renderInputElement(inputProps)}
+        anchor={this.renderInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}>
         <List
           style={styles.list}
+          keyboardShouldPersistTaps='always'
           data={this.data}
           bounces={false}
           renderItem={this.renderItem}

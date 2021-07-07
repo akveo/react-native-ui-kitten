@@ -113,6 +113,38 @@ describe('@datepicker: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
+  it('should render placeholder as pure JSX component', async () => {
+    const component = render(
+      <TestDatepicker placeholder={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render placeholder as string', async () => {
+    const component = render(
+      <TestDatepicker placeholder='I love Babel'/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render placeholder as component', async () => {
+    const component = render(
+      <TestDatepicker placeholder={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render label as pure JSX component', async () => {
+    const component = render(
+      <TestDatepicker label={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
   it('should render caption as string', async () => {
     const component = render(
       <TestDatepicker caption='I love Babel'/>,
@@ -129,9 +161,17 @@ describe('@datepicker: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render captionIcon', async () => {
+  it('should render caption', async () => {
     const component = render(
-      <TestDatepicker captionIcon={props => <View {...props} testID='caption icon'/>}/>,
+      <TestDatepicker caption={props => <View {...props} testID='caption icon'/>}/>,
+    );
+
+    expect(component.queryByTestId('caption icon')).toBeTruthy();
+  });
+
+  it('should render caption as pure JXS component', async () => {
+    const component = render(
+      <TestDatepicker caption={<View testID='caption icon'/>}/>,
     );
 
     expect(component.queryByTestId('caption icon')).toBeTruthy();
@@ -145,9 +185,25 @@ describe('@datepicker: component checks', () => {
     expect(component.queryByTestId('accessory left')).toBeTruthy();
   });
 
+  it('should render pure JSX component passed to accessoryLeft prop', async () => {
+    const component = render(
+      <TestDatepicker accessoryLeft={<View testID='accessory left'/>}/>,
+    );
+
+    expect(component.queryByTestId('accessory left')).toBeTruthy();
+  });
+
   it('should render component passed to accessoryRight prop', async () => {
     const component = render(
       <TestDatepicker accessoryRight={props => <View {...props} testID='accessory right'/>}/>,
+    );
+
+    expect(component.queryByTestId('accessory right')).toBeTruthy();
+  });
+
+  it('should render pure JSX component passed to accessoryRight prop', async () => {
+    const component = render(
+      <TestDatepicker accessoryRight={<View testID='accessory right'/>}/>,
     );
 
     expect(component.queryByTestId('accessory right')).toBeTruthy();

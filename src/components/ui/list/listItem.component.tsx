@@ -21,6 +21,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -31,7 +32,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type ListItemStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface ListItemProps extends TouchableWebProps, ListItemStyledProps {
@@ -50,19 +51,19 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} description - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} description - String, number or a function component
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ViewProps) => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
  *
  * @property {ReactNode} children - Component to render within the item.

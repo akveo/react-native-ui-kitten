@@ -1,0 +1,108 @@
+/* Source of for-business.css */
+
+.for-business-container {
+  background-color: #fcfcfc;
+  padding: 7.125rem 2rem 0;
+}
+
+.for-business {
+  display: flex;
+  flex-direction: column;
+  max-width: 80.375rem;
+  margin: 0 auto;
+  overflow: hidden;
+
+  background: #ffffff;
+  border: 1px solid #edf1f6;
+  border-radius: 0.5rem;
+
+  font-family: Raleway, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+
+  &__left,
+  &__right {
+    padding: 2rem;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: linear-gradient(39.99deg, #FE5722 25.21%, #FB7F1F 82.3%);;
+  }
+
+  &__heading {
+    color: #ffffff;
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 4.125rem;
+    margin: 0 0 2rem;
+  }
+
+  &__submit {
+    margin: auto auto 0;
+  }
+
+  &__offerings-title {
+    font-size: 2.25rem;
+    line-height: 2.625rem;
+    font-weight: 800;
+    color: #40424e;
+  }
+
+  &__offerings {
+    margin: 2.25rem 0 0;
+    padding: 0;
+    list-style: none;
+
+    &__offering {
+      margin-bottom: 0.75rem;
+
+      font-family: "Open Sans", sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.5625rem;
+      font-weight: 500;
+      color: #7c8087;
+
+      &::before {
+        content: '•';
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 58.125em) {
+  .for-business {
+    flex-direction: row;
+
+    &__left {
+      max-width: 32.25rem;
+      padding: 5.75rem 5.75rem 4.875rem;
+    }
+
+    &__submit {
+      white-space: nowrap;
+    }
+
+    &__right {
+      padding: 6.25rem 4rem;
+    }
+  }
+}
+
+@media (min-width: 80em) {
+  .for-business {
+    &__offerings-title__second-line {
+      display: block;
+    }
+
+    &__offerings {
+      columns: 2;
+    }
+  }
+}

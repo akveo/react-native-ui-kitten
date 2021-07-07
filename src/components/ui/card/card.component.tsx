@@ -19,6 +19,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -29,7 +30,7 @@ import {
 import { Divider } from '../divider/divider.component';
 
 type CardStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'filled' | 'outline' | string;
+  appearance?: LiteralUnion<'filled' | 'outline'>;
 }>;
 
 export interface CardProps extends TouchableWebProps, CardStyledProps {
@@ -49,13 +50,13 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @property {ReactNode} children - Component to render within the card.
  *
- * @property {(ViewProps) => ReactElement} header - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} header - Function component
  * to render above the content.
  *
- * @property {(ViewProps) => ReactElement} footer - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} footer - Function component
  * to render below the content.
  *
- * @property {(ViewProps) => ReactElement} accent - Function component
+ * @property {ReactElement | (ViewProps) => ReactElement} accent - Function component
  * to render above the card.
  * Accents may change it's color depending on *status* property.
  *
@@ -126,7 +127,7 @@ export class Card extends React.Component<CardProps> {
 
   private renderStatusAccent = (evaStyle): React.ReactElement => {
     return (
-      <View style={evaStyle}/>
+      <View style={evaStyle} />
     );
   };
 
@@ -149,11 +150,11 @@ export class Card extends React.Component<CardProps> {
           style={[styles.transparent, evaStyle.header]}
           component={header}
         />
-        {header && <Divider/>}
+        {header && <Divider />}
         <View style={evaStyle.body}>
           {children}
         </View>
-        {footer && <Divider/>}
+        {footer && <Divider />}
         <FalsyFC
           style={[styles.transparent, evaStyle.footer]}
           component={footer}

@@ -21,6 +21,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -36,7 +37,7 @@ import { TextProps } from '../text/text.component';
 import { SelectItemDescriptor } from './select.service';
 
 type SelectItemStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'grouped' | string;
+  appearance?: LiteralUnion<'default' | 'grouped'>;
 }>;
 
 type TouchableSelectProps = Overwrite<TouchableWebProps, {
@@ -59,15 +60,15 @@ export type SelectItemElement = React.ReactElement<SelectItemProps>;
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the *title*.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the *title*.
  * Expected to return an Image.
  *

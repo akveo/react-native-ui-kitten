@@ -1,0 +1,169 @@
+/*
+  Minified version of this file inlined into index.html (style element before #uik-dialog-container).
+*/
+
+$font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+
+.uik-dialog-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, .35);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.uik-dialog {
+  width: 25rem;
+  background-color: #ffffff;
+  border: .0625rem solid #e4e9f2;
+  border-radius: .25rem;
+  color: #222b45;
+  font-family: $font-family;
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+
+.uik-dialog-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+
+  border-bottom: 1px solid #edf1f7;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+
+  font-size: .9375rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.uik-dialog-button {
+  display: inline-flex;
+  margin-left: auto;
+  padding: .6875rem .5625rem;
+
+  background-color: transparent;
+  border: .0625rem solid transparent;
+  border-radius: .25rem;
+
+  color: #8f9bb3;
+  font-size: .875rem;
+  line-height: 1rem;
+  font-weight: 700;
+  vertical-align: top;
+  cursor: pointer;
+
+  & svg {
+    height: 1.25rem;
+    width: 1.25rem;
+    margin-top: -.125rem;
+    margin-bottom: -.125rem;
+  }
+}
+
+.uik-dialog-body {
+  padding: 1rem 1.5rem;
+}
+
+.hs-custom-form {
+  .modal-header {
+    display: none;
+  }
+
+  .modal-body {
+    padding-bottom: 0;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  input.hs-input {
+    margin: 0;
+    padding: .4375rem 1rem!important;
+    min-height: 1.6875rem;
+    width: 100%;
+
+    appearance: none;
+    background-color: #f7f9fc;
+    border: 1px solid #e4e9f2;
+    border-radius: .25rem;
+
+    color: #222b45;
+    font-family: $font-family;
+    font-size: .9375rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+  }
+
+  .hs-richtext .modal-body {
+    padding: 0;
+    margin-bottom: 1rem;
+
+    p {
+      margin-bottom: 0;
+      text-align: left !important;
+      height: auto;
+    }
+  }
+
+  .hs-recaptcha {
+    margin-top: 1rem;
+  }
+
+  .hs-error-msgs {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .hs-form-required, .hs-error-msg {
+    margin-top: 0.5rem;
+    color: #ff3d71;
+  }
+
+  .hs_error_rollup {
+    display: none;
+  }
+
+  .hs-submit-btn {
+    background-color: #f7f9fc;
+    border: .0625rem solid #f7f9fc;
+    border-radius: .25rem;
+
+    appearance: none;
+    display: inline-flex;
+    margin: 2rem 0 0;
+    padding: .6875rem 1.125rem;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+
+    color: #222b45;
+    font-family: $font-family;
+    font-size: .875rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  label {
+    font-weight: 400;
+  }
+}

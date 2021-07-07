@@ -19,6 +19,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -29,7 +30,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type TabStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface TabProps extends TouchableWebProps, TabStyledProps {
@@ -50,11 +51,11 @@ export type TabElement = React.ReactElement<TabProps>;
  *
  * @property {ReactElement} children - A component displayed below the tab.
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the tab.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} icon - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} icon - Function component
  * to render within the tab.
  * Expected to return an Image.
  *

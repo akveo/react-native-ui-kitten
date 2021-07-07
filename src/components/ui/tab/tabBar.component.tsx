@@ -15,6 +15,7 @@ import {
 import {
   ChildrenWithProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -28,7 +29,7 @@ import {
 import { TabIndicator } from '../shared/tabIndicator.component';
 
 type TabBarStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface TabBarProps extends ViewProps, TabBarStyledProps {
@@ -68,7 +69,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
  * import { TabBar, Tab, Layout, Text } from '@ui-kitten/components';
  *
- * const { Navigator, Screen } = createBottomTabNavigator();
+ * const { Navigator, Screen } = createMaterialTopTabNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -179,12 +180,12 @@ export class TabBar extends React.Component<TabBarProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, indicatorStyle, selectedIndex, children, ...viewProps } = this.props;
+    const { eva, style, testID, indicatorStyle, selectedIndex, children, ...viewProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
     const tabElements: TabElement[] = this.renderTabElements(children);
 
     return (
-      <View>
+      <View testID={testID}>
         <View
           {...viewProps}
           style={[evaStyle.container, styles.container, style]}>

@@ -3,16 +3,15 @@
 
 [Documentation][link:doc-homepage]
 
-UI Kitten is a React Native UI Library that allows you creating stunning multi-brand cross-platform mobile applications. 
-The library is based on Eva Design System which brings consistency and scalability in the design and development process. 
-It contains a set of general purpose UI components styled in a similar way. 
+UI Kitten is a React Native UI Library that allows you creating stunning multi-brand cross-platform mobile applications.
+The library is based on Eva Design System which brings consistency and scalability in the design and development process.
+It contains a set of general purpose UI components styled in a similar way.
 And the most awesome thing: the themes can be changed in the runtime, with no need to reload the application.
 
 100% Free and Open Source!
 
 ![Kitten Material](https://camo.githubusercontent.com/f0487d92194f3c685213539c53e9784113cd8a4b/68747470733a2f2f692e696d6775722e636f6d2f58384f344748622e706e67)
-
-[<img src="https://i.imgur.com/pYl0trU.jpg">][link:doc-homepage]
+![link:doc-homepage](https://user-images.githubusercontent.com/1452064/115417233-212a0100-a201-11eb-8bcf-0a60cca2e081.png)
 
 ## What's included
 
@@ -31,7 +30,7 @@ And the most awesome thing: the themes can be changed in the runtime, with no ne
 **Kitten Tricks** – [react-native starter kit][link:kitten-tricks] allows you to boost the development of a mobile app.
 There is a huge variety of customizable layouts, use “as is” or add new blocks.
 
-**Over 40 screens in dark and light themes** give you the possibility to create a bright and exclusive app while saving your time on compiling numerous details.  Also, you can download the source code and use it for your own benefit.  
+**Over 40 screens in dark and light themes** give you the possibility to create a bright and exclusive app while saving your time on compiling numerous details.  Also, you can download the source code and use it for your own benefit.
 
 ## Quick Start
 
@@ -86,7 +85,7 @@ We're always happy to receive your feedback!
 [link:eva-icons]: https://github.com/akveo/eva-icons
 [link:akveo-homepage]: https://www.akveo.com?utm_campaign=services%20-%20homepage%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=ui_kitten_readme
 [link:akveo-medium]: https://medium.com/akveo-engineering
-[link:akveo-twitter]: https://twitter.com/akveo_inc
+[link:akveo-twitter]: https://twitter.com/akveo
 [link:akveo-facebook]: https://www.facebook.com/akveo
 [link:ui-kitten-bundles]: https://store.akveo.com/collections/mobile-bundles?utm_campaign=akveo_store%20-%20mobile%20bundles%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=banner&utm_content=mobile_bundles_banner
 [link:ui-kitten-bundle-java]: https://store.akveo.com/products/java-mobile-starter-bundle?utm_campaign=akveo_store%20-%20mobile%20bundles%20-%20ui_kitten%20github%20readme&utm_source=ui_kitten&utm_medium=referral&utm_content=java_bundle_link

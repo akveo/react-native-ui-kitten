@@ -15,7 +15,7 @@ import { withStyles } from '@ui-kitten/components';
 
 const AwesomeView = (props) => {
   const { eva, style, ...restProps } = props;
-    
+
   return (
     <View {...restProps} style={[eva.style.awesome, style]} />
   );
@@ -30,7 +30,7 @@ export const ThemedAwesomeView = withStyles(AwesomeView, (theme) => ({
 
 In the example above we use `withStyles` function imported from UI Kitten. This allows us create a styles like you usually do with `StyleSheet` but with an ability to use current theme.
 
-Complete list of variables could be found under [Light Theme Variables](design-system/light-theme) table.
+Complete list of variables could be found under [Light Theme Variables](design-system/eva-light-theme) table.
 
 
 That's it! Now you're done and able to use your themed component.
@@ -51,5 +51,5 @@ export const AwesomeViewShowcase = (props) => (
 ## Related Articles
 
 - [Change Theme](guides/runtime-theming)
-- [Light Theme](design-system/light-theme)
-- [Dark Theme](design-system/dark-theme)
+- [Light Theme](design-system/eva-light-theme)
+- [Dark Theme](design-system/eva-dark-theme)

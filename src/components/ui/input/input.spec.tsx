@@ -96,7 +96,7 @@ describe('@input: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render component passed to label prop', () => {
+  it('should render function component passed to label prop', () => {
     const component = render(
       <TestInput label={props => <Text {...props}>I love Babel</Text>}/>,
     );
@@ -104,24 +104,48 @@ describe('@input: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
+  it('should render pure JSX component passed to label prop', () => {
+    const component = render(
+      <TestInput label={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render text passed to caption prop', () => {
+    const renderCaption = () => (
+      <Text>I love Babel</Text>
+    );
+
+    const component = render(
+      <TestInput caption={renderCaption}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render pure JSX component passed to caption prop', () => {
+    const renderCaption = (
+      <Text>I love Babel</Text>
+    );
+
+    const component = render(
+      <TestInput caption={renderCaption}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
   it('should render text passed to caption prop', () => {
     const component = render(
-      <TestInput caption='I love Babel'/>,
+      <TestInput caption='I love Babel' />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to caption prop', () => {
-    const component = render(
-      <TestInput caption={props => <Text {...props}>I love Babel</Text>}/>,
-    );
-
-    expect(component.queryByText('I love Babel')).toBeTruthy();
-  });
-
-  it('should render component passed to captionIcon prop', () => {
-    const CaptionIcon = (props): React.ReactElement<ImageProps> => (
+    const Caption = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
@@ -129,16 +153,16 @@ describe('@input: component checks', () => {
     );
 
     const component = render(
-      <TestInput captionIcon={CaptionIcon}/>,
+      <TestInput caption={Caption}/>,
     );
 
-    const captionIcon = component.queryByType(Image);
+    const caption = component.queryByType(Image);
 
-    expect(captionIcon).toBeTruthy();
-    expect(captionIcon.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(caption).toBeTruthy();
+    expect(caption.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
   });
 
-  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+  it('should render function components passed to accessoryLeft or accessoryRight props', () => {
     const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
@@ -149,6 +173,35 @@ describe('@input: component checks', () => {
     const AccessoryRight = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestInput
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should render pure JSX components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (
+      <Image
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (
+      <Image
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
       />
     );

@@ -19,6 +19,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -29,7 +30,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type BottomNavigationTabStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default' | string>;
 }>;
 
 export interface BottomNavigationTabProps extends TouchableWebProps, BottomNavigationTabStyledProps {
@@ -47,11 +48,11 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the tab.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} icon - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} icon - Function component
  * to render within the tab.
  * Expected to return an Image.
  *

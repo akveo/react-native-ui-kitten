@@ -10,6 +10,7 @@ import {
   ImageProps,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -54,14 +55,14 @@ describe('@button: component checks', () => {
   });
 
   it('should render components passed to accessoryLeft or accessoryRight props', () => {
-    const AccessoryLeft = (props?: ImageProps) => (
+    const AccessoryLeft = (props?: Partial<ImageProps>) => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
       />
     );
 
-    const AccessoryRight = (props?: ImageProps) => (
+    const AccessoryRight = (props?: Partial<ImageProps>) => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
@@ -83,6 +84,34 @@ describe('@button: component checks', () => {
     expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
     expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
   });
+
+  it('should render accessory from prop as pure JSX element', () => {
+    const accessoryLeft = <Text>Left accessory</Text>;
+    const accessoryRight = <Text>Right accessory</Text>;
+
+    const component = render(
+      <TestButton accessoryLeft={accessoryLeft} accessoryRight={accessoryRight} />
+    );
+    
+    expect(component.queryByText('Left accessory')).toBeTruthy();
+    expect(component.queryByText('Right accessory')).toBeTruthy();
+  })
+
+  it('should render children from prop as pure JSX element', () => {
+    const children = (
+      <View>
+        <Text>
+          Children component
+        </Text>
+      </View>
+    );
+
+    const component = render(
+      <TestButton children={children} />
+    );
+
+    expect(component.queryByText('Children component')).toBeTruthy();
+  })
 
   it('should call onPress', () => {
     const onPress = jest.fn();

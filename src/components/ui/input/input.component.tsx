@@ -24,13 +24,15 @@ import {
   EvaStatus,
   FalsyFC,
   FalsyText,
-  FlexStyleProps,
+  FlexViewCrossStyleProps,
   PropsService,
   RenderProp,
   WebEventResponder,
   WebEventResponderCallbacks,
   WebEventResponderInstance,
   Overwrite,
+  LiteralUnion,
+  TouchableWithoutFeedback,
 } from '../../devsupport';
 import {
   Interaction,
@@ -41,7 +43,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type InputStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface InputProps extends TextInputProps, InputStyledProps {
@@ -50,7 +52,6 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
   caption?: RenderProp<TextProps> | React.ReactText;
-  captionIcon?: RenderProp<Partial<ImageProps>>;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
@@ -65,7 +66,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {string} value - A value displayed in input field.
  *
- * @property {string} onChangeText - Called when the value should be changed.
+ * @property {(string) => void} onChangeText - Called when the value should be changed.
  *
  * @property {() => void} onFocus - Called when input field becomes focused.
  *
@@ -76,24 +77,19 @@ export type InputElement = React.ReactElement<InputProps>;
  * @property {boolean} disabled - Whether input field is disabled.
  * This property overrides `editable` property of TextInput.
  *
- * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} label - String, number or a function component
  * to render above the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - String, number or a function component
- * to render below the input field.
- * If it is a function, expected to return a Text.
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * Expected to return View.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
- * Expected to return an Image.
- *
- * @property {(ImageProps) => ReactElement} captionIcon - Function component
- * to render to start of the *caption*.
  * Expected to return an Image.
  *
  * @property {string} status - Status of the component.
@@ -185,7 +181,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
   private getComponentStyle = (source: StyleType) => {
     const flatStyles: ViewStyle = StyleSheet.flatten(this.props.style);
-    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexStyleProps);
+    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
 
     const {
       textMarginHorizontal,
@@ -208,10 +204,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       captionFontSize,
       captionFontWeight,
       captionFontFamily,
-      captionIconWidth,
-      captionIconHeight,
-      captionIconMarginRight,
-      captionIconTintColor,
       ...containerParameters
     } = source;
 
@@ -220,9 +212,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       inputContainer: {
         ...containerParameters,
         ...inputContainerStyle,
-      },
-      captionContainer: {
-        marginTop: captionMarginTop,
       },
       text: {
         marginHorizontal: textMarginHorizontal,
@@ -247,12 +236,6 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         fontWeight: labelFontWeight,
         fontFamily: labelFontFamily,
       },
-      captionIcon: {
-        width: captionIconWidth,
-        height: captionIconHeight,
-        tintColor: captionIconTintColor,
-        marginRight: captionIconMarginRight,
-      },
       captionLabel: {
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
@@ -270,14 +253,17 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       caption,
       accessoryLeft,
       accessoryRight,
-      captionIcon,
+      testID,
       ...textInputProps
     } = this.props;
 
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View style={evaStyle.container}>
+      <TouchableWithoutFeedback
+        testID={testID}
+        style={evaStyle.container}
+        onPress={this.focus}>
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
@@ -302,17 +288,11 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <View style={[evaStyle.captionContainer, styles.captionContainer]}>
-          <FalsyFC
-            style={evaStyle.captionIcon}
-            component={captionIcon}
-          />
-          <FalsyText
-            style={[evaStyle.captionLabel, styles.captionLabel]}
-            component={caption}
-          />
-        </View>
-      </View>
+        <FalsyText 
+          style={[evaStyle.captionLabel, styles.captionLabel]} 
+          component={caption}
+        />
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -322,10 +302,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-  },
-  captionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   text: {
     flexGrow: 1,

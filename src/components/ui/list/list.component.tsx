@@ -9,14 +9,14 @@ import {
   FlatList,
   FlatListProps,
 } from 'react-native';
-import { Overwrite } from '../../devsupport';
+import { Overwrite, LiteralUnion } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
 
 type ListStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export type ListProps<ItemT = any> = FlatListProps<ItemT> & ListStyledProps;
@@ -65,7 +65,7 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  * Using ListItem is helpful for basic lists, but not required. For example, `Card` may be used.
  */
 @styled('List')
-export class List<ItemT = any> extends React.Component<ListProps> {
+export class List<ItemT = any> extends React.Component<ListProps<ItemT>> {
 
   private listRef = React.createRef<FlatList>();
 

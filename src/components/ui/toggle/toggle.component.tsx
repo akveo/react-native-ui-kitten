@@ -27,6 +27,7 @@ import {
   TouchableWeb,
   TouchableWebProps,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -38,7 +39,7 @@ import { TextProps } from '../text/text.component';
 import { CheckMark } from '../shared/checkmark.component';
 
 type ToggleStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
+  appearance?: LiteralUnion<'default'>;
 }>;
 
 export interface ToggleProps extends TouchableWebProps, ToggleStyledProps {
@@ -61,7 +62,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * @property {(boolean) => void} onChange - Called when toggle
  * should switch it's value.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} children - String, number or a function component
  * to render near the toggle.
  * If it is a function, expected to return a Text.
  *
@@ -369,11 +370,12 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, checked, children, ...touchableProps } = this.props;
+    const { eva, style, checked, children, testID, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
+        testID={testID}
         {...this.panResponder.panHandlers}
         style={[styles.container, style]}>
         <TouchableWeb
@@ -383,9 +385,9 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
           onMouseLeave={this.onMouseLeave}
           onFocus={this.onFocus}
           onBlur={this.onBlur}>
-          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <View style={[evaStyle.highlight, styles.highlight]} />
           <Animated.View style={[evaStyle.ellipseContainer, styles.ellipseContainer]}>
-            <Animated.View style={[evaStyle.ellipse, styles.ellipse]}/>
+            <Animated.View style={[evaStyle.ellipse, styles.ellipse]} />
             <Animated.View style={[evaStyle.thumb, styles.thumb]}>
               <CheckMark {...evaStyle.icon} />
             </Animated.View>

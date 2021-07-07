@@ -40,7 +40,7 @@ describe('@bottom-navigation-tab: component checks', () => {
   );
 
   it('should render component passed to icon prop', () => {
-    const Icon = (props?: ImageProps) => (
+    const Icon = (props?: Partial<ImageProps>) => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
@@ -72,6 +72,23 @@ describe('@bottom-navigation-tab: component checks', () => {
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
+
+  it('should render title from prop passed as pure JSX element', () => {
+    const component = render(
+      <TestBottomNavigationTab title={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  })
+
+  it('should render icon from prop passed as pure JSX element', () => {
+    const component = render(
+      <TestBottomNavigationTab icon={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  })
+
   it('should call onMouseEnter', () => {
     const onMouseEnter = jest.fn();
 

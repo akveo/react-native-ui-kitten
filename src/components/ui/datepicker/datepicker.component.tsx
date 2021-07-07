@@ -19,7 +19,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 export interface DatepickerProps<D = Date> extends BaseDatepickerProps<D>, CalendarProps<D> {
-  autoDismiss: boolean;
+  autoDismiss?: boolean;
 }
 
 export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>;
@@ -91,29 +91,24 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Can be `small`, `medium` or `large`.
  * Defaults to *medium*.
  *
- * @property {ReactText | (TextProps) => ReactElement} placeholder - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function component
  * to render when input field is empty.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} label - String, number or a function component
  * to render to top of the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
  * Expected to return an Image.
  *
- * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
  * Expected to return an Image.
  *
- * @property {ReactText | (TextProps) => ReactElement} caption - String, number or a function component
- * to render to bottom of the input field.
- * If it is a function, expected to return a Text.
- *
- * @property {(ImageProps) => ReactElement} captionIcon - Function component
- * to render to start of the *caption*.
- * Expected to return an Image.
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * Expected to return View.
  *
  * @property {() => void} onFocus - Called when picker becomes visible.
  *

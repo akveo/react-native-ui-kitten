@@ -15,6 +15,7 @@ import {
   FalsyText,
   RenderProp,
   Overwrite,
+  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -24,7 +25,7 @@ import {
 import { TextProps } from '../text/text.component';
 
 type TopNavigationStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | 'control' | string;
+  appearance?: LiteralUnion<'default' | 'control'>;
 }>;
 
 export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps {
@@ -44,18 +45,18 @@ type AlignmentProp = 'start' | 'center';
  *
  * @extends React.Component
  *
- * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the top navigation.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (TextProps) => ReactElement} subtitle - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} subtitle - String, number or a function component
  * to render within the top navigation.
  * If it is a function, expected to return a Text.
  *
- * @property {() => ReactElement} accessoryLeft - Function component
+ * @property {ReactElement | () => ReactElement} accessoryLeft - Function component
  * to render to the left edge the top navigation.
  *
- * @property {() => ReactElement} accessoryRight - Function component
+ * @property {ReactElement | () => ReactElement} accessoryRight - Function component
  * to render to the right edge the top navigation.
  *
  * @property {string} appearance - Appearance of the component.
@@ -156,9 +157,9 @@ export class TopNavigation extends React.Component<TopNavigationProps> {
         style={[evaStyles.container, styles.container, alignmentStyles.container, style]}
         {...viewProps}>
         <View style={styles.leftControlContainer}>
-          <FalsyFC component={accessoryLeft}/>
+          <FalsyFC component={accessoryLeft} />
         </View>
-        <View style={alignmentStyles.titleContainer}>
+        <View style={alignmentStyles.titleContainer || styles.titleContainer}>
           <FalsyText
             style={evaStyles.title}
             component={title}
@@ -169,7 +170,7 @@ export class TopNavigation extends React.Component<TopNavigationProps> {
           />
         </View>
         <View style={[styles.rightControlsContainer, alignmentStyles.rightControlsContainer]}>
-          <FalsyFC component={accessoryRight}/>
+          <FalsyFC component={accessoryRight} />
         </View>
       </View>
     );
@@ -189,6 +190,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  titleContainer: {
+    flexDirection: 'row',
+    flex: 1
+  },
   leftControlContainer: {
     flexDirection: 'row',
     zIndex: 1,
@@ -198,7 +203,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   rightControlsContainerStart: {
-    flex: 1,
+    flex: 0,
     justifyContent: 'flex-end',
   },
 });
