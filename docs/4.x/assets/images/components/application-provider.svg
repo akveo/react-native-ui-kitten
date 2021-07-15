@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>icon/component/ Application Provider</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/component/-Application-Provider" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Rectangle" fill="#FEF4EA" points="42.043105 43.1488641 42.043105 18 54.4 17.3913043 54.4 55.0652174 18 55.0652174 18 43.1488641"></polygon>
+        <rect id="Rectangle" fill="#FDDCB9" x="18" y="44.3043478" width="3" height="10.7608696"></rect>
+        <rect id="Rectangle" fill="#FDDCB9" x="17.4" y="17.4565217" width="29" height="29"></rect>
+        <rect id="Rectangle" fill="#FCAF5C" x="18.4" y="17.3913043" width="2.4" height="30"></rect>
+        <polygon id="Rectangle" fill="#FCAF5C" transform="translate(28.400000, 27.923913) rotate(-180.000000) translate(-28.400000, -27.923913) " points="38.4 38.4565217 38.4 9.39130435 46.4 9.39130435 46.4 46.4565217 10.4 46.4565217 10.4 38.3913043"></polygon>
+        <path d="M10.4,7 L46.4,7 C47.7254834,7 48.8,8.07062342 48.8,9.39130435 L48.8,46.4565217 C48.8,47.7772027 47.7254834,48.8478261 46.4,48.8478261 L10.4,48.8478261 C9.0745166,48.8478261 8,47.7772027 8,46.4565217 L8,9.39130435 C8,8.07062342 9.0745166,7 10.4,7 Z M10.4,9.39130435 L10.4,46.4565217 L46.4,46.4565217 L46.4,9.39130435 L10.4,9.39130435 Z" id="Rectangle" fill="#FF7020" fill-rule="nonzero" transform="translate(28.400000, 27.923913) scale(-1, 1) translate(-28.400000, -27.923913) "></path>
+        <path d="M18.4,15 L54.4,15 C55.7254834,15 56.8,16.0706234 56.8,17.3913043 L56.8,54.4565217 C56.8,55.7772027 55.7254834,56.8478261 54.4,56.8478261 L18.4,56.8478261 C17.0745166,56.8478261 16,55.7772027 16,54.4565217 L16,17.3913043 C16,16.0706234 17.0745166,15 18.4,15 Z M18.4,17.3913043 L18.4,54.4565217 L54.4,54.4565217 L54.4,17.3913043 L18.4,17.3913043 Z" id="Rectangle" fill="#FF7020" fill-rule="nonzero" transform="translate(36.400000, 35.923913) scale(-1, 1) translate(-36.400000, -35.923913) "></path>
+        <rect id="Rectangle" fill="#FF881E" x="10.4" y="9.39130435" width="2.4" height="37.0652174"></rect>
+        <path d="M33.8700079,26.7058892 L38.901312,26.7058892 C40.5495219,26.7058892 41.88566,28.0490349 41.88566,29.7058892 C41.88566,31.3627434 40.5495219,32.7058892 38.901312,32.7058892 L33.8700079,32.7058892 C32.221798,32.7058892 30.88566,31.3627434 30.88566,29.7058892" id="Rectangle" stroke="#FF7020" stroke-width="2" stroke-linecap="round" transform="translate(36.385660, 29.705889) scale(-1, -1) rotate(-217.000000) translate(-36.385660, -29.705889) "></path>
+        <path d="M26.6822883,32.1222244 L31.7135924,32.1222244 C33.3618023,32.1222244 34.6979404,33.4653701 34.6979404,35.1222244 C34.6979404,36.7790786 33.3618023,38.1222244 31.7135924,38.1222244 L26.6822883,38.1222244 C25.0340785,38.1222244 23.6979404,36.7790786 23.6979404,35.1222244" id="Rectangle" stroke="#FF7020" stroke-width="2" stroke-linecap="round" transform="translate(29.197940, 35.122224) rotate(-217.000000) translate(-29.197940, -35.122224) "></path>
+    </g>
+</svg>
