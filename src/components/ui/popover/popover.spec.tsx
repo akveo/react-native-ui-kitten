@@ -165,16 +165,6 @@ describe('@popover: component checks', () => {
 
     expect(text).toBeFalsy();
   });
-
-  it('should render anchor prop from pure component', () => {
-    const componentAnchor = <Text>Anchor component</Text>;
-    const component = render(
-      <TestPopover anchor={componentAnchor} />
-    );
-
-    expect(component.queryByText('Anchor component')).toBeTruthy();
-  })
-
 });
 
 describe('@popover: service checks', () => {
