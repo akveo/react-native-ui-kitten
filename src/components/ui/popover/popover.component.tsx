@@ -39,7 +39,7 @@ type PopoverModalProps = Overwrite<ModalProps, {
 }>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
-  anchor: RenderProp | (() => RenderProp);
+  anchor: RenderProp;
   fullWidth?: boolean;
 }
 
@@ -227,17 +227,13 @@ export class Popover extends React.Component<PopoverProps, State> {
     );
   };
 
-  public render(): React.ReactElement {
-    const renderAnchor = typeof this.props.anchor === 'function' 
-      ? this.props.anchor() 
-      : this.props.anchor
-    
+  public render(): React.ReactElement {    
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         force={this.state.forceMeasure}
         onMeasure={this.onChildMeasure}>
-          <FalsyFC component={renderAnchor} />
+          <FalsyFC component={this.props.anchor} />
       </MeasureElement>
     );
   }

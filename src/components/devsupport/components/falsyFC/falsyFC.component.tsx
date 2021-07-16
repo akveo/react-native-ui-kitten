@@ -49,6 +49,6 @@ export class FalsyFC<Props = {}> extends React.Component<FalsyFCProps<Props>> {
       return React.cloneElement(component, props);
     }
 
-    return React.createElement(component as RenderFCProp<Props>, props as Props);
+    return component(props as Props);
   }
 }
