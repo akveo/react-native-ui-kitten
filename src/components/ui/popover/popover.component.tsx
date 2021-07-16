@@ -62,7 +62,7 @@ interface State {
  * @property {boolean} visible - Whether content component is visible.
  * Defaults to false.
  *
- * @property {ReactElement | () => ReactElement} anchor - A component relative to which content component will be shown.
+ * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
  * @property {ReactElement} children - A component displayed within the popover.
  *
