@@ -1,5 +1,6 @@
 export {
   FalsyFC,
+  RenderFCProp,
   RenderProp,
 } from './components/falsyFC/falsyFC.component';
 export { FalsyText } from './components/falsyText/falsyText.component';

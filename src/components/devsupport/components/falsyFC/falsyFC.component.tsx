@@ -1,6 +1,6 @@
 import React from 'react';
 
-type RenderFCProp<Props = {}> = (props?: Props) => React.ReactElement;
+export type RenderFCProp<Props = {}> = (props?: Props) => React.ReactElement;
 
 export type RenderProp<Props = {}> = RenderFCProp<Props> | React.ReactElement
 
@@ -49,6 +49,6 @@ export class FalsyFC<Props = {}> extends React.Component<FalsyFCProps<Props>> {
       return React.cloneElement(component, props);
     }
 
-    return component(props as Props);
+    return React.createElement(component as RenderFCProp<Props>, props as Props);
   }
 }
