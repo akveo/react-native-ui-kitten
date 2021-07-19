@@ -214,7 +214,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         testID={testID}
         visible={this.state.listVisible}
         fullWidth={true}
-        anchor={this.renderInputElement(inputProps)}
+        anchor={() => this.renderInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}>
         <List
           style={styles.list}

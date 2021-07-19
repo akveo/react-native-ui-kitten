@@ -87,14 +87,6 @@ describe('@tooltip: component checks', () => {
     expect(touchables.findToggleButton(component)).toBeTruthy();
   });
 
-  it('should render JSX element passed to `anchor` prop', () => {
-    const component = render(
-      <TestTooltip anchor={<Text>I love Babel</Text>} />,
-    );
-
-    expect(component.queryByText('I love Babel')).toBeTruthy()
-  });
-
   it('should not render content when not visible', async () => {
     const component = render(
       <TestTooltip visible={false}>

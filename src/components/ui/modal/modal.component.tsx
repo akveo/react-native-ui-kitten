@@ -116,6 +116,10 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     if (this.modalId && !this.props.visible) {
       this.hide();
     }
+
+    if (this.modalId && this.props.visible) {
+      ModalService.update(this.modalId, this.renderContentElement());
+    }
   }
 
   public componentWillUnmount(): void {
@@ -158,10 +162,6 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   };
 
   public render(): React.ReactNode {
-    if (this.modalId && this.props.visible) {
-      ModalService.update(this.modalId, this.renderContentElement());
-    }
-
     return null;
   }
 }

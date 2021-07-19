@@ -49,7 +49,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @method {() => void} hide - Sets Tooltip invisible.
  *
- * @property {ReactElement | () => ReactElement} anchor - A component relative to which content component will be shown.
+ * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} children - String, number or a function component
  * to render within the tooltip.

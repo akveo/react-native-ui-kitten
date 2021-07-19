@@ -16,8 +16,7 @@ import {
   MeasureElement,
   MeasuringElement,
   Point,
-  FalsyFC,
-  RenderProp,
+  RenderFCProp,
   Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
@@ -39,7 +38,7 @@ type PopoverModalProps = Overwrite<ModalProps, {
 }>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
-  anchor: RenderProp;
+  anchor: RenderFCProp;
   fullWidth?: boolean;
 }
 
@@ -63,7 +62,7 @@ interface State {
  * @property {boolean} visible - Whether content component is visible.
  * Defaults to false.
  *
- * @property {ReactElement | () => ReactElement} anchor - A component relative to which content component will be shown.
+ * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
  * @property {ReactElement} children - A component displayed within the popover.
  *
@@ -212,7 +211,7 @@ export class Popover extends React.Component<PopoverProps, State> {
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
         placement={this.actualPlacement.reverse()}>
-        {this.renderContentElement()}
+          {this.renderContentElement()}
       </PopoverView>
     );
   };
@@ -222,18 +221,18 @@ export class Popover extends React.Component<PopoverProps, State> {
       <MeasureElement 
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         onMeasure={this.onContentMeasure}>
-        {this.renderPopoverElement()}
+          {this.renderPopoverElement()}
       </MeasureElement>
     );
   };
 
-  public render(): React.ReactElement {
+  public render(): React.ReactElement {    
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         force={this.state.forceMeasure}
         onMeasure={this.onChildMeasure}>
-          <FalsyFC component={this.props.anchor} />
+          {this.props.anchor()}
       </MeasureElement>
     );
   }
