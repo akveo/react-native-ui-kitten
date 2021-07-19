@@ -1,6 +1,6 @@
 import React from 'react';
 
-type RenderFCProp<Props = {}> = (props?: Props) => React.ReactElement;
+export type RenderFCProp<Props = {}> = (props?: Props) => React.ReactElement;
 
 export type RenderProp<Props = {}> = RenderFCProp<Props> | React.ReactElement
 
