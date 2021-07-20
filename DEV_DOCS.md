@@ -259,9 +259,10 @@ To start a new release (publish the framework packages on NPM) you need:
 5. Fix/expand changelog manually
 6. Update documentation (e.g [DEV_DOCS.md](./DEV_DOCS.md)) files if needed
 7. Push the branch, create PR, approve - merge
-8. Pull the upstream (master or another version branch (e.g. 4.0.1, next))   
-9. Publish documentation: `npm run publish-docs`
-10. Publish framework packages: `npm run publish-packages`
-11. Create and push [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with template `(vX.X.X)`
-12. Create release on GitHub for the tag
-
+8. Pull the upstream (master or another version branch (e.g. 4.0.1, next))
+9. Verify that React Native CLI works properly with local JS template `npx react-native init MyApp --template file:///path-to/react-native-ui-kitten/src/template-js)`. [See CLI docs](https://github.com/react-native-community/cli/blob/master/docs/commands.md#--template-string).
+10. Verify that React Native CLI works properly with local TS template `npx react-native init MyApp --template file:///path-to/react-native-ui-kitten/src/template-ts)`. [See CLI docs](https://github.com/react-native-community/cli/blob/master/docs/commands.md#--template-string)
+11. Publish documentation: `npm run publish-docs`
+12. Publish framework packages: `npm run publish-packages`
+13. Create and push [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with template `(vX.X.X)`
+14. Create release on GitHub for the tag
