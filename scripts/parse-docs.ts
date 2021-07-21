@@ -33,6 +33,7 @@ gulp.task('parse-docs', gulp.series(
   createDocAppNavigator,
   createDocAppJson,
   rebuildDocApp,
+  rebuildShowCases,
   copyDocAppBuildToDocs,
   cleanUp,
 ));
@@ -81,6 +82,11 @@ function createDocAppJson(done: GulpCompletionCallback): void {
 function rebuildDocApp(done: GulpCompletionCallback): void {
   exec('npm run clean && npm run build', { cwd: PLAYGROUND_DIR });
 
+  done();
+}
+
+function rebuildShowCases(done: GulpCompletionCallback): void {
+  exec('npm run clean && npm run build', { cwd: SHOWCASE_DIR });
   done();
 }
 
