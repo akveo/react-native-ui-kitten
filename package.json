@@ -22,8 +22,9 @@
     "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",
     "test": "jest",
     "parse-docs": "gulp parse-docs",
+    "build-showcases": "cd src/showcases && npm run clean && npm run build && cd ../..",
     "bump-version": "gulp bump-version && conventional-changelog -i CHANGELOG.md -s",
-    "publish-docs": "npm run parse-docs && gulp publish-docs",
+    "publish-docs": "npm run build-showcases && npm run parse-docs && gulp publish-docs",
     "publish-packages": "gulp publish-packages"
   },
   "devDependencies": {
