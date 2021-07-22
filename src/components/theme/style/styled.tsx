@@ -101,8 +101,7 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
     return null;
   }
 
-  class Wrapper extends React.Component<PrivateRefProps, State> {
-
+  class Wrapper extends React.PureComponent<PrivateRefProps, State> {
     public state: State = {
       interaction: [],
     };
