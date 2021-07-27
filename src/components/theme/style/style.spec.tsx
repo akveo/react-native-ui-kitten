@@ -171,9 +171,9 @@ describe('@style: ui component checks', () => {
   };
 
   it('styled component should not re-renderer because of parent render', async () => {
-    const rerenderButtonText = 'Rerender';
+    const rerenderButtonText = 'Rerender parent';
     const getRenderCountText = (elementType: string, count: number) => {
-      return `${elementType}: render for ${count} times`;
+      return `${elementType}: render for ${count} ${count === 1 ? 'time' : 'times'}`;
     };
 
     @styled('Test')
