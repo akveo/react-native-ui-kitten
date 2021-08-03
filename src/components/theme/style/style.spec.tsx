@@ -4,11 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   TouchableOpacity,
   View,
   ViewProps,
+  Text,
 } from 'react-native';
 import {
   fireEvent,
@@ -160,6 +161,51 @@ describe('@style: ui component checks', () => {
       );
     }
   }
+
+  const Provider = ({ children }) => {
+    return (
+      <StyleProvider styles={computedMapping} theme={theme}>
+        {children}
+      </StyleProvider>
+    );
+  };
+
+  it('styled component should not re-renderer because of parent render', async () => {
+    const rerenderButtonText = 'Rerender parent';
+    const getRenderCountText = (elementType: string, count: number) => {
+      return `${elementType}: render for ${count} ${count === 1 ? 'time' : 'times'}`;
+    };
+
+    @styled('Test')
+    class ChildStyledComponent extends React.Component<any, any> {
+      renderCount = 0;
+
+      public render(): React.ReactElement<ViewProps> {
+        this.renderCount++;
+        return (
+          <Text>{getRenderCountText('Child', this.renderCount)}</Text>
+        );
+      }
+    }
+
+    const ParentComponent = () => {
+      const [renderCount, setRenderCount] = useState(1);
+      return <View>
+        <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
+          <Text>{rerenderButtonText}</Text>
+        </TouchableOpacity>
+        <Text>{getRenderCountText('Parent', renderCount)}</Text>
+        <ChildStyledComponent />
+      </View>;
+    };
+
+    const renderedComponent: RenderAPI = render(<ParentComponent />, { wrapper: Provider});
+    fireEvent.press(renderedComponent.getByText(rerenderButtonText));
+    fireEvent.press(renderedComponent.getByText(rerenderButtonText));
+
+    expect(renderedComponent.queryByText(getRenderCountText('Parent', 3))).toBeTruthy();
+    expect(renderedComponent.queryByText(getRenderCountText('Child', 1))).toBeTruthy();
+  });
 
   it('static methods are copied over', async () => {
     expect(Test.someStaticValueToCopy).not.toBeFalsy();
