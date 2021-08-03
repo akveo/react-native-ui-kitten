@@ -56,7 +56,7 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
   type WrappingElement = React.ReactElement<WrappingProps>;
   type WrappedElementInstance = React.ReactInstance;
 
-  class Wrapper extends React.Component<WrappingProps> {
+  class Wrapper extends React.PureComponent<WrappingProps> {
 
     private withThemedProps = (props: P, theme: ThemeType): WrappedProps => {
       const style = createStyles && createStyles(theme);
