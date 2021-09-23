@@ -1,3 +1,22 @@
+## <small>5.1.1 (2021-07-19)</small>
+
+### :rocket: Highlights:
+* Added testID prop for components (#1444) ([83c75b0](https://github.com/akveo/react-native-ui-kitten/commit/83c75b0)), closes [#1444](https://github.com/akveo/react-native-ui-kitten/issues/1444)
+* Improved Autocomplete. Now no need to double-click to select item from the list  (#1423) ([af715a9](https://github.com/akveo/react-native-ui-kitten/commit/af715a9)), closes [#1423](https://github.com/akveo/react-native-ui-kitten/issues/1423)
+* Documentation fixes and corrections
+
+
+### :rocket: Features
+* Add support for disabling custom mapping file watcher ([a985f07](https://github.com/akveo/react-native-ui-kitten/commit/a985f07))
+
+### :bug: Bug Fixes
+* **TabIndicator**: Now there is ability to change color and other styles without changing active tab ([123eb2b](https://github.com/akveo/react-native-ui-kitten/commit/123eb2b))
+* **Icon**: Fixed warning does not recognize the animationConfig ([2624267](https://github.com/akveo/react-native-ui-kitten/commit/2624267)), closes [#1432](https://github.com/akveo/react-native-ui-kitten/issues/1432)
+* **List**: Add forward ItemT to React's ListProps ([bdf41d3](https://github.com/akveo/react-native-ui-kitten/commit/bdf41d3)), closes [#1430](https://github.com/akveo/react-native-ui-kitten/issues/1430)
+* **Modal**: Remove warning during state update. ([273746a](https://github.com/akveo/react-native-ui-kitten/commit/273746a)), closes [#1448](https://github.com/akveo/react-native-ui-kitten/issues/1448)
+* Update eva packages to v2.1.1 (#1481) ([05eb9a2](https://github.com/akveo/react-native-ui-kitten/commit/05eb9a2)), closes [#1481](https://github.com/akveo/react-native-ui-kitten/issues/1481)
+* Update react-native-svg peer version (#1460) ([32a0882](https://github.com/akveo/react-native-ui-kitten/commit/32a0882)), closes [#1460](https://github.com/akveo/react-native-ui-kitten/issues/1460)
+
 ## 5.1.0 (2021-04-16)
 
 ### :rocket: Highlights:

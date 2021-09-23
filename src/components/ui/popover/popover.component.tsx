@@ -16,7 +16,7 @@ import {
   MeasureElement,
   MeasuringElement,
   Point,
-  RenderProp,
+  RenderFCProp,
   Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
@@ -38,7 +38,7 @@ type PopoverModalProps = Overwrite<ModalProps, {
 }>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
-  anchor: RenderProp;
+  anchor: RenderFCProp;
   fullWidth?: boolean;
 }
 
@@ -211,7 +211,7 @@ export class Popover extends React.Component<PopoverProps, State> {
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
         placement={this.actualPlacement.reverse()}>
-        {this.renderContentElement()}
+          {this.renderContentElement()}
       </PopoverView>
     );
   };
@@ -221,18 +221,18 @@ export class Popover extends React.Component<PopoverProps, State> {
       <MeasureElement 
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         onMeasure={this.onContentMeasure}>
-        {this.renderPopoverElement()}
+          {this.renderPopoverElement()}
       </MeasureElement>
     );
   };
 
-  public render(): React.ReactElement {
+  public render(): React.ReactElement {    
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         force={this.state.forceMeasure}
         onMeasure={this.onChildMeasure}>
-        {this.props.anchor()}
+          {this.props.anchor()}
       </MeasureElement>
     );
   }

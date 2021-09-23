@@ -4,10 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   TouchableOpacity,
   View,
+  Text,
 } from 'react-native';
 import {
   fireEvent,
@@ -81,6 +82,45 @@ describe('@theme: ui component checks', () => {
       </React.Fragment>
     );
   };
+
+  it('withStyles component should not re-renderer because of parent render', async () => {
+    const rerenderButtonText = 'Rerender parent';
+    const getRenderCountText = (elementType: string, count: number) => {
+      return `${elementType}: render for ${count} ${count === 1 ? 'time' : 'times'}`;
+    };
+
+    const ChildComponent = React.memo(() => {
+      const counter = useRef(0);
+      counter.current++;
+      return (
+        <Text>{getRenderCountText('Child', counter.current)}</Text>
+      );
+    });
+
+    const ChildComponentWithStyles = withStyles(ChildComponent);
+
+    const ParentComponent = () => {
+      const [renderCount, setRenderCount] = useState(1);
+      return <View>
+        <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
+          <Text>{rerenderButtonText}</Text>
+        </TouchableOpacity>
+        <Text>{getRenderCountText('Parent', renderCount)}</Text>
+        <ChildComponentWithStyles />
+      </View>;
+    };
+
+    const renderedComponent: RenderAPI = render(
+      <ThemeProvider theme={theme}>
+        <ParentComponent />
+      </ThemeProvider>,
+    );
+
+    fireEvent.press(renderedComponent.getByText(rerenderButtonText));
+
+    expect(renderedComponent.queryByText(getRenderCountText('Parent', 2))).toBeTruthy();
+    expect(renderedComponent.queryByText(getRenderCountText('Child', 1))).toBeTruthy();
+  });
 
   it('static methods are copied over', () => {
     // @ts-ignore: test-case

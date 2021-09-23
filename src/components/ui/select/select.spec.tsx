@@ -192,9 +192,17 @@ describe('@select: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render placeholder as component', () => {
+  it('should render placeholder as function component', () => {
     const component = render(
       <TestSelect placeholder={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render placeholder as pure JSX component', () => {
+    const component = render(
+      <TestSelect placeholder={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -208,9 +216,17 @@ describe('@select: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render label as component', () => {
+  it('should render label as function component', () => {
     const component = render(
       <TestSelect label={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render label as pure JSX component', () => {
+    const component = render(
+      <TestSelect label={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -224,7 +240,7 @@ describe('@select: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render caption as component', () => {
+  it('should render caption as function component', () => {
     const component = render(
       <TestSelect caption={props => <Text {...props}>I love Babel</Text>}/>,
     );
@@ -232,7 +248,15 @@ describe('@select: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+  it('should render caption as pure JSX component', () => {
+    const component = render(
+      <TestSelect caption={<Text>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render function components passed to accessoryLeft or accessoryRight props', () => {
     const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
@@ -243,6 +267,35 @@ describe('@select: component checks', () => {
     const AccessoryRight = (props): React.ReactElement<ImageProps> => (
       <Image
         {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestSelect
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should render JSX components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (
+      <Image
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (
+      <Image
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
       />
     );

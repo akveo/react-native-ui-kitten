@@ -24,7 +24,6 @@ import {
   Popover,
   PopoverElement,
 } from '../popover/popover.component';
-import { PopoverPlacement } from '../popover/type';
 import {
   AutocompleteItemElement,
   AutocompleteItemProps,

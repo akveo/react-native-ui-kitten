@@ -62,7 +62,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * @property {(boolean) => void} onChange - Called when toggle
  * should switch it's value.
  *
- * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} children - String, number or a function component
  * to render near the toggle.
  * If it is a function, expected to return a Text.
  *

@@ -165,7 +165,6 @@ describe('@popover: component checks', () => {
 
     expect(text).toBeFalsy();
   });
-
 });
 
 describe('@popover: service checks', () => {
