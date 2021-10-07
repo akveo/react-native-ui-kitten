@@ -23,7 +23,7 @@ import { ApplicationProvider } from '../../theme';
 import {
   TopNavigation,
   TopNavigationProps,
-} from './TopNavigation.component';
+} from './topNavigation.component';
 import {
   TopNavigationAction,
   TopNavigationActionProps,
