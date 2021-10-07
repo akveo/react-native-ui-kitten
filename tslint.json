@@ -1,4 +1,11 @@
 {
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**",
+      "**/*.ts",
+      "**/*.tsx"
+    ]
+  },
   "rules": {
     "trailing-comma": [
       true,
