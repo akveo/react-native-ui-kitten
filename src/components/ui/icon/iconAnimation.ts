@@ -21,7 +21,10 @@ export interface IconAnimationRegistry {
   shake: IconAnimation;
 }
 
-export function getIconAnimation(animation?: keyof IconAnimationRegistry | null, config?: AnimationConfig): IconAnimation | null {
+export function getIconAnimation(
+  animation?: keyof IconAnimationRegistry | null,
+  config?: AnimationConfig,
+): IconAnimation | null {
   switch (animation) {
     case 'zoom':
       return new ZoomAnimation(config);

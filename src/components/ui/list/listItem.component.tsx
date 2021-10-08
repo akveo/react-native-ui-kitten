@@ -55,8 +55,8 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactElement | ReactText | (TextProps) => ReactElement} description - String, number or a function component
- * to render within the item.
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} description - String, number or a function
+ * component to render within the item.
  * If it is a function, expected to return a Text.
  *
  * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component

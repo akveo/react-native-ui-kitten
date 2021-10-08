@@ -121,8 +121,8 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * If true, calls onSelect with IndexPath[] in arguments.
  * Otherwise, with IndexPath in arguments.
  *
- * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function component
- * to render when there is no selected option.
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function
+ * component to render when there is no selected option.
  * If it is a function, expected to return a Text.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} label - String, number or a function component
