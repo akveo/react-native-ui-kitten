@@ -9,7 +9,7 @@ import {
   StyleSheet,
   BackHandler,
   NativeEventSubscription,
-  Platform 
+  Platform,
 } from 'react-native';
 import {
   Frame,
@@ -154,7 +154,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   public componentDidMount(): void {
-    if(Platform.OS === 'android') {
+    if (Platform.OS === 'android') {
       this.hardwareBackSubscription = BackHandler.addEventListener('hardwareBackPress', this.onHardwareBackPress);
     }
   }
@@ -218,7 +218,7 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   private renderMeasuringPopoverElement = (): MeasuringElement => {
     return (
-      <MeasureElement 
+      <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         onMeasure={this.onContentMeasure}>
           {this.renderPopoverElement()}
@@ -226,7 +226,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     );
   };
 
-  public render(): React.ReactElement {    
+  public render(): React.ReactElement {
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}

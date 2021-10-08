@@ -86,8 +86,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Can be `small`, `medium` or `large`.
  * Defaults to *medium*.
  *
- * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function component
- * to render when input field is empty.
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function
+ * component to render when input field is empty.
  * If it is a function, expected to return a Text.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} label - String, number or a function component
@@ -102,8 +102,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * to render to end of the text.
  * Expected to return an Image.
  *
- * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
- * Expected to return View.
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below
+ * Input view. Expected to return View.
  *
  * @property {() => void} onFocus - Called when picker becomes visible.
  *

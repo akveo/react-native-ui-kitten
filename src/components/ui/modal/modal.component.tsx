@@ -128,7 +128,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   }
 
   private onDimensionChange = (): void => {
-    if(this.props.visible) {
+    if (this.props.visible) {
       ModalService.update(this.modalId, this.renderMeasuringContentElement());
     }
   }

@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
   },
   leftControlContainer: {
     flexDirection: 'row',

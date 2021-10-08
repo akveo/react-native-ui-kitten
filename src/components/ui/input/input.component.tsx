@@ -81,8 +81,8 @@ export type InputElement = React.ReactElement<InputProps>;
  * to render above the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
- * Expected to return View.
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below
+ * Input view. Expected to return View.
  *
  * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
@@ -181,7 +181,10 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
   private getComponentStyle = (source: StyleType) => {
     const flatStyles: ViewStyle = StyleSheet.flatten(this.props.style);
-    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
+    const {
+      rest: inputContainerStyle,
+      ...containerStyle
+    } = PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
 
     const {
       textMarginHorizontal,
@@ -288,8 +291,8 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <FalsyText 
-          style={[evaStyle.captionLabel, styles.captionLabel]} 
+        <FalsyText
+          style={[evaStyle.captionLabel, styles.captionLabel]}
           component={caption}
         />
       </TouchableWithoutFeedback>
