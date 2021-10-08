@@ -266,7 +266,7 @@ describe('@calendar: component checks', () => {
     const onVisibleDateChange = jest.fn();
 
     const component = render(
-      <TestCalendar onVisibleDateChange={onVisibleDateChange} />
+      <TestCalendar onVisibleDateChange={onVisibleDateChange} />,
     );
 
     const navigationPrevButton = component.queryAllByType(TouchableOpacity)[1];

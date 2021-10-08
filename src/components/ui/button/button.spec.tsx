@@ -90,12 +90,12 @@ describe('@button: component checks', () => {
     const accessoryRight = <Text>Right accessory</Text>;
 
     const component = render(
-      <TestButton accessoryLeft={accessoryLeft} accessoryRight={accessoryRight} />
+      <TestButton accessoryLeft={accessoryLeft} accessoryRight={accessoryRight} />,
     );
-    
+
     expect(component.queryByText('Left accessory')).toBeTruthy();
     expect(component.queryByText('Right accessory')).toBeTruthy();
-  })
+  });
 
   it('should render children from prop as pure JSX element', () => {
     const children = (
@@ -107,11 +107,11 @@ describe('@button: component checks', () => {
     );
 
     const component = render(
-      <TestButton children={children} />
+      <TestButton children={children} />,
     );
 
     expect(component.queryByText('Children component')).toBeTruthy();
-  })
+  });
 
   it('should call onPress', () => {
     const onPress = jest.fn();

@@ -129,7 +129,7 @@ describe('@tooltip: component checks', () => {
       <View>
         <Text>I love Babel</Text>
       </View>
-    )
+    );
 
     const component = render(
       <TestTooltip>

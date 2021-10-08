@@ -233,7 +233,7 @@ describe('@menu: component checks', () => {
           <MenuItem title='Option 1.2'/>
         </MenuGroup>
         <MenuItem title='Option 1'/>
-      </TestMenu>
+      </TestMenu>,
     );
 
     fireEvent.press(component.queryByText('Group 1'));
@@ -253,7 +253,7 @@ describe('@menu: component checks', () => {
           <MenuItem title='Option 2.2'/>
         </MenuGroup>
         <MenuItem title='Option 3'/>
-      </TestMenu>
+      </TestMenu>,
     );
 
     fireEvent.press(component.queryByText('Group 2'));

@@ -15,25 +15,25 @@ import {
 import { StyleProvider } from '../style/styleProvider.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
 import { ModalPanel } from '../modal/modalPanel.component';
- 
+
 interface EvaRuntimeProcessingProps {
   mapping: SchemaType;
   customMapping?: CustomSchemaType;
 }
- 
+
 interface EvaBuildtimeProcessingProps {
   styles: ThemeStyleType;
 }
- 
+
 type EvaProcessingProps = EvaRuntimeProcessingProps | EvaBuildtimeProcessingProps;
- 
+
 export type ApplicationProviderProps = EvaProcessingProps & ThemeProviderProps;
 export type ApplicationProviderElement = React.ReactElement<ApplicationProviderProps>;
- 
+
 interface State {
   styles: ThemeStyleType;
 }
- 
+
 /**
  * Overall application container.
  *
@@ -110,7 +110,7 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
       this.state.styles = this.createStyles(mapping, customMapping);
     }
   }
- 
+
   private createStyles = (mapping: SchemaType, custom: CustomSchemaType): ThemeStyleType => {
     const customizedMapping: SchemaType = merge({}, mapping, custom);
     return this.schemaProcessor.process(customizedMapping);

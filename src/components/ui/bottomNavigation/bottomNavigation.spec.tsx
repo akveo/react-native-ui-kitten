@@ -79,7 +79,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
-  })
+  });
 
   it('should render icon from prop passed as pure JSX element', () => {
     const component = render(
@@ -87,7 +87,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
-  })
+  });
 
   it('should call onMouseEnter', () => {
     const onMouseEnter = jest.fn();

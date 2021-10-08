@@ -27,8 +27,8 @@ export const InputAccessoriesShowcase = () => {
         {AlertIcon(styles.captionIcon)}
         <Text style={styles.captionText}>Should contain at least 8 symbols</Text>
       </View>
-    )
-  }
+    );
+  };
 
   return (
     <Input
@@ -52,12 +52,12 @@ const styles = StyleSheet.create({
   captionIcon: {
     width: 10,
     height: 10,
-    marginRight: 5
+    marginRight: 5,
   },
   captionText: {
     fontSize: 12,
-    fontWeight: "400",
-    fontFamily: "opensans-regular",
-    color: "#8F9BB3",
-  }
+    fontWeight: '400',
+    fontFamily: 'opensans-regular',
+    color: '#8F9BB3',
+  },
 });

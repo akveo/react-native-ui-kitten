@@ -115,7 +115,7 @@ describe('@checkbox component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
-  })
+  });
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
