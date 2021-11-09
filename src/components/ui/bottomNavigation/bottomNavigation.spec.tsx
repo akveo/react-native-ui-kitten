@@ -28,6 +28,7 @@ import {
   BottomNavigationTab,
   BottomNavigationTabProps,
 } from './bottomNavigationTab.component';
+import { TabIndicator } from '../shared/tabIndicator.component';
 
 describe('@bottom-navigation-tab: component checks', () => {
 
@@ -79,7 +80,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
-  })
+  });
 
   it('should render icon from prop passed as pure JSX element', () => {
     const component = render(
@@ -87,7 +88,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
-  })
+  });
 
   it('should call onMouseEnter', () => {
     const onMouseEnter = jest.fn();
@@ -127,6 +128,7 @@ describe('@bottom-navigation: component checks', () => {
         mapping={mapping}
         theme={light}>
         <BottomNavigation
+          {...props}
           selectedIndex={selectedIndex}
           onSelect={onSelect}>
           <BottomNavigationTab title='Tab 0'/>
@@ -150,6 +152,30 @@ describe('@bottom-navigation: component checks', () => {
     );
 
     expect(component.queryAllByType(BottomNavigationTab)[1].props.selected).toEqual(true);
+  });
+
+  it('should not render tab indicator', () => {
+    const component = render(
+      <TestBottomNavigation appearance='noIndicator'/>,
+    );
+
+    expect(component.queryByType(TabIndicator)).toEqual(null);
+  });
+
+  it('should render tab indicator correctly', () => {
+    const component = render(
+      <TestBottomNavigation indicatorStyle={{width: 99, backgroundColor: 'red'}}/>,
+      );
+
+    const el = component.queryByType(TabIndicator).children[0].children[0].children[0].children[0];
+
+    // default styles
+    expect(el.props.style[0].width).toEqual('100%');
+    expect(el.props.style[1][0].backgroundColor).toEqual('#3366FF');
+
+    // custom styles
+    expect(el.props.style[1][1].width).toEqual(99);
+    expect(el.props.style[1][1].backgroundColor).toEqual('red');
   });
 
   it('should set tab selected by pressing it', () => {

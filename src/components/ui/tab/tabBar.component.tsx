@@ -193,7 +193,8 @@ export class TabBar extends React.Component<TabBarProps> {
         </View>
         <TabIndicator
           ref={this.tabIndicatorRef}
-          style={[evaStyle.indicator, styles.indicator, indicatorStyle]}
+          style={styles.indicatorContainer}
+          indicatorStyle={[evaStyle.indicator, indicatorStyle]}
           selectedPosition={selectedIndex}
           positions={tabElements.length}
         />
@@ -209,5 +210,7 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
   },
-  indicator: {},
+  indicatorContainer: {
+    alignItems: 'center',
+  },
 });

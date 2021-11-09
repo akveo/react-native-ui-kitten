@@ -161,7 +161,8 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     return (
       <TabIndicator
         key={0}
-        style={[style, styles.indicator, indicatorStyle]}
+        style={styles.indicatorContainer}
+        indicatorStyle={[style, indicatorStyle]}
         selectedPosition={selectedIndex}
         positions={positions}
       />
@@ -214,7 +215,8 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
   },
-  indicator: {
+  indicatorContainer: {
     position: 'absolute',
+    alignItems: 'center',
   },
 });

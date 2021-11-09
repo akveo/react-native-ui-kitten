@@ -10,6 +10,8 @@ import {
   Easing,
   LayoutChangeEvent,
   Platform,
+  StyleProp,
+  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -18,6 +20,7 @@ import { RTLService } from '../../devsupport';
 export interface TabIndicatorProps extends ViewProps {
   positions: number;
   selectedPosition?: number;
+  indicatorStyle: StyleProp<ViewStyle>;
 }
 
 export type TabIndicatorElement = React.ReactElement<TabIndicatorProps>;
@@ -111,16 +114,24 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     };
   };
 
+  private renderIndicatorLine = (style: StyleProp<ViewStyle>): React.ReactElement => {
+    return (
+      <View style={[{ width: '100%' }, style]}/>
+    );
+  }
+
   public render(): React.ReactElement<ViewProps> {
-    const { style, ...viewProps } = this.props;
+    const { style, indicatorStyle, ...viewProps } = this.props;
     const evaStyle: ViewStyle = this.getComponentStyle();
+    const indicatorLine = this.renderIndicatorLine(indicatorStyle);
 
     return (
       <Animated.View
         {...viewProps}
-        style={[style, evaStyle]}
-        onLayout={this.onLayout}
-      />
+        style={[ style, evaStyle ]}
+        onLayout={this.onLayout}>
+        {indicatorLine}
+      </Animated.View>
     );
   }
 }
