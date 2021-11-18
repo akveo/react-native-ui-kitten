@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   ThemeService,
@@ -43,7 +44,11 @@ export enum State {
 export const useStyleSheet = <T extends Styles<T>>(styles: Styles<T>): T => {
   const theme: ThemeType = useTheme();
 
-  return StyleService.createThemed(styles, theme);
+  const stylesObj = useMemo(() => {
+    return StyleService.createThemed(styles, theme);
+  }, [theme])
+
+  return stylesObj;
 };
 
 /**
