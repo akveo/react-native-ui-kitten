@@ -44,11 +44,9 @@ export enum State {
 export const useStyleSheet = <T extends Styles<T>>(styles: Styles<T>): T => {
   const theme: ThemeType = useTheme();
 
-  const stylesObj = useMemo(() => {
+  return useMemo(() => {
     return StyleService.createThemed(styles, theme);
-  }, [theme])
-
-  return stylesObj;
+  }, [theme]);
 };
 
 /**
