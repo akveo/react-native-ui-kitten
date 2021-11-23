@@ -23,6 +23,8 @@ import {
   ThemeService,
   ThemeType,
 } from './theme.service';
+import { StyleProvider } from '../style/styleProvider.component';
+import { mapping } from '@eva-design/eva';
 
 const theme = {
   defaultColor: '#000000',
@@ -215,3 +217,95 @@ describe('@theme: ui component checks', () => {
     expect(themedComponent.props.eva.theme.defaultColor).toEqual('#ffffff');
   });
 });
+
+describe('@useTheme: rendering performance check', () => {
+  const styleTouchableTestId = '@style/touchable';
+  const themes = {
+    light: {
+      defaultColor: 'white',
+    },
+    dark: {
+      defaultColor: 'black',
+    }
+  };
+
+  const ThemeChangingProvider = (props) => {
+    return (
+      <StyleProvider styles={props.styles} theme={props.theme}>
+        <TouchableOpacity
+          testID={styleTouchableTestId}
+          onPress={props.onPress}>
+          <Text style={{ color: theme.defaultColor }}>{`${props.value}`}</Text>
+        </TouchableOpacity>
+      </StyleProvider>
+    );
+  };
+
+  it('changing theme should force new render', async () => {
+    const themeFuncMock = jest.fn();
+
+    const ChildComponent = (props) => {
+      React.useEffect(() => {
+        themeFuncMock()
+      });
+
+      return <ThemeChangingProvider {...props} />
+    };
+    
+    const Component = () => {
+      const [theme, setTheme] = React.useState<typeof themes['light']>(themes.dark);
+
+      const changeTheme = () => {
+        setTheme(theme.defaultColor === 'white' ? themes.dark : themes.light)
+      };
+      
+      return (
+        <ChildComponent
+          styles={mapping}
+          theme={theme}
+          onPress={changeTheme}
+          value={theme.defaultColor}
+        />
+      )
+    };
+
+    const component = render(<Component />);
+    expect(themeFuncMock).toBeCalledTimes(1);
+    fireEvent.press(component.getByTestId(styleTouchableTestId));
+    expect(themeFuncMock).toBeCalledTimes(2);
+  })
+
+  it('not changing theme value state should not force component to render', async () => {
+    const themeFuncMock = jest.fn();
+
+    const ChildComponent = (props) => {
+      React.useEffect(() => {
+        themeFuncMock();
+      });
+
+      return <ThemeChangingProvider {...props} />
+    };
+    
+    const Component = () => {
+      const [theme, setTheme] = React.useState<typeof themes['light']>(themes.dark);
+
+      const changeTheme = () => {
+        setTheme(themes.dark);
+      };
+      
+      return (
+        <ChildComponent
+          styles={mapping}
+          theme={theme}
+          onPress={changeTheme}
+          value={theme.defaultColor}
+        />
+      )
+    }
+
+    const component = render(<Component />);
+    expect(themeFuncMock).toBeCalledTimes(1);
+    fireEvent.press(component.getByTestId(styleTouchableTestId));
+    expect(themeFuncMock).toBeCalledTimes(1);
+  })
+})
