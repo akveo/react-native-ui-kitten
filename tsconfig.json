@@ -25,7 +25,6 @@
   "exclude": [
     "./src/template-js",
     "./src/template-ts",
-    "./src/showcases",
-    "./**/*.spec.ts",
+    "./src/showcases"
   ]
 }
