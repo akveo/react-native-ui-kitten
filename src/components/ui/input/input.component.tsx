@@ -261,7 +261,8 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
     return (
       <TouchableWithoutFeedback
-        testID={testID}
+        // testID={testID}
+        // accessible={false}
         style={evaStyle.container}
         onPress={this.focus}>
         <FalsyText
@@ -274,6 +275,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryLeft}
           />
           <TextInput
+            testID={testID}
             ref={this.textInputRef}
             placeholderTextColor={evaStyle.placeholder.color}
             {...textInputProps}
@@ -288,8 +290,8 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <FalsyText 
-          style={[evaStyle.captionLabel, styles.captionLabel]} 
+        <FalsyText
+          style={[evaStyle.captionLabel, styles.captionLabel]}
           component={caption}
         />
       </TouchableWithoutFeedback>

@@ -222,6 +222,30 @@ describe('@input: component checks', () => {
     expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
   });
 
+  it('should get input by testID', () => {
+    const testID = 'email';
+    const email = 'email@example.com';
+    const newEmail = 'awesomeName@example.com';
+    const onChangeText = jest.fn();
+    const component = render(
+      <TestInput
+        label={(itemProps) => (
+          <Text numberOfLines={1} {...itemProps}>label text</Text>
+        )}
+        value={email}
+        testID={testID}
+        onChangeText={onChangeText}
+      />,
+    );
+
+    const input = component.queryAllByTestId(testID)[0];
+
+    expect(input.props.value).toEqual(email);
+    fireEvent.changeText(input, newEmail);
+    expect(onChangeText).toBeCalledWith(newEmail);
+  });
+
+
   it('should request text change', () => {
     const onChangeText = jest.fn();
     const component = render(
