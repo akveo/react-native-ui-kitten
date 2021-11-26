@@ -71,6 +71,30 @@ describe('@input: component checks', () => {
     expect(componentRef.current.clear).toBeTruthy();
   });
 
+  it('should forward ref to kitten input', () => {
+    const inputRef: React.RefObject<Input> = React.createRef();
+    render(
+      <TestInput ref={inputRef}/>,
+    );
+
+    // should not be RN textInput
+    expect(inputRef.current.setNativeProps).toBeFalsy();
+    // should have inner prop that is RN textInput
+    expect(inputRef.current.textInputRef.current.setNativeProps).toBeTruthy();
+  });
+
+  it('should forward ref to RN textInput', () => {
+    const textInputRef: React.RefObject<TextInput> = React.createRef();
+    render(
+      <TestInput textInputRef={textInputRef} />,
+    );
+
+    // should be RN textInput
+    expect(textInputRef.current.setNativeProps).toBeTruthy();
+    // should not have inner prop
+    expect(textInputRef.current.textInputRef).toBeUndefined();
+  });
+
   it('should set TextInput editable to false by passing disabled prop', () => {
     const component = render(
       <TestInput disabled={true}/>,

@@ -55,6 +55,7 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
+  textInputRef?: React.RefObject<TextInput>;
 }
 
 export type InputElement = React.ReactElement<InputProps>;
@@ -140,7 +141,7 @@ export type InputElement = React.ReactElement<InputProps>;
 @styled('Input')
 export class Input extends React.Component<InputProps> implements WebEventResponderCallbacks {
 
-  private textInputRef = React.createRef<TextInput>();
+  private textInputRef = this.props.textInputRef || React.createRef<TextInput>();
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   public focus = (): void => {
@@ -288,8 +289,8 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <FalsyText 
-          style={[evaStyle.captionLabel, styles.captionLabel]} 
+        <FalsyText
+          style={[evaStyle.captionLabel, styles.captionLabel]}
           component={caption}
         />
       </TouchableWithoutFeedback>
