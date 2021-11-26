@@ -105,6 +105,8 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes the style of the text field.
  *
+ * @property {React.RefObject<TextInput>} textInputRef - Ref to the underlying TextInput.
+ *
  * @property {TextInputProps} ...TextInputProps - Any props applied to TextInput component.
  *
  * @overview-example InputSimpleUsage
