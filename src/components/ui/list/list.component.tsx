@@ -19,7 +19,9 @@ type ListStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'default'>;
 }>;
 
-export type ListProps<ItemT = any> = FlatListProps<ItemT> & ListStyledProps;
+export type ListProps<ItemT = any> = FlatListProps<ItemT> & ListStyledProps & {
+  flatListRef?: React.RefObject<FlatList>;
+};
 export type ListElement<ItemT = any> = React.ReactElement<ListProps<ItemT>>;
 
 export interface BaseScrollParams {
@@ -49,6 +51,8 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  * @property {(ListRenderItemInfo<ItemT>) => ReactElement} renderItem - Takes an
  * item from *data* and renders it into the list.
  *
+ * @property {React.RefObject<FlatList>} flatListRef - Ref to the underlying FlatList.
+ *
  * @property {FlatListProps} ...FlatListProps - Any props applied to FlatList component.
  *
  * @overview-example ListSimpleUsage
@@ -67,7 +71,7 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
 @styled('List')
 export class List<ItemT = any> extends React.Component<ListProps<ItemT>> {
 
-  private listRef = React.createRef<FlatList>();
+  private listRef = this.props.flatListRef || React.createRef<FlatList>();
 
   public scrollToEnd = (params?: BaseScrollParams): void => {
     this.listRef.current?.scrollToEnd(params);

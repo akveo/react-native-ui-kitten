@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  FlatList,
   Image,
   ImageProps,
   Text,
@@ -234,6 +235,36 @@ describe('@list: component checks', () => {
 
     expect(componentRef.current.scrollToOffset).toBeTruthy();
     componentRef.current.scrollToOffset({ offset: 0 });
+  });
+
+  it('should forward ref to kitten List', () => {
+    const componentRef = React.createRef<List>();
+    render(
+      <TestList
+        ref={componentRef}
+        data={new Array(11)}
+      />,
+    );
+
+    // should not be RN FlatList
+    expect(componentRef.current.setNativeProps).toBeFalsy();
+    // should have inner prop that is RN FlatList
+    expect(componentRef.current.listRef.current.setNativeProps).toBeTruthy();
+  });
+
+  it('should forward ref to RN FlatList', () => {
+    const flatListRef = React.createRef<FlatList>();
+    render(
+      <TestList
+        flatListRef={flatListRef}
+        data={new Array(11)}
+      />,
+    );
+
+    // should be RN FlatList
+    expect(flatListRef.current.setNativeProps).toBeTruthy();
+    // should not have inner prop
+    expect(flatListRef.current.listRef).toBeUndefined();
   });
 
 });
