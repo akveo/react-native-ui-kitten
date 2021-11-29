@@ -38,7 +38,6 @@ export interface MenuProps extends MenuListProps {
   children?: ChildrenWithProps<MenuItemProps>;
   selectedIndex?: IndexPath;
   onSelect?: (index: IndexPath) => void;
-  flatListRef?: React.RefObject<FlatList>;
 }
 
 export type MenuElement = React.ReactElement<MenuProps>;

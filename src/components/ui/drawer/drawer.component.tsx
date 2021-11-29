@@ -54,6 +54,8 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * @property {string} appearance - Appearance of the component.
  * Can be `default` or `noDivider`.
  *
+ * @property {React.RefObject<FlatList>} flatListRef - Ref to the underlying FlatList.
+ *
  * @property {ListProps} ...ListProps - Any props applied to List component,
  * excluding `renderItem` and `data`.
  *

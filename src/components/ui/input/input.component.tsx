@@ -256,6 +256,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       caption,
       accessoryLeft,
       accessoryRight,
+      textInputRef,
       testID,
       ...textInputProps
     } = this.props;

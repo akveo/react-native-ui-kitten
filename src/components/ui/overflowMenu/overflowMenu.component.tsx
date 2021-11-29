@@ -69,6 +69,8 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * @property {boolean} fullWidth - Whether a menu should take the width of `anchor`.
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
+ *
+ * @property {React.RefObject<FlatList>} flatListRef - Ref to the underlying FlatList.
  **
  * @overview-example OverflowMenuSimpleUsage
  * OverflowMenu accepts `MenuItem` components as child elements and is displayed relative to `anchor` view.

@@ -90,7 +90,7 @@ export class List<ItemT = any> extends React.Component<ListProps<ItemT>> {
   };
 
   public render(): React.ReactElement {
-    const { eva, style, keyExtractor, ...flatListProps } = this.props;
+    const { eva, style, keyExtractor, flatListRef, ...flatListProps } = this.props;
 
     return (
       <FlatList
