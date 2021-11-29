@@ -9,6 +9,7 @@ import {
   ListRenderItemInfo,
   NativeSyntheticEvent,
   StyleSheet,
+  TextInput,
   TextInputFocusEventData,
   TextInputSubmitEditingEventData,
   View,
@@ -33,6 +34,7 @@ export interface AutocompleteProps extends InputProps {
   children?: ChildrenWithProps<AutocompleteItemProps>;
   onSelect?: (index: number) => void;
   placement?: string;
+  textInputRef?: React.RefObject<TextInput>;
 }
 
 export type AutocompleteElement = React.ReactElement<AutocompleteProps>;
@@ -93,6 +95,8 @@ interface State {
  * @property {() => void} onFocus - Called when options list becomes visible.
  *
  * @property {() => void} onBlur - Called when options list becomes invisible.
+ *
+ * @property {React.RefObject<TextInput>} textInputRef - Ref to the underlying TextInput.
  *
  * @property {InputProps} ...InputProps - Any props applied to Input component.
  *

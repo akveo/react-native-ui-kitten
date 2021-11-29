@@ -373,4 +373,21 @@ describe('@autocomplete: component checks', () => {
     componentRef.current.hide();
   });
 
+  it('should forward ref to RN TextInput', () => {
+    const componentRef: React.RefObject<Autocomplete> = React.createRef();
+    const textInputRef: React.RefObject<TextInput> = React.createRef();
+    render(
+      <TestAutocomplete
+        ref={componentRef}
+        textInputRef={textInputRef} />,
+    );
+
+    // should not be Autocomplete, not RN TextInput
+    expect(componentRef.current.setNativeProps).toBeFalsy();
+    // should have inner prop that is kitten Input, not RN TextInput
+    expect(componentRef.current.inputRef.current.setNativeProps).toBeFalsy();
+    // should be RN TextInput
+    expect(textInputRef.current.setNativeProps).toBeTruthy();
+  });
+
 });
