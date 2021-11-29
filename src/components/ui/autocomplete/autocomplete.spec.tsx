@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  FlatList,
   Image,
   ImageProps,
   Text,
@@ -388,6 +389,22 @@ describe('@autocomplete: component checks', () => {
     expect(componentRef.current.inputRef.current.setNativeProps).toBeFalsy();
     // should be RN TextInput
     expect(textInputRef.current.setNativeProps).toBeTruthy();
+  });
+
+  it('should forward ref to RN FlatList', async () => {
+    const componentRef: React.RefObject<Autocomplete> = React.createRef();
+    const flatListRef = React.createRef<FlatList>();
+    render(
+      <TestAutocomplete
+        ref={componentRef}
+        flatListRef={flatListRef} />,
+    );
+
+    componentRef.current.show();
+    await waitForElement(() => null);
+
+    expect(componentRef.current.setNativeProps).toBeFalsy();
+    expect(flatListRef.current.setNativeProps).toBeTruthy();
   });
 
 });

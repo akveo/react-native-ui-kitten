@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  FlatList,
   ListRenderItemInfo,
   NativeSyntheticEvent,
   StyleSheet,
@@ -34,7 +35,7 @@ export interface AutocompleteProps extends InputProps {
   children?: ChildrenWithProps<AutocompleteItemProps>;
   onSelect?: (index: number) => void;
   placement?: string;
-  textInputRef?: React.RefObject<TextInput>;
+  flatListRef?: React.RefObject<FlatList>;
 }
 
 export type AutocompleteElement = React.ReactElement<AutocompleteProps>;
@@ -92,11 +93,13 @@ interface State {
  * `right end`, `bottom start` or `bottom end`.
  * Defaults to *bottom*.
  *
+ * @property {React.RefObject<FlatList>} flatListRef - Ref to the underlying FlatList.
+ *
+ * @property {React.RefObject<TextInput>} textInputRef - Ref to the underlying TextInput.
+ *
  * @property {() => void} onFocus - Called when options list becomes visible.
  *
  * @property {() => void} onBlur - Called when options list becomes invisible.
- *
- * @property {React.RefObject<TextInput>} textInputRef - Ref to the underlying TextInput.
  *
  * @property {InputProps} ...InputProps - Any props applied to Input component.
  *
@@ -208,7 +211,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   };
 
   public render(): PopoverElement {
-    const { placement, children, testID, ...inputProps } = this.props;
+    const { placement, children, testID, flatListRef, ...inputProps } = this.props;
 
     return (
       <Popover
@@ -222,6 +225,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         onBackdropPress={this.onBackdropPress}>
         <List
           style={styles.list}
+          flatListRef={flatListRef}
           keyboardShouldPersistTaps='always'
           data={this.data}
           bounces={false}
