@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  FlatList,
   Image,
   ImageProps,
   Text,
@@ -187,6 +188,16 @@ describe('@drawer: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should forward ref to underlying RN FlatList', () => {
+    const flatListRef = React.createRef<FlatList>();
+
+    render(
+      <TestDrawer flatListRef={flatListRef} />,
+    );
+
+    expect(flatListRef.current.setNativeProps).toBeTruthy();
   });
 
 });
