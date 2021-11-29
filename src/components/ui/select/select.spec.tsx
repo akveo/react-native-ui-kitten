@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  FlatList,
   Image,
   ImageProps,
   TouchableOpacity,
@@ -529,6 +530,23 @@ describe('@select: component checks', () => {
 
     expect(componentRef.current.hide).toBeTruthy();
     componentRef.current.hide();
+  });
+
+  it('should be able to call hide with ref', async () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    const flatListRef = React.createRef<FlatList>();
+
+    render(
+      <TestSelect
+        ref={componentRef}
+        flatListRef={flatListRef} />,
+    );
+
+    componentRef.current.show();
+    await waitForElement(() => null);
+
+    expect(componentRef.current.setNativeProps).toBeFalsy();
+    expect(flatListRef.current.setNativeProps).toBeTruthy();
   });
 
 });

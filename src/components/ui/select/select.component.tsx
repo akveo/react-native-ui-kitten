@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   Animated,
+  FlatList,
   GestureResponderEvent,
   ImageProps,
   ListRenderItemInfo,
@@ -69,6 +70,7 @@ export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;
   size?: EvaInputSize;
+  flatListRef?: React.RefObject<FlatList>;
 }
 
 export type SelectElement = React.ReactElement<SelectProps>;
@@ -149,6 +151,8 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * @property {string} size - Size of the component.
  * Can be `small`, `medium` or `large`.
  * Defaults to *medium*.
+ *
+ * @property {React.RefObject<FlatList>} flatListRef - Ref to the underlying FlatList.
  *
  * @property {() => void} onFocus - Called when options list becomes visible.
  *
@@ -483,7 +487,7 @@ export class Select extends React.Component<SelectProps, State> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, label, caption, children, ...touchableProps } = this.props;
+    const { eva, style, label, caption, children, flatListRef, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -501,6 +505,7 @@ export class Select extends React.Component<SelectProps, State> {
           onBackdropPress={this.onBackdropPress}>
           <List
             style={styles.list}
+            flatListRef={flatListRef}
             data={this.data}
             bounces={false}
             renderItem={this.renderItem}
