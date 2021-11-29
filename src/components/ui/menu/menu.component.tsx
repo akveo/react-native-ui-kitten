@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { ListRenderItemInfo } from 'react-native';
+import { FlatList, ListRenderItemInfo } from 'react-native';
 import {
   ChildrenWithProps,
   IndexPath,
@@ -38,6 +38,7 @@ export interface MenuProps extends MenuListProps {
   children?: ChildrenWithProps<MenuItemProps>;
   selectedIndex?: IndexPath;
   onSelect?: (index: IndexPath) => void;
+  flatListRef?: React.RefObject<FlatList>;
 }
 
 export type MenuElement = React.ReactElement<MenuProps>;
@@ -63,6 +64,8 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * Called with `row: number` for non-grouped items.
  * Called with `row: number, section: number` for items rendered within group,
  * where row - index of item in group, section - index of group in list.
+ *
+ * @property {React.RefObject<FlatList>} flatListRef - Ref to the underlying FlatList.
  *
  * @property {ListProps} ...ListProps - Any props applied to List component,
  * excluding `renderItem` and `data`.

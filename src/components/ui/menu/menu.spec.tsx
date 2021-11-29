@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  FlatList,
   Image,
   ImageProps,
   Text,
@@ -30,6 +31,7 @@ import {
 } from './menuItem.component';
 import { IndexPath } from '../../devsupport';
 import { MenuGroup } from './menuGroup.component';
+import { List } from '../list/list.component';
 
 jest.useFakeTimers();
 
@@ -180,6 +182,17 @@ describe('@menu: component checks', () => {
 
     expect(component.queryByText('Option 1')).toBeTruthy();
     expect(component.queryByText('Option 2')).toBeTruthy();
+  });
+
+  it('should forward ref to underlying RN FlatList', () => {
+    const flatListRef = React.createRef<FlatList>();
+
+    render(
+      <TestMenu flatListRef={flatListRef} />,
+    );
+
+    // should be RN FlatList
+    expect(flatListRef.current.setNativeProps).toBeTruthy();
   });
 
   it('should call onSelect with non-grouped index', () => {
