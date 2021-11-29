@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   Button,
+  FlatList,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
@@ -161,6 +162,23 @@ describe('@overflow-menu: component checks', () => {
 
     const options = await waitForElement(() => component.queryAllByType(MenuItem));
     expect(options.length).toEqual(0);
+  });
+
+  it('should forward ref to underlying RN FlatList', async () => {
+    const componentRef = React.createRef<OverflowMenu>();
+    const flatListRef = React.createRef<FlatList>();
+
+    render(
+      <TestOverflowMenu
+        ref={componentRef}
+        flatListRef={flatListRef} />,
+    );
+
+    componentRef.current.show();
+    await waitForElement(() => null);
+
+    expect(componentRef.current.setNativeProps).toBeFalsy();
+    expect(flatListRef.current.setNativeProps).toBeTruthy();
   });
 
 });
