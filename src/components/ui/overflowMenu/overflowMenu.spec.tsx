@@ -177,8 +177,9 @@ describe('@overflow-menu: component checks', () => {
     componentRef.current.show();
     await waitForElement(() => null);
 
-    expect(componentRef.current.setNativeProps).toBeFalsy();
+    expect(componentRef.current.constructor.name).toEqual('OverflowMenu');
     expect(flatListRef.current.setNativeProps).toBeTruthy();
+    expect(flatListRef.current.constructor.name).toEqual('FlatList');
   });
 
 });

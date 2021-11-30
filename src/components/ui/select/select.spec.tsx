@@ -532,7 +532,7 @@ describe('@select: component checks', () => {
     componentRef.current.hide();
   });
 
-  it('should be able to call hide with ref', async () => {
+  it('should forward ref to underlying RN FlatList', async () => {
     const componentRef: React.RefObject<Select> = React.createRef();
     const flatListRef = React.createRef<FlatList>();
 
@@ -545,8 +545,9 @@ describe('@select: component checks', () => {
     componentRef.current.show();
     await waitForElement(() => null);
 
-    expect(componentRef.current.setNativeProps).toBeFalsy();
+    expect(componentRef.current.constructor.name).toEqual('Select');
     expect(flatListRef.current.setNativeProps).toBeTruthy();
+    expect(flatListRef.current.constructor.name).toEqual('FlatList');
   });
 
 });

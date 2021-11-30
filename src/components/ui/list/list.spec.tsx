@@ -237,34 +237,23 @@ describe('@list: component checks', () => {
     componentRef.current.scrollToOffset({ offset: 0 });
   });
 
-  it('should forward ref to kitten List', () => {
+  it('should forward ref to underlying RN FlatList', () => {
     const componentRef = React.createRef<List>();
+    const flatListRef = React.createRef<FlatList>();
+
     render(
       <TestList
         ref={componentRef}
-        data={new Array(11)}
-      />,
-    );
-
-    // should not be RN FlatList
-    expect(componentRef.current.setNativeProps).toBeFalsy();
-    // should have inner prop that is RN FlatList
-    expect(componentRef.current.listRef.current.setNativeProps).toBeTruthy();
-  });
-
-  it('should forward ref to RN FlatList', () => {
-    const flatListRef = React.createRef<FlatList>();
-    render(
-      <TestList
         flatListRef={flatListRef}
         data={new Array(11)}
       />,
     );
 
-    // should be RN FlatList
+    expect(componentRef.current.constructor.name).toEqual('List');
+    // @ts-ignore
+    expect(componentRef.current.listRef.current.constructor.name).toEqual('FlatList');
     expect(flatListRef.current.setNativeProps).toBeTruthy();
-    // should not have inner prop
-    expect(flatListRef.current.listRef).toBeUndefined();
+    expect(flatListRef.current.constructor.name).toEqual('FlatList');
   });
 
 });

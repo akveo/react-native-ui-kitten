@@ -374,26 +374,28 @@ describe('@autocomplete: component checks', () => {
     componentRef.current.hide();
   });
 
-  it('should forward ref to RN TextInput', () => {
+  it('should forward ref to underlying RN TextInput', () => {
     const componentRef: React.RefObject<Autocomplete> = React.createRef();
     const textInputRef: React.RefObject<TextInput> = React.createRef();
+
     render(
       <TestAutocomplete
         ref={componentRef}
         textInputRef={textInputRef} />,
     );
 
-    // should not be Autocomplete, not RN TextInput
-    expect(componentRef.current.setNativeProps).toBeFalsy();
-    // should have inner prop that is kitten Input, not RN TextInput
-    expect(componentRef.current.inputRef.current.setNativeProps).toBeFalsy();
-    // should be RN TextInput
+    expect(componentRef.current.constructor.name).toEqual('Autocomplete');
+    // @ts-ignore
+    expect(componentRef.current.inputRef.current.constructor.name).toEqual('Input');
     expect(textInputRef.current.setNativeProps).toBeTruthy();
+    // @ts-ignore
+    expect(textInputRef.current.constructor.displayName).toEqual('TextInput');
   });
 
-  it('should forward ref to RN FlatList', async () => {
+  it('should forward ref to underlying RN FlatList', async () => {
     const componentRef: React.RefObject<Autocomplete> = React.createRef();
     const flatListRef = React.createRef<FlatList>();
+
     render(
       <TestAutocomplete
         ref={componentRef}
@@ -403,8 +405,9 @@ describe('@autocomplete: component checks', () => {
     componentRef.current.show();
     await waitForElement(() => null);
 
-    expect(componentRef.current.setNativeProps).toBeFalsy();
+    expect(componentRef.current.constructor.name).toEqual('Autocomplete');
     expect(flatListRef.current.setNativeProps).toBeTruthy();
+    expect(flatListRef.current.constructor.name).toEqual('FlatList');
   });
 
 });

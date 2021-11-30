@@ -32,6 +32,7 @@ import {
 import { IndexPath } from '../../devsupport';
 import { MenuGroup } from './menuGroup.component';
 import { List } from '../list/list.component';
+import { OverflowMenu } from '../overflowMenu/overflowMenu.component';
 
 jest.useFakeTimers();
 
@@ -191,8 +192,8 @@ describe('@menu: component checks', () => {
       <TestMenu flatListRef={flatListRef} />,
     );
 
-    // should be RN FlatList
     expect(flatListRef.current.setNativeProps).toBeTruthy();
+    expect(flatListRef.current.constructor.name).toEqual('FlatList');
   });
 
   it('should call onSelect with non-grouped index', () => {
@@ -246,7 +247,7 @@ describe('@menu: component checks', () => {
           <MenuItem title='Option 1.2'/>
         </MenuGroup>
         <MenuItem title='Option 1'/>
-      </TestMenu>
+      </TestMenu>,
     );
 
     fireEvent.press(component.queryByText('Group 1'));
@@ -266,7 +267,7 @@ describe('@menu: component checks', () => {
           <MenuItem title='Option 2.2'/>
         </MenuGroup>
         <MenuItem title='Option 3'/>
-      </TestMenu>
+      </TestMenu>,
     );
 
     fireEvent.press(component.queryByText('Group 2'));

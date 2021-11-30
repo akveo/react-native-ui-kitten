@@ -198,6 +198,7 @@ describe('@drawer: component checks', () => {
     );
 
     expect(flatListRef.current.setNativeProps).toBeTruthy();
+    expect(flatListRef.current.constructor.name).toEqual('FlatList');
   });
 
 });
