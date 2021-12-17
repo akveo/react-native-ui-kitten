@@ -181,6 +181,11 @@ export {
   DividerProps,
 } from './divider/divider.component';
 export {
+  ProgressBar,
+  ProgressBarProps,
+  ProgressBarElement,
+} from './progressBar/progressBar.component';
+export {
   Spinner,
   SpinnerProps,
   SpinnerElement,
