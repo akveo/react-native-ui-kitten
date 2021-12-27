@@ -8,7 +8,6 @@ import React from 'react';
 import {
   Animated,
   LayoutChangeEvent,
-  StyleProp,
   StyleSheet,
   View,
   ViewProps,
@@ -22,6 +21,7 @@ import {
 import {
   styled,
   StyledComponentProps,
+  StyleType,
 } from '@ui-kitten/components';
 import { ProgressBarAnimation } from './animation';
 
@@ -29,15 +29,8 @@ type ProgressBarStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'default'>;
 }>;
 
-interface ExtendedViewStyle extends ViewStyle {
-  /**
-   * Color of the ProgressBar indicator.
-   */
-  color?: string;
-}
-
 interface ComponentStyles {
-  track: ExtendedViewStyle;
+  track: ViewStyle;
   indicator: ViewStyle;
 }
 
@@ -45,7 +38,6 @@ export interface ProgressBarProps extends ViewProps, ProgressBarStyledProps {
   progress?: number;
   animating?: boolean;
   status?: EvaStatus;
-  style?: StyleProp<ExtendedViewStyle>;
 }
 
 export type ProgressBarElement = React.ReactElement<ProgressBarProps>;
@@ -142,24 +134,26 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
     return `${progress * 100}%`;
   }
 
-  private getComponentStyle = (style: ExtendedViewStyle): ComponentStyles => {
+  private getComponentStyle = (source: StyleType): ComponentStyles => {
     const {
       height,
       borderRadius,
-      color,
+      trackColor,
+      indicatorColor,
       ...trackStyles
-    } = style;
+    } = source;
 
     return {
       track: {
         height,
         borderRadius,
         ...trackStyles,
+        backgroundColor: trackColor,
       },
       indicator: {
         height,
         borderRadius,
-        backgroundColor: color,
+        backgroundColor: indicatorColor,
       },
     };
   }
@@ -187,7 +181,7 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
 
   public render(): React.ReactElement<ViewProps> {
     const { eva, style, progress, animating, ...viewProps } = this.props;
-    const combinedStyles: ExtendedViewStyle = StyleSheet.flatten([ eva.style, this.props.style ]);
+    const combinedStyles: StyleType = StyleSheet.flatten([ eva.style, this.props.style ]);
     const computedStyles = this.getComponentStyle(combinedStyles);
 
     return (

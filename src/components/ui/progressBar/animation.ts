@@ -57,11 +57,10 @@ export class ProgressBarAnimation extends Animation<ProgressBarAnimationConfig, 
 
   public stop(): void {
     super.stop();
-
-    // this.animationValue.setValue(0); // FIXME: should i use it
   }
 
-  public toProps(width: number): ProgressBaryAnimationStyle { // FIXME: type ts
+  // @ts-ignore: FIXME
+  public toProps(width: number): ProgressBaryAnimationStyle {
     return {
       transform: [
         { translateX: this.createTranslateXInterpolation(width) },
