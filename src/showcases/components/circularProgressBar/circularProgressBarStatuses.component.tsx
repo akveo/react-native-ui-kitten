@@ -1,0 +1,53 @@
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Layout, CircularProgressBar } from '@ui-kitten/components';
+
+let timeoutId;
+const getRandomNum = (min: number, max: number): number => Math.random() * (max - min) + min;
+
+export const CircularProgressBarStatusesShowcase = () => {
+  const [ progress, setProgress ] = React.useState(0);
+
+  React.useEffect(() => {
+    timeoutId = setTimeout(() => {
+      clearTimeout(timeoutId);
+
+      if (progress < 1) {
+        const load = getRandomNum(0.1, 0.4);
+        setProgress(progress + load);
+      } else {
+        setProgress(0);
+      }
+    }, 2000);
+
+    return () => clearTimeout(timeoutId);
+  }, [ progress ]);
+
+  return (
+    <Layout style={styles.container} level='1'>
+
+      <CircularProgressBar progress={progress} status='primary'/>
+      <CircularProgressBar progress={progress} status='success'/>
+      <CircularProgressBar progress={progress} status='info'/>
+      <CircularProgressBar progress={progress} status='warning'/>
+      <CircularProgressBar progress={progress} status='danger'/>
+      <CircularProgressBar progress={progress} status='basic'/>
+      <View style={styles.controlContainer}>
+        <CircularProgressBar progress={progress} status='control'/>
+      </View>
+
+    </Layout>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    width: 200,
+    alignItems: 'center',
+  },
+  controlContainer: {
+    borderRadius: 4,
+    padding: 12,
+    backgroundColor: '#3366FF',
+  },
+});

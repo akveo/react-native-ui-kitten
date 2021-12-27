@@ -186,6 +186,11 @@ export {
   ProgressBarElement,
 } from './progressBar/progressBar.component';
 export {
+  CircularProgressBar,
+  CircularProgressBarProps,
+  CircularProgressBarElement,
+} from './circularProgressBar/circularProgressBar.component';
+export {
   Spinner,
   SpinnerProps,
   SpinnerElement,

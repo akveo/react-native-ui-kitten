@@ -724,6 +724,17 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'CircularProgressBar',
+        icon: 'circular-progress-bar.svg',
+        source: [
+          'CircularProgressBar',
+        ],
+        title: 'CircularProgressBar',
+        description: 'Displays the length of a process.',
+        keywords: 'ui kitten, ui kitten menu, kitten extra, ui kitten circular progress bar ',
+      },
+      {
+        type: 'tabs',
         name: 'Calendar',
         icon: 'calendar.svg',
         source: [
