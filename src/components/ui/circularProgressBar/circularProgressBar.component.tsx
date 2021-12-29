@@ -19,7 +19,8 @@ import { NumberProp } from 'react-native-svg';
 import {
   EvaSize,
   LiteralUnion,
-  Overwrite, Size,
+  Overwrite,
+  Size,
 } from '@ui-kitten/components/devsupport';
 import {
   Icon,
@@ -95,6 +96,7 @@ export type CircularProgressBarElement = React.ReactElement<CircularProgressBarP
  *
  * @overview-example CircularProgressBarTheming
  * Styling of CircularProgressBar is possible with [configuring a custom theme](guides/branding).
+ *
  */
 
 @styled('CircularProgressBar')

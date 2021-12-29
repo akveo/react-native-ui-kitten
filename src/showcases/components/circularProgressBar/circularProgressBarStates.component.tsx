@@ -6,6 +6,8 @@ export const CircularProgressBarStatesShowcase = () => {
   return (
     <Layout style={styles.container} level='1'>
 
+      <CircularProgressBar progress={0.33}/>
+
       <CircularProgressBar progress={1} state='success'/>
 
       <CircularProgressBar progress={0.81} state='error'/>
@@ -16,7 +18,9 @@ export const CircularProgressBarStatesShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
 });

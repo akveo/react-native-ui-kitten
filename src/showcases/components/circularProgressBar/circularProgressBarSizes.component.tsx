@@ -5,7 +5,7 @@ import { Layout, CircularProgressBar } from '@ui-kitten/components';
 let timeoutId;
 const getRandomNum = (min: number, max: number): number => Math.random() * (max - min) + min;
 
-export const CircularProgressBarStatusesShowcase = () => {
+export const CircularProgressBarSizesShowcase = () => {
   const [ progress, setProgress ] = React.useState(0);
 
   React.useEffect(() => {
@@ -38,7 +38,9 @@ export const CircularProgressBarStatusesShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
 });

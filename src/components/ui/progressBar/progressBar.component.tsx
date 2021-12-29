@@ -16,7 +16,7 @@ import {
 import {
   EvaStatus,
   LiteralUnion,
-  Overwrite, Size,
+  Overwrite,
 } from '@ui-kitten/components/devsupport';
 import {
   styled,

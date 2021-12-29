@@ -24,14 +24,6 @@ export const ProgressBarThemingShowcase = () => {
   }, [ progress ]);
 
   return (
-    <ProgressBar
-      style={styles.bar}
-      progress={progress} />
+    <ProgressBar progress={progress} />
   );
 };
-
-const styles = StyleSheet.create({
-  bar: {
-    width: 200,
-  },
-});
