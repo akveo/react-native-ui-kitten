@@ -85,7 +85,7 @@ export type CircularProgressBarElement = React.ReactElement<CircularProgressBarP
  * Can be from 0 to 1.
  *
  * @overview-example CircularProgressBarSimpleUsage
- * Default CircularProgressBar state is `progress` and size is `medium`.
+ * Default CircularProgressBar state is `progress`, size is `medium` and animating is `true`.
  *
  * @overview-example CircularProgressBarSizes
  * To resize CircularProgressBar, a `size` property may be used.

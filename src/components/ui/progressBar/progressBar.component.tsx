@@ -16,7 +16,7 @@ import {
 import {
   EvaStatus,
   LiteralUnion,
-  Overwrite,
+  Overwrite, Size,
 } from '@ui-kitten/components/devsupport';
 import {
   styled,
@@ -54,20 +54,11 @@ interface State {
  * @property {boolean} animating - Whether component is animating.
  * Default is *true*.
  *
- * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *primary*.
- * Use *control* status when needed to display within a contrast container.
- *
  * @property {number} progress - Current state of a process.
  * Can be from 0 to 1.
  *
  * @overview-example ProgressBarSimpleUsage
- * Default ProgressBar status is `primary`.
- *
- * @overview-example ProgressBarStatuses
- * The track and indicator colours can be changed with `status` property
- * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
+ * Default ProgressBar animating is `true`.
  *
  * @overview-example ProgressBarTheming
  * Styling of ProgressBar is possible with [configuring a custom theme](guides/branding).
@@ -126,7 +117,6 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
 
   private onLayout = (event: LayoutChangeEvent) => {
     this.props.onLayout && this.props.onLayout(event);
-
     this.setState({ trackWidth: event.nativeEvent.layout.width });
   }
 
@@ -140,14 +130,12 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
       borderRadius,
       trackColor,
       indicatorColor,
-      ...trackStyles
     } = source;
 
     return {
       track: {
         height,
         borderRadius,
-        ...trackStyles,
         backgroundColor: trackColor,
       },
       indicator: {
@@ -182,14 +170,14 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
   public render(): React.ReactElement<ViewProps> {
     const { eva, style, progress, animating, ...viewProps } = this.props;
     const combinedStyles: StyleType = StyleSheet.flatten([ eva.style, this.props.style ]);
-    const computedStyles = this.getComponentStyle(combinedStyles);
+    const evaStyle = this.getComponentStyle(combinedStyles);
 
     return (
       <View
         {...viewProps}
-        style={[ styles.noOverflow, computedStyles.track ]}
+        style={[ evaStyle.track, styles.noOverflow, style ]}
         onLayout={this.onLayout}>
-        {this.renderIndicator(computedStyles.indicator, progress, animating)}
+        {this.renderIndicator(evaStyle.indicator, progress, animating)}
       </View>
     );
   }
