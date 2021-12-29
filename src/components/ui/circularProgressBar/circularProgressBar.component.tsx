@@ -18,9 +18,8 @@ import {
 import { NumberProp } from 'react-native-svg';
 import {
   EvaSize,
-  EvaStatus,
   LiteralUnion,
-  Overwrite,
+  Overwrite, Size,
 } from '@ui-kitten/components/devsupport';
 import {
   Icon,
@@ -42,6 +41,7 @@ interface IndicatorStyle {
 
 interface IconStyle {
   width: number;
+  height: number;
   tintColor: string;
 }
 
@@ -54,12 +54,11 @@ interface ComponentStyles {
   text: TextStyle;
 }
 
-type LoadingStates = LiteralUnion<'success' | 'error'>;
+type LoadingStates = LiteralUnion<'success' | 'error' | 'progress'>;
 
 export interface CircularProgressBarProps extends ViewProps, CircularProgressBarStyledProps {
   progress?: number;
   animating?: boolean;
-  status?: EvaStatus;
   size?: EvaSize;
   state?: LoadingStates;
 }
@@ -74,34 +73,25 @@ export type CircularProgressBarElement = React.ReactElement<CircularProgressBarP
  * @property {boolean} animating - Whether component is animating.
  * Default is *true*.
  *
- * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *primary*.
- * Use *control* status when needed to display within a contrast container.
- *
  * @property {string} size - Size of the component.
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
  * Defaults to *medium*.
  *
  * @property {string} state - State of the process.
- * Can be `success` or `error`.
- * No default value.
+ * Can be `progress`, `success` or `error`.
+ * Defaults to *progress*.
  *
  * @property {number} progress - Current progress value of the process.
  * Can be from 0 to 1.
  *
  * @overview-example CircularProgressBarSimpleUsage
- * Default CircularProgressBar status is `primary` and size is `medium`.
+ * Default CircularProgressBar state is `progress` and size is `medium`.
  *
  * @overview-example CircularProgressBarSizes
  * To resize CircularProgressBar, a `size` property may be used.
  *
  * @overview-example CircularProgressBarStates
  * To show the specific state of the process, a `state` property may be used.
- *
- * @overview-example CircularProgressBarStatuses
- * A color can be changed with `status` property
- * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
  * @overview-example CircularProgressBarTheming
  * Styling of CircularProgressBar is possible with [configuring a custom theme](guides/branding).
@@ -116,6 +106,17 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
   };
 
   private animation = new CircularProgressBarAnimation();
+
+  private accessoryIcons = {
+    success: 'checkmark',
+    error: 'close',
+  };
+
+  private get containerSize(): Size {
+    const { width, height } = StyleSheet.flatten([this.props.eva.style, this.props.style]);
+    // @ts-ignore: width and height are restricted to be a number
+    return new Size(width, height);
+  }
 
   public componentDidMount(): void {
     if (this.props.animating) {
@@ -153,51 +154,45 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     return progress > 1 ? 1 : (progress < 0 ? 0 : progress);
   }
 
-  private getComponentStyle = (source: StyleType, state?: LoadingStates): ComponentStyles => {
+  private getComponentStyle = (source: StyleType): ComponentStyles => {
     const {
-      indicatorColor, // indicatorColor
-      trackColor, // trackColor
       trackWidth, // width of track/indicator
+      trackColor,
+      indicatorColor,
 
-      width, // 2 * radius
+      iconWidth, // accessory icon
 
       textColor, // font styles
       textFontFamily,
       textFontSize,
       textFontWeight,
-
-      iconWidth, // accessory icon
-      successIconColor,
-      errorIconColor,
-
-      ...containerStyles
     } = source;
 
-    const widthAsNumber = typeof width === 'number' ? width : 80; // default medium width
-    const radius = widthAsNumber / 2;
-    const elementWidth = trackWidth > radius ? radius : trackWidth;
+    const { width, height }: Size = this.containerSize;
 
-    const isSuccess = state === 'success';
-    const stateColor = isSuccess ? successIconColor : errorIconColor;
+    const radius = width / 2;
+    const elementWidth = trackWidth > radius ? radius : trackWidth;
 
     return {
       radius,
+
       track: {
         width: elementWidth,
         color: trackColor,
       },
       indicator: {
         width: elementWidth,
-        color: state ? stateColor : indicatorColor,
+        color: indicatorColor,
       },
       container: {
         width,
+        height,
         borderRadius: radius,
-        ...containerStyles,
       },
       icon: {
         width: iconWidth,
-        tintColor: stateColor,
+        height: iconWidth,
+        tintColor: indicatorColor,
       },
       text: {
         color: textColor,
@@ -208,7 +203,7 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     };
   }
 
-  private renderStaticHalf = (radius: number, style: IndicatorStyle): React.ReactElement<ViewProps> => {
+  private renderHalfCircle = (radius: number, style: IndicatorStyle): React.ReactElement<ViewProps> => {
     const { width, color } = style;
 
     return (
@@ -231,15 +226,15 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     );
   }
 
-  private renderHalfCircle = (
-    style: ComponentStyles, viewStyle: ViewStyle, rotate: NumberProp, opacity?: NumberProp,
+  private renderHalf = (
+    evaStyle: ComponentStyles, viewStyle: ViewStyle, rotate: NumberProp, opacity?: NumberProp,
   ): React.ReactElement<ViewProps> => {
-    const { radius, track, indicator } = style;
+    const { radius, track, indicator } = evaStyle;
     const opacityProp = opacity || opacity === 0 ? { opacity } : undefined;
 
     return (
       <View style={viewStyle}>
-        {this.renderStaticHalf(radius, indicator)}
+        {this.renderHalfCircle(radius, indicator)}
         <Animated.View
           style={{
             ...StyleSheet.absoluteFillObject,
@@ -251,38 +246,37 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
               { perspective: 1000 },
             ],
           }}>
-          {this.renderStaticHalf(radius, track)}
+          {this.renderHalfCircle(radius, track)}
         </Animated.View>
       </View>
     );
   }
 
   private renderCircularProgress = (
-    progress: number, animating: boolean, state: LoadingStates | undefined, style: ComponentStyles,
+    progress: number, animating: boolean, evaStyle: ComponentStyles,
   ): React.ReactElement<ViewProps> => {
     let firstHalfOpacity;
     let firstHalfRotate;
     let secondHalfRotate;
 
     if (animating) {
-      const animationStyles = this.animation.toProps();
+      const { opacity, rotateFirstHalf, rotateSecondHalf } = this.animation.toProps();
 
-      firstHalfOpacity = animationStyles.opacity;
-      firstHalfRotate = animationStyles.rotateFirstHalf;
-      secondHalfRotate = animationStyles.rotateSecondHalf;
+      firstHalfOpacity = opacity;
+      firstHalfRotate = rotateFirstHalf;
+      secondHalfRotate = rotateSecondHalf;
     } else {
       const isSecondHalfActive = progress > 0.5;
 
       firstHalfOpacity = isSecondHalfActive ? 0 : 1;
       firstHalfRotate = `${progress * 360}deg`;
       secondHalfRotate = isSecondHalfActive ? `${(progress - 0.5) * 360}deg` : '0deg';
-
     }
 
     return (
       <View style={[ styles.absoluteFill, styles.center, styles.rotate90 ]}>
-        {this.renderHalfCircle(style, styles.zIndex, firstHalfRotate, firstHalfOpacity)}
-        {this.renderHalfCircle(style, styles.rotate180, secondHalfRotate)}
+        {this.renderHalf(evaStyle, styles.zIndex, firstHalfRotate, firstHalfOpacity)}
+        {this.renderHalf(evaStyle, styles.rotate180, secondHalfRotate)}
       </View>
     );
   }
@@ -295,37 +289,31 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     const label = this.getLabel(progress);
 
     return (
-      <Text style={[ style ]}>
+      <Text style={style}>
         {label}
       </Text>
     );
   }
 
   private renderIcon = (state: LoadingStates, style: IconStyle): React.ReactElement<IconProps> => {
-    const { width, tintColor } = style;
-    const isSuccess = state === 'success';
-    const src = isSuccess ? 'checkmark' : 'close';
+    const src = this.accessoryIcons[state];
 
     return (
       <Icon
         name={src}
-        style={{
-          tintColor,
-          width,
-          height: width,
-        }}/>
+        style={style} />
     );
   };
 
   private renderAccessory = (
-    progress: number, state: LoadingStates | undefined, style: ComponentStyles,
+    progress: number, state: LoadingStates, evaStyle: ComponentStyles,
   ): React.ReactElement<ViewProps> => {
     return (
       <View style={[ styles.absoluteFill, styles.center ]}>
         {
-          state
-            ? this.renderIcon(state, style.icon)
-            : this.renderText(progress, style.text)
+          state === 'progress'
+            ? this.renderText(progress, evaStyle.text)
+            : this.renderIcon(state, evaStyle.icon)
         }
       </View>
     );
@@ -334,15 +322,14 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
   public render(): React.ReactElement<ViewProps> {
     const { eva, style, progress, animating, state, ...viewProps } = this.props;
     const validProgress = this.clamp(progress);
-    const combinedStyles: StyleType = StyleSheet.flatten([ eva.style, this.props.style ]);
-    const computedStyles = this.getComponentStyle(combinedStyles, state);
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
         {...viewProps}
-        style={computedStyles.container}>
-        {this.renderCircularProgress(validProgress, animating, state, computedStyles)}
-        {this.renderAccessory(validProgress, state, computedStyles)}
+        style={[ evaStyle.container, style ]}>
+        {this.renderCircularProgress(validProgress, animating, evaStyle)}
+        {this.renderAccessory(validProgress, state, evaStyle)}
       </View>
     );
   }
