@@ -53,9 +53,14 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
     return range.indexOf(item) === range.length - 1;
   };
 
+  private isOneDayRange = (item: CalendarDateInfo<D>): boolean => {
+    return !!item.oneDayRange;
+  };
+
   private renderCellElement = (item: CalendarDateInfo<D>, index: number): CalendarPickerCellElement<D> => {
     const isFirstRangeItem: boolean = this.isFirstRangeItem(item, this.rangedArray);
     const isLastRangeItem: boolean = this.isLastRangeItem(item, this.rangedArray);
+    const isOneDayRange: boolean = this.isOneDayRange(item);
 
     return (
       <CalendarPickerCell
@@ -68,6 +73,7 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
         range={item.range}
         firstRangeItem={isFirstRangeItem}
         lastRangeItem={isLastRangeItem}
+        oneDayRange={isOneDayRange}
         onSelect={this.props.onSelect}
         shouldComponentUpdate={this.props.shouldItemUpdate}>
         {this.props.children}

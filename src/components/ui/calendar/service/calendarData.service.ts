@@ -122,7 +122,11 @@ export class CalendarDataService<D> {
       const isSameEndDate: boolean = this.dateService.compareDatesSafe(day.date, endDate) === 0;
 
       if (isSameStartDate || isSameEndDate) {
-        return { ...day, range: true };
+        if (isSameStartDate && isSameEndDate) {
+          return { ...day, range: true, oneDayRange: true };
+        } else {
+          return { ...day, range: true };
+        }
       } else {
         const isInRange: boolean = this.dateService.isBetween(day.date, startDate, endDate);
         return { ...day, range: isInRange };

@@ -73,7 +73,7 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * @property {(D, NamedStyles) => ReactElement} renderYear - Function component
  * to render instead of default year cell.
  * Called with a date for this cell and styles provided by Eva.
- * 
+ *
  * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next month / year.
  * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
  *
@@ -145,13 +145,15 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
     const rangeChanged: boolean = props.range !== nextProps.range;
     const rangeStartPlaceChanged: boolean = props.firstRangeItem !== nextProps.firstRangeItem;
     const rangeEndPlaceChanged: boolean = props.lastRangeItem !== nextProps.lastRangeItem;
+    const rangeOneDayDurationChanged: boolean = props.oneDayRange !== nextProps.oneDayRange;
 
     const shouldUpdate: boolean =
       selectionChanged
       || disablingChanged
       || rangeChanged
       || rangeStartPlaceChanged
-      || rangeEndPlaceChanged;
+      || rangeEndPlaceChanged
+      || rangeOneDayDurationChanged;
 
     if (shouldUpdate) {
       return true;

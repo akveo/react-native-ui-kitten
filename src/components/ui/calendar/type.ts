@@ -8,6 +8,7 @@ export interface CalendarDateOptions {
   bounding: boolean;
   holiday: boolean;
   range?: boolean;
+  oneDayRange?: boolean;
 }
 
 export interface CalendarRange<D> {
