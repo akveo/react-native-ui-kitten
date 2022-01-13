@@ -41,8 +41,14 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @method {() => void} clear - Removes all text from the Datepicker.
  *
+ * @method {() => void} scrollToToday - Show the current date in the picker, the picker should be visible.
+ *
+ * @method {(date: D) => void} scrollToDate - Show the specific date in the picker, the picker should be visible.
+ *
  * @property {D} date - Date which is currently selected.
  * Defaults to current date.
+ *
+ * @property {D} initialVisibleDate - Specific date that should be shown on load.
  *
  * @property {(D) => void} onSelect - Called when date cell is pressed.
  *
@@ -184,6 +190,7 @@ export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProp
       min: this.props.min,
       max: this.props.max,
       date: this.props.date,
+      initialVisibleDate: this.props.initialVisibleDate,
       dateService: this.props.dateService,
       boundingMonth: this.props.boundingMonth,
       startView: this.props.startView,
@@ -193,6 +200,7 @@ export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProp
       renderDay: this.props.renderDay,
       renderMonth: this.props.renderMonth,
       renderYear: this.props.renderYear,
+      renderFooter: this.props.renderFooter,
     };
   }
 
@@ -221,6 +229,7 @@ export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProp
     return (
       <Calendar
         {...this.calendarProps}
+        ref={this.calendarRef}
         onSelect={this.onSelect}
       />
     );

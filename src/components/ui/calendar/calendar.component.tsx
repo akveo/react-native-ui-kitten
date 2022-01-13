@@ -28,8 +28,14 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @extends React.Component
  *
+ * @method {() => void} scrollToToday - Show the current date in the calendar.
+ *
+ * @method {(date: D) => void} scrollToDate - Show the specific date in the calendar.
+ *
  * @property {D} date - Date which is currently selected.
  * Defaults to current date.
+ *
+ * @property {D} initialVisibleDate - Specific date that should be shown on the first render of the component..
  *
  * @property {(D) => void} onSelect - Called when date cell is pressed.
  *
@@ -70,7 +76,7 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next month / year.
  * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
- * 
+ *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example CalendarSimpleUsage

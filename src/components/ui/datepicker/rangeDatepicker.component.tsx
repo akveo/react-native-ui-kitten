@@ -38,9 +38,15 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @method {() => void} clear - Removes all text from the Datepicker.
  *
+ * @method {() => void} scrollToToday - Show the current date in the picker, the picker should be visible.
+ *
+ * @method {(date: D) => void} scrollToDate - Show the specific date in the picker, the picker should be visible.
+ *
  * @property {CalendarRange<D>} range - Date range which is currently selected.
  * CalendarRange `startDate?: D, endDate?: D` - Object with start and end dates for date range.
  * A range may contain only a startDate or both startDate and endDate properties meaning completeness of picked value.
+ *
+ * @property {D} initialVisibleDate - Specific date that should be shown on load.
  *
  * @property {(CalendarRange) => void} onSelect - Called when day cell is pressed.
  *
@@ -137,6 +143,7 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
       min: this.props.min,
       max: this.props.max,
       range: this.props.range,
+      initialVisibleDate: this.props.initialVisibleDate,
       dateService: this.props.dateService,
       boundingMonth: this.props.boundingMonth,
       startView: this.props.startView,
@@ -172,7 +179,9 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
   protected renderCalendar(): RangeCalendarElement<D> {
     return (
       // @ts-ignore
-      <RangeCalendar {...this.calendarProps} />
+      <RangeCalendar
+        ref={this.calendarRef}
+        {...this.calendarProps} />
     );
   }
 }
