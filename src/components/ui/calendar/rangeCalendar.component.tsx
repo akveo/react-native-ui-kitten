@@ -124,8 +124,8 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
     return this.dataService.createDayPickerData(date, this.props.range);
   }
 
-  protected selectedDate(): D {
-    return this.props.range?.startDate || this.dateService.today();
+  protected selectedDate(): D | undefined {
+    return this.props.range?.startDate;
   }
 
   protected onDateSelect(date: D): void {

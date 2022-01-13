@@ -174,7 +174,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   protected abstract createDates(date: D): DateBatch<D>;
 
-  protected abstract selectedDate(): D;
+  protected abstract selectedDate(): D | undefined;
 
   protected abstract onDateSelect(item: D): void;
 
@@ -184,7 +184,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
                                       nextProps: CalendarPickerCellProps<D>): boolean;
 
   private initialVisibleDate(): D {
-   return this.props.initialVisibleDate || this.selectedDate();
+   return this.props.initialVisibleDate || this.selectedDate() || this.dateService.today();
   }
 
   private onDaySelect = ({ date }: CalendarDateInfo<D>): void => {

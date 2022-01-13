@@ -132,8 +132,8 @@ export class Calendar<D = Date> extends BaseCalendarComponent<CalendarProps<D>, 
     return this.dataService.createDayPickerData(date);
   }
 
-  protected selectedDate(): D {
-    return this.props.date || this.dateService.today();
+  protected selectedDate(): D | undefined {
+    return this.props.date;
   }
 
   protected onDateSelect(date: D): void {
