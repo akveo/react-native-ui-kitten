@@ -168,7 +168,8 @@ describe('@calendar: component checks', () => {
 
     const nextYear = new Date(initialDate.getFullYear() + 12, initialDate.getMonth(), initialDate.getDate());
 
-    expect(componentRef.current.state.visibleDate).toEqual(nextYear);
+    expect(componentRef.current.state.visibleDate).toEqual(initialDate);
+    expect(componentRef.current.state.pickerDate).toEqual(nextYear);
   });
 
   it('should change year to previous when navigation button pressed', () => {
@@ -184,7 +185,8 @@ describe('@calendar: component checks', () => {
 
     const nextYear = new Date(initialDate.getFullYear() - 12, initialDate.getMonth(), initialDate.getDate());
 
-    expect(componentRef.current.state.visibleDate).toEqual(nextYear);
+    expect(componentRef.current.state.visibleDate).toEqual(initialDate);
+    expect(componentRef.current.state.pickerDate).toEqual(nextYear);
   });
 
   it('should scroll to current month when scrollToToday called', () => {
@@ -266,7 +268,7 @@ describe('@calendar: component checks', () => {
     const onVisibleDateChange = jest.fn();
 
     const component = render(
-      <TestCalendar onVisibleDateChange={onVisibleDateChange} />
+      <TestCalendar onVisibleDateChange={onVisibleDateChange} />,
     );
 
     const navigationPrevButton = component.queryAllByType(TouchableOpacity)[1];
