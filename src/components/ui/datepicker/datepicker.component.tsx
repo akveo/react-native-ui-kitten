@@ -49,6 +49,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Defaults to current date.
  *
  * @property {D} initialVisibleDate - Specific date that should be shown on load.
+ * If it is not set, the selected date or today's date will be displayed.
+ * Clear initialVisibleDate to stop showing it when the datepicker is opened.
  *
  * @property {(D) => void} onSelect - Called when date cell is pressed.
  *
@@ -135,6 +137,10 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @overview-example DatepickerAccessories
  * Pickers may contain labels, captions and inner views by configuring `accessoryLeft` or `accessoryRight` properties.
  * Within Eva, Datepicker accessories are expected to be images or [svg icons](guides/icon-packages).
+ *
+ * @overview-example DatepickerInitialVisibleDate
+ * Calendar can show specified date on render.
+ * Also, it is possible to use scrollToToday and scrollToDate to show specific dates.
  *
  * @overview-example DatepickerFilters
  * Picker may accept minimal and maximum dates, filter functions, and `boundingMonth` property,

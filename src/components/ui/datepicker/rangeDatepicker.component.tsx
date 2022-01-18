@@ -47,6 +47,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * A range may contain only a startDate or both startDate and endDate properties meaning completeness of picked value.
  *
  * @property {D} initialVisibleDate - Specific date that should be shown on load.
+ * If it is not set, the selected date or today's date will be displayed.
+ * Clear initialVisibleDate to stop showing it when the datepicker is opened.
  *
  * @property {(CalendarRange) => void} onSelect - Called when day cell is pressed.
  *

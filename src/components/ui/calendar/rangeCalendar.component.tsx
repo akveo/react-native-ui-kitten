@@ -42,6 +42,7 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * A range may contain only a startDate or both startDate and endDate properties meaning completeness of picked value.
  *
  * @property {D} initialVisibleDate - Specific date that should be shown on the first render of the component.
+ * If it is not set, the selected date or today's date will be displayed.
  *
  * @property {(CalendarRange) => void} onSelect - Called when day cell is pressed.
  *
