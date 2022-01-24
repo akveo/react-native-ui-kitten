@@ -60,7 +60,8 @@ interface State {
  * @method {() => void} hide - Sets `content` component invisible.
  *
  * @property {boolean} visible - Whether content component is visible.
- * Defaults to false. Do not use at the same time as the show/hide methods.
+ * Defaults to false.
+ * The property is more specific that the show/hide methods, so do not use them at the same time.
  *
  * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
