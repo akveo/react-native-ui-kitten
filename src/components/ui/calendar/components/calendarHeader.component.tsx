@@ -120,7 +120,7 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
           appearance='ghost'
           accessoryRight={this.renderTitleIcon}
           onPress={onTitlePress}>
-          {this.renderTitleElement}
+          {(props) => this.renderTitleElement(props)}
         </Button>
         {lateralNavigationAllowed && this.renderLateralNavigationControls()}
       </View>
