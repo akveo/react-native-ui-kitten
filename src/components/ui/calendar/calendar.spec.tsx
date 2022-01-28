@@ -187,6 +187,37 @@ describe('@calendar: component checks', () => {
     expect(componentRef.current.state.visibleDate).toEqual(nextYear);
   });
 
+  it('should show the selected date on load provided by date prop', () => {
+    const date = new Date(2021, 2, 1);
+    const componentRef = React.createRef<Calendar>();
+    render(
+      <TestCalendar
+        ref={componentRef}
+        date={date}
+      />,
+    );
+
+    const visibleDate = componentRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(date.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(date.getMonth());
+  });
+
+  it('should show the specific date on load provided by initialVisibleDate prop', () => {
+    const initialDate = new Date(2021, 2, 1);
+    const componentRef = React.createRef<Calendar>();
+    render(
+      <TestCalendar
+        ref={componentRef}
+        date={new Date()}
+        initialVisibleDate={initialDate}
+      />,
+    );
+
+    const visibleDate = componentRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(initialDate.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(initialDate.getMonth());
+  });
+
   it('should scroll to current month when scrollToToday called', () => {
     const componentRef = React.createRef<Calendar>();
     render(
@@ -199,6 +230,23 @@ describe('@calendar: component checks', () => {
     componentRef.current.scrollToToday();
 
     expect(componentRef.current.state.visibleDate.getMonth()).toEqual(today.getMonth());
+  });
+
+  it('should scroll to the specific date when scrollToDate called', () => {
+    const dateToScroll = new Date(2021, 2, 1);
+    const componentRef = React.createRef<Calendar>();
+    render(
+      <TestCalendar
+        ref={componentRef}
+        date={new Date()}
+      />,
+    );
+
+    componentRef.current.scrollToDate(dateToScroll);
+
+    const visibleDate = componentRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(dateToScroll.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(dateToScroll.getMonth());
   });
 
   it('should render element provided with renderDay prop', async () => {

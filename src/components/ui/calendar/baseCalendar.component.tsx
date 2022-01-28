@@ -45,6 +45,7 @@ import {
 export interface BaseCalendarProps<D = Date> extends ViewProps {
   min?: D;
   max?: D;
+  initialVisibleDate?: D;
   dateService?: DateService<D>;
   boundingMonth?: boolean;
   startView?: CalendarViewMode;
@@ -79,8 +80,9 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   public state: State<D> = {
     viewMode: this.props.startView,
-    visibleDate: this.dateService.getMonthStart(this.selectedDate()),
+    visibleDate: this.dateService.getMonthStart(this.initialVisibleDate()),
   };
+
   protected dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
 
   protected get dateService(): DateService<D> {
@@ -100,6 +102,15 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       viewMode: CalendarViewModes.DATE,
       visibleDate: this.dateService.today(),
     });
+  };
+
+  public scrollToDate = (date: D): void => {
+    if (date) {
+      this.setState({
+        viewMode: CalendarViewModes.DATE,
+        visibleDate: date,
+      });
+    }
   };
 
   public getCalendarStyle = (source: StyleType) => {
@@ -163,7 +174,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   protected abstract createDates(date: D): DateBatch<D>;
 
-  protected abstract selectedDate(): D;
+  protected abstract selectedDate(): D | undefined;
 
   protected abstract onDateSelect(item: D): void;
 
@@ -171,6 +182,10 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   protected abstract shouldUpdateDate(props: CalendarPickerCellProps<D>,
                                       nextProps: CalendarPickerCellProps<D>): boolean;
+
+  private initialVisibleDate(): D {
+   return this.props.initialVisibleDate || this.selectedDate() || this.dateService.today();
+  }
 
   private onDaySelect = ({ date }: CalendarDateInfo<D>): void => {
     this.onDateSelect(date);
