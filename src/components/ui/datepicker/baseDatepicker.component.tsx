@@ -73,6 +73,16 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     visible: false,
   };
 
+  protected calendarRef = React.createRef<any>(); // FIXME: ts
+
+  public scrollToToday = (): void => {
+    this.calendarRef.current?.scrollToToday();
+  }
+
+  public scrollToDate = (date: Date): void => {
+    this.calendarRef.current?.scrollToDate(date);
+  }
+
   private popoverRef = React.createRef<Popover>();
 
   public show = (): void => {

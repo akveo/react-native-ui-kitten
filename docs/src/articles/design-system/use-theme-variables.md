@@ -30,8 +30,34 @@ export const ThemedAwesomeView = withStyles(AwesomeView, (theme) => ({
 
 In the example above we use `withStyles` function imported from UI Kitten. This allows us create a styles like you usually do with `StyleSheet` but with an ability to use current theme.
 
-Complete list of variables could be found under [Light Theme Variables](design-system/eva-light-theme) table.
+You can also use hooks `useTheme` and `useStyleSheet` in order to get styles & current theme variables. Here's an example:
 
+```js
+import React from 'react';
+import { View } from 'react-native';
+import { useTheme, useStyleSheet, StyleService } from '@ui-kitten/components';
+
+export const ThemedAwesomeView = () => {
+  const theme = useTheme();
+  const styles = useStyleSheet(themedStyles);
+
+  return (
+    <View {...restProps} style={[styles.view, { color: theme['color-primary-100'] }]} />
+  );
+};
+
+const themedStyles = StyleService.create({
+  view: {
+    backgroundColor: 'color-primary-500',
+  }
+});
+```
+
+In the example above we use `useTheme` and `useStyleSheet` hook imported from UI Kitten. 
+`useStyleSheet` allows to create styles, but with supported variables we've defined inside our theme config
+`useTheme` allows to get access to theme variables directly and use them inside React component
+
+Complete list of variables could be found under [Light Theme Variables](design-system/eva-light-theme) table.
 
 That's it! Now you're done and able to use your themed component.
 
