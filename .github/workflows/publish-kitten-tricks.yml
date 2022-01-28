@@ -10,6 +10,11 @@ jobs:
       - name: Checkout UI Kitten
         uses: actions/checkout@v2
 
+      - name: Setup node version 12
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.13.0
+
       - name: Exclude unused modules
         run: rm -rf docs src/showcases src/template-js src/template-ts
 
@@ -26,9 +31,6 @@ jobs:
           repository: akveo/kittenTricks
           ref: next
           path: ./packages-ci/kittenTricks
-
-      - name: Setup Node
-        uses: actions/setup-node@v1
 
       - name: Setup Expo
         uses: expo/expo-github-action@v5
