@@ -13,12 +13,13 @@ import {
   CalendarDateInfo,
   CalendarDateOptions,
   CalendarRange,
+  RangeRole,
 } from '../type';
 
 const DEFAULT_DATE_OPTIONS: CalendarDateOptions = {
   bounding: false,
   holiday: false,
-  range: false,
+  range: RangeRole.none,
 };
 
 export type DateRange<D> = CalendarDateInfo<D>[];
@@ -112,7 +113,7 @@ export class CalendarDataService<D> {
   private withRangedStartDates(days: DateRange<D>, startDate): DateRange<D> {
     return days.map((day: CalendarDateInfo<D>): CalendarDateInfo<D> => {
       const isSameStartDate: boolean = this.dateService.compareDatesSafe(day.date, startDate) === 0;
-      return isSameStartDate ? { ...day, range: true } : day;
+      return isSameStartDate ? { ...day, range: RangeRole.start } : day;
     });
   }
 
@@ -120,17 +121,21 @@ export class CalendarDataService<D> {
     return days.map((day: CalendarDateInfo<D>): CalendarDateInfo<D> => {
       const isSameStartDate: boolean = this.dateService.compareDatesSafe(day.date, startDate) === 0;
       const isSameEndDate: boolean = this.dateService.compareDatesSafe(day.date, endDate) === 0;
+      const isInRange: boolean = this.dateService.isBetween(day.date, startDate, endDate);
 
-      if (isSameStartDate || isSameEndDate) {
-        if (isSameStartDate && isSameEndDate) {
-          return { ...day, range: true, oneDayRange: true };
-        } else {
-          return { ...day, range: true };
-        }
+      let rangeRole = RangeRole.none;
+      if (isInRange) {
+        rangeRole = RangeRole.member;
       } else {
-        const isInRange: boolean = this.dateService.isBetween(day.date, startDate, endDate);
-        return { ...day, range: isInRange };
+        if (isSameStartDate) {
+          rangeRole |= RangeRole.start;
+        }
+        if (isSameEndDate) {
+          rangeRole |= RangeRole.end;
+        }
       }
+
+      return { ...day, range: rangeRole };
     });
   }
 

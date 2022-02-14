@@ -29,15 +29,12 @@ export class RangeDateService<D> {
   }
 
   private createRangeForStart(range: CalendarRange<D>, date: D): CalendarRange<D> {
-    if (this.dateService.compareDatesSafe(date, range.startDate) === 1) {
-      // startDate > date
-      return { startDate: range.startDate, endDate: date };
-    } else if (this.dateService.compareDatesSafe(date, range.startDate) === -1) {
+    if (this.dateService.compareDatesSafe(date, range.startDate) === -1) {
       // startDate < date
       return { startDate: date, endDate: range.startDate };
     } else {
-      // startDate === date, range duration is equal one day
-      return { startDate: range.startDate, endDate: date };
+      // startDate >= date
+      return { startDate: range.startDate ?? date, endDate: date };
     }
   }
 

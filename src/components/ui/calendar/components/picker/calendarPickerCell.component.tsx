@@ -27,7 +27,6 @@ export interface CalendarPickerCellProps<D> extends StyledComponentProps, Toucha
   range?: boolean;
   firstRangeItem?: boolean;
   lastRangeItem?: boolean;
-  oneDayRange?: boolean;
   onSelect?: (date: CalendarDateInfo<D>) => void;
   children: ChildrenProp<D>;
   shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
@@ -50,31 +49,26 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
   };
 
   private getContainerBorderRadius = (borderRadius: number): StyleType => {
-    const { firstRangeItem, lastRangeItem, oneDayRange } = this.props;
+    const { firstRangeItem, lastRangeItem } = this.props;
 
-    if (oneDayRange) {
-      return {
-        borderRadius,
-      };
-    }
+    const borderStyle = {
+      borderBottomRightRadius: 0,
+      borderTopRightRadius: 0,
+      borderBottomLeftRadius: 0,
+      borderTopLeftRadius: 0,
+    };
+
     if (firstRangeItem) {
-      return {
-        borderBottomLeftRadius: borderRadius,
-        borderBottomRightRadius: 0,
-        borderTopLeftRadius: borderRadius,
-        borderTopRightRadius: 0,
-      };
-    }
-    if (lastRangeItem) {
-      return {
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: borderRadius,
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: borderRadius,
-      };
+      borderStyle.borderBottomLeftRadius = borderRadius;
+      borderStyle.borderTopLeftRadius = borderRadius;
     }
 
-    return {};
+    if (lastRangeItem) {
+      borderStyle.borderBottomRightRadius = borderRadius;
+      borderStyle.borderTopRightRadius = borderRadius;
+    }
+
+    return borderStyle;
   };
 
   private getComponentStyle = (source: StyleType) => {

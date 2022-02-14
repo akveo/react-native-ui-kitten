@@ -4,11 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+export enum RangeRole {
+  none ,
+  member ,
+  start = 1 << 1,
+  end = 2 << 1,
+  complete = start | end,
+}
+
 export interface CalendarDateOptions {
   bounding: boolean;
   holiday: boolean;
-  range?: boolean;
-  oneDayRange?: boolean;
+  range?: RangeRole;
 }
 
 export interface CalendarRange<D> {

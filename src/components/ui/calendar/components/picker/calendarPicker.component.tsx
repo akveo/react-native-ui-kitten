@@ -20,7 +20,10 @@ import {
   CalendarPickerCellElement,
   CalendarPickerCellProps,
 } from './calendarPickerCell.component';
-import { CalendarDateInfo } from '../../type';
+import {
+  CalendarDateInfo,
+  RangeRole,
+} from '../../type';
 
 export interface CalendarPickerProps<D> extends ViewProps {
   data: CalendarDateInfo<D>[][];
@@ -37,30 +40,9 @@ export type CalendarPickerElement<D> = React.ReactElement<CalendarPickerProps<D>
 
 export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
 
-  private get rangedArray(): CalendarDateInfo<D>[] {
-    const { data } = this.props;
-
-    return [].concat(...data).filter((item: CalendarDateInfo<D>) => {
-      return item.range;
-    });
-  }
-
-  private isFirstRangeItem = (item: CalendarDateInfo<D>, range: CalendarDateInfo<D>[]): boolean => {
-    return range.indexOf(item) === 0;
-  };
-
-  private isLastRangeItem = (item: CalendarDateInfo<D>, range: CalendarDateInfo<D>[]): boolean => {
-    return range.indexOf(item) === range.length - 1;
-  };
-
-  private isOneDayRange = (item: CalendarDateInfo<D>): boolean => {
-    return !!item.oneDayRange;
-  };
-
   private renderCellElement = (item: CalendarDateInfo<D>, index: number): CalendarPickerCellElement<D> => {
-    const isFirstRangeItem: boolean = this.isFirstRangeItem(item, this.rangedArray);
-    const isLastRangeItem: boolean = this.isLastRangeItem(item, this.rangedArray);
-    const isOneDayRange: boolean = this.isOneDayRange(item);
+    const firstRangeItem = !!(item.range & RangeRole.start);
+    const lastRangeItem = !!(item.range & RangeRole.end);
 
     return (
       <CalendarPickerCell
@@ -70,10 +52,9 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
         disabled={this.props.isItemDisabled(item)}
         bounding={item.bounding}
         today={this.props.isItemToday(item)}
-        range={item.range}
-        firstRangeItem={isFirstRangeItem}
-        lastRangeItem={isLastRangeItem}
-        oneDayRange={isOneDayRange}
+        range={!!item.range}
+        firstRangeItem={firstRangeItem}
+        lastRangeItem={lastRangeItem}
         onSelect={this.props.onSelect}
         shouldComponentUpdate={this.props.shouldItemUpdate}>
         {this.props.children}
