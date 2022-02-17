@@ -238,9 +238,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     const nextDate = this.createViewModeVisibleDate(-1);
 
     if (this.state.viewMode.id === CalendarViewModes.DATE.id) {
-      this.setState({
-        visibleDate: nextDate,
-      }, () => {
+      this.setState({ visibleDate: nextDate }, () => {
         this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
       });
     } else {
