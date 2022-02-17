@@ -10,6 +10,7 @@ import {
   ImageProps,
   Text,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import {
   fireEvent,
@@ -167,15 +168,11 @@ describe('@bottom-navigation: component checks', () => {
       <TestBottomNavigation indicatorStyle={{width: 99, backgroundColor: 'red'}}/>,
       );
 
-    const el = component.queryByType(TabIndicator).children[0].children[0].children[0].children[0];
+    const el = component.queryByTestId('indicator body');
+    const style = StyleSheet.flatten(el.props.style);
 
-    // default styles
-    expect(el.props.style[0].width).toEqual('100%');
-    expect(el.props.style[1][0].backgroundColor).toEqual('#3366FF');
-
-    // custom styles
-    expect(el.props.style[1][1].width).toEqual(99);
-    expect(el.props.style[1][1].backgroundColor).toEqual('red');
+    expect(style.width).toEqual(99);
+    expect(style.backgroundColor).toEqual('red');
   });
 
   it('should set tab selected by pressing it', () => {
