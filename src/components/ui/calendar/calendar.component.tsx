@@ -28,8 +28,15 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @extends React.Component
  *
+ * @method {() => void} scrollToToday - Show the current date in the calendar.
+ *
+ * @method {(date: D) => void} scrollToDate - Show the specific date in the calendar.
+ *
  * @property {D} date - Date which is currently selected.
  * Defaults to current date.
+ *
+ * @property {D} initialVisibleDate - Specific date that should be shown on the first render of the component.
+ * If it is not set, the selected date or today's date will be displayed.
  *
  * @property {(D) => void} onSelect - Called when date cell is pressed.
  *
@@ -70,7 +77,7 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next month / year.
  * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
- * 
+ *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example CalendarSimpleUsage
@@ -88,6 +95,10 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *   endDate?: D;
  * }
  * ```
+ *
+ * @overview-example CalendarInitialVisibleDate
+ * Calendar can show specified date on render.
+ * Also, it is possible to use scrollToToday and scrollToDate to show specific dates.
  *
  * @overview-example CalendarFilters
  * Calendar may accept minimal and maximum dates, filter functions, and `boundingMonth` property,
@@ -126,8 +137,8 @@ export class Calendar<D = Date> extends BaseCalendarComponent<CalendarProps<D>, 
     return this.dataService.createDayPickerData(date);
   }
 
-  protected selectedDate(): D {
-    return this.props.date || this.dateService.today();
+  protected selectedDate(): D | undefined {
+    return this.props.date;
   }
 
   protected onDateSelect(date: D): void {
