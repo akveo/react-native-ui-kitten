@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   TouchableOpacity,
   View,
@@ -28,6 +28,7 @@ import {
   Interaction,
   StyleService,
 } from './style.service';
+import { useStyleSheet } from './style.service';
 
 const theme = {
   defaultColor: '#000000',
@@ -147,17 +148,7 @@ describe('@style: ui component checks', () => {
 
     public render(): React.ReactElement<ViewProps> {
       return (
-        <View {...this.props} testID='@style/consumer'/>
-      );
-    }
-  }
-
-  @styled(null)
-  class NonStyledTest extends React.Component {
-
-    public render(): React.ReactElement<ViewProps> {
-      return (
-        <View {...this.props} testID='@style/consumer'/>
+        <View {...this.props} testID={styleConsumerTestId}/>
       );
     }
   }
@@ -189,7 +180,7 @@ describe('@style: ui component checks', () => {
     }
 
     const ParentComponent = () => {
-      const [renderCount, setRenderCount] = useState(1);
+      const [renderCount, setRenderCount] = React.useState(1);
       return <View>
         <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
           <Text>{rerenderButtonText}</Text>
@@ -318,3 +309,86 @@ describe('@style: ui component checks', () => {
     });
   });
 });
+
+describe('@useStyleSheet: rendering performance check', () => {
+  const styleTouchableTestId = '@style/touchable';
+
+  const themes = {
+    light: {
+      defaultColor: 'white',
+    },
+    dark: {
+      defaultColor: 'black',
+    }
+  };
+
+  const ThemeChangingProvider = (props) => {
+    return (
+      <StyleProvider styles={props.styles} theme={theme}>
+        <TouchableOpacity
+          testID={styleTouchableTestId}
+          onPress={props.onPress}>
+          <Text style={{ color: theme.defaultColor }}>{`${props.value}`}</Text>
+        </TouchableOpacity>
+      </StyleProvider>
+    );
+  };
+
+  it('useStyleSheet should not be called with every render', async () => {
+    const stylesFuncMock = jest.fn();
+    
+    const Component = () => {
+      const [state, setState] = React.useState(0);
+      const styles = useStyleSheet({});
+
+      React.useEffect(() => {
+        stylesFuncMock();
+      }, [styles]);
+      
+      return (
+        <ThemeChangingProvider
+          styles={computedMapping}
+          theme={theme}
+          onPress={() => setState(state + 1)}
+          value={theme.defaultColor}
+        />
+      )
+    };
+
+    const component = render(<Component />);
+    fireEvent.press(component.getByTestId(styleTouchableTestId));
+    expect(stylesFuncMock).toBeCalledTimes(1);
+  });
+
+  it('useStyleSheet should not be called with every render when memoized', async () => {
+    const stylesFuncMock = jest.fn();
+    
+    const Component = () => {
+      const [state, setState] = React.useState(0);
+      const styles = useStyleSheet({});
+
+      const memoizeValue = React.useMemo(() => {
+        stylesFuncMock();
+        return theme;
+      }, [styles]);
+
+      const changeState = React.useCallback(() => {
+        setState(state + 1);
+      }, [state, memoizeValue]);
+      
+      return (
+        <ThemeChangingProvider
+          styles={computedMapping}
+          theme={theme}
+          onPress={changeState}
+          value={theme.defaultColor}
+        />
+      )
+    };
+
+    const component = render(<Component />);
+    expect(stylesFuncMock).toBeCalledTimes(1);
+    fireEvent.press(component.getByTestId(styleTouchableTestId));
+    expect(stylesFuncMock).toBeCalledTimes(1);
+  });
+})
