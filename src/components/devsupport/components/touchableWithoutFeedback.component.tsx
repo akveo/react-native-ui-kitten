@@ -16,6 +16,7 @@ import {
 export interface TouchableWithoutFeedbackProps extends TouchableOpacityProps {
   useDefaultHitSlop?: boolean;
   children?: React.ReactNode;
+  focusable?: boolean;
 }
 
 export type TouchableWithoutFeedbackElement = React.ReactElement<TouchableWithoutFeedbackProps>;
