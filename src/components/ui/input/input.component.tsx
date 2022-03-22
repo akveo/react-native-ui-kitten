@@ -263,6 +263,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       <TouchableWithoutFeedback
         testID={testID}
         style={evaStyle.container}
+        focusable={false}
         onPress={this.focus}>
         <FalsyText
           style={[evaStyle.label, styles.label]}
@@ -288,8 +289,8 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <FalsyText 
-          style={[evaStyle.captionLabel, styles.captionLabel]} 
+        <FalsyText
+          style={[evaStyle.captionLabel, styles.captionLabel]}
           component={caption}
         />
       </TouchableWithoutFeedback>
