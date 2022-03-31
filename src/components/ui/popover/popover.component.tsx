@@ -10,6 +10,8 @@ import {
   BackHandler,
   NativeEventSubscription,
   Platform,
+  Modal,
+  View,
 } from 'react-native';
 import {
   Frame,
@@ -32,6 +34,7 @@ import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
+import {ModalResolver} from '@ui-kitten/components/theme/modal/modalResolver.component';
 
 type PopoverModalProps = Overwrite<ModalProps, {
   children?: React.ReactElement;
@@ -48,6 +51,9 @@ interface State {
   childFrame: Frame;
   anchorFrame: Frame;
   forceMeasure: boolean;
+  visible: boolean;
+  actualPlacement: PopoverPlacement;
+  contentPosition: Point;
 }
 
 /**
@@ -103,22 +109,21 @@ export class Popover extends React.Component<PopoverProps, State> {
     childFrame: Frame.zero(),
     anchorFrame: Frame.zero(),
     forceMeasure: false,
+    visible: false,
+    actualPlacement: PopoverPlacements.BOTTOM,
+    contentPosition: Point.zero(),
   };
 
   private hardwareBackSubscription: NativeEventSubscription;
-  private modalId: string;
-  private contentPosition: Point = Point.outscreen();
   private placementService: PopoverPlacementService = new PopoverPlacementService();
   private isPopoverUnmounted: boolean;
-
-  private actualPlacement: PopoverPlacement = this.preferredPlacement;
 
   private get preferredPlacement(): PopoverPlacement {
     return PopoverPlacements.parse(this.props.placement);
   }
 
   private get contentFlexPosition() {
-    const { x: left, y: top } = this.contentPosition;
+    const { x: left, y: top } = this.state.contentPosition;
     return { left, top };
   }
 
@@ -131,13 +136,11 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   public show = (): void => {
-    if (!this.isPopoverUnmounted) {
-      this.modalId = ModalService.show(this.renderMeasuringPopoverElement(), this.backdropConfig);
-    }
+    this.setState({visible: true});
   };
 
   public hide = (): void => {
-    this.modalId = ModalService.hide(this.modalId);
+    this.setState({visible: false});
   };
 
   private onHardwareBackPress = (): boolean => {
@@ -146,14 +149,8 @@ export class Popover extends React.Component<PopoverProps, State> {
   };
 
   public componentDidUpdate(prevProps: PopoverProps): void {
-    if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
-      this.setState({ forceMeasure: true });
-      return;
-    }
-
-    if (this.modalId && !this.props.visible) {
-      this.contentPosition = Point.outscreen();
-      this.hide();
+    if (this.props.visible !== prevProps.visible) {
+      this.setState({visible: this.props.visible});
     }
   }
 
@@ -173,26 +170,27 @@ export class Popover extends React.Component<PopoverProps, State> {
   private onChildMeasure = (childFrame: Frame): void => {
     this.state.childFrame = childFrame;
 
-    if (!this.modalId && this.props.visible) {
+    if (this.props.visible) {
       this.show();
       return;
     }
 
-    if (this.modalId && this.props.visible) {
-      ModalService.update(this.modalId, this.renderPopoverElement());
-    }
   };
 
   private onContentMeasure = (anchorFrame: Frame): void => {
     this.state.anchorFrame = anchorFrame;
 
     const placementOptions: PlacementOptions = this.findPlacementOptions(anchorFrame, this.state.childFrame);
-    this.actualPlacement = this.placementService.find(this.preferredPlacement, placementOptions);
+    const actualPlacement = this.placementService.find(this.preferredPlacement, placementOptions);
 
-    const displayFrame: Frame = this.actualPlacement.frame(placementOptions);
-    this.contentPosition = displayFrame.origin;
+    const displayFrame: Frame = actualPlacement.frame(placementOptions);
+    const contentPosition = displayFrame.origin;
 
-    ModalService.update(this.modalId, this.renderPopoverElement());
+    this.setState({
+      actualPlacement,
+      contentPosition,
+    });
+
   };
 
   private findPlacementOptions = (contentFrame: Frame, childFrame: Frame): PlacementOptions => {
@@ -216,7 +214,7 @@ export class Popover extends React.Component<PopoverProps, State> {
       <PopoverView
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
-        placement={this.actualPlacement.reverse()}>
+        placement={this.state.actualPlacement.reverse()}>
           {this.renderContentElement()}
       </PopoverView>
     );
@@ -234,12 +232,26 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   public render(): React.ReactElement {
     return (
-      <MeasureElement
-        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-        force={this.state.forceMeasure}
-        onMeasure={this.onChildMeasure}>
+      <React.Fragment>
+        <MeasureElement
+          shouldUseTopInsets={true}
+          force={this.state.forceMeasure}
+          onMeasure={this.onChildMeasure}>
           {this.props.anchor()}
-      </MeasureElement>
+        </MeasureElement>
+        {this.props.visible && (
+          <Modal transparent={true} visible={true} onRequestClose={this.hide}>
+              <View style={[StyleSheet.absoluteFillObject]}>
+                <ModalResolver
+                  visible={true}
+                  backdropStyle={this.props.backdropStyle}
+                  onBackdropPress={this.props.onBackdropPress}>
+                    {this.renderMeasuringPopoverElement()}
+                </ModalResolver>
+              </View>
+          </Modal>
+        )}
+      </React.Fragment>
     );
   }
 }
