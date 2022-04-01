@@ -58,7 +58,7 @@ npm i @ui-kitten/components @eva-design/eva react-native-svg
 
 <div class="note note-warning">
   <div class="note-body">
-    If you use Expo for Web, you need to add the following underneath the `"web"` key in `app.json` `"build": { "babel": { "include": [ "@ui-kitten/components" ] }`
+    If you use Expo for Web, you need to add the following underneath the `"web"` key in `app.json` `"build": { "babel": { "include": [ "@ui-kitten/components" ] } }`
   </div>
 </div>
 
