@@ -7,9 +7,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  BackHandler,
-  NativeEventSubscription,
-  Platform,
   Modal,
   View,
 } from 'react-native';
@@ -51,7 +48,6 @@ interface State {
   childFrame: Frame;
   anchorFrame: Frame;
   forceMeasure: boolean;
-  visible: boolean;
   actualPlacement: PopoverPlacement;
   contentPosition: Point;
 }
@@ -109,14 +105,11 @@ export class Popover extends React.Component<PopoverProps, State> {
     childFrame: Frame.zero(),
     anchorFrame: Frame.zero(),
     forceMeasure: false,
-    visible: false,
     actualPlacement: PopoverPlacements.BOTTOM,
     contentPosition: Point.zero(),
   };
 
-  private hardwareBackSubscription: NativeEventSubscription;
   private placementService: PopoverPlacementService = new PopoverPlacementService();
-  private isPopoverUnmounted: boolean;
 
   private get preferredPlacement(): PopoverPlacement {
     return PopoverPlacements.parse(this.props.placement);
@@ -127,58 +120,36 @@ export class Popover extends React.Component<PopoverProps, State> {
     return { left, top };
   }
 
-  private get backdropConfig() {
-    const { onBackdropPress, backdropStyle } = this.props;
-    return {
-      onBackdropPress,
-      backdropStyle,
-    };
-  }
-
   public show = (): void => {
-    this.setState({visible: true});
+    // deprecated
   };
 
   public hide = (): void => {
-    this.setState({visible: false});
-  };
-
-  private onHardwareBackPress = (): boolean => {
-    this.hide();
-    return false;
+    // deprecated
   };
 
   public componentDidUpdate(prevProps: PopoverProps): void {
-    if (this.props.visible !== prevProps.visible) {
-      this.setState({visible: this.props.visible});
+    if (this.props.visible && !this.state.forceMeasure) {
+      this.setState({ forceMeasure: true });
     }
   }
 
-  public componentDidMount(): void {
-    if (Platform.OS === 'android') {
-      this.hardwareBackSubscription = BackHandler.addEventListener('hardwareBackPress', this.onHardwareBackPress);
+  private static getDerivedStateFromProps(props, state) {
+    if (!props.visible) {
+      return {
+        ...state,
+        contentPosition: Point.outscreen(),
+      };
     }
-  }
-
-  public componentWillUnmount(): void {
-    this.hardwareBackSubscription?.remove();
-    this.hide();
-
-    this.isPopoverUnmounted = true;
+    return null;
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
-    this.state.childFrame = childFrame;
-
-    if (this.props.visible) {
-      this.show();
-      return;
-    }
-
+    this.setState({childFrame});
   };
 
   private onContentMeasure = (anchorFrame: Frame): void => {
-    this.state.anchorFrame = anchorFrame;
+    this.setState({anchorFrame});
 
     const placementOptions: PlacementOptions = this.findPlacementOptions(anchorFrame, this.state.childFrame);
     const actualPlacement = this.placementService.find(this.preferredPlacement, placementOptions);
@@ -234,21 +205,26 @@ export class Popover extends React.Component<PopoverProps, State> {
     return (
       <React.Fragment>
         <MeasureElement
-          shouldUseTopInsets={true}
+          shouldUseTopInsets={ModalService.getShouldUseTopInsets}
           force={this.state.forceMeasure}
           onMeasure={this.onChildMeasure}>
           {this.props.anchor()}
         </MeasureElement>
         {this.props.visible && (
-          <Modal transparent={true} visible={true} onRequestClose={this.hide}>
-              <View style={[StyleSheet.absoluteFillObject]}>
-                <ModalResolver
-                  visible={true}
-                  backdropStyle={this.props.backdropStyle}
-                  onBackdropPress={this.props.onBackdropPress}>
-                    {this.renderMeasuringPopoverElement()}
-                </ModalResolver>
-              </View>
+          <Modal
+            transparent={true}
+            visible={true}
+            supportedOrientations={['portrait', 'landscape']}
+            onRequestClose={this.props.onBackdropPress}
+            onDismiss={this.props.onBackdropPress}>
+            <View style={[StyleSheet.absoluteFillObject]}>
+              <ModalResolver
+                visible={true}
+                backdropStyle={this.props.backdropStyle}
+                onBackdropPress={this.props.onBackdropPress}>
+                {this.renderMeasuringPopoverElement()}
+              </ModalResolver>
+            </View>
           </Modal>
         )}
       </React.Fragment>

@@ -11,8 +11,7 @@ import {
   View,
   ViewProps,
   ViewStyle,
-  Dimensions,
-  NativeEventSubscription,
+  Modal as RNModal,
 } from 'react-native';
 import {
   Frame,
@@ -24,6 +23,7 @@ import {
   ModalPresentingConfig,
   ModalService,
 } from '../../theme';
+import {ModalResolver} from '@ui-kitten/components/theme/modal/modalResolver.component';
 
 export interface ModalProps extends ViewProps, ModalPresentingConfig {
   visible?: boolean;
@@ -35,6 +35,8 @@ export type ModalElement = React.ReactElement<ModalProps>;
 interface State {
   contentFrame: Frame;
   forceMeasure: boolean;
+  visible: boolean;
+  contentPosition: Point;
 }
 
 /**
@@ -70,83 +72,47 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   public state: State = {
     contentFrame: Frame.zero(),
     forceMeasure: false,
+    visible: false,
+    contentPosition: Point.outscreen(),
   };
-
-  private modalId: string;
-  private contentPosition: Point = Point.outscreen();
-  private dimensionsChangeSubscription: NativeEventSubscription | void;
 
   private get contentFlexPosition(): FlexStyle {
     const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});
-    const { x: centerX, y: centerY } = this.contentPosition;
+    const { x: centerX, y: centerY } = this.state.contentPosition;
     // @ts-ignore
     return { left: derivedStyle.left || centerX, top: derivedStyle.top || centerY };
   }
 
-  private get backdropConfig(): ModalPresentingConfig {
-    const { onBackdropPress, backdropStyle } = this.props;
-    return { onBackdropPress, backdropStyle };
-  }
-
   public show = (): void => {
-    this.modalId = ModalService.show(this.renderMeasuringContentElement(), this.backdropConfig);
+    // deprecated
   };
 
   public hide = (): void => {
-    this.modalId = ModalService.hide(this.modalId);
+    // deprecated
   };
 
-  public componentDidMount(): void {
-    this.dimensionsChangeSubscription = Dimensions.addEventListener('change', this.onDimensionChange);
-    if (!this.modalId && this.props.visible) {
-      this.show();
-      return;
-    }
-  }
-
   public componentDidUpdate(prevProps: ModalProps): void {
-    if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
+    if (this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
       return;
     }
-
-    if (!this.modalId && this.props.visible) {
-      this.show();
-      return;
-    }
-
-    if (this.modalId && !this.props.visible) {
-      this.hide();
-    }
-
-    if (this.modalId && this.props.visible) {
-      ModalService.update(this.modalId, this.renderContentElement());
-    }
   }
 
-  public componentWillUnmount(): void {
-    if (this.dimensionsChangeSubscription) {
-      this.dimensionsChangeSubscription.remove();
-    } else {
-      // for backward compatibility with RN <0.65
-      Dimensions.removeEventListener('change', this.onDimensionChange);
+  private static getDerivedStateFromProps(props, state) {
+    if (!props.visible) {
+      return {
+        ...state,
+        contentPosition: Point.outscreen(),
+      };
     }
-    this.hide();
-  }
-
-  private onDimensionChange = (): void => {
-    if(this.props.visible) {
-      ModalService.update(this.modalId, this.renderMeasuringContentElement());
-    }
+    return null;
   }
 
   private onContentMeasure = (contentFrame: Frame): void => {
-    this.state.contentFrame = contentFrame;
+    this.setState({contentFrame});
 
     const displayFrame: Frame = this.state.contentFrame.centerOf(Frame.window());
-    this.contentPosition = displayFrame.origin;
-
-    ModalService.update(this.modalId, this.renderContentElement());
+    this.setState({contentPosition: displayFrame.origin});
   };
 
   private renderContentElement = (): React.ReactElement<ViewProps> => {
@@ -169,7 +135,23 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   };
 
   public render(): React.ReactNode {
-    return null;
+    return this.props.visible && (
+      <RNModal
+        transparent={true}
+        visible={true}
+        supportedOrientations={['portrait', 'landscape']}
+        onRequestClose={this.props.onBackdropPress}
+        onDismiss={this.props.onBackdropPress}>
+        <View style={[StyleSheet.absoluteFillObject]}>
+          <ModalResolver
+            visible={true}
+            backdropStyle={this.props.backdropStyle}
+            onBackdropPress={this.props.onBackdropPress}>
+            {this.renderMeasuringContentElement()}
+          </ModalResolver>
+        </View>
+      </RNModal>
+    );
   }
 }
 
