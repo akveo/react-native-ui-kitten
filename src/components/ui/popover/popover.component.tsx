@@ -40,6 +40,7 @@ type PopoverModalProps = Overwrite<ModalProps, {
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
   anchor: RenderFCProp;
   fullWidth?: boolean;
+  shouldOverlayAnchor?: boolean;
 }
 
 export type PopoverElement = React.ReactElement<PopoverProps>;
@@ -73,6 +74,8 @@ interface State {
  * Useful when needed to close the modal on outside touches.
  *
  * @property {boolean} fullWidth - Whether a content component should take the width of `anchor`.
+ *
+ * @property {boolean} shouldOverlayAnchor - Whether a content component should overlay `anchor`.
  *
  * @property {string | PopoverPlacement} placement - Position of the content component relative to the `anchor`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
@@ -121,11 +124,11 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   public show = (): void => {
-    // deprecated
+    console.warn('deprecated');
   };
 
   public hide = (): void => {
-    // deprecated
+    console.warn('deprecated');
   };
 
   public componentDidUpdate(prevProps: PopoverProps): void {
@@ -194,7 +197,6 @@ export class Popover extends React.Component<PopoverProps, State> {
   private renderMeasuringPopoverElement = (): MeasuringElement => {
     return (
       <MeasureElement
-        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         onMeasure={this.onContentMeasure}>
           {this.renderPopoverElement()}
       </MeasureElement>
@@ -205,8 +207,8 @@ export class Popover extends React.Component<PopoverProps, State> {
     return (
       <React.Fragment>
         <MeasureElement
-          shouldUseTopInsets={ModalService.getShouldUseTopInsets}
           force={this.state.forceMeasure}
+          shouldOverlayElement={this.props.shouldOverlayAnchor}
           onMeasure={this.onChildMeasure}>
           {this.props.anchor()}
         </MeasureElement>
@@ -216,6 +218,7 @@ export class Popover extends React.Component<PopoverProps, State> {
             visible={true}
             supportedOrientations={['portrait', 'landscape']}
             onRequestClose={this.props.onBackdropPress}
+            statusBarTranslucent={ModalService.getShouldUseTopInsets}
             onDismiss={this.props.onBackdropPress}>
             <View style={[StyleSheet.absoluteFillObject]}>
               <ModalResolver

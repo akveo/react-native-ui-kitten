@@ -127,7 +127,6 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   private renderMeasuringContentElement = (): MeasuringElement => {
     return (
       <MeasureElement
-        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         onMeasure={this.onContentMeasure}>
         {this.renderContentElement()}
       </MeasureElement>
@@ -140,6 +139,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
         transparent={true}
         visible={true}
         supportedOrientations={['portrait', 'landscape']}
+        statusBarTranslucent={ModalService.getShouldUseTopInsets}
         onRequestClose={this.props.onBackdropPress}
         onDismiss={this.props.onBackdropPress}>
         <View style={[StyleSheet.absoluteFillObject]}>

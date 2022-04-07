@@ -119,6 +119,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
   private popoverRef = React.createRef<Popover>();
   private inputRef = React.createRef<Input>();
+  private inputRefAnchor = React.createRef<Input>();
 
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
@@ -160,6 +161,13 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.props.onFocus && this.props.onFocus(event);
   };
 
+  private onInputFocusAnchor = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
+    this.inputRefAnchor.current?.blur();
+    this.setOptionsListVisible();
+    this.focus();
+    this.props.onFocus && this.props.onFocus(event);
+  };
+
   private onInputSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
     this.setOptionsListInvisible();
     this.props.onSubmitEditing && this.props.onSubmitEditing(e);
@@ -167,6 +175,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
   private onBackdropPress = (): void => {
     this.blur();
+    this.inputRefAnchor.current?.blur();
     this.setOptionsListInvisible();
   };
 
@@ -190,12 +199,28 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     return React.cloneElement(info.item, { onPress: () => this.onItemPress(info.index) });
   };
 
+  private renderAnchorInputElement = (props: InputProps): InputElement => {
+    return (
+      <View>
+        <Input
+          {...props}
+          ref={this.inputRefAnchor}
+          showSoftInputOnFocus={false}
+          onFocus={this.onInputFocusAnchor}
+          onSubmitEditing={this.onInputSubmitEditing}
+        />
+      </View>
+    );
+  };
+
   private renderInputElement = (props: InputProps): InputElement => {
     return (
       <View>
         <Input
           {...props}
           ref={this.inputRef}
+          showSoftInputOnFocus={true}
+          autoFocus={true}
           onFocus={this.onInputFocus}
           onSubmitEditing={this.onInputSubmitEditing}
         />
@@ -214,15 +239,19 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         testID={testID}
         visible={this.state.listVisible}
         fullWidth={true}
-        anchor={() => this.renderInputElement(inputProps)}
+        shouldOverlayAnchor={true}
+        anchor={() => this.renderAnchorInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}>
-        <List
-          style={styles.list}
-          keyboardShouldPersistTaps='always'
-          data={this.data}
-          bounces={false}
-          renderItem={this.renderItem}
-        />
+        <View>
+          {this.renderInputElement(inputProps)}
+          <List
+            style={styles.list}
+            keyboardShouldPersistTaps='always'
+            data={this.data}
+            bounces={false}
+            renderItem={this.renderItem}
+          />
+        </View>
       </Popover>
     );
   }
