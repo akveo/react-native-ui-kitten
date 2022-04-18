@@ -83,16 +83,6 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     this.calendarRef.current?.scrollToDate(date);
   }
 
-  private popoverRef = React.createRef<Popover>();
-
-  public show = (): void => {
-    this.popoverRef.current?.show();
-  };
-
-  public hide = (): void => {
-    this.popoverRef.current?.hide();
-  };
-
   public focus = (): void => {
     this.setState({ visible: true }, this.onPickerVisible);
   };
@@ -261,7 +251,6 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
           component={label}
         />
         <Popover
-          ref={this.popoverRef}
           style={[evaStyle.popover, styles.popover]}
           backdropStyle={backdropStyle}
           placement={placement}

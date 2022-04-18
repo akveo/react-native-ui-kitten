@@ -194,35 +194,4 @@ describe('@tooltip: component checks', () => {
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
   });
 
-  it('should be able to show with ref', async () => {
-    const componentRef = React.createRef<Tooltip>();
-    const component = render(
-      <TestTooltip ref={componentRef}>
-        I love Babel
-      </TestTooltip>,
-    );
-
-    componentRef.current.show();
-
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-    expect(text).toBeTruthy();
-  });
-
-  it('should be able to hide with ref', async () => {
-    const componentRef = React.createRef<Tooltip>();
-    const component = render(
-      <TestTooltip ref={componentRef}>
-        I love Babel
-      </TestTooltip>,
-    );
-
-    componentRef.current.show();
-    await waitForElement(() => null);
-
-    componentRef.current.hide();
-
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-    expect(text).toBeFalsy();
-  });
-
 });

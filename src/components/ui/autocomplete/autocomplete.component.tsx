@@ -46,10 +46,6 @@ interface State {
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets data list visible.
- *
- * @method {() => void} hide - Sets data list invisible.
- *
  * @method {() => void} focus - Focuses an input field and sets data list visible.
  *
  * @method {() => void} blur - Removes focus from input field and sets data list invisible.
@@ -117,21 +113,12 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     listVisible: false,
   };
 
-  private popoverRef = React.createRef<Popover>();
   private inputRef = React.createRef<Input>();
   private inputRefAnchor = React.createRef<Input>();
 
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
   }
-
-  public show = (): void => {
-    this.popoverRef.current?.show();
-  };
-
-  public hide = (): void => {
-    this.popoverRef.current?.hide();
-  };
 
   public focus = (): void => {
     this.inputRef.current?.focus();
@@ -205,6 +192,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         <Input
           {...props}
           ref={this.inputRefAnchor}
+          testID='@autocomplete/input-anchor'
           showSoftInputOnFocus={false}
           onFocus={this.onInputFocusAnchor}
           onSubmitEditing={this.onInputSubmitEditing}
@@ -219,6 +207,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         <Input
           {...props}
           ref={this.inputRef}
+          testID='@autocomplete/input'
           showSoftInputOnFocus={true}
           autoFocus={true}
           onFocus={this.onInputFocus}
@@ -233,7 +222,6 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
     return (
       <Popover
-        ref={this.popoverRef}
         style={styles.popover}
         placement={placement}
         testID={testID}
@@ -242,7 +230,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         shouldOverlayAnchor={true}
         anchor={() => this.renderAnchorInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}>
-        <View>
+        <>
           {this.renderInputElement(inputProps)}
           <List
             style={styles.list}
@@ -251,7 +239,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
             bounces={false}
             renderItem={this.renderItem}
           />
-        </View>
+        </>
       </Popover>
     );
   }
@@ -261,6 +249,7 @@ const styles = StyleSheet.create({
   popover: {
     maxHeight: 192,
     overflow: 'hidden',
+    borderWidth: 0,
   },
   list: {
     flexGrow: 0,

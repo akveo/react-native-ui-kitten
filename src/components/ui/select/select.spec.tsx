@@ -511,26 +511,6 @@ describe('@select: component checks', () => {
     componentRef.current.clear();
   });
 
-  it('should be able to call show with ref', () => {
-    const componentRef: React.RefObject<Select> = React.createRef();
-    render(
-      <TestSelect ref={componentRef}/>,
-    );
-
-    expect(componentRef.current.show).toBeTruthy();
-    componentRef.current.show();
-  });
-
-  it('should be able to call hide with ref', async () => {
-    const componentRef: React.RefObject<Select> = React.createRef();
-    render(
-      <TestSelect ref={componentRef}/>,
-    );
-
-    expect(componentRef.current.hide).toBeTruthy();
-    componentRef.current.hide();
-  });
-
 });
 
 describe('@select: component checks with groups', () => {

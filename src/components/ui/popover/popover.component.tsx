@@ -58,10 +58,6 @@ interface State {
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets `content` component visible.
- *
- * @method {() => void} hide - Sets `content` component invisible.
- *
  * @property {boolean} visible - Whether content component is visible.
  * Defaults to false.
  * The property is more specific that the show/hide methods, so do not use them at the same time.
@@ -123,14 +119,6 @@ export class Popover extends React.Component<PopoverProps, State> {
     return { left, top };
   }
 
-  public show = (): void => {
-    console.warn('deprecated');
-  };
-
-  public hide = (): void => {
-    console.warn('deprecated');
-  };
-
   public componentDidUpdate(prevProps: PopoverProps): void {
     if (this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
@@ -148,7 +136,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
-    this.setState({childFrame});
+    this.state.childFrame = childFrame;
   };
 
   private onContentMeasure = (anchorFrame: Frame): void => {
@@ -215,7 +203,8 @@ export class Popover extends React.Component<PopoverProps, State> {
         {this.props.visible && (
           <Modal
             transparent={true}
-            visible={true}
+            visible={this.props.visible}
+            animationType='none'
             supportedOrientations={['portrait', 'landscape']}
             onRequestClose={this.props.onBackdropPress}
             statusBarTranslucent={ModalService.getShouldUseTopInsets}

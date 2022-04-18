@@ -44,10 +44,6 @@ interface State {
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets modal visible.
- *
- * @method {() => void} hide - Sets modal invisible.
- *
  * @property {ReactNode} children - Component to render within the modal.
  *
  * @property {boolean} visible - Whether component is visible.
@@ -72,7 +68,6 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   public state: State = {
     contentFrame: Frame.zero(),
     forceMeasure: false,
-    visible: false,
     contentPosition: Point.outscreen(),
   };
 
@@ -82,14 +77,6 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     // @ts-ignore
     return { left: derivedStyle.left || centerX, top: derivedStyle.top || centerY };
   }
-
-  public show = (): void => {
-    // deprecated
-  };
-
-  public hide = (): void => {
-    // deprecated
-  };
 
   public componentDidUpdate(prevProps: ModalProps): void {
     if (this.props.visible && !this.state.forceMeasure) {

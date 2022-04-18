@@ -15,7 +15,6 @@ import {
 import {
   fireEvent,
   render,
-  RenderAPI,
   waitForElement,
 } from 'react-native-testing-library';
 import {
@@ -252,10 +251,10 @@ describe('@autocomplete: component checks', () => {
       <TestAutocomplete/>,
     );
 
-    fireEvent(component.queryByType(TextInput), 'focus');
+    fireEvent(component.queryByTestId('@autocomplete/input-anchor'), 'focus');
     await waitForElement(() => null);
 
-    fireEvent.changeText(component.queryByType(TextInput), '2');
+    fireEvent.changeText(component.queryByTestId('@autocomplete/input'), '2');
     const firstOption = await waitForElement(() => component.queryByText('Option 1'));
     const secondOption = component.queryByText('Option 2');
 
@@ -268,11 +267,10 @@ describe('@autocomplete: component checks', () => {
     const component = render(
       <TestAutocomplete onSelect={onSelect}/>,
     );
-
-    fireEvent(component.queryByType(TextInput), 'focus');
+    fireEvent(component.queryByTestId('@autocomplete/input-anchor'), 'focus');
     await waitForElement(() => null);
 
-    fireEvent.press(component.queryAllByType(TouchableWithoutFeedback)[2]);
+    fireEvent.press(component.queryAllByType(TouchableWithoutFeedback)[3]);
     expect(onSelect).toBeCalledWith(1);
   });
 
@@ -281,10 +279,11 @@ describe('@autocomplete: component checks', () => {
       <TestAutocomplete/>,
     );
 
-    fireEvent(component.queryByType(TextInput), 'focus');
+    fireEvent(component.queryByTestId('@autocomplete/input-anchor'), 'focus');
 
-    const backdrop = await waitForElement(() => component.queryAllByType(TouchableWithoutFeedback)[1]);
-    fireEvent.press(backdrop);
+    await waitForElement(() => {
+      fireEvent.press(component.queryByTestId('@modal/backdrop'));
+    });
 
     const firstOption = await waitForElement(() => component.queryAllByType(TouchableWithoutFeedback)[2]);
     const secondOption = component.queryByText('Option 2');
@@ -351,26 +350,6 @@ describe('@autocomplete: component checks', () => {
 
     expect(componentRef.current.clear).toBeTruthy();
     componentRef.current.clear();
-  });
-
-  it('should be able to call show with ref', () => {
-    const componentRef: React.RefObject<Autocomplete> = React.createRef();
-    render(
-      <TestAutocomplete ref={componentRef}/>,
-    );
-
-    expect(componentRef.current.show).toBeTruthy();
-    componentRef.current.show();
-  });
-
-  it('should be able to call hide with ref', () => {
-    const componentRef: React.RefObject<Autocomplete> = React.createRef();
-    render(
-      <TestAutocomplete ref={componentRef}/>,
-    );
-
-    expect(componentRef.current.hide).toBeTruthy();
-    componentRef.current.hide();
   });
 
 });

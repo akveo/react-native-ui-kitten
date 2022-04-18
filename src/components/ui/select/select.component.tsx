@@ -87,10 +87,6 @@ const CHEVRON_ANIM_DURATION: number = 200;
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets options list visible.
- *
- * @method {() => void} hide - Sets options list invisible.
- *
  * @method {() => void} focus - Focuses input field and sets options list visible.
  *
  * @method {() => void} blur - Removes focus from input field and sets options list invisible.
@@ -226,7 +222,6 @@ export class Select extends React.Component<SelectProps, State> {
   };
 
   private service: SelectService = new SelectService();
-  private popoverRef = React.createRef<Popover>();
   private expandAnimation: Animated.Value = new Animated.Value(0);
 
   private get isMultiSelect(): boolean {
@@ -250,14 +245,6 @@ export class Select extends React.Component<SelectProps, State> {
       outputRange: [`${CHEVRON_DEG_COLLAPSED}deg`, `${CHEVRON_DEG_EXPANDED}deg`],
     });
   }
-
-  public show = (): void => {
-    this.popoverRef.current?.show();
-  };
-
-  public hide = (): void => {
-    this.popoverRef.current?.hide();
-  };
 
   public focus = (): void => {
     this.setOptionsListVisible();
@@ -493,7 +480,6 @@ export class Select extends React.Component<SelectProps, State> {
           component={label}
         />
         <Popover
-          ref={this.popoverRef}
           style={[styles.popover, evaStyle.popover]}
           visible={this.state.listVisible}
           fullWidth={true}

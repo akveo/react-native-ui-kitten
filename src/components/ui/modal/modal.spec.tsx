@@ -9,7 +9,6 @@ import {
   Button,
   StyleSheet,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
@@ -30,7 +29,7 @@ import {
 describe('@modal: component checks', () => {
 
   const TestModal = (props: Partial<ModalProps>) => {
-    const [visible, setVisible] = React.useState(props.visible);
+    const [visible, setVisible] = React.useState(props.visible || false);
     const [text, setText] = React.useState('I love Babel');
 
     const toggleVisible = (): void => {
@@ -62,7 +61,7 @@ describe('@modal: component checks', () => {
    */
   const touchables = {
     findToggleButton: (api: RenderAPI) => api.queryByTestId('@modal/toggle-button'),
-    findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[1],
+    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@modal/backdrop'),
     findChangeTextButton: (api: RenderAPI) => api.queryByTestId('@modal/change-text-button'),
   };
 

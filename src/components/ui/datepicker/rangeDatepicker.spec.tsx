@@ -334,33 +334,6 @@ describe('@range-datepicker: component checks', () => {
     expect(onBlur).toBeCalled();
   });
 
-  it('should show calendar by calling `show` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
-    const component = render(
-      <TestRangeDatepicker ref={componentRef}/>,
-    );
-
-    componentRef.current.show();
-    const calendar = await waitForElement(() => component.queryByType(RangeCalendar));
-
-    expect(calendar).toBeTruthy();
-  });
-
-  it('should hide calendar by calling `hide` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
-    const component = render(
-      <TestRangeDatepicker ref={componentRef}/>,
-    );
-
-    componentRef.current.show();
-    await waitForElement(() => null);
-
-    componentRef.current.hide();
-    const calendar = await waitForElement(() => component.queryByType(RangeCalendar));
-
-    expect(calendar).toBeFalsy();
-  });
-
   it('should show calendar by calling `focus` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const component = render(
@@ -470,7 +443,7 @@ describe('@range-datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
 
     // @ts-ignore: private calendarRef
     const calendarState = componentRef.current.calendarRef.current.state;
@@ -489,7 +462,7 @@ describe('@range-datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
 
     // @ts-ignore: private calendarRef
     const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
@@ -507,7 +480,7 @@ describe('@range-datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
     componentRef.current.scrollToToday();
 
     // @ts-ignore: private calendarRef
@@ -527,7 +500,7 @@ describe('@range-datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
     componentRef.current.scrollToDate(dateToScroll);
 
     // @ts-ignore: private calendarRef
