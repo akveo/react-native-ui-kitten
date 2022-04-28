@@ -9,7 +9,6 @@ import {
   Button,
   StyleSheet,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
@@ -59,11 +58,11 @@ describe('@popover: component checks', () => {
    */
   const touchables = {
     findToggleButton: (api: RenderAPI) => api.queryByTestId('@popover/toggle-button'),
-    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@modal/backdrop'),
+    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
 
   const TestPopover = React.forwardRef((props: Partial<PopoverProps>, ref: React.Ref<Popover>) => {
-    const [visible, setVisible] = React.useState(props.visible);
+    const [visible, setVisible] = React.useState(props.visible || false);
 
     const togglePopover = () => {
       setVisible(!visible);

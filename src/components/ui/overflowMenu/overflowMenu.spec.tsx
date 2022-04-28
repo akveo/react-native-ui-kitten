@@ -59,7 +59,7 @@ describe('@overflow-menu: component checks', () => {
   const TestOverflowMenu = React.forwardRef((props: Partial<OverflowMenuProps>,
                                              ref: React.Ref<OverflowMenu>) => {
 
-    const [visible, setVisible] = React.useState(props.visible);
+    const [visible, setVisible] = React.useState(props.visible || false);
 
     const toggleOverflowMenu = (): void => {
       setVisible(!visible);

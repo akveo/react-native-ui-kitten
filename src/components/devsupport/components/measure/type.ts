@@ -124,6 +124,30 @@ export class Frame {
   }
 
   /**
+   * Creates new frame aligned to inner bottom of other
+   */
+  public bottomIn(other: Frame): Frame {
+    return new Frame(
+      this.origin.x,
+      other.origin.y + other.size.height - this.size.height,
+      this.size.width,
+      this.size.height,
+    );
+  }
+
+  /**
+   * Creates new frame aligned to inner top of other
+   */
+  public topIn(other: Frame): Frame {
+    return new Frame(
+      this.origin.x,
+      other.origin.y,
+      this.size.width,
+      this.size.height,
+    );
+  }
+
+  /**
    * Creates new frame centered horizontally to other
    */
   public centerHorizontalOf(other: Frame): Frame {

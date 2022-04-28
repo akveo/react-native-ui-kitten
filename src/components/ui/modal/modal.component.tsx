@@ -12,6 +12,7 @@ import {
   ViewProps,
   ViewStyle,
   Modal as RNModal,
+  NativeSyntheticEvent,
 } from 'react-native';
 import {
   Frame,
@@ -19,15 +20,19 @@ import {
   MeasuringElement,
   Point,
 } from '../../devsupport';
-import {
-  ModalPresentingConfig,
-  ModalService,
-} from '../../theme';
-import {ModalResolver} from '@ui-kitten/components/theme/modal/modalResolver.component';
+import { ModalService } from '../../theme';
+import {Backdrop, BackdropPresentingConfig} from '@ui-kitten/components/theme/backdrop/backdrop.component';
 
-export interface ModalProps extends ViewProps, ModalPresentingConfig {
+export interface ModalProps extends ViewProps, BackdropPresentingConfig {
   visible?: boolean;
+  shouldUseContainer?: boolean;
   children?: React.ReactNode;
+  animationType?: 'none' | 'slide' | 'fade';
+  onShow?: (event: NativeSyntheticEvent<any>) => void;
+  supportedOrientations?: Array<
+    'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right'
+  >;
+  hardwareAccelerated?: boolean;
 }
 
 export type ModalElement = React.ReactElement<ModalProps>;
@@ -35,7 +40,6 @@ export type ModalElement = React.ReactElement<ModalProps>;
 interface State {
   contentFrame: Frame;
   forceMeasure: boolean;
-  visible: boolean;
   contentPosition: Point;
 }
 
@@ -49,8 +53,26 @@ interface State {
  * @property {boolean} visible - Whether component is visible.
  * Defaults to false.
  *
+ * @property {boolean} shouldUseContainer - Whether children should be wrapped into absolute positioned container.
+ * Defaults to true.
+ *
+ * @property {boolean} hardwareAccelerated - Controls whether to force hardware acceleration for the underlying window.
+ * Defaults to false.
+ *
+ * @property {'none' | 'slide' | 'fade'} animationType - Controls how the modal animates.
+ * Defaults to 'none'.
+ *
+ * @property {Array<'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right'>}
+ * supportedOrientations -
+ * allows the modal to be rotated to any of the specified orientations.
+ * On iOS, the modal is still restricted by what's specified
+ * in your app's Info.plist's UISupportedInterfaceOrientations field
+ *
  * @property {() => void} onBackdropPress - Called when the modal is visible and the view below it was touched.
  * Useful when needed to close the modal on outside touches.
+ *
+ * @property {(event: NativeSyntheticEvent<any>) => void} onShow -
+ * Allows passing a function that will be called once the modal has been shown.
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
@@ -64,6 +86,10 @@ interface State {
  * To configure underlying view, `backdropStyle` and `onBackdropPress` properties may be used.
  */
 export class Modal extends React.PureComponent<ModalProps, State> {
+
+  static defaultProps: Partial<ModalProps> = {
+    shouldUseContainer: true,
+  };
 
   public state: State = {
     contentFrame: Frame.zero(),
@@ -96,9 +122,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   }
 
   private onContentMeasure = (contentFrame: Frame): void => {
-    this.setState({contentFrame});
-
-    const displayFrame: Frame = this.state.contentFrame.centerOf(Frame.window());
+    const displayFrame: Frame = contentFrame.centerOf(Frame.window());
     this.setState({contentPosition: displayFrame.origin});
   };
 
@@ -114,6 +138,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   private renderMeasuringContentElement = (): MeasuringElement => {
     return (
       <MeasureElement
+        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         onMeasure={this.onContentMeasure}>
         {this.renderContentElement()}
       </MeasureElement>
@@ -124,19 +149,20 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     return this.props.visible && (
       <RNModal
         transparent={true}
-        visible={true}
-        supportedOrientations={['portrait', 'landscape']}
+        visible={this.props.visible}
+        supportedOrientations={this.props.supportedOrientations}
         statusBarTranslucent={ModalService.getShouldUseTopInsets}
+        animationType={this.props.animationType}
+        hardwareAccelerated={this.props.hardwareAccelerated}
         onRequestClose={this.props.onBackdropPress}
+        onShow={this.props.onShow}
         onDismiss={this.props.onBackdropPress}>
-        <View style={[StyleSheet.absoluteFillObject]}>
-          <ModalResolver
-            visible={true}
-            backdropStyle={this.props.backdropStyle}
-            onBackdropPress={this.props.onBackdropPress}>
-            {this.renderMeasuringContentElement()}
-          </ModalResolver>
-        </View>
+        <Backdrop
+          visible={this.props.visible}
+          backdropStyle={this.props.backdropStyle}
+          onBackdropPress={this.props.onBackdropPress}>
+          {this.props.shouldUseContainer ? this.renderMeasuringContentElement() : this.props.children}
+        </Backdrop>
       </RNModal>
     );
   }

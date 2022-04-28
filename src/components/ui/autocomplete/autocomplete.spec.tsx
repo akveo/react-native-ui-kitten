@@ -282,7 +282,7 @@ describe('@autocomplete: component checks', () => {
     fireEvent(component.queryByTestId('@autocomplete/input-anchor'), 'focus');
 
     await waitForElement(() => {
-      fireEvent.press(component.queryByTestId('@modal/backdrop'));
+      fireEvent.press(component.queryByTestId('@backdrop'));
     });
 
     const firstOption = await waitForElement(() => component.queryAllByType(TouchableWithoutFeedback)[2]);

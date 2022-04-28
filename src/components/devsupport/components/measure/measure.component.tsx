@@ -8,12 +8,13 @@ import React from 'react';
 import {
   findNodeHandle,
   UIManager,
+  StatusBar,
 } from 'react-native';
 import { Frame } from './type';
 
 export interface MeasureElementProps<P = any> {
   force?: boolean;
-  shouldOverlayElement?: boolean;
+  shouldUseTopInsets?: boolean;
   onMeasure: (frame: Frame) => void;
   children: React.ReactElement<P>;
 }
@@ -34,6 +35,7 @@ export type MeasuringElement<P = any> = React.ReactElement;
  * };
  *
  * <MeasureElement
+ *   shouldUseTopInsets={ModalService.getShouldUseTopInsets}
  *   onMeasure={onMeasure}>
  *   <ElementToMeasure />
  * </MeasureElement>
@@ -63,7 +65,7 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
   };
 
   const onUIManagerMeasure = (x: number, y: number, w: number, h: number): void => {
-    const originY = props.shouldOverlayElement ? y - h : y;
+    const originY = props.shouldUseTopInsets ? y + StatusBar.currentHeight || 0 : y;
     const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
     props.onMeasure(frame);
   };
@@ -81,5 +83,5 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
 };
 
 MeasureElement.defaultProps = {
-  shouldOverlayElement: false,
+  shouldUseTopInsets: false,
 };

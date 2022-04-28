@@ -33,8 +33,6 @@ import {
   TabView,
   TabViewProps,
 } from './tabView.component';
-import { TabIndicator } from '../shared/tabIndicator.component';
-import {ReactTestInstance} from 'react-test-renderer';
 
 describe('@tab: component checks', () => {
 
@@ -117,6 +115,7 @@ describe('@tab-bar: component checks', () => {
         mapping={mapping}
         theme={light}>
         <TabBar
+          testID={'@tab-bar'}
           selectedIndex={selectedIndex}
           onSelect={setSelectedIndex}
           {...props}>
@@ -161,11 +160,7 @@ describe('@tab-bar: component checks', () => {
       <TestTabBar indicatorStyle={{width: 99, backgroundColor: 'red'}}/>,
     );
 
-    const el = ((
-      (component.UNSAFE_queryByType(TabIndicator).children[0] as ReactTestInstance)
-        .children[0] as ReactTestInstance)
-          .children[0] as ReactTestInstance)
-            .children[0]  as ReactTestInstance;
+    const el = component.queryByTestId('indicator body');
 
     // default styles
     expect(el.props.style[0].width).toEqual('100%');
@@ -225,11 +220,7 @@ describe('@tab-view: component checks', () => {
       <TestTabView indicatorStyle={{width: 99, backgroundColor: 'red'}}/>,
     );
 
-    const el = ((
-      (component.UNSAFE_queryByType(TabIndicator).children[0] as ReactTestInstance)
-        .children[0] as ReactTestInstance)
-          .children[0] as ReactTestInstance)
-            .children[0]  as ReactTestInstance;
+    const el = component.queryByTestId('indicator body');
 
     // default styles
     expect(el.props.style[0].width).toEqual('100%');

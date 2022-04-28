@@ -5,11 +5,7 @@
  */
 
 import React from 'react';
-import {
-  StyleSheet,
-  Modal,
-  View,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {
   Frame,
   MeasureElement,
@@ -19,7 +15,7 @@ import {
   Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
-import { ModalProps } from '../modal/modal.component';
+import { Modal, ModalProps } from '../modal/modal.component';
 import {
   PopoverView,
   PopoverViewElement,
@@ -31,23 +27,20 @@ import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
-import {ModalResolver} from '@ui-kitten/components/theme/modal/modalResolver.component';
 
 type PopoverModalProps = Overwrite<ModalProps, {
   children?: React.ReactElement;
-}>;
+}>  & Pick<ModalProps, 'animationType' | 'hardwareAccelerated' | 'supportedOrientations' | 'onShow'>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
   anchor: RenderFCProp;
   fullWidth?: boolean;
-  shouldOverlayAnchor?: boolean;
 }
 
 export type PopoverElement = React.ReactElement<PopoverProps>;
 
 interface State {
   childFrame: Frame;
-  anchorFrame: Frame;
   forceMeasure: boolean;
   actualPlacement: PopoverPlacement;
   contentPosition: Point;
@@ -71,14 +64,27 @@ interface State {
  *
  * @property {boolean} fullWidth - Whether a content component should take the width of `anchor`.
  *
- * @property {boolean} shouldOverlayAnchor - Whether a content component should overlay `anchor`.
- *
  * @property {string | PopoverPlacement} placement - Position of the content component relative to the `anchor`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
- * `right end`, `bottom start` or `bottom end`.
+ * `right end`, `bottom start`, `bottom end`, `inner`, `inner top` or `inner bottom`.
  * Defaults to *bottom*.
  *
+ * @property {boolean} hardwareAccelerated - Controls whether to force hardware acceleration for the underlying window.
+ * Defaults to false.
+ *
+ * @property {'none' | 'slide' | 'fade'} animationType - Controls how the modal animates.
+ * Defaults to 'none'.
+ *
+ * @property {Array<'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right'>}
+ * supportedOrientations -
+ * allows the modal to be rotated to any of the specified orientations.
+ * On iOS, the modal is still restricted by what's specified
+ * in your app's Info.plist's UISupportedInterfaceOrientations field
+ *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
+ *
+ * @property {(event: NativeSyntheticEvent<any>) => void} onShow -
+ * Allows passing a function that will be called once the modal has been shown.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
@@ -102,9 +108,8 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   public state: State = {
     childFrame: Frame.zero(),
-    anchorFrame: Frame.zero(),
     forceMeasure: false,
-    actualPlacement: PopoverPlacements.BOTTOM,
+    actualPlacement: this.preferredPlacement,
     contentPosition: Point.zero(),
   };
 
@@ -140,8 +145,6 @@ export class Popover extends React.Component<PopoverProps, State> {
   };
 
   private onContentMeasure = (anchorFrame: Frame): void => {
-    this.setState({anchorFrame});
-
     const placementOptions: PlacementOptions = this.findPlacementOptions(anchorFrame, this.state.childFrame);
     const actualPlacement = this.placementService.find(this.preferredPlacement, placementOptions);
 
@@ -184,8 +187,7 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   private renderMeasuringPopoverElement = (): MeasuringElement => {
     return (
-      <MeasureElement
-        onMeasure={this.onContentMeasure}>
+      <MeasureElement onMeasure={this.onContentMeasure}>
           {this.renderPopoverElement()}
       </MeasureElement>
     );
@@ -193,33 +195,25 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   public render(): React.ReactElement {
     return (
-      <React.Fragment>
+      <View>
         <MeasureElement
           force={this.state.forceMeasure}
-          shouldOverlayElement={this.props.shouldOverlayAnchor}
+          shouldUseTopInsets={ModalService.getShouldUseTopInsets}
           onMeasure={this.onChildMeasure}>
           {this.props.anchor()}
         </MeasureElement>
-        {this.props.visible && (
           <Modal
-            transparent={true}
             visible={this.props.visible}
-            animationType='none'
-            supportedOrientations={['portrait', 'landscape']}
-            onRequestClose={this.props.onBackdropPress}
-            statusBarTranslucent={ModalService.getShouldUseTopInsets}
-            onDismiss={this.props.onBackdropPress}>
-            <View style={[StyleSheet.absoluteFillObject]}>
-              <ModalResolver
-                visible={true}
-                backdropStyle={this.props.backdropStyle}
-                onBackdropPress={this.props.onBackdropPress}>
-                {this.renderMeasuringPopoverElement()}
-              </ModalResolver>
-            </View>
+            shouldUseContainer={false}
+            backdropStyle={this.props.backdropStyle}
+            animationType={this.props.animationType}
+            hardwareAccelerated={this.props.hardwareAccelerated}
+            supportedOrientations={this.props.supportedOrientations}
+            onShow={this.props.onShow}
+            onBackdropPress={this.props.onBackdropPress}>
+            {this.renderMeasuringPopoverElement()}
           </Modal>
-        )}
-      </React.Fragment>
+      </View>
     );
   }
 }

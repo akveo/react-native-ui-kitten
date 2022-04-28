@@ -61,7 +61,7 @@ describe('@modal: component checks', () => {
    */
   const touchables = {
     findToggleButton: (api: RenderAPI) => api.queryByTestId('@modal/toggle-button'),
-    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@modal/backdrop'),
+    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
     findChangeTextButton: (api: RenderAPI) => api.queryByTestId('@modal/change-text-button'),
   };
 

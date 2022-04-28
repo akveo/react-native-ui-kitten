@@ -36,6 +36,7 @@ export const AutocompleteSimpleUsageShowcase = () => {
     <Autocomplete
       placeholder='Place your Text'
       value={value}
+      placement='inner top'
       onSelect={onSelect}
       onChangeText={onChangeText}>
       {data.map(renderOption)}

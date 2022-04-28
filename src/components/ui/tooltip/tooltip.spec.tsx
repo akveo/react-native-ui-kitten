@@ -50,7 +50,7 @@ describe('@tooltip: component checks', () => {
   const TestTooltip = React.forwardRef((props: Partial<TooltipProps>,
                                         ref: React.Ref<Tooltip>) => {
 
-    const [visible, setVisible] = React.useState(props.visible);
+    const [visible, setVisible] = React.useState(props.visible || false);
 
     const toggleTooltip = (): void => {
       setVisible(!visible);
@@ -129,7 +129,7 @@ describe('@tooltip: component checks', () => {
       <View>
         <Text>I love Babel</Text>
       </View>
-    )
+    );
 
     const component = render(
       <TestTooltip>

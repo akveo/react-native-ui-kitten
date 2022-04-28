@@ -53,6 +53,7 @@ export const AutocompleteAccessoriesShowcase = () => {
     <Autocomplete
       placeholder='Place your Text'
       value={value}
+      placement='inner top'
       accessoryRight={renderCloseIcon}
       onChangeText={onChangeText}
       onSelect={onSelect}>

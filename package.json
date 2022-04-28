@@ -35,7 +35,7 @@
     "@types/gulp-replace": "ts3.8",
     "@types/jest": "ts3.8",
     "@types/lodash.merge": "ts3.8",
-    "@types/react-native": "ts3.8",
+    "@types/react-native": "0.62.18",
     "@types/react-test-renderer": "ts3.8",
     "@types/rimraf": "ts3.8",
     "babel-jest": "^24.9.0",
@@ -49,7 +49,7 @@
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "react": "~16.9.0",
-    "react-native": "~0.61.4",
+    "react-native": "~0.62.2",
     "react-native-svg": "~9.13.6",
     "react-native-testing-library": "^1.14.0",
     "react-test-renderer": "16.9.0",
@@ -62,7 +62,7 @@
   },
   "resolutions": {
     "react": "~16.9.0",
-    "react-native": "~0.61.5",
+    "react-native": "~0.62.2",
     "react-native-svg": "~9.13.3"
   }
 }

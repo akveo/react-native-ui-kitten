@@ -109,6 +109,10 @@ interface State {
  */
 export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
+  static defaultProps: Partial<AutocompleteProps> = {
+    placement: 'inner top',
+  };
+
   public state: State = {
     listVisible: false,
   };
@@ -148,7 +152,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.props.onFocus && this.props.onFocus(event);
   };
 
-  private onInputFocusAnchor = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
+  private onAnchorInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.inputRefAnchor.current?.blur();
     this.setOptionsListVisible();
     this.focus();
@@ -194,7 +198,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
           ref={this.inputRefAnchor}
           testID='@autocomplete/input-anchor'
           showSoftInputOnFocus={false}
-          onFocus={this.onInputFocusAnchor}
+          onFocus={this.onAnchorInputFocus}
           onSubmitEditing={this.onInputSubmitEditing}
         />
       </View>
@@ -227,7 +231,6 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         testID={testID}
         visible={this.state.listVisible}
         fullWidth={true}
-        shouldOverlayAnchor={true}
         anchor={() => this.renderAnchorInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}>
         <>
