@@ -12,6 +12,7 @@ import {
   ViewProps,
   ViewStyle,
   Modal as RNModal,
+  ModalProps as ReactNativeModalProps,
   NativeSyntheticEvent,
 } from 'react-native';
 import {
@@ -23,16 +24,13 @@ import {
 import { ModalService } from '../../theme';
 import {Backdrop, BackdropPresentingConfig} from '@ui-kitten/components/theme/backdrop/backdrop.component';
 
-export interface ModalProps extends ViewProps, BackdropPresentingConfig {
+export type RNModalProps =
+  Pick<ReactNativeModalProps, 'animationType' | 'hardwareAccelerated' | 'supportedOrientations' | 'onShow'>;
+
+export interface ModalProps extends ViewProps, BackdropPresentingConfig, RNModalProps {
   visible?: boolean;
   shouldUseContainer?: boolean;
   children?: React.ReactNode;
-  animationType?: 'none' | 'slide' | 'fade';
-  onShow?: (event: NativeSyntheticEvent<any>) => void;
-  supportedOrientations?: Array<
-    'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right'
-  >;
-  hardwareAccelerated?: boolean;
 }
 
 export type ModalElement = React.ReactElement<ModalProps>;

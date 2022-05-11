@@ -15,7 +15,7 @@ import {
   Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
-import { Modal, ModalProps } from '../modal/modal.component';
+import {Modal, ModalProps, RNModalProps} from '../modal/modal.component';
 import {
   PopoverView,
   PopoverViewElement,
@@ -28,11 +28,9 @@ import {
   PopoverPlacements,
 } from './type';
 
-type PopoverModalProps = Overwrite<ModalProps, {
-  children?: React.ReactElement;
-}>  & Pick<ModalProps, 'animationType' | 'hardwareAccelerated' | 'supportedOrientations' | 'onShow'>;
+type PopoverModalProps = Overwrite<ModalProps, { children?: React.ReactElement; }>;
 
-export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
+export interface PopoverProps extends PopoverViewProps, PopoverModalProps, RNModalProps {
   anchor: RenderFCProp;
   fullWidth?: boolean;
 }
