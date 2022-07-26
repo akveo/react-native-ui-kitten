@@ -226,7 +226,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         color: textColor,
-        paddingTop: 12
+        ...(this.props.floatingLabel ? { paddingTop: 12 }: {})
       },
       placeholder: {
         color: placeholderColor,
