@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  Animated,
   ImageProps,
   NativeSyntheticEvent,
   Platform,
@@ -51,6 +52,7 @@ export interface InputProps extends TextInputProps, InputStyledProps {
   size?: EvaSize;
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
+  floatingLabel?: RenderProp<TextProps> | React.ReactText;
   caption?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
@@ -80,6 +82,9 @@ export type InputElement = React.ReactElement<InputProps>;
  * @property {ReactElement | ReactText | (TextProps) => ReactElement} label - String, number or a function component
  * to render above the input field.
  * If it is a function, expected to return a Text.
+ *
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} floatingLabel - Function component to render floating Input view.
+ * Expected to return View.
  *
  * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
  * Expected to return View.
@@ -142,6 +147,8 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
   private textInputRef = React.createRef<TextInput>();
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+  private animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
+  
 
   public focus = (): void => {
     this.textInputRef.current?.focus();
@@ -219,6 +226,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         color: textColor,
+        paddingTop: 12
       },
       placeholder: {
         color: placeholderColor,
@@ -236,6 +244,27 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         fontWeight: labelFontWeight,
         fontFamily: labelFontFamily,
       },
+      floatingLabel: {
+        zIndex: 1,
+        textAlign: 'left',
+        color: labelColor,
+        marginBottom: labelMarginBottom,
+        fontFamily: labelFontFamily,
+        position: 'absolute',
+        left: 16,
+        fontWeight:this.animatedIsFocused.interpolate({
+          inputRange: [0, 1],
+          outputRange: [10, labelFontWeight],
+        }),
+        top: this.animatedIsFocused.interpolate({
+          inputRange: [0, 1.5],
+          outputRange: [12, 0],
+        }),
+        fontSize: this.animatedIsFocused.interpolate({
+          inputRange: [0, 1],
+          outputRange: [15, labelFontSize],
+        }),
+      },
       captionLabel: {
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
@@ -245,11 +274,22 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
     };
   };
 
+  componentDidUpdate() {
+    const value = (this.isFocused() || this.props.value !== '');
+
+    Animated.timing(this.animatedIsFocused, {
+      toValue: value ? 1 : 0,
+      useNativeDriver: value,
+      duration: 200,
+    }).start();
+  };
+
   public render(): React.ReactElement<ViewProps> {
     const {
       eva,
       textStyle,
       label,
+      floatingLabel,
       caption,
       accessoryLeft,
       accessoryRight,
@@ -269,6 +309,9 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
           style={[evaStyle.label, styles.label]}
           component={label}
         />
+        <Animated.Text style={evaStyle.floatingLabel}>
+          {floatingLabel}
+        </Animated.Text>
         <View style={[evaStyle.inputContainer, styles.inputContainer]}>
           <FalsyFC
             style={evaStyle.icon}
