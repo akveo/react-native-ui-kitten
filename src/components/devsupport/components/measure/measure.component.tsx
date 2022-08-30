@@ -70,9 +70,9 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
     props.onMeasure(frame);
   };
 
-  const measureSelf = (): void => {
-    const node: number = findNodeHandle(ref.current);
-    UIManager.measureInWindow(node, onUIManagerMeasure);
+  const measureSelf = (event): void => {
+    const {x,y,width,height} = event.nativeEvent.layout
+    onUIManagerMeasure(x,y,width,height)
   };
 
   if (props.force) {
