@@ -523,6 +523,7 @@ const styles = StyleSheet.create({
   },
   popover: {
     overflow: 'hidden',
+    marginTop: Platform.OS === 'ios' ? -45 : 0,
   },
   list: {
     flexGrow: 0,
