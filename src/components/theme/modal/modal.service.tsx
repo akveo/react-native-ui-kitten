@@ -95,7 +95,7 @@ import {
 class ModalServiceType {
 
   panel: ModalPresenting | null = null;
-  private shouldUseTopInsets: boolean = false;
+  private shouldUseTopInsets = false;
 
   public mount(panel: ModalPresenting | null): void {
     this.panel = panel;

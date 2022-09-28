@@ -49,7 +49,7 @@ type CreateStylesFunction<T extends Styles<T>> = (theme: ThemeType) => T;
  * ```
  */
 export const withStyles = <P extends object, S>(Component: React.ComponentType<P>,
-                                                createStyles?: CreateStylesFunction<S>): ThemedComponentClass<P, S> => {
+  createStyles?: CreateStylesFunction<S>): ThemedComponentClass<P, S> => {
 
   type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
   type WrappedProps = ThemedComponentProps<S> & P;

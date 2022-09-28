@@ -42,8 +42,8 @@ export class ThemeService {
    * @returns ThemeValue if found, fallback param otherwise.
    */
   static getValue = (name: string,
-                     theme: ThemeType,
-                     fallback?: ThemeValue): ThemeValue | undefined => {
+    theme: ThemeType,
+    fallback?: ThemeValue): ThemeValue | undefined => {
 
     if (ThemeService.isReference(name)) {
       const themeKey: string = ThemeService.createKeyFromReference(name);

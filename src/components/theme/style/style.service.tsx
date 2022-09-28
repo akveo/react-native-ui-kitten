@@ -91,9 +91,9 @@ export class StyleService {
    * @returns stylesheet mapped to theme
    */
   static createThemed = <T extends Styles<T>>(styles: Styles<T>, theme: ThemeType): T => {
-    return Object.keys(styles).reduce((acc: T, key: string): T => {
+    return Object.keys(styles).reduce<T>((acc: T, key: string): T => {
       return { ...acc, [key]: StyleService.createThemedEntry(styles[key], theme) };
-    }, {} as T);
+    }, {});
   };
 
   /**

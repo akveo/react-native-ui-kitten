@@ -11,7 +11,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { Frame } from './type';
- 
+
 export interface MeasureElementProps<P = any> {
   force?: boolean;
   shouldUseTopInsets?: boolean;
@@ -20,7 +20,7 @@ export interface MeasureElementProps<P = any> {
 }
 
 export type MeasuringElement<P = any> = React.ReactElement;
- 
+
 /**
  * Measures child element size and it's screen position asynchronously.
  * Returns measure result in `onMeasure` callback.
@@ -35,7 +35,7 @@ export type MeasuringElement<P = any> = React.ReactElement;
  * };
  *
  * <MeasureElement
- *   shouldUseTopInsets={ModalService.getShouldUseTopInsets} 
+ *   shouldUseTopInsets={ModalService.getShouldUseTopInsets}
  *   onMeasure={onMeasure}>
  *   <ElementToMeasure />
  * </MeasureElement>
@@ -84,4 +84,4 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
 
 MeasureElement.defaultProps = {
   shouldUseTopInsets: false,
-}
+};

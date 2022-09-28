@@ -57,8 +57,8 @@ describe('@theme: service checks', () => {
 
 describe('@theme: ui component checks', () => {
 
-  const themeConsumerTestId: string = '@theme/consumer';
-  const themeChangeTouchableTestId: string = '@theme/btnChangeTheme';
+  const themeConsumerTestId = '@theme/consumer';
+  const themeChangeTouchableTestId = '@theme/btnChangeTheme';
 
   const Sample = (props) => (
     <View
@@ -67,21 +67,21 @@ describe('@theme: ui component checks', () => {
     />
   );
 
-  const ThemeChangingComponent = (props: { theme: ThemeType, themeInverse: ThemeType }) => {
+  const ThemeChangingComponent = (props: { theme: ThemeType; themeInverse: ThemeType }) => {
     const [currentTheme, setCurrentTheme] = React.useState(props.theme);
 
     const ThemedComponent = withStyles(Sample);
 
     return (
-      <React.Fragment>
+      <>
         <ThemeProvider theme={currentTheme}>
-          <ThemedComponent/>
+          <ThemedComponent />
         </ThemeProvider>
         <TouchableOpacity
           testID={themeChangeTouchableTestId}
           onPress={() => setCurrentTheme(props.themeInverse)}
         />
-      </React.Fragment>
+      </>
     );
   };
 
@@ -95,7 +95,9 @@ describe('@theme: ui component checks', () => {
       const counter = useRef(0);
       counter.current++;
       return (
-        <Text>{getRenderCountText('Child', counter.current)}</Text>
+        <Text>
+          {getRenderCountText('Child', counter.current)}
+        </Text>
       );
     });
 
@@ -103,13 +105,19 @@ describe('@theme: ui component checks', () => {
 
     const ParentComponent = () => {
       const [renderCount, setRenderCount] = useState(1);
-      return <View>
-        <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
-          <Text>{rerenderButtonText}</Text>
-        </TouchableOpacity>
-        <Text>{getRenderCountText('Parent', renderCount)}</Text>
-        <ChildComponentWithStyles />
-      </View>;
+      return (
+        <View>
+          <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
+            <Text>
+              {rerenderButtonText}
+            </Text>
+          </TouchableOpacity>
+          <Text>
+            {getRenderCountText('Parent', renderCount)}
+          </Text>
+          <ChildComponentWithStyles />
+        </View>
+      );
     };
 
     const renderedComponent: RenderAPI = render(
@@ -139,7 +147,7 @@ describe('@theme: ui component checks', () => {
 
     const component: RenderAPI = render(
       <ThemeProvider theme={theme}>
-        <ThemedComponent/>
+        <ThemedComponent />
       </ThemeProvider>,
     );
 
@@ -161,8 +169,9 @@ describe('@theme: ui component checks', () => {
       <ThemeProvider theme={{
         ...theme,
         defaultColor: '#ffffff',
-      }}>
-        <ThemedComponent/>
+      }}
+      >
+        <ThemedComponent />
       </ThemeProvider>,
     );
 
@@ -184,7 +193,7 @@ describe('@theme: ui component checks', () => {
 
     const component: RenderAPI = render(
       <ThemeProvider theme={theme}>
-        <ThemedComponent/>
+        <ThemedComponent />
       </ThemeProvider>,
     );
 
@@ -226,16 +235,22 @@ describe('@useTheme: rendering performance check', () => {
     },
     dark: {
       defaultColor: 'black',
-    }
+    },
   };
 
   const ThemeChangingProvider = (props) => {
     return (
-      <StyleProvider styles={props.styles} theme={props.theme}>
+      <StyleProvider
+        styles={props.styles}
+        theme={props.theme}
+      >
         <TouchableOpacity
           testID={styleTouchableTestId}
-          onPress={props.onPress}>
-          <Text style={{ color: theme.defaultColor }}>{`${props.value}`}</Text>
+          onPress={props.onPress}
+        >
+          <Text style={{ color: theme.defaultColor }}>
+            {`${props.value}`}
+          </Text>
         </TouchableOpacity>
       </StyleProvider>
     );
@@ -246,19 +261,19 @@ describe('@useTheme: rendering performance check', () => {
 
     const ChildComponent = (props) => {
       React.useEffect(() => {
-        themeFuncMock()
+        themeFuncMock();
       });
 
-      return <ThemeChangingProvider {...props} />
+      return <ThemeChangingProvider {...props} />;
     };
-    
+
     const Component = () => {
       const [theme, setTheme] = React.useState<typeof themes['light']>(themes.dark);
 
       const changeTheme = () => {
-        setTheme(theme.defaultColor === 'white' ? themes.dark : themes.light)
+        setTheme(theme.defaultColor === 'white' ? themes.dark : themes.light);
       };
-      
+
       return (
         <ChildComponent
           styles={mapping}
@@ -266,14 +281,14 @@ describe('@useTheme: rendering performance check', () => {
           onPress={changeTheme}
           value={theme.defaultColor}
         />
-      )
+      );
     };
 
     const component = render(<Component />);
     expect(themeFuncMock).toBeCalledTimes(1);
     fireEvent.press(component.getByTestId(styleTouchableTestId));
     expect(themeFuncMock).toBeCalledTimes(2);
-  })
+  });
 
   it('not changing theme value state should not force component to render', async () => {
     const themeFuncMock = jest.fn();
@@ -283,16 +298,16 @@ describe('@useTheme: rendering performance check', () => {
         themeFuncMock();
       });
 
-      return <ThemeChangingProvider {...props} />
+      return <ThemeChangingProvider {...props} />;
     };
-    
+
     const Component = () => {
       const [theme, setTheme] = React.useState<typeof themes['light']>(themes.dark);
 
       const changeTheme = () => {
         setTheme(themes.dark);
       };
-      
+
       return (
         <ChildComponent
           styles={mapping}
@@ -300,12 +315,12 @@ describe('@useTheme: rendering performance check', () => {
           onPress={changeTheme}
           value={theme.defaultColor}
         />
-      )
-    }
+      );
+    };
 
     const component = render(<Component />);
     expect(themeFuncMock).toBeCalledTimes(1);
     fireEvent.press(component.getByTestId(styleTouchableTestId));
     expect(themeFuncMock).toBeCalledTimes(1);
-  })
-})
+  });
+});
