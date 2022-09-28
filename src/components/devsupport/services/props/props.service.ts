@@ -161,13 +161,13 @@ class NativePropsService {
    */
   public allWithPrefix(source: StyleType, key: string): StyleType {
     return Object.keys(source)
-                 .filter((styleName: string) => styleName.includes(key))
-                 .reduce((obj: StyleType, styleKey: string) => {
-                   return {
-                     ...obj,
-                     [styleKey]: source[styleKey],
-                   };
-                 }, {});
+      .filter((styleName: string) => styleName.includes(key))
+      .reduce((obj: StyleType, styleKey: string) => {
+        return {
+          ...obj,
+          [styleKey]: source[styleKey],
+        };
+      }, {});
   }
 }
 

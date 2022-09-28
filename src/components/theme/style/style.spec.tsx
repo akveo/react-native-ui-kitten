@@ -144,18 +144,24 @@ describe('@style: ui component checks', () => {
   @styled('Test')
   class Test extends React.Component<{ disabled?: boolean }> {
 
-    static someStaticValueToCopy: string = 'Test';
+    static someStaticValueToCopy = 'Test';
 
     public render(): React.ReactElement<ViewProps> {
       return (
-        <View {...this.props} testID={styleConsumerTestId}/>
+        <View
+          {...this.props}
+          testID={styleConsumerTestId}
+        />
       );
     }
   }
 
   const Provider = ({ children }) => {
     return (
-      <StyleProvider styles={computedMapping} theme={theme}>
+      <StyleProvider
+        styles={computedMapping}
+        theme={theme}
+      >
         {children}
       </StyleProvider>
     );
@@ -174,23 +180,31 @@ describe('@style: ui component checks', () => {
       public render(): React.ReactElement<ViewProps> {
         this.renderCount++;
         return (
-          <Text>{getRenderCountText('Child', this.renderCount)}</Text>
+          <Text>
+            {getRenderCountText('Child', this.renderCount)}
+          </Text>
         );
       }
     }
 
     const ParentComponent = () => {
       const [renderCount, setRenderCount] = React.useState(1);
-      return <View>
-        <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
-          <Text>{rerenderButtonText}</Text>
-        </TouchableOpacity>
-        <Text>{getRenderCountText('Parent', renderCount)}</Text>
-        <ChildStyledComponent />
-      </View>;
+      return (
+        <View>
+          <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
+            <Text>
+              {rerenderButtonText}
+            </Text>
+          </TouchableOpacity>
+          <Text>
+            {getRenderCountText('Parent', renderCount)}
+          </Text>
+          <ChildStyledComponent />
+        </View>
+      );
     };
 
-    const renderedComponent: RenderAPI = render(<ParentComponent />, { wrapper: Provider});
+    const renderedComponent: RenderAPI = render(<ParentComponent />, { wrapper: Provider });
     fireEvent.press(renderedComponent.getByText(rerenderButtonText));
     fireEvent.press(renderedComponent.getByText(rerenderButtonText));
 
@@ -204,8 +218,11 @@ describe('@style: ui component checks', () => {
 
   it('receives custom props', async () => {
     const component: RenderAPI = render(
-      <StyleProvider styles={computedMapping} theme={theme}>
-        <Test/>
+      <StyleProvider
+        styles={computedMapping}
+        theme={theme}
+      >
+        <Test />
       </StyleProvider>,
     );
 
@@ -219,14 +236,20 @@ describe('@style: ui component checks', () => {
 
   it('default appearance styled properly', async () => {
     const component: RenderAPI = render(
-      <StyleProvider styles={computedMapping} theme={theme}>
-        <Test/>
+      <StyleProvider
+        styles={computedMapping}
+        theme={theme}
+      >
+        <Test />
       </StyleProvider>,
     );
 
     const withStateProp: RenderAPI = render(
-      <StyleProvider styles={computedMapping} theme={theme}>
-        <Test disabled={true}/>
+      <StyleProvider
+        styles={computedMapping}
+        theme={theme}
+      >
+        <Test disabled={true} />
       </StyleProvider>,
     );
 
@@ -248,8 +271,11 @@ describe('@style: ui component checks', () => {
 
   it('dispatch action works properly', async () => {
     const component: RenderAPI = render(
-      <StyleProvider styles={computedMapping} theme={theme}>
-        <Test/>
+      <StyleProvider
+        styles={computedMapping}
+        theme={theme}
+      >
+        <Test />
       </StyleProvider>,
     );
 
@@ -273,10 +299,14 @@ describe('@style: ui component checks', () => {
       const [currentTheme, setCurrentTheme] = React.useState(props.theme);
 
       return (
-        <StyleProvider styles={props.styles} theme={currentTheme}>
+        <StyleProvider
+          styles={props.styles}
+          theme={currentTheme}
+        >
           <TouchableOpacity
             testID={styleTouchableTestId}
-            onPress={() => setCurrentTheme(props.themeInverse)}>
+            onPress={() => setCurrentTheme(props.themeInverse)}
+          >
             {props.children}
           </TouchableOpacity>
         </StyleProvider>
@@ -290,8 +320,9 @@ describe('@style: ui component checks', () => {
         themeInverse={{
           ...theme,
           defaultColor: '#ffffff',
-        }}>
-        <Test/>
+        }}
+      >
+        <Test />
       </ThemeChangingProvider>,
     );
 
@@ -319,16 +350,22 @@ describe('@useStyleSheet: rendering performance check', () => {
     },
     dark: {
       defaultColor: 'black',
-    }
+    },
   };
 
   const ThemeChangingProvider = (props) => {
     return (
-      <StyleProvider styles={props.styles} theme={theme}>
+      <StyleProvider
+        styles={props.styles}
+        theme={theme}
+      >
         <TouchableOpacity
           testID={styleTouchableTestId}
-          onPress={props.onPress}>
-          <Text style={{ color: theme.defaultColor }}>{`${props.value}`}</Text>
+          onPress={props.onPress}
+        >
+          <Text style={{ color: theme.defaultColor }}>
+            {`${props.value}`}
+          </Text>
         </TouchableOpacity>
       </StyleProvider>
     );
@@ -336,7 +373,7 @@ describe('@useStyleSheet: rendering performance check', () => {
 
   it('useStyleSheet should not be called with every render', async () => {
     const stylesFuncMock = jest.fn();
-    
+
     const Component = () => {
       const [state, setState] = React.useState(0);
       const styles = useStyleSheet({});
@@ -344,7 +381,7 @@ describe('@useStyleSheet: rendering performance check', () => {
       React.useEffect(() => {
         stylesFuncMock();
       }, [styles]);
-      
+
       return (
         <ThemeChangingProvider
           styles={computedMapping}
@@ -352,7 +389,7 @@ describe('@useStyleSheet: rendering performance check', () => {
           onPress={() => setState(state + 1)}
           value={theme.defaultColor}
         />
-      )
+      );
     };
 
     const component = render(<Component />);
@@ -362,7 +399,7 @@ describe('@useStyleSheet: rendering performance check', () => {
 
   it('useStyleSheet should not be called with every render when memoized', async () => {
     const stylesFuncMock = jest.fn();
-    
+
     const Component = () => {
       const [state, setState] = React.useState(0);
       const styles = useStyleSheet({});
@@ -375,7 +412,7 @@ describe('@useStyleSheet: rendering performance check', () => {
       const changeState = React.useCallback(() => {
         setState(state + 1);
       }, [state, memoizeValue]);
-      
+
       return (
         <ThemeChangingProvider
           styles={computedMapping}
@@ -383,7 +420,7 @@ describe('@useStyleSheet: rendering performance check', () => {
           onPress={changeState}
           value={theme.defaultColor}
         />
-      )
+      );
     };
 
     const component = render(<Component />);
@@ -391,4 +428,4 @@ describe('@useStyleSheet: rendering performance check', () => {
     fireEvent.press(component.getByTestId(styleTouchableTestId));
     expect(stylesFuncMock).toBeCalledTimes(1);
   });
-})
+});

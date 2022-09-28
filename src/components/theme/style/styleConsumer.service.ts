@@ -17,8 +17,8 @@ import {
 } from './style.service';
 import { ThemeType } from '../theme/theme.service';
 
-const SEPARATOR_MAPPING_ENTRY: string = '.';
-const DOC_ROOT: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
+const SEPARATOR_MAPPING_ENTRY = '.';
+const DOC_ROOT = 'https://akveo.github.io/react-native-ui-kitten/docs';
 
 interface StyleInfo {
   appearance: string;
@@ -60,9 +60,9 @@ export class StyleConsumerService {
   }
 
   public createStyleProp<P extends object>(source: P,
-                                           style: StyleType,
-                                           theme: ThemeType,
-                                           interaction: Interaction[]): StyleType {
+    style: StyleType,
+    theme: ThemeType,
+    interaction: Interaction[]): StyleType {
 
     const styleInfo: StyleInfo = this.getStyleInfo(source, this.withValidInteraction(interaction));
     const generatedMapping: StyleType = this.getGeneratedStyleMapping(style, styleInfo);
@@ -137,7 +137,7 @@ export class StyleConsumerService {
   }
 
   private getStyleInfo<P extends StyledComponentProps>(props: P,
-                                                       interaction: Interaction[]): StyleInfo {
+    interaction: Interaction[]): StyleInfo {
     const variantProps: Partial<P> = this.getDerivedVariants(this.meta, props);
     const stateProps: Partial<P> = this.getDerivedStates(this.meta, props);
 

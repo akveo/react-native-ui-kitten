@@ -106,7 +106,7 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
       interaction: [],
     };
 
-    private init: boolean = false;
+    private init = false;
     private defaultProps: WrappedComponentProps;
     private service: StyleConsumerService;
 
@@ -121,8 +121,8 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
     };
 
     private withEvaProp = (sourceProps: WrappedComponentProps,
-                           sourceStyle: ThemeStyleType,
-                           theme: ThemeType): StyledComponentProps => {
+      sourceStyle: ThemeStyleType,
+      theme: ThemeType): StyledComponentProps => {
 
       const props: WrappedComponentProps = { ...this.defaultProps, ...sourceProps };
       const style: StyleType = this.service.createStyleProp(props, sourceStyle, theme, this.state.interaction);
@@ -154,11 +154,15 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
 
     public render(): React.ReactElement {
       return (
-        <MappingContext.Consumer>{(style: ThemeStyleType): React.ReactElement => (
-          <ThemeContext.Consumer>{(theme: ThemeType): React.ReactElement => {
-            return this.renderWrappedElement(style, theme);
-          }}</ThemeContext.Consumer>
-        )}</MappingContext.Consumer>
+        <MappingContext.Consumer>
+          {(style: ThemeStyleType): React.ReactElement => (
+            <ThemeContext.Consumer>
+              {(theme: ThemeType): React.ReactElement => {
+                return this.renderWrappedElement(style, theme);
+              }}
+            </ThemeContext.Consumer>
+          )}
+        </MappingContext.Consumer>
       );
     }
   }

@@ -56,7 +56,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
   public show(element: React.ReactElement, config: ModalPresentingConfig): string {
     const key: string = this.generateUniqueComponentKey();
     const components: Map<string, ModalPanelChild> = this.state.components
-                                                         .set(key, { ...config, element });
+      .set(key, { ...config, element });
 
     this.setState({ components });
 
@@ -92,7 +92,8 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
         key={index}
         visible={true}
         backdropStyle={config.backdropStyle}
-        onBackdropPress={config.onBackdropPress}>
+        onBackdropPress={config.onBackdropPress}
+      >
         {config.element}
       </ModalResolver>
     );
