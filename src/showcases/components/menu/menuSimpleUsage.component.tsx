@@ -1,7 +1,7 @@
 import React from 'react';
 import { IndexPath, Menu, MenuItem } from '@ui-kitten/components';
 
-export const MenuSimpleUsageShowcase = () => {
+export const MenuSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
 

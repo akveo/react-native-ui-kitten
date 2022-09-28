@@ -2,31 +2,31 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { CheckBox } from '@ui-kitten/components';
 
-export const CheckboxIndeterminateShowcase = () => {
+export const CheckboxIndeterminateShowcase = (): React.ReactElement => {
 
   const [allChecked, setAllChecked] = React.useState(false);
   const [indeterminate, setIndeterminate] = React.useState(false);
   const [readChecked, setReadChecked] = React.useState(false);
   const [writeChecked, setWriteChecked] = React.useState(false);
 
-  const onGroupCheckedChange = (checked) => {
+  const onGroupCheckedChange = (checked): void => {
     setReadChecked(checked);
     setWriteChecked(checked);
     setAllChecked(checked);
     updateGroup(checked, checked);
   };
 
-  const onReadCheckedChange = (checked) => {
+  const onReadCheckedChange = (checked): void => {
     setReadChecked(checked);
     updateGroup(checked, writeChecked);
   };
 
-  const onWriteCheckedChange = (checked) => {
+  const onWriteCheckedChange = (checked): void => {
     setWriteChecked(checked);
     updateGroup(checked, readChecked);
   };
 
-  const updateGroup = (...states) => {
+  const updateGroup = (...states): void => {
     const someChecked = states.some((item) => item === true);
     const everyChecked = states.every((item) => item === true);
 

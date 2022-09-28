@@ -6,18 +6,18 @@ const now = new Date();
 const date = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
 const initialVisibleDate = new Date(now.getFullYear(), now.getMonth() + 3, now.getDate() + 1);
 
-export const CalendarInitialVisibleDateShowcase = () => {
+export const CalendarInitialVisibleDateShowcase = (): React.ReactElement => {
   const [selectedDate, setSelectedDate] = React.useState(date);
 
   const componentRef = React.createRef<Calendar>();
 
-  const scrollToSelected = () => {
+  const scrollToSelected = (): void => {
     if (componentRef.current) {
       componentRef.current.scrollToDate(selectedDate);
     }
   };
 
-  const scrollToToday = () => {
+  const scrollToToday = (): void => {
     if (componentRef.current) {
       componentRef.current.scrollToToday();
     }

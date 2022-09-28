@@ -20,9 +20,9 @@ const hideEvent = Platform.select({
   default: 'keyboardWillHide',
 });
 
-const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
+const filter = (item, query): boolean => item.title.toLowerCase().includes(query.toLowerCase());
 
-export const AutocompleteHandleKeyboardShowcase = () => {
+export const AutocompleteHandleKeyboardShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState(null);
   const [data, setData] = React.useState(movies);
@@ -43,16 +43,16 @@ export const AutocompleteHandleKeyboardShowcase = () => {
     };
   });
 
-  const onSelect = useCallback((index) => {
+  const onSelect = useCallback((index): void => {
     setValue(data[index].title);
   }, [data]);
 
-  const onChangeText = useCallback((query) => {
+  const onChangeText = useCallback((query): void => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
   }, []);
 
-  const renderOption = (item, index) => (
+  const renderOption = (item, index): React.ReactElement => (
     <AutocompleteItem
       key={index}
       title={item.title}

@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Toggle } from '@ui-kitten/components';
 
-export const ToggleStatesShowcase = () => {
+export const ToggleStatesShowcase = (): React.ReactElement => {
 
   const [activeChecked, setActiveChecked] = React.useState(false);
 
-  const onActiveCheckedChange = (isChecked) => {
+  const onActiveCheckedChange = (isChecked): void => {
     setActiveChecked(isChecked);
   };
 

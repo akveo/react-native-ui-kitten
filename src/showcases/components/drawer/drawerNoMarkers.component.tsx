@@ -1,23 +1,23 @@
 import React from 'react';
 import { Drawer, DrawerItem, Text } from '@ui-kitten/components';
 
-export const DrawerNoMarkersShowcase = () => {
+export const DrawerNoMarkersShowcase = (): React.ReactElement => {
 
   const [selectedTitle, setSelectedTitle] = React.useState('No items selected');
 
-  const onUsersPress = ({ index }) => {
+  const onUsersPress = (): void => {
     setSelectedTitle('Users');
   };
 
-  const onOrdersPress = ({ index }) => {
+  const onOrdersPress = (): void => {
     setSelectedTitle('Orders');
   };
 
-  const onTransactionsPress = ({ index }) => {
+  const onTransactionsPress = (): void => {
     setSelectedTitle('Transactions');
   };
 
-  const onSettingsPress = ({ index }) => {
+  const onSettingsPress = (): void => {
     setSelectedTitle('Settings');
   };
 

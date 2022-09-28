@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from '@ui-kitten/components';
 
-export const TextAppearancesShowcase = () => (
+export const TextAppearancesShowcase = (): React.ReactElement => (
   <>
 
     <Text style={styles.text}>

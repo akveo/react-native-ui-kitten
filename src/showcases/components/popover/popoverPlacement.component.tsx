@@ -17,23 +17,23 @@ const placements = [
   'right end',
 ];
 
-export const PopoverPlacementShowcase = () => {
+export const PopoverPlacementShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
   const [placementIndex, setPlacementIndex] = React.useState(new IndexPath(4));
   const placement = placements[placementIndex.row];
 
-  const onPlacementSelect = (index) => {
+  const onPlacementSelect = (index): void => {
     setPlacementIndex(index);
   };
 
-  const renderToggleButton = () => (
+  const renderToggleButton = (): React.ReactElement => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE POPOVER
     </Button>
   );
 
-  const renderPlacementItem = (title) => (
+  const renderPlacementItem = (title): React.ReactElement => (
     <SelectItem title={title} />
   );
 

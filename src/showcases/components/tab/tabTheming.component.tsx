@@ -1,27 +1,27 @@
 import React from 'react';
-import { Icon, Tab, TabBar } from '@ui-kitten/components';
+import { Icon, IconElement, Tab, TabBar } from '@ui-kitten/components';
 
-const PersonIcon = (props) => (
+const PersonIcon = (props): IconElement => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-const BellIcon = (props) => (
+const BellIcon = (props): IconElement => (
   <Icon
     {...props}
     name='bell-outline'
   />
 );
 
-const EmailIcon = (props) => (
+const EmailIcon = (props): IconElement => (
   <Icon
     {...props}
     name='email-outline'
   />
 );
-export const TabThemingShowcase = () => {
+export const TabThemingShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 

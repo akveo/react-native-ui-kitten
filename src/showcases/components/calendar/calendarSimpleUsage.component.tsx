@@ -1,13 +1,12 @@
 import React from 'react';
 import { Calendar, Text } from '@ui-kitten/components';
 
-export const CalendarSimpleUsageShowcase = () => {
+export const CalendarSimpleUsageShowcase = (): React.ReactElement => {
 
   const [date, setDate] = React.useState(new Date());
 
   return (
     <>
-
       <Text category='h6'>
         Selected date:
         {' '}
@@ -18,7 +17,6 @@ export const CalendarSimpleUsageShowcase = () => {
         date={date}
         onSelect={nextDate => setDate(nextDate)}
       />
-
     </>
   );
 };

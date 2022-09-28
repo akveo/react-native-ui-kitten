@@ -1,18 +1,18 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Layout, Toggle } from '@ui-kitten/components';
+import { Layout, Toggle, ToggleProps } from '@ui-kitten/components';
 
-const useToggleState = (initialState = false) => {
+const useToggleState = (initialState = false): ToggleProps => {
   const [checked, setChecked] = React.useState(initialState);
 
-  const onCheckedChange = (isChecked) => {
+  const onCheckedChange = (isChecked): void => {
     setChecked(isChecked);
   };
 
   return { checked, onChange: onCheckedChange };
 };
 
-export const ToggleStatusShowcase = () => {
+export const ToggleStatusShowcase = (): React.ReactElement => {
 
   const primaryToggleState = useToggleState();
   const successToggleState = useToggleState();

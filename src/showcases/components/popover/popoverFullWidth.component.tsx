@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Button, Layout, Popover, Text } from '@ui-kitten/components';
 
-export const PopoverFullWidthShowcase = () => {
+export const PopoverFullWidthShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
 
-  const renderToggleButton = () => (
+  const renderToggleButton = (): React.ReactElement => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE POPOVER
     </Button>

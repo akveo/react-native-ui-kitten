@@ -3,7 +3,7 @@ import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { Card, Text } from '@ui-kitten/components';
 import { ShowcaseSettings } from './showcaseSettings.component';
 
-const ShowcaseCaption = (props) => (
+const ShowcaseCaption = (props): React.ReactElement => (
   <View {...props}>
     <Text
       appearance='hint'

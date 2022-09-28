@@ -2,24 +2,17 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
 
-const data = [
-  { title: 'Menu Item 1' },
-  { title: 'Menu Item 2' },
-  { title: 'Menu Item 3' },
-  { title: 'Menu Item 4' },
-];
-
-export const OverflowMenuStyledBackdropShowcase = () => {
+export const OverflowMenuStyledBackdropShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 
-  const onItemSelect = (index) => {
+  const onItemSelect = (index): void => {
     setSelectedIndex(index);
     setVisible(false);
   };
 
-  const renderToggleButton = () => (
+  const renderToggleButton = (): React.ReactElement => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE MENU
     </Button>

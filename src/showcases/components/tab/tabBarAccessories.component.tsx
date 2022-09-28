@@ -1,34 +1,34 @@
 import React from 'react';
-import { Icon, Tab, TabBar } from '@ui-kitten/components';
+import { Icon, IconElement, Tab, TabBar, TabBarProps } from '@ui-kitten/components';
 
-const PersonIcon = (props) => (
+const PersonIcon = (props): IconElement => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-const BellIcon = (props) => (
+const BellIcon = (props): IconElement => (
   <Icon
     {...props}
     name='bell-outline'
   />
 );
 
-const EmailIcon = (props) => (
+const EmailIcon = (props): IconElement => (
   <Icon
     {...props}
     name='email-outline'
   />
 );
 
-const useTabBarState = (initialState = 0) => {
+const useTabBarState = (initialState = 0): Partial<TabBarProps> => {
   const [selectedIndex, setSelectedIndex] = React.useState(initialState);
   return { selectedIndex, onSelect: setSelectedIndex };
 };
 
 
-export const TabBarAccessoriesShowcase = () => {
+export const TabBarAccessoriesShowcase = (): React.ReactElement => {
 
   const topState = useTabBarState();
   const bottomState = useTabBarState();

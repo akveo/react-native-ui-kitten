@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ViewProps } from 'react-native';
 import { SvgProps } from 'react-native-svg';
-import { Button, ButtonGroup, Icon, Layout, LayoutElement } from '@ui-kitten/components';
+import { Button, ButtonGroup, Icon, IconElement, Layout, LayoutElement } from '@ui-kitten/components';
 import { AppMapping, AppTheme, ThemeContext, ThemeContextType } from '../services/theme.service';
 
 export const ShowcaseSettings = (props: ViewProps): LayoutElement => {
@@ -21,7 +21,7 @@ export const ShowcaseSettings = (props: ViewProps): LayoutElement => {
     themeContext.setTheme(nextTheme);
   };
 
-  const ThemeIcon = (evaProps) => (
+  const ThemeIcon = (evaProps): IconElement => (
     <Icon
       ref={themeIconRef}
       {...evaProps}

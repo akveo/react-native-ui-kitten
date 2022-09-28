@@ -1,25 +1,25 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Icon, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
+import { Button, Icon, IconElement, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-export const OverflowMenuAccessoriesShowcase = () => {
+export const OverflowMenuAccessoriesShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 
-  const onSelect = (index) => {
+  const onSelect = (index): void => {
     setSelectedIndex(index);
     setVisible(false);
   };
 
-  const renderToggleButton = () => (
+  const renderToggleButton = (): React.ReactElement => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE MENU
     </Button>

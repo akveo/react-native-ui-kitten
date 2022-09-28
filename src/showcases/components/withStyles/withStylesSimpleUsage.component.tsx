@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text, withStyles } from '@ui-kitten/components';
+import { EvaProp, Text, withStyles } from '@ui-kitten/components';
 
-const ThemedComponent = ({ eva }) => (
+const ThemedComponent = ({ eva }: { eva: EvaProp }): React.ReactElement => (
   <View style={eva.style.container}>
     <Text
       style={{ color: eva.theme['color-success-default'] }}

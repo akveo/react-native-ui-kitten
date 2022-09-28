@@ -1,35 +1,35 @@
 import React from 'react';
-import { Drawer, DrawerGroup, DrawerItem, Icon } from '@ui-kitten/components';
+import { Drawer, DrawerGroup, DrawerItem, Icon, IconElement } from '@ui-kitten/components';
 
-const SmartphoneIcon = (props) => (
+const SmartphoneIcon = (props): IconElement => (
   <Icon
     {...props}
     name='smartphone-outline'
   />
 );
 
-const BrowserIcon = (props) => (
+const BrowserIcon = (props): IconElement => (
   <Icon
     {...props}
     name='browser-outline'
   />
 );
 
-const ColorPaletteIcon = (props) => (
+const ColorPaletteIcon = (props): IconElement => (
   <Icon
     {...props}
     name='color-palette-outline'
   />
 );
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-export const DrawerGroupsShowcase = () => {
+export const DrawerGroupsShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 

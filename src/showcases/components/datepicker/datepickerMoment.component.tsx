@@ -11,7 +11,7 @@ import { MomentDateService } from '@ui-kitten/moment';
 
 const dateService = new MomentDateService();
 
-export const DatepickerMomentShowcase = () => {
+export const DatepickerMomentShowcase = (): React.ReactElement => {
 
   const [date, setDate] = React.useState(moment());
 

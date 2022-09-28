@@ -1,7 +1,7 @@
 import React from 'react';
 import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 
-export const BottomNavigationSimpleUsageShowcase = () => {
+export const BottomNavigationSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 

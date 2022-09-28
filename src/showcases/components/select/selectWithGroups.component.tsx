@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { IndexPath, Layout, Select, SelectGroup, SelectItem } from '@ui-kitten/components';
 
-export const SelectWithGroupsShowcase = () => {
+export const SelectWithGroupsShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0, 1));
   const [multiSelectedIndex, setMultiSelectedIndex] = React.useState([

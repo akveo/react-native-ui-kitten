@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Input, Layout } from '@ui-kitten/components';
 
-export const InputStatesShowcase = () => {
+export const InputStatesShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState('');
 

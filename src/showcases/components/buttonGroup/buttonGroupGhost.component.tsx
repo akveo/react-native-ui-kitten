@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, ButtonGroup, Layout } from '@ui-kitten/components';
 
-export const ButtonGroupGhostShowcase = () => (
+export const ButtonGroupGhostShowcase = (): React.ReactElement => (
   <Layout
     style={styles.container}
     level='1'

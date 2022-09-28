@@ -1,14 +1,14 @@
 import React from 'react';
-import { Icon, Tab } from '@ui-kitten/components';
+import { Icon, IconElement, Tab } from '@ui-kitten/components';
 
-const PersonIcon = (props) => (
+const PersonIcon = (props): IconElement => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-export const TabSimpleUsageShowcase = () => (
+export const TabSimpleUsageShowcase = (): React.ReactElement => (
   <Tab
     title='USERS'
     icon={PersonIcon}

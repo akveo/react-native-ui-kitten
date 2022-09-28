@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
 
-export const LayoutLevelShowcase = () => (
+export const LayoutLevelShowcase = (): React.ReactElement => (
   <Layout style={styles.container}>
 
     <Layout

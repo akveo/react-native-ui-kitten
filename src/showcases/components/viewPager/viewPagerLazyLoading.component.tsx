@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Text, ViewPager } from '@ui-kitten/components';
 
-export const ViewPagerLazyLoadingShowcase = () => {
+export const ViewPagerLazyLoadingShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const shouldLoadComponent = (index) => index === selectedIndex;
+  const shouldLoadComponent = (index): boolean => index === selectedIndex;
 
   return (
     <ViewPager

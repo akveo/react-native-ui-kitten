@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, TabBar } from '@ui-kitten/components';
 
-export const TabBarSimpleUsageShowcase = () => {
+export const TabBarSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 

@@ -19,7 +19,7 @@ const groupedData = {
   ],
 };
 
-export const SelectDisplayValueShowcase = () => {
+export const SelectDisplayValueShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
   const [multiSelectedIndex, setMultiSelectedIndex] = React.useState([
@@ -33,11 +33,11 @@ export const SelectDisplayValueShowcase = () => {
     return groupedData[groupTitle][index.row];
   });
 
-  const renderOption = (title) => (
+  const renderOption = (title): React.ReactElement => (
     <SelectItem title={title} />
   );
 
-  const renderGroup = (title) => (
+  const renderGroup = (title): React.ReactElement => (
     <SelectGroup title={title}>
       {groupedData[title].map(renderOption)}
     </SelectGroup>

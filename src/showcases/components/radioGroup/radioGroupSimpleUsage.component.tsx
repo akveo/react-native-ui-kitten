@@ -1,7 +1,7 @@
 import React from 'react';
 import { Radio, RadioGroup, Text } from '@ui-kitten/components';
 
-export const RadioGroupSimpleUsageShowcase = () => {
+export const RadioGroupSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 

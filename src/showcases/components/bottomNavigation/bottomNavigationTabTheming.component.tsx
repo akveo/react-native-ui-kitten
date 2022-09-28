@@ -1,28 +1,28 @@
 import React from 'react';
-import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
+import { BottomNavigation, BottomNavigationTab, Icon, IconElement } from '@ui-kitten/components';
 
-const PersonIcon = (props) => (
+const PersonIcon = (props): IconElement => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-const BellIcon = (props) => (
+const BellIcon = (props): IconElement => (
   <Icon
     {...props}
     name='bell-outline'
   />
 );
 
-const EmailIcon = (props) => (
+const EmailIcon = (props): IconElement => (
   <Icon
     {...props}
     name='email-outline'
   />
 );
 
-export const BottomNavigationTabThemingShowcase = () => {
+export const BottomNavigationTabThemingShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 

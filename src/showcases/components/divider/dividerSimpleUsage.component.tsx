@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar, Button, Divider, Text } from '@ui-kitten/components';
 
-export const DividerSimpleUsageShowcase = () => (
+export const DividerSimpleUsageShowcase = (): React.ReactElement => (
   <>
     <View style={styles.details}>
       <Avatar

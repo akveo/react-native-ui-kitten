@@ -1,7 +1,7 @@
 import React from 'react';
 import { Drawer, DrawerItem, IndexPath } from '@ui-kitten/components';
 
-export const DrawerSimpleUsageShowcase = () => {
+export const DrawerSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
 

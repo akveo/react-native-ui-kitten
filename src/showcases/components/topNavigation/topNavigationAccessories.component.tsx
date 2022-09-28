@@ -1,58 +1,67 @@
 import React from 'react';
-import { Icon, Layout, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import {
+  Icon,
+  IconElement,
+  Layout,
+  MenuItem,
+  OverflowMenu,
+  TopNavigation,
+  TopNavigationAction,
+} from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
+import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 
-const BackIcon = (props) => (
+const BackIcon = (props): IconElement => (
   <Icon
     {...props}
     name='arrow-back'
   />
 );
 
-const EditIcon = (props) => (
+const EditIcon = (props): IconElement => (
   <Icon
     {...props}
     name='edit'
   />
 );
 
-const MenuIcon = (props) => (
+const MenuIcon = (props): IconElement => (
   <Icon
     {...props}
     name='more-vertical'
   />
 );
 
-const InfoIcon = (props) => (
+const InfoIcon = (props): IconElement => (
   <Icon
     {...props}
     name='info'
   />
 );
 
-const LogoutIcon = (props) => (
+const LogoutIcon = (props): IconElement => (
   <Icon
     {...props}
     name='log-out'
   />
 );
 
-export const TopNavigationAccessoriesShowcase = () => {
+export const TopNavigationAccessoriesShowcase = (): React.ReactElement => {
 
   const [menuVisible, setMenuVisible] = React.useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu = (): void => {
     setMenuVisible(!menuVisible);
   };
 
-  const renderMenuAction = () => (
+  const renderMenuAction = (): React.ReactElement => (
     <TopNavigationAction
       icon={MenuIcon}
       onPress={toggleMenu}
     />
   );
 
-  const renderRightActions = () => (
+  const renderRightActions = (): React.ReactElement => (
     <>
       <TopNavigationAction icon={EditIcon} />
       <OverflowMenu
@@ -72,7 +81,7 @@ export const TopNavigationAccessoriesShowcase = () => {
     </>
   );
 
-  const renderBackAction = () => (
+  const renderBackAction = (): TouchableWebElement => (
     <TopNavigationAction icon={BackIcon} />
   );
 

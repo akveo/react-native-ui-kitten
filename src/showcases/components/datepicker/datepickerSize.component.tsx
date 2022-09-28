@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Datepicker, Layout } from '@ui-kitten/components';
+import { Datepicker, DatepickerProps, Layout } from '@ui-kitten/components';
 
-const useDatepickerState = (initialDate = null) => {
+const useDatepickerState = (initialDate = null): DatepickerProps => {
   const [date, setDate] = React.useState(initialDate);
   return { date, onSelect: setDate };
 };
 
-export const DatepickerSizeShowcase = () => {
+export const DatepickerSizeShowcase = (): React.ReactElement => {
 
   const smallDatepickerState = useDatepickerState();
   const mediumDatepickerState = useDatepickerState();

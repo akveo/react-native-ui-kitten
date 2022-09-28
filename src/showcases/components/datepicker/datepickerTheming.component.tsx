@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Datepicker, Layout, Text } from '@ui-kitten/components';
 
-export const DatepickerThemingShowcase = () => {
+export const DatepickerThemingShowcase = (): React.ReactElement => {
 
   const [date, setDate] = React.useState(new Date());
 

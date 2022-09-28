@@ -1,27 +1,27 @@
 import React from 'react';
-import { Icon, Layout, Menu, MenuItem } from '@ui-kitten/components';
+import { Icon, IconElement, Layout, Menu, MenuItem, MenuProps } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-const ForwardIcon = (props) => (
+const ForwardIcon = (props): IconElement => (
   <Icon
     {...props}
     name='arrow-ios-forward'
   />
 );
 
-const useMenuState = (initialState = null) => {
+const useMenuState = (initialState = null): MenuProps => {
   const [selectedIndex, setSelectedIndex] = React.useState(initialState);
   return { selectedIndex, onSelect: setSelectedIndex };
 };
 
-export const MenuThemingShowcase = () => {
+export const MenuThemingShowcase = (): React.ReactElement => {
 
   const leftMenuState = useMenuState();
   const rightMenuState = useMenuState();

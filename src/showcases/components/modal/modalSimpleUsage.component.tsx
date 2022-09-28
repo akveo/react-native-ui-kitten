@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Card, Layout, Modal, Text } from '@ui-kitten/components';
 
-export const ModalSimpleUsageShowcase = () => {
+export const ModalSimpleUsageShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
 

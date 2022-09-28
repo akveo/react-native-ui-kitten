@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import {
   Button,
-  Icon,
+  Icon, IconElement,
   Input,
   Layout,
   MenuItem,
@@ -12,28 +12,28 @@ import {
   Tooltip,
 } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-const HeartIcon = (props) => (
+const HeartIcon = (props): IconElement => (
   <Icon
     {...props}
     name='heart'
   />
 );
 
-const ForwardIcon = (props) => (
+const ForwardIcon = (props): IconElement => (
   <Icon
     {...props}
     name='arrow-ios-forward'
   />
 );
 
-export const IconWithinComponentsShowcase = () => {
+export const IconWithinComponentsShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
@@ -41,19 +41,19 @@ export const IconWithinComponentsShowcase = () => {
   const [menuVisible, setMenuVisible] = React.useState(false);
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
 
-  const toggleSecureEntry = () => {
+  const toggleSecureEntry = (): void => {
     setSecureTextEntry(!secureTextEntry);
   };
 
-  const toggleTooltip = () => {
+  const toggleTooltip = (): void => {
     setTooltipVisible(!tooltipVisible);
   };
 
-  const toggleMenu = () => {
+  const toggleMenu = (): void => {
     setMenuVisible(!menuVisible);
   };
 
-  const renderInputIcon = (props) => (
+  const renderInputIcon = (props): React.ReactElement => (
     <TouchableWithoutFeedback onPress={toggleSecureEntry}>
       <Icon
         {...props}
@@ -62,7 +62,7 @@ export const IconWithinComponentsShowcase = () => {
     </TouchableWithoutFeedback>
   );
 
-  const renderTooltipButton = () => (
+  const renderTooltipButton = (): React.ReactElement => (
     <Button
       style={styles.button}
       accessoryLeft={HeartIcon}
@@ -72,7 +72,7 @@ export const IconWithinComponentsShowcase = () => {
     </Button>
   );
 
-  const renderMenuButton = () => (
+  const renderMenuButton = (): React.ReactElement => (
     <Button
       style={styles.button}
       accessoryLeft={HeartIcon}

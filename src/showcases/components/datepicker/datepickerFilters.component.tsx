@@ -1,19 +1,19 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Datepicker, Layout } from '@ui-kitten/components';
+import { Datepicker, DatepickerProps, Layout } from '@ui-kitten/components';
 
-const useDatepickerState = (initialDate = null) => {
+const useDatepickerState = (initialDate = null): DatepickerProps => {
   const [date, setDate] = React.useState(initialDate);
   return { date, onSelect: setDate };
 };
 
-const filter = (date) => date.getDay() !== 0 && date.getDay() !== 6;
+const filter = (date): boolean => date.getDay() !== 0 && date.getDay() !== 6;
 
 const now = new Date();
 const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
 const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
 
-export const DatepickerFiltersShowcase = () => {
+export const DatepickerFiltersShowcase = (): React.ReactElement => {
 
   const minMaxPickerState = useDatepickerState();
   const filterPickerState = useDatepickerState();

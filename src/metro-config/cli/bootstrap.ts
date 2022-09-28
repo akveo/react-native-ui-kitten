@@ -15,6 +15,7 @@ ui-kitten bootstrap @eva-design/eva
 ui-kitten bootstrap @eva-design/eva ./path-to/mapping.json
 `;
 
+// eslint-disable-next-line no-restricted-syntax
 export default (program: CommanderStatic): void => {
   program.command('bootstrap <evaPackage> [mappingPath]')
     .description(BOOTSTRAP_COMMAND_DESCRIPTION)
