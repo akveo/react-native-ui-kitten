@@ -30,7 +30,6 @@ import {
   CalendarRange,
   CalendarViewModes,
 } from '../calendar/type';
-import { Datepicker } from './datepicker.component';
 
 jest.mock('react-native', () => {
   const ActualReactNative = jest.requireActual('react-native');
@@ -57,7 +56,7 @@ describe('@range-datepicker: component checks', () => {
 
     const onSelect = (nextRange: CalendarRange<Date>): void => {
       setRange(nextRange);
-      props.onSelect && props.onSelect(nextRange);
+      props.onSelect?.(nextRange);
     };
 
     return (
@@ -74,6 +73,8 @@ describe('@range-datepicker: component checks', () => {
       </ApplicationProvider>
     );
   });
+
+  TestRangeDatepicker.displayName = 'TestRangeDatepicker';
 
   /*
    * In this test:
@@ -117,7 +118,7 @@ describe('@range-datepicker: component checks', () => {
     const component = render(
       <TestRangeDatepicker label={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -130,7 +131,7 @@ I love Babel
     const component = render(
       <TestRangeDatepicker label={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -151,7 +152,7 @@ I love Babel
     const component = render(
       <TestRangeDatepicker caption={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,

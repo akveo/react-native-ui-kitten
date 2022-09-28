@@ -120,6 +120,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   private popoverRef = React.createRef<Popover>();
   private inputRef = React.createRef<Input>();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
   }
@@ -149,8 +150,9 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   };
 
   public componentDidUpdate(prevProps: AutocompleteProps): void {
+    const { listVisible } = this.state;
     const isChildCountChanged: boolean = this.data.length !== React.Children.count(prevProps.children);
-    const shouldBecomeVisible: boolean = !this.state.listVisible && this.isFocused() && isChildCountChanged;
+    const shouldBecomeVisible: boolean = !listVisible && this.isFocused() && isChildCountChanged;
 
     shouldBecomeVisible && this.setState({ listVisible: shouldBecomeVisible });
   }

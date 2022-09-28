@@ -73,7 +73,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     visible: false,
   };
 
-  protected calendarRef = React.createRef<any>(); // FIXME: ts
+  protected calendarRef = React.createRef<BaseDatepickerComponent<P>>();
 
   public scrollToToday = (): void => {
     this.calendarRef.current?.scrollToToday();
@@ -111,7 +111,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
 
-  private getComponentStyle = (style: StyleType) => {
+  private getComponentStyle = (style: StyleType): StyleType => {
     const {
       textMarginHorizontal,
       textFontFamily,
@@ -178,27 +178,27 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   private onPress = (event: GestureResponderEvent): void => {
     this.setPickerVisible();
-    this.props.onPress && this.props.onPress(event);
+    this.props.onPress?.(event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn && this.props.onPressIn(event);
+    this.props.onPressIn?.(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut && this.props.onPressOut(event);
+    this.props.onPressOut?.(event);
   };
 
   private onPickerVisible = (): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onFocus && this.props.onFocus();
+    this.props.onFocus?.();
   };
 
   private onPickerInvisible = (): void => {
     this.props.eva.dispatch([]);
-    this.props.onBlur && this.props.onBlur();
+    this.props.onBlur?.();
   };
 
   private setPickerVisible = (): void => {

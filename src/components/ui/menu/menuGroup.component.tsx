@@ -125,7 +125,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue).start();
-      this.props.onPress && this.props.onPress(descriptor, event);
+      this.props.onPress?.(descriptor, event);
     }
   };
 

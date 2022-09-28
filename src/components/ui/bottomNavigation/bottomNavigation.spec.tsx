@@ -33,7 +33,7 @@ import { TabIndicator } from '../shared/tabIndicator.component';
 
 describe('@bottom-navigation-tab: component checks', () => {
 
-  const TestBottomNavigationTab = (props?: BottomNavigationTabProps) => (
+  const TestBottomNavigationTab = (props?: BottomNavigationTabProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -43,7 +43,7 @@ describe('@bottom-navigation-tab: component checks', () => {
   );
 
   it('should render component passed to icon prop', () => {
-    const Icon = (props?: Partial<ImageProps>) => (
+    const Icon = (props?: Partial<ImageProps>): JSX.Element => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
@@ -72,7 +72,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     const component = render(
       <TestBottomNavigationTab title={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -85,7 +85,7 @@ I love Babel
     const component = render(
       <TestBottomNavigationTab title={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -98,7 +98,7 @@ I love Babel
     const component = render(
       <TestBottomNavigationTab icon={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -132,12 +132,12 @@ I love Babel
 
 describe('@bottom-navigation: component checks', () => {
 
-  const TestBottomNavigation = (props?: Partial<BottomNavigationProps>) => {
+  const TestBottomNavigation = (props?: Partial<BottomNavigationProps>): JSX.Element => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onSelect = (index: number): void => {
       setSelectedIndex(index);
-      props.onSelect && props.onSelect(index);
+      props.onSelect?.(index);
     };
 
     return (
@@ -182,8 +182,9 @@ describe('@bottom-navigation: component checks', () => {
   });
 
   it('should render tab indicator correctly', () => {
+    const styles = { width: 99, backgroundColor: 'red' };
     const component = render(
-      <TestBottomNavigation indicatorStyle={{ width: 99, backgroundColor: 'red' }} />,
+      <TestBottomNavigation indicatorStyle={styles} />,
     );
 
     const el = component.queryByTestId('indicator body');

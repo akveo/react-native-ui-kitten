@@ -19,7 +19,7 @@ import {
 
 describe('@layout: component checks', () => {
 
-  const TestLayout = (props?: LayoutProps) => (
+  const TestLayout = (props?: LayoutProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -32,7 +32,7 @@ describe('@layout: component checks', () => {
     const component = render(
       <TestLayout>
         <Text>
-I love Babel
+          I love Babel
         </Text>
       </TestLayout>,
     );

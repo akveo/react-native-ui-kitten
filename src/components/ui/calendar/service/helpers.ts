@@ -19,7 +19,7 @@ export const batch = <T>(target: T[], batchSize: number, offset = 0): T[][] => {
 /**
  * returns array with numbers from zero to bound.
  * */
-export const range = <T>(bound: number, producer: (number) => T = i => i) => {
+export const range = <T>(bound: number, producer: (number) => T = i => i): T[] => {
   const arr: T[] = [];
 
   for (let i = 0; i < bound; i++) {

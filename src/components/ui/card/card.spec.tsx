@@ -25,7 +25,7 @@ import {
 
 describe('@card: component checks', () => {
 
-  const TestCard = (props?: Partial<CardProps>) => (
+  const TestCard = (props?: Partial<CardProps>): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -38,7 +38,7 @@ describe('@card: component checks', () => {
     const component = render(
       <TestCard>
         <Text>
-I love Babel
+          I love Babel
         </Text>
       </TestCard>,
     );
@@ -50,7 +50,7 @@ I love Babel
     const component = render(
       <TestCard header={props => (
         <Text {...props}>
-Test Card Header
+          Test Card Header
         </Text>
       )}
       />,
@@ -63,7 +63,7 @@ Test Card Header
     const component = render(
       <TestCard header={(
         <Text>
-Test Card Header
+          Test Card Header
         </Text>
       )}
       />,
@@ -76,7 +76,7 @@ Test Card Header
     const component = render(
       <TestCard footer={props => (
         <Text {...props}>
-Test Card Footer
+          Test Card Footer
         </Text>
       )}
       />,
@@ -89,7 +89,7 @@ Test Card Footer
     const component = render(
       <TestCard footer={(
         <Text>
-Test Card Footer
+          Test Card Footer
         </Text>
       )}
       />,
@@ -102,7 +102,7 @@ Test Card Footer
     const component = render(
       <TestCard accent={props => (
         <Text {...props}>
-Test Card Accent
+          Test Card Accent
         </Text>
       )}
       />,
@@ -115,7 +115,7 @@ Test Card Accent
     const component = render(
       <TestCard footer={(
         <Text>
-Test Card Accent
+          Test Card Accent
         </Text>
       )}
       />,

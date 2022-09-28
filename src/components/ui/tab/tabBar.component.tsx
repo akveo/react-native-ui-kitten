@@ -140,10 +140,10 @@ export class TabBar extends React.Component<TabBarProps> {
   }
 
   private onTabSelect = (index: number): void => {
-    this.props.onSelect && this.props.onSelect(index);
+    this.props.onSelect?.(index);
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       indicatorHeight,
       indicatorBorderRadius,

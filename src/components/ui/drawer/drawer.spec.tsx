@@ -31,7 +31,7 @@ import {
 
 describe('@drawer-item: component checks', () => {
 
-  const TestDrawerItem = (props?: DrawerItemProps) => (
+  const TestDrawerItem = (props?: DrawerItemProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -52,7 +52,7 @@ describe('@drawer-item: component checks', () => {
     const component = render(
       <TestDrawerItem title={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -65,7 +65,7 @@ I love Babel
     const component = render(
       <TestDrawerItem title={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -148,7 +148,7 @@ I love Babel
 
 describe('@drawer: component checks', () => {
 
-  const TestDrawer = (props?: DrawerProps) => (
+  const TestDrawer = (props?: DrawerProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -173,7 +173,7 @@ describe('@drawer: component checks', () => {
     const component = render(
       <TestDrawer header={() => (
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -186,7 +186,7 @@ I love Babel
     const component = render(
       <TestDrawer header={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -199,7 +199,7 @@ I love Babel
     const component = render(
       <TestDrawer footer={() => (
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -212,7 +212,7 @@ I love Babel
     const component = render(
       <TestDrawer footer={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,

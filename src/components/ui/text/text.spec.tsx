@@ -18,7 +18,7 @@ import {
 
 describe('@text: component checks', () => {
 
-  const TestText = (props?: TextProps) => (
+  const TestText = (props?: TextProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -30,7 +30,7 @@ describe('@text: component checks', () => {
   it('should render text passed to children', () => {
     const component = render(
       <TestText>
-I love Babel
+        I love Babel
       </TestText>,
     );
 
@@ -41,7 +41,7 @@ I love Babel
     const component = render(
       <TestText>
         <Text>
-I love Babel
+          I love Babel
         </Text>
       </TestText>,
     );

@@ -39,6 +39,8 @@ describe('@input: component checks', () => {
     </ApplicationProvider>
   ));
 
+  TestInput.displayName = 'TestInput';
+
   it('should be able to call focus via ref', () => {
     const componentRef: React.RefObject<Input> = React.createRef();
     render(
@@ -104,7 +106,7 @@ describe('@input: component checks', () => {
     const component = render(
       <TestInput label={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -117,7 +119,7 @@ I love Babel
     const component = render(
       <TestInput label={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -127,9 +129,9 @@ I love Babel
   });
 
   it('should render text passed to caption prop', () => {
-    const renderCaption = () => (
+    const renderCaption = (): JSX.Element => (
       <Text>
-I love Babel
+        I love Babel
       </Text>
     );
 
@@ -143,7 +145,7 @@ I love Babel
   it('should render pure JSX component passed to caption prop', () => {
     const renderCaption = (
       <Text>
-I love Babel
+        I love Babel
       </Text>
     );
 

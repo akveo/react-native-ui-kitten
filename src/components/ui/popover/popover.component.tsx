@@ -10,6 +10,8 @@ import {
   BackHandler,
   NativeEventSubscription,
   Platform,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import {
   Frame,
@@ -19,7 +21,7 @@ import {
   RenderFCProp,
   Overwrite,
 } from '../../devsupport';
-import { ModalService } from '../../theme';
+import { ModalPresentingConfig, ModalService } from '../../theme';
 import { ModalProps } from '../modal/modal.component';
 import {
   PopoverView,
@@ -117,12 +119,12 @@ export class Popover extends React.Component<PopoverProps, State> {
     return PopoverPlacements.parse(this.props.placement);
   }
 
-  private get contentFlexPosition() {
+  private get contentFlexPosition(): StyleProp<ViewStyle> {
     const { x: left, y: top } = this.contentPosition;
     return { left, top };
   }
 
-  private get backdropConfig() {
+  private get backdropConfig(): ModalPresentingConfig {
     const { onBackdropPress, backdropStyle } = this.props;
     return {
       onBackdropPress,
@@ -145,7 +147,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     return false;
   };
 
-  public componentDidUpdate(prevProps: PopoverProps): void {
+  public componentDidUpdate(): void {
     if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
       return;
@@ -171,7 +173,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
-    this.state.childFrame = childFrame;
+    this.setState({ childFrame });
 
     if (!this.modalId && this.props.visible) {
       this.show();
@@ -184,7 +186,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   };
 
   private onContentMeasure = (anchorFrame: Frame): void => {
-    this.state.anchorFrame = anchorFrame;
+    this.setState({ anchorFrame });
 
     const placementOptions: PlacementOptions = this.findPlacementOptions(anchorFrame, this.state.childFrame);
     this.actualPlacement = this.placementService.find(this.preferredPlacement, placementOptions);

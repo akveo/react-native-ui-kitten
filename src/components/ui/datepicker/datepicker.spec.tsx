@@ -52,7 +52,7 @@ describe('@datepicker: component checks', () => {
 
     const onSelect = (nextDate: Date): void => {
       setDate(nextDate);
-      props.onSelect && props.onSelect(nextDate);
+      props.onSelect?.(nextDate);
     };
 
     return (
@@ -69,6 +69,8 @@ describe('@datepicker: component checks', () => {
       </ApplicationProvider>
     );
   });
+
+  TestDatepicker.displayName = 'TestDatepicker';
 
   /*
    * In this test:
@@ -112,7 +114,7 @@ describe('@datepicker: component checks', () => {
     const component = render(
       <TestDatepicker label={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -125,7 +127,7 @@ I love Babel
     const component = render(
       <TestDatepicker placeholder={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -146,7 +148,7 @@ I love Babel
     const component = render(
       <TestDatepicker placeholder={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -159,7 +161,7 @@ I love Babel
     const component = render(
       <TestDatepicker label={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -180,7 +182,7 @@ I love Babel
     const component = render(
       <TestDatepicker caption={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,

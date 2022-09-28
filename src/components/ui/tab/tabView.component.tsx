@@ -79,15 +79,11 @@ export class TabView extends React.Component<TabViewProps> {
   private tabBarRef = React.createRef<TabBar>();
 
   private onBarSelect = (index: number): void => {
-    this.props.onSelect && this.props.onSelect(index);
-  };
-
-  private onPagerOffsetChange = (offset: number): void => {
-
+    this.props.onSelect?.(index);
   };
 
   private onPagerSelect = (index: number): void => {
-    this.props.onSelect && this.props.onSelect(index);
+    this.props.onSelect?.(index);
   };
 
   private renderComponentChild = (element: TabElement, index: number): TabViewChildElement => {
@@ -133,7 +129,6 @@ export class TabView extends React.Component<TabViewProps> {
           style={[styles.container, style]}
           selectedIndex={selectedIndex}
           shouldLoadComponent={this.props.shouldLoadComponent}
-          onOffsetChange={this.onPagerOffsetChange}
           onSelect={this.onPagerSelect}
         >
           {contents}

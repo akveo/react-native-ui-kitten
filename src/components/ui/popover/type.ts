@@ -127,7 +127,7 @@ export class Offsets {
     }
   }
 
-  private static typeOf(value: any): value is Offset {
+  private static typeOf(value: Offset | string): value is Offset {
     const { rawValue } = (<Offset>value);
 
     return rawValue !== undefined;
@@ -677,7 +677,7 @@ export class PopoverPlacements {
     }
   }
 
-  private static typeOf(value: any): value is PopoverPlacement {
+  private static typeOf(value: PopoverPlacement | string): value is PopoverPlacement {
     const { rawValue } = (<PopoverPlacement>value);
 
     return rawValue !== undefined;

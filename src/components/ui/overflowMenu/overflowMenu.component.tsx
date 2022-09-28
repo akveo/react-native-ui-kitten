@@ -123,7 +123,7 @@ export class OverflowMenu extends React.Component<OverflowMenuProps> {
     this.popoverRef.current?.hide();
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const { indicatorBackgroundColor, ...containerParameters } = source;
 
     return {

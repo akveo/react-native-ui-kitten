@@ -89,6 +89,8 @@ describe('@overflow-menu: component checks', () => {
     );
   });
 
+  TestOverflowMenu.displayName = 'TestOverflowMenu';
+
   it('should render element passed to `anchor` prop', () => {
     const component = render(
       <TestOverflowMenu />,
@@ -134,8 +136,9 @@ describe('@overflow-menu: component checks', () => {
   });
 
   it('should style backdrop with backdropStyle prop', async () => {
+    const styles = { backgroundColor: 'red' };
     const component = render(
-      <TestOverflowMenu backdropStyle={{ backgroundColor: 'red' }} />,
+      <TestOverflowMenu backdropStyle={styles} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));

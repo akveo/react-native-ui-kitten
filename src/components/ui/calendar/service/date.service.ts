@@ -12,7 +12,7 @@ export abstract class DateService<D> {
 
   protected locale: string;
 
-  public setLocale(locale: any) {
+  public setLocale(locale: string): void {
     this.locale = locale;
   }
 
