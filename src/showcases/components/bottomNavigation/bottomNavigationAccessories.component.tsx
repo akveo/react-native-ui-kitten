@@ -1,34 +1,34 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
+import { BottomNavigation, BottomNavigationProps, BottomNavigationTab, Icon, IconElement } from '@ui-kitten/components';
 
-const PersonIcon = (props) => (
+const PersonIcon = (props): IconElement => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-const BellIcon = (props) => (
+const BellIcon = (props): IconElement => (
   <Icon
     {...props}
     name='bell-outline'
   />
 );
 
-const EmailIcon = (props) => (
+const EmailIcon = (props): IconElement => (
   <Icon
     {...props}
     name='email-outline'
   />
 );
 
-const useBottomNavigationState = (initialState = 0) => {
+const useBottomNavigationState = (initialState = 0): BottomNavigationProps => {
   const [selectedIndex, setSelectedIndex] = React.useState(initialState);
   return { selectedIndex, onSelect: setSelectedIndex };
 };
 
-export const BottomNavigationAccessoriesShowcase = () => {
+export const BottomNavigationAccessoriesShowcase = (): React.ReactElement => {
 
   const topState = useBottomNavigationState();
   const bottomState = useBottomNavigationState();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
-import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
+import { Autocomplete, AutocompleteItem, Icon, IconElement } from '@ui-kitten/components';
 
 const movies = [
   { title: 'Star Wars' },
@@ -10,35 +10,35 @@ const movies = [
   { title: 'Interstellar' },
 ];
 
-const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
+const filter = (item, query): boolean => item.title.toLowerCase().includes(query.toLowerCase());
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-export const AutocompleteAccessoriesShowcase = () => {
+export const AutocompleteAccessoriesShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState(null);
   const [data, setData] = React.useState(movies);
 
-  const onSelect = (index) => {
+  const onSelect = (index): void => {
     setValue(data[index].title);
   };
 
-  const onChangeText = (query) => {
+  const onChangeText = (query): void => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
   };
 
-  const clearInput = () => {
+  const clearInput = (): void => {
     setValue('');
     setData(movies);
   };
 
-  const renderOption = (item, index) => (
+  const renderOption = (item, index): React.ReactElement => (
     <AutocompleteItem
       key={index}
       title={item.title}
@@ -46,7 +46,7 @@ export const AutocompleteAccessoriesShowcase = () => {
     />
   );
 
-  const renderCloseIcon = (props) => (
+  const renderCloseIcon = (props): React.ReactElement => (
     <TouchableWithoutFeedback onPress={clearInput}>
       <Icon
         {...props}

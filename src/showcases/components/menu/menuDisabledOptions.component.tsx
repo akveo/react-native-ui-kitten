@@ -1,21 +1,21 @@
 import React from 'react';
-import { Icon, Layout, Menu, MenuItem } from '@ui-kitten/components';
+import { Icon, IconElement, Layout, Menu, MenuItem } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-const ForwardIcon = (props) => (
+const ForwardIcon = (props): IconElement => (
   <Icon
     {...props}
     name='arrow-ios-forward'
   />
 );
 
-export const MenuDisabledOptionsShowcase = () => {
+export const MenuDisabledOptionsShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 

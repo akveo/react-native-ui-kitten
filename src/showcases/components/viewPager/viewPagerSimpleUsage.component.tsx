@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Text, ViewPager } from '@ui-kitten/components';
 
-export const ViewPagerSimpleUsageShowcase = () => {
+export const ViewPagerSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 

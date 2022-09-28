@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Layout, Radio } from '@ui-kitten/components';
+import { Layout, Radio, RadioProps } from '@ui-kitten/components';
 
-const useRadioState = (initialCheck = false) => {
+const useRadioState = (initialCheck = false): RadioProps => {
   const [checked, setChecked] = React.useState(initialCheck);
   return { checked, onChange: setChecked };
 };
 
-export const RadioStatusShowcase = () => {
+export const RadioStatusShowcase = (): React.ReactElement => {
 
   const primaryRadioState = useRadioState();
   const successRadioState = useRadioState();

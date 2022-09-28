@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Input } from '@ui-kitten/components';
+import { Input, InputProps } from '@ui-kitten/components';
 
-const useInputState = (initialValue = '') => {
+const useInputState = (initialValue = ''): InputProps => {
   const [value, setValue] = React.useState(initialValue);
   return { value, onChangeText: setValue };
 };
 
-export const InputSizeShowcase = () => {
+export const InputSizeShowcase = (): React.ReactElement => {
 
   const smallInputState = useInputState();
   const mediumInputState = useInputState();
@@ -40,7 +40,7 @@ export const InputSizeShowcase = () => {
 
       <Input
         multiline={true}
-        textStyle={{ minHeight: 64 }}
+        textStyle={styles.inputTextStyle}
         placeholder='Multiline'
         {...multilineInputState}
       />
@@ -52,6 +52,9 @@ export const InputSizeShowcase = () => {
 const styles = StyleSheet.create({
   input: {
     marginVertical: 2,
+  },
+  inputTextStyle: {
+    minHeight: 64,
   },
 });
 

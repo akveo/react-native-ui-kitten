@@ -9,23 +9,23 @@ const movies = [
   { title: 'Interstellar' },
 ];
 
-const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
+const filter = (item, query): boolean => item.title.toLowerCase().includes(query.toLowerCase());
 
-export const AutocompleteSimpleUsageShowcase = () => {
+export const AutocompleteSimpleUsageShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState(null);
   const [data, setData] = React.useState(movies);
 
-  const onSelect = (index) => {
+  const onSelect = (index): void => {
     setValue(movies[index].title);
   };
 
-  const onChangeText = (query) => {
+  const onChangeText = (query): void => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
   };
 
-  const renderOption = (item, index) => (
+  const renderOption = (item, index): React.ReactElement => (
     <AutocompleteItem
       key={index}
       title={item.title}

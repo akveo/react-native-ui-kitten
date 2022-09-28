@@ -1,35 +1,35 @@
 import React from 'react';
-import { Icon, Menu, MenuGroup, MenuItem } from '@ui-kitten/components';
+import { Icon, IconElement, Menu, MenuGroup, MenuItem } from '@ui-kitten/components';
 
-const SmartphoneIcon = (props) => (
+const SmartphoneIcon = (props): IconElement => (
   <Icon
     {...props}
     name='smartphone-outline'
   />
 );
 
-const BrowserIcon = (props) => (
+const BrowserIcon = (props): IconElement => (
   <Icon
     {...props}
     name='browser-outline'
   />
 );
 
-const ColorPaletteIcon = (props) => (
+const ColorPaletteIcon = (props): IconElement => (
   <Icon
     {...props}
     name='color-palette-outline'
   />
 );
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-export const MenuGroupsShowcase = () => {
+export const MenuGroupsShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 

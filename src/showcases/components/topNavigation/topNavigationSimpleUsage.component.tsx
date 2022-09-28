@@ -1,18 +1,18 @@
 import React from 'react';
-import { Icon, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { Icon, IconElement, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
-const BackIcon = (props) => (
+const BackIcon = (props): IconElement => (
   <Icon
     {...props}
     name='arrow-back'
   />
 );
 
-const BackAction = () => (
+const BackAction = (): React.ReactElement => (
   <TopNavigationAction icon={BackIcon} />
 );
 
-export const TopNavigationSimpleUsageShowcase = () => (
+export const TopNavigationSimpleUsageShowcase = (): React.ReactElement => (
   <TopNavigation
     accessoryLeft={BackAction}
     title='Eva Application'
@@ -20,7 +20,8 @@ export const TopNavigationSimpleUsageShowcase = () => (
 );
 
 
-const TopNavigationStyling = () => (
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const TopNavigationStyling = (): React.ReactElement => (
   <TopNavigation
     title={evaProps => (
       <Text {...evaProps}>

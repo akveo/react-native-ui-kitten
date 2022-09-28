@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Select, SelectItem } from '@ui-kitten/components';
 
-export const SelectDisabledOptionsShowcase = () => {
+export const SelectDisabledOptionsShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState();
 

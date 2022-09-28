@@ -2,32 +2,27 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Layout, MenuItem, OverflowMenu, Text } from '@ui-kitten/components';
 
-export const OverflowMenuNoMarkersShowcase = () => {
+export const OverflowMenuNoMarkersShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
   const [selectedTitle, setSelectedTitle] = React.useState('No items selected');
 
-  const onUsersPress = ({ index }) => {
+  const onUsersPress = (): void => {
     setSelectedTitle('Users');
     setVisible(false);
   };
 
-  const onOrdersPress = ({ index }) => {
+  const onOrdersPress = (): void => {
     setSelectedTitle('Orders');
     setVisible(false);
   };
 
-  const onTransactionsPress = ({ index }) => {
+  const onTransactionsPress = (): void => {
     setSelectedTitle('Transactions');
     setVisible(false);
   };
 
-  const onSettingsPress = ({ index }) => {
-    setSelectedTitle('Settings');
-    setVisible(false);
-  };
-
-  const renderToggleButton = () => (
+  const renderToggleButton = (): React.ReactElement => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE MENU
     </Button>

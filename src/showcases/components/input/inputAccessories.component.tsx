@@ -1,24 +1,24 @@
 import React from 'react';
 import { TouchableWithoutFeedback, StyleSheet, View } from 'react-native';
-import { Icon, Input, Text } from '@ui-kitten/components';
+import { Icon, IconElement, Input, Text } from '@ui-kitten/components';
 
-const AlertIcon = (props) => (
+const AlertIcon = (props): IconElement => (
   <Icon
     {...props}
     name='alert-circle-outline'
   />
 );
 
-export const InputAccessoriesShowcase = () => {
+export const InputAccessoriesShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
 
-  const toggleSecureEntry = () => {
+  const toggleSecureEntry = (): void => {
     setSecureTextEntry(!secureTextEntry);
   };
 
-  const renderIcon = (props) => (
+  const renderIcon = (props): React.ReactElement => (
     <TouchableWithoutFeedback onPress={toggleSecureEntry}>
       <Icon
         {...props}
@@ -27,7 +27,7 @@ export const InputAccessoriesShowcase = () => {
     </TouchableWithoutFeedback>
   );
 
-  const renderCaption = () => {
+  const renderCaption = (): React.ReactElement => {
     return (
       <View style={styles.captionContainer}>
         {AlertIcon(styles.captionIcon)}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Datepicker, Layout, NativeDateService } from '@ui-kitten/components';
+import { Datepicker, DatepickerProps, I18nConfig, Layout, NativeDateService } from '@ui-kitten/components';
 
-const useDatepickerState = (initialDate = null) => {
+const useDatepickerState = (initialDate = null): DatepickerProps => {
   const [date, setDate] = React.useState(initialDate);
   return { date, onSelect: setDate };
 };
 
-const i18n = {
+const i18n: I18nConfig = {
   dayNames: {
     short: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
     long: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
@@ -34,7 +34,7 @@ const i18n = {
 const localeDateService = new NativeDateService('ru', { i18n, startDayOfWeek: 1 });
 const formatDateService = new NativeDateService('en', { format: 'DD.MM.YYYY' });
 
-export const DatepickerLocaleSettingsShowcase = () => {
+export const DatepickerLocaleSettingsShowcase = (): React.ReactElement => {
 
   const dateFormatPickerState = useDatepickerState();
   const localePickerState = useDatepickerState();

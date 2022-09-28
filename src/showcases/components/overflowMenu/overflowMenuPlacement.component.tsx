@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, IndexPath, Layout, MenuItem, OverflowMenu, Select, SelectItem } from '@ui-kitten/components';
+import { Button, IndexPath, MenuItem, OverflowMenu, Select, SelectItem } from '@ui-kitten/components';
 
 const placements = [
   'top',
@@ -17,23 +17,23 @@ const placements = [
   'right end',
 ];
 
-export const OverflowMenuPlacementShowcase = () => {
+export const OverflowMenuPlacementShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
   const [placementIndex, setPlacementIndex] = React.useState(new IndexPath(1, 0));
   const placement = placements[placementIndex.row];
 
-  const onPlacementSelect = (index) => {
+  const onPlacementSelect = (index): void => {
     setPlacementIndex(index);
   };
 
-  const renderToggleButton = () => (
+  const renderToggleButton = (): React.ReactElement => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE MENU
     </Button>
   );
 
-  const renderPlacementItem = (title) => (
+  const renderPlacementItem = (title): React.ReactElement => (
     <SelectItem title={title} />
   );
 

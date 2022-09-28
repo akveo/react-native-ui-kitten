@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Calendar, Layout, RangeCalendar, Text } from '@ui-kitten/components';
 
-export const CalendarThemingShowcase = () => {
+export const CalendarThemingShowcase = (): React.ReactElement => {
 
   const [date, setDate] = React.useState(new Date());
   const [range, setRange] = React.useState({});

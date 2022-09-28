@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Layout, Text } from '@ui-kitten/components';
 
-const Header = (props) => (
+const Header = (props): React.ReactElement => (
   <View {...props}>
     <Text category='h6'>
 Maldives
@@ -13,9 +13,10 @@ By Wikipedia
   </View>
 );
 
-const Footer = (props) => (
+const Footer = (props): React.ReactElement => (
   <View
     {...props}
+    // eslint-disable-next-line react/prop-types
     style={[props.style, styles.footerContainer]}
   >
     <Button
@@ -34,7 +35,7 @@ const Footer = (props) => (
   </View>
 );
 
-export const CardAccessoriesShowcase = () => (
+export const CardAccessoriesShowcase = (): React.ReactElement => (
   <>
     <Layout
       style={styles.topContainer}

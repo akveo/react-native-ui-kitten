@@ -1,7 +1,7 @@
 import React from 'react';
 import { CheckBox } from '@ui-kitten/components';
 
-export const CheckboxSimpleUsageShowcase = () => {
+export const CheckboxSimpleUsageShowcase = (): React.ReactElement => {
 
   const [checked, setChecked] = React.useState(false);
 

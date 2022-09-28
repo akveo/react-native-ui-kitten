@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
-export const SelectSimpleUsageShowcase = () => {
+export const SelectSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
 

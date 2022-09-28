@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Radio } from '@ui-kitten/components';
 
-export const RadioStatesShowcase = () => {
+export const RadioStatesShowcase = (): React.ReactElement => {
 
   const [activeChecked, setActiveChecked] = React.useState(false);
 

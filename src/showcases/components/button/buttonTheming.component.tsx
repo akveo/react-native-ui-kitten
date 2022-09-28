@@ -1,21 +1,22 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Icon, Layout, Spinner } from '@ui-kitten/components';
+import { Button, Icon, IconElement, Layout, Spinner } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-const LoadingIndicator = (props) => (
+const LoadingIndicator = (props): React.ReactElement => (
+  // eslint-disable-next-line react/prop-types
   <View style={[props.style, styles.indicator]}>
     <Spinner size='small' />
   </View>
 );
 
-export const ButtonThemingShowcase = () => (
+export const ButtonThemingShowcase = (): React.ReactElement => (
   <Layout
     style={styles.container}
     level='1'

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Layout } from '@ui-kitten/components';
 
-export const AvatarSizeShowcase = () => (
+export const AvatarSizeShowcase = (): React.ReactElement => (
   <Layout
     style={styles.container}
     level='1'

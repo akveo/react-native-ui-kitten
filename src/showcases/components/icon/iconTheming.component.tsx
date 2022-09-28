@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Icon, Layout } from '@ui-kitten/components';
+import { Button, Icon, IconElement, Layout } from '@ui-kitten/components';
 
-export const IconThemingShowcase = () => {
+export const IconThemingShowcase = (): React.ReactElement => {
 
   const zoomIconRef = React.useRef();
   const pulseIconRef = React.useRef();
@@ -14,7 +14,7 @@ export const IconThemingShowcase = () => {
     shakeIconRef.current.startAnimation();
   }, []);
 
-  const renderZoomIcon = (props) => (
+  const renderZoomIcon = (props): IconElement => (
     <Icon
       {...props}
       ref={zoomIconRef}
@@ -24,7 +24,7 @@ export const IconThemingShowcase = () => {
     />
   );
 
-  const renderPulseIcon = (props) => (
+  const renderPulseIcon = (props): IconElement => (
     <Icon
       {...props}
       ref={pulseIconRef}
@@ -34,7 +34,7 @@ export const IconThemingShowcase = () => {
     />
   );
 
-  const renderShakeIcon = (props) => (
+  const renderShakeIcon = (props): IconElement => (
     <Icon
       {...props}
       ref={shakeIconRef}

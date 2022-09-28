@@ -1,15 +1,15 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, ButtonGroup, Icon, Layout } from '@ui-kitten/components';
+import { Button, ButtonGroup, Icon, IconElement, Layout } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-export const ButtonGroupWithIconsShowcase = () => (
+export const ButtonGroupWithIconsShowcase = (): React.ReactElement => (
   <Layout
     style={styles.container}
     level='1'

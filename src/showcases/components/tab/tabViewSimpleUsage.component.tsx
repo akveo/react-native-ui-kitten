@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Tab, TabView, Text } from '@ui-kitten/components';
 
-export const TabViewSimpleUsageShowcase = () => {
+export const TabViewSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 

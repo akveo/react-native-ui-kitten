@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Layout, Text } from '@ui-kitten/components';
 
-export const ButtonSimpleUsageShowcase = () => {
+export const ButtonSimpleUsageShowcase = (): React.ReactElement => {
 
   const [counter, setCounter] = React.useState(0);
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Layout, Spinner } from '@ui-kitten/components';
 
-export const SpinnerStatusesShowcase = () => (
+export const SpinnerStatusesShowcase = (): React.ReactElement => (
   <Layout
     style={styles.container}
     level='1'

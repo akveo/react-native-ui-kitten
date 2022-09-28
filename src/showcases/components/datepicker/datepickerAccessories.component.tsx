@@ -1,15 +1,15 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Datepicker, Icon, Layout } from '@ui-kitten/components';
+import { Datepicker, Icon, IconElement, Layout } from '@ui-kitten/components';
 
-const CalendarIcon = (props) => (
+const CalendarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='calendar'
   />
 );
 
-export const DatepickerAccessoriesShowcase = () => {
+export const DatepickerAccessoriesShowcase = (): React.ReactElement => {
 
   const [date, setDate] = React.useState(new Date());
 

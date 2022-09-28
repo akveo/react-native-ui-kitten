@@ -1,22 +1,22 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Icon, Layout, Select, SelectItem } from '@ui-kitten/components';
+import { Icon, IconElement, Layout, Select, SelectItem } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
+const StarIcon = (props): IconElement => (
   <Icon
     {...props}
     name='star'
   />
 );
 
-const ForwardIcon = (props) => (
+const ForwardIcon = (props): IconElement => (
   <Icon
     {...props}
     name='arrow-ios-forward'
   />
 );
 
-export const SelectAccessoriesShowcase = () => {
+export const SelectAccessoriesShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState();
 

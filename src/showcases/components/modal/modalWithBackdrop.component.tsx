@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Modal, Text } from '@ui-kitten/components';
 
-export const ModalWithBackdropShowcase = () => {
+export const ModalWithBackdropShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
 

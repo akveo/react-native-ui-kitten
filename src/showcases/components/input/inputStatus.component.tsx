@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Input, Layout } from '@ui-kitten/components';
+import { Input, InputProps, Layout } from '@ui-kitten/components';
 
-const useInputState = (initialValue = '') => {
+const useInputState = (initialValue = ''): InputProps => {
   const [value, setValue] = React.useState(initialValue);
   return { value, onChangeText: setValue };
 };
 
-export const InputStatusShowcase = () => {
+export const InputStatusShowcase = (): React.ReactElement => {
 
   const primaryInputState = useInputState();
   const successInputState = useInputState();

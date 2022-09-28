@@ -31,6 +31,7 @@ const mapping: AppMapping = isMappingKey ? (storedMapping as AppMapping) : AppMa
 
 enableScreens();
 
+// eslint-disable-next-line no-restricted-syntax, react/display-name
 export default (): React.ReactElement => {
 
   const [theme, setTheme] = React.useState<AppTheme>(AppTheme.light);
@@ -47,10 +48,12 @@ export default (): React.ReactElement => {
   const applicationProviderConfig: ApplicationProviderProps = {
     mapping: mappings[mapping],
     theme: themes[mapping][theme],
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     customMapping: customMapping,
   };
 
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const themeContextProviderConfig: ThemeContextType = {
     mapping: mapping,
     theme: theme,

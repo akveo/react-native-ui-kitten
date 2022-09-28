@@ -1,31 +1,32 @@
 import React from 'react';
 import { ImageBackground, StyleSheet } from 'react-native';
-import { Divider, Drawer, DrawerItem, Icon } from '@ui-kitten/components';
+import { Divider, Drawer, DrawerItem, Icon, IconElement } from '@ui-kitten/components';
 
-const PersonIcon = (props) => (
+const PersonIcon = (props): IconElement => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-const BellIcon = (props) => (
+const BellIcon = (props): IconElement => (
   <Icon
     {...props}
     name='bell-outline'
   />
 );
 
-const ForwardIcon = (props) => (
+const ForwardIcon = (props): IconElement => (
   <Icon
     {...props}
     name='arrow-ios-forward'
   />
 );
 
-const Header = (props) => (
+const Header = (props): React.ReactElement => (
   <>
     <ImageBackground
+      // eslint-disable-next-line react/prop-types
       style={[props.style, styles.header]}
       source={require('../../assets/icon.png')}
     />
@@ -33,7 +34,7 @@ const Header = (props) => (
   </>
 );
 
-export const DrawerAccessoriesShowcase = () => {
+export const DrawerAccessoriesShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 

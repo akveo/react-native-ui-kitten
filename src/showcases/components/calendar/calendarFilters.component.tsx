@@ -1,19 +1,19 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Calendar, Layout, Text } from '@ui-kitten/components';
+import { Calendar, CalendarProps, Layout, Text } from '@ui-kitten/components';
 
-const useCalendarState = (initialState = null) => {
+const useCalendarState = (initialState = null): CalendarProps => {
   const [date, setDate] = React.useState(initialState);
   return { date, onSelect: setDate };
 };
 
-const filter = (date) => date.getDay() !== 0 && date.getDay() !== 6;
+const filter = (date): boolean => date.getDay() !== 0 && date.getDay() !== 6;
 
 const now = new Date();
 const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
 const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
 
-export const CalendarFiltersShowcase = () => {
+export const CalendarFiltersShowcase = (): React.ReactElement => {
 
   const minMaxCalendarState = useCalendarState();
   const filterCalendarState = useCalendarState();

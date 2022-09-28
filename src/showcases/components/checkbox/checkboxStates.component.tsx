@@ -2,13 +2,13 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { CheckBox, Layout } from '@ui-kitten/components';
 
-export const CheckboxStatesShowcase = () => {
+export const CheckboxStatesShowcase = (): React.ReactElement => {
 
   const [activeChecked, setActiveChecked] = React.useState(false);
   const [indeterminateChecked, setIndeterminateChecked] = React.useState(false);
   const [indeterminate, setIndeterminate] = React.useState(true);
 
-  const onIndeterminateChange = (isChecked, isIndeterminate) => {
+  const onIndeterminateChange = (isChecked, isIndeterminate): void => {
     setIndeterminateChecked(isChecked);
     setIndeterminate(isIndeterminate);
   };
