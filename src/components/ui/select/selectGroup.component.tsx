@@ -71,7 +71,7 @@ export class SelectGroup extends React.Component<SelectGroupProps> {
   private createAccessoryProps = (props: SelectItemProps): CheckBoxProps => {
     return {
       checked: props.selected,
-      onChange: () => props.onPress && props.onPress(props.descriptor),
+      onChange: () => props.onPress?.(props.descriptor),
     };
   };
 

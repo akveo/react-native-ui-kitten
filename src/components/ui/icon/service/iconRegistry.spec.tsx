@@ -7,9 +7,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import { IconRegistryService } from './iconRegistry.service';
-import { IconProvider } from './type';
 
-const TestIcon: IconProvider<any> = {
+const TestIcon = {
   toReactElement: (): React.ReactElement => (
     <View />
   ),

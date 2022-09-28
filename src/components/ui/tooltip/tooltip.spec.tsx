@@ -79,6 +79,8 @@ describe('@tooltip: component checks', () => {
     );
   });
 
+  TestTooltip.displayName = 'TestTooltip';
+
   /*
    * In this test:
    * [0] for `anchor` component
@@ -126,7 +128,7 @@ describe('@tooltip: component checks', () => {
       <TestTooltip>
         {props => (
           <Text {...props}>
-I love Babel
+            I love Babel
           </Text>
         )}
       </TestTooltip>,
@@ -142,7 +144,7 @@ I love Babel
     const childrenComponent = (
       <View>
         <Text>
-I love Babel
+          I love Babel
         </Text>
       </View>
     );
@@ -212,8 +214,9 @@ I love Babel
   });
 
   it('should style backdrop with backdropStyle prop', async () => {
+    const styles = { backgroundColor: 'red' };
     const component = render(
-      <TestTooltip backdropStyle={{ backgroundColor: 'red' }} />,
+      <TestTooltip backdropStyle={styles} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));

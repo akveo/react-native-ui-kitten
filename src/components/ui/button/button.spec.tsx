@@ -28,7 +28,7 @@ import {
 
 describe('@button: component checks', () => {
 
-  const TestButton = (props?: ButtonProps) => (
+  const TestButton = (props?: ButtonProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -52,7 +52,7 @@ I love Babel
       <TestButton>
         {props => (
           <Text {...props}>
-I love Babel
+            I love Babel
           </Text>
         )}
       </TestButton>,
@@ -62,14 +62,14 @@ I love Babel
   });
 
   it('should render components passed to accessoryLeft or accessoryRight props', () => {
-    const AccessoryLeft = (props?: Partial<ImageProps>) => (
+    const AccessoryLeft = (props?: Partial<ImageProps>): JSX.Element => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
       />
     );
 
-    const AccessoryRight = (props?: Partial<ImageProps>) => (
+    const AccessoryRight = (props?: Partial<ImageProps>): JSX.Element => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
@@ -95,12 +95,12 @@ I love Babel
   it('should render accessory from prop as pure JSX element', () => {
     const accessoryLeft = (
       <Text>
-Left accessory
+        Left accessory
       </Text>
     );
     const accessoryRight = (
       <Text>
-Right accessory
+        Right accessory
       </Text>
     );
 
@@ -125,7 +125,9 @@ Right accessory
     );
 
     const component = render(
-      <TestButton children={children} />
+      <TestButton>
+        {children}
+      </TestButton>
     );
 
     expect(component.queryByText('Children component')).toBeTruthy();

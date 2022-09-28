@@ -65,11 +65,11 @@ describe('@popover: component checks', () => {
   const TestPopover = React.forwardRef((props: Partial<PopoverProps>, ref: React.Ref<Popover>) => {
     const [visible, setVisible] = React.useState(props.visible);
 
-    const togglePopover = () => {
+    const togglePopover = (): void => {
       setVisible(!visible);
     };
 
-    const AnchorButton = () => (
+    const AnchorButton = (): JSX.Element => (
       <Button
         testID='@popover/toggle-button'
         title=''
@@ -89,12 +89,14 @@ describe('@popover: component checks', () => {
           {...props}
         >
           <Text>
-I love Babel
+            I love Babel
           </Text>
         </Popover>
       </ApplicationProvider>
     );
   });
+
+  TestPopover.displayName = 'TestPopover';
 
   it('should render element passed to `anchor` prop', () => {
     const component = render(
@@ -139,8 +141,9 @@ I love Babel
   });
 
   it('should style backdrop with backdropStyle prop', async () => {
+    const backdropStyle = { backgroundColor: 'red' };
     const component = render(
-      <TestPopover backdropStyle={{ backgroundColor: 'red' }} />,
+      <TestPopover backdropStyle={backdropStyle} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));

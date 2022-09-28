@@ -52,7 +52,7 @@ describe('@calendar: component checks', () => {
 
     const onSelect = (nextDate: Date | Moment): void => {
       setDate(date);
-      props.onSelect && props.onSelect(nextDate);
+      props.onSelect?.(nextDate);
     };
 
     return (
@@ -69,6 +69,8 @@ describe('@calendar: component checks', () => {
       </ApplicationProvider>
     );
   });
+
+  TestCalendar.displayName = 'TestCalendar';
 
   it('should request date change on day select', () => {
     const onSelect = jest.fn((date: Date) => {

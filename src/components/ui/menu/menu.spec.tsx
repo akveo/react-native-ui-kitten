@@ -35,7 +35,7 @@ jest.useFakeTimers();
 
 describe('@menu-item: component checks', () => {
 
-  const TestMenuItem = (props?: MenuItemProps) => (
+  const TestMenuItem = (props?: MenuItemProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -56,7 +56,7 @@ describe('@menu-item: component checks', () => {
     const component = render(
       <TestMenuItem title={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -69,7 +69,7 @@ I love Babel
     const component = render(
       <TestMenuItem title={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
       />,
@@ -173,7 +173,7 @@ I love Babel
 
 describe('@menu: component checks', () => {
 
-  const TestMenu = (props: MenuProps) => (
+  const TestMenu = (props: MenuProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

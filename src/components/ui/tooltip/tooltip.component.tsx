@@ -115,7 +115,7 @@ export class Tooltip extends React.Component<TooltipProps> {
     this.popoverRef.current?.hide();
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       indicatorBackgroundColor,
       iconWidth,

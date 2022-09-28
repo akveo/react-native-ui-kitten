@@ -15,7 +15,6 @@ import {
 import {
   fireEvent,
   render,
-  RenderAPI,
   waitForElement,
 } from 'react-native-testing-library';
 import {
@@ -48,7 +47,7 @@ jest.mock('react-native', () => {
 
 describe('@autocomplete-item: component checks', () => {
 
-  const TestAutocompleteItem = (props?: AutocompleteItemProps) => (
+  const TestAutocompleteItem = (props?: AutocompleteItemProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -172,24 +171,24 @@ describe('@autocomplete: component checks', () => {
     { title: 'Option 2' },
   ];
 
-  const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
+  const filter = (item, query): { title: string } => item.title.toLowerCase().includes(query.toLowerCase());
 
   const TestAutocomplete = React.forwardRef((props: Partial<AutocompleteProps>, ref: React.Ref<Autocomplete>) => {
     const [value, setValue] = React.useState(props.value);
     const [data, setData] = React.useState(movies);
 
-    const onSelect = (index) => {
+    const onSelect = (index: number): void => {
       setValue(movies[index].title);
-      props.onSelect && props.onSelect(index);
+      props.onSelect?.(index);
     };
 
     const onChangeText = (query: string): void => {
       setValue(query);
       setData(movies.filter(item => filter(item, query)));
-      props.onChangeText && props.onChangeText(query);
+      props.onChangeText?.(query);
     };
 
-    const renderOption = (item, index) => (
+    const renderOption = (item, index): JSX.Element => (
       <AutocompleteItem
         key={index}
         title={item.title}
@@ -213,6 +212,8 @@ describe('@autocomplete: component checks', () => {
       </ApplicationProvider>
     );
   });
+
+  TestAutocomplete.displayName = 'TestAutocomplete';
 
   it('should render TextInput', () => {
     const component = render(

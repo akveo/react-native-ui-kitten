@@ -22,7 +22,7 @@ import {
 
 describe('@avatar: component checks', () => {
 
-  const TestAvatar = (props: Partial<AvatarProps>) => (
+  const TestAvatar = (props: Partial<AvatarProps>): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

@@ -42,7 +42,7 @@ describe('@range-calendar: component checks', () => {
 
     const onSelect = (nextRange: CalendarRange<Date>): void => {
       setRange(nextRange);
-      props.onSelect && props.onSelect(nextRange);
+      props.onSelect?.(nextRange);
     };
 
     return (
@@ -59,6 +59,8 @@ describe('@range-calendar: component checks', () => {
       </ApplicationProvider>
     );
   });
+
+  TestRangeCalendar.displayName = 'TestRangeCalendar';
 
   it('should call onSelect only with start date', () => {
     const onSelect = jest.fn((range: CalendarRange<Date>) => {

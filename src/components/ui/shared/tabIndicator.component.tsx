@@ -33,11 +33,11 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
   private indicatorWidth = 0;
   private contentOffset: Animated.Value = new Animated.Value(0);
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
   }
 
-  public componentDidUpdate() {
+  public componentDidUpdate(): void {
     const { selectedPosition: index } = this.props;
 
     this.scrollToIndex({
@@ -46,7 +46,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     });
   }
 
-  public componentWillUnmount() {
+  public componentWillUnmount(): void {
     this.contentOffset.removeAllListeners();
   }
 
@@ -58,7 +58,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
    *  animated: boolean | undefined
    * }
    */
-  public scrollToIndex(params: { index: number; animated?: boolean }) {
+  public scrollToIndex(params: { index: number; animated?: boolean }): void {
     const { index, ...rest } = params;
     const offset: number = this.indicatorWidth * index;
 
@@ -73,15 +73,17 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
    *  animated: boolean | undefined
    * }
    */
-  public scrollToOffset(params: { offset: number; animated?: boolean }) {
+  public scrollToOffset(params: { offset: number; animated?: boolean }): void {
     this.createOffsetAnimation(params).start(this.onContentOffsetAnimationStateEnd);
   }
 
-  private onContentOffsetAnimationStateChanged = (state: { value: number }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private onContentOffsetAnimationStateChanged = (state: { value: number }): void => {
     // no-op
   };
 
-  private onContentOffsetAnimationStateEnd = (result: { finished: boolean }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private onContentOffsetAnimationStateEnd = (result: { finished: boolean }): void => {
     // no-op
   };
 
@@ -94,7 +96,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     });
   };
 
-  private onLayout = (event: LayoutChangeEvent) => {
+  private onLayout = (event: LayoutChangeEvent): void => {
     this.indicatorWidth = event.nativeEvent.layout.width;
 
     this.scrollToOffset({
@@ -115,10 +117,11 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
   };
 
   private renderIndicatorLine = (style: StyleProp<ViewStyle>): React.ReactElement => {
+    const styles = [{ width: '100%', alignSelf: 'center', style }] as StyleProp<ViewStyle>;
     return (
       <View
         testID="indicator body"
-        style={[{ width: '100%', alignSelf: 'center' }, style]}
+        style={styles}
       />
     );
   };

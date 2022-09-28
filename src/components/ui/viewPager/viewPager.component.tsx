@@ -25,6 +25,7 @@ import {
   RTLService,
 } from '../../devsupport';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export interface ViewPagerProps<ChildrenProps = {}> extends ViewProps {
   children?: ChildrenWithProps<ChildrenProps>;
   selectedIndex?: number;
@@ -69,6 +70,8 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
 
 const DEFAULT_DURATION = 300;
 
+
+// eslint-disable-next-line @typescript-eslint/ban-types
 export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProps<ChildrenProps>>
   implements PanResponderCallbacks {
 
@@ -123,7 +126,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     this.contentOffset.setValue(state.dx - selectedPageOffset);
   };
 
-  public onPanResponderRelease = (event: GestureResponderEvent, state: PanResponderGestureState) => {
+  public onPanResponderRelease = (event: GestureResponderEvent, state: PanResponderGestureState): void => {
     if (Math.abs(state.vx) >= 0.5 || Math.abs(state.dx) >= 0.5 * this.contentWidth) {
       const i18nOffset: number = RTLService.select(state.dx, -state.dx);
       const index: number = i18nOffset > 0 ? this.props.selectedIndex - 1 : this.props.selectedIndex + 1;

@@ -72,19 +72,19 @@ export class Tab extends React.Component<TabProps> {
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-    this.props.onMouseEnter && this.props.onMouseEnter(event);
+    this.props.onMouseEnter?.(event);
   };
 
   private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onMouseLeave && this.props.onMouseLeave(event);
+    this.props.onMouseLeave?.(event);
   };
 
   private onPress = (): void => {
-    this.props.onSelect && this.props.onSelect(!this.props.selected);
+    this.props.onSelect?.(!this.props.selected);
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       textMarginVertical,
       textFontFamily,

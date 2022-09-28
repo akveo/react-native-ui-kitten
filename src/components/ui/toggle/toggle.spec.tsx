@@ -26,7 +26,7 @@ import {
 
 describe('@toggle: component checks', () => {
 
-  const TestToggle = (props?: ToggleProps) => (
+  const TestToggle = (props?: ToggleProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -72,7 +72,7 @@ describe('@toggle: component checks', () => {
   it('should render text', () => {
     const component = render(
       <TestToggle>
-I love Babel
+        I love Babel
       </TestToggle>,
     );
 
@@ -84,7 +84,7 @@ I love Babel
       <TestToggle>
         {props => (
           <Text {...props}>
-I love Babel
+            I love Babel
           </Text>
         )}
       </TestToggle>,
@@ -98,7 +98,7 @@ I love Babel
       <TestToggle>
         <View>
           <Text>
-I love Babel
+            I love Babel
           </Text>
         </View>
       </TestToggle>,

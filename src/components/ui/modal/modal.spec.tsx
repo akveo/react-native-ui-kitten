@@ -29,7 +29,7 @@ import {
 
 describe('@modal: component checks', () => {
 
-  const TestModal = (props: Partial<ModalProps>) => {
+  const TestModal = (props: Partial<ModalProps>): JSX.Element => {
     const [visible, setVisible] = React.useState(props.visible);
     const [text, setText] = React.useState('I love Babel');
 
@@ -144,8 +144,9 @@ describe('@modal: component checks', () => {
   });
 
   it('should style backdrop with backdropStyle prop', async () => {
+    const styles = { backgroundColor: 'red' };
     const component = render(
-      <TestModal backdropStyle={{ backgroundColor: 'red' }} />,
+      <TestModal backdropStyle={styles} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));

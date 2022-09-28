@@ -38,7 +38,7 @@ import { ReactTestInstance } from 'react-test-renderer';
 
 describe('@tab: component checks', () => {
 
-  const TestTab = (props?: TabProps) => (
+  const TestTab = (props?: TabProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -120,7 +120,7 @@ describe('@tab: component checks', () => {
 
 describe('@tab-bar: component checks', () => {
 
-  const TestTabBar = (props?: Partial<TabBarProps>) => {
+  const TestTabBar = (props?: Partial<TabBarProps>): JSX.Element => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     return (
@@ -170,8 +170,9 @@ describe('@tab-bar: component checks', () => {
   });
 
   it('should render tab indicator correctly', () => {
+    const styles = { width: 99, backgroundColor: 'red' };
     const component = render(
-      <TestTabBar indicatorStyle={{ width: 99, backgroundColor: 'red' }} />,
+      <TestTabBar indicatorStyle={styles} />,
     );
 
     const el = ((
@@ -192,7 +193,7 @@ describe('@tab-bar: component checks', () => {
 
 describe('@tab-view: component checks', () => {
 
-  const TestTabView = (props?: TabViewProps) => (
+  const TestTabView = (props?: TabViewProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -239,8 +240,9 @@ describe('@tab-view: component checks', () => {
   });
 
   it('should render tab indicator correctly', () => {
+    const styles = { width: 99, backgroundColor: 'red' };
     const component = render(
-      <TestTabView indicatorStyle={{ width: 99, backgroundColor: 'red' }} />,
+      <TestTabView indicatorStyle={styles} />,
     );
 
     const el = ((

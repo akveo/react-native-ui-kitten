@@ -84,12 +84,13 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
 @styled('ButtonGroup')
 export class ButtonGroup extends React.Component<ButtonGroupProps> {
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const { dividerBackgroundColor, dividerWidth, ...containerParameters } = source;
 
     return {
       container: {
         ...containerParameters,
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         borderWidth: containerParameters.borderWidth + 0.25,
       },
       button: {

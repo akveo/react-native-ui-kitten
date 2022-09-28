@@ -59,7 +59,7 @@ jest.mock('react-native', () => {
 
 describe('@select-item: component checks', () => {
 
-  const TestSelectItem = (props?: SelectItemProps) => (
+  const TestSelectItem = (props?: SelectItemProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -157,9 +157,9 @@ describe('@select: component checks', () => {
   const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
-    const onSelect = (index: IndexPath | IndexPath[]) => {
+    const onSelect = (index: IndexPath | IndexPath[]): void => {
       setSelectedIndex(index);
-      props.onSelect && props.onSelect(index);
+      props.onSelect?.(index);
     };
 
     return (
@@ -179,6 +179,8 @@ describe('@select: component checks', () => {
       </ApplicationProvider>
     );
   });
+
+  TestSelect.displayName = 'TestSelect';
 
   /*
    * In this test:
@@ -576,9 +578,9 @@ describe('@select: component checks with groups', () => {
   const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
-    const onSelect = (index: IndexPath | IndexPath[]) => {
+    const onSelect = (index: IndexPath | IndexPath[]): void => {
       setSelectedIndex(index);
-      props.onSelect && props.onSelect(index);
+      props.onSelect?.(index);
     };
 
     return (
@@ -604,6 +606,8 @@ describe('@select: component checks with groups', () => {
       </ApplicationProvider>
     );
   });
+
+  TestSelect.displayName = 'TestSelect';
 
   const touchables = {
     findControlTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[0],

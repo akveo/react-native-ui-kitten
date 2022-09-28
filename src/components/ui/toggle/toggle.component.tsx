@@ -247,7 +247,7 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
     }
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const { checked, disabled } = this.props;
 
     const {
@@ -358,7 +358,7 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
     this.ellipseScaleAnimation.setValue(value);
   };
 
-  private toggle = (callback = (nextValue: boolean) => null): void => {
+  private toggle = (callback: (nextValue: boolean) => null): void => {
     const value: number = this.props.checked ? -20 : 20;
 
     this.animateThumbTranslate(value, () => {

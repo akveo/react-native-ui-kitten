@@ -31,7 +31,7 @@ import {
 
 describe('@list-item: component checks', () => {
 
-  const TestListItem = (props?: ListItemProps) => (
+  const TestListItem = (props?: ListItemProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -205,6 +205,8 @@ describe('@list: component checks', () => {
     </ApplicationProvider>
   ),
   );
+
+  TestList.displayName = 'TestList';
 
   it('should render 2 list items', () => {
     const component = render(

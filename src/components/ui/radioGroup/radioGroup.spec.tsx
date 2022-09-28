@@ -23,12 +23,12 @@ import { Radio } from '../radio/radio.component';
 
 describe('@radio-group: component checks', () => {
 
-  const TestRadioGroup = (props?: Partial<RadioGroupProps>) => {
+  const TestRadioGroup = (props?: Partial<RadioGroupProps>): JSX.Element => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onCheckedChange = (index: number): void => {
       setSelectedIndex(index);
-      props.onChange && props.onChange(index);
+      props.onChange?.(index);
     };
 
     return (
@@ -41,10 +41,10 @@ describe('@radio-group: component checks', () => {
           onChange={onCheckedChange}
         >
           <Radio>
-Option 1
+            Option 1
           </Radio>
           <Radio>
-Option 2
+            Option 2
           </Radio>
         </RadioGroup>
       </ApplicationProvider>

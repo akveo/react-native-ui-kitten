@@ -83,15 +83,15 @@ export class Card extends React.Component<CardProps> {
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn && this.props.onPressIn(event);
+    this.props.onPressIn?.(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut && this.props.onPressOut(event);
+    this.props.onPressOut?.(event);
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       bodyPaddingVertical,
       bodyPaddingHorizontal,

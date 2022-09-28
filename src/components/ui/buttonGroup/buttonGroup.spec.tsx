@@ -20,7 +20,7 @@ import { Button } from '../button/button.component';
 
 describe('@button-group: component checks', () => {
 
-  const TestButtonGroup = (props?: Partial<ButtonGroupProps>) => (
+  const TestButtonGroup = (props?: Partial<ButtonGroupProps>): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

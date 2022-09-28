@@ -25,7 +25,7 @@ import {
 
 describe('@checkbox component checks', () => {
 
-  const TestCheckBox = (props?: CheckBoxProps) => (
+  const TestCheckBox = (props?: CheckBoxProps): JSX.Element => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -91,7 +91,7 @@ describe('@checkbox component checks', () => {
   it('should render text', () => {
     const component = render(
       <TestCheckBox>
-I love Babel
+        I love Babel
       </TestCheckBox>,
     );
 
@@ -103,7 +103,7 @@ I love Babel
       <TestCheckBox>
         {props => (
           <Text {...props}>
-I love Babel
+            I love Babel
           </Text>
         )}
       </TestCheckBox>,
@@ -115,7 +115,7 @@ I love Babel
   it('should render ReactElement passed to prop', () => {
     const renderComponent = (
       <Text>
-I love Babel
+        I love Babel
       </Text>
     );
 
