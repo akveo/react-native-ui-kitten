@@ -35,9 +35,10 @@ interface State {
   interaction: Interaction[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type WrappedComponentProps = any;
-// TODO: Better types. React.ComponentType<WrappedComponentProps>?
-type WrappedComponent = any;
+type WrappedComponent = React.ComponentType<WrappedComponentProps>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type StyledComponent = any;
 
 /**
@@ -110,7 +111,7 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
     private defaultProps: WrappedComponentProps;
     private service: StyleConsumerService;
 
-    private onInit = (style: ThemeStyleType, theme: ThemeType): void => {
+    private onInit = (style: ThemeStyleType): void => {
       this.service = new StyleConsumerService(name, style);
       this.defaultProps = this.service.createDefaultProps();
       this.init = true;
@@ -139,14 +140,14 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
 
     private renderWrappedElement = (style: ThemeStyleType, theme: ThemeType): React.ReactElement => {
       if (!this.init) {
-        this.onInit(style, theme);
+        this.onInit(style);
       }
 
       const { forwardedRef, ...restProps } = this.props;
 
       return (
         <Component
-          {...this.withEvaProp(restProps as any, style, theme)}
+          {...this.withEvaProp(restProps, style, theme)}
           ref={forwardedRef}
         />
       );

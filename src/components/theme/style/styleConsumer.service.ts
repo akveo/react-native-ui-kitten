@@ -26,6 +26,11 @@ interface StyleInfo {
   states: string[];
 }
 
+interface DefaultVariants {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [index: string]: any;
+}
+
 export class StyleConsumerService {
 
   private readonly name: string;
@@ -51,7 +56,7 @@ export class StyleConsumerService {
     }
   }
 
-  public createDefaultProps<P extends object>(): StyledComponentProps {
+  public createDefaultProps(): StyledComponentProps {
     const appearance: string = this.getDefaultAppearance();
     const variants: { [key: string]: string } = this.getDefaultVariants();
     const states: { [key: string]: boolean } = this.getDefaultStates();
@@ -84,7 +89,7 @@ export class StyleConsumerService {
     return StyleService.createThemedEntry(mapping, theme);
   }
 
-  private getGeneratedStyleMapping<P extends StyledComponentProps>(style: StyleType, info: StyleInfo): StyleType {
+  private getGeneratedStyleMapping(style: StyleType, info: StyleInfo): StyleType {
 
     return this.safe(style[this.name], (componentStyles: ControlThemedStyleType): ThemedStyleType => {
       const styleKeys: string[] = Object.keys(componentStyles.styles);
@@ -162,7 +167,7 @@ export class StyleConsumerService {
     return matches[matches.length - 1];
   }
 
-  private getDefaultVariants(): { [key: string]: any } {
+  private getDefaultVariants(): DefaultVariants {
     return this.transformObject(this.meta.variantGroups, (variants, group: string): string | undefined => {
       return Object.keys(variants[group]).find((variant: string): boolean => {
 
@@ -171,7 +176,7 @@ export class StyleConsumerService {
     });
   }
 
-  private getDefaultStates(): { [key: string]: any } {
+  private getDefaultStates(): DefaultVariants {
     return this.transformObject(this.meta.states, (states, state: string): boolean | undefined => {
       const isDefault: boolean = states[state].default === true;
 
@@ -203,9 +208,10 @@ export class StyleConsumerService {
    * @param value (V extends object) - object to transform
    * @param transform - object key transformation callback
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private transformObject<V extends object>(value: V, transform: (value: V, key: string) => any): Partial<V> {
-    return Object.keys(value).reduce((acc: Partial<V>, key: string): any => {
-      const nextValue: any = transform(value, key);
+    return Object.keys(value).reduce((acc: Partial<V>, key: string) => {
+      const nextValue = transform(value, key);
 
       return nextValue ? {
         ...acc,

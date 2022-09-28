@@ -5,11 +5,11 @@
  */
 
 export enum RangeRole {
-  none,
-  member,
-  start = 1 << 1,
-  end = 2 << 1,
-  complete = start | end,
+  none = 0,
+  member = 1,
+  start = 2,
+  end = 4,
+  complete = 6,
 }
 
 export interface CalendarDateOptions {

@@ -15,7 +15,7 @@ interface PrivateProps<T> {
   forwardedRef?: React.RefObject<T>;
 }
 
-export interface ThemedComponentProps<T extends Styles<T> = any> {
+export interface ThemedComponentProps<T extends Styles<T>> {
   eva?: EvaProp;
 }
 
@@ -53,13 +53,13 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
 
   type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
   type WrappedProps = ThemedComponentProps<S> & P;
-  type WrappingElement = React.ReactElement<WrappingProps>;
+  type WrappingElementType = React.ReactElement<WrappingProps>;
   type WrappedElementInstance = React.ReactInstance;
 
   class Wrapper extends React.PureComponent<WrappingProps> {
 
     private withThemedProps = (props: P, theme: ThemeType): WrappedProps => {
-      const style = createStyles && createStyles(theme);
+      const style = createStyles?.(theme);
       return {
         ...props,
         eva: {
@@ -90,8 +90,9 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
     }
   }
 
-  const WrappingElement = (props: WrappingProps, ref: React.Ref<WrappedElementInstance>): WrappingElement => {
+  const WrappingElement = (props: WrappingProps, ref: React.Ref<WrappedElementInstance>): WrappingElementType => {
     return (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       <Wrapper
         {...props}
@@ -106,6 +107,7 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
 
   hoistNonReactStatics(ThemedComponent, Component);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return ThemedComponent;
 };

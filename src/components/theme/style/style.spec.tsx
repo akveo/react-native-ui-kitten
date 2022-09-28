@@ -10,6 +10,7 @@ import {
   View,
   ViewProps,
   Text,
+  GestureResponderEvent,
 } from 'react-native';
 import {
   fireEvent,
@@ -27,8 +28,10 @@ import { StyleConsumerService } from './styleConsumer.service';
 import {
   Interaction,
   StyleService,
+  useStyleSheet,
 } from './style.service';
-import { useStyleSheet } from './style.service';
+import { ThemeStyleType } from '@eva-design/dss';
+import { ThemeType } from '@ui-kitten/components';
 
 const theme = {
   defaultColor: '#000000',
@@ -156,7 +159,7 @@ describe('@style: ui component checks', () => {
     }
   }
 
-  const Provider = ({ children }) => {
+  const Provider = ({ children }: { children: React.ReactNode }): React.ReactElement => {
     return (
       <StyleProvider
         styles={computedMapping}
@@ -169,12 +172,13 @@ describe('@style: ui component checks', () => {
 
   it('styled component should not re-renderer because of parent render', async () => {
     const rerenderButtonText = 'Rerender parent';
-    const getRenderCountText = (elementType: string, count: number) => {
+    const getRenderCountText = (elementType: string, count: number): string => {
       return `${elementType}: render for ${count} ${count === 1 ? 'time' : 'times'}`;
     };
 
+    // eslint-disable-next-line react/no-multi-comp
     @styled('Test')
-    class ChildStyledComponent extends React.Component<any, any> {
+    class ChildStyledComponent extends React.Component {
       renderCount = 0;
 
       public render(): React.ReactElement<ViewProps> {
@@ -187,7 +191,7 @@ describe('@style: ui component checks', () => {
       }
     }
 
-    const ParentComponent = () => {
+    const ParentComponent = (): React.ReactElement => {
       const [renderCount, setRenderCount] = React.useState(1);
       return (
         <View>
@@ -294,8 +298,14 @@ describe('@style: ui component checks', () => {
   });
 
   it('provides correct styles on theme change', async () => {
+    interface IThemeChangingProvider {
+      styles: ThemeStyleType;
+      theme: ThemeType;
+      themeInverse: ThemeType;
+      children: React.ReactNode;
+    }
 
-    const ThemeChangingProvider = (props) => {
+    const ThemeChangingProvider = (props: IThemeChangingProvider): React.ReactElement => {
       const [currentTheme, setCurrentTheme] = React.useState(props.theme);
 
       return (
@@ -344,16 +354,14 @@ describe('@style: ui component checks', () => {
 describe('@useStyleSheet: rendering performance check', () => {
   const styleTouchableTestId = '@style/touchable';
 
-  const themes = {
-    light: {
-      defaultColor: 'white',
-    },
-    dark: {
-      defaultColor: 'black',
-    },
-  };
+  interface IThemeChangingProvider {
+    styles: ThemeStyleType;
+    theme: ThemeType;
+    onPress: (event: GestureResponderEvent) => void;
+    value: string | number;
+  }
 
-  const ThemeChangingProvider = (props) => {
+  const ThemeChangingProvider = (props: IThemeChangingProvider): React.ReactElement => {
     return (
       <StyleProvider
         styles={props.styles}
@@ -374,7 +382,7 @@ describe('@useStyleSheet: rendering performance check', () => {
   it('useStyleSheet should not be called with every render', async () => {
     const stylesFuncMock = jest.fn();
 
-    const Component = () => {
+    const Component = (): React.ReactElement => {
       const [state, setState] = React.useState(0);
       const styles = useStyleSheet({});
 
@@ -400,7 +408,7 @@ describe('@useStyleSheet: rendering performance check', () => {
   it('useStyleSheet should not be called with every render when memoized', async () => {
     const stylesFuncMock = jest.fn();
 
-    const Component = () => {
+    const Component = (): React.ReactElement => {
       const [state, setState] = React.useState(0);
       const styles = useStyleSheet({});
 
