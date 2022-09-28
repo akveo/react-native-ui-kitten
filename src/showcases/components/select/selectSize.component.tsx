@@ -14,39 +14,42 @@ export const SelectSizeShowcase = () => {
   const largeSelectState = useSelectState();
 
   return (
-    <React.Fragment>
+    <>
 
       <Select
         style={styles.select}
         size='small'
         placeholder='Small'
-        {...smallSelectState}>
-        <SelectItem title='Option 1'/>
-        <SelectItem title='Option 2'/>
-        <SelectItem title='Option 3'/>
+        {...smallSelectState}
+      >
+        <SelectItem title='Option 1' />
+        <SelectItem title='Option 2' />
+        <SelectItem title='Option 3' />
       </Select>
 
       <Select
         style={styles.select}
         size='medium'
         placeholder='Medium'
-        {...mediumSelectState}>
-        <SelectItem title='Option 1'/>
-        <SelectItem title='Option 2'/>
-        <SelectItem title='Option 3'/>
+        {...mediumSelectState}
+      >
+        <SelectItem title='Option 1' />
+        <SelectItem title='Option 2' />
+        <SelectItem title='Option 3' />
       </Select>
 
       <Select
         style={styles.select}
         size='large'
         placeholder='Large'
-        {...largeSelectState}>
-        <SelectItem title='Option 1'/>
-        <SelectItem title='Option 2'/>
-        <SelectItem title='Option 3'/>
+        {...largeSelectState}
+      >
+        <SelectItem title='Option 1' />
+        <SelectItem title='Option 2' />
+        <SelectItem title='Option 3' />
       </Select>
 
-    </React.Fragment>
+    </>
   );
 };
 

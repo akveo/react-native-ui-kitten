@@ -8,10 +8,16 @@ export const CalendarThemingShowcase = () => {
   const [range, setRange] = React.useState({});
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
+        <Text
+          style={styles.text}
+          category='h6'
+        >
           Date
         </Text>
 
@@ -22,7 +28,10 @@ export const CalendarThemingShowcase = () => {
       </View>
 
       <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
+        <Text
+          style={styles.text}
+          category='h6'
+        >
           Date Ranges
         </Text>
 

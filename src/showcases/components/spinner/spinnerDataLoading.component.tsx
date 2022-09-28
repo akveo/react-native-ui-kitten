@@ -20,12 +20,12 @@ export const SpinnerDataLoadingShowcase = () => {
 
   const renderLoading = () => (
     <View style={styles.loading}>
-      <Spinner/>
+      <Spinner />
     </View>
   );
 
   const renderDataItem = ({ item, index }) => (
-    <ListItem title={`${item.title} ${index + 1}`}/>
+    <ListItem title={`${item.title} ${index + 1}`} />
   );
 
   const renderData = () => (

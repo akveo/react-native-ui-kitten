@@ -7,13 +7,13 @@ const date = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
 const initialVisibleDate = new Date(now.getFullYear(), now.getMonth() + 3, now.getDate() + 1);
 
 export const CalendarInitialVisibleDateShowcase = () => {
-  const [ selectedDate, setSelectedDate ] = React.useState(date);
+  const [selectedDate, setSelectedDate] = React.useState(date);
 
   const componentRef = React.createRef<Calendar>();
 
   const scrollToSelected = () => {
     if (componentRef.current) {
-        componentRef.current.scrollToDate(selectedDate);
+      componentRef.current.scrollToDate(selectedDate);
     }
   };
 
@@ -24,23 +24,34 @@ export const CalendarInitialVisibleDateShowcase = () => {
   };
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
-      <Button onPress={scrollToToday}>Scroll to Today</Button>
-      <Button onPress={scrollToSelected}>Scroll to Selected Date</Button>
+      <Button onPress={scrollToToday}>
+Scroll to Today
+      </Button>
+      <Button onPress={scrollToSelected}>
+Scroll to Selected Date
+      </Button>
 
       <View style={styles.calendarContainer}>
         <Text
           category='h6'
-          style={styles.text}>
-          Selected date: {selectedDate.toLocaleDateString()}
+          style={styles.text}
+        >
+          Selected date:
+          {' '}
+          {selectedDate.toLocaleDateString()}
         </Text>
 
         <Calendar
           ref={componentRef}
           date={selectedDate}
           initialVisibleDate={initialVisibleDate}
-          onSelect={nextDate => setSelectedDate(nextDate)} />
+          onSelect={nextDate => setSelectedDate(nextDate)}
+        />
       </View>
 
     </Layout>

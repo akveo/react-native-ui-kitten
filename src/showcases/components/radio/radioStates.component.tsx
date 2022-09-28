@@ -7,25 +7,31 @@ export const RadioStatesShowcase = () => {
   const [activeChecked, setActiveChecked] = React.useState(false);
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Radio
         style={styles.radio}
         checked={activeChecked}
-        onChange={nextChecked => setActiveChecked(nextChecked)}>
+        onChange={nextChecked => setActiveChecked(nextChecked)}
+      >
         Active
       </Radio>
 
       <Radio
         style={styles.radio}
-        disabled={true}>
+        disabled={true}
+      >
         Disabled
       </Radio>
 
       <Radio
         style={styles.radio}
         checked={true}
-        disabled={true}>
+        disabled={true}
+      >
         Checked Disabled
       </Radio>
 

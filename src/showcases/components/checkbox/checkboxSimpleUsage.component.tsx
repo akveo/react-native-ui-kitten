@@ -8,7 +8,8 @@ export const CheckboxSimpleUsageShowcase = () => {
   return (
     <CheckBox
       checked={checked}
-      onChange={nextChecked => setChecked(nextChecked)}>
+      onChange={nextChecked => setChecked(nextChecked)}
+    >
       {`Checked: ${checked}`}
     </CheckBox>
   );

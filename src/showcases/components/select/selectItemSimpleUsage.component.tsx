@@ -2,11 +2,17 @@ import React from 'react';
 import { Icon, SelectItem } from '@ui-kitten/components';
 
 const StarIcon = (props) => (
-  <Icon {...props} name='star'/>
+  <Icon
+    {...props}
+    name='star'
+  />
 );
 
 const ForwardIcon = (props) => (
-  <Icon {...props} name='arrow-ios-forward'/>
+  <Icon
+    {...props}
+    name='arrow-ios-forward'
+  />
 );
 
 export const SelectItemSimpleUsageShowcase = () => (

@@ -43,27 +43,30 @@ export const CheckboxIndeterminateShowcase = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <CheckBox
         style={styles.group}
         checked={allChecked}
         indeterminate={indeterminate}
-        onChange={onGroupCheckedChange}>
+        onChange={onGroupCheckedChange}
+      >
         Permissions
       </CheckBox>
       <CheckBox
         style={styles.option}
         checked={readChecked}
-        onChange={onReadCheckedChange}>
+        onChange={onReadCheckedChange}
+      >
         Read
       </CheckBox>
       <CheckBox
         style={styles.option}
         checked={writeChecked}
-        onChange={onWriteCheckedChange}>
+        onChange={onWriteCheckedChange}
+      >
         Write
       </CheckBox>
-    </React.Fragment>
+    </>
   );
 };
 

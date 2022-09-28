@@ -9,10 +9,11 @@ export const BottomNavigationWithoutIndicatorShowcase = () => {
     <BottomNavigation
       appearance='noIndicator'
       selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}>
-      <BottomNavigationTab title='USERS'/>
-      <BottomNavigationTab title='ORDERS'/>
-      <BottomNavigationTab title='TRANSACTIONS'/>
+      onSelect={index => setSelectedIndex(index)}
+    >
+      <BottomNavigationTab title='USERS' />
+      <BottomNavigationTab title='ORDERS' />
+      <BottomNavigationTab title='TRANSACTIONS' />
     </BottomNavigation>
   );
 };

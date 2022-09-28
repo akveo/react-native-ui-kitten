@@ -8,7 +8,8 @@ export const RadioSimpleUsageShowcase = () => {
   return (
     <Radio
       checked={checked}
-      onChange={nextChecked => setChecked(nextChecked)}>
+      onChange={nextChecked => setChecked(nextChecked)}
+    >
       {`Checked: ${checked}`}
     </Radio>
   );

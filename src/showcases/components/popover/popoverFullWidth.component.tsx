@@ -17,11 +17,13 @@ export const PopoverFullWidthShowcase = () => {
       visible={visible}
       anchor={renderToggleButton}
       fullWidth={true}
-      onBackdropPress={() => setVisible(false)}>
+      onBackdropPress={() => setVisible(false)}
+    >
       <Layout style={styles.content}>
         <Avatar
           style={styles.avatar}
-          source={require('../../assets/icon.png')}/>
+          source={require('../../assets/icon.png')}
+        />
         <Text>
           Welcome to UI Kitten 😻
         </Text>

@@ -15,7 +15,7 @@ export const InputSizeShowcase = () => {
   const multilineInputState = useInputState();
 
   return (
-    <React.Fragment>
+    <>
 
       <Input
         style={styles.input}
@@ -45,7 +45,7 @@ export const InputSizeShowcase = () => {
         {...multilineInputState}
       />
 
-    </React.Fragment>
+    </>
   );
 };
 

@@ -20,7 +20,10 @@ export const DatepickerFiltersShowcase = () => {
   const boundingPickerState = useDatepickerState();
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Datepicker
         placeholder='Min / Max'

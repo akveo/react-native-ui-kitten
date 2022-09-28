@@ -2,11 +2,17 @@ import React from 'react';
 import { Icon, Layout, Menu, MenuItem } from '@ui-kitten/components';
 
 const StarIcon = (props) => (
-  <Icon {...props} name='star'/>
+  <Icon
+    {...props}
+    name='star'
+  />
 );
 
 const ForwardIcon = (props) => (
-  <Icon {...props} name='arrow-ios-forward'/>
+  <Icon
+    {...props}
+    name='arrow-ios-forward'
+  />
 );
 
 export const MenuDisabledOptionsShowcase = () => {
@@ -18,7 +24,8 @@ export const MenuDisabledOptionsShowcase = () => {
 
       <Menu
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}>
+        onSelect={index => setSelectedIndex(index)}
+      >
         <MenuItem
           title='Users'
           accessoryLeft={StarIcon}

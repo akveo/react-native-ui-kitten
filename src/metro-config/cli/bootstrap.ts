@@ -1,12 +1,12 @@
 import { CommanderStatic } from 'commander';
 import BootstrapService from '../services/bootstrap.service';
 
-const BOOTSTRAP_COMMAND_DESCRIPTION: string = `
+const BOOTSTRAP_COMMAND_DESCRIPTION = `
 Compile mapping.json into style object, optionally merging it with another mapping
 https://akveo.github.io/react-native-ui-kitten/docs/guides/improving-performance
 `;
 
-const BOOTSTRAP_COMMAND_USAGE: string = `
+const BOOTSTRAP_COMMAND_USAGE = `
 
 - To compile the only Eva package:
 ui-kitten bootstrap @eva-design/eva

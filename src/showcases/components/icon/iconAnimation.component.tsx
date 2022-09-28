@@ -61,12 +61,16 @@ export const IconAnimationShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Button
         style={styles.button}
         accessoryLeft={renderZoomIcon}
-        onPress={() => zoomIconRef.current.startAnimation()}>
+        onPress={() => zoomIconRef.current.startAnimation()}
+      >
         ZOOM
       </Button>
 
@@ -75,7 +79,8 @@ export const IconAnimationShowcase = () => {
         status='success'
         style={styles.button}
         accessoryLeft={renderPulseIcon}
-        onPress={() => pulseIconRef.current.startAnimation()}>
+        onPress={() => pulseIconRef.current.startAnimation()}
+      >
         PULSE
       </Button>
 
@@ -84,7 +89,8 @@ export const IconAnimationShowcase = () => {
         status='danger'
         style={styles.button}
         accessoryLeft={renderShakeIcon}
-        onPress={() => shakeIconRef.current.startAnimation()}>
+        onPress={() => shakeIconRef.current.startAnimation()}
+      >
         SHAKE
       </Button>
 
@@ -92,7 +98,8 @@ export const IconAnimationShowcase = () => {
         appearance='ghost'
         status='info'
         style={styles.button}
-        accessoryRight={renderInfiniteAnimationIcon}>
+        accessoryRight={renderInfiniteAnimationIcon}
+      >
         INFINITE
       </Button>
 
@@ -100,7 +107,8 @@ export const IconAnimationShowcase = () => {
         appearance='ghost'
         status='warning'
         style={styles.button}
-        accessoryRight={renderNoAnimationIcon}>
+        accessoryRight={renderNoAnimationIcon}
+      >
         NO ANIMATION
       </Button>
 

@@ -16,9 +16,12 @@ export const ModalWithBackdropShowcase = () => {
       <Modal
         visible={visible}
         backdropStyle={styles.backdrop}
-        onBackdropPress={() => setVisible(false)}>
+        onBackdropPress={() => setVisible(false)}
+      >
         <Card disabled={true}>
-          <Text>Welcome to UI Kitten 😻</Text>
+          <Text>
+Welcome to UI Kitten 😻
+          </Text>
           <Button onPress={() => setVisible(false)}>
             DISMISS
           </Button>

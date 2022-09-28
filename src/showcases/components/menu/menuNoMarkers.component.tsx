@@ -22,14 +22,28 @@ export const MenuNoMarkersShowcase = () => {
   };
 
   return (
-    <React.Fragment>
-      <Text category='h6'>{selectedTitle}</Text>
+    <>
+      <Text category='h6'>
+        {selectedTitle}
+      </Text>
       <Menu>
-        <MenuItem title='Users' onPress={onUsersPress}/>
-        <MenuItem title='Orders' onPress={onOrdersPress}/>
-        <MenuItem title='Transactions' onPress={onTransactionsPress}/>
-        <MenuItem title='Settings' onPress={onSettingsPress}/>
+        <MenuItem
+          title='Users'
+          onPress={onUsersPress}
+        />
+        <MenuItem
+          title='Orders'
+          onPress={onOrdersPress}
+        />
+        <MenuItem
+          title='Transactions'
+          onPress={onTransactionsPress}
+        />
+        <MenuItem
+          title='Settings'
+          onPress={onSettingsPress}
+        />
       </Menu>
-    </React.Fragment>
+    </>
   );
 };

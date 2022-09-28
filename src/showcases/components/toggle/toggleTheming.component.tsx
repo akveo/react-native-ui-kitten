@@ -11,25 +11,31 @@ export const ToggleThemingShowcase = () => {
   };
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Toggle
         style={styles.toggle}
         checked={activeChecked}
-        onChange={onActiveCheckedChange}>
+        onChange={onActiveCheckedChange}
+      >
         Active
       </Toggle>
 
       <Toggle
         style={styles.toggle}
-        disabled={true}>
+        disabled={true}
+      >
         Disabled
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         checked={true}
-        disabled={true}>
+        disabled={true}
+      >
         Checked Disabled
       </Toggle>
 

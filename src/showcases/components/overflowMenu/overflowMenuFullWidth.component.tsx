@@ -19,17 +19,21 @@ export const OverflowMenuFullWidthShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
       <OverflowMenu
         anchor={renderToggleButton}
         visible={visible}
         fullWidth={true}
         selectedIndex={selectedIndex}
         onSelect={onItemSelect}
-        onBackdropPress={() => setVisible(false)}>
-        <MenuItem title='Users'/>
-        <MenuItem title='Orders'/>
-        <MenuItem title='Transactions'/>
+        onBackdropPress={() => setVisible(false)}
+      >
+        <MenuItem title='Users' />
+        <MenuItem title='Orders' />
+        <MenuItem title='Transactions' />
       </OverflowMenu>
     </Layout>
   );

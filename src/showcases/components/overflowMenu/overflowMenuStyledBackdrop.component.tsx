@@ -26,17 +26,21 @@ export const OverflowMenuStyledBackdropShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
       <OverflowMenu
         anchor={renderToggleButton}
         backdropStyle={styles.backdrop}
         visible={visible}
         selectedIndex={selectedIndex}
         onSelect={onItemSelect}
-        onBackdropPress={() => setVisible(false)}>
-        <MenuItem title='Users'/>
-        <MenuItem title='Orders'/>
-        <MenuItem title='Transactions'/>
+        onBackdropPress={() => setVisible(false)}
+      >
+        <MenuItem title='Users' />
+        <MenuItem title='Orders' />
+        <MenuItem title='Transactions' />
       </OverflowMenu>
     </Layout>
   );

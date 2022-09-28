@@ -34,15 +34,30 @@ export const OverflowMenuNoMarkersShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
-      <Text category='h6'>{selectedTitle}</Text>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
+      <Text category='h6'>
+        {selectedTitle}
+      </Text>
       <OverflowMenu
         visible={visible}
         anchor={renderToggleButton}
-        onBackdropPress={() => setVisible(false)}>
-        <MenuItem title='Users' onPress={onUsersPress}/>
-        <MenuItem title='Orders' onPress={onOrdersPress}/>
-        <MenuItem title='Transactions' onPress={onTransactionsPress}/>
+        onBackdropPress={() => setVisible(false)}
+      >
+        <MenuItem
+          title='Users'
+          onPress={onUsersPress}
+        />
+        <MenuItem
+          title='Orders'
+          onPress={onOrdersPress}
+        />
+        <MenuItem
+          title='Transactions'
+          onPress={onTransactionsPress}
+        />
       </OverflowMenu>
     </Layout>
   );

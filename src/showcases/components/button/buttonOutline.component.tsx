@@ -3,34 +3,65 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Layout } from '@ui-kitten/components';
 
 export const ButtonOutlineShowcase = () => (
-  <Layout style={styles.container} level='1'>
+  <Layout
+    style={styles.container}
+    level='1'
+  >
 
-    <Button style={styles.button} appearance='outline' status='primary'>
+    <Button
+      style={styles.button}
+      appearance='outline'
+      status='primary'
+    >
       PRIMARY
     </Button>
 
-    <Button style={styles.button} appearance='outline' status='success'>
+    <Button
+      style={styles.button}
+      appearance='outline'
+      status='success'
+    >
       SUCCESS
     </Button>
 
-    <Button style={styles.button} appearance='outline' status='info'>
+    <Button
+      style={styles.button}
+      appearance='outline'
+      status='info'
+    >
       INFO
     </Button>
 
-    <Button style={styles.button} appearance='outline' status='warning'>
+    <Button
+      style={styles.button}
+      appearance='outline'
+      status='warning'
+    >
       WARNING
     </Button>
 
-    <Button style={styles.button} appearance='outline' status='danger'>
+    <Button
+      style={styles.button}
+      appearance='outline'
+      status='danger'
+    >
       DANGER
     </Button>
 
-    <Button style={styles.button} appearance='outline' status='basic'>
+    <Button
+      style={styles.button}
+      appearance='outline'
+      status='basic'
+    >
       BASIC
     </Button>
 
     <View style={styles.controlContainer}>
-      <Button style={styles.button} appearance='outline' status='control'>
+      <Button
+        style={styles.button}
+        appearance='outline'
+        status='control'
+      >
         CONTROL
       </Button>
     </View>

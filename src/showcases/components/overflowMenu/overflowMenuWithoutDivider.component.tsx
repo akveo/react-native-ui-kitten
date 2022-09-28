@@ -19,7 +19,10 @@ export const OverflowMenuWithoutDividerShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <OverflowMenu
         appearance='noDivider'
@@ -27,10 +30,11 @@ export const OverflowMenuWithoutDividerShowcase = () => {
         visible={visible}
         selectedIndex={selectedIndex}
         onSelect={onItemSelect}
-        onBackdropPress={() => setVisible(false)}>
-        <MenuItem title='Users'/>
-        <MenuItem title='Orders'/>
-        <MenuItem title='Transactions'/>
+        onBackdropPress={() => setVisible(false)}
+      >
+        <MenuItem title='Users' />
+        <MenuItem title='Orders' />
+        <MenuItem title='Transactions' />
       </OverflowMenu>
 
     </Layout>

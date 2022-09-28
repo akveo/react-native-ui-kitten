@@ -22,14 +22,28 @@ export const DrawerNoMarkersShowcase = () => {
   };
 
   return (
-    <React.Fragment>
-      <Text category='h6'>{selectedTitle}</Text>
+    <>
+      <Text category='h6'>
+        {selectedTitle}
+      </Text>
       <Drawer>
-        <DrawerItem title='Users' onPress={onUsersPress}/>
-        <DrawerItem title='Orders' onPress={onOrdersPress}/>
-        <DrawerItem title='Transactions' onPress={onTransactionsPress}/>
-        <DrawerItem title='Settings' onPress={onSettingsPress}/>
+        <DrawerItem
+          title='Users'
+          onPress={onUsersPress}
+        />
+        <DrawerItem
+          title='Orders'
+          onPress={onOrdersPress}
+        />
+        <DrawerItem
+          title='Transactions'
+          onPress={onTransactionsPress}
+        />
+        <DrawerItem
+          title='Settings'
+          onPress={onSettingsPress}
+        />
       </Drawer>
-    </React.Fragment>
+    </>
   );
 };

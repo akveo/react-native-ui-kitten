@@ -19,16 +19,23 @@ export const OverflowMenuWithDisabledItemsShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
       <OverflowMenu
         anchor={renderToggleButton}
         visible={visible}
         selectedIndex={selectedIndex}
         onSelect={onItemSelect}
-        onBackdropPress={() => setVisible(false)}>
-        <MenuItem title='Users'/>
-        <MenuItem title='Orders' disabled={true}/>
-        <MenuItem title='Transactions'/>
+        onBackdropPress={() => setVisible(false)}
+      >
+        <MenuItem title='Users' />
+        <MenuItem
+          title='Orders'
+          disabled={true}
+        />
+        <MenuItem title='Transactions' />
       </OverflowMenu>
     </Layout>
   );

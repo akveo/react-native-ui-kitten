@@ -8,10 +8,11 @@ export const TabBarSimpleUsageShowcase = () => {
   return (
     <TabBar
       selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}>
-      <Tab title='USERS'/>
-      <Tab title='ORDERS'/>
-      <Tab title='TRANSACTIONS'/>
+      onSelect={index => setSelectedIndex(index)}
+    >
+      <Tab title='USERS' />
+      <Tab title='ORDERS' />
+      <Tab title='TRANSACTIONS' />
     </TabBar>
   );
 };

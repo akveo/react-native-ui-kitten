@@ -3,11 +3,17 @@ import { StyleSheet } from 'react-native';
 import { Button, Divider, Icon, List, ListItem, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
 const BackIcon = (props) => (
-  <Icon {...props} name='arrow-back'/>
+  <Icon
+    {...props}
+    name='arrow-back'
+  />
 );
 
 const SettingsIcon = (props) => (
-  <Icon {...props} name='settings'/>
+  <Icon
+    {...props}
+    name='settings'
+  />
 );
 
 const data = new Array(8).fill({
@@ -18,19 +24,24 @@ const data = new Array(8).fill({
 export const TopNavigationDividerShowcase = () => {
 
   const renderSettingsAction = () => (
-    <TopNavigationAction icon={SettingsIcon}/>
+    <TopNavigationAction icon={SettingsIcon} />
   );
 
   const renderBackAction = () => (
-    <TopNavigationAction icon={BackIcon}/>
+    <TopNavigationAction icon={BackIcon} />
   );
 
   const renderItemAccessory = (props) => (
-    <Button size='tiny'>FOLLOW</Button>
+    <Button size='tiny'>
+FOLLOW
+    </Button>
   );
 
   const renderItemIcon = (props) => (
-    <Icon {...props} name='person'/>
+    <Icon
+      {...props}
+      name='person'
+    />
   );
 
   const renderItem = ({ item, index }) => (
@@ -43,19 +54,19 @@ export const TopNavigationDividerShowcase = () => {
   );
 
   return (
-    <React.Fragment>
+    <>
       <TopNavigation
         title='Eva Application'
         accessoryLeft={renderBackAction}
         accessoryRight={renderSettingsAction}
       />
-      <Divider/>
+      <Divider />
       <List
         style={styles.container}
         data={data}
         renderItem={renderItem}
       />
-    </React.Fragment>
+    </>
   );
 };
 

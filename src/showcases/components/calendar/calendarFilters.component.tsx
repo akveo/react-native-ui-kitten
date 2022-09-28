@@ -20,10 +20,16 @@ export const CalendarFiltersShowcase = () => {
   const boundingCalendarState = useCalendarState();
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
+        <Text
+          style={styles.text}
+          category='h6'
+        >
           Min / Max
         </Text>
 
@@ -35,7 +41,10 @@ export const CalendarFiltersShowcase = () => {
       </View>
 
       <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
+        <Text
+          style={styles.text}
+          category='h6'
+        >
           Filter
         </Text>
 
@@ -46,7 +55,10 @@ export const CalendarFiltersShowcase = () => {
       </View>
 
       <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
+        <Text
+          style={styles.text}
+          category='h6'
+        >
           Bounding Month
         </Text>
 

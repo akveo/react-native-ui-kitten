@@ -94,5 +94,5 @@ class StyledComponent extends React.Component {
 // }
 
 export const StyledComponentVariantsShowcase = () => (
-  <StyledComponent status='danger'/>
+  <StyledComponent status='danger' />
 );

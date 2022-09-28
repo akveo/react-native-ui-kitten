@@ -7,7 +7,10 @@ export const UseStyleSheetSimpleUsageShowcase = () => {
 
   return (
     <View style={styles.container}>
-      <Text category='h4' status='control'>
+      <Text
+        category='h4'
+        status='control'
+      >
         I use success color as background!
       </Text>
     </View>

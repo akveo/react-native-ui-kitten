@@ -12,16 +12,23 @@ export const ViewPagerLazyLoadingShowcase = () => {
     <ViewPager
       selectedIndex={selectedIndex}
       shouldLoadComponent={shouldLoadComponent}
-      onSelect={index => setSelectedIndex(index)}>
+      onSelect={index => setSelectedIndex(index)}
+    >
       <Layout
         level='2'
-        style={styles.tab}>
-        <Text category='h5'>Tab 1</Text>
+        style={styles.tab}
+      >
+        <Text category='h5'>
+Tab 1
+        </Text>
       </Layout>
       <Layout
         level='2'
-        style={styles.tab}>
-        <Text category='h5'>Tab 2</Text>
+        style={styles.tab}
+      >
+        <Text category='h5'>
+Tab 2
+        </Text>
       </Layout>
     </ViewPager>
   );

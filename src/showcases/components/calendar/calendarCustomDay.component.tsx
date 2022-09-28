@@ -4,8 +4,11 @@ import { Calendar, Text } from '@ui-kitten/components';
 
 const DayCell = ({ date }, style) => (
   <View
-    style={[styles.dayContainer, style.container]}>
-    <Text style={style.text}>{`${date.getDate()}`}</Text>
+    style={[styles.dayContainer, style.container]}
+  >
+    <Text style={style.text}>
+      {`${date.getDate()}`}
+    </Text>
     <Text style={[style.text, styles.value]}>
       {`${100 * date.getDate() + Math.pow(date.getDate(), 2)}$`}
     </Text>

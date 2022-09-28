@@ -8,11 +8,12 @@ export const DrawerSimpleUsageShowcase = () => {
   return (
     <Drawer
       selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}>
-      <DrawerItem title='Users'/>
-      <DrawerItem title='Orders'/>
-      <DrawerItem title='Transactions'/>
-      <DrawerItem title='Settings'/>
+      onSelect={index => setSelectedIndex(index)}
+    >
+      <DrawerItem title='Users' />
+      <DrawerItem title='Orders' />
+      <DrawerItem title='Transactions' />
+      <DrawerItem title='Settings' />
     </Drawer>
   );
 };

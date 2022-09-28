@@ -34,8 +34,8 @@ export default class EvaConfigService {
   static validateConfigOrWarn = (config: EvaConfig): boolean => {
     if (!config.evaPackage || !EvaConfigService.isValidEvaPackageName(config.evaPackage)) {
       LogService.warn(
-        `There is no Eva package specified in UI Kitten metro config`,
-        `Consider setting "evaPackage" property of UI Kitten metro config`,
+        'There is no Eva package specified in UI Kitten metro config',
+        'Consider setting "evaPackage" property of UI Kitten metro config',
         'to one of the following values:',
         '',
         ...EvaConfigService.MAPPING_PACKAGE_NAMES,

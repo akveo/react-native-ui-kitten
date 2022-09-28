@@ -6,7 +6,7 @@ import { styled } from '@ui-kitten/components';
 class StyledComponent extends React.Component {
   render() {
     return (
-      <TouchableOpacity style={this.props.eva.style}/>
+      <TouchableOpacity style={this.props.eva.style} />
     );
   }
 }

@@ -2,11 +2,14 @@ import React from 'react';
 import { Icon, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
 const BackIcon = (props) => (
-  <Icon {...props} name='arrow-back'/>
+  <Icon
+    {...props}
+    name='arrow-back'
+  />
 );
 
 const BackAction = () => (
-  <TopNavigationAction icon={BackIcon}/>
+  <TopNavigationAction icon={BackIcon} />
 );
 
 export const TopNavigationSimpleUsageShowcase = () => (
@@ -19,7 +22,15 @@ export const TopNavigationSimpleUsageShowcase = () => (
 
 const TopNavigationStyling = () => (
   <TopNavigation
-    title={evaProps => <Text {...evaProps}>Title</Text>}
-    subtitle={evaProps => <Text {...evaProps}>Subtitle</Text>}
+    title={evaProps => (
+      <Text {...evaProps}>
+Title
+      </Text>
+    )}
+    subtitle={evaProps => (
+      <Text {...evaProps}>
+Subtitle
+      </Text>
+    )}
   />
 );

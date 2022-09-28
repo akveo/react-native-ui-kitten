@@ -17,7 +17,10 @@ export const DatepickerStatusShowcase = () => {
   const basicDatepickerState = useDatepickerState();
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <View style={styles.rowContainer}>
 

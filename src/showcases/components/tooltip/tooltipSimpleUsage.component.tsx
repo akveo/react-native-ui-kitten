@@ -15,7 +15,8 @@ export const TooltipSimpleUsageShowcase = () => {
     <Tooltip
       anchor={renderToggleButton}
       visible={visible}
-      onBackdropPress={() => setVisible(false)}>
+      onBackdropPress={() => setVisible(false)}
+    >
       Welcome to UI Kitten 😻
     </Tooltip>
   );
