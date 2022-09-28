@@ -14,12 +14,16 @@ export const CheckboxStatesShowcase = () => {
   };
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <CheckBox
         style={styles.checkbox}
         checked={activeChecked}
-        onChange={nextChecked => setActiveChecked(nextChecked)}>
+        onChange={nextChecked => setActiveChecked(nextChecked)}
+      >
         Active
       </CheckBox>
 
@@ -27,20 +31,23 @@ export const CheckboxStatesShowcase = () => {
         style={styles.checkbox}
         checked={indeterminateChecked}
         indeterminate={indeterminate}
-        onChange={onIndeterminateChange}>
+        onChange={onIndeterminateChange}
+      >
         Indeterminate
       </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
-        disabled={true}>
+        disabled={true}
+      >
         Disabled
       </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         disabled={true}
-        checked={true}>
+        checked={true}
+      >
         Checked Disabled
       </CheckBox>
 

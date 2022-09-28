@@ -9,21 +9,31 @@ export const ViewPagerSimpleUsageShowcase = () => {
   return (
     <ViewPager
       selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}>
+      onSelect={index => setSelectedIndex(index)}
+    >
       <Layout
         style={styles.tab}
-        level='2'>
-        <Text category='h5'>USERS</Text>
+        level='2'
+      >
+        <Text category='h5'>
+USERS
+        </Text>
       </Layout>
       <Layout
         style={styles.tab}
-        level='2'>
-        <Text category='h5'>ORDERS</Text>
+        level='2'
+      >
+        <Text category='h5'>
+ORDERS
+        </Text>
       </Layout>
       <Layout
         style={styles.tab}
-        level='2'>
-        <Text category='h5'>TRANSACTIONS</Text>
+        level='2'
+      >
+        <Text category='h5'>
+TRANSACTIONS
+        </Text>
       </Layout>
     </ViewPager>
   );

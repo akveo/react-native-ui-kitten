@@ -6,10 +6,12 @@ export const CalendarSimpleUsageShowcase = () => {
   const [date, setDate] = React.useState(new Date());
 
   return (
-    <React.Fragment>
+    <>
 
       <Text category='h6'>
-        Selected date: {date.toLocaleDateString()}
+        Selected date:
+        {' '}
+        {date.toLocaleDateString()}
       </Text>
 
       <Calendar
@@ -17,6 +19,6 @@ export const CalendarSimpleUsageShowcase = () => {
         onSelect={nextDate => setDate(nextDate)}
       />
 
-    </React.Fragment>
+    </>
   );
 };

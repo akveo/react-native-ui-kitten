@@ -3,7 +3,10 @@ import { TouchableWithoutFeedback, StyleSheet, View } from 'react-native';
 import { Icon, Input, Text } from '@ui-kitten/components';
 
 const AlertIcon = (props) => (
-  <Icon {...props} name='alert-circle-outline'/>
+  <Icon
+    {...props}
+    name='alert-circle-outline'
+  />
 );
 
 export const InputAccessoriesShowcase = () => {
@@ -17,7 +20,10 @@ export const InputAccessoriesShowcase = () => {
 
   const renderIcon = (props) => (
     <TouchableWithoutFeedback onPress={toggleSecureEntry}>
-      <Icon {...props} name={secureTextEntry ? 'eye-off' : 'eye'}/>
+      <Icon
+        {...props}
+        name={secureTextEntry ? 'eye-off' : 'eye'}
+      />
     </TouchableWithoutFeedback>
   );
 
@@ -25,10 +31,12 @@ export const InputAccessoriesShowcase = () => {
     return (
       <View style={styles.captionContainer}>
         {AlertIcon(styles.captionIcon)}
-        <Text style={styles.captionText}>Should contain at least 8 symbols</Text>
+        <Text style={styles.captionText}>
+Should contain at least 8 symbols
+        </Text>
       </View>
-    )
-  }
+    );
+  };
 
   return (
     <Input
@@ -52,12 +60,12 @@ const styles = StyleSheet.create({
   captionIcon: {
     width: 10,
     height: 10,
-    marginRight: 5
+    marginRight: 5,
   },
   captionText: {
     fontSize: 12,
-    fontWeight: "400",
-    fontFamily: "opensans-regular",
-    color: "#8F9BB3",
-  }
+    fontWeight: '400',
+    fontFamily: 'opensans-regular',
+    color: '#8F9BB3',
+  },
 });

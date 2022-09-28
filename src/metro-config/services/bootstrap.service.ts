@@ -11,9 +11,9 @@ import EvaConfigService, { EvaConfig } from './eva-config.service';
 import LogService from './log.service';
 import ProjectService from './project.service';
 
-const DEFAULT_CHECKSUM: string = 'default';
-const CACHE_FILE_NAME: string = 'generated.json';
-const CACHE_EXPORT_SIGNATURE: string = `\n\nexports.styles = require('./${CACHE_FILE_NAME}').styles`;
+const DEFAULT_CHECKSUM = 'default';
+const CACHE_FILE_NAME = 'generated.json';
+const CACHE_EXPORT_SIGNATURE = `\n\nexports.styles = require('./${CACHE_FILE_NAME}').styles`;
 
 const RELATIVE_PATHS = {
   evaPackage: (evaPackage: string): string => {
@@ -163,8 +163,8 @@ export default class BootstrapService {
 
   private static createChecksum = (target: any): string => {
     return Crypto.createHash('sha1')
-                 .update(target)
-                 .digest('hex');
+      .update(target)
+      .digest('hex');
   };
 }
 

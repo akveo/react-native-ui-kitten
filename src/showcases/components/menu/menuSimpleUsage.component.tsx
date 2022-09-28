@@ -8,11 +8,12 @@ export const MenuSimpleUsageShowcase = () => {
   return (
     <Menu
       selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}>
-      <MenuItem title='Users'/>
-      <MenuItem title='Orders'/>
-      <MenuItem title='Transactions'/>
-      <MenuItem title='Settings'/>
+      onSelect={index => setSelectedIndex(index)}
+    >
+      <MenuItem title='Users' />
+      <MenuItem title='Orders' />
+      <MenuItem title='Transactions' />
+      <MenuItem title='Settings' />
     </Menu>
   );
 };

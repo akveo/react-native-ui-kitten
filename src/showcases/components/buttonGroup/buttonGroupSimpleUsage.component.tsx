@@ -7,15 +7,26 @@ export const ButtonGroupSimpleUsageShowcase = () => {
   const [text, setText] = React.useState('Press any button');
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <ButtonGroup>
-        <Button onPress={() => setText('Left button pressed')}>L</Button>
-        <Button onPress={() => setText('Middle button pressed')}>M</Button>
-        <Button onPress={() => setText('Right button pressed')}>R</Button>
+        <Button onPress={() => setText('Left button pressed')}>
+L
+        </Button>
+        <Button onPress={() => setText('Middle button pressed')}>
+M
+        </Button>
+        <Button onPress={() => setText('Right button pressed')}>
+R
+        </Button>
       </ButtonGroup>
 
-      <Text style={styles.text}>{text}</Text>
+      <Text style={styles.text}>
+        {text}
+      </Text>
 
     </Layout>
   );

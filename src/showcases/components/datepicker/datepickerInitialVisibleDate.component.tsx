@@ -7,14 +7,14 @@ const date = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
 const initialDate = new Date(now.getFullYear(), now.getMonth() + 3, now.getDate() + 1);
 
 export const DatepickerInitialVisibleDateShowcase = () => {
-  const [ selectedDate, setSelectedDate ] = React.useState(date);
-  const [ initialVisibleDate, setInitialVisibleDate ] = React.useState(initialDate);
+  const [selectedDate, setSelectedDate] = React.useState(date);
+  const [initialVisibleDate, setInitialVisibleDate] = React.useState(initialDate);
 
   const componentRef = React.createRef<Datepicker>();
 
   const scrollToSelected = () => {
     if (componentRef.current) {
-        componentRef.current.scrollToDate(selectedDate);
+      componentRef.current.scrollToDate(selectedDate);
     }
   };
 
@@ -34,20 +34,30 @@ export const DatepickerInitialVisibleDateShowcase = () => {
   const renderFooter = () => {
     return (
       <View>
-        <Button onPress={scrollToToday}>Scroll to Today</Button>
-        <Button onPress={scrollToSelected}>Scroll to Selected Date</Button>
+        <Button onPress={scrollToToday}>
+Scroll to Today
+        </Button>
+        <Button onPress={scrollToSelected}>
+Scroll to Selected Date
+        </Button>
       </View>
     );
   };
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <View style={styles.calendarContainer}>
         <Text
           category='h6'
-          style={styles.text}>
-          Selected date: {selectedDate.toLocaleDateString()}
+          style={styles.text}
+        >
+          Selected date:
+          {' '}
+          {selectedDate.toLocaleDateString()}
         </Text>
 
         <Datepicker
@@ -55,7 +65,8 @@ export const DatepickerInitialVisibleDateShowcase = () => {
           date={selectedDate}
           initialVisibleDate={initialVisibleDate}
           onSelect={onSelect}
-          renderFooter={renderFooter} />
+          renderFooter={renderFooter}
+        />
       </View>
 
     </Layout>

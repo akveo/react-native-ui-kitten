@@ -34,7 +34,7 @@ export const SelectDisplayValueShowcase = () => {
   });
 
   const renderOption = (title) => (
-    <SelectItem title={title}/>
+    <SelectItem title={title} />
   );
 
   const renderGroup = (title) => (
@@ -44,14 +44,18 @@ export const SelectDisplayValueShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Select
         style={styles.select}
         placeholder='Default'
         value={displayValue}
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}>
+        onSelect={index => setSelectedIndex(index)}
+      >
         {data.map(renderOption)}
       </Select>
 
@@ -61,7 +65,8 @@ export const SelectDisplayValueShowcase = () => {
         placeholder='Multi'
         value={groupDisplayValues.join(', ')}
         selectedIndex={multiSelectedIndex}
-        onSelect={index => setMultiSelectedIndex(index)}>
+        onSelect={index => setMultiSelectedIndex(index)}
+      >
         {Object.keys(groupedData).map(renderGroup)}
       </Select>
 

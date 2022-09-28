@@ -44,7 +44,8 @@ export const AutocompleteAsyncShowcase = () => {
       placeholder='For example, Star Wars'
       value={query}
       onChangeText={onChangeText}
-      onSelect={onSelect}>
+      onSelect={onSelect}
+    >
       {data.map(renderOption)}
     </Autocomplete>
   );

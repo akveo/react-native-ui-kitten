@@ -9,7 +9,7 @@ const data = new Array(8).fill({
 export const ListSimpleUsageShowcase = () => {
 
   const renderItem = ({ item, index }) => (
-    <ListItem title={`${item.title} ${index + 1}`}/>
+    <ListItem title={`${item.title} ${index + 1}`} />
   );
 
   return (

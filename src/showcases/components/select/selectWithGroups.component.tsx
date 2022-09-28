@@ -11,22 +11,26 @@ export const SelectWithGroupsShowcase = () => {
   ]);
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Select
         style={styles.select}
         placeholder='Default'
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}>
+        onSelect={index => setSelectedIndex(index)}
+      >
         <SelectGroup title='Group 1'>
-          <SelectItem title='Option 1.1'/>
-          <SelectItem title='Option 1.2'/>
-          <SelectItem title='Option 1.3'/>
+          <SelectItem title='Option 1.1' />
+          <SelectItem title='Option 1.2' />
+          <SelectItem title='Option 1.3' />
         </SelectGroup>
         <SelectGroup title='Group 2'>
-          <SelectItem title='Option 2.1'/>
-          <SelectItem title='Option 2.2'/>
-          <SelectItem title='Option 2.3'/>
+          <SelectItem title='Option 2.1' />
+          <SelectItem title='Option 2.2' />
+          <SelectItem title='Option 2.3' />
         </SelectGroup>
       </Select>
 
@@ -35,16 +39,17 @@ export const SelectWithGroupsShowcase = () => {
         multiSelect={true}
         placeholder='Multi'
         selectedIndex={multiSelectedIndex}
-        onSelect={index => setMultiSelectedIndex(index)}>
+        onSelect={index => setMultiSelectedIndex(index)}
+      >
         <SelectGroup title='Group 1'>
-          <SelectItem title='Option 1.1'/>
-          <SelectItem title='Option 1.2'/>
-          <SelectItem title='Option 1.3'/>
+          <SelectItem title='Option 1.1' />
+          <SelectItem title='Option 1.2' />
+          <SelectItem title='Option 1.3' />
         </SelectGroup>
         <SelectGroup title='Group 2'>
-          <SelectItem title='Option 2.1'/>
-          <SelectItem title='Option 2.2'/>
-          <SelectItem title='Option 2.3'/>
+          <SelectItem title='Option 2.1' />
+          <SelectItem title='Option 2.2' />
+          <SelectItem title='Option 2.3' />
         </SelectGroup>
       </Select>
 

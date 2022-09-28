@@ -9,20 +9,27 @@ export const TabViewSimpleUsageShowcase = () => {
   return (
     <TabView
       selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}>
+      onSelect={index => setSelectedIndex(index)}
+    >
       <Tab title='USERS'>
         <Layout style={styles.tabContainer}>
-          <Text category='h5'>USERS</Text>
+          <Text category='h5'>
+USERS
+          </Text>
         </Layout>
       </Tab>
       <Tab title='ORDERS'>
         <Layout style={styles.tabContainer}>
-          <Text category='h5'>ORDERS</Text>
+          <Text category='h5'>
+ORDERS
+          </Text>
         </Layout>
       </Tab>
       <Tab title='TRANSACTIONS'>
         <Layout style={styles.tabContainer}>
-          <Text category='h5'>TRANSACTIONS</Text>
+          <Text category='h5'>
+TRANSACTIONS
+          </Text>
         </Layout>
       </Tab>
     </TabView>

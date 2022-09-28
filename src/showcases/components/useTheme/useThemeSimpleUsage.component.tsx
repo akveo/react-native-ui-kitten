@@ -7,7 +7,10 @@ export const UseThemeSimpleUsageShowcase = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme['color-primary-default'] }]}>
-      <Text category='h4' status='control'>
+      <Text
+        category='h4'
+        status='control'
+      >
         I use primary color as background!
       </Text>
     </View>

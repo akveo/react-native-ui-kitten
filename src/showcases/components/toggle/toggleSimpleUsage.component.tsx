@@ -10,7 +10,10 @@ export const ToggleSimpleUsageShowcase = () => {
   };
 
   return (
-    <Toggle checked={checked} onChange={onCheckedChange}>
+    <Toggle
+      checked={checked}
+      onChange={onCheckedChange}
+    >
       {`Checked: ${checked}`}
     </Toggle>
   );

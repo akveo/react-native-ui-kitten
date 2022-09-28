@@ -40,7 +40,10 @@ export const DatepickerLocaleSettingsShowcase = () => {
   const localePickerState = useDatepickerState();
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Datepicker
         style={styles.picker}

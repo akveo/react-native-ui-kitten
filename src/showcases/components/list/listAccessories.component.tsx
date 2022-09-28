@@ -10,11 +10,16 @@ const data = new Array(8).fill({
 export const ListAccessoriesShowcase = () => {
 
   const renderItemAccessory = (props) => (
-    <Button size='tiny'>FOLLOW</Button>
+    <Button size='tiny'>
+FOLLOW
+    </Button>
   );
 
   const renderItemIcon = (props) => (
-    <Icon {...props} name='person'/>
+    <Icon
+      {...props}
+      name='person'
+    />
   );
 
   const renderItem = ({ item, index }) => (

@@ -7,12 +7,14 @@ const ShowcaseCaption = (props) => (
   <View {...props}>
     <Text
       appearance='hint'
-      category='c2'>
+      category='c2'
+    >
       Powered by React Native Web
     </Text>
     <Text
       appearance='hint'
-      category='c1'>
+      category='c1'
+    >
       Rendering of React Native components in a web browser is an experimental feature and may contain issues.
     </Text>
   </View>
@@ -28,10 +30,11 @@ export const ShowcaseIFrame = (Component: React.ComponentType, id: string): Reac
     <Card
       style={styles.card}
       disabled={true}
-      header={props => <ShowcaseSettings {...props}/>}
-      footer={props => <ShowcaseCaption {...props}/>}
-      onLayout={postLayoutChangeEvent}>
-      <Component/>
+      header={props => <ShowcaseSettings {...props} />}
+      footer={props => <ShowcaseCaption {...props} />}
+      onLayout={postLayoutChangeEvent}
+    >
+      <Component />
     </Card>
   );
 };

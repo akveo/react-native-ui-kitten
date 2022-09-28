@@ -34,17 +34,18 @@ export const PopoverPlacementShowcase = () => {
   );
 
   const renderPlacementItem = (title) => (
-    <SelectItem title={title}/>
+    <SelectItem title={title} />
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <Select
         placeholder='Select Placement'
         value={placement}
         selectedIndex={placementIndex}
-        onSelect={onPlacementSelect}>
+        onSelect={onPlacementSelect}
+      >
         {placements.map(renderPlacementItem)}
       </Select>
 
@@ -54,11 +55,13 @@ export const PopoverPlacementShowcase = () => {
           anchor={renderToggleButton}
           visible={visible}
           placement={placement}
-          onBackdropPress={() => setVisible(false)}>
+          onBackdropPress={() => setVisible(false)}
+        >
           <Layout style={styles.content}>
             <Avatar
               style={styles.avatar}
-              source={require('../../assets/icon.png')}/>
+              source={require('../../assets/icon.png')}
+            />
             <Text>
               Welcome to UI Kitten 😻
             </Text>
@@ -67,7 +70,7 @@ export const PopoverPlacementShowcase = () => {
 
       </View>
 
-    </React.Fragment>
+    </>
   );
 };
 

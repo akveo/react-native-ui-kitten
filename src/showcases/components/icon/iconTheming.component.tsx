@@ -45,25 +45,31 @@ export const IconThemingShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Button
         style={styles.button}
-        accessoryLeft={renderZoomIcon}>
+        accessoryLeft={renderZoomIcon}
+      >
         ZOOM
       </Button>
 
       <Button
         appearance='outline'
         style={styles.button}
-        accessoryLeft={renderPulseIcon}>
+        accessoryLeft={renderPulseIcon}
+      >
         PULSE
       </Button>
 
       <Button
         appearance='ghost'
         style={styles.button}
-        accessoryRight={renderShakeIcon}>
+        accessoryRight={renderShakeIcon}
+      >
         SHAKE
       </Button>
 

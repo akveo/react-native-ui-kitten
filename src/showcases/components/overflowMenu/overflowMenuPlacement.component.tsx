@@ -34,17 +34,18 @@ export const OverflowMenuPlacementShowcase = () => {
   );
 
   const renderPlacementItem = (title) => (
-    <SelectItem title={title}/>
+    <SelectItem title={title} />
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <Select
         placeholder='Select Placement'
         value={placement}
         selectedIndex={placementIndex}
-        onSelect={onPlacementSelect}>
+        onSelect={onPlacementSelect}
+      >
         {placements.map(renderPlacementItem)}
       </Select>
 
@@ -54,15 +55,16 @@ export const OverflowMenuPlacementShowcase = () => {
           anchor={renderToggleButton}
           visible={visible}
           placement={placement}
-          onBackdropPress={() => setVisible(false)}>
-          <MenuItem title='Users'/>
-          <MenuItem title='Orders'/>
-          <MenuItem title='Transactions'/>
+          onBackdropPress={() => setVisible(false)}
+        >
+          <MenuItem title='Users' />
+          <MenuItem title='Orders' />
+          <MenuItem title='Transactions' />
         </OverflowMenu>
 
       </View>
 
-    </React.Fragment>
+    </>
   );
 };
 

@@ -34,33 +34,38 @@ export const TooltipPlacementShowcase = () => {
   );
 
   const renderPlacementItem = (title) => (
-    <SelectItem title={title}/>
+    <SelectItem title={title} />
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <Select
         placeholder='Select Placement'
         value={placement}
         selectedIndex={placementIndex}
-        onSelect={onPlacementSelect}>
+        onSelect={onPlacementSelect}
+      >
         {placements.map(renderPlacementItem)}
       </Select>
 
-      <Layout style={styles.buttonContainer} level='1'>
+      <Layout
+        style={styles.buttonContainer}
+        level='1'
+      >
 
         <Tooltip
           anchor={renderToggleButton}
           visible={visible}
           placement={placement}
-          onBackdropPress={() => setVisible(false)}>
+          onBackdropPress={() => setVisible(false)}
+        >
           Welcome to UI Kitten 😻
         </Tooltip>
 
       </Layout>
 
-    </React.Fragment>
+    </>
   );
 };
 

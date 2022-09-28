@@ -18,7 +18,10 @@ export const DatepickerCustomDayShowcase = () => {
   const [date, setDate] = React.useState(new Date());
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Datepicker
         placeholder='Pick Date'

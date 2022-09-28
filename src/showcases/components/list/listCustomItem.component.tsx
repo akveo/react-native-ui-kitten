@@ -11,7 +11,9 @@ export const ListCustomItemShowcase = () => {
   const renderItemHeader = (headerProps, info) => (
     <View {...headerProps}>
       <Text category='h6'>
-        {info.item.title} {info.index + 1}
+        {info.item.title}
+        {' '}
+        {info.index + 1}
       </Text>
     </View>
   );
@@ -27,7 +29,8 @@ export const ListCustomItemShowcase = () => {
       style={styles.item}
       status='basic'
       header={headerProps => renderItemHeader(headerProps, info)}
-      footer={renderItemFooter}>
+      footer={renderItemFooter}
+    >
       <Text>
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
         standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make

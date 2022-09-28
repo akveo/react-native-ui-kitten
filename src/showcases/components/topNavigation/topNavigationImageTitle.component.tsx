@@ -4,15 +4,24 @@ import { Avatar, Icon, MenuItem, OverflowMenu, Text, TopNavigation, TopNavigatio
 
 
 const MenuIcon = (props) => (
-  <Icon {...props} name='more-vertical'/>
+  <Icon
+    {...props}
+    name='more-vertical'
+  />
 );
 
 const InfoIcon = (props) => (
-  <Icon {...props} name='info'/>
+  <Icon
+    {...props}
+    name='info'
+  />
 );
 
 const LogoutIcon = (props) => (
-  <Icon {...props} name='log-out'/>
+  <Icon
+    {...props}
+    name='log-out'
+  />
 );
 
 export const TopNavigationImageTitleShowcase = () => {
@@ -24,19 +33,27 @@ export const TopNavigationImageTitleShowcase = () => {
   };
 
   const renderMenuAction = () => (
-    <TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
+    <TopNavigationAction
+      icon={MenuIcon}
+      onPress={toggleMenu}
+    />
   );
 
   const renderOverflowMenuAction = () => (
-    <React.Fragment>
-      <OverflowMenu
-        anchor={renderMenuAction}
-        visible={menuVisible}
-        onBackdropPress={toggleMenu}>
-        <MenuItem accessoryLeft={InfoIcon} title='About'/>
-        <MenuItem accessoryLeft={LogoutIcon} title='Logout'/>
-      </OverflowMenu>
-    </React.Fragment>
+    <OverflowMenu
+      anchor={renderMenuAction}
+      visible={menuVisible}
+      onBackdropPress={toggleMenu}
+    >
+      <MenuItem
+        accessoryLeft={InfoIcon}
+        title='About'
+      />
+      <MenuItem
+        accessoryLeft={LogoutIcon}
+        title='Logout'
+      />
+    </OverflowMenu>
   );
 
   const renderTitle = (props) => (
@@ -45,7 +62,9 @@ export const TopNavigationImageTitleShowcase = () => {
         style={styles.logo}
         source={require('../../assets/icon.png')}
       />
-      <Text {...props}>Eva Application</Text>
+      <Text {...props}>
+Eva Application
+      </Text>
     </View>
   );
 

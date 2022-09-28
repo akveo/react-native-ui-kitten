@@ -3,7 +3,10 @@ import { StyleSheet } from 'react-native';
 import { Button, Icon, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
 
 const StarIcon = (props) => (
-  <Icon {...props} name='star'/>
+  <Icon
+    {...props}
+    name='star'
+  />
 );
 
 export const OverflowMenuAccessoriesShowcase = () => {
@@ -23,16 +26,29 @@ export const OverflowMenuAccessoriesShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
       <OverflowMenu
         anchor={renderToggleButton}
         visible={visible}
         selectedIndex={selectedIndex}
         onSelect={onSelect}
-        onBackdropPress={() => setVisible(false)}>
-        <MenuItem title='Users' accessoryLeft={StarIcon}/>
-        <MenuItem title='Orders' accessoryLeft={StarIcon}/>
-        <MenuItem title='Transactions' accessoryLeft={StarIcon}/>
+        onBackdropPress={() => setVisible(false)}
+      >
+        <MenuItem
+          title='Users'
+          accessoryLeft={StarIcon}
+        />
+        <MenuItem
+          title='Orders'
+          accessoryLeft={StarIcon}
+        />
+        <MenuItem
+          title='Transactions'
+          accessoryLeft={StarIcon}
+        />
       </OverflowMenu>
     </Layout>
   );

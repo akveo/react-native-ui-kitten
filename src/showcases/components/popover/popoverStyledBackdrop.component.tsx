@@ -17,11 +17,13 @@ export const PopoverStyledBackdropShowcase = () => {
       backdropStyle={styles.backdrop}
       visible={visible}
       anchor={renderToggleButton}
-      onBackdropPress={() => setVisible(false)}>
+      onBackdropPress={() => setVisible(false)}
+    >
       <Layout style={styles.content}>
         <Avatar
           style={styles.avatar}
-          source={require('../../assets/icon.png')}/>
+          source={require('../../assets/icon.png')}
+        />
         <Text>
           Welcome to UI Kitten 😻
         </Text>

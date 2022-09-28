@@ -7,7 +7,10 @@ export const InputStatesShowcase = () => {
   const [value, setValue] = React.useState('');
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Input
         style={styles.input}

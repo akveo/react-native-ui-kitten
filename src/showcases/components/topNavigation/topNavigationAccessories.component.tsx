@@ -3,23 +3,38 @@ import { Icon, Layout, MenuItem, OverflowMenu, TopNavigation, TopNavigationActio
 import { StyleSheet } from 'react-native';
 
 const BackIcon = (props) => (
-  <Icon {...props} name='arrow-back'/>
+  <Icon
+    {...props}
+    name='arrow-back'
+  />
 );
 
 const EditIcon = (props) => (
-  <Icon {...props} name='edit'/>
+  <Icon
+    {...props}
+    name='edit'
+  />
 );
 
 const MenuIcon = (props) => (
-  <Icon {...props} name='more-vertical'/>
+  <Icon
+    {...props}
+    name='more-vertical'
+  />
 );
 
 const InfoIcon = (props) => (
-  <Icon {...props} name='info'/>
+  <Icon
+    {...props}
+    name='info'
+  />
 );
 
 const LogoutIcon = (props) => (
-  <Icon {...props} name='log-out'/>
+  <Icon
+    {...props}
+    name='log-out'
+  />
 );
 
 export const TopNavigationAccessoriesShowcase = () => {
@@ -31,28 +46,41 @@ export const TopNavigationAccessoriesShowcase = () => {
   };
 
   const renderMenuAction = () => (
-    <TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
+    <TopNavigationAction
+      icon={MenuIcon}
+      onPress={toggleMenu}
+    />
   );
 
   const renderRightActions = () => (
-    <React.Fragment>
-      <TopNavigationAction icon={EditIcon}/>
+    <>
+      <TopNavigationAction icon={EditIcon} />
       <OverflowMenu
         anchor={renderMenuAction}
         visible={menuVisible}
-        onBackdropPress={toggleMenu}>
-        <MenuItem accessoryLeft={InfoIcon} title='About'/>
-        <MenuItem accessoryLeft={LogoutIcon} title='Logout'/>
+        onBackdropPress={toggleMenu}
+      >
+        <MenuItem
+          accessoryLeft={InfoIcon}
+          title='About'
+        />
+        <MenuItem
+          accessoryLeft={LogoutIcon}
+          title='Logout'
+        />
       </OverflowMenu>
-    </React.Fragment>
+    </>
   );
 
   const renderBackAction = () => (
-    <TopNavigationAction icon={BackIcon}/>
+    <TopNavigationAction icon={BackIcon} />
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
       <TopNavigation
         alignment='center'
         title='Eva Application'

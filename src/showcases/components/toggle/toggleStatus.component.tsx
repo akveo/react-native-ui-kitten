@@ -23,47 +23,56 @@ export const ToggleStatusShowcase = () => {
   const controlToggleState = useToggleState();
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Toggle
         style={styles.toggle}
         status='primary'
-        {...primaryToggleState}>
+        {...primaryToggleState}
+      >
         Primary
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='success'
-        {...successToggleState}>
+        {...successToggleState}
+      >
         Success
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='info'
-        {...infoToggleState}>
+        {...infoToggleState}
+      >
         Info
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='warning'
-        {...warningToggleState}>
+        {...warningToggleState}
+      >
         Warning
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='danger'
-        {...dangerToggleState}>
+        {...dangerToggleState}
+      >
         Danger
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='basic'
-        {...basicToggleState}>
+        {...basicToggleState}
+      >
         Basic
       </Toggle>
 
@@ -71,7 +80,8 @@ export const ToggleStatusShowcase = () => {
         <Toggle
           style={styles.toggle}
           status='control'
-          {...controlToggleState}>
+          {...controlToggleState}
+        >
           Control
         </Toggle>
       </View>

@@ -65,7 +65,8 @@ export const AutocompleteHandleKeyboardShowcase = () => {
       value={value}
       placement={placement}
       onChangeText={onChangeText}
-      onSelect={onSelect}>
+      onSelect={onSelect}
+    >
       {data.map(renderOption)}
     </Autocomplete>
   );

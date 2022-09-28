@@ -28,8 +28,11 @@ export const ShowcaseThemingIFrame = (Component: React.ComponentType, showcaseId
   const currentTheme = themes[themeContext.mapping][themeContext.theme];
 
   const OrangeThemeProvider = (props: ThemeProviderProps) => (
-    <ThemeProvider {...props} theme={{ ...currentTheme, ...orangeTheme }}>
-      <Component/>
+    <ThemeProvider
+      {...props}
+      theme={{ ...currentTheme, ...orangeTheme }}
+    >
+      <Component />
     </ThemeProvider>
   );
 
