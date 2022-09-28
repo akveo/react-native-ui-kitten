@@ -157,12 +157,12 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
   private onInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.setOptionsListVisible();
-    this.props.onFocus && this.props.onFocus(event);
+    this.props.onFocus?.(event);
   };
 
   private onInputSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
     this.setOptionsListInvisible();
-    this.props.onSubmitEditing && this.props.onSubmitEditing(e);
+    this.props.onSubmitEditing?.(e);
   };
 
   private onBackdropPress = (): void => {
@@ -215,7 +215,8 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         visible={this.state.listVisible}
         fullWidth={true}
         anchor={() => this.renderInputElement(inputProps)}
-        onBackdropPress={this.onBackdropPress}>
+        onBackdropPress={this.onBackdropPress}
+      >
         <List
           style={styles.list}
           keyboardShouldPersistTaps='always'

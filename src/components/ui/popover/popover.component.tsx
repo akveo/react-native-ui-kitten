@@ -216,8 +216,9 @@ export class Popover extends React.Component<PopoverProps, State> {
       <PopoverView
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
-        placement={this.actualPlacement.reverse()}>
-          {this.renderContentElement()}
+        placement={this.actualPlacement.reverse()}
+      >
+        {this.renderContentElement()}
       </PopoverView>
     );
   };
@@ -226,8 +227,9 @@ export class Popover extends React.Component<PopoverProps, State> {
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-        onMeasure={this.onContentMeasure}>
-          {this.renderPopoverElement()}
+        onMeasure={this.onContentMeasure}
+      >
+        {this.renderPopoverElement()}
       </MeasureElement>
     );
   };
@@ -237,8 +239,9 @@ export class Popover extends React.Component<PopoverProps, State> {
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         force={this.state.forceMeasure}
-        onMeasure={this.onChildMeasure}>
-          {this.props.anchor()}
+        onMeasure={this.onChildMeasure}
+      >
+        {this.props.anchor()}
       </MeasureElement>
     );
   }

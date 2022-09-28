@@ -133,7 +133,7 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
 @styled('Datepicker')
 export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
 
-  static styledComponentName: string = 'Datepicker';
+  static styledComponentName = 'Datepicker';
 
   constructor(props: RangeDatepickerProps<D>) {
     super(props);
@@ -183,7 +183,8 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
       // @ts-ignore
       <RangeCalendar
         ref={this.calendarRef}
-        {...this.calendarProps} />
+        {...this.calendarProps}
+      />
     );
   }
 }

@@ -26,7 +26,8 @@ export class CalendarMonthHeader extends React.Component<CalendarMonthHeaderProp
     return (
       <View
         {...viewProps}
-        style={[styles.container, style]}>
+        style={[styles.container, style]}
+      >
         {data.map(children)}
       </View>
     );

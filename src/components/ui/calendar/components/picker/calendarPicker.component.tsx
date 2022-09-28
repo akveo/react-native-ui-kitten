@@ -56,7 +56,8 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
         firstRangeItem={firstRangeItem}
         lastRangeItem={lastRangeItem}
         onSelect={this.props.onSelect}
-        shouldComponentUpdate={this.props.shouldItemUpdate}>
+        shouldComponentUpdate={this.props.shouldItemUpdate}
+      >
         {this.props.children}
       </CalendarPickerCell>
     );
@@ -67,7 +68,8 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
       <CalendarPickerRow
         key={index}
         style={this.props.rowStyle}
-        data={item}>
+        data={item}
+      >
         {this.renderCellElement}
       </CalendarPickerRow>
     );
@@ -78,7 +80,8 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
 
     return (
       <View
-        {...viewProps}>
+        {...viewProps}
+      >
         {data.map(this.renderRowElement)}
       </View>
     );

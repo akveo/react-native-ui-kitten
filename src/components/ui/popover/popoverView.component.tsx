@@ -36,8 +36,8 @@ export interface PopoverViewProps extends ViewProps, StyledComponentProps {
 
 export type PopoverViewElement = React.ReactElement<PopoverViewProps>;
 
-const INDICATOR_OFFSET: number = 8;
-const INDICATOR_WIDTH: number = 6;
+const INDICATOR_OFFSET = 8;
+const INDICATOR_WIDTH = 6;
 
 @styled('Popover')
 export class PopoverView extends React.Component<PopoverViewProps> {
@@ -122,7 +122,8 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     return (
       <View
         style={[directionStyle.container, contentContainerStyle]}
-        onLayout={onLayout}>
+        onLayout={onLayout}
+      >
         <FalsyFC
           style={[evaStyle.indicator, directionStyle.indicator]}
           component={indicator}

@@ -140,7 +140,8 @@ export class Card extends React.Component<CardProps> {
         {...touchableProps}
         style={[styles.container, evaStyle.container, style]}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <FalsyFC
           style={evaStyle.accent}
           fallback={this.renderStatusAccent(evaStyle.accent)}

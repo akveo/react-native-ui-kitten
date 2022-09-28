@@ -1,5 +1,5 @@
 import React from 'react';
-import { Updates } from 'expo';
+import { reloadAsync } from 'expo-updates';
 import { enableScreens } from 'react-native-screens';
 import * as eva from '@eva-design/eva';
 import * as material from '@eva-design/material';
@@ -37,7 +37,7 @@ export default (): React.ReactElement => {
 
   const dispatchMappingChange = (nextMapping: AppMapping): void => {
     localStorage.setItem('mapping', nextMapping);
-    Updates.reload().then();
+    reloadAsync().then().catch(Promise.reject);
   };
 
   const isDarkMode = (): boolean => {
@@ -60,13 +60,13 @@ export default (): React.ReactElement => {
   };
 
   return (
-    <React.Fragment>
-      <IconRegistry icons={EvaIconsPack}/>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...applicationProviderConfig}>
         <ThemeContext.Provider value={themeContextProviderConfig}>
-          <AppNavigator/>
+          <AppNavigator />
         </ThemeContext.Provider>
       </ApplicationProvider>
-    </React.Fragment>
+    </>
   );
 };

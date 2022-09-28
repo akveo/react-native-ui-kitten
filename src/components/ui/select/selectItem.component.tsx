@@ -181,7 +181,8 @@ export class SelectItem extends React.Component<SelectItemProps> {
         onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={accessoryLeft}

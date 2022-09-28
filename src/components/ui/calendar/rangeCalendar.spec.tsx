@@ -48,7 +48,8 @@ describe('@range-calendar: component checks', () => {
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={light}>
+        theme={light}
+      >
         <RangeCalendar
           ref={ref}
           {...props}
@@ -68,7 +69,7 @@ describe('@range-calendar: component checks', () => {
     });
 
     const component = render(
-      <TestRangeCalendar onSelect={onSelect}/>,
+      <TestRangeCalendar onSelect={onSelect} />,
     );
 
     fireEvent.press(component.queryAllByText('7')[0]);

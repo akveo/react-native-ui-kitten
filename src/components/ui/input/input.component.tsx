@@ -264,7 +264,8 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         testID={testID}
         style={evaStyle.container}
         focusable={false}
-        onPress={this.focus}>
+        onPress={this.focus}
+      >
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}

@@ -34,9 +34,9 @@ interface State {
   submenuHeight: number;
 }
 
-const CHEVRON_DEG_COLLAPSED: number = -180;
-const CHEVRON_DEG_EXPANDED: number = 0;
-const CHEVRON_ANIM_DURATION: number = 200;
+const CHEVRON_DEG_COLLAPSED = -180;
+const CHEVRON_DEG_EXPANDED = 0;
+const CHEVRON_ANIM_DURATION = 200;
 const POSITION_OUTSCREEN: Point = Point.outscreen();
 
 /**
@@ -150,7 +150,10 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown {...evaProps} fill={style.tintColor as string}/>
+        <ChevronDown
+          {...evaProps}
+          fill={style.tintColor as string}
+        />
       </Animated.View>
     );
   };
@@ -173,7 +176,8 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-        onMeasure={this.onSubmenuMeasure}>
+        onMeasure={this.onSubmenuMeasure}
+      >
         {this.renderGroupedItems(evaStyle)}
       </MeasureElement>
     );
@@ -195,14 +199,14 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     const { children, ...itemProps } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <MenuItem
           accessoryRight={this.renderAccessoryIfNeeded}
           {...itemProps}
           onPress={this.onPress}
         />
         {this.renderGroupedItemsIfNeeded({})}
-      </React.Fragment>
+      </>
     );
   }
 }

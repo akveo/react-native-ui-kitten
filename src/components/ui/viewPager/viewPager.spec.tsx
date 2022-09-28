@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Text } from 'react-native';
+import { GestureResponderHandlers, Text } from 'react-native';
 import { render } from 'react-native-testing-library';
 import {
   ViewPager,
@@ -14,19 +14,23 @@ import {
 
 describe('@view-pager: component checks', () => {
 
-  const getComponentProps = (component) => {
+  const getComponentProps = (component): GestureResponderHandlers => {
     return component._fiber.pendingProps;
   };
 
   const TestViewPager = (props?: ViewPagerProps): React.ReactElement<ViewPagerProps> => (
-    <ViewPager {...props}/>
+    <ViewPager {...props} />
   );
 
   it('should render two tabs', () => {
     const component = render(
       <TestViewPager>
-        <Text>Tab 0</Text>
-        <Text>Tab 1</Text>
+        <Text>
+          Tab 0
+        </Text>
+        <Text>
+          Tab 1
+        </Text>
       </TestViewPager>,
     );
 
@@ -38,8 +42,12 @@ describe('@view-pager: component checks', () => {
     const shouldLoadComponent = jest.fn();
     render(
       <TestViewPager shouldLoadComponent={shouldLoadComponent}>
-        <Text>Tab 0</Text>
-        <Text>Tab 1</Text>
+        <Text>
+          Tab 0
+        </Text>
+        <Text>
+          Tab 1
+        </Text>
       </TestViewPager>,
     );
 
@@ -49,8 +57,12 @@ describe('@view-pager: component checks', () => {
   it('should not render child if disabled by shouldLoadComponent', () => {
     const component = render(
       <TestViewPager shouldLoadComponent={index => index !== 1}>
-        <Text>Tab 0</Text>
-        <Text>Tab 1</Text>
+        <Text>
+          Tab 0
+        </Text>
+        <Text>
+          Tab 1
+        </Text>
       </TestViewPager>,
     );
 
@@ -61,8 +73,12 @@ describe('@view-pager: component checks', () => {
   it('should disable swipe gesture when swipeEnabled is false', () => {
     const component = render(
       <TestViewPager swipeEnabled={false}>
-        <Text>Tab 0</Text>
-        <Text>Tab 1</Text>
+        <Text>
+          Tab 0
+        </Text>
+        <Text>
+          Tab 1
+        </Text>
       </TestViewPager>,
     );
 

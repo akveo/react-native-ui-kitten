@@ -77,11 +77,11 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   public scrollToToday = (): void => {
     this.calendarRef.current?.scrollToToday();
-  }
+  };
 
   public scrollToDate = (date: Date): void => {
     this.calendarRef.current?.scrollToDate(date);
-  }
+  };
 
   private popoverRef = React.createRef<Popover>();
 
@@ -216,7 +216,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         style={[evaStyle.control, styles.control, this.props.controlStyle]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={this.props.accessoryLeft}
@@ -255,7 +256,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     return (
       <View
         style={style}
-        testID={testID}>
+        testID={testID}
+      >
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
@@ -267,7 +269,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
           placement={placement}
           visible={this.state.visible}
           anchor={() => this.renderInputElement(touchableProps, evaStyle)}
-          onBackdropPress={this.setPickerInvisible}>
+          onBackdropPress={this.setPickerInvisible}
+        >
           {this.renderCalendar()}
         </Popover>
         <FalsyText

@@ -70,17 +70,27 @@ describe('@popover: component checks', () => {
     };
 
     const AnchorButton = () => (
-      <Button testID='@popover/toggle-button' title='' onPress={togglePopover}/>
+      <Button
+        testID='@popover/toggle-button'
+        title=''
+        onPress={togglePopover}
+      />
     );
 
     return (
-      <ApplicationProvider mapping={mapping} theme={light}>
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
         <Popover
           ref={ref}
           visible={visible}
           anchor={AnchorButton}
-          {...props}>
-          <Text>I love Babel</Text>
+          {...props}
+        >
+          <Text>
+I love Babel
+          </Text>
         </Popover>
       </ApplicationProvider>
     );
@@ -88,7 +98,7 @@ describe('@popover: component checks', () => {
 
   it('should render element passed to `anchor` prop', () => {
     const component = render(
-      <TestPopover/>,
+      <TestPopover />,
     );
 
     expect(touchables.findToggleButton(component)).toBeTruthy();
@@ -96,7 +106,7 @@ describe('@popover: component checks', () => {
 
   it('should not render content when not visible', () => {
     const component = render(
-      <TestPopover visible={false}/>,
+      <TestPopover visible={false} />,
     );
 
     expect(component.queryByText('I love Babel')).toBeFalsy();
@@ -104,7 +114,7 @@ describe('@popover: component checks', () => {
 
   it('should render content when becomes visible', async () => {
     const component = render(
-      <TestPopover/>,
+      <TestPopover />,
     );
 
 
@@ -117,7 +127,7 @@ describe('@popover: component checks', () => {
   it('should call onBackdropPress', async () => {
     const onBackdropPress = jest.fn();
     const component = render(
-      <TestPopover onBackdropPress={onBackdropPress}/>,
+      <TestPopover onBackdropPress={onBackdropPress} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -130,7 +140,7 @@ describe('@popover: component checks', () => {
 
   it('should style backdrop with backdropStyle prop', async () => {
     const component = render(
-      <TestPopover backdropStyle={{ backgroundColor: 'red' }}/>,
+      <TestPopover backdropStyle={{ backgroundColor: 'red' }} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -142,7 +152,7 @@ describe('@popover: component checks', () => {
   it('should be able to show with ref', async () => {
     const componentRef = React.createRef<Popover>();
     const component = render(
-      <TestPopover ref={componentRef}/>,
+      <TestPopover ref={componentRef} />,
     );
 
     componentRef.current.show();
@@ -154,7 +164,7 @@ describe('@popover: component checks', () => {
   it('should be able to hide with ref', async () => {
     const componentRef = React.createRef<Popover>();
     const component = render(
-      <TestPopover ref={componentRef}/>,
+      <TestPopover ref={componentRef} />,
     );
 
     componentRef.current.show();

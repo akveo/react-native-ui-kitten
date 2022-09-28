@@ -20,7 +20,10 @@ export class Minus extends React.Component<SvgProps> {
 
   public render(): React.ReactElement<SvgProps> {
     return (
-      <Svg {...this.props} viewBox='0 0 24 24'>
+      <Svg
+        {...this.props}
+        viewBox='0 0 24 24'
+      >
         <G data-name='Layer 2'>
           <G data-name='minus'>
             <Rect
@@ -29,7 +32,7 @@ export class Minus extends React.Component<SvgProps> {
               transform='rotate(180 12 12)'
               opacity='0'
             />
-            <Path d='M19 13H5a1 1 0 0 1 0-2h14a1 1 0 0 1 0 2z'/>
+            <Path d='M19 13H5a1 1 0 0 1 0-2h14a1 1 0 0 1 0 2z' />
           </G>
         </G>
       </Svg>

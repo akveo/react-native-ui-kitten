@@ -28,7 +28,8 @@ describe('@checkbox component checks', () => {
   const TestCheckBox = (props?: CheckBoxProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
+      theme={light}
+    >
       <CheckBox {...props} />
     </ApplicationProvider>
   );
@@ -89,7 +90,9 @@ describe('@checkbox component checks', () => {
 
   it('should render text', () => {
     const component = render(
-      <TestCheckBox>I love Babel</TestCheckBox>,
+      <TestCheckBox>
+I love Babel
+      </TestCheckBox>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -98,7 +101,11 @@ describe('@checkbox component checks', () => {
   it('should render text as component', () => {
     const component = render(
       <TestCheckBox>
-        {props => <Text {...props}>I love Babel</Text>}
+        {props => (
+          <Text {...props}>
+I love Babel
+          </Text>
+        )}
       </TestCheckBox>,
     );
 
@@ -106,7 +113,11 @@ describe('@checkbox component checks', () => {
   });
 
   it('should render ReactElement passed to prop', () => {
-    const renderComponent = <Text>I love Babel</Text>;
+    const renderComponent = (
+      <Text>
+I love Babel
+      </Text>
+    );
 
     const component = render(
       <TestCheckBox>
@@ -115,12 +126,12 @@ describe('@checkbox component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
-  })
+  });
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
     const component = render(
-      <TestCheckBox onPressIn={onPressIn}/>,
+      <TestCheckBox onPressIn={onPressIn} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -130,7 +141,7 @@ describe('@checkbox component checks', () => {
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
     const component = render(
-      <TestCheckBox onPressOut={onPressOut}/>,
+      <TestCheckBox onPressOut={onPressOut} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
@@ -141,7 +152,7 @@ describe('@checkbox component checks', () => {
     const onMouseEnter = jest.fn();
 
     const component = render(
-      <TestCheckBox onMouseEnter={onMouseEnter}/>,
+      <TestCheckBox onMouseEnter={onMouseEnter} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
@@ -152,7 +163,7 @@ describe('@checkbox component checks', () => {
     const onMouseLeave = jest.fn();
 
     const component = render(
-      <TestCheckBox onMouseLeave={onMouseLeave}/>,
+      <TestCheckBox onMouseLeave={onMouseLeave} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
@@ -163,7 +174,7 @@ describe('@checkbox component checks', () => {
     const onFocus = jest.fn();
 
     const component = render(
-      <TestCheckBox onFocus={onFocus}/>,
+      <TestCheckBox onFocus={onFocus} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'focus');
@@ -174,7 +185,7 @@ describe('@checkbox component checks', () => {
     const onBlur = jest.fn();
 
     const component = render(
-      <TestCheckBox onBlur={onBlur}/>,
+      <TestCheckBox onBlur={onBlur} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'blur');

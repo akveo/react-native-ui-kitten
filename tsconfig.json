@@ -1,11 +1,12 @@
 {
+  //  "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/tsc-out",
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-native",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
@@ -19,12 +20,16 @@
     }
   },
   "include": [
+    ".eslintrc.js",
     "./src",
-    "./src/**/package.json"
+    "src/**/*.ts",
   ],
   "exclude": [
     "./src/template-js",
     "./src/template-ts",
-    "./src/showcases"
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
   ]
 }

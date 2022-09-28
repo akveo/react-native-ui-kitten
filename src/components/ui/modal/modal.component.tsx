@@ -135,10 +135,10 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   }
 
   private onDimensionChange = (): void => {
-    if(this.props.visible) {
+    if (this.props.visible) {
       ModalService.update(this.modalId, this.renderMeasuringContentElement());
     }
-  }
+  };
 
   private onContentMeasure = (contentFrame: Frame): void => {
     this.state.contentFrame = contentFrame;
@@ -162,7 +162,8 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-        onMeasure={this.onContentMeasure}>
+        onMeasure={this.onContentMeasure}
+      >
         {this.renderContentElement()}
       </MeasureElement>
     );

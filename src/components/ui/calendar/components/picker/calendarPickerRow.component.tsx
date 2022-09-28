@@ -28,7 +28,8 @@ export class CalendarPickerRow<D> extends React.Component<CalendarPickerRowProps
     return (
       <View
         {...viewProps}
-        style={[styles.container, style]}>
+        style={[styles.container, style]}
+      >
         {data.map(children)}
       </View>
     );

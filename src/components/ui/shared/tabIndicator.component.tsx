@@ -30,7 +30,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
   static defaultProps: Partial<TabIndicatorProps> = {
     selectedPosition: 0,
   };
-  private indicatorWidth: number = 0;
+  private indicatorWidth = 0;
   private contentOffset: Animated.Value = new Animated.Value(0);
 
   public componentDidMount() {
@@ -58,7 +58,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
    *  animated: boolean | undefined
    * }
    */
-  public scrollToIndex(params: { index: number, animated?: boolean }) {
+  public scrollToIndex(params: { index: number; animated?: boolean }) {
     const { index, ...rest } = params;
     const offset: number = this.indicatorWidth * index;
 
@@ -73,7 +73,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
    *  animated: boolean | undefined
    * }
    */
-  public scrollToOffset(params: { offset: number, animated?: boolean }) {
+  public scrollToOffset(params: { offset: number; animated?: boolean }) {
     this.createOffsetAnimation(params).start(this.onContentOffsetAnimationStateEnd);
   }
 
@@ -85,7 +85,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     // no-op
   };
 
-  private createOffsetAnimation = (params: { offset: number, animated?: boolean }): Animated.CompositeAnimation => {
+  private createOffsetAnimation = (params: { offset: number; animated?: boolean }): Animated.CompositeAnimation => {
     return Animated.timing(this.contentOffset, {
       toValue: RTLService.select(params.offset, -params.offset),
       duration: 200,
@@ -110,15 +110,15 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
       width: `${widthPercent}%`,
 
       // @ts-ignore: RN has no types for `Animated` styles
-      transform: [ { translateX: this.contentOffset } ],
+      transform: [{ translateX: this.contentOffset }],
     };
   };
 
   private renderIndicatorLine = (style: StyleProp<ViewStyle>): React.ReactElement => {
     return (
       <View
-        testID={'indicator body'}
-        style={[ { width: '100%', alignSelf: 'center' }, style ]}
+        testID="indicator body"
+        style={[{ width: '100%', alignSelf: 'center' }, style]}
       />
     );
   };
@@ -131,8 +131,9 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     return (
       <Animated.View
         {...viewProps}
-        style={[ evaStyle ]}
-        onLayout={this.onLayout}>
+        style={evaStyle}
+        onLayout={this.onLayout}
+      >
         {indicatorLine}
       </Animated.View>
     );

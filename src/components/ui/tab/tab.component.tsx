@@ -126,7 +126,8 @@ export class Tab extends React.Component<TabProps> {
         style={[evaStyle.container, styles.container, style]}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        onPress={this.onPress}>
+        onPress={this.onPress}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={icon}

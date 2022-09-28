@@ -196,7 +196,8 @@ export class Button extends React.Component<ButtonProps> {
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={accessoryLeft}

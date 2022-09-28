@@ -31,14 +31,17 @@ describe('@button: component checks', () => {
   const TestButton = (props?: ButtonProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
-      <Button {...props}/>
+      theme={light}
+    >
+      <Button {...props} />
     </ApplicationProvider>
   );
 
   it('should render text passed to children', () => {
     const component = render(
-      <TestButton>I love Babel</TestButton>,
+      <TestButton>
+I love Babel
+      </TestButton>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -47,7 +50,11 @@ describe('@button: component checks', () => {
   it('should render component passed to children', () => {
     const component = render(
       <TestButton>
-        {props => <Text {...props}>I love Babel</Text>}
+        {props => (
+          <Text {...props}>
+I love Babel
+          </Text>
+        )}
       </TestButton>,
     );
 
@@ -86,16 +93,27 @@ describe('@button: component checks', () => {
   });
 
   it('should render accessory from prop as pure JSX element', () => {
-    const accessoryLeft = <Text>Left accessory</Text>;
-    const accessoryRight = <Text>Right accessory</Text>;
+    const accessoryLeft = (
+      <Text>
+Left accessory
+      </Text>
+    );
+    const accessoryRight = (
+      <Text>
+Right accessory
+      </Text>
+    );
 
     const component = render(
-      <TestButton accessoryLeft={accessoryLeft} accessoryRight={accessoryRight} />
+      <TestButton
+        accessoryLeft={accessoryLeft}
+        accessoryRight={accessoryRight}
+      />
     );
-    
+
     expect(component.queryByText('Left accessory')).toBeTruthy();
     expect(component.queryByText('Right accessory')).toBeTruthy();
-  })
+  });
 
   it('should render children from prop as pure JSX element', () => {
     const children = (
@@ -111,13 +129,13 @@ describe('@button: component checks', () => {
     );
 
     expect(component.queryByText('Children component')).toBeTruthy();
-  })
+  });
 
   it('should call onPress', () => {
     const onPress = jest.fn();
 
     const component = render(
-      <TestButton onPress={onPress}/>,
+      <TestButton onPress={onPress} />,
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
@@ -128,7 +146,7 @@ describe('@button: component checks', () => {
     const onPressIn = jest.fn();
 
     const component = render(
-      <TestButton onPressIn={onPressIn}/>,
+      <TestButton onPressIn={onPressIn} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -139,7 +157,7 @@ describe('@button: component checks', () => {
     const onPressOut = jest.fn();
 
     const component = render(
-      <TestButton onPressOut={onPressOut}/>,
+      <TestButton onPressOut={onPressOut} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
@@ -150,7 +168,7 @@ describe('@button: component checks', () => {
     const onMouseEnter = jest.fn();
 
     const component = render(
-      <TestButton onMouseEnter={onMouseEnter}/>,
+      <TestButton onMouseEnter={onMouseEnter} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
@@ -161,7 +179,7 @@ describe('@button: component checks', () => {
     const onMouseLeave = jest.fn();
 
     const component = render(
-      <TestButton onMouseLeave={onMouseLeave}/>,
+      <TestButton onMouseLeave={onMouseLeave} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
@@ -172,7 +190,7 @@ describe('@button: component checks', () => {
     const onFocus = jest.fn();
 
     const component = render(
-      <TestButton onFocus={onFocus}/>,
+      <TestButton onFocus={onFocus} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'focus');
@@ -183,7 +201,7 @@ describe('@button: component checks', () => {
     const onBlur = jest.fn();
 
     const component = render(
-      <TestButton onBlur={onBlur}/>,
+      <TestButton onBlur={onBlur} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'blur');

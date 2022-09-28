@@ -154,11 +154,11 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
     const rangeEndPlaceChanged: boolean = props.lastRangeItem !== nextProps.lastRangeItem;
 
     const shouldUpdate: boolean =
-      selectionChanged
-      || disablingChanged
-      || rangeChanged
-      || rangeStartPlaceChanged
-      || rangeEndPlaceChanged;
+      selectionChanged ||
+      disablingChanged ||
+      rangeChanged ||
+      rangeStartPlaceChanged ||
+      rangeEndPlaceChanged;
 
     if (shouldUpdate) {
       return true;

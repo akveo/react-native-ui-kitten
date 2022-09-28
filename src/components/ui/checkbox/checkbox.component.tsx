@@ -210,7 +210,8 @@ export class CheckBox extends React.Component<CheckBoxProps> {
         onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <View style={styles.highlightContainer}>
           <View style={[evaStyle.highlight, styles.highlight]} />
           <View style={[evaStyle.selectContainer, styles.selectContainer]}>

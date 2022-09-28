@@ -161,7 +161,7 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     return (
       <TabIndicator
         key={0}
-        style={[ style, indicatorStyle ]}
+        style={[style, indicatorStyle]}
         selectedPosition={selectedIndex}
         positions={positions}
       />
@@ -199,7 +199,7 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     return (
       <View testID={testID} style={styles.container}>
         {indicatorElement}
-        <View style={[ evaStyle.container, styles.elementsContainer, style ]}>
+        <View style={[evaStyle.container, styles.elementsContainer, style]}>
           {tabElements}
         </View>
       </View>
