@@ -19,7 +19,6 @@ import {
   MeasuringElement,
   Point,
   RenderFCProp,
-  Overwrite,
 } from '../../devsupport';
 import { ModalPresentingConfig, ModalService } from '../../theme';
 import { ModalProps } from '../modal/modal.component';
@@ -35,12 +34,12 @@ import {
   PopoverPlacements,
 } from './type';
 
-type PopoverModalProps = Overwrite<ModalProps, {
-  children?: React.ReactElement;
-}>;
+type PopoverModalProps = Omit<ModalProps, 'children'>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
-  anchor: RenderFCProp;
+  children?: React.ReactElement;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  anchor: RenderFCProp<any>;
   fullWidth?: boolean;
 }
 

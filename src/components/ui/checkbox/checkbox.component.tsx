@@ -43,7 +43,9 @@ type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'default' | string>;
 }>;
 
-export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
+type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
+
+export interface CheckBoxProps extends TouchableWebPropsWithoutChildren, CheckBoxStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean, indeterminate: boolean) => void;

@@ -1,5 +1,4 @@
 {
-  //  "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/tsc-out",
@@ -21,8 +20,7 @@
   },
   "include": [
     ".eslintrc.js",
-    "./src",
-    "src/**/*.ts",
+    "./src/**/*"
   ],
   "exclude": [
     "./src/template-js",

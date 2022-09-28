@@ -73,7 +73,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     visible: false,
   };
 
-  protected calendarRef = React.createRef<BaseDatepickerComponent<P>>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected calendarRef = React.createRef<any>();
 
   public scrollToToday = (): void => {
     this.calendarRef.current?.scrollToToday();

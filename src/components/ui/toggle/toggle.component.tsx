@@ -42,7 +42,9 @@ type ToggleStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'default'>;
 }>;
 
-export interface ToggleProps extends TouchableWebProps, ToggleStyledProps {
+type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
+
+export interface ToggleProps extends TouchableWebPropsWithoutChildren, ToggleStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
@@ -358,7 +360,7 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
     this.ellipseScaleAnimation.setValue(value);
   };
 
-  private toggle = (callback: (nextValue: boolean) => null): void => {
+  private toggle = (callback: (nextValue: boolean) => void): void => {
     const value: number = this.props.checked ? -20 : 20;
 
     this.animateThumbTranslate(value, () => {

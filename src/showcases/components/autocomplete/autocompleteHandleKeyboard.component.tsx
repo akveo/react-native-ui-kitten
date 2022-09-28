@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Keyboard, Platform } from 'react-native';
+import { Keyboard, KeyboardEventName, Platform } from 'react-native';
 import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
 const movies = [
@@ -29,11 +29,11 @@ export const AutocompleteHandleKeyboardShowcase = () => {
   const [placement, setPlacement] = React.useState('bottom');
 
   React.useEffect(() => {
-    const keyboardShowListener = Keyboard.addListener(showEvent, () => {
+    const keyboardShowListener = Keyboard.addListener(showEvent as KeyboardEventName, () => {
       setPlacement('top');
     });
 
-    const keyboardHideListener = Keyboard.addListener(hideEvent, () => {
+    const keyboardHideListener = Keyboard.addListener(hideEvent as KeyboardEventName, () => {
       setPlacement('bottom');
     });
 

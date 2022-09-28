@@ -25,7 +25,9 @@ import {
   RangeRole,
 } from '../../type';
 
-export interface CalendarPickerProps<D> extends ViewProps {
+type ViewPropsWithoutChildren = Omit<ViewProps, 'children'>;
+
+export interface CalendarPickerProps<D> extends ViewPropsWithoutChildren {
   data: CalendarDateInfo<D>[][];
   isItemSelected: (item: CalendarDateInfo<D>) => boolean;
   isItemDisabled: (item: CalendarDateInfo<D>) => boolean;

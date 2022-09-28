@@ -30,16 +30,22 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should be initialized with en locale', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect((dateService).locale).toBe('en');
   });
 
   it('* should be initialized with zh locale', () => {
     dateService = new NativeDateService('zh', { i18n });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect(dateService.locale).toBe('zh');
   });
 
   it('* should be initialized with en locale if no i18n', () => {
     dateService = new NativeDateService('zh');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect(dateService.locale).toBe('en');
   });
 
