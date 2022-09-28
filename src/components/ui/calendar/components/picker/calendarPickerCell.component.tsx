@@ -120,7 +120,8 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
       <TouchableWithoutFeedback
         {...touchableProps}
         style={[evaStyle.container, styles.container, style]}
-        onPress={this.onPress}>
+        onPress={this.onPress}
+      >
         {this.renderContentElement(children, evaStyle)}
       </TouchableWithoutFeedback>
     );

@@ -80,8 +80,8 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   };
 
   private containerRef = React.createRef<View>();
-  private contentWidth: number = 0;
-  private contentOffsetValue: number = 0;
+  private contentWidth = 0;
+  private contentOffsetValue = 0;
   private contentOffset: Animated.Value = new Animated.Value(this.contentOffsetValue);
   private panResponder: PanResponderInstance = PanResponder.create(this);
 
@@ -134,7 +134,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     }
   };
 
-  public scrollToIndex(params: { index: number, animated?: boolean }): void {
+  public scrollToIndex(params: { index: number; animated?: boolean }): void {
     const { index, ...rest } = params;
     const childCount = this.children.length - 1;
     const offset: number = this.contentWidth * (index < 0 ? 0 : index > childCount ? childCount : index);
@@ -142,7 +142,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     this.scrollToOffset({ offset, ...rest });
   }
 
-  public scrollToOffset = (params: { offset: number, animated?: boolean }): void => {
+  public scrollToOffset = (params: { offset: number; animated?: boolean }): void => {
     this.createOffsetAnimation(params).start(this.onContentOffsetAnimationStateEnd);
   };
 
@@ -167,7 +167,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     }
   };
 
-  private createOffsetAnimation = (params: { offset: number, animated?: boolean }): Animated.CompositeAnimation => {
+  private createOffsetAnimation = (params: { offset: number; animated?: boolean }): Animated.CompositeAnimation => {
     const animationDuration: number = params.animated ? this.props.animationDuration : 0;
 
     return Animated.timing(this.contentOffset, {
@@ -205,15 +205,15 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     const { style, children, swipeEnabled, ...viewProps } = this.props;
 
     const panResponderConfig = swipeEnabled ? this.panResponder.panHandlers : null;
-    const animatedViewProps = { ...viewProps, ...panResponderConfig  };
+    const animatedViewProps = { ...viewProps, ...panResponderConfig };
 
     return (
       <Animated.View
         {...animatedViewProps}
         style={[styles.container, style, this.getContainerStyle()]}
         onLayout={this.onLayout}
-        // @ts-ignore
-        ref={this.containerRef}>
+        ref={this.containerRef}
+      >
         {this.renderComponentChildren()}
       </Animated.View>
     );

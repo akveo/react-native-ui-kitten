@@ -116,13 +116,15 @@ export class TabView extends React.Component<TabViewProps> {
     return (
       <View
         {...viewProps}
-        style={[styles.container, style]}>
+        style={[styles.container, style]}
+      >
         <TabBar
           style={tabBarStyle}
           ref={this.tabBarRef}
           selectedIndex={selectedIndex}
           indicatorStyle={indicatorStyle}
-          onSelect={this.onBarSelect}>
+          onSelect={this.onBarSelect}
+        >
           {tabs}
         </TabBar>
         <ViewPager
@@ -132,7 +134,8 @@ export class TabView extends React.Component<TabViewProps> {
           selectedIndex={selectedIndex}
           shouldLoadComponent={this.props.shouldLoadComponent}
           onOffsetChange={this.onPagerOffsetChange}
-          onSelect={this.onPagerSelect}>
+          onSelect={this.onPagerSelect}
+        >
           {contents}
         </ViewPager>
       </View>

@@ -130,7 +130,7 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should parse date', () => {
-    const date: string = '06.15.2018';
+    const date = '06.15.2018';
     expect(dateService.parse(date, '')).toEqual(new Date(2018, 5, 15));
   });
 

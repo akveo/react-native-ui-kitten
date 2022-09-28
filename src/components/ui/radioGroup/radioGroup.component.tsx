@@ -92,7 +92,8 @@ export class RadioGroup extends React.Component<RadioGroupProps> {
     return (
       <View
         {...viewProps}
-        style={[evaStyle.container, style]}>
+        style={[evaStyle.container, style]}
+      >
         {radioElements}
       </View>
     );

@@ -131,11 +131,11 @@ export class TabBar extends React.Component<TabBarProps> {
 
   private tabIndicatorRef = React.createRef<TabIndicator>();
 
-  public scrollToIndex(params: { index: number, animated?: boolean }): void {
+  public scrollToIndex(params: { index: number; animated?: boolean }): void {
     this.tabIndicatorRef.current?.scrollToIndex(params);
   }
 
-  public scrollToOffset(params: { offset: number, animated?: boolean }): void {
+  public scrollToOffset(params: { offset: number; animated?: boolean }): void {
     this.tabIndicatorRef.current?.scrollToOffset(params);
   }
 
@@ -188,12 +188,13 @@ export class TabBar extends React.Component<TabBarProps> {
       <View testID={testID}>
         <View
           {...viewProps}
-          style={[evaStyle.container, styles.container, style]}>
+          style={[evaStyle.container, styles.container, style]}
+        >
           {tabElements}
         </View>
         <TabIndicator
           ref={this.tabIndicatorRef}
-          style={[ evaStyle.indicator, indicatorStyle ]}
+          style={[evaStyle.indicator, indicatorStyle]}
           selectedPosition={selectedIndex}
           positions={tabElements.length}
         />

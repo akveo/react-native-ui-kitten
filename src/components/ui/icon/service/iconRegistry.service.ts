@@ -9,7 +9,7 @@ import {
 } from './type';
 
 function throwPackNotFoundError(name: string) {
-  const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
+  const docRoot = 'https://akveo.github.io/react-native-ui-kitten/docs';
 
   const message: string = [
     `\nIcon: Icon Pack '${name}' is not registered`,
@@ -21,7 +21,7 @@ function throwPackNotFoundError(name: string) {
 }
 
 function throwIconNotFoundError(name: string, pack: string) {
-  const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
+  const docRoot = 'https://akveo.github.io/react-native-ui-kitten/docs';
 
   const message: string = [
     `\nIcon: '${name}' icon is not registered in pack '${pack}'.`,

@@ -120,7 +120,8 @@ export class BottomNavigationTab extends React.Component<BottomNavigationTabProp
         style={[evaStyle.container, styles.container, style]}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        onPress={this.onPress}>
+        onPress={this.onPress}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={icon}

@@ -16,8 +16,8 @@ import {
   AnimationConfig,
 } from '../animation/animation';
 
-const PI: number = 180;
-const PI2: number = 360;
+const PI = 180;
+const PI2 = 360;
 const OFFSET_MIN: number = PI / 12;
 const OFFSET_MAX: number = PI / 6;
 

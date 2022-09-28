@@ -377,14 +377,16 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
       <View
         testID={testID}
         {...this.panResponder.panHandlers}
-        style={[styles.container, style]}>
+        style={[styles.container, style]}
+      >
         <TouchableWeb
           {...touchableProps}
           style={styles.toggleContainer}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}
           onFocus={this.onFocus}
-          onBlur={this.onBlur}>
+          onBlur={this.onBlur}
+        >
           <View style={[evaStyle.highlight, styles.highlight]} />
           <Animated.View style={[evaStyle.ellipseContainer, styles.ellipseContainer]}>
             <Animated.View style={[evaStyle.ellipse, styles.ellipse]} />

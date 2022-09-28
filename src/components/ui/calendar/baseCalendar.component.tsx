@@ -63,15 +63,15 @@ export type BaseCalendarElement<D> = React.ReactElement<BaseCalendarProps<D>>;
 
 interface State<D> {
   viewMode: CalendarViewMode;
-  visibleDate: D;  // is used in date view mode
-  pickerDate: D;  // is used in month/year view mode, goal - not to change visibleDate until month has changed
+  visibleDate: D; // is used in date view mode
+  pickerDate: D; // is used in month/year view mode, goal - not to change visibleDate until month has changed
   // pickerDate equals to visibleDate from start
   // is auto synchronised with visibleDate on onPickerNavigationPress (open/close month/year picker)
   // visibleDate is set to pickerDate on onMonthSelect
 }
 
-const PICKER_ROWS: number = 4;
-const PICKER_COLUMNS: number = 3;
+const PICKER_ROWS = 4;
+const PICKER_COLUMNS = 3;
 const VIEWS_IN_PICKER: number = PICKER_ROWS * PICKER_COLUMNS;
 
 export abstract class BaseCalendarComponent<P, D = Date> extends React.Component<BaseCalendarProps<D> & P, State<D>> {
@@ -188,7 +188,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   protected abstract isDateSelected(date: D): boolean;
 
   protected abstract shouldUpdateDate(props: CalendarPickerCellProps<D>,
-                                      nextProps: CalendarPickerCellProps<D>): boolean;
+    nextProps: CalendarPickerCellProps<D>): boolean;
 
   private initialVisibleDate(): D {
     return this.props.initialVisibleDate || this.selectedDate() || this.dateService.today();
@@ -353,7 +353,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         key={index}
-        textStyle={this.getWeekdayStyle(this.props.eva.style)}>
+        textStyle={this.getWeekdayStyle(this.props.eva.style)}
+      >
         {weekday}
       </CalendarDateContent>
     );
@@ -363,7 +364,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         style={evaStyle.container}
-        textStyle={evaStyle.text}>
+        textStyle={evaStyle.text}
+      >
         {this.dateService.getDate(date)}
       </CalendarDateContent>
     );
@@ -373,7 +375,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         style={evaStyle.container}
-        textStyle={evaStyle.text}>
+        textStyle={evaStyle.text}
+      >
         {this.dateService.getMonthName(date, TranslationWidth.SHORT)}
       </CalendarDateContent>
     );
@@ -383,7 +386,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         style={evaStyle.container}
-        textStyle={evaStyle.text}>
+        textStyle={evaStyle.text}
+      >
         {this.dateService.getYear(date)}
       </CalendarDateContent>
     );
@@ -391,10 +395,11 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   private renderDayPickerElement = (date: D, evaStyle): React.ReactFragment => {
     return (
-      <React.Fragment>
+      <>
         <CalendarMonthHeader
           style={evaStyle.daysHeaderContainer}
-          data={this.dateService.getDayOfWeekNames()}>
+          data={this.dateService.getDayOfWeekNames()}
+        >
           {this.renderWeekdayElement}
         </CalendarMonthHeader>
         <Divider style={evaStyle.divider} />
@@ -405,10 +410,11 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
           isItemSelected={this.isDaySelected}
           isItemDisabled={this.isDayDisabled}
           isItemToday={this.isDayToday}
-          shouldItemUpdate={this.shouldUpdateDate}>
+          shouldItemUpdate={this.shouldUpdateDate}
+        >
           {this.renderDayIfNeeded}
         </CalendarPicker>
-      </React.Fragment>
+      </>
     );
   };
 
@@ -420,7 +426,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
         onSelect={this.onMonthSelect}
         isItemSelected={this.isMonthSelected}
         isItemDisabled={this.isMonthDisabled}
-        isItemToday={this.isMonthToday}>
+        isItemToday={this.isMonthToday}
+      >
         {this.props.renderMonth || this.renderMonthElement}
       </CalendarPicker>
     );
@@ -434,7 +441,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
         onSelect={this.onYearSelect}
         isItemSelected={this.isYearSelected}
         isItemDisabled={this.isYearDisabled}
-        isItemToday={this.isYearToday}>
+        isItemToday={this.isYearToday}
+      >
         {this.props.renderYear || this.renderYearElement}
       </CalendarPicker>
     );
@@ -483,7 +491,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <View
         {...viewProps}
-        style={[ evaStyle.container, style ]}>
+        style={[evaStyle.container, style]}
+      >
         {this.renderHeaderElement(evaStyle)}
         {this.renderPickerElement(evaStyle)}
         {this.renderFooterElement(evaStyle)}

@@ -5,8 +5,8 @@
  */
 
 export enum RangeRole {
-  none ,
-  member ,
+  none,
+  member,
   start = 1 << 1,
   end = 2 << 1,
   complete = start | end,

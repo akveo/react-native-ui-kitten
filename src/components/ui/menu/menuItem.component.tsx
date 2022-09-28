@@ -157,7 +157,8 @@ export class MenuItem extends React.Component<MenuItemProps> {
         onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <View style={[StyleSheet.absoluteFill, evaStyle.indicator]} />
         <FalsyFC
           style={evaStyle.icon}

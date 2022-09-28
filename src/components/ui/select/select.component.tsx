@@ -77,9 +77,9 @@ interface State {
   listVisible: boolean;
 }
 
-const CHEVRON_DEG_COLLAPSED: number = -180;
-const CHEVRON_DEG_EXPANDED: number = 0;
-const CHEVRON_ANIM_DURATION: number = 200;
+const CHEVRON_DEG_COLLAPSED = -180;
+const CHEVRON_DEG_EXPANDED = 0;
+const CHEVRON_ANIM_DURATION = 200;
 
 /**
  * A dropdown menu for displaying selectable options.
@@ -444,7 +444,10 @@ export class Select extends React.Component<SelectProps, State> {
     const { tintColor, ...svgStyle } = evaStyle;
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown style={svgStyle} fill={tintColor} />
+        <ChevronDown
+          style={svgStyle}
+          fill={tintColor}
+        />
       </Animated.View>
     );
   };
@@ -462,7 +465,8 @@ export class Select extends React.Component<SelectProps, State> {
         onMouseLeave={this.onMouseLeave}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
-        disabled={props.disabled}>
+        disabled={props.disabled}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={props.accessoryLeft}
@@ -498,7 +502,8 @@ export class Select extends React.Component<SelectProps, State> {
           visible={this.state.listVisible}
           fullWidth={true}
           anchor={() => this.renderInputElement(touchableProps, evaStyle)}
-          onBackdropPress={this.onBackdropPress}>
+          onBackdropPress={this.onBackdropPress}
+        >
           <List
             style={styles.list}
             data={this.data}

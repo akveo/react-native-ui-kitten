@@ -149,7 +149,8 @@ export class ButtonGroup extends React.Component<ButtonGroupProps> {
     return (
       <View
         {...viewProps}
-        style={[evaStyle.container, styles.container, style]}>
+        style={[evaStyle.container, styles.container, style]}
+      >
         {this.renderButtonElements(children, evaStyle)}
       </View>
     );

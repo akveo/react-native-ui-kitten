@@ -150,7 +150,7 @@ export class ListItem extends React.Component<ListItemProps> {
 
   private renderTemplateChildren = (props: ListItemProps, evaStyle): React.ReactFragment => {
     return (
-      <React.Fragment>
+      <>
         <FalsyFC
           style={evaStyle.icon}
           component={props.accessoryLeft}
@@ -169,7 +169,7 @@ export class ListItem extends React.Component<ListItemProps> {
           style={evaStyle.icon}
           component={props.accessoryRight}
         />
-      </React.Fragment>
+      </>
     );
   };
 
@@ -192,7 +192,8 @@ export class ListItem extends React.Component<ListItemProps> {
         {...touchableProps}
         style={[evaStyle.container, styles.container, webStyles.container, style]}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         {children || this.renderTemplateChildren(this.props, evaStyle)}
       </TouchableWeb>
     );

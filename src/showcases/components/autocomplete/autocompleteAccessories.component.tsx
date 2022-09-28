@@ -13,7 +13,10 @@ const movies = [
 const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
 
 const StarIcon = (props) => (
-  <Icon {...props} name='star'/>
+  <Icon
+    {...props}
+    name='star'
+  />
 );
 
 export const AutocompleteAccessoriesShowcase = () => {
@@ -45,7 +48,10 @@ export const AutocompleteAccessoriesShowcase = () => {
 
   const renderCloseIcon = (props) => (
     <TouchableWithoutFeedback onPress={clearInput}>
-      <Icon {...props} name='close'/>
+      <Icon
+        {...props}
+        name='close'
+      />
     </TouchableWithoutFeedback>
   );
 
@@ -55,7 +61,8 @@ export const AutocompleteAccessoriesShowcase = () => {
       value={value}
       accessoryRight={renderCloseIcon}
       onChangeText={onChangeText}
-      onSelect={onSelect}>
+      onSelect={onSelect}
+    >
       {data.map(renderOption)}
     </Autocomplete>
   );

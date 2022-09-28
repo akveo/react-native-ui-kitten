@@ -5,7 +5,7 @@ import { EvaIcon } from './evaIcon.component';
 
 export const createIconsMap = (): { [key: string]: IconProvider<SvgProps> } => {
   return new Proxy({}, {
-    get(target: {}, name: string): IconProvider<SvgProps> {
+    get(target, name: string): IconProvider<SvgProps> {
       return new EvaIcon(findIconByName(name));
     },
   });

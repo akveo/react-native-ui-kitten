@@ -31,7 +31,7 @@ export interface PulseAnimationConfig extends AnimationConfig, TimingAnimationCo
 
 export class PulseAnimation extends Animation<PulseAnimationConfig, ViewProps> {
 
-  private value: Animated.Value;
+  private readonly value: Animated.Value;
 
   constructor(config?: PulseAnimationConfig) {
     super({ ...DEFAULT_CONFIG, ...config });
