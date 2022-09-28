@@ -34,7 +34,9 @@ type RadioStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'default'>;
 }>;
 
-export interface RadioProps extends TouchableWebProps, RadioStyledProps {
+type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
+
+export interface RadioProps extends TouchableWebPropsWithoutChildren, RadioStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;

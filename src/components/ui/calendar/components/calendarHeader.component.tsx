@@ -37,11 +37,15 @@ import {
   CalendarViewModes,
 } from '@ui-kitten/components/ui/calendar/type';
 
+interface IconStyle extends ImageStyle {
+  tintColor?: string;
+}
+
 export interface CalendarHeaderProps extends ViewProps {
   viewModeId: CalendarViewModeId;
   title: string;
   titleStyle?: StyleProp<TextStyle>;
-  iconStyle?: ImageStyle;
+  iconStyle?: IconStyle;
   lateralNavigationAllowed: boolean;
   onTitlePress?: () => void;
   onNavigationLeftPress?: () => void;

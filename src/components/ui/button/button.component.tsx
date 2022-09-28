@@ -36,7 +36,9 @@ type ButtonStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'filled' | 'outline' | 'ghost'>;
 }>;
 
-export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
+type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
+
+export interface ButtonProps extends TouchableWebPropsWithoutChildren, ButtonStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;

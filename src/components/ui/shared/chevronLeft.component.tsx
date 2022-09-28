@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React from 'react';
 import {
   G,
@@ -24,8 +26,8 @@ export class ChevronLeft extends React.Component<SvgProps> {
         {...this.props}
         viewBox='0 0 24 24'
       >
-        <G data-name='Layer 2'>
-          <G data-name='chevron-left'>
+        <G>
+          <G>
             <Rect
               width='24'
               height='24'

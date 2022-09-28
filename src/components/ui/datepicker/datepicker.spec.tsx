@@ -505,25 +505,6 @@ describe('@datepicker: component checks', () => {
     expect(onPressOut).toBeCalled();
   });
 
-  it('should show the selected date on load provided by date prop', () => {
-    const date = new Date(2021, 2, 1);
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
-
-    render(
-      <TestDatepicker
-        ref={componentRef}
-        date={date}
-      />,
-    );
-
-    componentRef.current.show();
-
-    // @ts-ignore: private calendarRef
-    const calendarState = componentRef.current.calendarRef.current.state;
-    expect(calendarState.visibleDate.getFullYear()).toEqual(date.getFullYear());
-    expect(calendarState.visibleDate.getMonth()).toEqual(date.getMonth());
-  });
-
   it('should show the specific date on load provided by initialVisibleDate prop', () => {
     const initialDate = new Date(2021, 2, 1);
     const componentRef: React.RefObject<Datepicker> = React.createRef();

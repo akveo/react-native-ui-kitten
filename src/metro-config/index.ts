@@ -7,9 +7,10 @@ import ProjectService from './services/project.service';
 
 // TS definitions for metro config?
 type MetroConfigType = {
-  reporter: {
+  reporter?: {
     update: (event) => void;
   };
+  watchFolders?: Array<string>;
 };
 
 const defaultMetroConfig = MetroConfig.getDefaultValues();

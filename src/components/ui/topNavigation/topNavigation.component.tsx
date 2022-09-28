@@ -31,8 +31,8 @@ type TopNavigationStyledProps = Overwrite<StyledComponentProps, {
 export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   subtitle?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp;
-  accessoryRight?: RenderProp;
+  accessoryLeft?: () => React.ReactElement;
+  accessoryRight?: () => React.ReactElement;
   alignment?: AlignmentProp;
 }
 
