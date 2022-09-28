@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Frame } from './type';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface MeasureElementProps<P = any> {
   force?: boolean;
   shouldUseTopInsets?: boolean;
@@ -19,7 +20,7 @@ export interface MeasureElementProps<P = any> {
   children: React.ReactElement<P>;
 }
 
-export type MeasuringElement<P = any> = React.ReactElement;
+export type MeasuringElement = React.ReactElement;
 
 /**
  * Measures child element size and it's screen position asynchronously.
@@ -47,7 +48,7 @@ export type MeasuringElement<P = any> = React.ReactElement;
  */
 export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringElement => {
 
-  const ref = React.useRef<any>();
+  const ref = React.useRef();
 
   const bindToWindow = (frame: Frame, window: Frame): Frame => {
     if (frame.origin.x < window.size.width) {

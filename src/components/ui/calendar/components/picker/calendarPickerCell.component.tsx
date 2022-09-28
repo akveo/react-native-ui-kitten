@@ -32,7 +32,7 @@ export interface CalendarPickerCellProps<D> extends StyledComponentProps {
   onSelect?: (date: CalendarDateInfo<D>) => void;
   children: ChildrenProp<D>;
   shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
-  style: StyleProp<TextStyle> | undefined;
+  style?: StyleProp<TextStyle>;
   disabled?: boolean;
 }
 

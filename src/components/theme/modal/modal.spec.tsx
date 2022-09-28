@@ -12,7 +12,7 @@ describe('@modal-panel: component checks', () => {
   it('should set service instance when becomes mounted', () => {
     render(
       <ModalPanel>
-Test
+        Test
       </ModalPanel>,
     );
 
@@ -22,7 +22,7 @@ Test
   it('should clean service instance when becomes unmounted', () => {
     const component = render(
       <ModalPanel>
-Test
+        Test
       </ModalPanel>,
     );
 
@@ -39,9 +39,10 @@ describe('@modal-service: service checks', () => {
       <View />,
     );
 
-    const id = ModalService.show(<Text>
-I love Babel
-                                 </Text>, {});
+    const id = ModalService.show(
+      <Text>
+        I love Babel
+      </Text>, {});
     const text = component.queryByText('I love Babel');
 
     expect(id).toBeFalsy();
@@ -51,9 +52,10 @@ I love Babel
   it('should do nothing on update if there is no ModalPanel', () => {
     const component = render(<View />);
 
-    ModalService.update('random-id', <Text>
-I love Babel
-                                     </Text>);
+    ModalService.update('random-id',
+      <Text>
+        I love Babel
+      </Text>);
 
     expect(component.queryByText('I love Babel')).toBeFalsy();
   });
@@ -63,9 +65,10 @@ I love Babel
       <View />,
     );
 
-    const id = ModalService.show(<Text>
-I love Babel
-                                 </Text>, {});
+    const id = ModalService.show(
+      <Text>
+        I love Babel
+      </Text>, {});
 
     expect(id).toBeFalsy();
     expect(component.queryByText('I love Babel')).toBeFalsy();
@@ -78,13 +81,14 @@ I love Babel
   it('should render element and return it\'s id', () => {
     const component = render(
       <ModalPanel>
-Test
+        Test
       </ModalPanel>,
     );
 
-    const id = ModalService.show(<Text>
-I love Babel
-                                 </Text>, {});
+    const id = ModalService.show(
+      <Text>
+        I love Babel
+      </Text>, {});
     const text = component.queryByText('I love Babel');
 
     expect(id).toBeTruthy();
@@ -94,16 +98,18 @@ I love Babel
   it('should render multiple elements with unique ids', () => {
     const component = render(
       <ModalPanel>
-Test
+        Test
       </ModalPanel>,
     );
 
-    const firstId = ModalService.show(<Text>
-I love Babel
-                                      </Text>, {});
-    const secondId = ModalService.show(<Text>
-I love Jest
-                                       </Text>, {});
+    const firstId = ModalService.show(
+      <Text>
+        I love Babel
+      </Text>, {});
+    const secondId = ModalService.show(
+      <Text>
+        I love Jest
+      </Text>, {});
 
     const firstElement = component.queryByText('I love Babel');
     const secondElement = component.queryByText('I love Jest');
@@ -116,16 +122,18 @@ I love Jest
   it('should update rendered element by it\'s id', () => {
     const component = render(
       <ModalPanel>
-Test
+        Test
       </ModalPanel>,
     );
 
-    const id = ModalService.show(<Text>
-I love Babel
-                                 </Text>, {});
-    ModalService.update(id, <Text>
-I love Jest
-                            </Text>);
+    const id = ModalService.show(
+      <Text>
+        I love Babel
+      </Text>, {});
+    ModalService.update(id,
+      <Text>
+        I love Jest
+      </Text>);
 
     expect(component.queryByText('I love Babel')).toBeFalsy();
     expect(component.queryByText('I love Jest')).toBeTruthy();
@@ -134,16 +142,18 @@ I love Jest
   it('should do nothing on update if there is no element with id', () => {
     const component = render(
       <ModalPanel>
-Test
+        Test
       </ModalPanel>,
     );
 
-    ModalService.show(<Text>
-I love Babel
-                      </Text>, {});
-    ModalService.update('random-id', <Text>
-I love Jest
-                                     </Text>);
+    ModalService.show(
+      <Text>
+        I love Babel
+      </Text>, {});
+    ModalService.update('random-id',
+      <Text>
+        I love Jest
+      </Text>);
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
     expect(component.queryByText('I love Jest')).toBeFalsy();
@@ -152,13 +162,14 @@ I love Jest
   it('should hide rendered element by it\'s id and clear it\'s id', () => {
     const component = render(
       <ModalPanel>
-Test
+        Test
       </ModalPanel>,
     );
 
-    const id = ModalService.show(<Text>
-I love Jest
-                                 </Text>, {});
+    const id = ModalService.show(
+      <Text>
+        I love Jest
+      </Text>, {});
 
     expect(component.queryByText('I love Jest')).toBeTruthy();
 

@@ -17,16 +17,16 @@ class WebEventResponderStatic {
   static create(config: WebEventResponderCallbacks): WebEventResponderInstance {
     return new WebEventResponderInstance({
       onMouseEnter: () => {
-        config.onMouseEnter && config.onMouseEnter();
+        config.onMouseEnter?.();
       },
       onMouseLeave: () => {
-        config.onMouseLeave && config.onMouseLeave();
+        config.onMouseLeave?.();
       },
       onFocus: () => {
-        config.onFocus && config.onFocus();
+        config.onFocus?.();
       },
       onBlur: () => {
-        config.onBlur && config.onBlur();
+        config.onBlur?.();
       },
     });
   }

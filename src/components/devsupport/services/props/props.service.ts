@@ -102,6 +102,7 @@ const FlexViewCrossStyleValues = [
 export const FlexViewCrossStyleProps: string[] = FlexStyleProps.filter((el) => !FlexViewCrossStyleValues.includes(el));
 
 export interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 

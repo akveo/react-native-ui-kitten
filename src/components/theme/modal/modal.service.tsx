@@ -22,11 +22,11 @@ import {
  *
  * @method {(identifier: string, children: React.ReactNode) => void} update - Updates component from a modal window.
  *
- * @property {boolean} getShouldUseTopInsets - returns `true` if StatusBar additional offset is not enabled, returns `false`
- * if StatusBar additional offset is enabled.
+ * @property {boolean} getShouldUseTopInsets - returns `true` if StatusBar additional offset is not enabled, returns
+ * `false` if StatusBar additional offset is enabled.
  *
- * @property {boolean} setShouldUseTopInsets - `true` value enables StatusBar additional offset, `false` disables StatusBar
- * additional offset
+ * @property {boolean} setShouldUseTopInsets - `true` value enables StatusBar additional offset, `false` disables
+ * StatusBar additional offset
  *
  * @overview-example Simple Usage example
  * ModalService simple usage example.
@@ -66,8 +66,8 @@ import {
  * ```
  *
  * @overview-example StatusBar additional offset support configuration
- * ModalService could also control additional status bar offset configuration for all related UI Kitten measurable elements like
- * [Modal](components/modal) and [Popover](components/popover).
+ * ModalService could also control additional status bar offset configuration for all related UI Kitten measurable
+ * elements like [Modal](components/modal) and [Popover](components/popover).
  *
  * ```
  * import React from 'react';

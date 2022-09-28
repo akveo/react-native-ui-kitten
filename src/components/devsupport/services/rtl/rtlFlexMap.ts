@@ -71,6 +71,7 @@ const FlexWrapMapper: RTLFlexMapper<string> = {
 /**
  * Matches FlexBox style properties that can affect on Layout depending on LTR/RTL mode corresponding Mappers
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const RtlFlexMap: Record<string, RTLFlexMapper<any>> = {
   alignContent: FlexStartEndMapper,
   alignItems: FlexStartEndMapper,

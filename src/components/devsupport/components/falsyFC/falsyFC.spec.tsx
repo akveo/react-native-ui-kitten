@@ -3,6 +3,8 @@ import { Text } from 'react-native';
 import { render } from 'react-native-testing-library';
 import { FalsyFC } from './falsyFC.component';
 
+const styles = { color: 'red' };
+
 it('should render nothing', () => {
   const component = render(<FalsyFC />);
   expect(component.toJSON()).toEqual(null);
@@ -11,10 +13,10 @@ it('should render nothing', () => {
 it('should render provided function component', () => {
   const component = render(
     <FalsyFC
-      style={{ color: 'red' }}
+      style={styles}
       component={props => (
         <Text {...props}>
-I love Babel
+          I love Babel
         </Text>
       )}
     />,
@@ -23,17 +25,15 @@ I love Babel
   const textComponent = component.getByText('I love Babel');
 
   expect(textComponent).toBeTruthy();
-  expect(textComponent.props.style).toEqual({
-    color: 'red',
-  });
+  expect(textComponent.props.style).toEqual(styles);
 });
 
 it('should render provided function component with hooks', () => {
-  const HookComponent = (props) => {
+  const HookComponent = (props): React.ReactElement => {
     const state = React.useState(1);
     return (
       <Text {...props}>
-I love Babel
+        I love Babel
         {state}
       </Text>
     );
@@ -41,7 +41,7 @@ I love Babel
 
   const component = render(
     <FalsyFC
-      style={{ color: 'red' }}
+      style={styles}
       component={props => <HookComponent {...props} />}
     />,
   );
@@ -56,7 +56,7 @@ it('should render fallback component', () => {
       component={null}
       fallback={(
         <Text>
-I love Babel
+          I love Babel
         </Text>
       )}
     />,
@@ -68,7 +68,7 @@ I love Babel
 });
 
 it('should be able to render components with hooks', () => {
-  const ComponentWithHooks = () => {
+  const ComponentWithHooks = (): React.ReactElement => {
     const [text, setText] = React.useState('');
 
     React.useEffect(() => {
@@ -94,24 +94,22 @@ it('should be able to render components with hooks', () => {
 });
 
 it('should be able to render valid element', () => {
-  const ComponentWithHooks = (props) => {
+  const ComponentWithHooks = (props): React.ReactElement => {
     return (
       <Text {...props}>
-I love Babel
+        I love Babel
       </Text>
     );
   };
 
   const component = render(
     <FalsyFC
-      style={{ color: 'red' }}
+      style={styles}
       component={<ComponentWithHooks />}
     />,
   );
 
   const textComponent = component.getByText('I love Babel');
   expect(textComponent).toBeTruthy();
-  expect(textComponent.props.style).toEqual({
-    color: 'red',
-  });
+  expect(textComponent.props.style).toEqual(styles);
 });

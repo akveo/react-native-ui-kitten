@@ -1,12 +1,14 @@
 import { ReactElement } from 'react';
 
 export type ChildrenProp<Element extends ReactElement = ReactElement> = Element | Element[];
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type ChildrenWithProps<Props = {}> = ChildrenProp<ReactElement<Props>>;
 
 
 /*
  * https://github.com/microsoft/TypeScript/issues/29729#issuecomment-505826972
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type LiteralUnion<T extends U, U = string> = T | (U & {});
 
 export type EvaStatus = LiteralUnion<'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control'>;
