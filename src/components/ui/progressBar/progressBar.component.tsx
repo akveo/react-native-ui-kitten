@@ -117,7 +117,10 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
 
   private onLayout = (event: LayoutChangeEvent) => {
     this.props.onLayout && this.props.onLayout(event);
-    this.setState({ trackWidth: event.nativeEvent.layout.width });
+    const trackWidth = event.nativeEvent.layout.width
+
+    this.setState({ trackWidth });
+    this.animation.setBarWidth(trackWidth);
   }
 
   private getIndicatorWidth = (progress: number): string => {
@@ -152,7 +155,7 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
     const indicatorStyles: Animated.AnimatedProps<ViewStyle>[] = [ style ];
 
     if (animating) {
-      const animationStyles = this.animation.toProps(this.state.trackWidth);
+      const animationStyles = this.animation.toProps();
 
       indicatorStyles.push(animationStyles);
     } else {

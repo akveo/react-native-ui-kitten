@@ -7,13 +7,12 @@
 import {
   Animated,
   Easing,
-  Platform,
+  Platform, TransformsStyle, ViewStyle,
 } from 'react-native';
 import {
   Animation,
   AnimationConfig,
 } from '../animation/animation';
-import { TransformProps } from 'react-native-svg';
 
 const DEFAULT_CONFIG: ProgressBarAnimationConfig = {
   duration: 1000,
@@ -22,22 +21,27 @@ const DEFAULT_CONFIG: ProgressBarAnimationConfig = {
   useNativeDriver: Platform.OS !== 'web',
 };
 
-interface ProgressBaryAnimationStyle {
-  transform: Animated.AnimatedProps<TransformProps>[];
-}
+type ProgressBarAnimationStyle = Animated.AnimatedProps<ViewStyle>
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
 
 type ProgressBarAnimationConfig = AnimationConfig & TimingAnimationConfig;
 
-export class ProgressBarAnimation extends Animation<ProgressBarAnimationConfig, ProgressBaryAnimationStyle> {
+export class ProgressBarAnimation extends Animation<ProgressBarAnimationConfig, ProgressBarAnimationStyle> {
 
   private toValue: number;
-  private animationValue: Animated.Value;
+
+  private barWidth: number = 0;
+
+  private readonly animationValue: Animated.Value;
 
   constructor(config?: ProgressBarAnimationConfig) {
     super({ ...DEFAULT_CONFIG, ...config });
     this.animationValue = new Animated.Value(0);
+  }
+
+  public setBarWidth(value: number): void {
+    this.barWidth = value;
   }
 
   protected get animation(): Animated.CompositeAnimation {
@@ -59,28 +63,18 @@ export class ProgressBarAnimation extends Animation<ProgressBarAnimationConfig, 
     super.stop();
   }
 
-  // @ts-ignore: FIXME
-  public toProps(width: number): ProgressBaryAnimationStyle {
+  public toProps(): ProgressBarAnimationStyle {
     return {
       transform: [
-        { translateX: this.createTranslateXInterpolation(width) },
-        { scaleX: this.createScaleXInterpolation() },
+        { translateX: this.createTranslateXInterpolation() },
       ],
     };
   }
 
-  private createTranslateXInterpolation = (width: number): Animated.AnimatedInterpolation => {
-    return this.animationValue.interpolate({
-        inputRange: [ 0, 1 ],
-        outputRange: [ -0.5 * width, 0 ],
-      });
-  };
-
-  private createScaleXInterpolation = (): Animated.AnimatedInterpolation => {
+  private createTranslateXInterpolation = (): Animated.AnimatedInterpolation => {
     return this.animationValue.interpolate({
       inputRange: [ 0, 1 ],
-      outputRange: [ 0.0001, 1 ],
+      outputRange: [ -this.barWidth, 0 ],
     });
   };
-
 }
