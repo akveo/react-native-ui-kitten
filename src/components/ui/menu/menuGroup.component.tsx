@@ -132,10 +132,10 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     this.setState({ submenuHeight: frame.size.height });
   };
 
-  private createExpandAnimation = (toValue: number, duration?: number): Animated.CompositeAnimation => {
+  private createExpandAnimation = (toValue: number): Animated.CompositeAnimation => {
     return Animated.timing(this.expandAnimation, {
       toValue: toValue,
-      duration: duration || CHEVRON_ANIM_DURATION,
+      duration: CHEVRON_ANIM_DURATION,
       useNativeDriver: false,
     });
   };
