@@ -25,7 +25,7 @@ import { MenuItemDescriptor } from './menu.service';
 
 export interface MenuGroupProps extends MenuItemProps {
   children?: ChildrenWithProps<MenuItemProps>;
-  initialExpanded?: boolean;
+  initiallyExpanded?: boolean;
 }
 
 export type MenuGroupElement = React.ReactElement<MenuGroupProps>;
@@ -59,8 +59,8 @@ const POSITION_OUTSCREEN: Point = Point.outscreen();
  * @property {ReactElement | (ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the *title*.
  * Expected to return an Image.
- * 
- * @property {boolean} initialExpanded - Boolean value to render to initially expand a group.
+ *
+ * @property {boolean} initiallyExpanded - Boolean value which defines whether group should be initially expanded.
  * If true - menu group will be expanded by default.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
@@ -69,21 +69,22 @@ const POSITION_OUTSCREEN: Point = Point.outscreen();
  */
 export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
-  private initialExpanded: boolean;
-
-  constructor(props) {
-    super(props);
-    this.initialExpanded = false;
-  }
-
   public state: State = {
     submenuHeight: 1,
   };
+
+  private initiallyExpanded: boolean;
+
   private expandAnimation: Animated.Value = new Animated.Value(0);
 
-  public componentDidMount() {
-    if(this.props.initialExpanded) {
-      this.initialExpanded = true;
+  constructor(props) {
+    super(props);
+    this.initiallyExpanded = props.initiallyExpanded;
+  }
+
+  public componentDidUpdate(prevProps: Readonly<MenuGroupProps>, prevState: Readonly<State>, snapshot?: any) {
+    if (this.state.submenuHeight !== prevState.submenuHeight && this.initiallyExpanded) {
+      this.expandAnimation.setValue(this.state.submenuHeight);
     }
   }
 
@@ -119,6 +120,8 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   private onPress = (descriptor: MenuItemDescriptor, event: GestureResponderEvent): void => {
     if (this.hasSubmenu) {
+      this.initiallyExpanded = false;
+
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue).start();
       this.props.onPress && this.props.onPress(descriptor, event);
@@ -127,11 +130,6 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   private onSubmenuMeasure = (frame: Frame): void => {
     this.setState({ submenuHeight: frame.size.height });
-    if (this.initialExpanded) {
-      const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
-      this.createExpandAnimation(expandValue, 0).start();
-      this.initialExpanded = false
-    }
   };
 
   private createExpandAnimation = (toValue: number, duration?: number): Animated.CompositeAnimation => {
@@ -172,7 +170,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   private renderMeasuringGroupedItems = (evaStyle): MeasuringElement => {
     return (
-      <MeasureElement 
+      <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         onMeasure={this.onSubmenuMeasure}>
         {this.renderGroupedItems(evaStyle)}
@@ -194,8 +192,6 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   public render(): React.ReactNode {
     const { children, ...itemProps } = this.props;
-
-    console.log(this.initialExpanded);
 
     return (
       <React.Fragment>
