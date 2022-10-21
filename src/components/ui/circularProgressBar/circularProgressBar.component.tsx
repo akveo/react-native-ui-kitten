@@ -231,15 +231,15 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
   private renderHalf = (
     evaStyle: ComponentStyles, viewStyle: ViewStyle, rotate: NumberProp, opacity?: NumberProp,
   ): React.ReactElement<ViewProps> => {
-    const { radius, track, indicator } = evaStyle;
+    const { radius, indicator } = evaStyle;
     const opacityProp = opacity || opacity === 0 ? { opacity } : undefined;
 
     return (
       <View style={viewStyle}>
-        {this.renderHalfCircle(radius, indicator)}
+        <View style={{ width: radius * 2, height: radius }} />
         <Animated.View
           style={{
-            ...StyleSheet.absoluteFillObject,
+            ...styles.absoluteFill,
             ...opacityProp,
             transform: [
               { translateY: radius / 2 },
@@ -248,7 +248,7 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
               { perspective: 1000 },
             ],
           }}>
-          {this.renderHalfCircle(radius, track)}
+          {this.renderHalfCircle(radius, indicator)}
         </Animated.View>
       </View>
     );
@@ -257,27 +257,30 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
   private renderCircularProgress = (
     progress: number, animating: boolean, evaStyle: ComponentStyles,
   ): React.ReactElement<ViewProps> => {
-    let firstHalfOpacity;
     let firstHalfRotate;
     let secondHalfRotate;
 
     if (animating) {
-      const { opacity, rotateFirstHalf, rotateSecondHalf } = this.animation.toProps();
+      const { rotateFirstHalf, rotateSecondHalf } = this.animation.toProps();
 
-      firstHalfOpacity = opacity;
       firstHalfRotate = rotateFirstHalf;
       secondHalfRotate = rotateSecondHalf;
     } else {
-      const isSecondHalfActive = progress > 0.5;
-
-      firstHalfOpacity = isSecondHalfActive ? 0 : 1;
-      firstHalfRotate = `${progress * 360}deg`;
-      secondHalfRotate = isSecondHalfActive ? `${(progress - 0.5) * 360}deg` : '0deg';
+      firstHalfRotate = `${Math.min(progress, 0.5) * 360 - 180}deg`;
+      secondHalfRotate = `${Math.max(0.5, progress) * 360}deg`;
     }
+
+    const trackStyle = {
+      ...styles.absoluteFill,
+      borderWidth: evaStyle.track.width,
+      borderColor: evaStyle.track.color,
+      borderRadius: evaStyle.radius,
+    };
 
     return (
       <View style={[ styles.absoluteFill, styles.center, styles.rotate90 ]}>
-        {this.renderHalf(evaStyle, styles.zIndex, firstHalfRotate, firstHalfOpacity)}
+        <View style={trackStyle} />
+        {this.renderHalf(evaStyle, styles.zIndex, firstHalfRotate)}
         {this.renderHalf(evaStyle, styles.rotate180, secondHalfRotate)}
       </View>
     );
@@ -341,26 +344,24 @@ const styles = StyleSheet.create({
   absoluteFill: {
     ...StyleSheet.absoluteFillObject,
   },
-
   center: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   zIndex: {
     zIndex: 1,
+    overflow: 'hidden',
   },
-
   rotate90: {
     transform: [
       { rotate: '90deg' },
     ],
   },
-
   rotate180: {
     transform: [
       { rotate: '180deg' },
     ],
+    overflow: 'hidden'
   },
 });
 

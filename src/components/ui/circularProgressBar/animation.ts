@@ -24,7 +24,6 @@ const DEFAULT_CONFIG: ComponentAnimationConfig = {
 interface AnimationStyle {
   rotateFirstHalf: Animated.AnimatedInterpolation;
   rotateSecondHalf: Animated.AnimatedInterpolation;
-  opacity: Animated.AnimatedInterpolation;
 }
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
@@ -34,7 +33,7 @@ type ComponentAnimationConfig = AnimationConfig & TimingAnimationConfig;
 export class CircularProgressBarAnimation extends Animation<ComponentAnimationConfig, AnimationStyle> {
 
   private toValue: number;
-  private animationValue: Animated.Value;
+  private readonly animationValue: Animated.Value;
 
   constructor(config?: ComponentAnimationConfig) {
     super({ ...DEFAULT_CONFIG, ...config });
@@ -64,22 +63,13 @@ export class CircularProgressBarAnimation extends Animation<ComponentAnimationCo
     return {
       rotateFirstHalf: this.createRotateFirstHalfInterpolation(),
       rotateSecondHalf: this.createRotateSecondHalfInterpolation(),
-      opacity: this.createOpacityInterpolation(),
     };
   }
-
-  private createOpacityInterpolation = (): Animated.AnimatedInterpolation => {
-    return this.animationValue.interpolate({
-      inputRange: [ 0, 0.5, 0.5, 1 ],
-      outputRange: [ 1, 1, 0, 0 ],
-      extrapolate: 'clamp',
-    });
-  };
 
   private createRotateFirstHalfInterpolation = (): Animated.AnimatedInterpolation => {
     return this.animationValue.interpolate({
       inputRange: [ 0, 0.5 ],
-      outputRange: [ '0deg', '180deg' ],
+      outputRange: [ '180deg', '360deg' ],
       extrapolate: 'clamp',
     });
   };
@@ -87,7 +77,7 @@ export class CircularProgressBarAnimation extends Animation<ComponentAnimationCo
   private createRotateSecondHalfInterpolation = (): Animated.AnimatedInterpolation => {
     return this.animationValue.interpolate({
       inputRange: [ 0.5, 1 ],
-      outputRange: [ '0deg', '180deg' ],
+      outputRange: [ '180deg', '360deg' ],
       extrapolate: 'clamp',
     });
   };
