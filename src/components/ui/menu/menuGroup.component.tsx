@@ -83,7 +83,8 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
   }
 
   public componentDidUpdate(prevProps: Readonly<MenuGroupProps>, prevState: Readonly<State>, snapshot?: any) {
-    if (this.state.submenuHeight !== prevState.submenuHeight && this.initiallyExpanded) {
+    const submenuHeightChanged = this.state.submenuHeight !== prevState.submenuHeight;
+    if (submenuHeightChanged && this.hasSubmenu && this.initiallyExpanded) {
       this.expandAnimation.setValue(this.state.submenuHeight);
     }
   }
