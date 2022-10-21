@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   Animated,
+  EasingFunction,
   StyleSheet,
   Text,
   TextProps,
@@ -29,7 +30,7 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@ui-kitten/components';
-import { CircularProgressBarAnimation } from './animation';
+import { CircularProgressBarAnimation, CircularProgressBarAnimationConfig } from './animation';
 
 type CircularProgressBarStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'default'>;
@@ -62,6 +63,7 @@ export interface CircularProgressBarProps extends ViewProps, CircularProgressBar
   animating?: boolean;
   size?: EvaSize;
   state?: LoadingStates;
+  animationConfig?: Partial<CircularProgressBarAnimationConfig>;
 }
 
 export type CircularProgressBarElement = React.ReactElement<CircularProgressBarProps>;
@@ -85,6 +87,9 @@ export type CircularProgressBarElement = React.ReactElement<CircularProgressBarP
  * @property {number} progress - Current progress value of the process.
  * Can be from 0 to 1.
  *
+ * @property {Partial<CircularProgressBarAnimationConfig>} animationConfig - Animation configuration.
+ * Optional. Can define duration, easing function and etc.
+ *
  * @overview-example CircularProgressBarSimpleUsage
  * Default CircularProgressBar state is `progress`, size is `medium` and animating is `true`.
  *
@@ -107,15 +112,21 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     progress: 0,
   };
 
-  private animation = new CircularProgressBarAnimation();
+  private animation: CircularProgressBarAnimation;
 
   private accessoryIcons = {
     success: 'checkmark',
     error: 'close',
   };
 
+  constructor(props: CircularProgressBarProps) {
+    super(props);
+
+    this.animation = new CircularProgressBarAnimation(props.animationConfig);
+  }
+
   private get containerSize(): Size {
-    const { width, height } = StyleSheet.flatten([this.props.eva.style, this.props.style]);
+    const { width, height } = StyleSheet.flatten([ this.props.eva.style, this.props.style ]);
     // @ts-ignore: width and height are restricted to be a number
     return new Size(width, height);
   }

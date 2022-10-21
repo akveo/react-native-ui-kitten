@@ -14,8 +14,8 @@ import {
   AnimationConfig,
 } from '../animation/animation';
 
-const DEFAULT_CONFIG: ComponentAnimationConfig = {
-  duration: 1000,
+const DEFAULT_CONFIG: CircularProgressBarAnimationConfig = {
+  duration: 500,
   easing: Easing.linear,
   cycles: 1,
   useNativeDriver: Platform.OS !== 'web',
@@ -28,14 +28,14 @@ interface AnimationStyle {
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
 
-type ComponentAnimationConfig = AnimationConfig & TimingAnimationConfig;
+export type CircularProgressBarAnimationConfig = AnimationConfig & TimingAnimationConfig;
 
-export class CircularProgressBarAnimation extends Animation<ComponentAnimationConfig, AnimationStyle> {
+export class CircularProgressBarAnimation extends Animation<CircularProgressBarAnimationConfig, AnimationStyle> {
 
   private toValue: number;
   private readonly animationValue: Animated.Value;
 
-  constructor(config?: ComponentAnimationConfig) {
+  constructor(config?: Partial<CircularProgressBarAnimationConfig>) {
     super({ ...DEFAULT_CONFIG, ...config });
     this.animationValue = new Animated.Value(0);
   }

@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   Animated,
+  EasingFunction,
   LayoutChangeEvent,
   StyleSheet,
   View,
@@ -23,7 +24,7 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@ui-kitten/components';
-import { ProgressBarAnimation } from './animation';
+import { ProgressBarAnimation, ProgressBarAnimationConfig } from './animation';
 
 type ProgressBarStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'default'>;
@@ -37,6 +38,7 @@ interface ComponentStyles {
 export interface ProgressBarProps extends ViewProps, ProgressBarStyledProps {
   progress?: number;
   animating?: boolean;
+  animationConfig?: Partial<ProgressBarAnimationConfig>;
   status?: EvaStatus;
 }
 
@@ -56,6 +58,9 @@ interface State {
  *
  * @property {number} progress - Current state of a process.
  * Can be from 0 to 1.
+ *
+ * @property {Partial<ProgressBarAnimationConfig>} animationConfig - Animation configuration.
+ * Optional. Can define duration, easing function and etc.
  *
  * @overview-example ProgressBarSimpleUsage
  * Default ProgressBar animating is `true`.
@@ -77,7 +82,13 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
     trackWidth: 0,
   };
 
-  private animation = new ProgressBarAnimation();
+  private animation: ProgressBarAnimation;
+
+  constructor(props: ProgressBarProps) {
+    super(props);
+
+    this.animation = new ProgressBarAnimation(props.animationConfig);
+  }
 
   public componentDidMount(): void {
     if (this.props.animating) {

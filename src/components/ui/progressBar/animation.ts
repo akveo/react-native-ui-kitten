@@ -15,7 +15,7 @@ import {
 } from '../animation/animation';
 
 const DEFAULT_CONFIG: ProgressBarAnimationConfig = {
-  duration: 1000,
+  duration: 500,
   easing: Easing.linear,
   cycles: 1,
   useNativeDriver: Platform.OS !== 'web',
@@ -25,7 +25,7 @@ type ProgressBarAnimationStyle = Animated.AnimatedProps<ViewStyle>
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
 
-type ProgressBarAnimationConfig = AnimationConfig & TimingAnimationConfig;
+export type ProgressBarAnimationConfig = AnimationConfig & TimingAnimationConfig;
 
 export class ProgressBarAnimation extends Animation<ProgressBarAnimationConfig, ProgressBarAnimationStyle> {
 
@@ -35,7 +35,7 @@ export class ProgressBarAnimation extends Animation<ProgressBarAnimationConfig, 
 
   private readonly animationValue: Animated.Value;
 
-  constructor(config?: ProgressBarAnimationConfig) {
+  constructor(config?: Partial<ProgressBarAnimationConfig>) {
     super({ ...DEFAULT_CONFIG, ...config });
     this.animationValue = new Animated.Value(0);
   }
