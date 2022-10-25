@@ -13,6 +13,8 @@ import {
   RangeCalendarProps,
 } from './rangeCalendar.component';
 import { CalendarRange } from './type';
+import { TouchableOpacity } from 'react-native';
+import { Text } from '../text/text.component';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -114,4 +116,59 @@ describe('@range-calendar: component checks', () => {
 
     fireEvent.press(component.queryAllByText('7')[0]);
   });
+
+  it('should render custom left arrow', () => {
+    const onVisibleDateChange = jest.fn();
+
+    const renderArrow = (props: { onPress: () => void }) => {
+      return (
+        <TouchableOpacity
+          testID={'@arrow/left'}
+          onPress={props.onPress}
+        >
+          <Text>LEFT</Text>
+        </TouchableOpacity>
+      )
+    }
+
+    const component = render(
+      <TestRangeCalendar
+        renderArrowLeft={renderArrow}
+        onVisibleDateChange={onVisibleDateChange}
+      />
+    );
+
+    const leftArrow = component.queryByTestId('@arrow/left');
+    fireEvent.press(leftArrow);
+
+    expect(onVisibleDateChange).toBeCalled();
+  })
+
+  it('should render custom right arrow', () => {
+    const onVisibleDateChange = jest.fn();
+
+    const renderArrow = (props: { onPress: () => void }) => {
+      return (
+        <TouchableOpacity
+          testID={'@arrow/right'}
+          onPress={props.onPress}
+        >
+          <Text>RIGHT</Text>
+        </TouchableOpacity>
+      )
+    }
+
+    const component = render(
+      <TestRangeCalendar
+        renderArrowRight={renderArrow}
+        onVisibleDateChange={onVisibleDateChange}
+      />
+    );
+
+    const leftArrow = component.queryByTestId('@arrow/right');
+    fireEvent.press(leftArrow);
+
+    expect(onVisibleDateChange).toBeCalled();
+  })
+
 });

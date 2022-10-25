@@ -1,19 +1,20 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { Datepicker, Text, CalendarViewModeId } from "@ui-kitten/components";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { Datepicker, Text } from "@ui-kitten/components";
+
+const LeftArrow = (arrowProps: { onPress: () => void }) => {
+  return (
+    <TouchableOpacity
+      style={styles.arrow}
+      onPress={arrowProps.onPress}
+    >
+      <Text>PREV</Text>
+    </TouchableOpacity>
+  );
+};
 
 export const DatepickerAccessoriesShowcase = () => {
   const [date, setDate] = React.useState(new Date());
-
-  const renderRightArrow = (id: CalendarViewModeId) => {
-    return (
-      <View style={styles.arrow}>
-        <TouchableOpacity>
-          <Text>{id}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
 
   return (
     <Datepicker
@@ -22,14 +23,23 @@ export const DatepickerAccessoriesShowcase = () => {
       placeholder="Pick Date"
       date={date}
       onSelect={(nextDate) => setDate(nextDate)}
-      renderArrowRight={renderRightArrow}
+      renderArrowLeft={LeftArrow}
+      renderArrowRight={(arrowProps) => {
+        return (
+          <TouchableOpacity
+            style={styles.arrow}
+            onPress={arrowProps.onPress}
+          >
+            <Text>NEXT</Text>
+          </TouchableOpacity>
+        )
+      }}
     />
   );
 };
 
 const styles = StyleSheet.create({
   arrow: {
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },

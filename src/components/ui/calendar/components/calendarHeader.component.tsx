@@ -14,7 +14,7 @@ import {
   ViewProps,
 } from 'react-native';
 import { SvgProps } from 'react-native-svg';
-import { RTLService, RenderProp } from '../../../devsupport';
+import { RTLService } from '../../../devsupport';
 import { Button } from '../../button/button.component';
 import {
   Text,
@@ -41,8 +41,8 @@ export interface CalendarHeaderProps extends ViewProps {
   onTitlePress?: () => void;
   onNavigationLeftPress?: () => void;
   onNavigationRightPress?: () => void;
-  arrowLeft?: RenderProp<Partial<ViewProps | TextProps>>;
-  arrowRight?: RenderProp<Partial<ViewProps | TextProps>>;
+  arrowLeftComponent?: React.ComponentType<{ onPress: () => void }> | null;
+  arrowRightComponent?: React.ComponentType<{ onPress: () => void }> | null;
 }
 
 export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
@@ -85,20 +85,30 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
   };
 
   private renderLeftArrow = (): React.ReactElement => {
+    const LeftArrowComponent = this.props.arrowLeftComponent;
+    if (LeftArrowComponent) {
+      return <LeftArrowComponent onPress={this.props.onNavigationLeftPress} />;
+    }
+
     return (
       <Button
         appearance='ghost'
-        accessoryRight={this.props.arrowLeft || this.renderLeftIcon}
+        accessoryRight={this.renderLeftIcon}
         onPress={this.props.onNavigationLeftPress}
       />
     );
   };
 
   private renderRightArrow = (): React.ReactElement => {
+    const RightArrowComponent = this.props.arrowRightComponent;
+    if (RightArrowComponent) {
+      return <RightArrowComponent onPress={this.props.onNavigationRightPress} />;
+    }
+
     return (
       <Button
         appearance='ghost'
-        accessoryRight={this.props.arrowRight || this.renderRightIcon}
+        accessoryRight={this.renderRightIcon}
         onPress={this.props.onNavigationRightPress}
       />
     );

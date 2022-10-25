@@ -115,15 +115,15 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Defaults to *bottom*.
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
- * 
- * @property {(CalendarViewMode) => void} renderArrowLeft - Function component
- * to render instead of default previous arrow.
- * Accepts viewMode argument which returns string with current calendar view ("YEAR", "MONTH", "DATE").
- * 
- * @property {(CalendarViewMode) => void} renderArrowRight - Function component
- * to render instead of default next arrow.
- * Accepts viewMode argument which returns string with current calendar view ("YEAR", "MONTH", "DATE").
- * 
+ *
+ * @property {ComponentType<{ onPress: () => void }> | null} renderArrowLeft - Custom component which will be used
+ * to render left arrow inside header instead of default one. Custom component must invoke onPress method from
+ * props to keep calendar navigation functionality.
+ *
+ * @property {ComponentType<{ onPress: () => void }> | null} renderArrowRight - Custom component which will be used
+ * to render right arrow inside header instead of default one. Custom component must invoke onPress method from
+ * props to keep calendar navigation functionality.
+ *
  * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next month / year.
  * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
  *
