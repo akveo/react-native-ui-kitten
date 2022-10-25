@@ -68,11 +68,11 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  * to render instead of default year cell.
  * Called with a date for this cell and styles provided by Eva.
  *
- * @property {ComponentType<{ onPress: () => void }> | null} renderArrowLeft - Custom component which will be used
+ * @property {ComponentType | null} renderArrowLeft - Custom component which will be used
  * to render left arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
  *
- * @property {ComponentType<{ onPress: () => void }> | null} renderArrowRight - Custom component which will be used
+ * @property {ComponentType | null} renderArrowRight - Custom component which will be used
  * to render right arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
  *

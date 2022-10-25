@@ -116,11 +116,11 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
- * @property {ComponentType<{ onPress: () => void }> | null} renderArrowLeft - Custom component which will be used
+ * @property {ComponentType | null} renderArrowLeft - Custom component which will be used
  * to render left arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
  *
- * @property {ComponentType<{ onPress: () => void }> | null} renderArrowRight - Custom component which will be used
+ * @property {ComponentType | null} renderArrowRight - Custom component which will be used
  * to render right arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
  *
