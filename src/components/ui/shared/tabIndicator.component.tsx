@@ -108,7 +108,6 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
 
     return {
       width: `${widthPercent}%`,
-      position: 'absolute',
 
       // @ts-ignore: RN has no types for `Animated` styles
       transform: [ { translateX: this.contentOffset } ],
