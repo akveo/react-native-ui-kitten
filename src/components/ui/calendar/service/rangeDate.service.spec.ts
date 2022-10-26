@@ -38,6 +38,16 @@ describe('@range service checks', () => {
     expect(range).toStrictEqual({ startDate, endDate });
   });
 
+  it('* should create range with same start and end dates after select', () => {
+    const startDate = new Date(2019, 8, 12);
+    const endDate = new Date(2019, 8, 12);
+
+    let range: CalendarRange<Date> = rangeService.createRange(initialRange, startDate);
+    range = rangeService.createRange(range, endDate);
+
+    expect(range).toStrictEqual({ startDate, endDate });
+  });
+
   it('* should create range with start date after re-select', () => {
     const startDate = new Date(2019, 8, 12);
     const endDate = new Date(2019, 8, 24);

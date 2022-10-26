@@ -12,6 +12,7 @@ import {
   ViewProps,
   ViewStyle,
   Dimensions,
+  NativeEventSubscription,
 } from 'react-native';
 import {
   Frame,
@@ -73,6 +74,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
 
   private modalId: string;
   private contentPosition: Point = Point.outscreen();
+  private dimensionsChangeSubscription: NativeEventSubscription | void;
 
   private get contentFlexPosition(): FlexStyle {
     const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});
@@ -95,7 +97,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   };
 
   public componentDidMount(): void {
-    Dimensions.addEventListener('change', this.onDimensionChange);
+    this.dimensionsChangeSubscription = Dimensions.addEventListener('change', this.onDimensionChange);
     if (!this.modalId && this.props.visible) {
       this.show();
       return;
@@ -123,7 +125,12 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   }
 
   public componentWillUnmount(): void {
-    Dimensions.removeEventListener('change', this.onDimensionChange);
+    if (this.dimensionsChangeSubscription) {
+      this.dimensionsChangeSubscription.remove();
+    } else {
+      // for backward compatibility with RN <0.65
+      Dimensions.removeEventListener('change', this.onDimensionChange);
+    }
     this.hide();
   }
 
