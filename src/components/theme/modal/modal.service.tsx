@@ -13,7 +13,7 @@ import {
 /**
  * Singleton service designed to manage modal components.
  *
- * @type ModalServiceType
+ * @type ModalService
  *
  * @method {(element: React.ReactElement<ModalPresentingBased>, config: ModalPresentingConfig) => string} show -
  * Shows component in a modal window. Returns its id.
@@ -22,7 +22,14 @@ import {
  *
  * @method {(identifier: string, children: React.ReactNode) => void} update - Updates component from a modal window.
  *
- * @example Simple Usage
+ * @property {boolean} getShouldUseTopInsets - returns `true` if StatusBar additional offset is not enabled, returns `false`
+ * if StatusBar additional offset is enabled.
+ *
+ * @property {boolean} setShouldUseTopInsets - `true` value enables StatusBar additional offset, `false` disables StatusBar
+ * additional offset
+ *
+ * @overview-example Simple Usage example
+ * ModalService simple usage example.
  *
  * ```
  * import React from 'react';
@@ -30,15 +37,15 @@ import {
  *
  * export const ModalServiceShowcase = () => {
  *
- *   const modalID = '';
+ *   let modalID = '';
  *
  *   const showModal = () => {
- *     const contentElement = this.renderModalContentElement();
- *     this.modalID = ModalService.show(contentElement, { onBackdropPress: this.hideModal });
+ *     const contentElement = renderModalContentElement();
+ *     modalID = ModalService.show(contentElement, { onBackdropPress: hideModal });
  *   };
  *
  *   const hideModal = () => {
- *     ModalService.hide(this.modalID);
+ *     ModalService.hide(modalID);
  *   };
  *
  *   const renderModalContentElement = () => {
@@ -56,6 +63,33 @@ import {
  *     </Layout>
  *   );
  * }
+ * ```
+ *
+ * @overview-example StatusBar additional offset support configuration
+ * ModalService could also control additional status bar offset configuration for all related UI Kitten measurable elements like
+ * [Modal](components/modal) and [Popover](components/popover).
+ *
+ * ```
+ * import React from 'react';
+ * import * as eva from '@eva-design/eva';
+ * import { ApplicationProvider, Layout, Text, ModalService } from '@ui-kitten/components';
+ *
+ * ModalService.setShouldUseTopInsets = true //applies StatusBar additional offset
+ *
+ * const HomeScreen = () => (
+ *   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+ *     <Text category='h1'>HOME</Text>
+ *   </Layout>
+ * );
+ *
+ * export default () => {
+ *
+ *   return (
+ *     <ApplicationProvider {...eva} theme={eva.light}>
+ *       <HomeScreen />
+ *     </ApplicationProvider>
+ *   )
+ * };
  * ```
  */
 class ModalServiceType {
@@ -91,7 +125,7 @@ class ModalServiceType {
 
   public set setShouldUseTopInsets(state: boolean) {
     this.shouldUseTopInsets = state;
-  };
+  }
 
   public get getShouldUseTopInsets(): boolean {
     return this.shouldUseTopInsets;

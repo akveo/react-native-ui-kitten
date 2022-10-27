@@ -32,8 +32,13 @@ import {
   ChevronRight,
   ChevronRightElement,
 } from '../../shared/chevronRight.component';
+import {
+  CalendarViewModeId,
+  CalendarViewModes,
+} from '@ui-kitten/components/ui/calendar/type';
 
 export interface CalendarHeaderProps extends ViewProps {
+  viewModeId: CalendarViewModeId;
   title: string;
   titleStyle?: StyleProp<TextStyle>;
   iconStyle?: ImageStyle;
@@ -51,10 +56,13 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderTitleIcon = (): ChevronDownElement => {
     const { tintColor, ...svgStyle } = this.props.iconStyle;
+    const rotateStyle = this.props.viewModeId === CalendarViewModes.DATE.id
+      ? {}
+      : styles.rotateIcon;
 
     return (
       <ChevronDown
-        style={[styles.headerButtonIcon, svgStyle]}
+        style={[styles.headerButtonIcon, rotateStyle, svgStyle]}
         fill={tintColor}
       />
     );
@@ -134,7 +142,7 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, titleStyle, onTitlePress, title, lateralNavigationAllowed, ...viewProps } = this.props;
+    const { style, titleStyle, onTitlePress, title, lateralNavigationAllowed, viewModeId, ...viewProps } = this.props;
 
     return (
       <View
@@ -144,7 +152,7 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
           appearance='ghost'
           accessoryRight={this.renderTitleIcon}
           onPress={onTitlePress}>
-          {this.renderTitleElement}
+          {(props) => this.renderTitleElement(props)}
         </Button>
         {lateralNavigationAllowed && this.renderLateralNavigationControls()}
       </View>
@@ -170,5 +178,8 @@ const styles = StyleSheet.create({
   subContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  rotateIcon: {
+    transform: [{ rotate: '180deg' }],
   },
 });

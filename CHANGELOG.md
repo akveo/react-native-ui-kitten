@@ -1,3 +1,50 @@
+## <small>5.1.2 (2022-03-24)</small>
+
+### :rocket: Highlights:
+* Improved performance for styles hook & styled components (#1550) ([0f8d08e](https://github.com/akveo/react-native-ui-kitten/commit/0f8d08e)), closes [#1550](https://github.com/akveo/react-native-ui-kitten/issues/1550), (#1489) ([04481ce](https://github.com/akveo/react-native-ui-kitten/commit/04481ce)), closes [#1489](https://github.com/akveo/react-native-ui-kitten/issues/1489)
+* Calendar: added `initialVisibleDate` prop to show specific dates ([e66d8cf](https://github.com/akveo/react-native-ui-kitten/commit/e66d8cf))
+* Calendar: split navigation on year/month view modes with date view mode ([c63a5b4](https://github.com/akveo/react-native-ui-kitten/commit/c63a5b4))
+
+### :bug: Bug Fixes
+* **Calendar**: rerender header on arrow press (#1572) ([f152170](https://github.com/akveo/react-native-ui-kitten/commit/f152170)), closes [#1572](https://github.com/akveo/react-native-ui-kitten/issues/1572)
+* **Calendar**: fix calendar header (#1580) ([c63a5b4](https://github.com/akveo/react-native-ui-kitten/commit/c63a5b4)), closes [#1580](https://github.com/akveo/react-native-ui-kitten/issues/1580)
+* **Calendar**: fix styles of today's date. (#1579) ([e66d8cf](https://github.com/akveo/react-native-ui-kitten/commit/e66d8cf)), closes [#1579](https://github.com/akveo/react-native-ui-kitten/issues/1579)
+* **Input**: fixed double tab for Input component for react-native-web (#1596) ([d8dcf05](https://github.com/akveo/react-native-ui-kitten/commit/d8dcf05)), closes [#1596](https://github.com/akveo/react-native-ui-kitten/issues/1596)
+* **Modal**: update usage example of modal service (#1559) ([2a9ed67](https://github.com/akveo/react-native-ui-kitten/commit/2a9ed67)), closes [#1559](https://github.com/akveo/react-native-ui-kitten/issues/1559)
+* **Modal**: deprecated warn removed (#1519) ([add8350](https://github.com/akveo/react-native-ui-kitten/commit/add8350)), closes [#1519](https://github.com/akveo/react-native-ui-kitten/issues/1519)
+* **Popover**: block showing after unmount (#1560) ([ab62f87](https://github.com/akveo/react-native-ui-kitten/commit/ab62f87)), closes [#1560](https://github.com/akveo/react-native-ui-kitten/issues/1560)
+* **TabIndicator**: add a wrapper over the indicator to apply  user styles correctly (#1512) (#1547) ([8d69c5f](https://github.com/akveo/react-native-ui-kitten/commit/8d69c5f)), closes [#1512](https://github.com/akveo/react-native-ui-kitten/issues/1512) [#1547](https://github.com/akveo/react-native-ui-kitten/issues/1547)
+* **RangePicker**: allow to pick one day as completed range (#1573) ([d0207f6](https://github.com/akveo/react-native-ui-kitten/commit/d0207f6)), closes [#1573](https://github.com/akveo/react-native-ui-kitten/issues/1573)
+* Updated templates versions (#1485) ([313a725](https://github.com/akveo/react-native-ui-kitten/commit/313a725)), closes [#1485](https://github.com/akveo/react-native-ui-kitten/issues/1485)
+* gh: set node version for publish to expo extension (#1581) ([3032caa](https://github.com/akveo/react-native-ui-kitten/commit/3032caa)), closes [#1581](https://github.com/akveo/react-native-ui-kitten/issues/1581)
+
+### :books: Documentation:
+* Navigation guide update (#1537) ([cebfa4f](https://github.com/akveo/react-native-ui-kitten/commit/cebfa4f)), closes [#1537](https://github.com/akveo/react-native-ui-kitten/issues/1537)
+* New Akveo logo ([393d6c7](https://github.com/akveo/react-native-ui-kitten/commit/393d6c7))
+* Added needed step to fix issue with Expo for Web (#1556) ([96cd0a1](https://github.com/akveo/react-native-ui-kitten/commit/96cd0a1)), closes [#1556](https://github.com/akveo/react-native-ui-kitten/issues/1556)
+* Added step for docs publishing ([a581633](https://github.com/akveo/react-native-ui-kitten/commit/a581633))
+* Added part related to design a section with theme hooks examples (#1552) ([327e45c](https://github.com/akveo/react-native-ui-kitten/commit/327e45c)), closes [#1552](https://github.com/akveo/react-native-ui-kitten/issues/1552)
+
+
+## <small>5.1.1 (2021-07-19)</small>
+
+### :rocket: Highlights:
+* Added testID prop for components (#1444) ([83c75b0](https://github.com/akveo/react-native-ui-kitten/commit/83c75b0)), closes [#1444](https://github.com/akveo/react-native-ui-kitten/issues/1444)
+* Improved Autocomplete. Now no need to double-click to select item from the list  (#1423) ([af715a9](https://github.com/akveo/react-native-ui-kitten/commit/af715a9)), closes [#1423](https://github.com/akveo/react-native-ui-kitten/issues/1423)
+* Documentation fixes and corrections
+
+
+### :rocket: Features
+* Add support for disabling custom mapping file watcher ([a985f07](https://github.com/akveo/react-native-ui-kitten/commit/a985f07))
+
+### :bug: Bug Fixes
+* **TabIndicator**: Now there is ability to change color and other styles without changing active tab ([123eb2b](https://github.com/akveo/react-native-ui-kitten/commit/123eb2b))
+* **Icon**: Fixed warning does not recognize the animationConfig ([2624267](https://github.com/akveo/react-native-ui-kitten/commit/2624267)), closes [#1432](https://github.com/akveo/react-native-ui-kitten/issues/1432)
+* **List**: Add forward ItemT to React's ListProps ([bdf41d3](https://github.com/akveo/react-native-ui-kitten/commit/bdf41d3)), closes [#1430](https://github.com/akveo/react-native-ui-kitten/issues/1430)
+* **Modal**: Remove warning during state update. ([273746a](https://github.com/akveo/react-native-ui-kitten/commit/273746a)), closes [#1448](https://github.com/akveo/react-native-ui-kitten/issues/1448)
+* Update eva packages to v2.1.1 (#1481) ([05eb9a2](https://github.com/akveo/react-native-ui-kitten/commit/05eb9a2)), closes [#1481](https://github.com/akveo/react-native-ui-kitten/issues/1481)
+* Update react-native-svg peer version (#1460) ([32a0882](https://github.com/akveo/react-native-ui-kitten/commit/32a0882)), closes [#1460](https://github.com/akveo/react-native-ui-kitten/issues/1460)
+
 ## 5.1.0 (2021-04-16)
 
 ### :rocket: Highlights:
@@ -27,24 +74,24 @@
 
 ### :bomb: Breaking Changes:
 * refactor `styled` function to be decorator ([#1004](https://github.com/akveo/react-native-ui-kitten/issues/1004) [#024ac83](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/024ac83d4a0e35d2916e19d00edb065e2764396d))
-Despite this is a breaking change, this helps us to keep the existing code base much cleaner by removing of `styledComponentName` statics. For the end user this also leads to better type definitions when using refs.
+  Despite this is a breaking change, this helps us to keep the existing code base much cleaner by removing of `styledComponentName` statics. For the end user this also leads to better type definitions when using refs.
 
-### :bug: Bug Fixes: 
+### :bug: Bug Fixes:
 - Handle stateful (hook) components within the _accessory_ and _text_ props ([#1015](https://github.com/akveo/react-native-ui-kitten/issues/1015) [#5ba8daf](https://github.com/akveo/react-native-ui-kitten/commit/5ba8daf7a1d223dedcbe34700cc177adaa88416d) by @Photonios)
 - Handle invalid dispatch interactions in styled components ([#1059](https://github.com/akveo/react-native-ui-kitten/issues/1059) [#aa9704e](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/aa9704e8341af5a8ac4f7b72e6e7e534f949828b))
 - Runtime crashes of several components when using latest react-native-svg versions ([#1056](https://github.com/akveo/react-native-ui-kitten/issues/1056) [#1042](https://github.com/akveo/react-native-ui-kitten/issues/1042) [#1005](https://github.com/akveo/react-native-ui-kitten/issues/1005) [#ff9ada3](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/ff9ada3403d54c6bb1a1e17a2026d1d9240cbc48))
 - Modal: proper update of nested components ([#826](https://github.com/akveo/react-native-ui-kitten/issues/826) [#35f2d69](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/35f2d69d2d895cf4793d22350a85bb671ae61d82))
 - Bottom Navigation: call `onSelect` even when index is not changed. ([#977](https://github.com/akveo/react-native-ui-kitten/issues/977) [#252a207](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/252a20739297ad2d6dacb7bc276189d9a609107b))
 - Input: different height comparing to other components on Android ([#1006](https://github.com/akveo/react-native-ui-kitten/issues/1006) [#70e1b52](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/70e1b52efe495aa063aaab90ecd71a119913acab))
-- Card: Header/Footer press feedback. ([#cc7e806](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/cc7e8061bcc06da63872c6d369df65d3c1ba8102)) 
-- Autocomplete: handle `onSubmitEditing` [same way](https://github.com/akveo/react-native-ui-kitten/commit/e6e2325c175c69df08d69d5a4cc297092d216cc7) as v4 ([#1025](https://github.com/akveo/react-native-ui-kitten/issues/1025) [#820328f](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/820328f00dd80e175d1dd2fe6b35d7ea8534722a)) 
+- Card: Header/Footer press feedback. ([#cc7e806](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/cc7e8061bcc06da63872c6d369df65d3c1ba8102))
+- Autocomplete: handle `onSubmitEditing` [same way](https://github.com/akveo/react-native-ui-kitten/commit/e6e2325c175c69df08d69d5a4cc297092d216cc7) as v4 ([#1025](https://github.com/akveo/react-native-ui-kitten/issues/1025) [#820328f](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/820328f00dd80e175d1dd2fe6b35d7ea8534722a))
 - TabView: indicator animation ([#1003](https://github.com/akveo/react-native-ui-kitten/issues/1003) [#95d0101](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/95d01015ca9b4810cc9a340802e8c8f237e7e12b))
 - ViewPager: selected index changes ([#1061](https://github.com/akveo/react-native-ui-kitten/issues/1061) [#8493e99](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/8493e990f1f11e84dbd821456ef994e1cb5f44eb))
 - Typescript: Remove utility-types dependency. ([#1030](https://github.com/akveo/react-native-ui-kitten/issues/1030) [#1024](https://github.com/akveo/react-native-ui-kitten/issues/1024) [#1d05a03](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/1d05a035133cbf61cb8973706d5ba317da7b677f))
 
 ### :books: Documentation:
 - Improve live examples loading performance. ([#1043](https://github.com/akveo/react-native-ui-kitten/issues/1043) [#e5967b2](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/e5967b2834435b82970b8812b52d2100de0048b7))
-- Note details on integrating Metro Config with 3rd party libraries ([#1070](https://github.com/akveo/react-native-ui-kitten/issues/1070) [#0d12f1b](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/0d12f1bf59cc2193a457fd4708f1ef16bed7510d)) 
+- Note details on integrating Metro Config with 3rd party libraries ([#1070](https://github.com/akveo/react-native-ui-kitten/issues/1070) [#0d12f1b](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/0d12f1bf59cc2193a457fd4708f1ef16bed7510d))
 - Fix **Autocomplete Async** example. ([#1033](https://github.com/akveo/react-native-ui-kitten/issues/1033) [#fe56913](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/fe56913e2cff71814f49fa19badd8c3980b9be94))
 - Fix **Drawer with React Navigation** example. ([#1034](https://github.com/akveo/react-native-ui-kitten/issues/1034) [#ec8a1ab](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/ec8a1ab1f225f7224cee91c1447712c31a075848))
 - Fix **Asset Icon Packages** example ([#1026](https://github.com/akveo/react-native-ui-kitten/issues/1026) [#91dd965](https://github.com/akveo/react-native-ui-kitten/pull/1055/commits/91dd9654a63e7a737cbb7a842e005dd3ff6967ea))

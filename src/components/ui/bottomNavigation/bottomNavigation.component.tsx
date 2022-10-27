@@ -161,7 +161,7 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     return (
       <TabIndicator
         key={0}
-        style={[style, styles.indicator, indicatorStyle]}
+        style={[ style, indicatorStyle ]}
         selectedPosition={selectedIndex}
         positions={positions}
       />
@@ -192,16 +192,16 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, ...viewProps } = this.props;
+    const { eva, style, testID } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
     const [indicatorElement, ...tabElements] = this.renderComponentChildren(evaStyle);
 
     return (
-      <View
-        {...viewProps}
-        style={[evaStyle.container, styles.container, style]}>
+      <View testID={testID} style={styles.container}>
         {indicatorElement}
-        {tabElements}
+        <View style={[ evaStyle.container, styles.elementsContainer, style ]}>
+          {tabElements}
+        </View>
       </View>
     );
   }
@@ -209,12 +209,12 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
+  },
+  elementsContainer: {
     flexDirection: 'row',
   },
   item: {
     flex: 1,
-  },
-  indicator: {
-    position: 'absolute',
   },
 });

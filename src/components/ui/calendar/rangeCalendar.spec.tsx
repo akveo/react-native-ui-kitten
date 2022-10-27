@@ -117,6 +117,24 @@ describe('@range-calendar: component checks', () => {
     fireEvent.press(component.queryAllByText('7')[0]);
   });
 
+  it('should show startDate of the selected range on load provided by range prop', () => {
+    const date = new Date(2021, 2, 1);
+    const componentRef = React.createRef<RangeCalendar>();
+    render(
+      <TestRangeCalendar
+        ref={componentRef}
+        range={{
+          startDate: date,
+          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 10),
+        }}
+      />,
+    );
+
+    const visibleDate = componentRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(date.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(date.getMonth());
+  });
+
   it('should render custom left arrow', () => {
     const onVisibleDateChange = jest.fn();
 

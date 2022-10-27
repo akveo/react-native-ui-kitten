@@ -9,15 +9,14 @@ import {
   StyleSheet,
   BackHandler,
   NativeEventSubscription,
-  Platform 
+  Platform,
 } from 'react-native';
 import {
   Frame,
   MeasureElement,
   MeasuringElement,
   Point,
-  FalsyFC,
-  RenderProp,
+  RenderFCProp,
   Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
@@ -39,7 +38,7 @@ type PopoverModalProps = Overwrite<ModalProps, {
 }>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
-  anchor: RenderProp;
+  anchor: RenderFCProp;
   fullWidth?: boolean;
 }
 
@@ -62,8 +61,9 @@ interface State {
  *
  * @property {boolean} visible - Whether content component is visible.
  * Defaults to false.
+ * The property is more specific that the show/hide methods, so do not use them at the same time.
  *
- * @property {ReactElement | () => ReactElement} anchor - A component relative to which content component will be shown.
+ * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
  * @property {ReactElement} children - A component displayed within the popover.
  *
@@ -109,6 +109,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   private modalId: string;
   private contentPosition: Point = Point.outscreen();
   private placementService: PopoverPlacementService = new PopoverPlacementService();
+  private isPopoverUnmounted: boolean;
 
   private actualPlacement: PopoverPlacement = this.preferredPlacement;
 
@@ -130,7 +131,9 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   public show = (): void => {
-    this.modalId = ModalService.show(this.renderMeasuringPopoverElement(), this.backdropConfig);
+    if (!this.isPopoverUnmounted) {
+      this.modalId = ModalService.show(this.renderMeasuringPopoverElement(), this.backdropConfig);
+    }
   };
 
   public hide = (): void => {
@@ -155,7 +158,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   public componentDidMount(): void {
-    if(Platform.OS === 'android') {
+    if (Platform.OS === 'android') {
       this.hardwareBackSubscription = BackHandler.addEventListener('hardwareBackPress', this.onHardwareBackPress);
     }
   }
@@ -163,6 +166,8 @@ export class Popover extends React.Component<PopoverProps, State> {
   public componentWillUnmount(): void {
     this.hardwareBackSubscription?.remove();
     this.hide();
+
+    this.isPopoverUnmounted = true;
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
@@ -212,17 +217,17 @@ export class Popover extends React.Component<PopoverProps, State> {
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
         placement={this.actualPlacement.reverse()}>
-        {this.renderContentElement()}
+          {this.renderContentElement()}
       </PopoverView>
     );
   };
 
   private renderMeasuringPopoverElement = (): MeasuringElement => {
     return (
-      <MeasureElement 
+      <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         onMeasure={this.onContentMeasure}>
-        {this.renderPopoverElement()}
+          {this.renderPopoverElement()}
       </MeasureElement>
     );
   };
@@ -233,7 +238,7 @@ export class Popover extends React.Component<PopoverProps, State> {
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         force={this.state.forceMeasure}
         onMeasure={this.onChildMeasure}>
-          <FalsyFC component={this.props.anchor} />
+          {this.props.anchor()}
       </MeasureElement>
     );
   }

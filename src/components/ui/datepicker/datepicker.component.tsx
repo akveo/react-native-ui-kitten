@@ -41,8 +41,16 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @method {() => void} clear - Removes all text from the Datepicker.
  *
+ * @method {() => void} scrollToToday - Show the current date in the picker, the picker should be visible.
+ *
+ * @method {(date: D) => void} scrollToDate - Show the specific date in the picker, the picker should be visible.
+ *
  * @property {D} date - Date which is currently selected.
  * Defaults to current date.
+ *
+ * @property {D} initialVisibleDate - Specific date that should be shown on load.
+ * If it is not set, the selected date or today's date will be displayed.
+ * Clear initialVisibleDate to stop showing it when the datepicker is opened.
  *
  * @property {(D) => void} onSelect - Called when date cell is pressed.
  *
@@ -77,7 +85,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
  * Defaults to *CalendarViewModes.DATE*.
  *
- * @property {(date: D) => string} title - A function to transform selected date to a string displayed in header.
+ * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed in header for the specific view mode: first date - date picker, second date - year and month picker.
  *
  * @property {(date: D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
@@ -141,6 +149,10 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Pickers may contain labels, captions and inner views by configuring `accessoryLeft` or `accessoryRight` properties.
  * Within Eva, Datepicker accessories are expected to be images or [svg icons](guides/icon-packages).
  *
+ * @overview-example DatepickerInitialVisibleDate
+ * Calendar can show specified date on render.
+ * Also, it is possible to use scrollToToday and scrollToDate to show specific dates.
+ *
  * @overview-example DatepickerFilters
  * Picker may accept minimal and maximum dates, filter functions, and `boundingMonth` property,
  * which disables displaying previous month dates at the current date view.
@@ -195,6 +207,7 @@ export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProp
       min: this.props.min,
       max: this.props.max,
       date: this.props.date,
+      initialVisibleDate: this.props.initialVisibleDate,
       dateService: this.props.dateService,
       boundingMonth: this.props.boundingMonth,
       startView: this.props.startView,
@@ -204,6 +217,7 @@ export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProp
       renderDay: this.props.renderDay,
       renderMonth: this.props.renderMonth,
       renderYear: this.props.renderYear,
+      renderFooter: this.props.renderFooter,
       renderArrowRight: this.props.renderArrowRight,
       renderArrowLeft: this.props.renderArrowLeft,
       onVisibleDateChange: this.props.onVisibleDateChange,
@@ -235,6 +249,7 @@ export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProp
     return (
       <Calendar
         {...this.calendarProps}
+        ref={this.calendarRef}
         onSelect={this.onSelect}
       />
     );

@@ -28,8 +28,15 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @extends React.Component
  *
+ * @method {() => void} scrollToToday - Show the current date in the calendar.
+ *
+ * @method {(date: D) => void} scrollToDate - Show the specific date in the calendar.
+ *
  * @property {D} date - Date which is currently selected.
  * Defaults to current date.
+ *
+ * @property {D} initialVisibleDate - Specific date that should be shown on the first render of the component.
+ * If it is not set, the selected date or today's date will be displayed.
  *
  * @property {(D) => void} onSelect - Called when date cell is pressed.
  *
@@ -49,7 +56,7 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
  * Defaults to *CalendarViewModes.DATE*.
  *
- * @property {(D) => string} title - A function to transform selected date to a string displayed in header.
+ * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed in header for the specific view mode: first date - date picker, second date - year and month picker.
  *
  * @property {(D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
@@ -97,6 +104,10 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  * }
  * ```
  *
+ * @overview-example CalendarInitialVisibleDate
+ * Calendar can show specified date on render.
+ * Also, it is possible to use scrollToToday and scrollToDate to show specific dates.
+ *
  * @overview-example CalendarFilters
  * Calendar may accept minimal and maximum dates, filter functions, and `boundingMonth` property,
  * which disables displaying previous month dates at the current date view.
@@ -134,8 +145,8 @@ export class Calendar<D = Date> extends BaseCalendarComponent<CalendarProps<D>, 
     return this.dataService.createDayPickerData(date);
   }
 
-  protected selectedDate(): D {
-    return this.props.date || this.dateService.today();
+  protected selectedDate(): D | undefined {
+    return this.props.date;
   }
 
   protected onDateSelect(date: D): void {

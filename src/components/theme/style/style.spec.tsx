@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
   ViewProps,
+  Text,
 } from 'react-native';
 import {
   fireEvent,
@@ -27,6 +28,7 @@ import {
   Interaction,
   StyleService,
 } from './style.service';
+import { useStyleSheet } from './style.service';
 
 const theme = {
   defaultColor: '#000000',
@@ -146,20 +148,55 @@ describe('@style: ui component checks', () => {
 
     public render(): React.ReactElement<ViewProps> {
       return (
-        <View {...this.props} testID='@style/consumer'/>
+        <View {...this.props} testID={styleConsumerTestId}/>
       );
     }
   }
 
-  @styled(null)
-  class NonStyledTest extends React.Component {
+  const Provider = ({ children }) => {
+    return (
+      <StyleProvider styles={computedMapping} theme={theme}>
+        {children}
+      </StyleProvider>
+    );
+  };
 
-    public render(): React.ReactElement<ViewProps> {
-      return (
-        <View {...this.props} testID='@style/consumer'/>
-      );
+  it('styled component should not re-renderer because of parent render', async () => {
+    const rerenderButtonText = 'Rerender parent';
+    const getRenderCountText = (elementType: string, count: number) => {
+      return `${elementType}: render for ${count} ${count === 1 ? 'time' : 'times'}`;
+    };
+
+    @styled('Test')
+    class ChildStyledComponent extends React.Component<any, any> {
+      renderCount = 0;
+
+      public render(): React.ReactElement<ViewProps> {
+        this.renderCount++;
+        return (
+          <Text>{getRenderCountText('Child', this.renderCount)}</Text>
+        );
+      }
     }
-  }
+
+    const ParentComponent = () => {
+      const [renderCount, setRenderCount] = React.useState(1);
+      return <View>
+        <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
+          <Text>{rerenderButtonText}</Text>
+        </TouchableOpacity>
+        <Text>{getRenderCountText('Parent', renderCount)}</Text>
+        <ChildStyledComponent />
+      </View>;
+    };
+
+    const renderedComponent: RenderAPI = render(<ParentComponent />, { wrapper: Provider});
+    fireEvent.press(renderedComponent.getByText(rerenderButtonText));
+    fireEvent.press(renderedComponent.getByText(rerenderButtonText));
+
+    expect(renderedComponent.queryByText(getRenderCountText('Parent', 3))).toBeTruthy();
+    expect(renderedComponent.queryByText(getRenderCountText('Child', 1))).toBeTruthy();
+  });
 
   it('static methods are copied over', async () => {
     expect(Test.someStaticValueToCopy).not.toBeFalsy();
@@ -272,3 +309,86 @@ describe('@style: ui component checks', () => {
     });
   });
 });
+
+describe('@useStyleSheet: rendering performance check', () => {
+  const styleTouchableTestId = '@style/touchable';
+
+  const themes = {
+    light: {
+      defaultColor: 'white',
+    },
+    dark: {
+      defaultColor: 'black',
+    }
+  };
+
+  const ThemeChangingProvider = (props) => {
+    return (
+      <StyleProvider styles={props.styles} theme={theme}>
+        <TouchableOpacity
+          testID={styleTouchableTestId}
+          onPress={props.onPress}>
+          <Text style={{ color: theme.defaultColor }}>{`${props.value}`}</Text>
+        </TouchableOpacity>
+      </StyleProvider>
+    );
+  };
+
+  it('useStyleSheet should not be called with every render', async () => {
+    const stylesFuncMock = jest.fn();
+    
+    const Component = () => {
+      const [state, setState] = React.useState(0);
+      const styles = useStyleSheet({});
+
+      React.useEffect(() => {
+        stylesFuncMock();
+      }, [styles]);
+      
+      return (
+        <ThemeChangingProvider
+          styles={computedMapping}
+          theme={theme}
+          onPress={() => setState(state + 1)}
+          value={theme.defaultColor}
+        />
+      )
+    };
+
+    const component = render(<Component />);
+    fireEvent.press(component.getByTestId(styleTouchableTestId));
+    expect(stylesFuncMock).toBeCalledTimes(1);
+  });
+
+  it('useStyleSheet should not be called with every render when memoized', async () => {
+    const stylesFuncMock = jest.fn();
+    
+    const Component = () => {
+      const [state, setState] = React.useState(0);
+      const styles = useStyleSheet({});
+
+      const memoizeValue = React.useMemo(() => {
+        stylesFuncMock();
+        return theme;
+      }, [styles]);
+
+      const changeState = React.useCallback(() => {
+        setState(state + 1);
+      }, [state, memoizeValue]);
+      
+      return (
+        <ThemeChangingProvider
+          styles={computedMapping}
+          theme={theme}
+          onPress={changeState}
+          value={theme.defaultColor}
+        />
+      )
+    };
+
+    const component = render(<Component />);
+    expect(stylesFuncMock).toBeCalledTimes(1);
+    fireEvent.press(component.getByTestId(styleTouchableTestId));
+    expect(stylesFuncMock).toBeCalledTimes(1);
+  });
+})

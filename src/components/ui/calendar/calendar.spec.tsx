@@ -169,7 +169,8 @@ describe('@calendar: component checks', () => {
 
     const nextYear = new Date(initialDate.getFullYear() + 12, initialDate.getMonth(), initialDate.getDate());
 
-    expect(componentRef.current.state.visibleDate).toEqual(nextYear);
+    expect(componentRef.current.state.visibleDate).toEqual(initialDate);
+    expect(componentRef.current.state.pickerDate).toEqual(nextYear);
   });
 
   it('should change year to previous when navigation button pressed', () => {
@@ -185,7 +186,39 @@ describe('@calendar: component checks', () => {
 
     const nextYear = new Date(initialDate.getFullYear() - 12, initialDate.getMonth(), initialDate.getDate());
 
-    expect(componentRef.current.state.visibleDate).toEqual(nextYear);
+    expect(componentRef.current.state.visibleDate).toEqual(initialDate);
+    expect(componentRef.current.state.pickerDate).toEqual(nextYear);
+  });
+
+  it('should show the selected date on load provided by date prop', () => {
+    const date = new Date(2021, 2, 1);
+    const componentRef = React.createRef<Calendar>();
+    render(
+      <TestCalendar
+        ref={componentRef}
+        date={date}
+      />,
+    );
+
+    const visibleDate = componentRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(date.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(date.getMonth());
+  });
+
+  it('should show the specific date on load provided by initialVisibleDate prop', () => {
+    const initialDate = new Date(2021, 2, 1);
+    const componentRef = React.createRef<Calendar>();
+    render(
+      <TestCalendar
+        ref={componentRef}
+        date={new Date()}
+        initialVisibleDate={initialDate}
+      />,
+    );
+
+    const visibleDate = componentRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(initialDate.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(initialDate.getMonth());
   });
 
   it('should scroll to current month when scrollToToday called', () => {
@@ -200,6 +233,23 @@ describe('@calendar: component checks', () => {
     componentRef.current.scrollToToday();
 
     expect(componentRef.current.state.visibleDate.getMonth()).toEqual(today.getMonth());
+  });
+
+  it('should scroll to the specific date when scrollToDate called', () => {
+    const dateToScroll = new Date(2021, 2, 1);
+    const componentRef = React.createRef<Calendar>();
+    render(
+      <TestCalendar
+        ref={componentRef}
+        date={new Date()}
+      />,
+    );
+
+    componentRef.current.scrollToDate(dateToScroll);
+
+    const visibleDate = componentRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(dateToScroll.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(dateToScroll.getMonth());
   });
 
   it('should render element provided with renderDay prop', async () => {
@@ -267,7 +317,7 @@ describe('@calendar: component checks', () => {
     const onVisibleDateChange = jest.fn();
 
     const component = render(
-      <TestCalendar onVisibleDateChange={onVisibleDateChange} />
+      <TestCalendar onVisibleDateChange={onVisibleDateChange} />,
     );
 
     const navigationPrevButton = component.queryAllByType(TouchableOpacity)[1];

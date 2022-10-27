@@ -33,6 +33,8 @@ import {
   TabView,
   TabViewProps,
 } from './tabView.component';
+import { TabIndicator } from '../shared/tabIndicator.component';
+import {ReactTestInstance} from 'react-test-renderer';
 
 describe('@tab: component checks', () => {
 
@@ -116,7 +118,8 @@ describe('@tab-bar: component checks', () => {
         theme={light}>
         <TabBar
           selectedIndex={selectedIndex}
-          onSelect={setSelectedIndex}>
+          onSelect={setSelectedIndex}
+          {...props}>
           <Tab title='Tab 0'/>
           <Tab title='Tab 1'/>
         </TabBar>
@@ -153,6 +156,25 @@ describe('@tab-bar: component checks', () => {
     expect(component.queryAllByType(Tab)[1].props.selected).toEqual(true);
   });
 
+  it('should render tab indicator correctly', () => {
+    const component = render(
+      <TestTabBar indicatorStyle={{width: 99, backgroundColor: 'red'}}/>,
+    );
+
+    const el = ((
+      (component.UNSAFE_queryByType(TabIndicator).children[0] as ReactTestInstance)
+        .children[0] as ReactTestInstance)
+          .children[0] as ReactTestInstance)
+            .children[0]  as ReactTestInstance;
+
+    // default styles
+    expect(el.props.style[0].width).toEqual('100%');
+    expect(el.props.style[1][0].backgroundColor).toEqual('#3366FF');
+
+    // custom styles
+    expect(el.props.style[1][1].width).toEqual(99);
+    expect(el.props.style[1][1].backgroundColor).toEqual('red');
+  });
 });
 
 describe('@tab-view: component checks', () => {
@@ -196,6 +218,26 @@ describe('@tab-view: component checks', () => {
 
     expect(component.queryByText('Tab 0')).toBeTruthy();
     expect(component.queryByText('Tab 1')).toBeFalsy();
+  });
+
+  it('should render tab indicator correctly', () => {
+    const component = render(
+      <TestTabView indicatorStyle={{width: 99, backgroundColor: 'red'}}/>,
+    );
+
+    const el = ((
+      (component.UNSAFE_queryByType(TabIndicator).children[0] as ReactTestInstance)
+        .children[0] as ReactTestInstance)
+          .children[0] as ReactTestInstance)
+            .children[0]  as ReactTestInstance;
+
+    // default styles
+    expect(el.props.style[0].width).toEqual('100%');
+    expect(el.props.style[1][0].backgroundColor).toEqual('#3366FF');
+
+    // custom styles
+    expect(el.props.style[1][1].width).toEqual(99);
+    expect(el.props.style[1][1].backgroundColor).toEqual('red');
   });
 });
 

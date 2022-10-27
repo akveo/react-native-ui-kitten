@@ -457,6 +457,84 @@ describe('@datepicker: component checks', () => {
     expect(onPressOut).toBeCalled();
   });
 
+  it('should show the selected date on load provided by date prop', () => {
+    const date = new Date(2021, 2, 1);
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
+
+    render(
+      <TestDatepicker
+        ref={componentRef}
+        date={date}
+      />,
+    );
+
+    componentRef.current.show();
+
+    // @ts-ignore: private calendarRef
+    const calendarState = componentRef.current.calendarRef.current.state;
+    expect(calendarState.visibleDate.getFullYear()).toEqual(date.getFullYear());
+    expect(calendarState.visibleDate.getMonth()).toEqual(date.getMonth());
+  });
+
+  it('should show the specific date on load provided by initialVisibleDate prop', () => {
+    const initialDate = new Date(2021, 2, 1);
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
+
+    render(
+      <TestDatepicker
+        ref={componentRef}
+        date={new Date()}
+        initialVisibleDate={initialDate}
+      />,
+    );
+
+    componentRef.current.show();
+
+    // @ts-ignore: private calendarRef
+    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(initialDate.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(initialDate.getMonth());
+  });
+
+  it('should scroll to current month when scrollToToday called', () => {
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
+
+    render(
+      <TestDatepicker
+        ref={componentRef}
+        date={new Date(2020, 1, 1)}
+      />,
+    );
+
+    componentRef.current.show();
+    componentRef.current.scrollToToday();
+
+    // @ts-ignore: private calendarRef
+    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(today.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(today.getMonth());
+  });
+
+  it('should scroll to the specific date when scrollToDate called', () => {
+    const dateToScroll = new Date(2021, 2, 1);
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
+
+    render(
+      <TestDatepicker
+        ref={componentRef}
+        date={new Date(2020, 1, 1)}
+      />,
+    );
+
+    componentRef.current.show();
+    componentRef.current.scrollToDate(dateToScroll);
+
+    // @ts-ignore: private calendarRef
+    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    expect(visibleDate.getFullYear()).toEqual(dateToScroll.getFullYear());
+    expect(visibleDate.getMonth()).toEqual(dateToScroll.getMonth());
+  });
+
   it('should render custom left arrow', () => {
     const componentRef: React.RefObject<Datepicker> = React.createRef();
 

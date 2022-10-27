@@ -4,10 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   TouchableOpacity,
   View,
+  Text,
 } from 'react-native';
 import {
   fireEvent,
@@ -22,6 +23,8 @@ import {
   ThemeService,
   ThemeType,
 } from './theme.service';
+import { StyleProvider } from '../style/styleProvider.component';
+import { mapping } from '@eva-design/eva';
 
 const theme = {
   defaultColor: '#000000',
@@ -81,6 +84,45 @@ describe('@theme: ui component checks', () => {
       </React.Fragment>
     );
   };
+
+  it('withStyles component should not re-renderer because of parent render', async () => {
+    const rerenderButtonText = 'Rerender parent';
+    const getRenderCountText = (elementType: string, count: number) => {
+      return `${elementType}: render for ${count} ${count === 1 ? 'time' : 'times'}`;
+    };
+
+    const ChildComponent = React.memo(() => {
+      const counter = useRef(0);
+      counter.current++;
+      return (
+        <Text>{getRenderCountText('Child', counter.current)}</Text>
+      );
+    });
+
+    const ChildComponentWithStyles = withStyles(ChildComponent);
+
+    const ParentComponent = () => {
+      const [renderCount, setRenderCount] = useState(1);
+      return <View>
+        <TouchableOpacity onPress={() => setRenderCount(renderCount + 1)}>
+          <Text>{rerenderButtonText}</Text>
+        </TouchableOpacity>
+        <Text>{getRenderCountText('Parent', renderCount)}</Text>
+        <ChildComponentWithStyles />
+      </View>;
+    };
+
+    const renderedComponent: RenderAPI = render(
+      <ThemeProvider theme={theme}>
+        <ParentComponent />
+      </ThemeProvider>,
+    );
+
+    fireEvent.press(renderedComponent.getByText(rerenderButtonText));
+
+    expect(renderedComponent.queryByText(getRenderCountText('Parent', 2))).toBeTruthy();
+    expect(renderedComponent.queryByText(getRenderCountText('Child', 1))).toBeTruthy();
+  });
 
   it('static methods are copied over', () => {
     // @ts-ignore: test-case
@@ -175,3 +217,95 @@ describe('@theme: ui component checks', () => {
     expect(themedComponent.props.eva.theme.defaultColor).toEqual('#ffffff');
   });
 });
+
+describe('@useTheme: rendering performance check', () => {
+  const styleTouchableTestId = '@style/touchable';
+  const themes = {
+    light: {
+      defaultColor: 'white',
+    },
+    dark: {
+      defaultColor: 'black',
+    }
+  };
+
+  const ThemeChangingProvider = (props) => {
+    return (
+      <StyleProvider styles={props.styles} theme={props.theme}>
+        <TouchableOpacity
+          testID={styleTouchableTestId}
+          onPress={props.onPress}>
+          <Text style={{ color: theme.defaultColor }}>{`${props.value}`}</Text>
+        </TouchableOpacity>
+      </StyleProvider>
+    );
+  };
+
+  it('changing theme should force new render', async () => {
+    const themeFuncMock = jest.fn();
+
+    const ChildComponent = (props) => {
+      React.useEffect(() => {
+        themeFuncMock()
+      });
+
+      return <ThemeChangingProvider {...props} />
+    };
+    
+    const Component = () => {
+      const [theme, setTheme] = React.useState<typeof themes['light']>(themes.dark);
+
+      const changeTheme = () => {
+        setTheme(theme.defaultColor === 'white' ? themes.dark : themes.light)
+      };
+      
+      return (
+        <ChildComponent
+          styles={mapping}
+          theme={theme}
+          onPress={changeTheme}
+          value={theme.defaultColor}
+        />
+      )
+    };
+
+    const component = render(<Component />);
+    expect(themeFuncMock).toBeCalledTimes(1);
+    fireEvent.press(component.getByTestId(styleTouchableTestId));
+    expect(themeFuncMock).toBeCalledTimes(2);
+  })
+
+  it('not changing theme value state should not force component to render', async () => {
+    const themeFuncMock = jest.fn();
+
+    const ChildComponent = (props) => {
+      React.useEffect(() => {
+        themeFuncMock();
+      });
+
+      return <ThemeChangingProvider {...props} />
+    };
+    
+    const Component = () => {
+      const [theme, setTheme] = React.useState<typeof themes['light']>(themes.dark);
+
+      const changeTheme = () => {
+        setTheme(themes.dark);
+      };
+      
+      return (
+        <ChildComponent
+          styles={mapping}
+          theme={theme}
+          onPress={changeTheme}
+          value={theme.defaultColor}
+        />
+      )
+    }
+
+    const component = render(<Component />);
+    expect(themeFuncMock).toBeCalledTimes(1);
+    fireEvent.press(component.getByTestId(styleTouchableTestId));
+    expect(themeFuncMock).toBeCalledTimes(1);
+  })
+})
