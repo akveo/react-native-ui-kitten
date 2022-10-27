@@ -6,7 +6,7 @@ when needed to build a custom, branded solution.
 
 In this guide, we will learn how to create a custom theme, apply fonts
 and give an explanation on how theme variables are used within Eva.
-If your team has a designer, it may be useful to see the original <a href="https://gumroad.com/l/eva-design" target="_blank">Sketch file</a> (it's free).
+If your team has a designer, it may be useful to see the original <a href="https://akveo.gumroad.com/l/eva-sketch" target="_blank">Sketch file</a> (it's free).
 
 <div class="note note-warning">
   <div class="note-title">IMPORTANT</div>
