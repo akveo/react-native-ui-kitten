@@ -13,9 +13,7 @@ export const DatepickerThemingShowcase = (): React.ReactElement => {
     >
 
       <Text category='h6'>
-        Selected date:
-        {' '}
-        {date.toLocaleDateString()}
+        {`Selected date: ${date.toLocaleDateString()}`}
       </Text>
 
       <Datepicker

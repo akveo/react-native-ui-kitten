@@ -57,6 +57,7 @@ interface EvaCache {
  * E.g, if `evaPackage` is `@eva-design/eva`:
  * The result will be stored at `./node_modules/@eva-design/eva/generated.json`
  */
+// eslint-disable-next-line no-restricted-syntax
 export default class BootstrapService {
 
   static run = (config: EvaConfig): void => {
@@ -106,7 +107,7 @@ export default class BootstrapService {
     let actualChecksum: string = DEFAULT_CHECKSUM;
     let nextChecksum: string = DEFAULT_CHECKSUM;
 
-    if (actualCache && actualCache.checksum) {
+    if (actualCache?.checksum) {
       actualChecksum = actualCache.checksum;
     }
 
@@ -161,7 +162,7 @@ export default class BootstrapService {
     return JSON.stringify(cache, null, 2);
   };
 
-  private static createChecksum = (target: any): string => {
+  private static createChecksum = (target: string): string => {
     return Crypto.createHash('sha1')
       .update(target)
       .digest('hex');

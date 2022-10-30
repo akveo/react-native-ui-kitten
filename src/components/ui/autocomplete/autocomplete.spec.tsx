@@ -47,7 +47,7 @@ jest.mock('react-native', () => {
 
 describe('@autocomplete-item: component checks', () => {
 
-  const TestAutocompleteItem = (props?: AutocompleteItemProps): JSX.Element => (
+  const TestAutocompleteItem = (props?: AutocompleteItemProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

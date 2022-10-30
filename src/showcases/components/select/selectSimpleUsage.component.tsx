@@ -4,7 +4,7 @@ import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
 export const SelectSimpleUsageShowcase = (): React.ReactElement => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath | IndexPath[]>(new IndexPath(0));
 
   return (
     <Layout

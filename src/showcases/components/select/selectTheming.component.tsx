@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Icon, IconElement, Layout, Select, SelectItem } from '@ui-kitten/components';
+import { Icon, IconElement, IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
 const StarIcon = (props): IconElement => (
   <Icon
@@ -18,7 +18,7 @@ const ForwardIcon = (props): IconElement => (
 
 export const SelectThemingShowcase = (): React.ReactElement => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState();
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath | IndexPath[]>();
 
   return (
     <Layout

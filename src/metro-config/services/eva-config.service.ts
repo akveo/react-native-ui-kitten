@@ -24,6 +24,7 @@ export interface EvaConfig {
 
 export type EvaMappingPackageName = '@eva-design/eva' | '@eva-design/material';
 
+// eslint-disable-next-line no-restricted-syntax
 export default class EvaConfigService {
 
   static MAPPING_PACKAGE_NAMES: EvaMappingPackageName[] = [

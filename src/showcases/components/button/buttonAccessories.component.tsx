@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ImageProps, StyleSheet, View } from 'react-native';
 import { Button, Icon, IconElement, Layout, Spinner } from '@ui-kitten/components';
 
 const StarIcon = (props): IconElement => (
@@ -9,8 +9,7 @@ const StarIcon = (props): IconElement => (
   />
 );
 
-const LoadingIndicator = (props): React.ReactElement => (
-  // eslint-disable-next-line react/prop-types
+const LoadingIndicator = (props: ImageProps): React.ReactElement => (
   <View style={[props.style, styles.indicator]}>
     <Spinner size='small' />
   </View>

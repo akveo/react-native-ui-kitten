@@ -1,4 +1,5 @@
 import React from 'react';
+import { ImageProps, StyleSheet } from 'react-native';
 import { Avatar, Button, ListItem } from '@ui-kitten/components';
 
 const InstallButton = (): React.ReactElement => (
@@ -7,11 +8,10 @@ const InstallButton = (): React.ReactElement => (
   </Button>
 );
 
-const ItemImage = (props): React.ReactElement => (
+const ItemImage = (props: ImageProps): React.ReactElement => (
   <Avatar
     {...props}
-    // eslint-disable-next-line react-native/no-inline-styles,react/prop-types
-    style={[props.style, { tintColor: null }]}
+    style={[props.style, styles.itemImage]}
     source={require('../../assets/icon.png')}
   />
 );
@@ -24,3 +24,9 @@ export const ListItemSimpleUsageShowcase = (): React.ReactElement => (
     accessoryRight={InstallButton}
   />
 );
+
+const styles = StyleSheet.create({
+  itemImage: {
+    tintColor: null,
+  },
+});

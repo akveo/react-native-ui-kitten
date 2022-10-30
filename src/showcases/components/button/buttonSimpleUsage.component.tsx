@@ -17,11 +17,7 @@ export const ButtonSimpleUsageShowcase = (): React.ReactElement => {
       </Button>
 
       <Text style={styles.text}>
-        Pressed
-        {' '}
-        {counter}
-        {' '}
-times
+        {`Pressed ${counter} times`}
       </Text>
 
     </Layout>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { ImageProps, StyleSheet } from 'react-native';
 import { Button, Icon, IconElement, Layout } from '@ui-kitten/components';
 
 export const IconThemingShowcase = (): React.ReactElement => {
 
-  const zoomIconRef = React.useRef();
-  const pulseIconRef = React.useRef();
-  const shakeIconRef = React.useRef();
+  const zoomIconRef = React.useRef<Icon<Partial<ImageProps>>>();
+  const pulseIconRef = React.useRef<Icon<Partial<ImageProps>>>();
+  const shakeIconRef = React.useRef<Icon<Partial<ImageProps>>>();
 
   React.useEffect(() => {
     zoomIconRef.current.startAnimation();

@@ -1,32 +1,31 @@
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
-import { Divider, Drawer, DrawerItem, Icon, IconElement } from '@ui-kitten/components';
+import { ImageBackground, StyleSheet, ViewProps } from 'react-native';
+import { Divider, Drawer, DrawerItem, Icon, IconElement, IconProps } from '@ui-kitten/components';
 
-const PersonIcon = (props): IconElement => (
+const PersonIcon = (props: IconProps): IconElement => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-const BellIcon = (props): IconElement => (
+const BellIcon = (props: IconProps): IconElement => (
   <Icon
     {...props}
     name='bell-outline'
   />
 );
 
-const ForwardIcon = (props): IconElement => (
+const ForwardIcon = (props: IconProps): IconElement => (
   <Icon
     {...props}
     name='arrow-ios-forward'
   />
 );
 
-const Header = (props): React.ReactElement => (
+const Header = (props: ViewProps): React.ReactElement => (
   <>
     <ImageBackground
-      //eslint-disable-next-line react/prop-types
       style={[props.style, styles.header]}
       source={require('../../assets/icon.png')}
     />

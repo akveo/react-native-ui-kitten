@@ -4,8 +4,8 @@ import { IndexPath, Layout, Select, SelectGroup, SelectItem } from '@ui-kitten/c
 
 export const SelectWithGroupsShowcase = (): React.ReactElement => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0, 1));
-  const [multiSelectedIndex, setMultiSelectedIndex] = React.useState([
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath | IndexPath[]>(new IndexPath(0, 1));
+  const [multiSelectedIndex, setMultiSelectedIndex] = React.useState<IndexPath | IndexPath[]>([
     new IndexPath(0, 0),
     new IndexPath(1, 1),
   ]);

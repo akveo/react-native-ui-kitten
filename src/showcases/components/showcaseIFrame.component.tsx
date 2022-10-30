@@ -20,7 +20,7 @@ const ShowcaseCaption = (props): React.ReactElement => (
   </View>
 );
 
-export const ShowcaseIFrame = (Component: React.ComponentType, id: string): React.ReactElement => {
+export const ShowcaseIFrame = (Component, id: string): React.ReactElement => {
 
   const postLayoutChangeEvent = (event: LayoutChangeEvent): void => {
     window.parent.postMessage({ id, height: event.nativeEvent.layout.height }, '*');
