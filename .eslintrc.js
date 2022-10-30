@@ -20,4 +20,10 @@ module.exports = {
     project: [ './tsconfig.json' ],
     sourceType: 'module',
   },
+  settings: {
+    react: {
+      version: '18.0.0',
+    },
+  },
+  ignorePatterns: ["src/template-js", "src/template-ts"]
 };

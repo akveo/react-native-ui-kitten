@@ -19,7 +19,7 @@
     "demo": "yarn --cwd ../kittenTricks",
     "build": "gulp build",
     "clean": "rimraf ./dist",
-    "lint": "eslint -c .eslintrc.js ./src/**/*.{ts,tsx}",
+    "lint": "eslint -c .eslintrc.js ./src",
     "test": "jest",
     "parse-docs": "gulp parse-docs",
     "bump-version": "gulp bump-version && conventional-changelog -i CHANGELOG.md -s",

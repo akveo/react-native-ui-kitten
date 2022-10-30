@@ -8,12 +8,10 @@ const data = new Array(8).fill({
 
 export const ListCustomItemShowcase = (): React.ReactElement => {
 
-  const renderItemHeader = (headerProps, info: ListRenderItemInfo<unknown>): React.ReactElement => (
+  const renderItemHeader = (headerProps, info: ListRenderItemInfo<{ title: string }>): React.ReactElement => (
     <View {...headerProps}>
       <Text category='h6'>
-        {info.item.title}
-        {' '}
-        {info.index + 1}
+        {`${info.item.title} ${info.index + 1}`}
       </Text>
     </View>
   );

@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewProps } from 'react-native';
 import { Button, Card, Layout, Text } from '@ui-kitten/components';
 
-const Header = (props): React.ReactElement => (
+const Header = (props: ViewProps): React.ReactElement => (
   <View {...props}>
     <Text category='h6'>
-Maldives
+      Maldives
     </Text>
     <Text category='s1'>
-By Wikipedia
+      By Wikipedia
     </Text>
   </View>
 );
 
-const Footer = (props): React.ReactElement => (
+const Footer = (props: ViewProps): React.ReactElement => (
   <View
     {...props}
     // eslint-disable-next-line react/prop-types

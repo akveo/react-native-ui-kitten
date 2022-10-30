@@ -35,10 +35,10 @@ export const DatepickerInitialVisibleDateShowcase = (): React.ReactElement => {
     return (
       <View>
         <Button onPress={scrollToToday}>
-Scroll to Today
+          Scroll to Today
         </Button>
         <Button onPress={scrollToSelected}>
-Scroll to Selected Date
+          Scroll to Selected Date
         </Button>
       </View>
     );
@@ -55,9 +55,7 @@ Scroll to Selected Date
           category='h6'
           style={styles.text}
         >
-          Selected date:
-          {' '}
-          {selectedDate.toLocaleDateString()}
+          {`Selected date: ${selectedDate.toLocaleDateString()}`}
         </Text>
 
         <Datepicker

@@ -12,12 +12,11 @@ import {
 } from 'react-native';
 import { Frame } from './type';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface MeasureElementProps<P = any> {
+export interface MeasureElementProps {
   force?: boolean;
   shouldUseTopInsets?: boolean;
   onMeasure: (frame: Frame) => void;
-  children: React.ReactElement<P>;
+  children: React.ReactElement;
 }
 
 export type MeasuringElement = React.ReactElement;

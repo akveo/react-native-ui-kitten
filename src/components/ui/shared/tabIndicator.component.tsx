@@ -33,10 +33,6 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
   private indicatorWidth = 0;
   private contentOffset: Animated.Value = new Animated.Value(0);
 
-  public componentDidMount(): void {
-    this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
-  }
-
   public componentDidUpdate(): void {
     const { selectedPosition: index } = this.props;
 
@@ -44,10 +40,6 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
       index,
       animated: true,
     });
-  }
-
-  public componentWillUnmount(): void {
-    this.contentOffset.removeAllListeners();
   }
 
   /**
@@ -74,18 +66,8 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
    * }
    */
   public scrollToOffset(params: { offset: number; animated?: boolean }): void {
-    this.createOffsetAnimation(params).start(this.onContentOffsetAnimationStateEnd);
+    this.createOffsetAnimation(params).start();
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private onContentOffsetAnimationStateChanged = (state: { value: number }): void => {
-    // no-op
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private onContentOffsetAnimationStateEnd = (result: { finished: boolean }): void => {
-    // no-op
-  };
 
   private createOffsetAnimation = (params: { offset: number; animated?: boolean }): Animated.CompositeAnimation => {
     return Animated.timing(this.contentOffset, {

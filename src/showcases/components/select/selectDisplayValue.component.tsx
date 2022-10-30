@@ -21,8 +21,8 @@ const groupedData = {
 
 export const SelectDisplayValueShowcase = (): React.ReactElement => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
-  const [multiSelectedIndex, setMultiSelectedIndex] = React.useState([
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(new IndexPath(0));
+  const [multiSelectedIndex, setMultiSelectedIndex] = React.useState<IndexPath[]>([
     new IndexPath(0, 0),
     new IndexPath(1, 1),
   ]);
@@ -54,7 +54,7 @@ export const SelectDisplayValueShowcase = (): React.ReactElement => {
         placeholder='Default'
         value={displayValue}
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}
+        onSelect={(index: IndexPath) => setSelectedIndex(index)}
       >
         {data.map(renderOption)}
       </Select>
@@ -65,7 +65,7 @@ export const SelectDisplayValueShowcase = (): React.ReactElement => {
         placeholder='Multi'
         value={groupDisplayValues.join(', ')}
         selectedIndex={multiSelectedIndex}
-        onSelect={index => setMultiSelectedIndex(index)}
+        onSelect={(index: IndexPath[]) => setMultiSelectedIndex(index)}
       >
         {Object.keys(groupedData).map(renderGroup)}
       </Select>

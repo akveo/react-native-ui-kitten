@@ -4,7 +4,7 @@ import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
 export const SelectMultiSelectShowcase = (): React.ReactElement => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState([
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath[]>([
     new IndexPath(0),
     new IndexPath(1),
   ]);
@@ -17,7 +17,7 @@ export const SelectMultiSelectShowcase = (): React.ReactElement => {
       <Select
         multiSelect={true}
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}
+        onSelect={(index: IndexPath[]) => setSelectedIndex(index)}
       >
         <SelectItem title='Option 1' />
         <SelectItem title='Option 2' />

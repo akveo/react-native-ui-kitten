@@ -1,8 +1,7 @@
 import { ReactElement } from 'react';
 
 export type ChildrenProp<Element extends ReactElement = ReactElement> = Element | Element[];
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type ChildrenWithProps<Props = {}> = ChildrenProp<ReactElement<Props>>;
+export type ChildrenWithProps<Props> = ChildrenProp<ReactElement<Props>>;
 
 
 /*

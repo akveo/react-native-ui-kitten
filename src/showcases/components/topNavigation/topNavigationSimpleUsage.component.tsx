@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, IconElement, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { Icon, IconElement, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
 const BackIcon = (props): IconElement => (
   <Icon
@@ -16,22 +16,5 @@ export const TopNavigationSimpleUsageShowcase = (): React.ReactElement => (
   <TopNavigation
     accessoryLeft={BackAction}
     title='Eva Application'
-  />
-);
-
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TopNavigationStyling = (): React.ReactElement => (
-  <TopNavigation
-    title={evaProps => (
-      <Text {...evaProps}>
-Title
-      </Text>
-    )}
-    subtitle={evaProps => (
-      <Text {...evaProps}>
-Subtitle
-      </Text>
-    )}
   />
 );
