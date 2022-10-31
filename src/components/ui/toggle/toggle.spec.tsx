@@ -26,7 +26,7 @@ import {
 
 describe('@toggle: component checks', () => {
 
-  const TestToggle = (props?: ToggleProps): JSX.Element => (
+  const TestToggle = (props?: ToggleProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

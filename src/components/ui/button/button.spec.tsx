@@ -28,7 +28,7 @@ import {
 
 describe('@button: component checks', () => {
 
-  const TestButton = (props?: ButtonProps): JSX.Element => (
+  const TestButton = (props?: ButtonProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -62,14 +62,14 @@ I love Babel
   });
 
   it('should render components passed to accessoryLeft or accessoryRight props', () => {
-    const AccessoryLeft = (props?: Partial<ImageProps>): JSX.Element => (
+    const AccessoryLeft = (props?: Partial<ImageProps>): React.ReactElement => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
       />
     );
 
-    const AccessoryRight = (props?: Partial<ImageProps>): JSX.Element => (
+    const AccessoryRight = (props?: Partial<ImageProps>): React.ReactElement => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}

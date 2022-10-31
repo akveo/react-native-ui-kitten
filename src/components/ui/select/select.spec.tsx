@@ -59,7 +59,7 @@ jest.mock('react-native', () => {
 
 describe('@select-item: component checks', () => {
 
-  const TestSelectItem = (props?: SelectItemProps): JSX.Element => (
+  const TestSelectItem = (props?: SelectItemProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

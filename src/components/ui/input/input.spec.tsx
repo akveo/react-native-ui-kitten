@@ -129,7 +129,7 @@ describe('@input: component checks', () => {
   });
 
   it('should render text passed to caption prop', () => {
-    const renderCaption = (): JSX.Element => (
+    const renderCaption = (): React.ReactElement => (
       <Text>
         I love Babel
       </Text>

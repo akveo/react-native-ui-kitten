@@ -38,7 +38,7 @@ import { ReactTestInstance } from 'react-test-renderer';
 
 describe('@tab: component checks', () => {
 
-  const TestTab = (props?: TabProps): JSX.Element => (
+  const TestTab = (props?: TabProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -120,7 +120,7 @@ describe('@tab: component checks', () => {
 
 describe('@tab-bar: component checks', () => {
 
-  const TestTabBar = (props?: Partial<TabBarProps>): JSX.Element => {
+  const TestTabBar = (props?: Partial<TabBarProps>): React.ReactElement => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     return (
@@ -193,7 +193,7 @@ describe('@tab-bar: component checks', () => {
 
 describe('@tab-view: component checks', () => {
 
-  const TestTabView = (props?: TabViewProps): JSX.Element => (
+  const TestTabView = (props?: TabViewProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

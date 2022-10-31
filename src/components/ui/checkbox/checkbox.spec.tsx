@@ -25,7 +25,7 @@ import {
 
 describe('@checkbox component checks', () => {
 
-  const TestCheckBox = (props?: CheckBoxProps): JSX.Element => (
+  const TestCheckBox = (props?: CheckBoxProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

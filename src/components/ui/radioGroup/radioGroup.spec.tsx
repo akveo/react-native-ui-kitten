@@ -23,7 +23,7 @@ import { Radio } from '../radio/radio.component';
 
 describe('@radio-group: component checks', () => {
 
-  const TestRadioGroup = (props?: Partial<RadioGroupProps>): JSX.Element => {
+  const TestRadioGroup = (props?: Partial<RadioGroupProps>): React.ReactElement => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onCheckedChange = (index: number): void => {

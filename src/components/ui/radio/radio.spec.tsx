@@ -25,7 +25,7 @@ import {
 
 describe('@radio: component checks', () => {
 
-  const TestRadio = (props?: RadioProps): JSX.Element => (
+  const TestRadio = (props?: RadioProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

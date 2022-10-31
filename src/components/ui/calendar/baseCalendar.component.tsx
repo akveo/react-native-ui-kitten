@@ -398,7 +398,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     );
   };
 
-  private renderDayPickerElement = (date: D, evaStyle): JSX.Element => {
+  private renderDayPickerElement = (date: D, evaStyle): React.ReactElement => {
     return (
       <>
         <CalendarMonthHeader

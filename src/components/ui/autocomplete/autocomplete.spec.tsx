@@ -188,7 +188,7 @@ describe('@autocomplete: component checks', () => {
       props.onChangeText?.(query);
     };
 
-    const renderOption = (item, index): JSX.Element => (
+    const renderOption = (item, index): React.ReactElement => (
       <AutocompleteItem
         key={index}
         title={item.title}
