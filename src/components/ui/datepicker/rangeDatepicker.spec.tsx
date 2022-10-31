@@ -24,7 +24,7 @@ import { ApplicationProvider } from '../../theme';
 import {
   RangeDatepicker,
   RangeDatepickerProps,
-} from './RangeDatepicker.component';
+} from './rangeDatepicker.component';
 import { RangeCalendar } from '../calendar/rangeCalendar.component';
 import {
   CalendarRange,

@@ -24,6 +24,7 @@ import { MenuItemDescriptor } from './menu.service';
 
 export interface MenuGroupProps extends MenuItemProps {
   children?: ChildrenWithProps<MenuItemProps>;
+  initiallyExpanded?: boolean;
 }
 
 export type MenuGroupElement = React.ReactElement<MenuGroupProps>;
@@ -58,6 +59,9 @@ const POSITION_OUTSCREEN: Point = Point.outscreen();
  * to render to end of the *title*.
  * Expected to return an Image.
  *
+ * @property {boolean} initiallyExpanded - Boolean value which defines whether group should be initially expanded.
+ * If true - menu group will be expanded by default.
+ *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example MenuGroups
@@ -67,7 +71,22 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
   public state: State = {
     submenuHeight: 1,
   };
+
+  private initiallyExpanded: boolean;
+
   private expandAnimation: Animated.Value = new Animated.Value(0);
+
+  constructor(props) {
+    super(props);
+    this.initiallyExpanded = props.initiallyExpanded;
+  }
+
+  public componentDidUpdate(prevProps: Readonly<MenuGroupProps>, prevState: Readonly<State>, snapshot?: any) {
+    const submenuHeightChanged = this.state.submenuHeight !== prevState.submenuHeight;
+    if (submenuHeightChanged && this.hasSubmenu && this.initiallyExpanded) {
+      this.expandAnimation.setValue(this.state.submenuHeight);
+    }
+  }
 
   private get hasSubmenu(): boolean {
     return React.Children.count(this.props.children) > 0;
@@ -101,6 +120,8 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
   private onPress = (descriptor: MenuItemDescriptor, event: GestureResponderEvent): void => {
     if (this.hasSubmenu) {
+      this.initiallyExpanded = false;
+
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue).start();
       this.props.onPress && this.props.onPress(descriptor, event);
@@ -128,7 +149,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown {...evaProps} fill={style.tintColor}/>
+        <ChevronDown {...evaProps} fill={style.tintColor as string}/>
       </Animated.View>
     );
   };
