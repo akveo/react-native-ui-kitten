@@ -18,7 +18,7 @@ import {
 
 describe('@text: component checks', () => {
 
-  const TestText = (props?: TextProps): JSX.Element => (
+  const TestText = (props?: TextProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

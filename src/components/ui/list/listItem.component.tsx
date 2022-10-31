@@ -153,7 +153,7 @@ export class ListItem extends React.Component<ListItemProps> {
     };
   };
 
-  private renderTemplateChildren = (props: ListItemProps, evaStyle): JSX.Element => {
+  private renderTemplateChildren = (props: ListItemProps, evaStyle): React.ReactElement => {
     return (
       <>
         <FalsyFC

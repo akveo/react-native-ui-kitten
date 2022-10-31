@@ -19,7 +19,7 @@ import {
 
 describe('@layout: component checks', () => {
 
-  const TestLayout = (props?: LayoutProps): JSX.Element => (
+  const TestLayout = (props?: LayoutProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

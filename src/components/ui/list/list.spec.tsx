@@ -31,7 +31,7 @@ import {
 
 describe('@list-item: component checks', () => {
 
-  const TestListItem = (props?: ListItemProps): JSX.Element => (
+  const TestListItem = (props?: ListItemProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

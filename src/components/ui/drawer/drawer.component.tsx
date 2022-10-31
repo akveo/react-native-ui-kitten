@@ -166,7 +166,7 @@ export class Drawer extends React.Component<DrawerProps> {
     };
   };
 
-  public render(): JSX.Element {
+  public render(): React.ReactElement {
     const { eva, style, header, footer, ...menuProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 

@@ -35,7 +35,7 @@ jest.useFakeTimers();
 
 describe('@menu-item: component checks', () => {
 
-  const TestMenuItem = (props?: MenuItemProps): JSX.Element => (
+  const TestMenuItem = (props?: MenuItemProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -173,7 +173,7 @@ describe('@menu-item: component checks', () => {
 
 describe('@menu: component checks', () => {
 
-  const TestMenu = (props: MenuProps): JSX.Element => (
+  const TestMenu = (props: MenuProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

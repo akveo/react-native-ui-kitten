@@ -31,7 +31,7 @@ import {
 
 describe('@drawer-item: component checks', () => {
 
-  const TestDrawerItem = (props?: DrawerItemProps): JSX.Element => (
+  const TestDrawerItem = (props?: DrawerItemProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -148,7 +148,7 @@ describe('@drawer-item: component checks', () => {
 
 describe('@drawer: component checks', () => {
 
-  const TestDrawer = (props?: DrawerProps): JSX.Element => (
+  const TestDrawer = (props?: DrawerProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

@@ -69,7 +69,7 @@ describe('@popover: component checks', () => {
       setVisible(!visible);
     };
 
-    const AnchorButton = (): JSX.Element => (
+    const AnchorButton = (): React.ReactElement => (
       <Button
         testID='@popover/toggle-button'
         title=''

@@ -25,7 +25,7 @@ import {
 
 describe('@card: component checks', () => {
 
-  const TestCard = (props?: Partial<CardProps>): JSX.Element => (
+  const TestCard = (props?: Partial<CardProps>): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

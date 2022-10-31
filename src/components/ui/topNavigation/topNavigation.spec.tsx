@@ -31,7 +31,7 @@ import {
 
 describe('@top-navigation-action: component checks', () => {
 
-  const TestTopNavigationAction = (props?: TopNavigationActionProps): JSX.Element => (
+  const TestTopNavigationAction = (props?: TopNavigationActionProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -153,7 +153,7 @@ describe('@top-navigation-action: component checks', () => {
 
 describe('@top-navigation: component checks', () => {
 
-  const TestTopNavigation = (props?: Partial<TopNavigationProps>): JSX.Element => (
+  const TestTopNavigation = (props?: Partial<TopNavigationProps>): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}

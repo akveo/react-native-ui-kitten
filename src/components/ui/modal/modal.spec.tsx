@@ -29,7 +29,7 @@ import {
 
 describe('@modal: component checks', () => {
 
-  const TestModal = (props: Partial<ModalProps>): JSX.Element => {
+  const TestModal = (props: Partial<ModalProps>): React.ReactElement => {
     const [visible, setVisible] = React.useState(props.visible);
     const [text, setText] = React.useState('I love Babel');
 

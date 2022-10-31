@@ -33,7 +33,7 @@ import { TabIndicator } from '../shared/tabIndicator.component';
 
 describe('@bottom-navigation-tab: component checks', () => {
 
-  const TestBottomNavigationTab = (props?: BottomNavigationTabProps): JSX.Element => (
+  const TestBottomNavigationTab = (props?: BottomNavigationTabProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -43,7 +43,7 @@ describe('@bottom-navigation-tab: component checks', () => {
   );
 
   it('should render component passed to icon prop', () => {
-    const Icon = (props?: Partial<ImageProps>): JSX.Element => (
+    const Icon = (props?: Partial<ImageProps>): React.ReactElement => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
@@ -132,7 +132,7 @@ describe('@bottom-navigation-tab: component checks', () => {
 
 describe('@bottom-navigation: component checks', () => {
 
-  const TestBottomNavigation = (props?: Partial<BottomNavigationProps>): JSX.Element => {
+  const TestBottomNavigation = (props?: Partial<BottomNavigationProps>): React.ReactElement => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onSelect = (index: number): void => {
