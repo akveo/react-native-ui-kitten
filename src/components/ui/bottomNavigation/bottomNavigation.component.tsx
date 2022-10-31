@@ -197,7 +197,10 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     const [indicatorElement, ...tabElements] = this.renderComponentChildren(evaStyle);
 
     return (
-      <View testID={testID} style={styles.container}>
+      <View
+        testID={testID}
+        style={styles.container}
+      >
         {indicatorElement}
         <View style={[evaStyle.container, styles.elementsContainer, style]}>
           {tabElements}
