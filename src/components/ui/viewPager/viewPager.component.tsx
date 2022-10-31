@@ -32,6 +32,7 @@ export interface ViewPagerProps<ChildrenProps = {}> extends ViewProps {
   onSelect?: (index: number) => void;
   shouldLoadComponent?: (index: number) => boolean;
   onOffsetChange?: (offset: number) => void;
+  animationDuration?: number;
 }
 
 export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
@@ -55,6 +56,8 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  *
  * @property {(number) => void} onOffsetChange - Called when scroll offset changes.
  *
+ * @property {number} animationDuration - Duration of animated transition.
+ *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ViewPagerSimpleUsage
@@ -63,11 +66,15 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * @overview-example ViewPagerLazyLoading
  * Each view can be loaded lazily by using `shouldLoadComponent` property.
  */
+
+const DEFAULT_DURATION = 300;
+
 export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProps<ChildrenProps>>
   implements PanResponderCallbacks {
 
   static defaultProps: Partial<ViewPagerProps> = {
     selectedIndex: 0,
+    animationDuration: DEFAULT_DURATION,
     swipeEnabled: true,
     shouldLoadComponent: (): boolean => true,
   };
@@ -161,7 +168,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   };
 
   private createOffsetAnimation = (params: { offset: number, animated?: boolean }): Animated.CompositeAnimation => {
-    const animationDuration: number = params.animated ? 300 : 0;
+    const animationDuration: number = params.animated ? this.props.animationDuration : 0;
 
     return Animated.timing(this.contentOffset, {
       toValue: RTLService.select(-params.offset, params.offset),
