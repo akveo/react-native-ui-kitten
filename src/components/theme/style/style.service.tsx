@@ -49,6 +49,14 @@ export const useStyleSheet = <T extends Styles<T>>(styles: Styles<T>): T => {
   }, [theme]);
 };
 
+export const useStyleSheetWithArgs = <T extends Styles<T>, A>(createStyles: (args: A) => Styles<T>, args: A): T => {
+  const theme: ThemeType = useTheme();
+
+  return useMemo(() => {
+    return StyleService.createThemed(createStyles(args), theme);
+  }, [theme, args]);
+};
+
 /**
  * Service for creating styles that fit current theme.
  * Unlike StyleSheet class exported from React Native package, it allows using Eva theme variables.
@@ -85,6 +93,10 @@ export class StyleService {
    */
   static create = <T extends Styles<T>>(styles: T): T => {
     return styles;
+  };
+
+  static createWithArgs = <T extends Styles<T>, A>(createStyles: (args: A) => T): (args: A) => T => {
+    return createStyles;
   };
 
   /**
