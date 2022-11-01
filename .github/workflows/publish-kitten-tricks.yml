@@ -10,10 +10,10 @@ jobs:
       - name: Checkout UI Kitten
         uses: actions/checkout@v3
 
-      - name: Setup node version 12
+      - name: Setup node version 14
         uses: actions/setup-node@v3
         with:
-          node-version: '12'
+          node-version: '14'
           cache: 'yarn'
 
       - name: Exclude unused modules
@@ -36,7 +36,7 @@ jobs:
       - name: Setup Expo
         uses: expo/expo-github-action@v5
         with:
-          expo-version: 3.x
+          expo-version: 4.x
           username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
           password: ${{ secrets.EXPO_CLI_PASSWORD_UI_KITTEN }}
           expo-cache: true
