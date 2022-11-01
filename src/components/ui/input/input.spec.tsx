@@ -144,6 +144,14 @@ describe('@input: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
+  it('should render text passed to floatingLabel prop', () => {
+    const component = render(
+      <TestInput floatingLabel='Floating Label' />,
+    );
+
+    expect(component.queryByText('Floating Label')).toBeTruthy();
+  });
+
   it('should render component passed to caption prop', () => {
     const Caption = (props): React.ReactElement<ImageProps> => (
       <Image
