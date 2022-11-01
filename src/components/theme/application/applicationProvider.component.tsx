@@ -14,7 +14,6 @@ import {
 } from '@eva-design/dss';
 import { StyleProvider } from '../style/styleProvider.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
-// import { ModalPanel } from '../modal/modalPanel.component';
 
 interface EvaRuntimeProcessingProps {
   mapping: SchemaType;
