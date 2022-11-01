@@ -34,7 +34,7 @@ jobs:
           path: ./packages-ci/kittenTricks
 
       - name: Setup Expo
-        uses: expo/expo-github-action@v5
+        uses: expo/expo-github-action@v6
         with:
           expo-version: 3.x
           expo-username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
