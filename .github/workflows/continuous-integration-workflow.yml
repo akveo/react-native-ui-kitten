@@ -15,21 +15,22 @@ jobs:
     name: Running TypeScript compiler, TSLint and Jest
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - name: Set up Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '13.x'
+          node-version: '14'
+          cache: 'yarn'
 
       - name: Install
-        run: yarn
+        run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Test
-        run: npm run test
+        run: yarn test
