@@ -17,13 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set up Node
-        uses: actions/setup-node@v1
+      - name: Cache
+        uses: actions/cache@v2
+        id: node_modules_cache
         with:
-          node-version: '13.x'
+          path: node_modules
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
-        run: yarn
+        run: yarn install --frozen-lockfile
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
 
       - name: Lint
         run: npm run lint
