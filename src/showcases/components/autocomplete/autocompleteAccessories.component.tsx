@@ -28,7 +28,7 @@ export const AutocompleteAccessoriesShowcase = () => {
   const onChangeText = useCallback((query) => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
-  }, [movies]);
+  }, []);
 
   const clearInput = () => {
     setValue('');

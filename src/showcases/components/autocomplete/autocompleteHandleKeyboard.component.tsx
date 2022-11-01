@@ -50,7 +50,7 @@ export const AutocompleteHandleKeyboardShowcase = () => {
   const onChangeText = useCallback((query) => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
-  }, [movies]);
+  }, []);
 
   const renderOption = (item, index) => (
     <AutocompleteItem
