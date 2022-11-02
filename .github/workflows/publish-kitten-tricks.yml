@@ -8,45 +8,56 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == 'akveo/react-native-ui-kitten'
     steps:
       - name: Checkout UI Kitten
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Setup node version 16
-        uses: actions/setup-node@v3
+      - name: Setup node version 14
+        uses: actions/setup-node@v2
         with:
-          node-version: 16
-          cache: 'yarn'
+          node-version: 14.x
 
       - name: Exclude unused modules
         run: rm -rf docs src/showcases src/template-js src/template-ts
 
       - name: Checkout Eva
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           repository: eva-design/eva
           ref: next
           path: ./packages-ci/eva
 
       - name: Checkout Kitten Tricks
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           repository: akveo/kittenTricks
           ref: next
           path: ./packages-ci/kittenTricks
 
       - name: Setup Expo
-        uses: expo/expo-github-action@v6
+        uses: expo/expo-github-action@v5
         with:
-          expo-version: 4.x
-          username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
-          password: ${{ secrets.EXPO_CLI_PASSWORD_UI_KITTEN }}
+          expo-version: 3.x
+          expo-username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
+          expo-password: ${{ secrets.EXPO_CLI_PASSWORD_UI_KITTEN }}
           expo-cache: true
 
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Check yarn cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Install UI Kitten dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: yarn --frozen-lockfile --prefer-offline
 
       - name: Install Kitten Tricks dependencies
         working-directory: ./packages-ci/kittenTricks
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: yarn --frozen-lockfile --prefer-offline
 
       - name: Switch Kitten Tricks environment
         working-directory: ./packages-ci/kittenTricks
