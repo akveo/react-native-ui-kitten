@@ -7,23 +7,18 @@ export const OverflowMenuNoMarkersShowcase = () => {
   const [visible, setVisible] = React.useState(false);
   const [selectedTitle, setSelectedTitle] = React.useState('No items selected');
 
-  const onUsersPress = ({ index }) => {
+  const onUsersPress = () => {
     setSelectedTitle('Users');
     setVisible(false);
   };
 
-  const onOrdersPress = ({ index }) => {
+  const onOrdersPress = () => {
     setSelectedTitle('Orders');
     setVisible(false);
   };
 
-  const onTransactionsPress = ({ index }) => {
+  const onTransactionsPress = () => {
     setSelectedTitle('Transactions');
-    setVisible(false);
-  };
-
-  const onSettingsPress = ({ index }) => {
-    setSelectedTitle('Settings');
     setVisible(false);
   };
 
