@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Keyboard, KeyboardEventName, Platform } from 'react-native';
 import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
@@ -43,14 +43,14 @@ export const AutocompleteHandleKeyboardShowcase = (): React.ReactElement => {
     };
   });
 
-  const onSelect = (index): void => {
-    setValue(movies[index].title);
-  };
+  const onSelect = useCallback((index): void => {
+    setValue(data[index].title);
+  }, [data]);
 
-  const onChangeText = (query): void => {
+  const onChangeText = useCallback((query): void => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
-  };
+  }, []);
 
   const renderOption = (item, index): React.ReactElement => (
     <AutocompleteItem

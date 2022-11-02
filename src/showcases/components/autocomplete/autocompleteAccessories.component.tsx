@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import { Autocomplete, AutocompleteItem, Icon, IconElement } from '@ui-kitten/components';
 
@@ -24,14 +24,14 @@ export const AutocompleteAccessoriesShowcase = (): React.ReactElement => {
   const [value, setValue] = React.useState(null);
   const [data, setData] = React.useState(movies);
 
-  const onSelect = (index): void => {
+  const onSelect = useCallback((index): void => {
     setValue(data[index].title);
-  };
+  }, [data]);
 
-  const onChangeText = (query): void => {
+  const onChangeText = useCallback((query): void => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
-  };
+  }, []);
 
   const clearInput = (): void => {
     setValue('');

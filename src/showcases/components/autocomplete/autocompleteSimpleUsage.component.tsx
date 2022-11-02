@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
 const movies = [
@@ -16,14 +16,14 @@ export const AutocompleteSimpleUsageShowcase = (): React.ReactElement => {
   const [value, setValue] = React.useState(null);
   const [data, setData] = React.useState(movies);
 
-  const onSelect = (index): void => {
-    setValue(movies[index].title);
-  };
+  const onSelect = useCallback((index): void => {
+    setValue(data[index].title);
+  }, [data]);
 
-  const onChangeText = (query): void => {
+  const onChangeText = useCallback((query): void => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
-  };
+  }, []);
 
   const renderOption = (item, index): React.ReactElement => (
     <AutocompleteItem
