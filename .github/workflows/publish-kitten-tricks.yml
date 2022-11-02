@@ -10,10 +10,10 @@ jobs:
       - name: Checkout UI Kitten
         uses: actions/checkout@v2
 
-      - name: Setup node version 14
+      - name: Setup node version 13
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 13.x
 
       - name: Exclude unused modules
         run: rm -rf docs src/showcases src/template-js src/template-ts
