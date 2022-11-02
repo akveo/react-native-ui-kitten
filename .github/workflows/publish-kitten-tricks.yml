@@ -10,10 +10,10 @@ jobs:
       - name: Checkout UI Kitten
         uses: actions/checkout@v3
 
-      - name: Setup node version 14
+      - name: Setup node version 16
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: 16
           cache: 'yarn'
 
       - name: Exclude unused modules
