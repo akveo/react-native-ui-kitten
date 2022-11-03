@@ -24,7 +24,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: yarn install --prefer-offline
 
       - name: Lint
         run: yarn lint
