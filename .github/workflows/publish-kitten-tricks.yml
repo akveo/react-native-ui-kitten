@@ -10,10 +10,10 @@ jobs:
       - name: Checkout UI Kitten
         uses: actions/checkout@v2
 
-      - name: Setup node version 12
+      - name: Setup node version 14
         uses: actions/setup-node@v2
         with:
-          node-version: 12.13.0
+          node-version: 14.x
 
       - name: Exclude unused modules
         run: rm -rf docs src/showcases src/template-js src/template-ts
@@ -35,7 +35,7 @@ jobs:
       - name: Setup Expo
         uses: expo/expo-github-action@v5
         with:
-          expo-version: 3.x
+          expo-version: 4.x
           expo-username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD_UI_KITTEN }}
           expo-cache: true
@@ -53,11 +53,11 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install UI Kitten dependencies
-        run: yarn
+        run: yarn --frozen-lockfile --prefer-offline
 
       - name: Install Kitten Tricks dependencies
         working-directory: ./packages-ci/kittenTricks
-        run: yarn
+        run: yarn --frozen-lockfile --prefer-offline
 
       - name: Switch Kitten Tricks environment
         working-directory: ./packages-ci/kittenTricks
