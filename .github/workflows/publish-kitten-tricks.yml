@@ -35,7 +35,7 @@ jobs:
       - name: Setup Expo
         uses: expo/expo-github-action@v5
         with:
-          expo-version: 4.x
+          expo-version: 4.2.1
           expo-username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD_UI_KITTEN }}
           expo-cache: true
