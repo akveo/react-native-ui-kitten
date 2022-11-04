@@ -73,15 +73,16 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     visible: false,
   };
 
-  protected calendarRef = React.createRef<any>(); // FIXME: ts
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected calendarRef = React.createRef<any>();
 
   public scrollToToday = (): void => {
     this.calendarRef.current?.scrollToToday();
-  }
+  };
 
   public scrollToDate = (date: Date): void => {
     this.calendarRef.current?.scrollToDate(date);
-  }
+  };
 
   private popoverRef = React.createRef<Popover>();
 
@@ -111,7 +112,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
 
-  private getComponentStyle = (style: StyleType) => {
+  private getComponentStyle = (style: StyleType): StyleType => {
     const {
       textMarginHorizontal,
       textFontFamily,
@@ -178,27 +179,27 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   private onPress = (event: GestureResponderEvent): void => {
     this.setPickerVisible();
-    this.props.onPress && this.props.onPress(event);
+    this.props.onPress?.(event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn && this.props.onPressIn(event);
+    this.props.onPressIn?.(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut && this.props.onPressOut(event);
+    this.props.onPressOut?.(event);
   };
 
   private onPickerVisible = (): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onFocus && this.props.onFocus();
+    this.props.onFocus?.();
   };
 
   private onPickerInvisible = (): void => {
     this.props.eva.dispatch([]);
-    this.props.onBlur && this.props.onBlur();
+    this.props.onBlur?.();
   };
 
   private setPickerVisible = (): void => {
@@ -216,7 +217,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         style={[evaStyle.control, styles.control, this.props.controlStyle]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={this.props.accessoryLeft}
@@ -255,7 +257,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     return (
       <View
         style={style}
-        testID={testID}>
+        testID={testID}
+      >
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
@@ -267,7 +270,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
           placement={placement}
           visible={this.state.visible}
           anchor={() => this.renderInputElement(touchableProps, evaStyle)}
-          onBackdropPress={this.setPickerInvisible}>
+          onBackdropPress={this.setPickerInvisible}
+        >
           {this.renderCalendar()}
         </Popover>
         <FalsyText

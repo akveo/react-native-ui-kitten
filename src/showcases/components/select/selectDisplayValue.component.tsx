@@ -19,10 +19,10 @@ const groupedData = {
   ],
 };
 
-export const SelectDisplayValueShowcase = () => {
+export const SelectDisplayValueShowcase = (): React.ReactElement => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
-  const [multiSelectedIndex, setMultiSelectedIndex] = React.useState([
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(new IndexPath(0));
+  const [multiSelectedIndex, setMultiSelectedIndex] = React.useState<IndexPath[]>([
     new IndexPath(0, 0),
     new IndexPath(1, 1),
   ]);
@@ -33,25 +33,29 @@ export const SelectDisplayValueShowcase = () => {
     return groupedData[groupTitle][index.row];
   });
 
-  const renderOption = (title) => (
-    <SelectItem title={title}/>
+  const renderOption = (title): React.ReactElement => (
+    <SelectItem title={title} />
   );
 
-  const renderGroup = (title) => (
+  const renderGroup = (title): React.ReactElement => (
     <SelectGroup title={title}>
       {groupedData[title].map(renderOption)}
     </SelectGroup>
   );
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Select
         style={styles.select}
         placeholder='Default'
         value={displayValue}
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}>
+        onSelect={(index: IndexPath) => setSelectedIndex(index)}
+      >
         {data.map(renderOption)}
       </Select>
 
@@ -61,7 +65,8 @@ export const SelectDisplayValueShowcase = () => {
         placeholder='Multi'
         value={groupDisplayValues.join(', ')}
         selectedIndex={multiSelectedIndex}
-        onSelect={index => setMultiSelectedIndex(index)}>
+        onSelect={(index: IndexPath[]) => setMultiSelectedIndex(index)}
+      >
         {Object.keys(groupedData).map(renderGroup)}
       </Select>
 

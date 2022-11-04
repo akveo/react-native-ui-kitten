@@ -45,6 +45,11 @@ export interface ListItemProps extends TouchableWebProps, ListItemStyledProps {
 
 export type ListItemElement = React.ReactElement<ListItemProps>;
 
+
+type WebStyles = {
+  container: StyleType;
+};
+
 /**
  * A single item rendered in List.
  * Items should be rendered within List by providing them through `renderItem` property to provide a usable component.
@@ -55,8 +60,8 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * to render within the item.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactElement | ReactText | (TextProps) => ReactElement} description - String, number or a function component
- * to render within the item.
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} description - String, number or a function
+ * component to render within the item.
  * If it is a function, expected to return a Text.
  *
  * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
@@ -92,15 +97,15 @@ export class ListItem extends React.Component<ListItemProps> {
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn && this.props.onPressIn(event);
+    this.props.onPressIn?.(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut && this.props.onPressOut(event);
+    this.props.onPressOut?.(event);
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       iconWidth,
       iconHeight,
@@ -148,9 +153,9 @@ export class ListItem extends React.Component<ListItemProps> {
     };
   };
 
-  private renderTemplateChildren = (props: ListItemProps, evaStyle): React.ReactFragment => {
+  private renderTemplateChildren = (props: ListItemProps, evaStyle): React.ReactElement => {
     return (
-      <React.Fragment>
+      <>
         <FalsyFC
           style={evaStyle.icon}
           component={props.accessoryLeft}
@@ -169,7 +174,7 @@ export class ListItem extends React.Component<ListItemProps> {
           style={evaStyle.icon}
           component={props.accessoryRight}
         />
-      </React.Fragment>
+      </>
     );
   };
 
@@ -192,7 +197,8 @@ export class ListItem extends React.Component<ListItemProps> {
         {...touchableProps}
         style={[evaStyle.container, styles.container, webStyles.container, style]}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         {children || this.renderTemplateChildren(this.props, evaStyle)}
       </TouchableWeb>
     );
@@ -215,9 +221,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
+const webStyles = Platform.OS === 'web' && StyleSheet.create<WebStyles>({
   container: {
-    // @ts-ignore
     outlineWidth: 0,
   },
 });

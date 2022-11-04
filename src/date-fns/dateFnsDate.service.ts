@@ -12,8 +12,14 @@ import dateFnsParse from 'date-fns/parse';
 import dateFnsFormat from 'date-fns/format';
 
 export interface DateFnsOptions extends NativeDateServiceOptions {
-  parseOptions?: {};
-  formatOptions?: {};
+  parseOptions?: {
+    useAdditionalDayOfYearTokens: boolean;
+    useAdditionalWeekYearTokens: boolean;
+  };
+  formatOptions?: {
+    useAdditionalDayOfYearTokens: boolean;
+    useAdditionalWeekYearTokens: boolean;
+  };
 }
 
 const DEFAULT_OPTIONS: DateFnsOptions = {
@@ -30,7 +36,7 @@ const DEFAULT_OPTIONS: DateFnsOptions = {
 
 export class DateFnsService extends NativeDateService {
 
-  constructor(locale: string = 'en', options?: DateFnsOptions) {
+  constructor(locale = 'en', options?: DateFnsOptions) {
     super(locale, { ...DEFAULT_OPTIONS, ...options });
   }
 

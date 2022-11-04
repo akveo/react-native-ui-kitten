@@ -71,7 +71,7 @@ export class SelectGroup extends React.Component<SelectGroupProps> {
   private createAccessoryProps = (props: SelectItemProps): CheckBoxProps => {
     return {
       checked: props.selected,
-      onChange: () => props.onPress && props.onPress(props.descriptor),
+      onChange: () => props.onPress?.(props.descriptor),
     };
   };
 
@@ -104,13 +104,13 @@ export class SelectGroup extends React.Component<SelectGroupProps> {
     const { children, ...itemProps } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <SelectItem
           accessoryLeft={evaProps => this.renderAccessory({ ...evaProps, ...this.groupAccessoryProps })}
           {...itemProps}
         />
         {this.renderGroupedItems(children)}
-      </React.Fragment>
+      </>
     );
   }
 }

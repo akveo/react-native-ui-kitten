@@ -12,6 +12,7 @@ import {
   useTheme,
 } from '../theme/theme.service';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type StyleType = Record<string, any>;
 export type Styles<T> = StyleSheet.NamedStyles<T>;
 
@@ -90,10 +91,11 @@ export class StyleService {
   /**
    * @returns stylesheet mapped to theme
    */
-  static createThemed = <T extends Styles<T>>(styles: Styles<T>, theme: ThemeType): T => {
-    return Object.keys(styles).reduce((acc: T, key: string): T => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static createThemed = <T extends Styles<T>>(styles: Styles<T>, theme: ThemeType): any => {
+    return Object.keys(styles).reduce((acc, key: string) => {
       return { ...acc, [key]: StyleService.createThemedEntry(styles[key], theme) };
-    }, {} as T);
+    }, {});
   };
 
   /**
@@ -101,7 +103,7 @@ export class StyleService {
    */
   static createThemedEntry = (style: StyleType, theme: ThemeType): StyleType => {
     return Object.keys(style).reduce((acc: StyleType, key: string): StyleType => {
-      const value: any = style[key];
+      const value = style[key];
       return { ...acc, [key]: ThemeService.getValue(value, theme, value) };
     }, {});
   };

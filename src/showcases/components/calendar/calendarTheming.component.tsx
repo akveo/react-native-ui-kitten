@@ -2,16 +2,22 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Calendar, Layout, RangeCalendar, Text } from '@ui-kitten/components';
 
-export const CalendarThemingShowcase = () => {
+export const CalendarThemingShowcase = (): React.ReactElement => {
 
   const [date, setDate] = React.useState(new Date());
   const [range, setRange] = React.useState({});
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
+        <Text
+          style={styles.text}
+          category='h6'
+        >
           Date
         </Text>
 
@@ -22,7 +28,10 @@ export const CalendarThemingShowcase = () => {
       </View>
 
       <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
+        <Text
+          style={styles.text}
+          category='h6'
+        >
           Date Ranges
         </Text>
 

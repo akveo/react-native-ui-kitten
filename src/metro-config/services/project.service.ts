@@ -10,6 +10,7 @@ import LogService from './log.service';
  */
 const PROJECT_PATH: string = Path.resolve(__dirname, '../../../../');
 
+// eslint-disable-next-line no-restricted-syntax
 export default class ProjectService {
 
   static resolvePath = (path: string): string => {
@@ -20,7 +21,7 @@ export default class ProjectService {
     return Path.resolve(PROJECT_PATH, path);
   };
 
-  static requireModule = <T = {}>(path: string): T | null => {
+  static requireModule = <T = Record<string, unknown>>(path: string): T | null => {
     const modulePath: string = ProjectService.resolvePath(path);
 
     try {

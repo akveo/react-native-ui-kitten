@@ -47,16 +47,18 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
   }
 
   public hide = (identifier: string): string => {
-    const components: Map<string, ModalPanelChild> = this.state.components;
+    const { components: componentsFromState } = this.state;
+    const components: Map<string, ModalPanelChild> = componentsFromState;
     components.delete(identifier);
     this.setState({ components });
     return '';
   };
 
   public show(element: React.ReactElement, config: ModalPresentingConfig): string {
+    const { components: componentsFromState } = this.state;
     const key: string = this.generateUniqueComponentKey();
-    const components: Map<string, ModalPanelChild> = this.state.components
-                                                         .set(key, { ...config, element });
+    const components: Map<string, ModalPanelChild> = componentsFromState
+      .set(key, { ...config, element });
 
     this.setState({ components });
 
@@ -92,7 +94,8 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
         key={index}
         visible={true}
         backdropStyle={config.backdropStyle}
-        onBackdropPress={config.onBackdropPress}>
+        onBackdropPress={config.onBackdropPress}
+      >
         {config.element}
       </ModalResolver>
     );

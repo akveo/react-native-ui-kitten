@@ -16,8 +16,8 @@ export class MenuService {
     return { groupIndices, index: new IndexPath(index) };
   };
 
-  public createDescriptorForNestedElement = (groupDescriptor: MenuItemDescriptor, index: number): MenuItemDescriptor => {
-
+  public createDescriptorForNestedElement =
+  (groupDescriptor: MenuItemDescriptor, index: number): MenuItemDescriptor => {
     return {
       index: new IndexPath(index, groupDescriptor.index.row),
       groupIndices: null,

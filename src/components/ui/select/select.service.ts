@@ -8,13 +8,13 @@ export interface SelectItemDescriptor {
   groupIndices?: IndexPath[];
 }
 
-const SEPARATOR: string = ', ';
+const SEPARATOR = ', ';
 
 export class SelectService {
 
   public selectItem = (multiSelect: boolean,
-                       descriptor: SelectItemDescriptor,
-                       selected: IndexPath[]): IndexPath | IndexPath[] => {
+    descriptor: SelectItemDescriptor,
+    selected: IndexPath[]): IndexPath | IndexPath[] => {
 
     if (multiSelect) {
       return this.createMultiSelectIndices(descriptor, selected);
@@ -46,8 +46,8 @@ export class SelectService {
   };
 
   public createDescriptorForElement = (element: SelectItemElement,
-                                       multiSelect: boolean,
-                                       index: number): SelectItemDescriptor => {
+    multiSelect: boolean,
+    index: number): SelectItemDescriptor => {
 
     const groupIndices = React.Children.map(element.props.children, ((child: SelectItemElement, row: number) => {
       return new IndexPath(row, index);
@@ -57,8 +57,8 @@ export class SelectService {
   };
 
   public createDescriptorForNestedElement = (element: SelectItemElement,
-                                             descriptor: SelectItemDescriptor,
-                                             index: number): SelectItemDescriptor => {
+    descriptor: SelectItemDescriptor,
+    index: number): SelectItemDescriptor => {
 
     return {
       ...descriptor,

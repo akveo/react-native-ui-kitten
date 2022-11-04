@@ -123,7 +123,7 @@ export class OverflowMenu extends React.Component<OverflowMenuProps> {
     this.popoverRef.current?.hide();
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const { indicatorBackgroundColor, ...containerParameters } = source;
 
     return {
@@ -143,7 +143,8 @@ export class OverflowMenu extends React.Component<OverflowMenuProps> {
         style={styles.menu}
         initialNumToRender={this.itemsCount}
         showsVerticalScrollIndicator={false}
-        bounces={false}>
+        bounces={false}
+      >
         {this.props.children}
       </Menu>
     );
@@ -158,7 +159,8 @@ export class OverflowMenu extends React.Component<OverflowMenuProps> {
       <Popover
         {...popoverProps}
         ref={this.popoverRef}
-        style={[styles.popover, evaStyle.container, style]}>
+        style={[styles.popover, evaStyle.container, style]}
+      >
         {contentElement}
       </Popover>
     );

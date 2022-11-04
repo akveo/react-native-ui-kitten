@@ -18,10 +18,11 @@
   "dependencies": {
     "@react-navigation/web": "^1.0.0-alpha.9",
     "awesome-debounce-promise": "^2.1.0",
-    "expo": "^37.0.0",
-    "react": "16.9.0",
+    "expo": "^46.0.9",
+    "expo-updates": "~0.14.5",
+    "react": "18.0.0",
     "react-dom": "16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native": "0.69.5",
     "react-native-gesture-handler": "~1.6.0",
     "react-native-reanimated": "~1.7.0",
     "react-native-safe-area-context": "0.7.3",
@@ -32,7 +33,7 @@
     "react-navigation-stack": "^2.3.13"
   },
   "devDependencies": {
-    "@expo/webpack-config": "^0.11.25",
-    "babel-preset-expo": "^8.1.0"
+    "@expo/webpack-config": "^0.17.2",
+    "babel-preset-expo": "^9.2.0"
   }
 }

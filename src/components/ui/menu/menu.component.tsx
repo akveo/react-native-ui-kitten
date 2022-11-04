@@ -112,6 +112,7 @@ export class Menu extends React.Component<MenuProps> {
 
   private service: MenuService = new MenuService();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
   }
@@ -121,11 +122,11 @@ export class Menu extends React.Component<MenuProps> {
   }
 
   public clear = (): void => {
-    this.props.onSelect && this.props.onSelect(null);
+    this.props.onSelect?.(null);
   };
 
   private onItemPress = (descriptor: MenuItemDescriptor): void => {
-    this.props.onSelect && this.props.onSelect(descriptor.index);
+    this.props.onSelect?.(descriptor.index);
   };
 
   private isItemSelected = (descriptor: MenuItemDescriptor): boolean => {
@@ -140,8 +141,8 @@ export class Menu extends React.Component<MenuProps> {
       return this.cloneItemWithProps(el, { ...props, selected, descriptor });
     });
 
-    const onPress = (descriptor: MenuItemDescriptor, event?: GestureResponderEvent) => {
-      element.props.onPress && element.props.onPress(descriptor, event);
+    const onPress = (descriptor: MenuItemDescriptor, event?: GestureResponderEvent): void => {
+      element.props.onPress?.(descriptor, event);
       props.onPress(descriptor);
     };
 
