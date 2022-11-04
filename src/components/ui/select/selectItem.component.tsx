@@ -162,6 +162,7 @@ export class SelectItem extends React.Component<SelectItemProps> {
       <CheckBox
         style={evaStyle}
         checked={this.props.selected}
+        disabled={this.props.disabled}
         onChange={this.onAccessoryCheckedChange}
       />
     );
