@@ -2,32 +2,70 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, ButtonGroup, Layout } from '@ui-kitten/components';
 
-export const ButtonGroupSizeShowcase = () => (
-  <Layout style={styles.container} level='1'>
+export const ButtonGroupSizeShowcase = (): React.ReactElement => (
+  <Layout
+    style={styles.container}
+    level='1'
+  >
 
-    <ButtonGroup style={styles.buttonGroup} size='tiny'>
-      <Button>L</Button>
-      <Button>R</Button>
+    <ButtonGroup
+      style={styles.buttonGroup}
+      size='tiny'
+    >
+      <Button>
+L
+      </Button>
+      <Button>
+R
+      </Button>
     </ButtonGroup>
 
-    <ButtonGroup style={styles.buttonGroup} size='small'>
-      <Button>L</Button>
-      <Button>R</Button>
+    <ButtonGroup
+      style={styles.buttonGroup}
+      size='small'
+    >
+      <Button>
+L
+      </Button>
+      <Button>
+R
+      </Button>
     </ButtonGroup>
 
-    <ButtonGroup style={styles.buttonGroup} size='medium'>
-      <Button>L</Button>
-      <Button>R</Button>
+    <ButtonGroup
+      style={styles.buttonGroup}
+      size='medium'
+    >
+      <Button>
+L
+      </Button>
+      <Button>
+R
+      </Button>
     </ButtonGroup>
 
-    <ButtonGroup style={styles.buttonGroup} size='large'>
-      <Button>L</Button>
-      <Button>R</Button>
+    <ButtonGroup
+      style={styles.buttonGroup}
+      size='large'
+    >
+      <Button>
+L
+      </Button>
+      <Button>
+R
+      </Button>
     </ButtonGroup>
 
-    <ButtonGroup style={styles.buttonGroup} size='giant'>
-      <Button>L</Button>
-      <Button>R</Button>
+    <ButtonGroup
+      style={styles.buttonGroup}
+      size='giant'
+    >
+      <Button>
+L
+      </Button>
+      <Button>
+R
+      </Button>
     </ButtonGroup>
 
   </Layout>

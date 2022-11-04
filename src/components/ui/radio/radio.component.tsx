@@ -34,7 +34,9 @@ type RadioStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'default'>;
 }>;
 
-export interface RadioProps extends TouchableWebProps, RadioStyledProps {
+type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
+
+export interface RadioProps extends TouchableWebPropsWithoutChildren, RadioStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
@@ -95,39 +97,39 @@ export class Radio extends React.Component<RadioProps> {
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-    this.props.onMouseEnter && this.props.onMouseEnter(event);
+    this.props.onMouseEnter?.(event);
   };
 
   private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onMouseLeave && this.props.onMouseLeave(event);
+    this.props.onMouseLeave?.(event);
   };
 
   private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-    this.props.onFocus && this.props.onFocus(event);
+    this.props.onFocus?.(event);
   };
 
   private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onBlur && this.props.onBlur(event);
+    this.props.onBlur?.(event);
   };
 
   private onPress = (): void => {
-    this.props.onChange && this.props.onChange(!this.props.checked);
+    this.props.onChange?.(!this.props.checked);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn && this.props.onPressIn(event);
+    this.props.onPressIn?.(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut && this.props.onPressOut(event);
+    this.props.onPressOut?.(event);
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       textMarginHorizontal,
       textFontFamily,
@@ -183,7 +185,8 @@ export class Radio extends React.Component<RadioProps> {
         onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <View style={styles.highlightContainer}>
           <View style={[evaStyle.highlight, styles.highlight]} />
           <View style={[evaStyle.selectContainer, styles.selectContainer]}>

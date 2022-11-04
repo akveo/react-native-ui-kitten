@@ -37,11 +37,15 @@ import {
   CalendarViewModes,
 } from '@ui-kitten/components/ui/calendar/type';
 
+interface IconStyle extends ImageStyle {
+  tintColor?: string;
+}
+
 export interface CalendarHeaderProps extends ViewProps {
   viewModeId: CalendarViewModeId;
   title: string;
   titleStyle?: StyleProp<TextStyle>;
-  iconStyle?: ImageStyle;
+  iconStyle?: IconStyle;
   lateralNavigationAllowed: boolean;
   onTitlePress?: () => void;
   onNavigationLeftPress?: () => void;
@@ -54,9 +58,9 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderTitleIcon = (): ChevronDownElement => {
     const { tintColor, ...svgStyle } = this.props.iconStyle;
-    const rotateStyle = this.props.viewModeId === CalendarViewModes.DATE.id
-      ? {}
-      : styles.rotateIcon;
+    const rotateStyle = this.props.viewModeId === CalendarViewModes.DATE.id ?
+      {} :
+      styles.rotateIcon;
 
     return (
       <ChevronDown
@@ -111,7 +115,8 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
     return (
       <Text
         {...props}
-        style={[props.style, styles.headerButtonText, this.props.titleStyle]}>
+        style={[props.style, styles.headerButtonText, this.props.titleStyle]}
+      >
         {this.props.title}
       </Text>
     );
@@ -123,11 +128,13 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
     return (
       <View
         {...viewProps}
-        style={[styles.container, style]}>
+        style={[styles.container, style]}
+      >
         <Button
           appearance='ghost'
           accessoryRight={this.renderTitleIcon}
-          onPress={onTitlePress}>
+          onPress={onTitlePress}
+        >
           {(props) => this.renderTitleElement(props)}
         </Button>
         {lateralNavigationAllowed && this.renderLateralNavigationControls()}

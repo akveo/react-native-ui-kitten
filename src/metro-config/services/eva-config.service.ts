@@ -24,6 +24,7 @@ export interface EvaConfig {
 
 export type EvaMappingPackageName = '@eva-design/eva' | '@eva-design/material';
 
+// eslint-disable-next-line no-restricted-syntax
 export default class EvaConfigService {
 
   static MAPPING_PACKAGE_NAMES: EvaMappingPackageName[] = [
@@ -34,8 +35,8 @@ export default class EvaConfigService {
   static validateConfigOrWarn = (config: EvaConfig): boolean => {
     if (!config.evaPackage || !EvaConfigService.isValidEvaPackageName(config.evaPackage)) {
       LogService.warn(
-        `There is no Eva package specified in UI Kitten metro config`,
-        `Consider setting "evaPackage" property of UI Kitten metro config`,
+        'There is no Eva package specified in UI Kitten metro config',
+        'Consider setting "evaPackage" property of UI Kitten metro config',
         'to one of the following values:',
         '',
         ...EvaConfigService.MAPPING_PACKAGE_NAMES,

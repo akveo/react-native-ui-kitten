@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import {
   Button,
-  Icon,
+  Icon, IconElement,
   Input,
   Layout,
   MenuItem,
@@ -12,19 +12,28 @@ import {
   Tooltip,
 } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
-  <Icon {...props} name='star'/>
+const StarIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='star'
+  />
 );
 
-const HeartIcon = (props) => (
-  <Icon {...props} name='heart'/>
+const HeartIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='heart'
+  />
 );
 
-const ForwardIcon = (props) => (
-  <Icon {...props} name='arrow-ios-forward'/>
+const ForwardIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='arrow-ios-forward'
+  />
 );
 
-export const IconWithinComponentsShowcase = () => {
+export const IconWithinComponentsShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
@@ -32,46 +41,54 @@ export const IconWithinComponentsShowcase = () => {
   const [menuVisible, setMenuVisible] = React.useState(false);
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
 
-  const toggleSecureEntry = () => {
+  const toggleSecureEntry = (): void => {
     setSecureTextEntry(!secureTextEntry);
   };
 
-  const toggleTooltip = () => {
+  const toggleTooltip = (): void => {
     setTooltipVisible(!tooltipVisible);
   };
 
-  const toggleMenu = () => {
+  const toggleMenu = (): void => {
     setMenuVisible(!menuVisible);
   };
 
-  const renderInputIcon = (props) => (
+  const renderInputIcon = (props): React.ReactElement => (
     <TouchableWithoutFeedback onPress={toggleSecureEntry}>
-      <Icon {...props} name={!secureTextEntry ? 'eye' : 'eye-off'}/>
+      <Icon
+        {...props}
+        name={!secureTextEntry ? 'eye' : 'eye-off'}
+      />
     </TouchableWithoutFeedback>
   );
 
-  const renderTooltipButton = () => (
+  const renderTooltipButton = (): React.ReactElement => (
     <Button
       style={styles.button}
       accessoryLeft={HeartIcon}
-      onPress={toggleTooltip}>
+      onPress={toggleTooltip}
+    >
       PRESS ME
     </Button>
   );
 
-  const renderMenuButton = () => (
+  const renderMenuButton = (): React.ReactElement => (
     <Button
       style={styles.button}
       accessoryLeft={HeartIcon}
-      onPress={toggleMenu}>
+      onPress={toggleMenu}
+    >
       PRESS ME
     </Button>
   );
 
   return (
-    <React.Fragment>
+    <>
 
-      <Layout style={styles.inputContainer} level='1'>
+      <Layout
+        style={styles.inputContainer}
+        level='1'
+      >
 
         <Input
           style={styles.input}
@@ -87,10 +104,20 @@ export const IconWithinComponentsShowcase = () => {
           placeholder='Select'
           selectedIndex={selectIndex}
           accessoryLeft={StarIcon}
-          onSelect={index => setSelectIndex(index)}>
-          <SelectItem accessoryLeft={HeartIcon} title='Option 1'/>
-          <SelectItem accessoryLeft={HeartIcon} title='Option 2'/>
-          <SelectItem accessoryLeft={HeartIcon} title='Option 3'/>
+          onSelect={index => setSelectIndex(index)}
+        >
+          <SelectItem
+            accessoryLeft={HeartIcon}
+            title='Option 1'
+          />
+          <SelectItem
+            accessoryLeft={HeartIcon}
+            title='Option 2'
+          />
+          <SelectItem
+            accessoryLeft={HeartIcon}
+            title='Option 3'
+          />
         </Select>
 
       </Layout>
@@ -100,18 +127,29 @@ export const IconWithinComponentsShowcase = () => {
         onSelect={toggleMenu}
         visible={menuVisible}
         anchor={renderMenuButton}
-        onBackdropPress={toggleMenu}>
-        <MenuItem title='Menu Option 1' accessoryRight={ForwardIcon}/>
-        <MenuItem title='Menu Option 2' accessoryRight={ForwardIcon}/>
+        onBackdropPress={toggleMenu}
+      >
+        <MenuItem
+          title='Menu Option 1'
+          accessoryRight={ForwardIcon}
+        />
+        <MenuItem
+          title='Menu Option 2'
+          accessoryRight={ForwardIcon}
+        />
       </OverflowMenu>
 
-      <Layout style={styles.buttonContainer} level='1'>
+      <Layout
+        style={styles.buttonContainer}
+        level='1'
+      >
 
         <Tooltip
           anchor={renderTooltipButton}
           visible={tooltipVisible}
           accessoryLeft={StarIcon}
-          onBackdropPress={toggleTooltip}>
+          onBackdropPress={toggleTooltip}
+        >
           Hi!
         </Tooltip>
 
@@ -123,7 +161,7 @@ export const IconWithinComponentsShowcase = () => {
 
       </Layout>
 
-    </React.Fragment>
+    </>
   );
 };
 

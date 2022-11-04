@@ -26,7 +26,7 @@ import {
   PopoverPlacements,
 } from './type';
 
-type AnimatedViewStyle = ViewStyle | any;
+type AnimatedViewStyle = ViewStyle;
 
 export interface PopoverViewProps extends ViewProps, StyledComponentProps {
   contentContainerStyle?: StyleProp<AnimatedViewStyle>;
@@ -36,8 +36,8 @@ export interface PopoverViewProps extends ViewProps, StyledComponentProps {
 
 export type PopoverViewElement = React.ReactElement<PopoverViewProps>;
 
-const INDICATOR_OFFSET: number = 8;
-const INDICATOR_WIDTH: number = 6;
+const INDICATOR_OFFSET = 8;
+const INDICATOR_WIDTH = 6;
 
 @styled('Popover')
 export class PopoverView extends React.Component<PopoverViewProps> {
@@ -46,7 +46,7 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     return PopoverPlacements.parse(this.props.placement);
   }
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const { indicatorWidth, indicatorHeight, indicatorBackgroundColor, ...containerParameters } = source;
 
     return {
@@ -59,7 +59,7 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     };
   };
 
-  private getDirectionStyle = () => {
+  private getDirectionStyle = (): StyleType => {
     const { direction, alignment } = this.placement.flex();
 
     const isVertical: boolean = direction.startsWith('column');
@@ -122,7 +122,8 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     return (
       <View
         style={[directionStyle.container, contentContainerStyle]}
-        onLayout={onLayout}>
+        onLayout={onLayout}
+      >
         <FalsyFC
           style={[evaStyle.indicator, directionStyle.indicator]}
           component={indicator}

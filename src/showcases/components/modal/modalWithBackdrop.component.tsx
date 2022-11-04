@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Modal, Text } from '@ui-kitten/components';
 
-export const ModalWithBackdropShowcase = () => {
+export const ModalWithBackdropShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
 
@@ -16,9 +16,12 @@ export const ModalWithBackdropShowcase = () => {
       <Modal
         visible={visible}
         backdropStyle={styles.backdrop}
-        onBackdropPress={() => setVisible(false)}>
+        onBackdropPress={() => setVisible(false)}
+      >
         <Card disabled={true}>
-          <Text>Welcome to UI Kitten 😻</Text>
+          <Text>
+Welcome to UI Kitten 😻
+          </Text>
           <Button onPress={() => setVisible(false)}>
             DISMISS
           </Button>

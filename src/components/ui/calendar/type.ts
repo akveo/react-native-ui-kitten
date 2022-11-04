@@ -5,11 +5,11 @@
  */
 
 export enum RangeRole {
-  none ,
-  member ,
-  start = 1 << 1,
-  end = 2 << 1,
-  complete = start | end,
+  none = 0,
+  member = 1,
+  start = 2,
+  end = 4,
+  complete = 6,
 }
 
 export interface CalendarDateOptions {
@@ -65,13 +65,13 @@ export interface CalendarViewMode {
   pickNext: () => CalendarViewMode;
 }
 
-interface CalendarViewModes {
+interface ICalendarViewModes {
   DATE: CalendarViewMode;
   MONTH: CalendarViewMode;
   YEAR: CalendarViewMode;
 }
 
-export const CalendarViewModes: CalendarViewModes = {
+export const CalendarViewModes: ICalendarViewModes = {
   DATE: VIEW_MODE_DATE,
   MONTH: VIEW_MODE_MONTH,
   YEAR: VIEW_MODE_YEAR,

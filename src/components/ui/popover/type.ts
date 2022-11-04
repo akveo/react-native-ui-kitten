@@ -23,7 +23,7 @@ export interface Offset {
 export class Offsets {
 
   static MARGIN: Offset = new class implements Offset {
-    rawValue: string = 'margin';
+    rawValue = 'margin';
 
     apply(frame: Frame, value: number): Frame {
       return new Frame(value, value, value, value);
@@ -31,7 +31,7 @@ export class Offsets {
   };
 
   static MARGIN_HORIZONTAL: Offset = new class implements Offset {
-    rawValue: string = 'marginHorizontal';
+    rawValue = 'marginHorizontal';
 
     apply(frame: Frame, value: number): Frame {
       return new Frame(value, frame.origin.y, value, frame.size.height);
@@ -39,7 +39,7 @@ export class Offsets {
   };
 
   static MARGIN_VERTICAL: Offset = new class implements Offset {
-    rawValue: string = 'marginVertical';
+    rawValue = 'marginVertical';
 
     apply(frame: Frame, value: number): Frame {
       return new Frame(frame.origin.x, value, frame.size.width, value);
@@ -47,7 +47,7 @@ export class Offsets {
   };
 
   static MARGIN_LEFT: Offset = new class implements Offset {
-    rawValue: string = 'marginLeft';
+    rawValue = 'marginLeft';
 
     apply(frame: Frame, value: number): Frame {
       return new Frame(value, frame.origin.y, frame.size.width, frame.size.height);
@@ -55,7 +55,7 @@ export class Offsets {
   };
 
   static MARGIN_TOP: Offset = new class implements Offset {
-    rawValue: string = 'marginTop';
+    rawValue = 'marginTop';
 
     apply(frame: Frame, value: number): Frame {
       return new Frame(frame.origin.x, value, frame.size.width, frame.size.height);
@@ -63,7 +63,7 @@ export class Offsets {
   };
 
   static MARGIN_RIGHT: Offset = new class implements Offset {
-    rawValue: string = 'marginRight';
+    rawValue = 'marginRight';
 
     apply(frame: Frame, value: number): Frame {
       return new Frame(frame.origin.x, frame.origin.y, value, frame.size.height);
@@ -71,7 +71,7 @@ export class Offsets {
   };
 
   static MARGIN_BOTTOM: Offset = new class implements Offset {
-    rawValue: string = 'marginBottom';
+    rawValue = 'marginBottom';
 
     apply(frame: Frame, value: number): Frame {
       return new Frame(frame.origin.x, frame.origin.y, frame.size.width, value);
@@ -92,14 +92,14 @@ export class Offsets {
     const flatStyle: FlexStyle = StyleSheet.flatten(source) || {};
 
     return Object.keys(flatStyle)
-                 .filter((key: string): boolean => offsetKeys.includes(key))
-                 .reduce((acc: Frame, key: string): Frame => {
+      .filter((key: string): boolean => offsetKeys.includes(key))
+      .reduce((acc: Frame, key: string): Frame => {
 
-                   const value: number = flatStyle[key];
-                   const offsetValue: Offset | undefined = Offsets.parse(key);
+        const value: number = flatStyle[key];
+        const offsetValue: Offset | undefined = Offsets.parse(key);
 
-                   return offsetValue ? offsetValue.apply(acc, value) : acc;
-                 }, Frame.zero());
+        return offsetValue ? offsetValue.apply(acc, value) : acc;
+      }, Frame.zero());
   }
 
   static parse(value: string | Offset, fallback?: Offset): Offset | undefined {
@@ -127,7 +127,7 @@ export class Offsets {
     }
   }
 
-  private static typeOf(value: any): value is Offset {
+  private static typeOf(value: Offset | string): value is Offset {
     const { rawValue } = (<Offset>value);
 
     return rawValue !== undefined;
@@ -136,9 +136,9 @@ export class Offsets {
 
 export class PlacementOptions {
   constructor(readonly source: Frame = Frame.zero(),
-              readonly other: Frame = Frame.zero(),
-              readonly bounds: Frame = Frame.zero(),
-              readonly offsets: Frame = Frame.zero()) {
+    readonly other: Frame = Frame.zero(),
+    readonly bounds: Frame = Frame.zero(),
+    readonly offsets: Frame = Frame.zero()) {
   }
 }
 
@@ -198,7 +198,7 @@ export class PopoverPlacements {
     }
   };
   static LEFT_START: PopoverPlacement = new class implements PopoverPlacement {
-    rawValue: string = 'left start';
+    rawValue = 'left start';
 
     frame(options: PlacementOptions): Frame {
       const { origin, size } = this.parent().frame(options);
@@ -355,7 +355,7 @@ export class PopoverPlacements {
     }
   };
   static LEFT: PopoverPlacement = new class implements PopoverPlacement {
-    rawValue: string = 'left';
+    rawValue = 'left';
 
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.leftOf(options.other).centerVerticalOf(options.other);
@@ -677,7 +677,7 @@ export class PopoverPlacements {
     }
   }
 
-  private static typeOf(value: any): value is PopoverPlacement {
+  private static typeOf(value: PopoverPlacement | string): value is PopoverPlacement {
     const { rawValue } = (<PopoverPlacement>value);
 
     return rawValue !== undefined;

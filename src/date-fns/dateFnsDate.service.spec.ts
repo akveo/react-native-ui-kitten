@@ -26,13 +26,13 @@ describe('@date-fns: service checks', () => {
   });
 
   describe('service global config', () => {
-    const FORMAT: string = 'MM-dd-yyyy';
-    const year: number = 2010;
-    const monthIndex: number = 10;
+    const FORMAT = 'MM-dd-yyyy';
+    const year = 2010;
+    const monthIndex = 10;
     const month: number = monthIndex + 1;
-    const day: number = 20;
+    const day = 20;
     const date: Date = new Date(year, monthIndex, day);
-    const formattedDate: string = `${month}-${day}-${year}`;
+    const formattedDate = `${month}-${day}-${year}`;
 
     beforeEach(() => {
       dateService = new DateFnsService('en', {

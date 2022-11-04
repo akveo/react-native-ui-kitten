@@ -10,6 +10,8 @@ import {
   BackHandler,
   NativeEventSubscription,
   Platform,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import {
   Frame,
@@ -17,9 +19,8 @@ import {
   MeasuringElement,
   Point,
   RenderFCProp,
-  Overwrite,
 } from '../../devsupport';
-import { ModalService } from '../../theme';
+import { ModalPresentingConfig, ModalService } from '../../theme';
 import { ModalProps } from '../modal/modal.component';
 import {
   PopoverView,
@@ -33,12 +34,12 @@ import {
   PopoverPlacements,
 } from './type';
 
-type PopoverModalProps = Overwrite<ModalProps, {
-  children?: React.ReactElement;
-}>;
+type PopoverModalProps = Omit<ModalProps, 'children'>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
-  anchor: RenderFCProp;
+  children?: React.ReactElement;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  anchor: RenderFCProp<any>;
   fullWidth?: boolean;
 }
 
@@ -117,12 +118,12 @@ export class Popover extends React.Component<PopoverProps, State> {
     return PopoverPlacements.parse(this.props.placement);
   }
 
-  private get contentFlexPosition() {
+  private get contentFlexPosition(): StyleProp<ViewStyle> {
     const { x: left, y: top } = this.contentPosition;
     return { left, top };
   }
 
-  private get backdropConfig() {
+  private get backdropConfig(): ModalPresentingConfig {
     const { onBackdropPress, backdropStyle } = this.props;
     return {
       onBackdropPress,
@@ -145,7 +146,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     return false;
   };
 
-  public componentDidUpdate(prevProps: PopoverProps): void {
+  public componentDidUpdate(): void {
     if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
       return;
@@ -171,7 +172,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
-    this.state.childFrame = childFrame;
+    this.setState({ childFrame });
 
     if (!this.modalId && this.props.visible) {
       this.show();
@@ -184,7 +185,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   };
 
   private onContentMeasure = (anchorFrame: Frame): void => {
-    this.state.anchorFrame = anchorFrame;
+    this.setState({ anchorFrame });
 
     const placementOptions: PlacementOptions = this.findPlacementOptions(anchorFrame, this.state.childFrame);
     this.actualPlacement = this.placementService.find(this.preferredPlacement, placementOptions);
@@ -216,8 +217,9 @@ export class Popover extends React.Component<PopoverProps, State> {
       <PopoverView
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
-        placement={this.actualPlacement.reverse()}>
-          {this.renderContentElement()}
+        placement={this.actualPlacement.reverse()}
+      >
+        {this.renderContentElement()}
       </PopoverView>
     );
   };
@@ -226,8 +228,9 @@ export class Popover extends React.Component<PopoverProps, State> {
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-        onMeasure={this.onContentMeasure}>
-          {this.renderPopoverElement()}
+        onMeasure={this.onContentMeasure}
+      >
+        {this.renderPopoverElement()}
       </MeasureElement>
     );
   };
@@ -237,8 +240,9 @@ export class Popover extends React.Component<PopoverProps, State> {
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
         force={this.state.forceMeasure}
-        onMeasure={this.onChildMeasure}>
-          {this.props.anchor()}
+        onMeasure={this.onChildMeasure}
+      >
+        {this.props.anchor()}
       </MeasureElement>
     );
   }

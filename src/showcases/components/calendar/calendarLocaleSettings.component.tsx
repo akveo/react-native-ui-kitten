@@ -1,7 +1,7 @@
 import React from 'react';
-import { Calendar, NativeDateService } from '@ui-kitten/components';
+import { Calendar, I18nConfig, NativeDateService } from '@ui-kitten/components';
 
-const i18n = {
+const i18n: I18nConfig = {
   dayNames: {
     short: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
     long: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
@@ -27,7 +27,7 @@ const i18n = {
 
 const localeDateService = new NativeDateService('ru', { i18n, startDayOfWeek: 1 });
 
-export const CalendarLocaleSettingsShowcase = () => {
+export const CalendarLocaleSettingsShowcase = (): React.ReactElement => {
 
   const [date, setDate] = React.useState(new Date());
 

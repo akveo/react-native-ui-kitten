@@ -21,9 +21,11 @@ export interface ThemeContextType {
 export const ThemeContext = React.createContext<ThemeContextType>({
   mapping: AppMapping.eva,
   theme: AppTheme.light,
-  setMapping: (mapping: AppMapping) => {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function ,@typescript-eslint/no-unused-vars
+  setMapping: (mapping: AppMapping): void => {
   },
-  setTheme: (theme: AppTheme) => {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  setTheme: (theme: AppTheme): void => {
   },
   isDarkMode: () => false,
 });

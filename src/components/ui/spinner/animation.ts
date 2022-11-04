@@ -16,8 +16,8 @@ import {
   AnimationConfig,
 } from '../animation/animation';
 
-const PI: number = 180;
-const PI2: number = 360;
+const PI = 180;
+const PI2 = 360;
 const OFFSET_MIN: number = PI / 12;
 const OFFSET_MAX: number = PI / 6;
 
@@ -70,13 +70,13 @@ export class SpinnerAnimation extends Animation<SpinnerAnimationConfig, SpinnerA
     return Animated.timing(this.animationValue, { toValue: 1.0, ...this.config });
   }
 
-  public start(callback?: Animated.EndCallback) {
+  public start(callback?: Animated.EndCallback): void {
     // reset animation value before the next animation cycle
     this.animationValue.setValue(0);
     super.start(callback);
   }
 
-  public stop() {
+  public stop(): void {
     super.stop();
     this.animationValue.setValue(0);
   }

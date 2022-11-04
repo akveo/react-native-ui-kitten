@@ -58,10 +58,10 @@ export class RadioGroup extends React.Component<RadioGroupProps> {
   };
 
   private onRadioChange = (index: number): void => {
-    this.props.onChange && this.props.onChange(index);
+    this.props.onChange?.(index);
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const { itemMarginVertical, ...containerParameters } = source;
 
     return {
@@ -92,7 +92,8 @@ export class RadioGroup extends React.Component<RadioGroupProps> {
     return (
       <View
         {...viewProps}
-        style={[evaStyle.container, style]}>
+        style={[evaStyle.container, style]}
+      >
         {radioElements}
       </View>
     );

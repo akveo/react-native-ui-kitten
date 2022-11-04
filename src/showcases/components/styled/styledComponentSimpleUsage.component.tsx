@@ -1,12 +1,16 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { styled } from '@ui-kitten/components';
+import { EvaProp, styled } from '@ui-kitten/components';
+
+interface IProps {
+  eva: EvaProp;
+}
 
 @styled('StyledComponent')
-class StyledComponent extends React.Component {
-  render() {
+class StyledComponent extends React.Component<IProps> {
+  render(): React.ReactElement {
     return (
-      <TouchableOpacity style={this.props.eva.style}/>
+      <TouchableOpacity style={this.props.eva.style} />
     );
   }
 }
