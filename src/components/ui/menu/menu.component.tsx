@@ -133,6 +133,7 @@ export class Menu extends React.Component<MenuProps> {
     return descriptor.index.equals(this.props.selectedIndex);
   };
 
+  // eslint-disable-next-line max-len
   private cloneItemWithProps = (element: React.ReactElement<MenuItemProps>, props: MenuItemProps): React.ReactElement => {
     const nestedElements = React.Children.map(element.props.children, (el: MenuItemElement, index: number) => {
       const descriptor = this.service.createDescriptorForNestedElement(props.descriptor, index);

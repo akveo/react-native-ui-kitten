@@ -127,7 +127,7 @@ describe('@tab-bar: component checks', () => {
         theme={light}
       >
         <TabBar
-          testID={'@tab-bar'}
+          testID='@tab-bar'
           selectedIndex={selectedIndex}
           onSelect={setSelectedIndex}
           {...props}

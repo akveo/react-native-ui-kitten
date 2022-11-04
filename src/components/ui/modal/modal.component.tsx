@@ -13,7 +13,6 @@ import {
   ViewStyle,
   Modal as RNModal,
   ModalProps as ReactNativeModalProps,
-  NativeSyntheticEvent,
 } from 'react-native';
 import {
   Frame,
@@ -22,7 +21,7 @@ import {
   Point,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
-import {Backdrop, BackdropPresentingConfig} from '@ui-kitten/components/theme/backdrop/backdrop.component';
+import { Backdrop, BackdropPresentingConfig } from '@ui-kitten/components/theme/backdrop/backdrop.component';
 
 export type RNModalProps =
   Pick<ReactNativeModalProps, 'animationType' | 'hardwareAccelerated' | 'supportedOrientations' | 'onShow'>;
@@ -108,7 +107,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     }
   }
 
-  private static getDerivedStateFromProps(props, state) {
+  public static getDerivedStateFromProps(props: ModalProps, state: State): State {
     if (!props.visible) {
       return {
         ...state,
@@ -116,11 +115,11 @@ export class Modal extends React.PureComponent<ModalProps, State> {
       };
     }
     return null;
-  };
+  }
 
   private onContentMeasure = (contentFrame: Frame): void => {
     const displayFrame: Frame = contentFrame.centerOf(Frame.window());
-    this.setState({contentPosition: displayFrame.origin});
+    this.setState({ contentPosition: displayFrame.origin });
   };
 
   private renderContentElement = (): React.ReactElement<ViewProps> => {
@@ -154,11 +153,13 @@ export class Modal extends React.PureComponent<ModalProps, State> {
         hardwareAccelerated={this.props.hardwareAccelerated}
         onRequestClose={this.props.onBackdropPress}
         onShow={this.props.onShow}
-        onDismiss={this.props.onBackdropPress}>
+        onDismiss={this.props.onBackdropPress}
+      >
         <Backdrop
           visible={this.props.visible}
           backdropStyle={this.props.backdropStyle}
-          onBackdropPress={this.props.onBackdropPress}>
+          onBackdropPress={this.props.onBackdropPress}
+        >
           {this.props.shouldUseContainer ? this.renderMeasuringContentElement() : this.props.children}
         </Backdrop>
       </RNModal>

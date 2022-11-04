@@ -147,7 +147,7 @@ describe('@overflow-menu: component checks', () => {
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
   });
 
-/*  it('should be able to show with ref', async () => {
+  /*  it('should be able to show with ref', async () => {
     const componentRef = React.createRef<OverflowMenu>();
 
     const component = render(
@@ -160,7 +160,7 @@ describe('@overflow-menu: component checks', () => {
     expect(options.length).toEqual(2);
   });*/
 
-/*  it('should be able to hide with ref', async () => {
+  /*  it('should be able to hide with ref', async () => {
     const componentRef = React.createRef<OverflowMenu>();
 
     const component = render(

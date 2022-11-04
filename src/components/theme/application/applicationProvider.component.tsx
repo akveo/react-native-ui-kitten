@@ -121,7 +121,7 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
         theme={this.props.theme}
         styles={this.state.styles}
       >
-          {this.props.children}
+        {this.props.children}
       </StyleProvider>
     );
   }

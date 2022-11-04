@@ -158,7 +158,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.inputRefAnchor.current?.blur();
     this.setOptionsListVisible();
     this.focus();
-    this.props.onFocus && this.props.onFocus(event);
+    this.props.onFocus?.(event);
   };
 
   private onInputSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
