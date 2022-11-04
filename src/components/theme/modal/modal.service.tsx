@@ -19,7 +19,8 @@ import React from 'react';
  *
  * @overview-example StatusBar additional offset support configuration
  * ModalService could also control additional status bar offset configuration
- * for all related UI Kitten measurable elements like [Modal](components/modal) and [Popover](components/popover).
+ * for all related UI Kitten measurable
+ * elements like [Modal](components/modal) and [Popover](components/popover).
  *
  * ```
  * import React from 'react';
@@ -46,7 +47,7 @@ import React from 'react';
  */
 class ModalServiceType {
 
-  private shouldUseTopInsets: boolean = false;
+  private shouldUseTopInsets = false;
 
   public set setShouldUseTopInsets(state: boolean) {
     this.shouldUseTopInsets = state;

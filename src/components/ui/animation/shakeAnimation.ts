@@ -32,7 +32,7 @@ export interface ShakeAnimationConfig extends AnimationConfig, TimingAnimationCo
 
 export class ShakeAnimation extends Animation<ShakeAnimationConfig, ViewProps> {
 
-  private value: Animated.Value;
+  private readonly value: Animated.Value;
 
   constructor(config?: ShakeAnimationConfig) {
     super({ ...DEFAULT_CONFIG, ...config });

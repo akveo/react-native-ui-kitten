@@ -1,31 +1,36 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Select, SelectItem } from '@ui-kitten/components';
+import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
-export const SelectStatesShowcase = () => {
+export const SelectStatesShowcase = (): React.ReactElement => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState();
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath | IndexPath[]>();
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <Select
         style={styles.select}
         placeholder='Active'
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}>
-        <SelectItem title='Option 1'/>
-        <SelectItem title='Option 2'/>
-        <SelectItem title='Option 3'/>
+        onSelect={index => setSelectedIndex(index)}
+      >
+        <SelectItem title='Option 1' />
+        <SelectItem title='Option 2' />
+        <SelectItem title='Option 3' />
       </Select>
 
       <Select
         style={styles.select}
         placeholder='Disabled'
-        disabled={true}>
-        <SelectItem title='Option 1'/>
-        <SelectItem title='Option 2'/>
-        <SelectItem title='Option 3'/>
+        disabled={true}
+      >
+        <SelectItem title='Option 1' />
+        <SelectItem title='Option 2' />
+        <SelectItem title='Option 3' />
       </Select>
 
     </Layout>

@@ -34,7 +34,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * @property {ReactElement<DrawerItemProps> | ReactElement<DrawerItemProps>[]} children -
  * items to be rendered within drawer.
- * 
+ *
  * @property {ReactElement | (ViewProps) => ReactElement} header - Function component
  * to render above the content.
  *
@@ -144,7 +144,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
 @styled('Drawer')
 export class Drawer extends React.Component<DrawerProps> {
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       headerPaddingHorizontal,
       headerPaddingVertical,
@@ -166,12 +166,12 @@ export class Drawer extends React.Component<DrawerProps> {
     };
   };
 
-  public render(): React.ReactFragment {
+  public render(): React.ReactElement {
     const { eva, style, header, footer, ...menuProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <React.Fragment>
+      <>
         <FalsyFC
           style={evaStyle.header}
           component={header}
@@ -186,7 +186,7 @@ export class Drawer extends React.Component<DrawerProps> {
           style={evaStyle.footer}
           component={footer}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -101,7 +101,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
 @styled('Tooltip')
 export class Tooltip extends React.Component<TooltipProps> {
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       indicatorBackgroundColor,
       iconWidth,
@@ -140,7 +140,10 @@ export class Tooltip extends React.Component<TooltipProps> {
   private renderPopoverIndicatorElement = (props: ViewProps): React.ReactElement => {
     const evaStyle = this.getComponentStyle(this.props.eva.style);
     return (
-      <PopoverIndicator {...props} style={[props.style, evaStyle.indicator]} />
+      <PopoverIndicator
+        {...props}
+        style={[props.style, evaStyle.indicator]}
+      />
     );
   };
 
@@ -152,7 +155,8 @@ export class Tooltip extends React.Component<TooltipProps> {
       <Popover
         {...popoverProps}
         style={[evaStyle.container, style]}
-        indicator={this.renderPopoverIndicatorElement}>
+        indicator={this.renderPopoverIndicatorElement}
+      >
         <View style={styles.content}>
           <FalsyFC
             style={evaStyle.icon}

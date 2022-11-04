@@ -98,11 +98,10 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   private get contentFlexPosition(): FlexStyle {
     const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});
     const { x: centerX, y: centerY } = this.state.contentPosition;
-    // @ts-ignore
     return { left: derivedStyle.left || centerX, top: derivedStyle.top || centerY };
   }
 
-  public componentDidUpdate(prevProps: ModalProps): void {
+  public componentDidUpdate(): void {
     if (this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
       return;
@@ -117,7 +116,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
       };
     }
     return null;
-  }
+  };
 
   private onContentMeasure = (contentFrame: Frame): void => {
     const displayFrame: Frame = contentFrame.centerOf(Frame.window());
@@ -137,7 +136,8 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-        onMeasure={this.onContentMeasure}>
+        onMeasure={this.onContentMeasure}
+      >
         {this.renderContentElement()}
       </MeasureElement>
     );

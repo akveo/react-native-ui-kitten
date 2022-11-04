@@ -123,7 +123,7 @@ export class Spinner extends React.PureComponent<SpinnerProps> {
     this.animation.stop();
   };
 
-  private getComponentStyle = (source: SpinnerAnimationStyle) => {
+  private getComponentStyle = (source: SpinnerAnimationStyle): { start: ArcElementStyle; end: ArcElementStyle } => {
     const start: ArcElementStyle = {
       container: source.container,
       arc: source.start,
@@ -161,7 +161,8 @@ export class Spinner extends React.PureComponent<SpinnerProps> {
     return (
       <View
         testID={this.props.testID}
-        style={containerSize}>
+        style={containerSize}
+      >
         {this.renderArcElement(evaStyle.start, containerSize)}
         {this.renderArcElement(evaStyle.end, containerSize)}
       </View>

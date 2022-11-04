@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   Animated,
   GestureResponderEvent,
@@ -77,9 +77,9 @@ interface State {
   listVisible: boolean;
 }
 
-const CHEVRON_DEG_COLLAPSED: number = -180;
-const CHEVRON_DEG_EXPANDED: number = 0;
-const CHEVRON_ANIM_DURATION: number = 200;
+const CHEVRON_DEG_COLLAPSED = -180;
+const CHEVRON_DEG_EXPANDED = 0;
+const CHEVRON_ANIM_DURATION = 200;
 
 /**
  * A dropdown menu for displaying selectable options.
@@ -117,8 +117,8 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * If true, calls onSelect with IndexPath[] in arguments.
  * Otherwise, with IndexPath in arguments.
  *
- * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function component
- * to render when there is no selected option.
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function
+ * component to render when there is no selected option.
  * If it is a function, expected to return a Text.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} label - String, number or a function component
@@ -228,7 +228,7 @@ export class Select extends React.Component<SelectProps, State> {
     return this.props.multiSelect;
   }
 
-  private get data(): any[] {
+  private get data(): Array<Exclude<ReactNode, boolean | null | undefined>> {
     return React.Children.toArray(this.props.children || []);
   }
 
@@ -259,17 +259,17 @@ export class Select extends React.Component<SelectProps, State> {
   };
 
   public clear = (): void => {
-    this.props.onSelect && this.props.onSelect(null);
+    this.props.onSelect?.(null);
   };
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-    this.props.onMouseEnter && this.props.onMouseEnter(event);
+    this.props.onMouseEnter?.(event);
   };
 
   private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onMouseLeave && this.props.onMouseLeave(event);
+    this.props.onMouseLeave?.(event);
   };
 
   private onPress = (): void => {
@@ -278,12 +278,12 @@ export class Select extends React.Component<SelectProps, State> {
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn && this.props.onPressIn(event);
+    this.props.onPressIn?.(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut && this.props.onPressOut(event);
+    this.props.onPressOut?.(event);
   };
 
   private onItemPress = (descriptor: SelectItemDescriptor): void => {
@@ -301,18 +301,18 @@ export class Select extends React.Component<SelectProps, State> {
   private onListVisible = (): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
     this.createExpandAnimation(-CHEVRON_DEG_COLLAPSED).start(() => {
-      this.props.onFocus && this.props.onFocus(null);
+      this.props.onFocus?.(null);
     });
   };
 
   private onListInvisible = (): void => {
     this.props.eva.dispatch([]);
     this.createExpandAnimation(CHEVRON_DEG_EXPANDED).start(() => {
-      this.props.onBlur && this.props.onBlur(null);
+      this.props.onBlur?.(null);
     });
   };
 
-  private getComponentStyle = (style: StyleType) => {
+  private getComponentStyle = (style: StyleType): StyleType => {
     const {
       textMarginHorizontal,
       textFontFamily,
@@ -431,7 +431,10 @@ export class Select extends React.Component<SelectProps, State> {
     const { tintColor, ...svgStyle } = evaStyle;
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown style={svgStyle} fill={tintColor} />
+        <ChevronDown
+          style={svgStyle}
+          fill={tintColor}
+        />
       </Animated.View>
     );
   };
@@ -449,7 +452,8 @@ export class Select extends React.Component<SelectProps, State> {
         onMouseLeave={this.onMouseLeave}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
-        disabled={props.disabled}>
+        disabled={props.disabled}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={props.accessoryLeft}
@@ -484,7 +488,8 @@ export class Select extends React.Component<SelectProps, State> {
           visible={this.state.listVisible}
           fullWidth={true}
           anchor={() => this.renderInputElement(touchableProps, evaStyle)}
-          onBackdropPress={this.onBackdropPress}>
+          onBackdropPress={this.onBackdropPress}
+        >
           <List
             style={styles.list}
             data={this.data}

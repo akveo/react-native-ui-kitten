@@ -19,10 +19,11 @@ import {
 
 describe('@layout: component checks', () => {
 
-  const TestLayout = (props?: LayoutProps) => (
+  const TestLayout = (props?: LayoutProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
+      theme={light}
+    >
       <Layout {...props} />
     </ApplicationProvider>
   );
@@ -30,7 +31,9 @@ describe('@layout: component checks', () => {
   it('should render component passed to children', () => {
     const component = render(
       <TestLayout>
-        <Text>I love Babel</Text>
+        <Text>
+          I love Babel
+        </Text>
       </TestLayout>,
     );
 

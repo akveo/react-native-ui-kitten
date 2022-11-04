@@ -57,7 +57,7 @@ describe('@overflow-menu: component checks', () => {
   };
 
   const TestOverflowMenu = React.forwardRef((props: Partial<OverflowMenuProps>,
-                                             ref: React.Ref<OverflowMenu>) => {
+    ref: React.Ref<OverflowMenu>) => {
 
     const [visible, setVisible] = React.useState(props.visible || false);
 
@@ -66,22 +66,34 @@ describe('@overflow-menu: component checks', () => {
     };
 
     return (
-      <ApplicationProvider mapping={mapping} theme={light}>
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
         <OverflowMenu
           ref={ref}
           visible={visible}
-          anchor={() => <Button testID='@overflow-menu/toggle-button' title='' onPress={toggleOverflowMenu}/>}
-          {...props}>
-          <MenuItem title='Option 1'/>
-          <MenuItem title='Option 2'/>
+          anchor={() => (
+            <Button
+              testID='@overflow-menu/toggle-button'
+              title=''
+              onPress={toggleOverflowMenu}
+            />
+          )}
+          {...props}
+        >
+          <MenuItem title='Option 1' />
+          <MenuItem title='Option 2' />
         </OverflowMenu>
       </ApplicationProvider>
     );
   });
 
+  TestOverflowMenu.displayName = 'TestOverflowMenu';
+
   it('should render element passed to `anchor` prop', () => {
     const component = render(
-      <TestOverflowMenu/>,
+      <TestOverflowMenu />,
     );
 
     expect(touchables.findToggleButton(component)).toBeTruthy();
@@ -89,7 +101,7 @@ describe('@overflow-menu: component checks', () => {
 
   it('should not render content when not visible', async () => {
     const component = render(
-      <TestOverflowMenu visible={false}/>,
+      <TestOverflowMenu visible={false} />,
     );
 
     const options = await waitForElement(() => component.queryAllByType(MenuItem));
@@ -98,7 +110,7 @@ describe('@overflow-menu: component checks', () => {
 
   it('should render content when becomes visible', async () => {
     const component = render(
-      <TestOverflowMenu visible={true}/>,
+      <TestOverflowMenu visible={true} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -111,7 +123,7 @@ describe('@overflow-menu: component checks', () => {
     const onBackdropPress = jest.fn();
 
     const component = render(
-      <TestOverflowMenu onBackdropPress={onBackdropPress}/>,
+      <TestOverflowMenu onBackdropPress={onBackdropPress} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -124,8 +136,9 @@ describe('@overflow-menu: component checks', () => {
   });
 
   it('should style backdrop with backdropStyle prop', async () => {
+    const styles = { backgroundColor: 'red' };
     const component = render(
-      <TestOverflowMenu backdropStyle={{ backgroundColor: 'red' }}/>,
+      <TestOverflowMenu backdropStyle={styles} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -138,7 +151,7 @@ describe('@overflow-menu: component checks', () => {
     const componentRef = React.createRef<OverflowMenu>();
 
     const component = render(
-      <TestOverflowMenu ref={componentRef}/>,
+      <TestOverflowMenu ref={componentRef} />,
     );
 
     componentRef.current.show();
@@ -151,7 +164,7 @@ describe('@overflow-menu: component checks', () => {
     const componentRef = React.createRef<OverflowMenu>();
 
     const component = render(
-      <TestOverflowMenu ref={componentRef}/>,
+      <TestOverflowMenu ref={componentRef} />,
     );
 
     componentRef.current.show();

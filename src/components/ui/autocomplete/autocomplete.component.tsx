@@ -120,6 +120,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   private inputRef = React.createRef<Input>();
   private inputRefAnchor = React.createRef<Input>();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
   }
@@ -141,15 +142,16 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   };
 
   public componentDidUpdate(prevProps: AutocompleteProps): void {
+    const { listVisible } = this.state;
     const isChildCountChanged: boolean = this.data.length !== React.Children.count(prevProps.children);
-    const shouldBecomeVisible: boolean = !this.state.listVisible && this.isFocused() && isChildCountChanged;
+    const shouldBecomeVisible: boolean = !listVisible && this.isFocused() && isChildCountChanged;
 
     shouldBecomeVisible && this.setState({ listVisible: shouldBecomeVisible });
   }
 
   private onInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.setOptionsListVisible();
-    this.props.onFocus && this.props.onFocus(event);
+    this.props.onFocus?.(event);
   };
 
   private onAnchorInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
@@ -161,7 +163,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
   private onInputSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
     this.setOptionsListInvisible();
-    this.props.onSubmitEditing && this.props.onSubmitEditing(e);
+    this.props.onSubmitEditing?.(e);
   };
 
   private onBackdropPress = (): void => {
@@ -232,7 +234,8 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         visible={this.state.listVisible}
         fullWidth={true}
         anchor={() => this.renderAnchorInputElement(inputProps)}
-        onBackdropPress={this.onBackdropPress}>
+        onBackdropPress={this.onBackdropPress}
+      >
         <>
           {this.renderInputElement(inputProps)}
           <List

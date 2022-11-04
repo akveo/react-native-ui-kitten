@@ -5,17 +5,21 @@
  */
 
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import {
   Frame,
   MeasureElement,
   MeasuringElement,
   Point,
   RenderFCProp,
-  Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
-import {Modal, ModalProps, RNModalProps} from '../modal/modal.component';
+import { Modal, ModalProps, RNModalProps } from '../modal/modal.component';
 import {
   PopoverView,
   PopoverViewElement,
@@ -28,10 +32,12 @@ import {
   PopoverPlacements,
 } from './type';
 
-type PopoverModalProps = Overwrite<ModalProps, { children?: React.ReactElement; }>;
+type PopoverModalProps = Omit<ModalProps, ' children'>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps, RNModalProps {
-  anchor: RenderFCProp;
+  children?: React.ReactElement;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  anchor: RenderFCProp<any>;
   fullWidth?: boolean;
 }
 
@@ -117,18 +123,18 @@ export class Popover extends React.Component<PopoverProps, State> {
     return PopoverPlacements.parse(this.props.placement);
   }
 
-  private get contentFlexPosition() {
+  private get contentFlexPosition(): StyleProp<ViewStyle> {
     const { x: left, y: top } = this.state.contentPosition;
     return { left, top };
   }
 
-  public componentDidUpdate(prevProps: PopoverProps): void {
+  public componentDidUpdate(): void {
     if (this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
     }
   }
 
-  private static getDerivedStateFromProps(props, state) {
+  public static getDerivedStateFromProps(props, state): State {
     if (!props.visible) {
       return {
         ...state,
@@ -139,7 +145,9 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
-    this.state.childFrame = childFrame;
+    if (!childFrame.equals(this.state.childFrame)) {
+      this.setState({ childFrame });
+    }
   };
 
   private onContentMeasure = (anchorFrame: Frame): void => {
@@ -153,7 +161,6 @@ export class Popover extends React.Component<PopoverProps, State> {
       actualPlacement,
       contentPosition,
     });
-
   };
 
   private findPlacementOptions = (contentFrame: Frame, childFrame: Frame): PlacementOptions => {
@@ -177,16 +184,19 @@ export class Popover extends React.Component<PopoverProps, State> {
       <PopoverView
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
-        placement={this.state.actualPlacement.reverse()}>
-          {this.renderContentElement()}
+        placement={this.state.actualPlacement.reverse()}
+      >
+        {this.renderContentElement()}
       </PopoverView>
     );
   };
 
   private renderMeasuringPopoverElement = (): MeasuringElement => {
     return (
-      <MeasureElement onMeasure={this.onContentMeasure}>
-          {this.renderPopoverElement()}
+      <MeasureElement
+        onMeasure={this.onContentMeasure}
+      >
+        {this.renderPopoverElement()}
       </MeasureElement>
     );
   };
@@ -197,20 +207,22 @@ export class Popover extends React.Component<PopoverProps, State> {
         <MeasureElement
           force={this.state.forceMeasure}
           shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-          onMeasure={this.onChildMeasure}>
+          onMeasure={this.onChildMeasure}
+        >
           {this.props.anchor()}
         </MeasureElement>
-          <Modal
-            visible={this.props.visible}
-            shouldUseContainer={false}
-            backdropStyle={this.props.backdropStyle}
-            animationType={this.props.animationType}
-            hardwareAccelerated={this.props.hardwareAccelerated}
-            supportedOrientations={this.props.supportedOrientations}
-            onShow={this.props.onShow}
-            onBackdropPress={this.props.onBackdropPress}>
-            {this.renderMeasuringPopoverElement()}
-          </Modal>
+        <Modal
+          visible={this.props.visible}
+          shouldUseContainer={false}
+          backdropStyle={this.props.backdropStyle}
+          animationType={this.props.animationType}
+          hardwareAccelerated={this.props.hardwareAccelerated}
+          supportedOrientations={this.props.supportedOrientations}
+          onShow={this.props.onShow}
+          onBackdropPress={this.props.onBackdropPress}
+        >
+          {this.renderMeasuringPopoverElement()}
+        </Modal>
       </View>
     );
   }

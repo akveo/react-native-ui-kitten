@@ -6,7 +6,7 @@ import {
 export class Point {
 
   constructor(readonly x: number,
-              readonly y: number) {
+    readonly y: number) {
   }
 
   static zero(): Point {
@@ -28,7 +28,7 @@ export class Point {
 export class Size {
 
   constructor(readonly width: number,
-              readonly height: number) {
+    readonly height: number) {
 
   }
 

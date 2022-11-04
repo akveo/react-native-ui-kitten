@@ -2,14 +2,29 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Layout } from '@ui-kitten/components';
 
-export const AvatarShapeShowcase = () => (
-  <Layout style={styles.container} level='1'>
+export const AvatarShapeShowcase = (): React.ReactElement => (
+  <Layout
+    style={styles.container}
+    level='1'
+  >
 
-    <Avatar style={styles.avatar} shape='square' source={require('../../assets/icon.png')}/>
+    <Avatar
+      style={styles.avatar}
+      shape='square'
+      source={require('../../assets/icon.png')}
+    />
 
-    <Avatar style={styles.avatar} shape='rounded' source={require('../../assets/icon.png')}/>
+    <Avatar
+      style={styles.avatar}
+      shape='rounded'
+      source={require('../../assets/icon.png')}
+    />
 
-    <Avatar style={styles.avatar} shape='round' source={require('../../assets/icon.png')}/>
+    <Avatar
+      style={styles.avatar}
+      shape='round'
+      source={require('../../assets/icon.png')}
+    />
 
   </Layout>
 );

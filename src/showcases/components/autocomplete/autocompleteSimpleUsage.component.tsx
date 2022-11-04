@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
 const movies = [
@@ -9,23 +9,23 @@ const movies = [
   { title: 'Interstellar' },
 ];
 
-const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
+const filter = (item, query): boolean => item.title.toLowerCase().includes(query.toLowerCase());
 
-export const AutocompleteSimpleUsageShowcase = () => {
+export const AutocompleteSimpleUsageShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState(null);
   const [data, setData] = React.useState(movies);
 
-  const onSelect = (index) => {
-    setValue(movies[index].title);
-  };
+  const onSelect = useCallback((index): void => {
+    setValue(data[index].title);
+  }, [data]);
 
-  const onChangeText = (query) => {
+  const onChangeText = useCallback((query): void => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
-  };
+  }, []);
 
-  const renderOption = (item, index) => (
+  const renderOption = (item, index): React.ReactElement => (
     <AutocompleteItem
       key={index}
       title={item.title}
@@ -38,7 +38,8 @@ export const AutocompleteSimpleUsageShowcase = () => {
       value={value}
       placement='inner top'
       onSelect={onSelect}
-      onChangeText={onChangeText}>
+      onChangeText={onChangeText}
+    >
       {data.map(renderOption)}
     </Autocomplete>
   );

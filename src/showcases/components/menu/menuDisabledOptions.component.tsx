@@ -1,15 +1,21 @@
 import React from 'react';
-import { Icon, Layout, Menu, MenuItem } from '@ui-kitten/components';
+import { Icon, IconElement, Layout, Menu, MenuItem } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
-  <Icon {...props} name='star'/>
+const StarIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='star'
+  />
 );
 
-const ForwardIcon = (props) => (
-  <Icon {...props} name='arrow-ios-forward'/>
+const ForwardIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='arrow-ios-forward'
+  />
 );
 
-export const MenuDisabledOptionsShowcase = () => {
+export const MenuDisabledOptionsShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 
@@ -18,7 +24,8 @@ export const MenuDisabledOptionsShowcase = () => {
 
       <Menu
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}>
+        onSelect={index => setSelectedIndex(index)}
+      >
         <MenuItem
           title='Users'
           accessoryLeft={StarIcon}

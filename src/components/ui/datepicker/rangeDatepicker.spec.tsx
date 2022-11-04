@@ -30,7 +30,6 @@ import {
   CalendarRange,
   CalendarViewModes,
 } from '../calendar/type';
-import { Datepicker } from './datepicker.component';
 
 jest.mock('react-native', () => {
   const ActualReactNative = jest.requireActual('react-native');
@@ -52,16 +51,19 @@ describe('@range-datepicker: component checks', () => {
   });
 
   const TestRangeDatepicker = React.forwardRef((props: Partial<RangeDatepickerProps>,
-                                                ref: React.Ref<RangeDatepicker>) => {
+    ref: React.Ref<RangeDatepicker>) => {
     const [range, setRange] = React.useState(props.range || {});
 
     const onSelect = (nextRange: CalendarRange<Date>): void => {
       setRange(nextRange);
-      props.onSelect && props.onSelect(nextRange);
+      props.onSelect?.(nextRange);
     };
 
     return (
-      <ApplicationProvider mapping={mapping} theme={light}>
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
         <RangeDatepicker
           ref={ref}
           {...props}
@@ -71,6 +73,8 @@ describe('@range-datepicker: component checks', () => {
       </ApplicationProvider>
     );
   });
+
+  TestRangeDatepicker.displayName = 'TestRangeDatepicker';
 
   /*
    * In this test:
@@ -85,7 +89,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should not render range calendar when not focused', () => {
     const component = render(
-      <TestRangeDatepicker/>,
+      <TestRangeDatepicker />,
     );
 
     expect(component.queryByType(RangeCalendar)).toBeFalsy();
@@ -93,7 +97,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render range calendar when becomes focused', async () => {
     const component = render(
-      <TestRangeDatepicker/>,
+      <TestRangeDatepicker />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
@@ -104,7 +108,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render label as string', async () => {
     const component = render(
-      <TestRangeDatepicker label='I love Babel'/>,
+      <TestRangeDatepicker label='I love Babel' />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -112,7 +116,12 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render label as component', async () => {
     const component = render(
-      <TestRangeDatepicker label={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestRangeDatepicker label={props => (
+        <Text {...props}>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -120,7 +129,12 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render label as pure JSX component', async () => {
     const component = render(
-      <TestRangeDatepicker label={<Text>I love Babel</Text>}/>,
+      <TestRangeDatepicker label={(
+        <Text>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -128,7 +142,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render caption as string', async () => {
     const component = render(
-      <TestRangeDatepicker caption='I love Babel'/>,
+      <TestRangeDatepicker caption='I love Babel' />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -136,7 +150,12 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render caption as component', async () => {
     const component = render(
-      <TestRangeDatepicker caption={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestRangeDatepicker caption={props => (
+        <Text {...props}>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -144,7 +163,13 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render caption', async () => {
     const component = render(
-      <TestRangeDatepicker caption={props => <View {...props} testID='caption icon'/>}/>,
+      <TestRangeDatepicker caption={props => (
+        <View
+          {...props}
+          testID='caption icon'
+        />
+      )}
+      />,
     );
 
     expect(component.queryByTestId('caption icon')).toBeTruthy();
@@ -152,7 +177,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render caption as pure JSX component', async () => {
     const component = render(
-      <TestRangeDatepicker caption={<View testID='caption icon'/>}/>,
+      <TestRangeDatepicker caption={<View testID='caption icon' />} />,
     );
 
     expect(component.queryByTestId('caption icon')).toBeTruthy();
@@ -160,7 +185,13 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render component passed to accessoryLeft prop', async () => {
     const component = render(
-      <TestRangeDatepicker accessoryLeft={props => <View {...props} testID='accessory left'/>}/>,
+      <TestRangeDatepicker accessoryLeft={props => (
+        <View
+          {...props}
+          testID='accessory left'
+        />
+      )}
+      />,
     );
 
     expect(component.queryByTestId('accessory left')).toBeTruthy();
@@ -168,7 +199,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render pure JSX component passed to accessoryLeft prop', async () => {
     const component = render(
-      <TestRangeDatepicker accessoryLeft={<View testID='accessory left'/>}/>,
+      <TestRangeDatepicker accessoryLeft={<View testID='accessory left' />} />,
     );
 
     expect(component.queryByTestId('accessory left')).toBeTruthy();
@@ -176,7 +207,13 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render component passed to accessoryRight prop', async () => {
     const component = render(
-      <TestRangeDatepicker accessoryRight={props => <View {...props} testID='accessory right'/>}/>,
+      <TestRangeDatepicker accessoryRight={props => (
+        <View
+          {...props}
+          testID='accessory right'
+        />
+      )}
+      />,
     );
 
     expect(component.queryByTestId('accessory right')).toBeTruthy();
@@ -184,7 +221,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render pure JSX component passed to accessoryRight prop', async () => {
     const component = render(
-      <TestRangeDatepicker accessoryRight={<View testID='accessory right'/>}/>,
+      <TestRangeDatepicker accessoryRight={<View testID='accessory right' />} />,
     );
 
     expect(component.queryByTestId('accessory right')).toBeTruthy();
@@ -199,7 +236,7 @@ describe('@range-datepicker: component checks', () => {
     });
 
     const component = render(
-      <TestRangeDatepicker onSelect={onSelect}/>,
+      <TestRangeDatepicker onSelect={onSelect} />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
@@ -257,7 +294,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should render element provided with renderDay prop', async () => {
     const component = render(
-      <TestRangeDatepicker renderDay={() => <View testID='@range-datepicker/cell'/>}/>,
+      <TestRangeDatepicker renderDay={() => <View testID='@range-datepicker/cell' />} />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
@@ -270,7 +307,7 @@ describe('@range-datepicker: component checks', () => {
     const component = render(
       <TestRangeDatepicker
         startView={CalendarViewModes.MONTH}
-        renderMonth={() => <View testID='@range-datepicker/cell'/>}
+        renderMonth={() => <View testID='@range-datepicker/cell' />}
       />,
     );
 
@@ -284,7 +321,7 @@ describe('@range-datepicker: component checks', () => {
     const component = render(
       <TestRangeDatepicker
         startView={CalendarViewModes.YEAR}
-        renderYear={() => <View testID='@range-datepicker/cell'/>}
+        renderYear={() => <View testID='@range-datepicker/cell' />}
       />,
     );
 
@@ -296,7 +333,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should hide calendar when backdrop pressed', async () => {
     const component = render(
-      <TestRangeDatepicker/>,
+      <TestRangeDatepicker />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
@@ -311,7 +348,7 @@ describe('@range-datepicker: component checks', () => {
   it('should call onFocus when calendar becomes visible', async () => {
     const onFocus = jest.fn();
     const component = render(
-      <TestRangeDatepicker onFocus={onFocus}/>,
+      <TestRangeDatepicker onFocus={onFocus} />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
@@ -323,7 +360,7 @@ describe('@range-datepicker: component checks', () => {
   it('should call onBlur when calendar becomes invisible', async () => {
     const onBlur = jest.fn();
     const component = render(
-      <TestRangeDatepicker onBlur={onBlur}/>,
+      <TestRangeDatepicker onBlur={onBlur} />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
@@ -337,7 +374,7 @@ describe('@range-datepicker: component checks', () => {
   it('should show calendar by calling `focus` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const component = render(
-      <TestRangeDatepicker ref={componentRef}/>,
+      <TestRangeDatepicker ref={componentRef} />,
     );
 
     componentRef.current.focus();
@@ -349,7 +386,7 @@ describe('@range-datepicker: component checks', () => {
   it('should hide calendar by calling `blur` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const component = render(
-      <TestRangeDatepicker ref={componentRef}/>,
+      <TestRangeDatepicker ref={componentRef} />,
     );
 
     componentRef.current.focus();
@@ -364,7 +401,7 @@ describe('@range-datepicker: component checks', () => {
   it('should return false if calendar not visible by calling `isFocused` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     render(
-      <TestRangeDatepicker ref={componentRef}/>,
+      <TestRangeDatepicker ref={componentRef} />,
     );
 
     expect(componentRef.current.isFocused()).toEqual(false);
@@ -373,7 +410,7 @@ describe('@range-datepicker: component checks', () => {
   it('should return true if calendar visible by calling `isFocused` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     render(
-      <TestRangeDatepicker ref={componentRef}/>,
+      <TestRangeDatepicker ref={componentRef} />,
     );
 
     componentRef.current.focus();
@@ -402,7 +439,7 @@ describe('@range-datepicker: component checks', () => {
   it('should call onPress', async () => {
     const onPress = jest.fn();
     const component = render(
-      <TestRangeDatepicker onPress={onPress}/>,
+      <TestRangeDatepicker onPress={onPress} />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
@@ -412,7 +449,7 @@ describe('@range-datepicker: component checks', () => {
   it('should call onPressIn', async () => {
     const onPressIn = jest.fn();
     const component = render(
-      <TestRangeDatepicker onPressIn={onPressIn}/>,
+      <TestRangeDatepicker onPressIn={onPressIn} />,
     );
 
     fireEvent(touchables.findInputTouchable(component), 'pressIn');
@@ -422,7 +459,7 @@ describe('@range-datepicker: component checks', () => {
   it('should call onPressOut', async () => {
     const onPressOut = jest.fn();
     const component = render(
-      <TestRangeDatepicker onPressOut={onPressOut}/>,
+      <TestRangeDatepicker onPressOut={onPressOut} />,
     );
 
     fireEvent(touchables.findInputTouchable(component), 'pressOut');
@@ -476,7 +513,7 @@ describe('@range-datepicker: component checks', () => {
     render(
       <TestRangeDatepicker
         ref={componentRef}
-        initialVisibleDate={new Date (2021, 2, 1)}
+        initialVisibleDate={new Date(2021, 2, 1)}
       />,
     );
 
@@ -496,7 +533,7 @@ describe('@range-datepicker: component checks', () => {
     render(
       <TestRangeDatepicker
         ref={componentRef}
-        initialVisibleDate={new Date (2021, 2, 1)}
+        initialVisibleDate={new Date(2021, 2, 1)}
       />,
     );
 

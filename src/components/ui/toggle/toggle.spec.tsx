@@ -26,10 +26,11 @@ import {
 
 describe('@toggle: component checks', () => {
 
-  const TestToggle = (props?: ToggleProps) => (
+  const TestToggle = (props?: ToggleProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
+      theme={light}
+    >
       <Toggle {...props} />
     </ApplicationProvider>
   );
@@ -70,7 +71,9 @@ describe('@toggle: component checks', () => {
 
   it('should render text', () => {
     const component = render(
-      <TestToggle>I love Babel</TestToggle>,
+      <TestToggle>
+        I love Babel
+      </TestToggle>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -79,7 +82,11 @@ describe('@toggle: component checks', () => {
   it('should render text as function component', () => {
     const component = render(
       <TestToggle>
-        {props => <Text {...props}>I love Babel</Text>}
+        {props => (
+          <Text {...props}>
+            I love Babel
+          </Text>
+        )}
       </TestToggle>,
     );
 
@@ -90,7 +97,9 @@ describe('@toggle: component checks', () => {
     const component = render(
       <TestToggle>
         <View>
-          <Text>I love Babel</Text>
+          <Text>
+            I love Babel
+          </Text>
         </View>
       </TestToggle>,
     );

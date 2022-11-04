@@ -8,8 +8,8 @@ import {
   IconProvider,
 } from './type';
 
-function throwPackNotFoundError(name: string) {
-  const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
+function throwPackNotFoundError(name: string): void {
+  const docRoot = 'https://akveo.github.io/react-native-ui-kitten/docs';
 
   const message: string = [
     `\nIcon: Icon Pack '${name}' is not registered`,
@@ -20,8 +20,8 @@ function throwPackNotFoundError(name: string) {
   throw Error(message);
 }
 
-function throwIconNotFoundError(name: string, pack: string) {
-  const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
+function throwIconNotFoundError(name: string, pack: string): void {
+  const docRoot = 'https://akveo.github.io/react-native-ui-kitten/docs';
 
   const message: string = [
     `\nIcon: '${name}' icon is not registered in pack '${pack}'.`,
@@ -38,6 +38,7 @@ export interface RegisteredIcon<T> {
   icon: IconProvider<T>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type IconProps = any;
 
 /**
@@ -54,8 +55,8 @@ class RegistryService {
    *
    * @param {IconPack[]} packs - array of icon packs
    */
-  public register<T>(...packs: IconPack<T>[]) {
-    packs.forEach((pack: IconPack<IconProps>) => {
+  public register<T>(...packs: IconPack<T>[]): void {
+    packs.forEach((pack) => {
       this.registerIconPack(pack);
     });
   }
@@ -66,7 +67,7 @@ class RegistryService {
    * @param {string} name
    * @throws {Error} if pack is nor registered
    */
-  public setDefaultIconPack(name: string) {
+  public setDefaultIconPack(name: string): void {
     if (!this.packs.has(name)) {
       throwPackNotFoundError(name);
     }
@@ -103,7 +104,7 @@ class RegistryService {
    *
    * @param {IconPack} pack - icon pack to register
    */
-  protected registerIconPack<T>(pack: IconPack<T>) {
+  protected registerIconPack<T>(pack: IconPack<T>): void {
     this.packs.set(pack.name, pack);
   }
 

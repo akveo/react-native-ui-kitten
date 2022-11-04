@@ -119,7 +119,8 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
     return (
       <StyleProvider
         theme={this.props.theme}
-        styles={this.state.styles}>
+        styles={this.state.styles}
+      >
           {this.props.children}
       </StyleProvider>
     );

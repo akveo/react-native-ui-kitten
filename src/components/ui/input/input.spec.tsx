@@ -30,15 +30,21 @@ describe('@input: component checks', () => {
   const TestInput = React.forwardRef((props: InputProps, ref: React.Ref<Input>) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
-      <Input ref={ref} {...props}/>
+      theme={light}
+    >
+      <Input
+        ref={ref}
+        {...props}
+      />
     </ApplicationProvider>
   ));
+
+  TestInput.displayName = 'TestInput';
 
   it('should be able to call focus via ref', () => {
     const componentRef: React.RefObject<Input> = React.createRef();
     render(
-      <TestInput ref={componentRef}/>,
+      <TestInput ref={componentRef} />,
     );
 
     expect(componentRef.current.focus).toBeTruthy();
@@ -47,7 +53,7 @@ describe('@input: component checks', () => {
   it('should be able to call blur via ref', () => {
     const componentRef: React.RefObject<Input> = React.createRef();
     render(
-      <TestInput ref={componentRef}/>,
+      <TestInput ref={componentRef} />,
     );
 
     expect(componentRef.current.blur).toBeTruthy();
@@ -56,7 +62,7 @@ describe('@input: component checks', () => {
   it('should be able to call isFocused via ref', () => {
     const componentRef: React.RefObject<Input> = React.createRef();
     render(
-      <TestInput ref={componentRef}/>,
+      <TestInput ref={componentRef} />,
     );
 
     expect(componentRef.current.isFocused).toBeTruthy();
@@ -65,7 +71,7 @@ describe('@input: component checks', () => {
   it('should be able to call clear via ref', () => {
     const componentRef: React.RefObject<Input> = React.createRef();
     render(
-      <TestInput ref={componentRef}/>,
+      <TestInput ref={componentRef} />,
     );
 
     expect(componentRef.current.clear).toBeTruthy();
@@ -73,7 +79,7 @@ describe('@input: component checks', () => {
 
   it('should set TextInput editable to false by passing disabled prop', () => {
     const component = render(
-      <TestInput disabled={true}/>,
+      <TestInput disabled={true} />,
     );
 
     const textInput = component.queryByType(TextInput);
@@ -82,7 +88,7 @@ describe('@input: component checks', () => {
 
   it('should render placeholder', () => {
     const component = render(
-      <TestInput placeholder='I love Babel'/>,
+      <TestInput placeholder='I love Babel' />,
     );
 
     expect(component.queryByPlaceholder('I love Babel')).toBeTruthy();
@@ -90,7 +96,7 @@ describe('@input: component checks', () => {
 
   it('should render text passed to label prop', () => {
     const component = render(
-      <TestInput label='I love Babel'/>,
+      <TestInput label='I love Babel' />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -98,7 +104,12 @@ describe('@input: component checks', () => {
 
   it('should render function component passed to label prop', () => {
     const component = render(
-      <TestInput label={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestInput label={props => (
+        <Text {...props}>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -106,19 +117,26 @@ describe('@input: component checks', () => {
 
   it('should render pure JSX component passed to label prop', () => {
     const component = render(
-      <TestInput label={<Text>I love Babel</Text>}/>,
+      <TestInput label={(
+        <Text>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render text passed to caption prop', () => {
-    const renderCaption = () => (
-      <Text>I love Babel</Text>
+    const renderCaption = (): React.ReactElement => (
+      <Text>
+        I love Babel
+      </Text>
     );
 
     const component = render(
-      <TestInput caption={renderCaption}/>,
+      <TestInput caption={renderCaption} />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -126,11 +144,13 @@ describe('@input: component checks', () => {
 
   it('should render pure JSX component passed to caption prop', () => {
     const renderCaption = (
-      <Text>I love Babel</Text>
+      <Text>
+        I love Babel
+      </Text>
     );
 
     const component = render(
-      <TestInput caption={renderCaption}/>,
+      <TestInput caption={renderCaption} />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -153,7 +173,7 @@ describe('@input: component checks', () => {
     );
 
     const component = render(
-      <TestInput caption={Caption}/>,
+      <TestInput caption={Caption} />,
     );
 
     const caption = component.queryByType(Image);
@@ -225,7 +245,7 @@ describe('@input: component checks', () => {
   it('should request text change', () => {
     const onChangeText = jest.fn();
     const component = render(
-      <TestInput onChangeText={onChangeText}/>,
+      <TestInput onChangeText={onChangeText} />,
     );
 
     fireEvent.changeText(component.queryByType(TextInput), 'I love Babel');
@@ -235,7 +255,7 @@ describe('@input: component checks', () => {
   it('should call onFocus', () => {
     const onFocus = jest.fn();
     const component = render(
-      <TestInput onFocus={onFocus}/>,
+      <TestInput onFocus={onFocus} />,
     );
 
     fireEvent(component.queryByType(TextInput), 'focus');
@@ -245,7 +265,7 @@ describe('@input: component checks', () => {
   it('should call onBlur', () => {
     const onBlur = jest.fn();
     const component = render(
-      <TestInput onBlur={onBlur}/>,
+      <TestInput onBlur={onBlur} />,
     );
 
     fireEvent(component.queryByType(TextInput), 'blur');

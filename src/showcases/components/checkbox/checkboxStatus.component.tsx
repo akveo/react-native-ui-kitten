@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { CheckBox, Layout } from '@ui-kitten/components';
+import { CheckBox, CheckBoxProps, Layout } from '@ui-kitten/components';
 
-const useCheckboxState = (initialCheck = false) => {
+const useCheckboxState = (initialCheck = false): CheckBoxProps => {
   const [checked, setChecked] = React.useState(initialCheck);
   return { checked, onChange: setChecked };
 };
 
-export const CheckboxStatusShowcase = () => {
+export const CheckboxStatusShowcase = (): React.ReactElement => {
 
   const primaryCheckboxState = useCheckboxState();
   const successCheckboxState = useCheckboxState();
@@ -18,47 +18,56 @@ export const CheckboxStatusShowcase = () => {
   const controlCheckboxState = useCheckboxState();
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <CheckBox
         style={styles.checkbox}
         status='primary'
-        {...primaryCheckboxState}>
+        {...primaryCheckboxState}
+      >
         Primary
       </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='success'
-        {...successCheckboxState}>
+        {...successCheckboxState}
+      >
         Success
       </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='info'
-        {...infoCheckboxState}>
+        {...infoCheckboxState}
+      >
         Info
       </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='warning'
-        {...warningCheckboxState}>
+        {...warningCheckboxState}
+      >
         Warning
       </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='danger'
-        {...dangerCheckboxState}>
+        {...dangerCheckboxState}
+      >
         Danger
       </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
         status='basic'
-        {...basicCheckboxState}>
+        {...basicCheckboxState}
+      >
         Basic
       </CheckBox>
 
@@ -66,7 +75,8 @@ export const CheckboxStatusShowcase = () => {
         <CheckBox
           style={styles.checkbox}
           status='control'
-          {...controlCheckboxState}>
+          {...controlCheckboxState}
+        >
           Control
         </CheckBox>
       </View>

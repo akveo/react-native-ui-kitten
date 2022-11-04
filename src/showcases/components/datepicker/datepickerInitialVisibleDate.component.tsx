@@ -6,48 +6,56 @@ const now = new Date();
 const date = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
 const initialDate = new Date(now.getFullYear(), now.getMonth() + 3, now.getDate() + 1);
 
-export const DatepickerInitialVisibleDateShowcase = () => {
-  const [ selectedDate, setSelectedDate ] = React.useState(date);
-  const [ initialVisibleDate, setInitialVisibleDate ] = React.useState(initialDate);
+export const DatepickerInitialVisibleDateShowcase = (): React.ReactElement => {
+  const [selectedDate, setSelectedDate] = React.useState(date);
+  const [initialVisibleDate, setInitialVisibleDate] = React.useState(initialDate);
 
   const componentRef = React.createRef<Datepicker>();
 
-  const scrollToSelected = () => {
+  const scrollToSelected = (): void => {
     if (componentRef.current) {
-        componentRef.current.scrollToDate(selectedDate);
+      componentRef.current.scrollToDate(selectedDate);
     }
   };
 
-  const scrollToToday = () => {
+  const scrollToToday = (): void => {
     if (componentRef.current) {
       componentRef.current.scrollToToday();
     }
   };
 
-  const onSelect = (nextDate) => {
+  const onSelect = (nextDate): void => {
     setSelectedDate(nextDate);
 
     // clear initialVisibleDate to stop showing it when the datepicker is opened
     setInitialVisibleDate(undefined);
   };
 
-  const renderFooter = () => {
+  const renderFooter = (): React.ReactElement => {
     return (
       <View>
-        <Button onPress={scrollToToday}>Scroll to Today</Button>
-        <Button onPress={scrollToSelected}>Scroll to Selected Date</Button>
+        <Button onPress={scrollToToday}>
+          Scroll to Today
+        </Button>
+        <Button onPress={scrollToSelected}>
+          Scroll to Selected Date
+        </Button>
       </View>
     );
   };
 
   return (
-    <Layout style={styles.container} level='1'>
+    <Layout
+      style={styles.container}
+      level='1'
+    >
 
       <View style={styles.calendarContainer}>
         <Text
           category='h6'
-          style={styles.text}>
-          Selected date: {selectedDate.toLocaleDateString()}
+          style={styles.text}
+        >
+          {`Selected date: ${selectedDate.toLocaleDateString()}`}
         </Text>
 
         <Datepicker
@@ -55,7 +63,8 @@ export const DatepickerInitialVisibleDateShowcase = () => {
           date={selectedDate}
           initialVisibleDate={initialVisibleDate}
           onSelect={onSelect}
-          renderFooter={renderFooter} />
+          renderFooter={renderFooter}
+        />
       </View>
 
     </Layout>

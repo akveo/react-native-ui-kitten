@@ -12,15 +12,14 @@ import {
 } from 'react-native';
 import { Frame } from './type';
 
-export interface MeasureElementProps<P = any> {
+export interface MeasureElementProps {
   force?: boolean;
   shouldUseTopInsets?: boolean;
   onMeasure: (frame: Frame) => void;
-  children: React.ReactElement<P>;
+  children: React.ReactElement;
 }
 
-export type MeasuringElement<P = any> = React.ReactElement;
-
+export type MeasuringElement = React.ReactElement;
 /**
  * Measures child element size and it's screen position asynchronously.
  * Returns measure result in `onMeasure` callback.
@@ -47,7 +46,7 @@ export type MeasuringElement<P = any> = React.ReactElement;
  */
 export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringElement => {
 
-  const ref = React.useRef<any>();
+  const ref = React.useRef();
 
   const bindToWindow = (frame: Frame, window: Frame): Frame => {
     if (frame.origin.x < window.size.width) {

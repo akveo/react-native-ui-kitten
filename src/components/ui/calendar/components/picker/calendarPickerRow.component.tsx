@@ -13,7 +13,9 @@ import {
 import { CalendarPickerCellElement } from './calendarPickerCell.component';
 import { CalendarDateInfo } from '../../type';
 
-export interface CalendarPickerRowProps<D> extends ViewProps {
+type ViewPropsWithoutChildren = Omit<ViewProps, 'children'>;
+
+export interface CalendarPickerRowProps<D> extends ViewPropsWithoutChildren {
   data: CalendarDateInfo<D>[];
   children: (item: CalendarDateInfo<D>, index: number) => CalendarPickerCellElement<D>;
 }
@@ -28,7 +30,8 @@ export class CalendarPickerRow<D> extends React.Component<CalendarPickerRowProps
     return (
       <View
         {...viewProps}
-        style={[styles.container, style]}>
+        style={[styles.container, style]}
+      >
         {data.map(children)}
       </View>
     );

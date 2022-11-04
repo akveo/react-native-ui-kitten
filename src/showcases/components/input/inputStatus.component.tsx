@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Input, Layout } from '@ui-kitten/components';
+import { Input, InputProps, Layout } from '@ui-kitten/components';
 
-const useInputState = (initialValue = '') => {
+const useInputState = (initialValue = ''): InputProps => {
   const [value, setValue] = React.useState(initialValue);
   return { value, onChangeText: setValue };
 };
 
-export const InputStatusShowcase = () => {
+export const InputStatusShowcase = (): React.ReactElement => {
 
   const primaryInputState = useInputState();
   const successInputState = useInputState();
@@ -18,7 +18,7 @@ export const InputStatusShowcase = () => {
   const controlInputState = useInputState();
 
   return (
-    <React.Fragment>
+    <>
 
       <Input
         style={styles.input}
@@ -27,7 +27,10 @@ export const InputStatusShowcase = () => {
         {...primaryInputState}
       />
 
-      <Layout style={styles.rowContainer} level='1'>
+      <Layout
+        style={styles.rowContainer}
+        level='1'
+      >
         <Input
           style={styles.input}
           status='success'
@@ -42,7 +45,10 @@ export const InputStatusShowcase = () => {
         />
       </Layout>
 
-      <Layout style={styles.rowContainer} level='1'>
+      <Layout
+        style={styles.rowContainer}
+        level='1'
+      >
         <Input
           style={styles.input}
           status='warning'
@@ -58,7 +64,10 @@ export const InputStatusShowcase = () => {
         />
       </Layout>
 
-      <Layout style={styles.rowContainer} level='1'>
+      <Layout
+        style={styles.rowContainer}
+        level='1'
+      >
         <Input
           style={styles.input}
           status='basic'
@@ -76,7 +85,7 @@ export const InputStatusShowcase = () => {
         </View>
       </Layout>
 
-    </React.Fragment>
+    </>
   );
 };
 
