@@ -25,7 +25,7 @@ describe('@range-calendar: component checks', () => {
    * Get rid of useNativeDriver warnings
    */
   beforeAll(() => {
-    jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+    jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
   });
 
   afterAll(() => {

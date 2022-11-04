@@ -35,11 +35,10 @@ it('should render provided function component', () => {
 
 it('should render provided function component with hooks', () => {
   const HookComponent = (props): React.ReactElement => {
-    const state = React.useState(1);
+    const [state] = React.useState(1);
     return (
       <Text {...props}>
-        I love Babel
-        {state}
+        {`I love Babel ${state}`}
       </Text>
     );
   };
