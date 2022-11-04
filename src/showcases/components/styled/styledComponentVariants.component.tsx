@@ -2,12 +2,12 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { EvaProp, Interaction, styled } from '@ui-kitten/components';
 
-interface IProps {
+interface Props {
   eva?: EvaProp;
 }
 
 @styled('StyledComponent')
-class StyledComponent extends React.Component<IProps> {
+class StyledComponent extends React.Component<Props> {
 
   onPressIn = (): void => {
     this.props.eva?.dispatch([Interaction.ACTIVE]);
