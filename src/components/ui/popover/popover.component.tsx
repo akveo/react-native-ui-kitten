@@ -172,7 +172,9 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
-    this.setState({ childFrame });
+    if (!childFrame.equals(this.state.childFrame)) {
+      this.setState({ childFrame });
+    }
 
     if (!this.modalId && this.props.visible) {
       this.show();
@@ -185,7 +187,9 @@ export class Popover extends React.Component<PopoverProps, State> {
   };
 
   private onContentMeasure = (anchorFrame: Frame): void => {
-    this.setState({ anchorFrame });
+    if (!anchorFrame.equals(this.state.anchorFrame)) {
+      this.setState({ anchorFrame });
+    }
 
     const placementOptions: PlacementOptions = this.findPlacementOptions(anchorFrame, this.state.childFrame);
     this.actualPlacement = this.placementService.find(this.preferredPlacement, placementOptions);
