@@ -4,6 +4,9 @@
 # intellij
 .idea
 local.properties
+*.iml
+*.hprof
+.cxx/
 
 # node.js
 node_modules/
