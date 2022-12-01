@@ -157,10 +157,12 @@ export class Popover extends React.Component<PopoverProps, State> {
     const displayFrame: Frame = actualPlacement.frame(placementOptions);
     const contentPosition = displayFrame.origin;
 
-    this.setState({
-      actualPlacement,
-      contentPosition,
-    });
+    if (!contentPosition.equals(this.state.contentPosition) || actualPlacement.rawValue !== this.state.actualPlacement.rawValue) {
+      this.setState({
+        actualPlacement,
+        contentPosition
+      });
+    }
   };
 
   private findPlacementOptions = (contentFrame: Frame, childFrame: Frame): PlacementOptions => {

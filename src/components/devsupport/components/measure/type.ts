@@ -152,7 +152,7 @@ export class Frame {
    */
   public centerHorizontalOf(other: Frame): Frame {
     return new Frame(
-      other.origin.x + (other.size.width - this.size.width) / 2,
+      other.origin.x + Math.floor((other.size.width - this.size.width) / 2),
       this.origin.y,
       this.size.width,
       this.size.height,
@@ -165,7 +165,7 @@ export class Frame {
   public centerVerticalOf(other: Frame): Frame {
     return new Frame(
       this.origin.x,
-      other.origin.y + (other.size.height - this.size.height) / 2,
+      other.origin.y + Math.floor((other.size.height - this.size.height) / 2),
       this.size.width,
       this.size.height,
     );
@@ -173,8 +173,8 @@ export class Frame {
 
   public centerOf(other: Frame): Frame {
     return new Frame(
-      other.origin.x + (other.size.width - this.size.width) / 2,
-      other.origin.y + (other.size.height - this.size.height) / 2,
+      other.origin.x + Math.floor((other.size.width - this.size.width) / 2),
+      other.origin.y + Math.floor((other.size.height - this.size.height) / 2),
       this.size.width,
       this.size.height,
     );
