@@ -152,7 +152,7 @@ export class Card extends React.Component<CardProps> {
           component={header}
         />
         {header && <Divider />}
-        <View style={evaStyle.body}>
+        <View style={[ styles.content, evaStyle.body ]}>
           {children}
         </View>
         {footer && <Divider />}
@@ -172,4 +172,7 @@ const styles = StyleSheet.create({
   transparent: {
     backgroundColor: 'transparent',
   },
+  content: {
+    flexShrink: 1,
+  }
 });
