@@ -7,7 +7,7 @@
 import React from 'react';
 import {
   Image,
-  ImageProps,
+  ImageProps, StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
@@ -175,14 +175,10 @@ describe('@tab-bar: component checks', () => {
     );
 
     const el = component.queryByTestId('indicator body');
+    const style = StyleSheet.flatten(el.props.style);
 
-    // default styles
-    expect(el.props.style[0].width).toEqual('100%');
-    expect(el.props.style[1][0].backgroundColor).toEqual('#3366FF');
-
-    // custom styles
-    expect(el.props.style[1][1].width).toEqual(99);
-    expect(el.props.style[1][1].backgroundColor).toEqual('red');
+    expect(style.width).toEqual(99);
+    expect(style.backgroundColor).toEqual('red');
   });
 });
 
@@ -241,14 +237,10 @@ describe('@tab-view: component checks', () => {
     );
 
     const el = component.queryByTestId('indicator body');
+    const style = StyleSheet.flatten(el.props.style);
 
-    // default styles
-    expect(el.props.style[0].width).toEqual('100%');
-    expect(el.props.style[1][0].backgroundColor).toEqual('#3366FF');
-
-    // custom styles
-    expect(el.props.style[1][1].width).toEqual(99);
-    expect(el.props.style[1][1].backgroundColor).toEqual('red');
+    expect(style.width).toEqual(99);
+    expect(style.backgroundColor).toEqual('red');
   });
 });
 
