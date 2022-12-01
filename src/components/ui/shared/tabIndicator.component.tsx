@@ -14,6 +14,7 @@ import {
   View,
   ViewProps,
   ViewStyle,
+  StyleSheet,
 } from 'react-native';
 import { RTLService } from '../../devsupport';
 
@@ -99,7 +100,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
   };
 
   private renderIndicatorLine = (style: StyleProp<ViewStyle>): React.ReactElement => {
-    const styles = [{ width: '100%', alignSelf: 'center', style }] as StyleProp<ViewStyle>;
+    const styles = [{ width: '100%', alignSelf: 'center' }, StyleSheet.flatten(style)] as StyleProp<ViewStyle>;
     return (
       <View
         testID="indicator body"
