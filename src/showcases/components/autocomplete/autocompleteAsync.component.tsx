@@ -44,6 +44,7 @@ export const AutocompleteAsyncShowcase = (): React.ReactElement => {
     <Autocomplete
       placeholder='For example, Star Wars'
       value={query}
+      placement='inner top'
       onChangeText={onChangeText}
       onSelect={onSelect}
     >

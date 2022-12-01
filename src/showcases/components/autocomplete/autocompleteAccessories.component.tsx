@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import { Autocomplete, AutocompleteItem, Icon, IconElement } from '@ui-kitten/components';
 
@@ -59,6 +59,7 @@ export const AutocompleteAccessoriesShowcase = (): React.ReactElement => {
     <Autocomplete
       placeholder='Place your Text'
       value={value}
+      placement='inner top'
       accessoryRight={renderCloseIcon}
       onChangeText={onChangeText}
       onSelect={onSelect}

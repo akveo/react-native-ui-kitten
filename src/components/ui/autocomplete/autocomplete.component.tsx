@@ -46,10 +46,6 @@ interface State {
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets data list visible.
- *
- * @method {() => void} hide - Sets data list invisible.
- *
  * @method {() => void} focus - Focuses an input field and sets data list visible.
  *
  * @method {() => void} blur - Removes focus from input field and sets data list invisible.
@@ -113,25 +109,21 @@ interface State {
  */
 export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
+  static defaultProps: Partial<AutocompleteProps> = {
+    placement: 'inner top',
+  };
+
   public state: State = {
     listVisible: false,
   };
 
-  private popoverRef = React.createRef<Popover>();
   private inputRef = React.createRef<Input>();
+  private inputRefAnchor = React.createRef<Input>();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
   }
-
-  public show = (): void => {
-    this.popoverRef.current?.show();
-  };
-
-  public hide = (): void => {
-    this.popoverRef.current?.hide();
-  };
 
   public focus = (): void => {
     this.inputRef.current?.focus();
@@ -162,6 +154,13 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.props.onFocus?.(event);
   };
 
+  private onAnchorInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
+    this.inputRefAnchor.current?.blur();
+    this.setOptionsListVisible();
+    this.focus();
+    this.props.onFocus?.(event);
+  };
+
   private onInputSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
     this.setOptionsListInvisible();
     this.props.onSubmitEditing?.(e);
@@ -169,6 +168,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
   private onBackdropPress = (): void => {
     this.blur();
+    this.inputRefAnchor.current?.blur();
     this.setOptionsListInvisible();
   };
 
@@ -192,12 +192,30 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     return React.cloneElement(info.item, { onPress: () => this.onItemPress(info.index) });
   };
 
+  private renderAnchorInputElement = (props: InputProps): InputElement => {
+    return (
+      <View>
+        <Input
+          {...props}
+          ref={this.inputRefAnchor}
+          testID='@autocomplete/input-anchor'
+          showSoftInputOnFocus={false}
+          onFocus={this.onAnchorInputFocus}
+          onSubmitEditing={this.onInputSubmitEditing}
+        />
+      </View>
+    );
+  };
+
   private renderInputElement = (props: InputProps): InputElement => {
     return (
       <View>
         <Input
           {...props}
           ref={this.inputRef}
+          testID='@autocomplete/input'
+          showSoftInputOnFocus={true}
+          autoFocus={true}
           onFocus={this.onInputFocus}
           onSubmitEditing={this.onInputSubmitEditing}
         />
@@ -210,22 +228,24 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
 
     return (
       <Popover
-        ref={this.popoverRef}
         style={styles.popover}
         placement={placement}
         testID={testID}
         visible={this.state.listVisible}
         fullWidth={true}
-        anchor={() => this.renderInputElement(inputProps)}
+        anchor={() => this.renderAnchorInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}
       >
-        <List
-          style={styles.list}
-          keyboardShouldPersistTaps='always'
-          data={this.data}
-          bounces={false}
-          renderItem={this.renderItem}
-        />
+        <>
+          {this.renderInputElement(inputProps)}
+          <List
+            style={styles.list}
+            keyboardShouldPersistTaps='always'
+            data={this.data}
+            bounces={false}
+            renderItem={this.renderItem}
+          />
+        </>
       </Popover>
     );
   }
@@ -235,6 +255,7 @@ const styles = StyleSheet.create({
   popover: {
     maxHeight: 192,
     overflow: 'hidden',
+    borderWidth: 0,
   },
   list: {
     flexGrow: 0,

@@ -371,33 +371,6 @@ describe('@range-datepicker: component checks', () => {
     expect(onBlur).toBeCalled();
   });
 
-  it('should show calendar by calling `show` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
-    const component = render(
-      <TestRangeDatepicker ref={componentRef} />,
-    );
-
-    componentRef.current.show();
-    const calendar = await waitForElement(() => component.queryByType(RangeCalendar));
-
-    expect(calendar).toBeTruthy();
-  });
-
-  it('should hide calendar by calling `hide` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
-    const component = render(
-      <TestRangeDatepicker ref={componentRef} />,
-    );
-
-    componentRef.current.show();
-    await waitForElement(() => null);
-
-    componentRef.current.hide();
-    const calendar = await waitForElement(() => component.queryByType(RangeCalendar));
-
-    expect(calendar).toBeFalsy();
-  });
-
   it('should show calendar by calling `focus` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const component = render(
@@ -493,6 +466,28 @@ describe('@range-datepicker: component checks', () => {
     expect(onPressOut).toBeCalled();
   });
 
+  it('should show startDate of the selected range on load provided by range prop', () => {
+    const date = new Date(2021, 2, 1);
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+
+    render(
+      <TestRangeDatepicker
+        ref={componentRef}
+        range={{
+          startDate: date,
+          endDate: new Date(2021, 3, 1),
+        }}
+      />,
+    );
+
+    componentRef.current.focus();
+
+    // @ts-ignore: private calendarRef
+    const calendarState = componentRef.current.calendarRef.current.state;
+    expect(calendarState.visibleDate.getFullYear()).toEqual(date.getFullYear());
+    expect(calendarState.visibleDate.getMonth()).toEqual(date.getMonth());
+  });
+
   it('should show the specific date on load provided by initialVisibleDate prop', () => {
     const initialDate = new Date(2021, 2, 1);
     const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
@@ -504,7 +499,7 @@ describe('@range-datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
 
     // @ts-ignore: private calendarRef
     const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
@@ -522,7 +517,7 @@ describe('@range-datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
     componentRef.current.scrollToToday();
 
     // @ts-ignore: private calendarRef
@@ -542,7 +537,7 @@ describe('@range-datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
     componentRef.current.scrollToDate(dateToScroll);
 
     // @ts-ignore: private calendarRef

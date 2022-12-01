@@ -378,34 +378,6 @@ describe('@datepicker: component checks', () => {
     expect(onBlur).toBeCalled();
   });
 
-  it('should show calendar by calling `show` with ref', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
-    const component = render(
-      <TestDatepicker ref={componentRef} />,
-    );
-
-    componentRef.current.show();
-    const calendar = await waitForElement(() => component.queryByType(Calendar));
-
-    expect(calendar).toBeTruthy();
-  });
-
-  it('should hide calendar by calling `hide` with ref', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
-
-    const component = render(
-      <TestDatepicker ref={componentRef} />,
-    );
-
-    componentRef.current.show();
-    await waitForElement(() => null);
-
-    componentRef.current.hide();
-    const calendar = await waitForElement(() => component.queryByType(Calendar));
-
-    expect(calendar).toBeFalsy();
-  });
-
   it('should show calendar by calling `focus` with ref', async () => {
     const componentRef: React.RefObject<Datepicker> = React.createRef();
 
@@ -505,6 +477,25 @@ describe('@datepicker: component checks', () => {
     expect(onPressOut).toBeCalled();
   });
 
+  it('should show the selected date on load provided by date prop', () => {
+    const date = new Date(2021, 2, 1);
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
+
+    render(
+      <TestDatepicker
+        ref={componentRef}
+        date={date}
+      />,
+    );
+
+    componentRef.current.focus();
+
+    // @ts-ignore: private calendarRef
+    const calendarState = componentRef.current.calendarRef.current.state;
+    expect(calendarState.visibleDate.getFullYear()).toEqual(date.getFullYear());
+    expect(calendarState.visibleDate.getMonth()).toEqual(date.getMonth());
+  });
+
   it('should show the specific date on load provided by initialVisibleDate prop', () => {
     const initialDate = new Date(2021, 2, 1);
     const componentRef: React.RefObject<Datepicker> = React.createRef();
@@ -517,7 +508,7 @@ describe('@datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
 
     // @ts-ignore: private calendarRef
     const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
@@ -535,7 +526,7 @@ describe('@datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
     componentRef.current.scrollToToday();
 
     // @ts-ignore: private calendarRef
@@ -555,7 +546,7 @@ describe('@datepicker: component checks', () => {
       />,
     );
 
-    componentRef.current.show();
+    componentRef.current.focus();
     componentRef.current.scrollToDate(dateToScroll);
 
     // @ts-ignore: private calendarRef

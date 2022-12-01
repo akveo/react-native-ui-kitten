@@ -33,8 +33,6 @@ import {
   TabView,
   TabViewProps,
 } from './tabView.component';
-import { TabIndicator } from '../shared/tabIndicator.component';
-import { ReactTestInstance } from 'react-test-renderer';
 
 describe('@tab: component checks', () => {
 
@@ -129,6 +127,7 @@ describe('@tab-bar: component checks', () => {
         theme={light}
       >
         <TabBar
+          testID='@tab-bar'
           selectedIndex={selectedIndex}
           onSelect={setSelectedIndex}
           {...props}

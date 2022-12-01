@@ -9,7 +9,6 @@ import {
   Button,
   StyleSheet,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
@@ -59,11 +58,11 @@ describe('@popover: component checks', () => {
    */
   const touchables = {
     findToggleButton: (api: RenderAPI) => api.queryByTestId('@popover/toggle-button'),
-    findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[1],
+    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
 
   const TestPopover = React.forwardRef((props: Partial<PopoverProps>, ref: React.Ref<Popover>) => {
-    const [visible, setVisible] = React.useState(props.visible);
+    const [visible, setVisible] = React.useState(props.visible || false);
 
     const togglePopover = (): void => {
       setVisible(!visible);
@@ -119,8 +118,7 @@ describe('@popover: component checks', () => {
       <TestPopover />,
     );
 
-
-    fireEvent.press(component.queryByTestId('@popover/toggle-button'));
+    fireEvent.press(touchables.findToggleButton(component));
     const text = await waitForElement(() => component.queryByText('I love Babel'));
 
     expect(text).toBeTruthy();
@@ -150,33 +148,6 @@ describe('@popover: component checks', () => {
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
 
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
-  });
-
-  it('should be able to show with ref', async () => {
-    const componentRef = React.createRef<Popover>();
-    const component = render(
-      <TestPopover ref={componentRef} />,
-    );
-
-    componentRef.current.show();
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-
-    expect(text).toBeTruthy();
-  });
-
-  it('should be able to hide with ref', async () => {
-    const componentRef = React.createRef<Popover>();
-    const component = render(
-      <TestPopover ref={componentRef} />,
-    );
-
-    componentRef.current.show();
-    await waitForElement(() => null);
-
-    componentRef.current.hide();
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-
-    expect(text).toBeFalsy();
   });
 });
 

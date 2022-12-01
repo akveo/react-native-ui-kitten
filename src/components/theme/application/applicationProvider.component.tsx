@@ -14,7 +14,6 @@ import {
 } from '@eva-design/dss';
 import { StyleProvider } from '../style/styleProvider.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
-import { ModalPanel } from '../modal/modalPanel.component';
 
 interface EvaRuntimeProcessingProps {
   mapping: SchemaType;
@@ -122,9 +121,7 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
         theme={this.props.theme}
         styles={this.state.styles}
       >
-        <ModalPanel>
-          {this.props.children}
-        </ModalPanel>
+        {this.props.children}
       </StyleProvider>
     );
   }

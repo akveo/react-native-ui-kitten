@@ -50,7 +50,7 @@ describe('@tooltip: component checks', () => {
   const TestTooltip = React.forwardRef((props: Partial<TooltipProps>,
     ref: React.Ref<Tooltip>) => {
 
-    const [visible, setVisible] = React.useState(props.visible);
+    const [visible, setVisible] = React.useState(props.visible || false);
 
     const toggleTooltip = (): void => {
       setVisible(!visible);
@@ -223,37 +223,6 @@ describe('@tooltip: component checks', () => {
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
 
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
-  });
-
-  it('should be able to show with ref', async () => {
-    const componentRef = React.createRef<Tooltip>();
-    const component = render(
-      <TestTooltip ref={componentRef}>
-        I love Babel
-      </TestTooltip>,
-    );
-
-    componentRef.current.show();
-
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-    expect(text).toBeTruthy();
-  });
-
-  it('should be able to hide with ref', async () => {
-    const componentRef = React.createRef<Tooltip>();
-    const component = render(
-      <TestTooltip ref={componentRef}>
-        I love Babel
-      </TestTooltip>,
-    );
-
-    componentRef.current.show();
-    await waitForElement(() => null);
-
-    componentRef.current.hide();
-
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-    expect(text).toBeFalsy();
   });
 
 });

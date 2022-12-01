@@ -24,12 +24,6 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
 /**
  * Range date picker provides a simple way to select a date range within a picker displayed in modal.
  *
- * @extends React.Component
- *
- * @method {() => void} show - Sets picker visible.
- *
- * @method {() => void} hide - Sets picker invisible.
- *
  * @method {() => void} focus - Focuses Datepicker and sets it visible.
  *
  * @method {() => void} blur - Removes focus from Datepicker and sets it invisible.
