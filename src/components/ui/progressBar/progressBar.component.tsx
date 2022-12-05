@@ -15,6 +15,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  EvaSize,
   EvaStatus,
   LiteralUnion,
   Overwrite,
@@ -40,6 +41,7 @@ export interface ProgressBarProps extends ViewProps, ProgressBarStyledProps {
   animating?: boolean;
   animationConfig?: Partial<ProgressBarAnimationConfig>;
   status?: EvaStatus;
+  size?: EvaSize;
 }
 
 export type ProgressBarElement = React.ReactElement<ProgressBarProps>;
@@ -58,6 +60,15 @@ interface State {
  *
  * @property {number} progress - Current state of a process.
  * Can be from 0 to 1.
+ *
+ * @property {string} size - Size of the component.
+ * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Defaults to *small*.
+ *
+ * @property {string} status - Status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Defaults to *primary*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {Partial<ProgressBarAnimationConfig>} animationConfig - Animation configuration.
  * Optional. Can define duration, easing function and etc.

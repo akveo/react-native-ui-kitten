@@ -7,9 +7,7 @@
 import React from 'react';
 import {
   Animated,
-  EasingFunction,
   StyleSheet,
-  Text,
   TextProps,
   TextStyle,
   View,
@@ -22,13 +20,16 @@ import {
   LiteralUnion,
   Overwrite,
   Size,
+  EvaStatus,
+  RenderProp,
+  FalsyFC,
 } from '@ui-kitten/components/devsupport';
 import {
-  Icon,
   IconProps,
   styled,
   StyledComponentProps,
   StyleType,
+  Text,
 } from '@ui-kitten/components';
 import { CircularProgressBarAnimation, CircularProgressBarAnimationConfig } from './animation';
 
@@ -61,8 +62,11 @@ type LoadingStates = LiteralUnion<'success' | 'error' | 'progress'>;
 export interface CircularProgressBarProps extends ViewProps, CircularProgressBarStyledProps {
   progress?: number;
   animating?: boolean;
+  renderIcon?: RenderProp<Partial<IconProps>>;
   size?: EvaSize;
-  state?: LoadingStates;
+  status?: EvaStatus;
+  textStyle?: TextStyle;
+  iconStyle?: IconStyle;
   animationConfig?: Partial<CircularProgressBarAnimationConfig>;
 }
 
@@ -73,6 +77,9 @@ export type CircularProgressBarElement = React.ReactElement<CircularProgressBarP
  *
  * @extends React.Component
  *
+ * @property {number} progress - Current progress value of the process.
+ * Can be from 0 to 1.
+
  * @property {boolean} animating - Whether component is animating.
  * Default is *true*.
  *
@@ -80,12 +87,14 @@ export type CircularProgressBarElement = React.ReactElement<CircularProgressBarP
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
  * Defaults to *medium*.
  *
- * @property {string} state - State of the process.
- * Can be `progress`, `success` or `error`.
- * Defaults to *progress*.
+ * @property {string} status - Status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Defaults to *primary*.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {number} progress - Current progress value of the process.
- * Can be from 0 to 1.
+ * @property {ReactElement | (IconProps) => ReactElement} renderIcon - Function component
+ * to render inside circular progress bar.
+ * Expected to return an Icon.
  *
  * @property {Partial<CircularProgressBarAnimationConfig>} animationConfig - Animation configuration.
  * Optional. Can define duration, easing function and etc.
@@ -113,11 +122,6 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
   };
 
   private animation: CircularProgressBarAnimation;
-
-  private accessoryIcons = {
-    success: 'checkmark',
-    error: 'close',
-  };
 
   constructor(props: CircularProgressBarProps) {
     super(props);
@@ -175,7 +179,6 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
 
       iconWidth, // accessory icon
 
-      textColor, // font styles
       textFontFamily,
       textFontSize,
       textFontWeight,
@@ -188,7 +191,6 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
 
     return {
       radius,
-
       track: {
         width: elementWidth,
         color: trackColor,
@@ -208,7 +210,6 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
         tintColor: indicatorColor,
       },
       text: {
-        color: textColor,
         fontFamily: textFontFamily,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
@@ -265,9 +266,7 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     );
   }
 
-  private renderCircularProgress = (
-    progress: number, animating: boolean, evaStyle: ComponentStyles,
-  ): React.ReactElement<ViewProps> => {
+  private renderCircularProgress = (progress: number, animating: boolean, evaStyle: ComponentStyles): React.ReactElement<ViewProps> => {
     let firstHalfRotate;
     let secondHalfRotate;
 
@@ -297,46 +296,52 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     );
   }
 
-  private getLabel = (progress: number): string => {
-    return `${Math.round(progress * 100)}%`;
-  }
-
   private renderText = (progress: number, style: TextStyle): React.ReactElement<TextProps> => {
-    const label = this.getLabel(progress);
+    const label = `${Math.round(progress * 100)}%`;
+    const { status, textStyle } = this.props
 
     return (
-      <Text style={style}>
+      <Text
+        style={[ style, textStyle ]}
+        status={status}
+      >
         {label}
       </Text>
     );
   }
 
   private renderIcon = (state: LoadingStates, style: IconStyle): React.ReactElement<IconProps> => {
-    const src = this.accessoryIcons[state];
-
     return (
-      <Icon
-        name={src}
-        style={style} />
+      <FalsyFC
+        component={this.props.renderIcon}
+        style={[ style, this.props.iconStyle ]}
+      />
     );
   };
 
-  private renderAccessory = (
-    progress: number, state: LoadingStates, evaStyle: ComponentStyles,
-  ): React.ReactElement<ViewProps> => {
+  private renderAccessory = (progress: number, status: EvaStatus, evaStyle: ComponentStyles): React.ReactElement<ViewProps> => {
+    const showIcon = this.props.renderIcon;
+
     return (
       <View style={[ styles.absoluteFill, styles.center ]}>
         {
-          state === 'progress'
-            ? this.renderText(progress, evaStyle.text)
-            : this.renderIcon(state, evaStyle.icon)
+          showIcon ? this.renderIcon(status, evaStyle.icon) : this.renderText(progress, evaStyle.text)
         }
       </View>
     );
   }
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, progress, animating, state, ...viewProps } = this.props;
+    const {
+      eva,
+      style,
+      progress,
+      animating,
+      status,
+      size,
+      textStyle,
+      ...viewProps
+    } = this.props;
     const validProgress = this.clamp(progress);
     const evaStyle = this.getComponentStyle(eva.style);
 
@@ -345,7 +350,7 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
         {...viewProps}
         style={[ evaStyle.container, style ]}>
         {this.renderCircularProgress(validProgress, animating, evaStyle)}
-        {this.renderAccessory(validProgress, state, evaStyle)}
+        {this.renderAccessory(validProgress, status, evaStyle)}
       </View>
     );
   }
