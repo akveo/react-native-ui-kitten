@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ProgressBar } from '@ui-kitten/components';
 
 let timeoutId;
@@ -7,7 +7,7 @@ const getRandomNum = (min: number, max: number): number => Math.random() * (max 
 export const ProgressBarSimpleUsageShowcase = (): React.ReactElement => {
   const [progress, setProgress] = React.useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     timeoutId = setTimeout(() => {
       clearTimeout(timeoutId);
 

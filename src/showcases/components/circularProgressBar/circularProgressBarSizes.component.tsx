@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, CircularProgressBar } from '@ui-kitten/components';
 
-let timeoutId;
 const getRandomNum = (min: number, max: number): number => Math.random() * (max - min) + min;
 
 export const CircularProgressBarSizesShowcase = (): React.ReactElement => {
   const [progress, setProgress] = React.useState(0);
 
-  React.useEffect(() => {
-    timeoutId = setTimeout(() => {
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
       clearTimeout(timeoutId);
 
       if (progress < 1) {
