@@ -7,12 +7,12 @@
 import { TranslationWidth } from '../i18n/type';
 
 export abstract class DateService<D> {
-  static DAYS_IN_WEEK: number = 7;
-  static MONTHS_IN_YEAR: number = 12;
+  static DAYS_IN_WEEK = 7;
+  static MONTHS_IN_YEAR = 12;
 
   protected locale: string;
 
-  public setLocale(locale: any) {
+  public setLocale(locale: string): void {
     this.locale = locale;
   }
 

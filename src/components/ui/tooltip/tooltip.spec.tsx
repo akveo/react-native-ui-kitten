@@ -48,26 +48,38 @@ describe('@tooltip: component checks', () => {
   });
 
   const TestTooltip = React.forwardRef((props: Partial<TooltipProps>,
-                                        ref: React.Ref<Tooltip>) => {
+    ref: React.Ref<Tooltip>) => {
 
-    const [visible, setVisible] = React.useState(props.visible);
+    const [visible, setVisible] = React.useState(props.visible || false);
 
     const toggleTooltip = (): void => {
       setVisible(!visible);
     };
 
     return (
-      <ApplicationProvider mapping={mapping} theme={light}>
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
         <Tooltip
           ref={ref}
           visible={visible}
-          anchor={() => <Button testID='@tooltip/toggle-button' title='' onPress={toggleTooltip}/>}
-          {...props}>
+          anchor={() => (
+            <Button
+              testID='@tooltip/toggle-button'
+              title=''
+              onPress={toggleTooltip}
+            />
+          )}
+          {...props}
+        >
           {props.children}
         </Tooltip>
       </ApplicationProvider>
     );
   });
+
+  TestTooltip.displayName = 'TestTooltip';
 
   /*
    * In this test:
@@ -81,7 +93,7 @@ describe('@tooltip: component checks', () => {
 
   it('should render function element passed to `anchor` prop', () => {
     const component = render(
-      <TestTooltip/>,
+      <TestTooltip />,
     );
 
     expect(touchables.findToggleButton(component)).toBeTruthy();
@@ -114,7 +126,11 @@ describe('@tooltip: component checks', () => {
   it('should render content as component when becomes visible', async () => {
     const component = render(
       <TestTooltip>
-        {props => <Text {...props}>I love Babel</Text>}
+        {props => (
+          <Text {...props}>
+            I love Babel
+          </Text>
+        )}
       </TestTooltip>,
     );
 
@@ -127,9 +143,11 @@ describe('@tooltip: component checks', () => {
   it('should render content as pure JSX component when becomes visible', async () => {
     const childrenComponent = (
       <View>
-        <Text>I love Babel</Text>
+        <Text>
+          I love Babel
+        </Text>
       </View>
-    )
+    );
 
     const component = render(
       <TestTooltip>
@@ -145,7 +163,13 @@ describe('@tooltip: component checks', () => {
 
   it('should render component passed to accessoryLeft prop when visible', async () => {
     const component = render(
-      <TestTooltip accessoryLeft={props => <View {...props} testID='@tooltip/accessory-left'/>}>
+      <TestTooltip accessoryLeft={props => (
+        <View
+          {...props}
+          testID='@tooltip/accessory-left'
+        />
+      )}
+      >
         I love Babel
       </TestTooltip>,
     );
@@ -158,7 +182,13 @@ describe('@tooltip: component checks', () => {
 
   it('should render component passed to accessoryRight prop when visible', async () => {
     const component = render(
-      <TestTooltip accessoryRight={props => <View {...props} testID='@tooltip/accessory-right'/>}>
+      <TestTooltip accessoryRight={props => (
+        <View
+          {...props}
+          testID='@tooltip/accessory-right'
+        />
+      )}
+      >
         I love Babel
       </TestTooltip>,
     );
@@ -172,7 +202,7 @@ describe('@tooltip: component checks', () => {
   it('should call onBackdropPress', async () => {
     const onBackdropPress = jest.fn();
     const component = render(
-      <TestTooltip onBackdropPress={onBackdropPress}/>,
+      <TestTooltip onBackdropPress={onBackdropPress} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -184,45 +214,15 @@ describe('@tooltip: component checks', () => {
   });
 
   it('should style backdrop with backdropStyle prop', async () => {
+    const styles = { backgroundColor: 'red' };
     const component = render(
-      <TestTooltip backdropStyle={{ backgroundColor: 'red' }}/>,
+      <TestTooltip backdropStyle={styles} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
 
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
-  });
-
-  it('should be able to show with ref', async () => {
-    const componentRef = React.createRef<Tooltip>();
-    const component = render(
-      <TestTooltip ref={componentRef}>
-        I love Babel
-      </TestTooltip>,
-    );
-
-    componentRef.current.show();
-
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-    expect(text).toBeTruthy();
-  });
-
-  it('should be able to hide with ref', async () => {
-    const componentRef = React.createRef<Tooltip>();
-    const component = render(
-      <TestTooltip ref={componentRef}>
-        I love Babel
-      </TestTooltip>,
-    );
-
-    componentRef.current.show();
-    await waitForElement(() => null);
-
-    componentRef.current.hide();
-
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-    expect(text).toBeFalsy();
   });
 
 });

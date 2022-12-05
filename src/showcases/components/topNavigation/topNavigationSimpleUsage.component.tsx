@@ -1,25 +1,20 @@
 import React from 'react';
-import { Icon, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { Icon, IconElement, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
-const BackIcon = (props) => (
-  <Icon {...props} name='arrow-back'/>
-);
-
-const BackAction = () => (
-  <TopNavigationAction icon={BackIcon}/>
-);
-
-export const TopNavigationSimpleUsageShowcase = () => (
-  <TopNavigation
-    accessoryLeft={BackAction}
-    title='Eva Application'
+const BackIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='arrow-back'
   />
 );
 
+const BackAction = (): React.ReactElement => (
+  <TopNavigationAction icon={BackIcon} />
+);
 
-const TopNavigationStyling = () => (
+export const TopNavigationSimpleUsageShowcase = (): React.ReactElement => (
   <TopNavigation
-    title={evaProps => <Text {...evaProps}>Title</Text>}
-    subtitle={evaProps => <Text {...evaProps}>Subtitle</Text>}
+    accessoryLeft={BackAction}
+    title='Eva Application'
   />
 );

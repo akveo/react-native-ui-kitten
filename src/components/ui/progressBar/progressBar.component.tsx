@@ -7,7 +7,6 @@
 import React from 'react';
 import {
   Animated,
-  EasingFunction,
   LayoutChangeEvent,
   StyleSheet,
   View,
@@ -131,23 +130,19 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
 
   private stopAnimation = (): void => {
     this.animation.stop();
-  }
+  };
 
   private clamp = (progress: number): number => {
     return progress > 1 ? 1 : (progress < 0 ? 0 : progress);
-  }
+  };
 
-  private onLayout = (event: LayoutChangeEvent) => {
-    this.props.onLayout && this.props.onLayout(event);
-    const trackWidth = event.nativeEvent.layout.width
+  private onLayout = (event: LayoutChangeEvent): void => {
+    this.props.onLayout?.(event);
+    const trackWidth = event.nativeEvent.layout.width;
 
     this.setState({ trackWidth });
     this.animation.setBarWidth(trackWidth);
-  }
-
-  private getIndicatorWidth = (progress: number): string => {
-    return `${progress * 100}%`;
-  }
+  };
 
   private getComponentStyle = (source: StyleType): ComponentStyles => {
     const {
@@ -169,12 +164,12 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
         backgroundColor: indicatorColor,
       },
     };
-  }
+  };
 
   private renderIndicator = (
     style: ViewStyle, progress: number, animating: boolean,
   ): React.ReactElement<Animated.AnimatedProps<ViewStyle>> => {
-    const indicatorStyles: Animated.AnimatedProps<ViewStyle>[] = [ style ];
+    const indicatorStyles: Animated.AnimatedProps<ViewStyle>[] = [style];
 
     if (animating) {
       const animationStyles = this.animation.toProps();
@@ -182,7 +177,7 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
       indicatorStyles.push(animationStyles);
     } else {
       const validProgress = this.clamp(progress);
-      const width = this.getIndicatorWidth(validProgress);
+      const width = `${validProgress * 100}%`;
 
       indicatorStyles.push({ width });
     }
@@ -190,18 +185,19 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
     return (
       <Animated.View style={indicatorStyles} />
     );
-  }
+  };
 
   public render(): React.ReactElement<ViewProps> {
     const { eva, style, progress, animating, ...viewProps } = this.props;
-    const combinedStyles: StyleType = StyleSheet.flatten([ eva.style, this.props.style ]);
+    const combinedStyles: StyleType = StyleSheet.flatten([eva.style, this.props.style]);
     const evaStyle = this.getComponentStyle(combinedStyles);
 
     return (
       <View
         {...viewProps}
-        style={[ evaStyle.track, styles.noOverflow, style ]}
-        onLayout={this.onLayout}>
+        style={[evaStyle.track, styles.noOverflow, style]}
+        onLayout={this.onLayout}
+      >
         {this.renderIndicator(evaStyle.indicator, progress, animating)}
       </View>
     );

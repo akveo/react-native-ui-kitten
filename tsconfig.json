@@ -5,7 +5,7 @@
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-native",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
@@ -19,14 +19,15 @@
     }
   },
   "include": [
-    "./src",
-    "./src/**/package.json"
+    ".eslintrc.js",
+    "./src/**/*"
   ],
   "exclude": [
     "./src/template-js",
     "./src/template-ts",
-    "./src/showcases",
-    "./**/*.spec.ts",
-    "./**/*.spec.tsx"
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
   ]
 }

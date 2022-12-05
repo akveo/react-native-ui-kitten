@@ -2,26 +2,44 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Layout } from '@ui-kitten/components';
 
-export const ButtonSizeShowcase = () => (
-  <Layout style={styles.container} level='1'>
+export const ButtonSizeShowcase = (): React.ReactElement => (
+  <Layout
+    style={styles.container}
+    level='1'
+  >
 
-    <Button style={styles.button} size='tiny'>
+    <Button
+      style={styles.button}
+      size='tiny'
+    >
       TINY
     </Button>
 
-    <Button style={styles.button} size='small'>
+    <Button
+      style={styles.button}
+      size='small'
+    >
       SMALL
     </Button>
 
-    <Button style={styles.button} size='medium'>
+    <Button
+      style={styles.button}
+      size='medium'
+    >
       MEDIUM
     </Button>
 
-    <Button style={styles.button} size='large'>
+    <Button
+      style={styles.button}
+      size='large'
+    >
       LARGE
     </Button>
 
-    <Button style={styles.button} size='giant'>
+    <Button
+      style={styles.button}
+      size='giant'
+    >
       GIANT
     </Button>
 

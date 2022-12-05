@@ -33,9 +33,16 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  *
  * @extends React.Component
  *
+ * @method {() => void} scrollToToday - Show the current date in the calendar.
+ *
+ * @method {(date: D) => void} scrollToDate - Show the specific date in the calendar.
+ *
  * @property {CalendarRange<D>} range - Date range which is currently selected.
  * CalendarRange `startDate?: D, endDate?: D` - Object with start and end dates for date range.
  * A range may contain only a startDate or both startDate and endDate properties meaning completeness of picked value.
+ *
+ * @property {D} initialVisibleDate - Specific date that should be shown on the first render of the component.
+ * If it is not set, the selected date or today's date will be displayed.
  *
  * @property {(CalendarRange) => void} onSelect - Called when day cell is pressed.
  *
@@ -55,7 +62,8 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
  * Defaults to *CalendarViewModes.DATE*.
  *
- * @property {(D) => string} title - A function to transform selected date to a string displayed in header.
+ * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed in
+ * header for the specific view mode: first date - date picker, second date - year and month picker.
  *
  * @property {(D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
@@ -73,8 +81,9 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * @property {(D, NamedStyles) => ReactElement} renderYear - Function component
  * to render instead of default year cell.
  * Called with a date for this cell and styles provided by Eva.
- * 
- * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next month / year.
+ *
+ * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next
+ * month / year.
  * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
@@ -118,8 +127,8 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
     return this.dataService.createDayPickerData(date, this.props.range);
   }
 
-  protected selectedDate(): D {
-    return this.dateService.today();
+  protected selectedDate(): D | undefined {
+    return this.props.range?.startDate;
   }
 
   protected onDateSelect(date: D): void {
@@ -129,7 +138,7 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
     }
   }
 
-  protected isDateSelected(date: D): boolean {
+  protected isDateSelected(): boolean {
     return false;
   }
 
@@ -147,11 +156,11 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
     const rangeEndPlaceChanged: boolean = props.lastRangeItem !== nextProps.lastRangeItem;
 
     const shouldUpdate: boolean =
-      selectionChanged
-      || disablingChanged
-      || rangeChanged
-      || rangeStartPlaceChanged
-      || rangeEndPlaceChanged;
+      selectionChanged ||
+      disablingChanged ||
+      rangeChanged ||
+      rangeStartPlaceChanged ||
+      rangeEndPlaceChanged;
 
     if (shouldUpdate) {
       return true;

@@ -2,26 +2,33 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Text, ViewPager } from '@ui-kitten/components';
 
-export const ViewPagerLazyLoadingShowcase = () => {
+export const ViewPagerLazyLoadingShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const shouldLoadComponent = (index) => index === selectedIndex;
+  const shouldLoadComponent = (index): boolean => index === selectedIndex;
 
   return (
     <ViewPager
       selectedIndex={selectedIndex}
       shouldLoadComponent={shouldLoadComponent}
-      onSelect={index => setSelectedIndex(index)}>
+      onSelect={index => setSelectedIndex(index)}
+    >
       <Layout
         level='2'
-        style={styles.tab}>
-        <Text category='h5'>Tab 1</Text>
+        style={styles.tab}
+      >
+        <Text category='h5'>
+Tab 1
+        </Text>
       </Layout>
       <Layout
         level='2'
-        style={styles.tab}>
-        <Text category='h5'>Tab 2</Text>
+        style={styles.tab}
+      >
+        <Text category='h5'>
+Tab 2
+        </Text>
       </Layout>
     </ViewPager>
   );

@@ -4,10 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+export enum RangeRole {
+  none = 0,
+  member = 1,
+  start = 2,
+  end = 4,
+  complete = 6,
+}
+
 export interface CalendarDateOptions {
   bounding: boolean;
   holiday: boolean;
-  range?: boolean;
+  range?: RangeRole;
 }
 
 export interface CalendarRange<D> {
@@ -57,13 +65,13 @@ export interface CalendarViewMode {
   pickNext: () => CalendarViewMode;
 }
 
-interface CalendarViewModes {
+interface ICalendarViewModes {
   DATE: CalendarViewMode;
   MONTH: CalendarViewMode;
   YEAR: CalendarViewMode;
 }
 
-export const CalendarViewModes: CalendarViewModes = {
+export const CalendarViewModes: ICalendarViewModes = {
   DATE: VIEW_MODE_DATE,
   MONTH: VIEW_MODE_MONTH,
   YEAR: VIEW_MODE_YEAR,

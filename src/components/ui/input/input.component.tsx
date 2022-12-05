@@ -81,7 +81,8 @@ export type InputElement = React.ReactElement<InputProps>;
  * to render above the input field.
  * If it is a function, expected to return a Text.
  *
- * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below
+ * Input view.
  * Expected to return View.
  *
  * @property {ReactElement | (ImageProps) => ReactElement} accessoryLeft - Function component
@@ -171,17 +172,18 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
   private onTextFieldFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-    this.props.onFocus && this.props.onFocus(event);
+    this.props.onFocus?.(event);
   };
 
   private onTextFieldBlur = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.props.eva.dispatch([]);
-    this.props.onBlur && this.props.onBlur(event);
+    this.props.onBlur?.(event);
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const flatStyles: ViewStyle = StyleSheet.flatten(this.props.style);
-    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
+    const { rest: inputContainerStyle, ...containerStyle } =
+      PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
 
     const {
       textMarginHorizontal,
@@ -261,9 +263,11 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
     return (
       <TouchableWithoutFeedback
-        testID={testID}
+        testID={`@${testID}/container`}
         style={evaStyle.container}
-        onPress={this.focus}>
+        focusable={false}
+        onPress={this.focus}
+      >
         <FalsyText
           style={[evaStyle.label, styles.label]}
           component={label}
@@ -278,6 +282,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             placeholderTextColor={evaStyle.placeholder.color}
             {...textInputProps}
             {...this.webEventResponder.eventHandlers}
+            testID={`@${testID}/input`}
             style={[evaStyle.text, styles.text, platformStyles.text, textStyle]}
             editable={!textInputProps.disabled}
             onFocus={this.onTextFieldFocus}
@@ -288,8 +293,8 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             component={accessoryRight}
           />
         </View>
-        <FalsyText 
-          style={[evaStyle.captionLabel, styles.captionLabel]} 
+        <FalsyText
+          style={[evaStyle.captionLabel, styles.captionLabel]}
           component={caption}
         />
       </TouchableWithoutFeedback>

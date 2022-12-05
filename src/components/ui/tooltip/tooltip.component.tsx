@@ -45,10 +45,6 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets Tooltip visible.
- *
- * @method {() => void} hide - Sets Tooltip invisible.
- *
  * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} children - String, number or a function component
@@ -105,17 +101,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
 @styled('Tooltip')
 export class Tooltip extends React.Component<TooltipProps> {
 
-  private popoverRef = React.createRef<Popover>();
-
-  public show = (): void => {
-    this.popoverRef.current?.show();
-  };
-
-  public hide = (): void => {
-    this.popoverRef.current?.hide();
-  };
-
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       indicatorBackgroundColor,
       iconWidth,
@@ -154,7 +140,10 @@ export class Tooltip extends React.Component<TooltipProps> {
   private renderPopoverIndicatorElement = (props: ViewProps): React.ReactElement => {
     const evaStyle = this.getComponentStyle(this.props.eva.style);
     return (
-      <PopoverIndicator {...props} style={[props.style, evaStyle.indicator]} />
+      <PopoverIndicator
+        {...props}
+        style={[props.style, evaStyle.indicator]}
+      />
     );
   };
 
@@ -165,9 +154,9 @@ export class Tooltip extends React.Component<TooltipProps> {
     return (
       <Popover
         {...popoverProps}
-        ref={this.popoverRef}
         style={[evaStyle.container, style]}
-        indicator={this.renderPopoverIndicatorElement}>
+        indicator={this.renderPopoverIndicatorElement}
+      >
         <View style={styles.content}>
           <FalsyFC
             style={evaStyle.icon}

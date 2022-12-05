@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { ProgressBar } from '@ui-kitten/components';
 
 let timeoutId;
 const getRandomNum = (min: number, max: number): number => Math.random() * (max - min) + min;
 
-export const ProgressBarSimpleUsageShowcase = () => {
-  const [ progress, setProgress ] = React.useState(0);
+export const ProgressBarSimpleUsageShowcase = (): React.ReactElement => {
+  const [progress, setProgress] = React.useState(0);
 
   React.useEffect(() => {
     timeoutId = setTimeout(() => {
@@ -21,7 +20,7 @@ export const ProgressBarSimpleUsageShowcase = () => {
     }, 2000);
 
     return () => clearTimeout(timeoutId);
-  }, [ progress ]);
+  }, [progress]);
 
   return (
     <ProgressBar progress={progress} />

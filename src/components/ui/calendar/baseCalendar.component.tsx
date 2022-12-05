@@ -45,10 +45,11 @@ import {
 export interface BaseCalendarProps<D = Date> extends ViewProps {
   min?: D;
   max?: D;
+  initialVisibleDate?: D;
   dateService?: DateService<D>;
   boundingMonth?: boolean;
   startView?: CalendarViewMode;
-  title?: (date: D, viewMode: CalendarViewMode) => string;
+  title?: (datePickerDate: D, monthYearPickerDate: D, viewMode: CalendarViewMode) => string;
   filter?: (date: D) => boolean;
   renderFooter?: () => React.ReactElement;
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
@@ -62,11 +63,15 @@ export type BaseCalendarElement<D> = React.ReactElement<BaseCalendarProps<D>>;
 
 interface State<D> {
   viewMode: CalendarViewMode;
-  visibleDate: D;
+  visibleDate: D; // is used in date view mode
+  pickerDate: D; // is used in month/year view mode, goal - not to change visibleDate until month has changed
+  // pickerDate equals to visibleDate from start
+  // is auto synchronised with visibleDate on onPickerNavigationPress (open/close month/year picker)
+  // visibleDate is set to pickerDate on onMonthSelect
 }
 
-const PICKER_ROWS: number = 4;
-const PICKER_COLUMNS: number = 3;
+const PICKER_ROWS = 4;
+const PICKER_COLUMNS = 3;
 const VIEWS_IN_PICKER: number = PICKER_ROWS * PICKER_COLUMNS;
 
 export abstract class BaseCalendarComponent<P, D = Date> extends React.Component<BaseCalendarProps<D> & P, State<D>> {
@@ -79,8 +84,10 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   public state: State<D> = {
     viewMode: this.props.startView,
-    visibleDate: this.dateService.getMonthStart(this.selectedDate()),
+    visibleDate: this.dateService.getMonthStart(this.initialVisibleDate()),
+    pickerDate: this.dateService.getMonthStart(this.initialVisibleDate()),
   };
+
   protected dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
 
   protected get dateService(): DateService<D> {
@@ -99,10 +106,21 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     this.setState({
       viewMode: CalendarViewModes.DATE,
       visibleDate: this.dateService.today(),
+      pickerDate: this.dateService.today(),
     });
   };
 
-  public getCalendarStyle = (source: StyleType) => {
+  public scrollToDate = (date: D): void => {
+    if (date) {
+      this.setState({
+        viewMode: CalendarViewModes.DATE,
+        visibleDate: date,
+        pickerDate: date,
+      });
+    }
+  };
+
+  public getCalendarStyle = (source: StyleType): StyleType => {
     return {
       container: {
         width: source.width,
@@ -163,69 +181,84 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   protected abstract createDates(date: D): DateBatch<D>;
 
-  protected abstract selectedDate(): D;
+  protected abstract selectedDate(): D | undefined;
 
   protected abstract onDateSelect(item: D): void;
 
   protected abstract isDateSelected(date: D): boolean;
 
   protected abstract shouldUpdateDate(props: CalendarPickerCellProps<D>,
-                                      nextProps: CalendarPickerCellProps<D>): boolean;
+    nextProps: CalendarPickerCellProps<D>): boolean;
+
+  private initialVisibleDate(): D {
+    return this.props.initialVisibleDate || this.selectedDate() || this.dateService.today();
+  }
 
   private onDaySelect = ({ date }: CalendarDateInfo<D>): void => {
     this.onDateSelect(date);
   };
 
   private onMonthSelect = ({ date }: CalendarDateInfo<D>): void => {
+    const { pickerDate, viewMode } = this.state;
     const nextVisibleDate: D = this.dateService.createDate(
-      this.dateService.getYear(this.state.visibleDate),
+      this.dateService.getYear(pickerDate),
       this.dateService.getMonth(date),
-      this.dateService.getDate(this.state.visibleDate),
+      this.dateService.getDate(pickerDate),
     );
 
     this.setState({
-      viewMode: this.state.viewMode.pickNext(),
+      viewMode: viewMode.pickNext(),
       visibleDate: nextVisibleDate,
+      pickerDate: nextVisibleDate,
     }, () => {
       this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
     });
   };
 
   private onYearSelect = ({ date }: CalendarDateInfo<D>): void => {
+    const { pickerDate, viewMode } = this.state;
     const nextVisibleDate: D = this.dateService.createDate(
       this.dateService.getYear(date),
-      this.dateService.getMonth(this.state.visibleDate),
-      this.dateService.getDate(this.state.visibleDate),
+      this.dateService.getMonth(pickerDate),
+      this.dateService.getDate(pickerDate),
     );
 
     this.setState({
-      viewMode: this.state.viewMode.pickNext(),
-      visibleDate: nextVisibleDate,
-    }, () => {
-      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
+      viewMode: viewMode.pickNext(),
+      pickerDate: nextVisibleDate,
     });
   };
 
   private onPickerNavigationPress = (): void => {
+    const { viewMode, visibleDate } = this.state;
     this.setState({
-      viewMode: this.state.viewMode.navigationNext(),
+      viewMode: viewMode.navigationNext(),
+      pickerDate: visibleDate,
     });
   };
 
   private onHeaderNavigationLeftPress = (): void => {
-    this.setState({
-      visibleDate: this.createViewModeVisibleDate(-1),
-    }, () => {
-      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
-    });
+    const nextDate = this.createViewModeVisibleDate(-1);
+
+    if (this.state.viewMode.id === CalendarViewModes.DATE.id) {
+      this.setState({ visibleDate: nextDate }, () => {
+        this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
+      });
+    } else {
+      this.setState({ pickerDate: nextDate });
+    }
   };
 
   private onHeaderNavigationRightPress = (): void => {
-    this.setState({
-      visibleDate: this.createViewModeVisibleDate(1),
-    }, () => {
-      this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
-    });
+    const nextDate = this.createViewModeVisibleDate(1);
+
+    if (this.state.viewMode.id === CalendarViewModes.DATE.id) {
+      this.setState({ visibleDate: nextDate }, () => {
+        this.props.onVisibleDateChange?.(this.state.visibleDate, this.state.viewMode.id);
+      });
+    } else {
+      this.setState({ pickerDate: nextDate });
+    }
   };
 
   private getWeekdayStyle = (source: StyleType): StyleType => {
@@ -281,30 +314,32 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
         return this.dateService.addMonth(this.state.visibleDate, page);
       }
       case CalendarViewModes.MONTH.id: {
-        return this.dateService.addYear(this.state.visibleDate, page);
+        return this.dateService.addYear(this.state.pickerDate, page);
       }
       case CalendarViewModes.YEAR.id: {
-        return this.dateService.addYear(this.state.visibleDate, VIEWS_IN_PICKER * page);
+        return this.dateService.addYear(this.state.pickerDate, VIEWS_IN_PICKER * page);
       }
+      default: return;
     }
   };
 
-  private createViewModeHeaderTitle = (date: D, viewMode: CalendarViewMode): string => {
+  private createViewModeHeaderTitle = (visibleDate: D, pickerDate: D, viewMode: CalendarViewMode): string => {
     switch (viewMode.id) {
       case CalendarViewModes.DATE.id: {
-        const month: string = this.props.dateService.getMonthName(date, TranslationWidth.LONG);
-        const year: number = this.props.dateService.getYear(date);
+        const month: string = this.props.dateService.getMonthName(visibleDate, TranslationWidth.LONG);
+        const year: number = this.props.dateService.getYear(visibleDate);
         return `${month} ${year}`;
       }
       case CalendarViewModes.MONTH.id: {
-        return `${this.dateService.getYear(date)}`;
+        return `${this.dateService.getYear(pickerDate)}`;
       }
       case CalendarViewModes.YEAR.id: {
-        const minDateFormat: number = this.dateService.getYear(this.min);
-        const maxDateFormat: number = this.dateService.getYear(this.max);
+        const minDateFormat: number = this.dateService.getYear(pickerDate);
+        const maxDateFormat: number = minDateFormat + VIEWS_IN_PICKER - 1;
 
         return `${minDateFormat} - ${maxDateFormat}`;
       }
+      default: return;
     }
   };
 
@@ -323,7 +358,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         key={index}
-        textStyle={this.getWeekdayStyle(this.props.eva.style)}>
+        textStyle={this.getWeekdayStyle(this.props.eva.style)}
+      >
         {weekday}
       </CalendarDateContent>
     );
@@ -333,7 +369,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         style={evaStyle.container}
-        textStyle={evaStyle.text}>
+        textStyle={evaStyle.text}
+      >
         {this.dateService.getDate(date)}
       </CalendarDateContent>
     );
@@ -343,7 +380,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         style={evaStyle.container}
-        textStyle={evaStyle.text}>
+        textStyle={evaStyle.text}
+      >
         {this.dateService.getMonthName(date, TranslationWidth.SHORT)}
       </CalendarDateContent>
     );
@@ -353,21 +391,23 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         style={evaStyle.container}
-        textStyle={evaStyle.text}>
+        textStyle={evaStyle.text}
+      >
         {this.dateService.getYear(date)}
       </CalendarDateContent>
     );
   };
 
-  private renderDayPickerElement = (date: D, evaStyle): React.ReactFragment => {
+  private renderDayPickerElement = (date: D, evaStyle): React.ReactElement => {
     return (
-      <React.Fragment>
+      <>
         <CalendarMonthHeader
           style={evaStyle.daysHeaderContainer}
-          data={this.dateService.getDayOfWeekNames()}>
+          data={this.dateService.getDayOfWeekNames()}
+        >
           {this.renderWeekdayElement}
         </CalendarMonthHeader>
-        <Divider style={evaStyle.divider}/>
+        <Divider style={evaStyle.divider} />
         <CalendarPicker
           rowStyle={evaStyle.row}
           data={this.createDates(date)}
@@ -375,10 +415,11 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
           isItemSelected={this.isDaySelected}
           isItemDisabled={this.isDayDisabled}
           isItemToday={this.isDayToday}
-          shouldItemUpdate={this.shouldUpdateDate}>
+          shouldItemUpdate={this.shouldUpdateDate}
+        >
           {this.renderDayIfNeeded}
         </CalendarPicker>
-      </React.Fragment>
+      </>
     );
   };
 
@@ -390,7 +431,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
         onSelect={this.onMonthSelect}
         isItemSelected={this.isMonthSelected}
         isItemDisabled={this.isMonthDisabled}
-        isItemToday={this.isMonthToday}>
+        isItemToday={this.isMonthToday}
+      >
         {this.props.renderMonth || this.renderMonthElement}
       </CalendarPicker>
     );
@@ -404,24 +446,26 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
         onSelect={this.onYearSelect}
         isItemSelected={this.isYearSelected}
         isItemDisabled={this.isYearDisabled}
-        isItemToday={this.isYearToday}>
+        isItemToday={this.isYearToday}
+      >
         {this.props.renderYear || this.renderYearElement}
       </CalendarPicker>
     );
   };
 
-  private renderPickerElement = (date: D, style: StyleType): React.ReactNode => {
+  private renderPickerElement = (style: StyleType): React.ReactNode => {
     switch (this.state.viewMode.id) {
       case CalendarViewModes.DATE.id:
-        return this.renderDayPickerElement(date, style);
+        return this.renderDayPickerElement(this.state.visibleDate, style);
       case CalendarViewModes.MONTH.id:
-        return this.renderMonthPickerElement(date, style);
+        return this.renderMonthPickerElement(this.state.pickerDate, style);
       case CalendarViewModes.YEAR.id:
-        return this.renderYearPickerElement(date, style);
+        return this.renderYearPickerElement(this.state.pickerDate, style);
+      default: return;
     }
   };
 
-  private renderFooterElement = (evaStyle): React.ReactElement => {
+  private renderFooterElement = (): React.ReactElement => {
     if (this.props.renderFooter) {
       return this.props.renderFooter();
     }
@@ -433,8 +477,9 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
     return (
       <CalendarHeader
+        viewModeId={this.state.viewMode.id}
         style={evaStyle.headerContainer}
-        title={titleSelector(this.state.visibleDate, this.state.viewMode)}
+        title={titleSelector(this.state.visibleDate, this.state.pickerDate, this.state.viewMode)}
         titleStyle={evaStyle.title}
         iconStyle={evaStyle.icon}
         lateralNavigationAllowed={this.isHeaderNavigationAllowed()}
@@ -452,10 +497,11 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <View
         {...viewProps}
-        style={[evaStyle.container, style]}>
+        style={[evaStyle.container, style]}
+      >
         {this.renderHeaderElement(evaStyle)}
-        {this.renderPickerElement(this.state.visibleDate, evaStyle)}
-        {this.renderFooterElement(evaStyle)}
+        {this.renderPickerElement(evaStyle)}
+        {this.renderFooterElement()}
       </View>
     );
   }

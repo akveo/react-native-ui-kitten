@@ -11,9 +11,9 @@ import EvaConfigService, { EvaConfig } from './eva-config.service';
 import LogService from './log.service';
 import ProjectService from './project.service';
 
-const DEFAULT_CHECKSUM: string = 'default';
-const CACHE_FILE_NAME: string = 'generated.json';
-const CACHE_EXPORT_SIGNATURE: string = `\n\nexports.styles = require('./${CACHE_FILE_NAME}').styles`;
+const DEFAULT_CHECKSUM = 'default';
+const CACHE_FILE_NAME = 'generated.json';
+const CACHE_EXPORT_SIGNATURE = `\n\nexports.styles = require('./${CACHE_FILE_NAME}').styles`;
 
 const RELATIVE_PATHS = {
   evaPackage: (evaPackage: string): string => {
@@ -57,6 +57,7 @@ interface EvaCache {
  * E.g, if `evaPackage` is `@eva-design/eva`:
  * The result will be stored at `./node_modules/@eva-design/eva/generated.json`
  */
+// eslint-disable-next-line no-restricted-syntax
 export default class BootstrapService {
 
   static run = (config: EvaConfig): void => {
@@ -106,7 +107,7 @@ export default class BootstrapService {
     let actualChecksum: string = DEFAULT_CHECKSUM;
     let nextChecksum: string = DEFAULT_CHECKSUM;
 
-    if (actualCache && actualCache.checksum) {
+    if (actualCache?.checksum) {
       actualChecksum = actualCache.checksum;
     }
 
@@ -161,10 +162,10 @@ export default class BootstrapService {
     return JSON.stringify(cache, null, 2);
   };
 
-  private static createChecksum = (target: any): string => {
+  private static createChecksum = (target: string): string => {
     return Crypto.createHash('sha1')
-                 .update(target)
-                 .digest('hex');
+      .update(target)
+      .digest('hex');
   };
 }
 

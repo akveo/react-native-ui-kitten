@@ -6,7 +6,9 @@
 
 import React from 'react';
 import {
+  StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableOpacityProps,
 } from 'react-native';
 import { TouchableWithoutFeedback } from '../../../../devsupport';
@@ -19,7 +21,7 @@ import { CalendarDateInfo } from '../../type';
 
 type ChildrenProp<D> = (date: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
 
-export interface CalendarPickerCellProps<D> extends StyledComponentProps, TouchableOpacityProps {
+export interface CalendarPickerCellProps<D> extends StyledComponentProps {
   date: CalendarDateInfo<D>;
   selected?: boolean;
   bounding?: boolean;
@@ -30,6 +32,8 @@ export interface CalendarPickerCellProps<D> extends StyledComponentProps, Toucha
   onSelect?: (date: CalendarDateInfo<D>) => void;
   children: ChildrenProp<D>;
   shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
+  style?: StyleProp<TextStyle>;
+  disabled?: boolean;
 }
 
 export type CalendarPickerCellElement<D> = React.ReactElement<CalendarPickerCellProps<D>>;
@@ -45,33 +49,33 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
   }
 
   private onPress = (): void => {
-    this.props.onSelect && this.props.onSelect(this.props.date);
+    this.props.onSelect?.(this.props.date);
   };
 
   private getContainerBorderRadius = (borderRadius: number): StyleType => {
     const { firstRangeItem, lastRangeItem } = this.props;
 
+    const borderStyle = {
+      borderBottomRightRadius: 0,
+      borderTopRightRadius: 0,
+      borderBottomLeftRadius: 0,
+      borderTopLeftRadius: 0,
+    };
+
     if (firstRangeItem) {
-      return {
-        borderBottomLeftRadius: borderRadius,
-        borderBottomRightRadius: 0,
-        borderTopLeftRadius: borderRadius,
-        borderTopRightRadius: 0,
-      };
-    }
-    if (lastRangeItem) {
-      return {
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: borderRadius,
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: borderRadius,
-      };
+      borderStyle.borderBottomLeftRadius = borderRadius;
+      borderStyle.borderTopLeftRadius = borderRadius;
     }
 
-    return {};
+    if (lastRangeItem) {
+      borderStyle.borderBottomRightRadius = borderRadius;
+      borderStyle.borderTopRightRadius = borderRadius;
+    }
+
+    return borderStyle;
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       contentBorderWidth,
       contentBorderRadius,
@@ -106,7 +110,7 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
   };
 
   private renderContentElement = (source: ChildrenProp<D>, evaStyle): React.ReactElement => {
-    return source && source(this.props.date, {
+    return source?.(this.props.date, {
       container: evaStyle.contentContainer,
       text: evaStyle.contentText,
     });
@@ -120,7 +124,8 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
       <TouchableWithoutFeedback
         {...touchableProps}
         style={[evaStyle.container, styles.container, style]}
-        onPress={this.onPress}>
+        onPress={this.onPress}
+      >
         {this.renderContentElement(children, evaStyle)}
       </TouchableWithoutFeedback>
     );

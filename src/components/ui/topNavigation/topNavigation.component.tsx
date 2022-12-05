@@ -31,8 +31,8 @@ type TopNavigationStyledProps = Overwrite<StyledComponentProps, {
 export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   subtitle?: RenderProp<TextProps> | React.ReactText;
-  accessoryLeft?: RenderProp;
-  accessoryRight?: RenderProp;
+  accessoryLeft?: () => React.ReactElement;
+  accessoryRight?: () => React.ReactElement;
   alignment?: AlignmentProp;
 }
 
@@ -99,7 +99,7 @@ type AlignmentProp = 'start' | 'center';
 @styled('TopNavigation')
 export class TopNavigation extends React.Component<TopNavigationProps> {
 
-  private getAlignmentDependentStyles = (alignment: AlignmentProp) => {
+  private getAlignmentDependentStyles = (alignment: AlignmentProp): StyleType => {
     if (alignment === 'center') {
       return {
         container: styles.containerCentered,
@@ -112,7 +112,7 @@ export class TopNavigation extends React.Component<TopNavigationProps> {
     };
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
       titleTextAlign,
       titleFontFamily,
@@ -155,7 +155,8 @@ export class TopNavigation extends React.Component<TopNavigationProps> {
     return (
       <View
         style={[evaStyles.container, styles.container, alignmentStyles.container, style]}
-        {...viewProps}>
+        {...viewProps}
+      >
         <View style={styles.leftControlContainer}>
           <FalsyFC component={accessoryLeft} />
         </View>
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
   },
   leftControlContainer: {
     flexDirection: 'row',

@@ -7,7 +7,7 @@
 import React from 'react';
 import {
   Image,
-  ImageProps,
+  ImageProps, StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
@@ -36,10 +36,11 @@ import {
 
 describe('@tab: component checks', () => {
 
-  const TestTab = (props?: TabProps) => (
+  const TestTab = (props?: TabProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
+      theme={light}
+    >
       <Tab {...props} />
     </ApplicationProvider>
   );
@@ -53,7 +54,7 @@ describe('@tab: component checks', () => {
     );
 
     const component = render(
-      <TestTab icon={Icon}/>,
+      <TestTab icon={Icon} />,
     );
 
     const image = component.queryByType(Image);
@@ -70,7 +71,7 @@ describe('@tab: component checks', () => {
     );
 
     const component = render(
-      <TestTab icon={Icon}/>,
+      <TestTab icon={Icon} />,
     );
 
     const image = component.queryByType(Image);
@@ -81,7 +82,7 @@ describe('@tab: component checks', () => {
 
   it('should render string passed to title prop', () => {
     const component = render(
-      <TestTab title='I love Babel'/>,
+      <TestTab title='I love Babel' />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -89,7 +90,12 @@ describe('@tab: component checks', () => {
 
   it('should render function component passed to title prop', () => {
     const component = render(
-      <TestTab title={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestTab title={props => (
+        <Text {...props}>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -97,7 +103,12 @@ describe('@tab: component checks', () => {
 
   it('should render pure JSX component passed to title prop', () => {
     const component = render(
-      <TestTab title={<Text>I love Babel</Text>}/>,
+      <TestTab title={(
+        <Text>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -107,18 +118,22 @@ describe('@tab: component checks', () => {
 
 describe('@tab-bar: component checks', () => {
 
-  const TestTabBar = (props?: Partial<TabBarProps>) => {
+  const TestTabBar = (props?: Partial<TabBarProps>): React.ReactElement => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={light}>
+        theme={light}
+      >
         <TabBar
+          testID='@tab-bar'
           selectedIndex={selectedIndex}
-          onSelect={setSelectedIndex}>
-          <Tab title='Tab 0'/>
-          <Tab title='Tab 1'/>
+          onSelect={setSelectedIndex}
+          {...props}
+        >
+          <Tab title='Tab 0' />
+          <Tab title='Tab 1' />
         </TabBar>
       </ApplicationProvider>
     );
@@ -130,7 +145,7 @@ describe('@tab-bar: component checks', () => {
 
   it('should render 2 tabs passed to children', () => {
     const component = render(
-      <TestTabBar/>,
+      <TestTabBar />,
     );
 
     expect(component.queryAllByType(Tab).length).toEqual(2);
@@ -138,7 +153,7 @@ describe('@tab-bar: component checks', () => {
 
   it('should set tab selected by passing selectedIndex prop', () => {
     const component = render(
-      <TestTabBar selectedIndex={1}/>,
+      <TestTabBar selectedIndex={1} />,
     );
 
     expect(component.queryAllByType(Tab)[1].props.selected).toEqual(true);
@@ -146,27 +161,44 @@ describe('@tab-bar: component checks', () => {
 
   it('should set tab selected by pressing it', () => {
     const component = render(
-      <TestTabBar/>,
+      <TestTabBar />,
     );
 
     fireEvent.press(touchables.findTabTouchable(component, 1));
     expect(component.queryAllByType(Tab)[1].props.selected).toEqual(true);
   });
 
+  it('should render tab indicator correctly', () => {
+    const styles = { width: 99, backgroundColor: 'red' };
+    const component = render(
+      <TestTabBar indicatorStyle={styles} />,
+    );
+
+    const el = component.queryByTestId('indicator body');
+    const style = StyleSheet.flatten(el.props.style);
+
+    expect(style.width).toEqual(99);
+    expect(style.backgroundColor).toEqual('red');
+  });
 });
 
 describe('@tab-view: component checks', () => {
 
-  const TestTabView = (props?: TabViewProps) => (
+  const TestTabView = (props?: TabViewProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
+      theme={light}
+    >
       <TabView {...props}>
         <Tab>
-          <Text>Tab 0</Text>
+          <Text>
+            Tab 0
+          </Text>
         </Tab>
         <Tab>
-          <Text>Tab 1</Text>
+          <Text>
+            Tab 1
+          </Text>
         </Tab>
       </TabView>
     </ApplicationProvider>
@@ -174,7 +206,7 @@ describe('@tab-view: component checks', () => {
 
   it('should render 2 tabs passed to children', () => {
     const component = render(
-      <TestTabView/>,
+      <TestTabView />,
     );
 
     expect(component.queryAllByType(Tab).length).toEqual(2);
@@ -182,7 +214,7 @@ describe('@tab-view: component checks', () => {
 
   it('should render 2 content elements passed to tab children', () => {
     const component = render(
-      <TestTabView/>,
+      <TestTabView />,
     );
 
     expect(component.queryByText('Tab 0')).toBeTruthy();
@@ -191,11 +223,24 @@ describe('@tab-view: component checks', () => {
 
   it('should not render content elements if disabled by shouldLoadComponent prop', () => {
     const component = render(
-      <TestTabView shouldLoadComponent={index => index !== 1}/>,
+      <TestTabView shouldLoadComponent={index => index !== 1} />,
     );
 
     expect(component.queryByText('Tab 0')).toBeTruthy();
     expect(component.queryByText('Tab 1')).toBeFalsy();
+  });
+
+  it('should render tab indicator correctly', () => {
+    const styles = { width: 99, backgroundColor: 'red' };
+    const component = render(
+      <TestTabView indicatorStyle={styles} />,
+    );
+
+    const el = component.queryByTestId('indicator body');
+    const style = StyleSheet.flatten(el.props.style);
+
+    expect(style.width).toEqual(99);
+    expect(style.backgroundColor).toEqual('red');
   });
 });
 

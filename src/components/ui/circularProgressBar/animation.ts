@@ -22,8 +22,8 @@ const DEFAULT_CONFIG: CircularProgressBarAnimationConfig = {
 };
 
 interface AnimationStyle {
-  rotateFirstHalf: Animated.AnimatedInterpolation;
-  rotateSecondHalf: Animated.AnimatedInterpolation;
+  rotateFirstHalf: Animated.AnimatedInterpolation<string>;
+  rotateSecondHalf: Animated.AnimatedInterpolation<string>;
 }
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
@@ -66,18 +66,18 @@ export class CircularProgressBarAnimation extends Animation<CircularProgressBarA
     };
   }
 
-  private createRotateFirstHalfInterpolation = (): Animated.AnimatedInterpolation => {
+  private createRotateFirstHalfInterpolation = (): Animated.AnimatedInterpolation<string> => {
     return this.animationValue.interpolate({
-      inputRange: [ 0, 0.5 ],
-      outputRange: [ '180deg', '360deg' ],
+      inputRange: [0, 0.5],
+      outputRange: ['180deg', '360deg'],
       extrapolate: 'clamp',
     });
   };
 
-  private createRotateSecondHalfInterpolation = (): Animated.AnimatedInterpolation => {
+  private createRotateSecondHalfInterpolation = (): Animated.AnimatedInterpolation<string> => {
     return this.animationValue.interpolate({
-      inputRange: [ 0.5, 1 ],
-      outputRange: [ '180deg', '360deg' ],
+      inputRange: [0.5, 1],
+      outputRange: ['180deg', '360deg'],
       extrapolate: 'clamp',
     });
   };

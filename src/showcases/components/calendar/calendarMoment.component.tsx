@@ -10,7 +10,7 @@ import moment from 'moment';
 
 const dateService = new MomentDateService();
 
-export const CalendarMomentShowcase = () => {
+export const CalendarMomentShowcase = (): React.ReactElement => {
 
   const [date, setDate] = React.useState(moment());
 

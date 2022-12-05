@@ -102,6 +102,7 @@ const FlexViewCrossStyleValues = [
 export const FlexViewCrossStyleProps: string[] = FlexStyleProps.filter((el) => !FlexViewCrossStyleValues.includes(el));
 
 export interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -161,13 +162,13 @@ class NativePropsService {
    */
   public allWithPrefix(source: StyleType, key: string): StyleType {
     return Object.keys(source)
-                 .filter((styleName: string) => styleName.includes(key))
-                 .reduce((obj: StyleType, styleKey: string) => {
-                   return {
-                     ...obj,
-                     [styleKey]: source[styleKey],
-                   };
-                 }, {});
+      .filter((styleName: string) => styleName.includes(key))
+      .reduce((obj: StyleType, styleKey: string) => {
+        return {
+          ...obj,
+          [styleKey]: source[styleKey],
+        };
+      }, {});
   }
 }
 

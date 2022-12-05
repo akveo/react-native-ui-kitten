@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { pascal } from 'change-case';
+import { pascalCase } from 'change-case';
 
 interface ShowcaseMap {
   [componentName: string]: ComponentShowcase;
@@ -63,7 +63,7 @@ const createComponentShowcase = (showcasePath: string, component: string): Compo
   const showcaseFiles: string[] = fs.readdirSync(path.resolve(showcasePath, component));
 
   return showcaseFiles.reduce((showcaseAcc: ComponentShowcase, showcaseFile: string) => {
-    const routeName: string = pascal(`${showcaseFile.split('.component.tsx')[0]}`);
+    const routeName: string = pascalCase(`${showcaseFile.split('.component.tsx')[0]}`);
     const showcaseInfo: ShowcaseInfo = { name: `${routeName}Showcase`, routeName, path: showcaseFile };
     return { ...showcaseAcc, showcases: [...showcaseAcc.showcases, showcaseInfo] };
   }, { showcases: [] });

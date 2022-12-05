@@ -2,16 +2,21 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, CircularProgressBar } from '@ui-kitten/components';
 
-export const CircularProgressBarStatesShowcase = () => {
+export const CircularProgressBarStatesShowcase = (): React.ReactElement => {
   return (
-    <Layout style={styles.container} level='1'>
-
-      <CircularProgressBar progress={0.33}/>
-
-      <CircularProgressBar progress={1} state='success'/>
-
-      <CircularProgressBar progress={0.81} state='error'/>
-
+    <Layout
+      style={styles.container}
+      level='1'
+    >
+      <CircularProgressBar progress={0.33} />
+      <CircularProgressBar
+        progress={1}
+        status='success'
+      />
+      <CircularProgressBar
+        progress={0.81}
+        status='danger'
+      />
     </Layout>
   );
 };

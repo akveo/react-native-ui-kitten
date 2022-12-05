@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Text } from '@ui-kitten/components';
 
-export const CardSimpleUsageShowcase = () => (
+export const CardSimpleUsageShowcase = (): React.ReactElement => (
   <Card>
     <Text>
       The Maldives, officially the Republic of Maldives, is a small country in South Asia,

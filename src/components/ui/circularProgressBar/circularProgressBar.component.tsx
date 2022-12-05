@@ -14,7 +14,6 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { NumberProp } from 'react-native-svg';
 import {
   EvaSize,
   LiteralUnion,
@@ -130,7 +129,7 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
   }
 
   private get containerSize(): Size {
-    const { width, height } = StyleSheet.flatten([ this.props.eva.style, this.props.style ]);
+    const { width, height } = StyleSheet.flatten([this.props.eva.style, this.props.style]);
     // @ts-ignore: width and height are restricted to be a number
     return new Size(width, height);
   }
@@ -161,15 +160,15 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
   private startAnimation = (): void => {
     const validProgress = this.clamp(this.props.progress);
     this.animation.startDeterminate(validProgress);
-  }
+  };
 
   private stopAnimation = (): void => {
     this.animation.stop();
-  }
+  };
 
   private clamp = (progress: number): number => {
     return progress > 1 ? 1 : (progress < 0 ? 0 : progress);
-  }
+  };
 
   private getComponentStyle = (source: StyleType): ComponentStyles => {
     const {
@@ -215,18 +214,17 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
         fontWeight: textFontWeight,
       },
     };
-  }
+  };
 
   private renderHalfCircle = (radius: number, style: IndicatorStyle): React.ReactElement<ViewProps> => {
     const { width, color } = style;
+    const containerSizeStyle = {
+      width: radius * 2,
+      height: radius,
+    };
 
     return (
-      <View
-        style={{
-          width: radius * 2,
-          height: radius,
-          overflow: 'hidden',
-        }}>
+      <View style={[styles.circle, containerSizeStyle]}>
         <View
           style={{
             borderWidth: width,
@@ -238,10 +236,13 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
         />
       </View>
     );
-  }
+  };
 
   private renderHalf = (
-    evaStyle: ComponentStyles, viewStyle: ViewStyle, rotate: NumberProp, opacity?: NumberProp,
+    evaStyle: ComponentStyles,
+    viewStyle: ViewStyle,
+    rotate: string,
+    opacity?: number,
   ): React.ReactElement<ViewProps> => {
     const { radius, indicator } = evaStyle;
     const opacityProp = opacity || opacity === 0 ? { opacity } : undefined;
@@ -249,24 +250,28 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     return (
       <View style={viewStyle}>
         <View style={{ width: radius * 2, height: radius }} />
-        <Animated.View
-          style={{
-            ...styles.absoluteFill,
-            ...opacityProp,
-            transform: [
-              { translateY: radius / 2 },
-              { rotate },
-              { translateY: -1 * radius / 2 },
-              { perspective: 1000 },
-            ],
-          }}>
+        <Animated.View style={{
+          ...styles.absoluteFill,
+          ...opacityProp,
+          transform: [
+            { translateY: radius / 2 },
+            { rotate },
+            { translateY: -1 * radius / 2 },
+            { perspective: 1000 },
+          ],
+        }}
+        >
           {this.renderHalfCircle(radius, indicator)}
         </Animated.View>
       </View>
     );
-  }
+  };
 
-  private renderCircularProgress = (progress: number, animating: boolean, evaStyle: ComponentStyles): React.ReactElement<ViewProps> => {
+  private renderCircularProgress = (
+    progress: number,
+    animating: boolean,
+    evaStyle: ComponentStyles
+  ): React.ReactElement<ViewProps> => {
     let firstHalfRotate;
     let secondHalfRotate;
 
@@ -288,48 +293,50 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     };
 
     return (
-      <View style={[ styles.absoluteFill, styles.center, styles.rotate90 ]}>
+      <View style={[styles.absoluteFill, styles.center, styles.rotate90]}>
         <View style={trackStyle} />
         {this.renderHalf(evaStyle, styles.zIndex, firstHalfRotate)}
         {this.renderHalf(evaStyle, styles.rotate180, secondHalfRotate)}
       </View>
     );
-  }
+  };
 
   private renderText = (progress: number, style: TextStyle): React.ReactElement<TextProps> => {
     const label = `${Math.round(progress * 100)}%`;
-    const { status, textStyle } = this.props
+    const { status, textStyle } = this.props;
 
     return (
       <Text
-        style={[ style, textStyle ]}
+        style={[style, textStyle]}
         status={status}
       >
         {label}
       </Text>
     );
-  }
+  };
 
   private renderIcon = (state: LoadingStates, style: IconStyle): React.ReactElement<IconProps> => {
     return (
       <FalsyFC
         component={this.props.renderIcon}
-        style={[ style, this.props.iconStyle ]}
+        style={[style, this.props.iconStyle]}
       />
     );
   };
 
-  private renderAccessory = (progress: number, status: EvaStatus, evaStyle: ComponentStyles): React.ReactElement<ViewProps> => {
+  private renderAccessory = (
+    progress: number,
+    status: EvaStatus,
+    evaStyle: ComponentStyles
+  ): React.ReactElement<ViewProps> => {
     const showIcon = this.props.renderIcon;
 
     return (
-      <View style={[ styles.absoluteFill, styles.center ]}>
-        {
-          showIcon ? this.renderIcon(status, evaStyle.icon) : this.renderText(progress, evaStyle.text)
-        }
+      <View style={[styles.absoluteFill, styles.center]}>
+        {showIcon ? this.renderIcon(status, evaStyle.icon) : this.renderText(progress, evaStyle.text)}
       </View>
     );
-  }
+  };
 
   public render(): React.ReactElement<ViewProps> {
     const {
@@ -348,7 +355,8 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     return (
       <View
         {...viewProps}
-        style={[ evaStyle.container, style ]}>
+        style={[evaStyle.container, style]}
+      >
         {this.renderCircularProgress(validProgress, animating, evaStyle)}
         {this.renderAccessory(validProgress, status, evaStyle)}
       </View>
@@ -377,7 +385,10 @@ const styles = StyleSheet.create({
     transform: [
       { rotate: '180deg' },
     ],
-    overflow: 'hidden'
+    overflow: 'hidden',
+  },
+  circle: {
+    overflow: 'hidden',
   },
 });
 

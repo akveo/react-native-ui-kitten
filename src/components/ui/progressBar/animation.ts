@@ -7,7 +7,8 @@
 import {
   Animated,
   Easing,
-  Platform, TransformsStyle, ViewStyle,
+  Platform,
+  ViewStyle,
 } from 'react-native';
 import {
   Animation,
@@ -21,7 +22,7 @@ const DEFAULT_CONFIG: ProgressBarAnimationConfig = {
   useNativeDriver: Platform.OS !== 'web',
 };
 
-type ProgressBarAnimationStyle = Animated.AnimatedProps<ViewStyle>
+type ProgressBarAnimationStyle = Animated.AnimatedProps<ViewStyle>;
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
 
@@ -31,7 +32,7 @@ export class ProgressBarAnimation extends Animation<ProgressBarAnimationConfig, 
 
   private toValue: number;
 
-  private barWidth: number = 0;
+  private barWidth = 0;
 
   private readonly animationValue: Animated.Value;
 
@@ -71,10 +72,10 @@ export class ProgressBarAnimation extends Animation<ProgressBarAnimationConfig, 
     };
   }
 
-  private createTranslateXInterpolation = (): Animated.AnimatedInterpolation => {
+  private createTranslateXInterpolation = (): Animated.AnimatedInterpolation<number> => {
     return this.animationValue.interpolate({
-      inputRange: [ 0, 1 ],
-      outputRange: [ -this.barWidth, 0 ],
+      inputRange: [0, 1],
+      outputRange: [-this.barWidth, 0],
     });
   };
 }

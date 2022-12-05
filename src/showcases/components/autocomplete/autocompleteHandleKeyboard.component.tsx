@@ -1,5 +1,5 @@
-import React from 'react';
-import { Keyboard, Platform } from 'react-native';
+import React, { useCallback } from 'react';
+import { Keyboard, KeyboardEventName, Platform } from 'react-native';
 import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
 const movies = [
@@ -20,20 +20,20 @@ const hideEvent = Platform.select({
   default: 'keyboardWillHide',
 });
 
-const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
+const filter = (item, query): boolean => item.title.toLowerCase().includes(query.toLowerCase());
 
-export const AutocompleteHandleKeyboardShowcase = () => {
+export const AutocompleteHandleKeyboardShowcase = (): React.ReactElement => {
 
   const [value, setValue] = React.useState(null);
   const [data, setData] = React.useState(movies);
   const [placement, setPlacement] = React.useState('bottom');
 
   React.useEffect(() => {
-    const keyboardShowListener = Keyboard.addListener(showEvent, () => {
+    const keyboardShowListener = Keyboard.addListener(showEvent as KeyboardEventName, () => {
       setPlacement('top');
     });
 
-    const keyboardHideListener = Keyboard.addListener(hideEvent, () => {
+    const keyboardHideListener = Keyboard.addListener(hideEvent as KeyboardEventName, () => {
       setPlacement('bottom');
     });
 
@@ -43,16 +43,16 @@ export const AutocompleteHandleKeyboardShowcase = () => {
     };
   });
 
-  const onSelect = (index) => {
-    setValue(movies[index].title);
-  };
+  const onSelect = useCallback((index): void => {
+    setValue(data[index].title);
+  }, [data]);
 
-  const onChangeText = (query) => {
+  const onChangeText = useCallback((query): void => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
-  };
+  }, []);
 
-  const renderOption = (item, index) => (
+  const renderOption = (item, index): React.ReactElement => (
     <AutocompleteItem
       key={index}
       title={item.title}
@@ -65,7 +65,8 @@ export const AutocompleteHandleKeyboardShowcase = () => {
       value={value}
       placement={placement}
       onChangeText={onChangeText}
-      onSelect={onSelect}>
+      onSelect={onSelect}
+    >
       {data.map(renderOption)}
     </Autocomplete>
   );

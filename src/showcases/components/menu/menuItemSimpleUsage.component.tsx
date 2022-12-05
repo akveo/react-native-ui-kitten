@@ -1,15 +1,21 @@
 import React from 'react';
-import { Icon, MenuItem } from '@ui-kitten/components';
+import { Icon, IconElement, MenuItem } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
-  <Icon {...props} name='star'/>
+const StarIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='star'
+  />
 );
 
-const ForwardIcon = (props) => (
-  <Icon {...props} name='arrow-ios-forward'/>
+const ForwardIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='arrow-ios-forward'
+  />
 );
 
-export const MenuItemSimpleUsageShowcase = () => (
+export const MenuItemSimpleUsageShowcase = (): React.ReactElement => (
   <MenuItem
     title='Users'
     accessoryLeft={StarIcon}

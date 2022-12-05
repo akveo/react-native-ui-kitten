@@ -24,12 +24,6 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
 /**
  * Range date picker provides a simple way to select a date range within a picker displayed in modal.
  *
- * @extends React.Component
- *
- * @method {() => void} show - Sets picker visible.
- *
- * @method {() => void} hide - Sets picker invisible.
- *
  * @method {() => void} focus - Focuses Datepicker and sets it visible.
  *
  * @method {() => void} blur - Removes focus from Datepicker and sets it invisible.
@@ -38,9 +32,17 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @method {() => void} clear - Removes all text from the Datepicker.
  *
+ * @method {() => void} scrollToToday - Show the current date in the picker, the picker should be visible.
+ *
+ * @method {(date: D) => void} scrollToDate - Show the specific date in the picker, the picker should be visible.
+ *
  * @property {CalendarRange<D>} range - Date range which is currently selected.
  * CalendarRange `startDate?: D, endDate?: D` - Object with start and end dates for date range.
  * A range may contain only a startDate or both startDate and endDate properties meaning completeness of picked value.
+ *
+ * @property {D} initialVisibleDate - Specific date that should be shown on load.
+ * If it is not set, the selected date or today's date will be displayed.
+ * Clear initialVisibleDate to stop showing it when the datepicker is opened.
  *
  * @property {(CalendarRange) => void} onSelect - Called when day cell is pressed.
  *
@@ -72,7 +74,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
  * Defaults to *CalendarViewModes.DATE*.
  *
- * @property {(D) => string} title - A function to transform selected date to a string displayed in header.
+ * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed
+ * in header for the specific view mode: first date - date picker, second date - year and month picker.
  *
  * @property {(D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
@@ -86,8 +89,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Can be `small`, `medium` or `large`.
  * Defaults to *medium*.
  *
- * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function component
- * to render when input field is empty.
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function
+ * component to render when input field is empty.
  * If it is a function, expected to return a Text.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} label - String, number or a function component
@@ -102,7 +105,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * to render to end of the text.
  * Expected to return an Image.
  *
- * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * @property {ReactElement | ReactText | (TextProps) => ReactElement} caption - Function component to render below
+ * Input view.
  * Expected to return View.
  *
  * @property {() => void} onFocus - Called when picker becomes visible.
@@ -125,7 +129,7 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
 @styled('Datepicker')
 export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
 
-  static styledComponentName: string = 'Datepicker';
+  static styledComponentName = 'Datepicker';
 
   constructor(props: RangeDatepickerProps<D>) {
     super(props);
@@ -137,6 +141,7 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
       min: this.props.min,
       max: this.props.max,
       range: this.props.range,
+      initialVisibleDate: this.props.initialVisibleDate,
       dateService: this.props.dateService,
       boundingMonth: this.props.boundingMonth,
       startView: this.props.startView,
@@ -151,7 +156,7 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
   }
 
   public clear = (): void => {
-    this.props.onSelect && this.props.onSelect({});
+    this.props.onSelect?.({});
   };
 
   // BaseDatepickerComponent
@@ -171,8 +176,10 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
 
   protected renderCalendar(): RangeCalendarElement<D> {
     return (
-      // @ts-ignore
-      <RangeCalendar {...this.calendarProps} />
+      <RangeCalendar
+        ref={this.calendarRef}
+        {...this.calendarProps}
+      />
     );
   }
 }

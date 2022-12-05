@@ -6,10 +6,10 @@ const data = new Array(8).fill({
   title: 'Item',
 });
 
-export const ListSimpleUsageShowcase = () => {
+export const ListSimpleUsageShowcase = (): React.ReactElement => {
 
-  const renderItem = ({ item, index }) => (
-    <ListItem title={`${item.title} ${index + 1}`}/>
+  const renderItem = ({ item, index }: { item: { title: string }; index: number }): React.ReactElement => (
+    <ListItem title={`${item.title} ${index + 1}`} />
   );
 
   return (

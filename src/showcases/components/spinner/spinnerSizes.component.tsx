@@ -2,18 +2,21 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Spinner } from '@ui-kitten/components';
 
-export const SpinnerSizesShowcase = () => (
-  <Layout style={styles.container} level='1'>
+export const SpinnerSizesShowcase = (): React.ReactElement => (
+  <Layout
+    style={styles.container}
+    level='1'
+  >
 
-    <Spinner size='tiny'/>
+    <Spinner size='tiny' />
 
-    <Spinner size='small'/>
+    <Spinner size='small' />
 
-    <Spinner size='medium'/>
+    <Spinner size='medium' />
 
-    <Spinner size='large'/>
+    <Spinner size='large' />
 
-    <Spinner size='giant'/>
+    <Spinner size='giant' />
 
   </Layout>
 );

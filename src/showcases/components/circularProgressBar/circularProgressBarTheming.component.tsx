@@ -4,8 +4,8 @@ import { CircularProgressBar } from '@ui-kitten/components';
 let timeoutId;
 const getRandomNum = (min: number, max: number): number => Math.random() * (max - min) + min;
 
-export const CircularProgressBarThemingShowcase = () => {
-  const [ progress, setProgress ] = React.useState(0);
+export const CircularProgressBarThemingShowcase = (): React.ReactElement => {
+  const [progress, setProgress] = React.useState(0);
 
   React.useEffect(() => {
     timeoutId = setTimeout(() => {
@@ -20,7 +20,7 @@ export const CircularProgressBarThemingShowcase = () => {
     }, 2000);
 
     return () => clearTimeout(timeoutId);
-  }, [ progress ]);
+  }, [progress]);
 
   return (
     <CircularProgressBar progress={progress} />
