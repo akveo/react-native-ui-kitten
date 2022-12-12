@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-export const batch = <T>(target: T[], batchSize: number, offset: number = 0): T[][] => {
+export const batch = <T>(target: T[], batchSize: number, offset = 0): T[][] => {
   return target.reduce((res, item, index): T[] => {
     const chunkIndex = Math.floor((index + offset) / batchSize);
     if (!res[chunkIndex]) {
@@ -19,7 +19,7 @@ export const batch = <T>(target: T[], batchSize: number, offset: number = 0): T[
 /**
  * returns array with numbers from zero to bound.
  * */
-export const range = <T>(bound: number, producer: (number) => T = i => i) => {
+export const range = <T>(bound: number, producer: (number) => T = i => i): T[] => {
   const arr: T[] = [];
 
   for (let i = 0; i < bound; i++) {

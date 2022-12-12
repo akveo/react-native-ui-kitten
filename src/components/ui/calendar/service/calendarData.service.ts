@@ -174,20 +174,20 @@ export class CalendarDataService<D> {
     const daysInMonth: number = this.dateService.getNumberOfDaysInMonth(month);
 
     return this.createDateRangeForMonth(month, DEFAULT_DATE_OPTIONS)
-               .slice(daysInMonth - numberOfBoundingDates)
-               .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
-                 return { ...date, bounding: true };
-               });
+      .slice(daysInMonth - numberOfBoundingDates)
+      .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
+        return { ...date, bounding: true };
+      });
   }
 
   private createNextBoundingDays(activeMonth: D, numberOfBoundingDates: number): DateRange<D> {
     const month: D = this.dateService.addMonth(activeMonth, 1);
 
     return this.createDateRangeForMonth(month, DEFAULT_DATE_OPTIONS)
-               .slice(0, numberOfBoundingDates)
-               .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
-                 return { ...date, bounding: true };
-               });
+      .slice(0, numberOfBoundingDates)
+      .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
+        return { ...date, bounding: true };
+      });
   }
 
   private getStartOfWeekDayDiff(date: D): number {
@@ -198,9 +198,9 @@ export class CalendarDataService<D> {
 
   private getWeekStartDiff(date: D): number {
     return (
-      DateService.DAYS_IN_WEEK
-      - this.dateService.getFirstDayOfWeek()
-      + this.dateService.getDayOfWeek(date)
+      DateService.DAYS_IN_WEEK -
+      this.dateService.getFirstDayOfWeek() +
+      this.dateService.getDayOfWeek(date)
     ) % DateService.DAYS_IN_WEEK;
   }
 

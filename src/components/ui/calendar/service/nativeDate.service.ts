@@ -42,7 +42,8 @@ export class NativeDateService extends DateService<Date> {
     this.setFechaLocaleData(this.options.i18n || EN);
   }
 
-  public setLocale(locale: string) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public setLocale(locale: string): void {
     console.warn('Runtime locale is not supported');
   }
 
@@ -102,6 +103,7 @@ export class NativeDateService extends DateService<Date> {
   /**
    * We haven't got capability to parse date using formatting without third party libraries.
    * */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public parse(date: string, format: string): Date {
     return new Date(Date.parse(date));
   }
@@ -200,6 +202,8 @@ export class NativeDateService extends DateService<Date> {
         return this.i18nSettings.dayNamesShort;
       case TranslationWidth.LONG:
         return this.i18nSettings.dayNames;
+      default:
+        return;
     }
   }
 
@@ -209,10 +213,12 @@ export class NativeDateService extends DateService<Date> {
         return this.i18nSettings.monthNamesShort;
       case TranslationWidth.LONG:
         return this.i18nSettings.monthNames;
+      default:
+        return;
     }
   }
 
-  private setFechaLocaleData(config: I18nConfig) {
+  private setFechaLocaleData(config: I18nConfig): void {
     this.i18nSettings = {
       ...fecha.i18n,
       dayNames: config.dayNames[TranslationWidth.LONG],

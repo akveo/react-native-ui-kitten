@@ -29,10 +29,6 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets picker visible.
- *
- * @method {() => void} hide - Sets picker invisible.
- *
  * @method {() => void} focus - Focuses Datepicker and sets it visible.
  *
  * @method {() => void} blur - Removes focus from Datepicker and sets it invisible.
@@ -85,7 +81,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
  * Defaults to *CalendarViewModes.DATE*.
  *
- * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed in header for the specific view mode: first date - date picker, second date - year and month picker.
+ * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed in
+ * header for the specific view mode: first date - date picker, second date - year and month picker.
  *
  * @property {(date: D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
@@ -99,8 +96,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Can be `small`, `medium` or `large`.
  * Defaults to *medium*.
  *
- * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function component
- * to render when input field is empty.
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function
+ * component to render when input field is empty.
  * If it is a function, expected to return a Text.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} label - String, number or a function component
@@ -115,7 +112,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * to render to end of the text.
  * Expected to return an Image.
  *
- * @property {ReactText | ReactElement | (TextProps) => ReactElement} caption - Function component to render below Input view.
+ * @property {ReactText | ReactElement | (TextProps) => ReactElement} caption - Function component to render below
+ * Input view.
  * Expected to return View.
  *
  * @property {() => void} onFocus - Called when picker becomes visible.
@@ -241,7 +239,7 @@ export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProp
   }
 
   protected onSelect = (date: D): void => {
-    this.props.onSelect && this.props.onSelect(date);
+    this.props.onSelect?.(date);
     this.props.autoDismiss && this.blur();
   };
 

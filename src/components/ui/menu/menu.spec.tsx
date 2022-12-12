@@ -35,17 +35,18 @@ jest.useFakeTimers();
 
 describe('@menu-item: component checks', () => {
 
-  const TestMenuItem = (props?: MenuItemProps) => (
+  const TestMenuItem = (props?: MenuItemProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
-      <MenuItem {...props}/>
+      theme={light}
+    >
+      <MenuItem {...props} />
     </ApplicationProvider>
   );
 
   it('should render text passed to title prop', () => {
     const component = render(
-      <TestMenuItem title='I love Babel'/>,
+      <TestMenuItem title='I love Babel' />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -53,7 +54,12 @@ describe('@menu-item: component checks', () => {
 
   it('should render text passed to title prop as pure JSX component', () => {
     const component = render(
-      <TestMenuItem title={<Text>I love Babel</Text>}/>,
+      <TestMenuItem title={(
+        <Text>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -61,7 +67,12 @@ describe('@menu-item: component checks', () => {
 
   it('should render function component passed to title prop', () => {
     const component = render(
-      <TestMenuItem title={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestMenuItem title={props => (
+        <Text {...props}>
+          I love Babel
+        </Text>
+      )}
+      />,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -131,7 +142,7 @@ describe('@menu-item: component checks', () => {
   it('should call onPress', () => {
     const onPress = jest.fn();
     const component = render(
-      <TestMenuItem onPress={onPress}/>,
+      <TestMenuItem onPress={onPress} />,
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
@@ -141,7 +152,7 @@ describe('@menu-item: component checks', () => {
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
     const component = render(
-      <TestMenuItem onPressIn={onPressIn}/>,
+      <TestMenuItem onPressIn={onPressIn} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -151,7 +162,7 @@ describe('@menu-item: component checks', () => {
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
     const component = render(
-      <TestMenuItem onPressOut={onPressOut}/>,
+      <TestMenuItem onPressOut={onPressOut} />,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
@@ -162,19 +173,20 @@ describe('@menu-item: component checks', () => {
 
 describe('@menu: component checks', () => {
 
-  const TestMenu = (props: MenuProps) => (
+  const TestMenu = (props: MenuProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
-      <Menu {...props}/>
+      theme={light}
+    >
+      <Menu {...props} />
     </ApplicationProvider>
   );
 
   it('should render two menu items passed to children', () => {
     const component = render(
       <TestMenu>
-        <MenuItem title='Option 1'/>
-        <MenuItem title='Option 2'/>
+        <MenuItem title='Option 1' />
+        <MenuItem title='Option 2' />
       </TestMenu>,
     );
 
@@ -190,8 +202,8 @@ describe('@menu: component checks', () => {
 
     const component = render(
       <TestMenu onSelect={onSelect}>
-        <MenuItem title='Option 1'/>
-        <MenuItem title='Option 2'/>
+        <MenuItem title='Option 1' />
+        <MenuItem title='Option 2' />
       </TestMenu>,
     );
 
@@ -207,12 +219,12 @@ describe('@menu: component checks', () => {
     const component = render(
       <TestMenu onSelect={onSelect}>
         <MenuGroup title='Group 1'>
-          <MenuItem title='Option 1.1'/>
-          <MenuItem title='Option 1.2'/>
+          <MenuItem title='Option 1.1' />
+          <MenuItem title='Option 1.2' />
         </MenuGroup>
         <MenuGroup title='Group 2'>
-          <MenuItem title='Option 2.1'/>
-          <MenuItem title='Option 2.2'/>
+          <MenuItem title='Option 2.1' />
+          <MenuItem title='Option 2.2' />
         </MenuGroup>
       </TestMenu>,
     );
@@ -229,10 +241,10 @@ describe('@menu: component checks', () => {
     const component = render(
       <TestMenu onSelect={onSelect}>
         <MenuGroup title='Group 1'>
-          <MenuItem title='Option 1.1'/>
-          <MenuItem title='Option 1.2'/>
+          <MenuItem title='Option 1.1' />
+          <MenuItem title='Option 1.2' />
         </MenuGroup>
-        <MenuItem title='Option 1'/>
+        <MenuItem title='Option 1' />
       </TestMenu>
     );
 
@@ -247,12 +259,12 @@ describe('@menu: component checks', () => {
 
     const component = render(
       <TestMenu onSelect={onSelect}>
-        <MenuItem title='Option 1'/>
+        <MenuItem title='Option 1' />
         <MenuGroup title='Group 2'>
-          <MenuItem title='Option 2.1'/>
-          <MenuItem title='Option 2.2'/>
+          <MenuItem title='Option 2.1' />
+          <MenuItem title='Option 2.2' />
         </MenuGroup>
-        <MenuItem title='Option 3'/>
+        <MenuItem title='Option 3' />
       </TestMenu>
     );
 
@@ -266,13 +278,19 @@ describe('@menu: component checks', () => {
 
     const component = render(
       <TestMenu onSelect={onSelect}>
-        <MenuGroup onPress={onGroupPress} title='Group 1'>
-          <MenuItem onPress={onItemPress} title='Option 1.1'/>
-          <MenuItem title='Option 1.2'/>
+        <MenuGroup
+          onPress={onGroupPress}
+          title='Group 1'
+        >
+          <MenuItem
+            onPress={onItemPress}
+            title='Option 1.1'
+          />
+          <MenuItem title='Option 1.2' />
         </MenuGroup>
         <MenuGroup title='Group 2'>
-          <MenuItem title='Option 2.1'/>
-          <MenuItem title='Option 2.2'/>
+          <MenuItem title='Option 2.1' />
+          <MenuItem title='Option 2.2' />
         </MenuGroup>
       </TestMenu>,
     );

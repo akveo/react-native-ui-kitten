@@ -2,24 +2,30 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from '@ui-kitten/components';
 
-export const TextAppearancesShowcase = () => (
-  <React.Fragment>
+export const TextAppearancesShowcase = (): React.ReactElement => (
+  <>
 
     <Text style={styles.text}>
       Default Text.
     </Text>
 
-    <Text style={styles.text} appearance='hint'>
+    <Text
+      style={styles.text}
+      appearance='hint'
+    >
       Hint Text.
     </Text>
 
     <View style={styles.alternativeContainer}>
-      <Text style={styles.text} appearance='alternative'>
+      <Text
+        style={styles.text}
+        appearance='alternative'
+      >
         Alternative Text.
       </Text>
     </View>
 
-  </React.Fragment>
+  </>
 );
 
 const styles = StyleSheet.create({

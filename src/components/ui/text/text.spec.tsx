@@ -18,17 +18,20 @@ import {
 
 describe('@text: component checks', () => {
 
-  const TestText = (props?: TextProps) => (
+  const TestText = (props?: TextProps): React.ReactElement => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}>
-      <Text {...props}/>
+      theme={light}
+    >
+      <Text {...props} />
     </ApplicationProvider>
   );
 
   it('should render text passed to children', () => {
     const component = render(
-      <TestText>I love Babel</TestText>,
+      <TestText>
+        I love Babel
+      </TestText>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -37,7 +40,9 @@ describe('@text: component checks', () => {
   it('should render component passed to children', () => {
     const component = render(
       <TestText>
-        <Text>I love Babel</Text>
+        <Text>
+          I love Babel
+        </Text>
       </TestText>,
     );
 

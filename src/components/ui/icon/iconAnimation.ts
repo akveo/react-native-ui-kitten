@@ -13,7 +13,7 @@ import {
   ZoomAnimation,
 } from '../animation';
 
-export type IconAnimation = Animation<any, ViewStyle>;
+export type IconAnimation = Animation<AnimationConfig, ViewStyle>;
 
 export interface IconAnimationRegistry {
   zoom: IconAnimation;
@@ -21,7 +21,9 @@ export interface IconAnimationRegistry {
   shake: IconAnimation;
 }
 
-export function getIconAnimation(animation?: keyof IconAnimationRegistry | null, config?: AnimationConfig): IconAnimation | null {
+export function getIconAnimation(
+  animation?: keyof IconAnimationRegistry | null,
+  config?: AnimationConfig): IconAnimation | null {
   switch (animation) {
     case 'zoom':
       return new ZoomAnimation(config);

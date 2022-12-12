@@ -1,23 +1,33 @@
 import React from 'react';
-import { Button, Icon, List, ListItem } from '@ui-kitten/components';
+import { Button, Icon, IconElement, List, ListItem } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
+
+interface IListItem {
+  title: string;
+  description: string;
+}
 
 const data = new Array(8).fill({
   title: 'Title for Item',
   description: 'Description for Item',
 });
 
-export const ListAccessoriesShowcase = () => {
+export const ListAccessoriesShowcase = (): React.ReactElement => {
 
-  const renderItemAccessory = (props) => (
-    <Button size='tiny'>FOLLOW</Button>
+  const renderItemAccessory = (): React.ReactElement => (
+    <Button size='tiny'>
+FOLLOW
+    </Button>
   );
 
-  const renderItemIcon = (props) => (
-    <Icon {...props} name='person'/>
+  const renderItemIcon = (props): IconElement => (
+    <Icon
+      {...props}
+      name='person'
+    />
   );
 
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({ item, index }: { item: IListItem; index: number }): React.ReactElement => (
     <ListItem
       title={`${item.title} ${index + 1}`}
       description={`${item.description} ${index + 1}`}

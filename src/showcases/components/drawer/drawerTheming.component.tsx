@@ -1,30 +1,39 @@
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
-import { Divider, Drawer, DrawerItem, Icon } from '@ui-kitten/components';
+import { ImageBackground, StyleSheet, ViewProps } from 'react-native';
+import { Divider, Drawer, DrawerItem, Icon, IconElement, IconProps } from '@ui-kitten/components';
 
-const PersonIcon = (props) => (
-  <Icon {...props} name='person-outline'/>
+const PersonIcon = (props: IconProps): IconElement => (
+  <Icon
+    {...props}
+    name='person-outline'
+  />
 );
 
-const BellIcon = (props) => (
-  <Icon {...props} name='bell-outline'/>
+const BellIcon = (props: IconProps): IconElement => (
+  <Icon
+    {...props}
+    name='bell-outline'
+  />
 );
 
-const ForwardIcon = (props) => (
-  <Icon {...props} name='arrow-ios-forward'/>
+const ForwardIcon = (props: IconProps): IconElement => (
+  <Icon
+    {...props}
+    name='arrow-ios-forward'
+  />
 );
 
-const Header = (props) => (
-  <React.Fragment>
+const Header = (props: ViewProps): React.ReactElement => (
+  <>
     <ImageBackground
       style={[props.style, styles.header]}
       source={require('../../assets/icon.png')}
     />
-    <Divider/>
-  </React.Fragment>
+    <Divider />
+  </>
 );
 
-export const DrawerThemingShowcase = () => {
+export const DrawerThemingShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 
@@ -32,7 +41,8 @@ export const DrawerThemingShowcase = () => {
     <Drawer
       header={Header}
       selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}>
+      onSelect={index => setSelectedIndex(index)}
+    >
       <DrawerItem
         title='Users'
         accessoryLeft={PersonIcon}

@@ -9,7 +9,6 @@ import {
   Button,
   StyleSheet,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
@@ -59,36 +58,48 @@ describe('@popover: component checks', () => {
    */
   const touchables = {
     findToggleButton: (api: RenderAPI) => api.queryByTestId('@popover/toggle-button'),
-    findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[1],
+    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
 
   const TestPopover = React.forwardRef((props: Partial<PopoverProps>, ref: React.Ref<Popover>) => {
-    const [visible, setVisible] = React.useState(props.visible);
+    const [visible, setVisible] = React.useState(props.visible || false);
 
-    const togglePopover = () => {
+    const togglePopover = (): void => {
       setVisible(!visible);
     };
 
-    const AnchorButton = () => (
-      <Button testID='@popover/toggle-button' title='' onPress={togglePopover}/>
+    const AnchorButton = (): React.ReactElement => (
+      <Button
+        testID='@popover/toggle-button'
+        title=''
+        onPress={togglePopover}
+      />
     );
 
     return (
-      <ApplicationProvider mapping={mapping} theme={light}>
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
         <Popover
           ref={ref}
           visible={visible}
           anchor={AnchorButton}
-          {...props}>
-          <Text>I love Babel</Text>
+          {...props}
+        >
+          <Text>
+            I love Babel
+          </Text>
         </Popover>
       </ApplicationProvider>
     );
   });
 
+  TestPopover.displayName = 'TestPopover';
+
   it('should render element passed to `anchor` prop', () => {
     const component = render(
-      <TestPopover/>,
+      <TestPopover />,
     );
 
     expect(touchables.findToggleButton(component)).toBeTruthy();
@@ -96,7 +107,7 @@ describe('@popover: component checks', () => {
 
   it('should not render content when not visible', () => {
     const component = render(
-      <TestPopover visible={false}/>,
+      <TestPopover visible={false} />,
     );
 
     expect(component.queryByText('I love Babel')).toBeFalsy();
@@ -104,11 +115,10 @@ describe('@popover: component checks', () => {
 
   it('should render content when becomes visible', async () => {
     const component = render(
-      <TestPopover/>,
+      <TestPopover />,
     );
 
-
-    fireEvent.press(component.queryByTestId('@popover/toggle-button'));
+    fireEvent.press(touchables.findToggleButton(component));
     const text = await waitForElement(() => component.queryByText('I love Babel'));
 
     expect(text).toBeTruthy();
@@ -117,7 +127,7 @@ describe('@popover: component checks', () => {
   it('should call onBackdropPress', async () => {
     const onBackdropPress = jest.fn();
     const component = render(
-      <TestPopover onBackdropPress={onBackdropPress}/>,
+      <TestPopover onBackdropPress={onBackdropPress} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -129,41 +139,15 @@ describe('@popover: component checks', () => {
   });
 
   it('should style backdrop with backdropStyle prop', async () => {
+    const backdropStyle = { backgroundColor: 'red' };
     const component = render(
-      <TestPopover backdropStyle={{ backgroundColor: 'red' }}/>,
+      <TestPopover backdropStyle={backdropStyle} />,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
 
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
-  });
-
-  it('should be able to show with ref', async () => {
-    const componentRef = React.createRef<Popover>();
-    const component = render(
-      <TestPopover ref={componentRef}/>,
-    );
-
-    componentRef.current.show();
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-
-    expect(text).toBeTruthy();
-  });
-
-  it('should be able to hide with ref', async () => {
-    const componentRef = React.createRef<Popover>();
-    const component = render(
-      <TestPopover ref={componentRef}/>,
-    );
-
-    componentRef.current.show();
-    await waitForElement(() => null);
-
-    componentRef.current.hide();
-    const text = await waitForElement(() => component.queryByText('I love Babel'));
-
-    expect(text).toBeFalsy();
   });
 });
 

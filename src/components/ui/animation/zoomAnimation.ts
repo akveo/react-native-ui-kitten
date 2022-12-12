@@ -31,7 +31,7 @@ export interface ZoomAnimationConfig extends AnimationConfig, TimingAnimationCon
 
 export class ZoomAnimation extends Animation<ZoomAnimationConfig, ViewProps> {
 
-  private value: Animated.Value;
+  private readonly value: Animated.Value;
 
   constructor(config?: ZoomAnimationConfig) {
     super({ ...DEFAULT_CONFIG, ...config });

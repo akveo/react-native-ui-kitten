@@ -140,10 +140,10 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
   };
 
   private onTabSelect = (index: number): void => {
-    this.props.onSelect && this.props.onSelect(index);
+    this.props.onSelect?.(index);
   };
 
-  private getComponentStyle = (source: StyleType) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const { indicatorHeight, indicatorBackgroundColor, ...containerParameters } = source;
 
     return {
@@ -161,7 +161,7 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     return (
       <TabIndicator
         key={0}
-        style={[ style, indicatorStyle ]}
+        style={[style, indicatorStyle]}
         selectedPosition={selectedIndex}
         positions={positions}
       />
@@ -197,9 +197,12 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     const [indicatorElement, ...tabElements] = this.renderComponentChildren(evaStyle);
 
     return (
-      <View testID={testID} style={styles.container}>
+      <View
+        testID={testID}
+        style={styles.container}
+      >
         {indicatorElement}
-        <View style={[ evaStyle.container, styles.elementsContainer, style ]}>
+        <View style={[evaStyle.container, styles.elementsContainer, style]}>
           {tabElements}
         </View>
       </View>

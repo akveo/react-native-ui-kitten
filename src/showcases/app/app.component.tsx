@@ -1,5 +1,5 @@
 import React from 'react';
-import { Updates } from 'expo';
+import { reloadAsync } from 'expo-updates';
 import { enableScreens } from 'react-native-screens';
 import * as eva from '@eva-design/eva';
 import * as material from '@eva-design/material';
@@ -31,13 +31,14 @@ const mapping: AppMapping = isMappingKey ? (storedMapping as AppMapping) : AppMa
 
 enableScreens();
 
+// eslint-disable-next-line no-restricted-syntax, react/display-name
 export default (): React.ReactElement => {
 
   const [theme, setTheme] = React.useState<AppTheme>(AppTheme.light);
 
   const dispatchMappingChange = (nextMapping: AppMapping): void => {
     localStorage.setItem('mapping', nextMapping);
-    Updates.reload().then();
+    reloadAsync().then().catch(Promise.reject);
   };
 
   const isDarkMode = (): boolean => {
@@ -47,10 +48,12 @@ export default (): React.ReactElement => {
   const applicationProviderConfig: ApplicationProviderProps = {
     mapping: mappings[mapping],
     theme: themes[mapping][theme],
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     customMapping: customMapping,
   };
 
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const themeContextProviderConfig: ThemeContextType = {
     mapping: mapping,
     theme: theme,
@@ -60,13 +63,13 @@ export default (): React.ReactElement => {
   };
 
   return (
-    <React.Fragment>
-      <IconRegistry icons={EvaIconsPack}/>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...applicationProviderConfig}>
         <ThemeContext.Provider value={themeContextProviderConfig}>
-          <AppNavigator/>
+          <AppNavigator />
         </ThemeContext.Provider>
       </ApplicationProvider>
-    </React.Fragment>
+    </>
   );
 };

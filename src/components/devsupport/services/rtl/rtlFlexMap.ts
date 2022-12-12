@@ -1,9 +1,9 @@
-const FLEX_PREFIX: string = 'flex';
-const FLEX_ROW_PREFIX: string = 'row';
-const FLEX_WRAP_PREFIX: string = 'wrap';
-const FLEX_START_PREFIX: string = 'start';
-const FLEX_END_PREFIX: string = 'end';
-const FLEX_REVERSE_PREFIX: string = 'reverse';
+const FLEX_PREFIX = 'flex';
+const FLEX_ROW_PREFIX = 'row';
+const FLEX_WRAP_PREFIX = 'wrap';
+const FLEX_START_PREFIX = 'start';
+const FLEX_END_PREFIX = 'end';
+const FLEX_REVERSE_PREFIX = 'reverse';
 
 /**
  * Works with FlexBox style properties that starts with `flex` and ends with `-start` or `-end`
@@ -71,7 +71,7 @@ const FlexWrapMapper: RTLFlexMapper<string> = {
 /**
  * Matches FlexBox style properties that can affect on Layout depending on LTR/RTL mode corresponding Mappers
  */
-export const RtlFlexMap: Record<string, RTLFlexMapper<any>> = {
+export const RtlFlexMap: Record<string, RTLFlexMapper<string>> = {
   alignContent: FlexStartEndMapper,
   alignItems: FlexStartEndMapper,
   alignSelf: FlexStartEndMapper,

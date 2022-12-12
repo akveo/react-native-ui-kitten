@@ -20,7 +20,6 @@ import {
   MenuItemElement,
   MenuItemProps,
 } from './menuItem.component';
-import { ModalService } from '../../theme';
 import { MenuItemDescriptor } from './menu.service';
 
 export interface MenuGroupProps extends MenuItemProps {
@@ -34,9 +33,9 @@ interface State {
   submenuHeight: number;
 }
 
-const CHEVRON_DEG_COLLAPSED: number = -180;
-const CHEVRON_DEG_EXPANDED: number = 0;
-const CHEVRON_ANIM_DURATION: number = 200;
+const CHEVRON_DEG_COLLAPSED = -180;
+const CHEVRON_DEG_EXPANDED = 0;
+const CHEVRON_ANIM_DURATION = 200;
 const POSITION_OUTSCREEN: Point = Point.outscreen();
 
 /**
@@ -82,7 +81,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     this.initiallyExpanded = props.initiallyExpanded;
   }
 
-  public componentDidUpdate(prevProps: Readonly<MenuGroupProps>, prevState: Readonly<State>, snapshot?: any) {
+  public componentDidUpdate(prevProps: Readonly<MenuGroupProps>, prevState: Readonly<State>): void {
     const submenuHeightChanged = this.state.submenuHeight !== prevState.submenuHeight;
     if (submenuHeightChanged && this.hasSubmenu && this.initiallyExpanded) {
       this.expandAnimation.setValue(this.state.submenuHeight);
@@ -125,7 +124,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
       const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
       this.createExpandAnimation(expandValue).start();
-      this.props.onPress && this.props.onPress(descriptor, event);
+      this.props.onPress?.(descriptor, event);
     }
   };
 
@@ -150,7 +149,10 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown {...evaProps} fill={style.tintColor as string}/>
+        <ChevronDown
+          {...evaProps}
+          fill={style.tintColor as string}
+        />
       </Animated.View>
     );
   };
@@ -172,8 +174,8 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
   private renderMeasuringGroupedItems = (evaStyle): MeasuringElement => {
     return (
       <MeasureElement
-        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-        onMeasure={this.onSubmenuMeasure}>
+        onMeasure={this.onSubmenuMeasure}
+      >
         {this.renderGroupedItems(evaStyle)}
       </MeasureElement>
     );
@@ -195,14 +197,14 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     const { children, ...itemProps } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <MenuItem
           accessoryRight={this.renderAccessoryIfNeeded}
           {...itemProps}
           onPress={this.onPress}
         />
         {this.renderGroupedItemsIfNeeded({})}
-      </React.Fragment>
+      </>
     );
   }
 }

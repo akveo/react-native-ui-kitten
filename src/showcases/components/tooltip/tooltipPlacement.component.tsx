@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button, IndexPath, Layout, Select, SelectItem, Tooltip } from '@ui-kitten/components';
 
 const placements = [
@@ -17,50 +17,55 @@ const placements = [
   'right end',
 ];
 
-export const TooltipPlacementShowcase = () => {
+export const TooltipPlacementShowcase = (): React.ReactElement => {
 
   const [visible, setVisible] = React.useState(false);
   const [placementIndex, setPlacementIndex] = React.useState(new IndexPath(1, 0));
   const placement = placements[placementIndex.row];
 
-  const onPlacementSelect = (index) => {
+  const onPlacementSelect = (index): void => {
     setPlacementIndex(index);
   };
 
-  const renderToggleButton = () => (
+  const renderToggleButton = (): React.ReactElement => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE TOOLTIP
     </Button>
   );
 
-  const renderPlacementItem = (title) => (
-    <SelectItem title={title}/>
+  const renderPlacementItem = (title): React.ReactElement => (
+    <SelectItem title={title} />
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <Select
         placeholder='Select Placement'
         value={placement}
         selectedIndex={placementIndex}
-        onSelect={onPlacementSelect}>
+        onSelect={onPlacementSelect}
+      >
         {placements.map(renderPlacementItem)}
       </Select>
 
-      <Layout style={styles.buttonContainer} level='1'>
+      <Layout
+        style={styles.buttonContainer}
+        level='1'
+      >
 
         <Tooltip
           anchor={renderToggleButton}
           visible={visible}
           placement={placement}
-          onBackdropPress={() => setVisible(false)}>
+          onBackdropPress={() => setVisible(false)}
+        >
           Welcome to UI Kitten 😻
         </Tooltip>
 
       </Layout>
 
-    </React.Fragment>
+    </>
   );
 };
 

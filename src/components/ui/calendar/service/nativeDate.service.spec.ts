@@ -30,17 +30,23 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should be initialized with en locale', () => {
-    expect((<any>dateService).locale).toBe('en');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    expect((dateService).locale).toBe('en');
   });
 
   it('* should be initialized with zh locale', () => {
     dateService = new NativeDateService('zh', { i18n });
-    expect((<any>dateService).locale).toBe('zh');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    expect(dateService.locale).toBe('zh');
   });
 
   it('* should be initialized with en locale if no i18n', () => {
     dateService = new NativeDateService('zh');
-    expect((<any>dateService).locale).toBe('en');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    expect(dateService.locale).toBe('en');
   });
 
   it('* should validate as correct if date string is valid according to the format', () => {
@@ -130,7 +136,7 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should parse date', () => {
-    const date: string = '06.15.2018';
+    const date = '06.15.2018';
     expect(dateService.parse(date, '')).toEqual(new Date(2018, 5, 15));
   });
 

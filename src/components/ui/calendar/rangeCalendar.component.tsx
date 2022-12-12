@@ -62,7 +62,8 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
  * Defaults to *CalendarViewModes.DATE*.
  *
- * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed in header for the specific view mode: first date - date picker, second date - year and month picker.
+ * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed in
+ * header for the specific view mode: first date - date picker, second date - year and month picker.
  *
  * @property {(D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
@@ -89,7 +90,8 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * to render right arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
  *
- * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next month / year.
+ * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next
+ * month / year.
  * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
@@ -144,7 +146,7 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
     }
   }
 
-  protected isDateSelected(date: D): boolean {
+  protected isDateSelected(): boolean {
     return false;
   }
 
@@ -162,11 +164,11 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
     const rangeEndPlaceChanged: boolean = props.lastRangeItem !== nextProps.lastRangeItem;
 
     const shouldUpdate: boolean =
-      selectionChanged
-      || disablingChanged
-      || rangeChanged
-      || rangeStartPlaceChanged
-      || rangeEndPlaceChanged;
+      selectionChanged ||
+      disablingChanged ||
+      rangeChanged ||
+      rangeStartPlaceChanged ||
+      rangeEndPlaceChanged;
 
     if (shouldUpdate) {
       return true;

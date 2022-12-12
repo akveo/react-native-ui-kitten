@@ -1,13 +1,33 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Divider, Icon, List, ListItem, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import {
+  Button,
+  Divider,
+  Icon,
+  IconElement,
+  List,
+  ListItem,
+  TopNavigation,
+  TopNavigationAction,
+} from '@ui-kitten/components';
 
-const BackIcon = (props) => (
-  <Icon {...props} name='arrow-back'/>
+interface IListItem {
+  title: string;
+  description: string;
+}
+
+const BackIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='arrow-back'
+  />
 );
 
-const SettingsIcon = (props) => (
-  <Icon {...props} name='settings'/>
+const SettingsIcon = (props): IconElement => (
+  <Icon
+    {...props}
+    name='settings'
+  />
 );
 
 const data = new Array(8).fill({
@@ -15,25 +35,30 @@ const data = new Array(8).fill({
   description: 'Description for Item',
 });
 
-export const TopNavigationDividerShowcase = () => {
+export const TopNavigationDividerShowcase = (): React.ReactElement => {
 
-  const renderSettingsAction = () => (
-    <TopNavigationAction icon={SettingsIcon}/>
+  const renderSettingsAction = (): React.ReactElement => (
+    <TopNavigationAction icon={SettingsIcon} />
   );
 
-  const renderBackAction = () => (
-    <TopNavigationAction icon={BackIcon}/>
+  const renderBackAction = (): React.ReactElement => (
+    <TopNavigationAction icon={BackIcon} />
   );
 
-  const renderItemAccessory = (props) => (
-    <Button size='tiny'>FOLLOW</Button>
+  const renderItemAccessory = (): React.ReactElement => (
+    <Button size='tiny'>
+FOLLOW
+    </Button>
   );
 
-  const renderItemIcon = (props) => (
-    <Icon {...props} name='person'/>
+  const renderItemIcon = (props): IconElement => (
+    <Icon
+      {...props}
+      name='person'
+    />
   );
 
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({ item, index }: { item: IListItem; index: number }): React.ReactElement => (
     <ListItem
       title={`${item.title} ${index + 1}`}
       description={`${item.description} ${index + 1}`}
@@ -43,19 +68,19 @@ export const TopNavigationDividerShowcase = () => {
   );
 
   return (
-    <React.Fragment>
+    <>
       <TopNavigation
         title='Eva Application'
         accessoryLeft={renderBackAction}
         accessoryRight={renderSettingsAction}
       />
-      <Divider/>
+      <Divider />
       <List
         style={styles.container}
         data={data}
         renderItem={renderItem}
       />
-    </React.Fragment>
+    </>
   );
 };
 
