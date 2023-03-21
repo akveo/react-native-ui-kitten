@@ -152,7 +152,7 @@ export class Card extends React.Component<CardProps> {
           component={header}
         />
         {header && <Divider />}
-        <View style={[ styles.content, evaStyle.body ]}>
+        <View style={[styles.content, evaStyle.body]}>
           {children}
         </View>
         {footer && <Divider />}
@@ -174,5 +174,5 @@ const styles = StyleSheet.create({
   },
   content: {
     flexShrink: 1,
-  }
+  },
 });
