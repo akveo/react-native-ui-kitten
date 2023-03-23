@@ -546,4 +546,68 @@ describe('@range-datepicker: component checks', () => {
     expect(visibleDate.getMonth()).toEqual(dateToScroll.getMonth());
   });
 
+  it('should render custom left arrow', () => {
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+
+    const onVisibleDateChange = jest.fn();
+
+    const renderArrow = (props: { onPress: () => void }) => {
+      return (
+        <TouchableOpacity
+          testID={'@arrow/left'}
+          onPress={props.onPress}
+        >
+          <Text>LEFT</Text>
+        </TouchableOpacity>
+      )
+    }
+
+    const component = render(
+      <TestRangeDatepicker
+        ref={componentRef}
+        renderArrowLeft={renderArrow}
+        onVisibleDateChange={onVisibleDateChange}
+      />
+    );
+
+    componentRef.current?.focus();
+
+    const leftArrow = component.queryByTestId('@arrow/left');
+    fireEvent.press(leftArrow);
+
+    expect(onVisibleDateChange).toBeCalled();
+  })
+
+  it('should render custom right arrow', () => {
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+
+    const onVisibleDateChange = jest.fn();
+
+    const renderArrow = (props: { onPress: () => void }) => {
+      return (
+        <TouchableOpacity
+          testID={'@arrow/right'}
+          onPress={props.onPress}
+        >
+          <Text>RIGHT</Text>
+        </TouchableOpacity>
+      )
+    }
+
+    const component = render(
+      <TestRangeDatepicker
+        ref={componentRef}
+        renderArrowRight={renderArrow}
+        onVisibleDateChange={onVisibleDateChange}
+      />
+    );
+
+    componentRef.current?.focus();
+
+    const leftArrow = component.queryByTestId('@arrow/right');
+    fireEvent.press(leftArrow);
+
+    expect(onVisibleDateChange).toBeCalled();
+  })
+
 });

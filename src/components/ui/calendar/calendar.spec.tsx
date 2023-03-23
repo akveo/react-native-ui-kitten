@@ -26,6 +26,7 @@ import {
 } from './calendar.component';
 import { CalendarViewModes } from './type';
 import { MomentDateService } from '@ui-kitten/moment';
+import { Text } from '../text/text.component';
 
 describe('@calendar: component checks', () => {
 
@@ -347,5 +348,59 @@ describe('@calendar: component checks', () => {
     expect(onVisibleDateChange).toBeCalledTimes(2);
 
   });
+
+  it('should render custom left arrow', () => {
+    const onVisibleDateChange = jest.fn();
+
+    const renderArrow = (props: { onPress: () => void }) => {
+      return (
+        <TouchableOpacity
+          testID={'@arrow/left'}
+          onPress={props.onPress}
+        >
+          <Text>LEFT</Text>
+        </TouchableOpacity>
+      )
+    }
+
+    const component = render(
+      <TestCalendar
+        renderArrowLeft={renderArrow}
+        onVisibleDateChange={onVisibleDateChange}
+      />
+    );
+
+    const leftArrow = component.queryByTestId('@arrow/left');
+    fireEvent.press(leftArrow);
+
+    expect(onVisibleDateChange).toBeCalled();
+  })
+
+  it('should render custom right arrow', () => {
+    const onVisibleDateChange = jest.fn();
+
+    const renderArrow = (props: { onPress: () => void }) => {
+      return (
+        <TouchableOpacity
+          testID={'@arrow/right'}
+          onPress={props.onPress}
+        >
+          <Text>RIGHT</Text>
+        </TouchableOpacity>
+      )
+    }
+
+    const component = render(
+      <TestCalendar
+        renderArrowRight={renderArrow}
+        onVisibleDateChange={onVisibleDateChange}
+      />
+    );
+
+    const leftArrow = component.queryByTestId('@arrow/right');
+    fireEvent.press(leftArrow);
+
+    expect(onVisibleDateChange).toBeCalled();
+  })
 
 });
