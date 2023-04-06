@@ -22,7 +22,7 @@
     "lint": "eslint -c .eslintrc.js ./src",
     "test": "jest",
     "parse-docs": "gulp parse-docs",
-    "view-docs": "gulp parse-docs && cd docs && yarn start && cd ..",
+    "view-docs": "cd src/showcases/ && npm run env -- dev && cd ../.. && yarn parse-docs && cd docs && yarn start && cd ..",
     "bump-version": "gulp bump-version && conventional-changelog -i CHANGELOG.md -s",
     "publish-docs": "npm run parse-docs && gulp publish-docs",
     "publish-packages": "gulp publish-packages",

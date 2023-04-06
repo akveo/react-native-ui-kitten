@@ -99,13 +99,13 @@ export type CircularProgressBarElement = React.ReactElement<CircularProgressBarP
  * Optional. Can define duration, easing function and etc.
  *
  * @overview-example CircularProgressBarSimpleUsage
- * Default CircularProgressBar state is `progress`, size is `medium` and animating is `true`.
+ * Default CircularProgressBar status is `primary`, size is `medium` and animating is `true`.
  *
  * @overview-example CircularProgressBarSizes
  * To resize CircularProgressBar, a `size` property may be used.
  *
  * @overview-example CircularProgressBarStates
- * To show the specific state of the process, a `state` property may be used.
+ * To show the specific status of the process, a `status` property may be used.
  *
  * @overview-example CircularProgressBarTheming
  * Styling of CircularProgressBar is possible with [configuring a custom theme](guides/branding).
@@ -286,7 +286,7 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
     }
 
     const trackStyle = {
-      ...styles.absoluteFill,
+      ...StyleSheet.absoluteFillObject,
       borderWidth: evaStyle.track.width,
       borderColor: evaStyle.track.color,
       borderRadius: evaStyle.radius,

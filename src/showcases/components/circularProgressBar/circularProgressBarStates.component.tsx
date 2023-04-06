@@ -1,20 +1,22 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, CircularProgressBar } from '@ui-kitten/components';
+import { useProgress } from '../../helpers/progress.hook';
 
 export const CircularProgressBarStatesShowcase = (): React.ReactElement => {
+  const progress = useProgress();
   return (
     <Layout
       style={styles.container}
       level='1'
     >
-      <CircularProgressBar progress={0.33} />
+      <CircularProgressBar progress={progress} />
       <CircularProgressBar
-        progress={1}
+        progress={progress}
         status='success'
       />
       <CircularProgressBar
-        progress={0.81}
+        progress={progress}
         status='danger'
       />
     </Layout>
