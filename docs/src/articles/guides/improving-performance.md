@@ -39,9 +39,13 @@ Metro Bundler is used to bundle React Native applications.
 By using it with extra configuration, we may compile Eva packages during the application build time.
 This means, the application will start with ready-to-go stylings.
 
-Create **metro.config.js** at the root of your project if you don't have this file yet and place the following code:
+Create **metro.config.js** at the root of your project (if you don't have this file yet) and use the `MetroConfig.create` method to add necessary handlers into default config object (or previously specified if you already had customizations). 
+If your application uses [mapping customization](design-system/customize-mapping) feature, or you have created another mapping.json during the previous steps, you can specify a path to custom mapping.json file:
 
 ```js
+const { getDefaultConfig } = require('metro-config'); // If you have a bare react-native project
+// const { getDefaultConfig } = require("expo/metro-config"); // If your project is an expo one
+
 const MetroConfig = require('@ui-kitten/metro-config');
 
 const evaConfig = {
@@ -50,27 +54,12 @@ const evaConfig = {
   // customMappingPath: './custom-mapping.json',
 };
 
-module.exports = MetroConfig.create(evaConfig, {
-  // Whatever was previously specified
-});
-```
-
-If your application uses [mapping customization](design-system/customize-mapping) feature,
-or you have created another mapping.json during the previous steps,
-it's also required to specify a path to custom mapping.json.
-
-```js
-const MetroConfig = require('@ui-kitten/metro-config');
-
-const evaConfig = {
-  evaPackage: '@eva-design/eva',
-  customMappingPath: './path-to/mapping.json',
+module.exports = async () => {
+  const defaultConfig = await getDefaultConfig(__dirname);
+  return MetroConfig.create(evaConfig, defaultConfig);
 };
-
-module.exports = MetroConfig.create(evaConfig, {
-  // Whatever was previously specified
-});
 ```
+
 Shut down the current bundler process and restart the app with clearing cache.
 
 ```bash
@@ -113,45 +102,3 @@ It may be one of the valid Eva Design System packages.
 **customMappingPath** represents a path to custom mapping if you use [mapping customization](design-system/customize-mapping) feature. You may omit it if you do not customize Eva.
 
 The second argument of `create` function is a standard configuration of Metro Bundler. In case you had `metro.config.js` previously, pass the object you had to merge it with UI Kitten configuration.
-
-## Using with 3rd party Metro configurations
-
-Some libraries may require having specific Metro Bundler configuration, assuming you should merge it with the one provided by UI Kitten. To simplify this process, we made `@ui-kitten/metro-config` package resolve this issue out of the box, meaning you **should not** merge two configurations yourself.
-
-For example, let's have a look on how it can be used with `react-native-svg-transformer` library:
-
-The required configuration is:
-
-```js
-{
-  transformer: {
-    babelTransformerPath: require.resolve("react-native-svg-transformer")
-  },
-  resolver: {
-    assetExts: assetExts.filter(ext => ext !== "svg"),
-    sourceExts: [...sourceExts, "svg"]
-  }
-}
-```
-
-Meaning you can simply put it down into `create` function.
-
-```js
-const MetroConfig = require('@ui-kitten/metro-config');
-const defaultConfig = require('metro-config/src/defaults').getDefaultValues();
-
-const evaConfig = {
-  evaPackage: '@eva-design/eva',
-};
-
-module.exports = MetroConfig.create(evaConfig, {
-  transformer: {
-    babelTransformerPath: require.resolve('react-native-svg-transformer'),
-  },
-  resolver: {
-    assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg'),
-    sourceExts: [...defaultConfig.resolver.sourceExts, 'svg']
-  },
-});
-```
-
