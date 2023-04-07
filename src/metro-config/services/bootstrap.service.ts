@@ -4,7 +4,6 @@ import {
   ThemeStyleType,
 } from '@eva-design/dss';
 import { SchemaProcessor } from '@eva-design/processor';
-import Crypto from 'crypto';
 import Fs from 'fs';
 import LodashMerge from 'lodash.merge';
 import EvaConfigService, { EvaConfig } from './eva-config.service';
@@ -162,10 +161,15 @@ export default class BootstrapService {
     return JSON.stringify(cache, null, 2);
   };
 
+  // JavaScript implementation of Java's String.hashCode() method
   private static createChecksum = (target: string): string => {
-    return Crypto.createHash('sha1')
-      .update(target)
-      .digest('hex');
+    let hash = 0;
+    for (let i = 0, len = target.length; i < len; i++) {
+      const chr = target.charCodeAt(i);
+      hash = (hash << 5) - hash + chr;
+      hash |= 0;
+    }
+    return hash.toString();
   };
 }
 
