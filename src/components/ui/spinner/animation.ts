@@ -85,9 +85,9 @@ export class SpinnerAnimation extends Animation<SpinnerAnimationConfig, SpinnerA
    * @returns {SpinnerAnimationStyle} - an object that contains container, start and end arcs transform styles.
    */
   public toProps(): SpinnerAnimationStyle {
-    const containerInterpolation: Animated.AnimatedInterpolation = this.createContainerInterpolation();
-    const startArcInterpolation: Animated.AnimatedInterpolation = this.createArcInterpolation(StartArcEasing);
-    const endArcInterpolation: Animated.AnimatedInterpolation = this.createArcInterpolation(EndArcEasing);
+    const containerInterpolation: Animated.AnimatedInterpolation<number> = this.createContainerInterpolation();
+    const startArcInterpolation: Animated.AnimatedInterpolation<number> = this.createArcInterpolation(StartArcEasing);
+    const endArcInterpolation: Animated.AnimatedInterpolation<number> = this.createArcInterpolation(EndArcEasing);
 
     return {
       container: this.toStyleTransformProp(containerInterpolation),
@@ -108,7 +108,7 @@ export class SpinnerAnimation extends Animation<SpinnerAnimationConfig, SpinnerA
     return new Array(numberOfFrames).fill(0);
   };
 
-  private createContainerInterpolation = (): Animated.AnimatedInterpolation => {
+  private createContainerInterpolation = (): Animated.AnimatedInterpolation<number> => {
     return this.animationValue.interpolate({
       inputRange: [0, 1],
       outputRange: [
@@ -118,7 +118,7 @@ export class SpinnerAnimation extends Animation<SpinnerAnimationConfig, SpinnerA
     });
   };
 
-  private createArcInterpolation = (easing: EasingFunction): Animated.AnimatedInterpolation => {
+  private createArcInterpolation = (easing: EasingFunction): Animated.AnimatedInterpolation<number> => {
     return this.animationValue.interpolate({
       inputRange: this.createArcInterpolationInputRange(),
       outputRange: this.createArcInterpolationOutputRange(easing),
@@ -156,7 +156,8 @@ export class SpinnerAnimation extends Animation<SpinnerAnimationConfig, SpinnerA
    * @param {ViewStyle} source - initial StyleSheet object.
    * @returns a final StyleSheet object with a `rotate` animation value.
    */
-  private toStyleTransformProp = (rotate: Animated.AnimatedInterpolation, source: ViewStyle = {}): ViewStyle => {
+  private toStyleTransformProp = (rotate: Animated.AnimatedInterpolation<number | string>,
+    source: ViewStyle = {}): ViewStyle => {
     const transform = [...(source.transform || []), { rotate }];
 
     // @ts-ignore: AnimatedInterpolation does not fit RotateTransform type declaration

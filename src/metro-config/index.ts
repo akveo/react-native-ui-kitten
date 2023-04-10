@@ -1,6 +1,5 @@
 import Fs from 'fs';
 import LodashMerge from 'lodash.merge';
-import MetroConfig from 'metro-config/src/defaults';
 import BootstrapService from './services/bootstrap.service';
 import { EvaConfig } from './services/eva-config.service';
 import ProjectService from './services/project.service';
@@ -13,7 +12,6 @@ type MetroConfigType = {
   watchFolders?: Array<string>;
 };
 
-const defaultMetroConfig = MetroConfig.getDefaultValues();
 const customMappingWatchOptions = {
   /*
    * How often the custom mapping should be polled in milliseconds
@@ -50,7 +48,7 @@ const customMappingWatchOptions = {
 export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): MetroConfigType => {
 
   const handleMetroEvent = (event): void => {
-    const reporter = metroConfig?.reporter || defaultMetroConfig.reporter;
+    const reporter = metroConfig?.reporter;
 
     if (reporter?.update) {
       reporter.update(event);

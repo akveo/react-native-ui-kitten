@@ -239,7 +239,7 @@ export class Select extends React.Component<SelectProps, State> {
     return Array.isArray(this.props.selectedIndex) ? this.props.selectedIndex : [this.props.selectedIndex];
   }
 
-  private get expandToRotateInterpolation(): Animated.AnimatedInterpolation {
+  private get expandToRotateInterpolation(): Animated.AnimatedInterpolation<string> {
     return this.expandAnimation.interpolate({
       inputRange: [CHEVRON_DEG_COLLAPSED, CHEVRON_DEG_EXPANDED],
       outputRange: [`${CHEVRON_DEG_COLLAPSED}deg`, `${CHEVRON_DEG_EXPANDED}deg`],
