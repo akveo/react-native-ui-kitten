@@ -102,7 +102,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     return this.expandAnimation._value;
   }
 
-  private get expandToRotateInterpolation(): Animated.AnimatedInterpolation {
+  private get expandToRotateInterpolation(): Animated.AnimatedInterpolation<string> {
     return this.expandAnimation.interpolate({
       inputRange: [-this.state.submenuHeight, CHEVRON_DEG_EXPANDED],
       outputRange: [`${CHEVRON_DEG_COLLAPSED}deg`, `${CHEVRON_DEG_EXPANDED}deg`],

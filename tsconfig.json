@@ -19,8 +19,9 @@
     }
   },
   "include": [
+    "./src",
     ".eslintrc.js",
-    "./src/**/*"
+    "./src/**/package.json"
   ],
   "exclude": [
     "./src/template-js",
