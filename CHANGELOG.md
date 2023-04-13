@@ -1,3 +1,32 @@
+## 5.2.0 (2023-04-13)
+
+* fix: added frame check for popover state update (#1672) ([d6590ec](https://github.com/akveo/react-native-ui-kitten/commit/d6590ec)), closes [#1672](https://github.com/akveo/react-native-ui-kitten/issues/1672)
+* fix: added shrinking to card children container (#1671) ([e591303](https://github.com/akveo/react-native-ui-kitten/commit/e591303)), closes [#1671](https://github.com/akveo/react-native-ui-kitten/issues/1671)
+* fix: changed tab indicator position to relative, adjusted bottom nav bar layout (#1660) ([66c181f](https://github.com/akveo/react-native-ui-kitten/commit/66c181f)), closes [#1660](https://github.com/akveo/react-native-ui-kitten/issues/1660)
+* fix: check and fixed failing tests (#1673) ([4eaafab](https://github.com/akveo/react-native-ui-kitten/commit/4eaafab)), closes [#1673](https://github.com/akveo/react-native-ui-kitten/issues/1673)
+* fix: docs generation ([532fa19](https://github.com/akveo/react-native-ui-kitten/commit/532fa19))
+* fix: fix metro-config for expo usage (#1710) ([07bb149](https://github.com/akveo/react-native-ui-kitten/commit/07bb149)), closes [#1710](https://github.com/akveo/react-native-ui-kitten/issues/1710)
+* fix: fixed passing parameters for menu item for onPress callback (#1669) ([ffd7efc](https://github.com/akveo/react-native-ui-kitten/commit/ffd7efc)), closes [#1669](https://github.com/akveo/react-native-ui-kitten/issues/1669)
+* fix: parametrized testIDs for container and text input based on passed prop (#1685) ([8bea09f](https://github.com/akveo/react-native-ui-kitten/commit/8bea09f)), closes [#1685](https://github.com/akveo/react-native-ui-kitten/issues/1685)
+* fix: passing disabled prop to select item inner checkbox (#1668) ([f736cb1](https://github.com/akveo/react-native-ui-kitten/commit/f736cb1)), closes [#1668](https://github.com/akveo/react-native-ui-kitten/issues/1668)
+* fix(ci): updated GH actions config (#1670) ([220e8c8](https://github.com/akveo/react-native-ui-kitten/commit/220e8c8)), closes [#1670](https://github.com/akveo/react-native-ui-kitten/issues/1670)
+* fix(tests): Make tests green on case sensitive file systems (#1528) ([740758e](https://github.com/akveo/react-native-ui-kitten/commit/740758e)), closes [#1528](https://github.com/akveo/react-native-ui-kitten/issues/1528)
+* fix autocomplete showcases - pick the wrong item onSelect (#1632) ([962cfb0](https://github.com/akveo/react-native-ui-kitten/commit/962cfb0)), closes [#1632](https://github.com/akveo/react-native-ui-kitten/issues/1632)
+* Fix/metro config expo (#1712) ([d5b9b5a](https://github.com/akveo/react-native-ui-kitten/commit/d5b9b5a)), closes [#1712](https://github.com/akveo/react-native-ui-kitten/issues/1712)
+* Update link to sketch file on gum road. (#1570) ([e92a04a](https://github.com/akveo/react-native-ui-kitten/commit/e92a04a)), closes [#1570](https://github.com/akveo/react-native-ui-kitten/issues/1570)
+* update rn, fix eslint, ts errors (#1655) ([b8ca73b](https://github.com/akveo/react-native-ui-kitten/commit/b8ca73b)), closes [#1655](https://github.com/akveo/react-native-ui-kitten/issues/1655)
+* feat: add linear and circular progress bars (#1567) ([4a8d19d](https://github.com/akveo/react-native-ui-kitten/commit/4a8d19d)), closes [#1567](https://github.com/akveo/react-native-ui-kitten/issues/1567)
+* feat: add props for adding custom arrows to calendar component (#1390) ([5dacb9a](https://github.com/akveo/react-native-ui-kitten/commit/5dacb9a)), closes [#1390](https://github.com/akveo/react-native-ui-kitten/issues/1390)
+* feat: added animationDuration prop to view pager (#1662) ([8de3e15](https://github.com/akveo/react-native-ui-kitten/commit/8de3e15)), closes [#1662](https://github.com/akveo/react-native-ui-kitten/issues/1662)
+* feat: updated js and ts templates (#1703) ([f80de5b](https://github.com/akveo/react-native-ui-kitten/commit/f80de5b)), closes [#1703](https://github.com/akveo/react-native-ui-kitten/issues/1703)
+* feat(modals):  migrate Modal/Popover to the RN's Modal (#1615) ([c19ae7b](https://github.com/akveo/react-native-ui-kitten/commit/c19ae7b)), closes [#1615](https://github.com/akveo/react-native-ui-kitten/issues/1615)
+* chore: update rn version to 0.70.6 (#1686) ([df96d0d](https://github.com/akveo/react-native-ui-kitten/commit/df96d0d)), closes [#1686](https://github.com/akveo/react-native-ui-kitten/issues/1686)
+* feature: menu group - default expand option (#1389) ([30e2a5c](https://github.com/akveo/react-native-ui-kitten/commit/30e2a5c)), closes [#1389](https://github.com/akveo/react-native-ui-kitten/issues/1389)
+* docs: add theme variables link to theme docs (#1494) ([88d1631](https://github.com/akveo/react-native-ui-kitten/commit/88d1631)), closes [#1494](https://github.com/akveo/react-native-ui-kitten/issues/1494)
+* docs: getting started guide, malformed json example (#1605) (#1606) ([d0ececa](https://github.com/akveo/react-native-ui-kitten/commit/d0ececa)), closes [#1605](https://github.com/akveo/react-native-ui-kitten/issues/1605) [#1606](https://github.com/akveo/react-native-ui-kitten/issues/1606) [#1605](https://github.com/akveo/react-native-ui-kitten/issues/1605)
+
+
+
 ## <small>5.1.2 (2022-03-24)</small>
 
 ### :rocket: Highlights:
