@@ -135,8 +135,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * to render right arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
  *
- * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next month / year.
- * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
+ * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous
+ * or next month / year. viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
