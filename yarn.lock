@@ -7006,10 +7006,10 @@ dns-txt@^2.0.2:
   dependencies:
     buffer-indexof "^1.0.0"
 
-doc-prsr@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/doc-prsr/-/doc-prsr-2.2.4.tgz#0a67da9905d92fd3b78cf65044a8c07b31ed04c9"
-  integrity sha512-yVf7/yY9gx/KTmYA0m1eWG19Jo0olvY5nAcrF/ki5BBr3NDqgc/yMLskVSGjCKGPsVMM/QxUMTk/G8CSt2lk8w==
+doc-prsr@2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/doc-prsr/-/doc-prsr-2.2.5.tgz#ea80abe4e082d420ec5cb2fa9aeffd7ad82f7946"
+  integrity sha512-2DRdCnP4LRSX0QTCu+sNQk3GK2K2/ogJD6cBQIJWblTNFI07ggYpioXCXdXEdsvA/Qff7STRjGAcspiquLI2Tw==
   dependencies:
     commander "^2.9.0"
     path "^0.12.7"

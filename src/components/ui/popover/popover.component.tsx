@@ -79,7 +79,7 @@ interface State {
  * @property {'none' | 'slide' | 'fade'} animationType - Controls how the modal animates.
  * Defaults to 'none'.
  *
- * @property {Array<'portrait' | 'portrait_upside_down' | 'landscape' | 'landscape_left' | 'landscape_right'>}
+ * @property {Array<'portrait' | 'portrait-upside_down' | 'landscape' | 'landscape-left' | 'landscape-right'>}
  * supportedOrientations -
  * allows the modal to be rotated to any of the specified orientations.
  * On iOS, the modal is still restricted by what's specified

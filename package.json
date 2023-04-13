@@ -53,7 +53,7 @@
     "change-case": "^4.1.2",
     "conventional-changelog-cli": "^2.0.21",
     "coveralls": "^3.0.2",
-    "doc-prsr": "^2.2.4",
+    "doc-prsr": "2.2.5",
     "eslint": "^7.32.0",
     "eslint-config-akveo": "^1.0.1",
     "eslint-plugin-react-native": "^4.0.0",
