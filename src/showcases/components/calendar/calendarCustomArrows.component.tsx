@@ -1,19 +1,21 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { Calendar, Text } from "@ui-kitten/components";
+import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Calendar, Text } from '@ui-kitten/components';
 
-const LeftArrow = (arrowProps: { onPress: () => void }) => {
+const LeftArrow = (arrowProps: { onPress: () => void }): React.ReactElement => {
   return (
     <TouchableOpacity
       style={styles.arrow}
       onPress={arrowProps.onPress}
     >
-      <Text>PREV</Text>
+      <Text>
+        PREV
+      </Text>
     </TouchableOpacity>
   );
 };
 
-export const CalendarCustomDayShowcase = () => {
+export const CalendarCustomDayShowcase = (): React.ReactElement => {
   const [date, setDate] = React.useState(null);
 
   return (
@@ -27,9 +29,11 @@ export const CalendarCustomDayShowcase = () => {
             style={styles.arrow}
             onPress={arrowProps.onPress}
           >
-            <Text>NEXT</Text>
+            <Text>
+              NEXT
+            </Text>
           </TouchableOpacity>
-        )
+        );
       }}
     />
   );
@@ -37,7 +41,7 @@ export const CalendarCustomDayShowcase = () => {
 
 const styles = StyleSheet.create({
   arrow: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

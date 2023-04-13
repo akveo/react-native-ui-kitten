@@ -1,19 +1,21 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { Datepicker, Text } from "@ui-kitten/components";
+import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Datepicker, Text } from '@ui-kitten/components';
 
-const LeftArrow = (arrowProps: { onPress: () => void }) => {
+const LeftArrow = (arrowProps: { onPress: () => void }): React.ReactElement => {
   return (
     <TouchableOpacity
       style={styles.arrow}
       onPress={arrowProps.onPress}
     >
-      <Text>PREV</Text>
+      <Text>
+        PREV
+      </Text>
     </TouchableOpacity>
   );
 };
 
-export const DatepickerAccessoriesShowcase = () => {
+export const DatepickerAccessoriesShowcase = (): React.ReactElement => {
   const [date, setDate] = React.useState(new Date());
 
   return (
@@ -30,9 +32,11 @@ export const DatepickerAccessoriesShowcase = () => {
             style={styles.arrow}
             onPress={arrowProps.onPress}
           >
-            <Text>NEXT</Text>
+            <Text>
+              NEXT
+            </Text>
           </TouchableOpacity>
-        )
+        );
       }}
     />
   );
@@ -40,7 +44,7 @@ export const DatepickerAccessoriesShowcase = () => {
 
 const styles = StyleSheet.create({
   arrow: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
