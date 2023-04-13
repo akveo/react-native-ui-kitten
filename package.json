@@ -22,9 +22,11 @@
     "lint": "eslint -c .eslintrc.js ./src",
     "test": "jest",
     "parse-docs": "gulp parse-docs",
+    "view-docs": "cd src/showcases/ && npm run env -- dev && cd ../.. && yarn parse-docs && cd docs && yarn start && cd ..",
     "bump-version": "gulp bump-version && conventional-changelog -i CHANGELOG.md -s",
     "publish-docs": "npm run parse-docs && gulp publish-docs",
-    "publish-packages": "gulp publish-packages"
+    "publish-packages": "gulp publish-packages",
+    "r": "rm -rf node_modules && rm -rf src/showcases/node_modules && rm -rf docs/node_modules && yarn"
   },
   "dependencies": {
     "react": "18.1.0",
@@ -51,7 +53,7 @@
     "change-case": "^4.1.2",
     "conventional-changelog-cli": "^2.0.21",
     "coveralls": "^3.0.2",
-    "doc-prsr": "^2.2.4",
+    "doc-prsr": "2.2.5",
     "eslint": "^7.32.0",
     "eslint-config-akveo": "^1.0.1",
     "eslint-plugin-react-native": "^4.0.0",

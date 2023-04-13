@@ -1,27 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { CircularProgressBar } from '@ui-kitten/components';
-
-let timeoutId;
-const getRandomNum = (min: number, max: number): number => Math.random() * (max - min) + min;
+import { useProgress } from '../../helpers/progress.hook';
 
 export const CircularProgressBarThemingShowcase = (): React.ReactElement => {
-  const [progress, setProgress] = React.useState(0);
-
-  useEffect(() => {
-    timeoutId = setTimeout(() => {
-      clearTimeout(timeoutId);
-
-      if (progress < 1) {
-        const load = getRandomNum(0.1, 0.4);
-        setProgress(progress + load);
-      } else {
-        setProgress(0);
-      }
-    }, 2000);
-
-    return () => clearTimeout(timeoutId);
-  }, [progress]);
-
+  const progress = useProgress();
   return (
     <CircularProgressBar progress={progress} />
   );
