@@ -255,7 +255,7 @@ To start a new release (publish the framework packages on NPM) you need:
 1. Setup node 14 environment (the latest is v14.21.3 with npm 6.14.18). Consider using a node manager, e.g. [n](https://github.com/tj/n).
 2. Create a new release branch with template `release/vX.X.X`
 3. MANUALLY update a version in main ./package.json to a new one
-4. Check eva version in package.json files of packages (if the release requires its changes)
+4. Check eva dependencies (if the release requires its changes)
 5. Run tests: `yarn lint && yarn test`
 6. Run build: `yarn build`
 7. Generate changelog: `yarn bump-version`
