@@ -1,5 +1,6 @@
-## 5.2.0 (2023-04-13)
+## 5.3.0 (2023-04-14)
 
+* release: v5.2.0 (#1715) ([ef892df](https://github.com/akveo/react-native-ui-kitten/commit/ef892df)), closes [#1715](https://github.com/akveo/react-native-ui-kitten/issues/1715)
 * fix: added frame check for popover state update (#1672) ([d6590ec](https://github.com/akveo/react-native-ui-kitten/commit/d6590ec)), closes [#1672](https://github.com/akveo/react-native-ui-kitten/issues/1672)
 * fix: added shrinking to card children container (#1671) ([e591303](https://github.com/akveo/react-native-ui-kitten/commit/e591303)), closes [#1671](https://github.com/akveo/react-native-ui-kitten/issues/1671)
 * fix: changed tab indicator position to relative, adjusted bottom nav bar layout (#1660) ([66c181f](https://github.com/akveo/react-native-ui-kitten/commit/66c181f)), closes [#1660](https://github.com/akveo/react-native-ui-kitten/issues/1660)
@@ -7,6 +8,7 @@
 * fix: docs generation ([532fa19](https://github.com/akveo/react-native-ui-kitten/commit/532fa19))
 * fix: fix metro-config for expo usage (#1710) ([07bb149](https://github.com/akveo/react-native-ui-kitten/commit/07bb149)), closes [#1710](https://github.com/akveo/react-native-ui-kitten/issues/1710)
 * fix: fixed passing parameters for menu item for onPress callback (#1669) ([ffd7efc](https://github.com/akveo/react-native-ui-kitten/commit/ffd7efc)), closes [#1669](https://github.com/akveo/react-native-ui-kitten/issues/1669)
+* fix: linter-errors (#1714) ([a8a72af](https://github.com/akveo/react-native-ui-kitten/commit/a8a72af)), closes [#1714](https://github.com/akveo/react-native-ui-kitten/issues/1714)
 * fix: parametrized testIDs for container and text input based on passed prop (#1685) ([8bea09f](https://github.com/akveo/react-native-ui-kitten/commit/8bea09f)), closes [#1685](https://github.com/akveo/react-native-ui-kitten/issues/1685)
 * fix: passing disabled prop to select item inner checkbox (#1668) ([f736cb1](https://github.com/akveo/react-native-ui-kitten/commit/f736cb1)), closes [#1668](https://github.com/akveo/react-native-ui-kitten/issues/1668)
 * fix(ci): updated GH actions config (#1670) ([220e8c8](https://github.com/akveo/react-native-ui-kitten/commit/220e8c8)), closes [#1670](https://github.com/akveo/react-native-ui-kitten/issues/1670)
@@ -24,6 +26,11 @@
 * feature: menu group - default expand option (#1389) ([30e2a5c](https://github.com/akveo/react-native-ui-kitten/commit/30e2a5c)), closes [#1389](https://github.com/akveo/react-native-ui-kitten/issues/1389)
 * docs: add theme variables link to theme docs (#1494) ([88d1631](https://github.com/akveo/react-native-ui-kitten/commit/88d1631)), closes [#1494](https://github.com/akveo/react-native-ui-kitten/issues/1494)
 * docs: getting started guide, malformed json example (#1605) (#1606) ([d0ececa](https://github.com/akveo/react-native-ui-kitten/commit/d0ececa)), closes [#1605](https://github.com/akveo/react-native-ui-kitten/issues/1605) [#1606](https://github.com/akveo/react-native-ui-kitten/issues/1606) [#1605](https://github.com/akveo/react-native-ui-kitten/issues/1605)
+
+
+
+## 5.2.0 (2023-04-13)
+
 
 
 
