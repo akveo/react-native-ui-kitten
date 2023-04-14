@@ -1607,15 +1607,15 @@
   resolved "https://registry.yarnpkg.com/@eva-design/dss/-/dss-2.2.0.tgz#1eb765e480b3b140386a3a105374435c0c927616"
   integrity sha512-ip+iLpe8WFR1IyPGR9puJtXhkZQrWV9p+Xgg3u/3ruDNaObh/YlnfZdS0i29m6YZduW3I+lLuXSXwq5f4pAbRA==
 
-"@eva-design/eva@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@eva-design/eva/-/eva-2.1.1.tgz#ad237ae76d63e7c474b3a0755c697490bbe5a4bc"
-  integrity sha512-WS1ykETXyq0Kxa0aFlPMBeftEtBeTDv9qEUeQ4VvbTETMc7hsZPSkPr2HudtQhFihiM72GFfwAK6GIAlF6GXdQ==
+"@eva-design/eva@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@eva-design/eva/-/eva-2.2.0.tgz#59da30f650992a066df090e4aa6a3b2201762fe7"
+  integrity sha512-Wh98ex5cCK+YYSQNpthX1bT4CA3zDRR1WnJv0YlyvULAkmjaEvqtoGMCXzu5DH8v1fGIggu/OpAokLS7UVPe+A==
 
-"@eva-design/material@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@eva-design/material/-/material-2.1.1.tgz#b08bd8f2c8411871c118fac11f7b59c2f4cdfb2f"
-  integrity sha512-fVqknxM+PVsuPx0H/CcEgoZkZ1UIr41Cxt56yt67LBCus4xIILqyXx5pAvc//QTz3x7K29UEWH80YS6gpZaRag==
+"@eva-design/material@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@eva-design/material/-/material-2.2.0.tgz#53130102d431396dbd39b0a0b9070be050c4771e"
+  integrity sha512-ajYNOhDac5fTggTt7Yz9Q+l7gwQSh2e/3EfCuP5IhUGUTz35+NyRsWZlmqS1kmWYV9zVifNAvO7SEnb+0u8tAQ==
 
 "@eva-design/processor@^2.2.0":
   version "2.2.0"
