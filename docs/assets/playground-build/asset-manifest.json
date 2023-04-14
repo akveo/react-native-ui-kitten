@@ -1,22 +1,24 @@
 {
   "files": {
-    "app.js": "/static/js/app.ac18bf3c.chunk.js",
-    "app.js.map": "/static/js/app.ac18bf3c.chunk.js.map",
-    "runtime~app.js": "/static/js/runtime~app.c344a218.js",
-    "runtime~app.js.map": "/static/js/runtime~app.c344a218.js.map",
-    "static/js/2.fd48670c.chunk.js": "/static/js/2.fd48670c.chunk.js",
-    "static/js/2.fd48670c.chunk.js.map": "/static/js/2.fd48670c.chunk.js.map",
+    "app.js": "/static/js/app.1e81416f.chunk.js",
+    "app.js.map": "/static/js/app.1e81416f.chunk.js.map",
+    "runtime~app.js": "/static/js/runtime~app.d73315c5.js",
+    "runtime~app.js.map": "/static/js/runtime~app.d73315c5.js.map",
+    "static/js/2.6654a298.chunk.js": "/static/js/2.6654a298.chunk.js",
+    "static/js/2.6654a298.chunk.js.map": "/static/js/2.6654a298.chunk.js.map",
     "favicon-16.png": "/favicon-16.png",
     "favicon-32.png": "/favicon-32.png",
     "favicon.ico": "/favicon.ico",
     "index.html": "/index.html",
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
-    "static/media/icon.png": "/static/media/icon.a78e4b51.png"
+    "static/js/2.6654a298.chunk.js.LICENSE.txt": "/static/js/2.6654a298.chunk.js.LICENSE.txt",
+    "static/js/app.1e81416f.chunk.js.LICENSE.txt": "/static/js/app.1e81416f.chunk.js.LICENSE.txt",
+    "static/media/icon.png": "/static/media/icon.36f92bd4.png"
   },
   "entrypoints": [
-    "static/js/runtime~app.c344a218.js",
-    "static/js/2.fd48670c.chunk.js",
-    "static/js/app.ac18bf3c.chunk.js"
+    "static/js/runtime~app.d73315c5.js",
+    "static/js/2.6654a298.chunk.js",
+    "static/js/app.1e81416f.chunk.js"
   ]
 }
