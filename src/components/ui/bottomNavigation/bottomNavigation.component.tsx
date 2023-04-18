@@ -197,10 +197,7 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     const [indicatorElement, ...tabElements] = this.renderComponentChildren(evaStyle);
 
     return (
-      <View
-        testID={testID}
-        style={styles.container}
-      >
+      <View testID={testID}>
         {indicatorElement}
         <View style={[evaStyle.container, styles.elementsContainer, style]}>
           {tabElements}
@@ -211,9 +208,6 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-  },
   elementsContainer: {
     flexDirection: 'row',
   },
