@@ -36,13 +36,15 @@ export interface ViewPagerProps<ChildrenProps = {}> extends ViewProps {
   animationDuration?: number;
 }
 
+const DEFAULT_DURATION = 300;
+
 export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
 
 /**
  * A view with a set of swipeable pages.
  *
  * @extends React.Component
- **
+ *
  * @property {ReactNode} children - Page components to render within the view.
  *
  * @property {number} selectedIndex - Index of currently selected view.
@@ -67,10 +69,6 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * @overview-example ViewPagerLazyLoading
  * Each view can be loaded lazily by using `shouldLoadComponent` property.
  */
-
-const DEFAULT_DURATION = 300;
-
-
 // eslint-disable-next-line @typescript-eslint/ban-types
 export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProps<ChildrenProps>>
   implements PanResponderCallbacks {
