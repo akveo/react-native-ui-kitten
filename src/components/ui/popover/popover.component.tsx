@@ -187,7 +187,7 @@ export class Popover extends React.Component<PopoverProps, State> {
       <PopoverView
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
-        placement={this.state.actualPlacement.reverse()}
+        placement={this.state.actualPlacement}
       >
         {this.renderContentElement()}
       </PopoverView>

@@ -15,6 +15,9 @@ const placements = [
   'right',
   'right start',
   'right end',
+  'inner',
+  'inner bottom',
+  'inner top',
 ];
 
 export const PopoverPlacementShowcase = (): React.ReactElement => {
@@ -39,7 +42,6 @@ export const PopoverPlacementShowcase = (): React.ReactElement => {
 
   return (
     <>
-
       <Select
         placeholder='Select Placement'
         value={placement}
@@ -50,7 +52,6 @@ export const PopoverPlacementShowcase = (): React.ReactElement => {
       </Select>
 
       <View style={styles.buttonContainer}>
-
         <Popover
           anchor={renderToggleButton}
           visible={visible}
@@ -67,9 +68,7 @@ export const PopoverPlacementShowcase = (): React.ReactElement => {
             </Text>
           </Layout>
         </Popover>
-
       </View>
-
     </>
   );
 };
