@@ -135,7 +135,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   public static getDerivedStateFromProps(props, state): State {
-    if (!props.visible) {
+    if (!props.visible && !Point.outscreen().equals(state.contentPosition)) {
       return {
         ...state,
         contentPosition: Point.outscreen(),
