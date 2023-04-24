@@ -22,7 +22,7 @@ const PLACEMENT_FAMILIES: string[] = [
 export class PopoverPlacementService {
 
   public find(preferredValue: PopoverPlacement, options: PlacementOptions): PopoverPlacement {
-    const placement: PopoverPlacement = this.findRecursive(preferredValue, PLACEMENT_FAMILIES, options);
+    const placement: PopoverPlacement = this.findRecursive(preferredValue, [...PLACEMENT_FAMILIES], options);
 
     return placement || preferredValue;
   }

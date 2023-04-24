@@ -598,7 +598,7 @@ export class PopoverPlacements {
     rawValue = 'inner';
 
     frame(options: PlacementOptions): Frame {
-      const { origin, size } = options.source.bottomIn(options.other).centerHorizontalOf(options.other);
+      const { origin, size } = options.source.centerVerticalOf(options.other).centerHorizontalOf(options.other);
 
       const x: number = RTLService.select(
         origin.x,
@@ -625,7 +625,7 @@ export class PopoverPlacements {
     }
 
     reverse(): PopoverPlacement {
-      return null;
+      return PopoverPlacements.INNER;
     }
 
     family(): PopoverPlacement[] {
@@ -644,7 +644,19 @@ export class PopoverPlacements {
     rawValue = 'inner bottom';
 
     frame(options: PlacementOptions): Frame {
-      return this.parent().frame(options);
+      const { origin, size } = options.source.bottomIn(options.other).centerHorizontalOf(options.other);
+
+      const x: number = RTLService.select(
+        origin.x,
+        options.bounds.size.width - (origin.x + size.width),
+      );
+
+      return new Frame(
+        x,
+        origin.y - options.offsets.size.height,
+        size.width,
+        size.height,
+      );
     }
 
     flex(): FlexPlacement {
