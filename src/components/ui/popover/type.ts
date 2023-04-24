@@ -168,7 +168,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y,
+        Math.round(origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y),
         size.width,
         size.height,
       );
@@ -205,7 +205,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y,
+        Math.round(origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y),
         size.width,
         size.height,
       );
@@ -242,7 +242,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height,
+        Math.round(origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height),
         size.width,
         size.height,
       );
@@ -279,7 +279,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height,
+        Math.round(origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height),
         size.width,
         size.height,
       );
@@ -407,7 +407,7 @@ export class PopoverPlacements {
       const { origin, size } = this.parent().frame(options);
 
       return new Frame(
-        origin.x - (options.other.size.width - size.width) / 2 + options.offsets.origin.x,
+        Math.round(origin.x - (options.other.size.width - size.width) / 2 + options.offsets.origin.x),
         origin.y,
         size.width,
         size.height,
@@ -444,7 +444,7 @@ export class PopoverPlacements {
       const { origin, size } = this.parent().frame(options);
 
       return new Frame(
-        origin.x - (options.other.size.width - size.width) / 2 + options.offsets.origin.x,
+        Math.round(origin.x - (options.other.size.width - size.width) / 2 + options.offsets.origin.x),
         origin.y,
         size.width,
         size.height,
@@ -481,7 +481,7 @@ export class PopoverPlacements {
       const { origin, size } = this.parent().frame(options);
 
       return new Frame(
-        origin.x + (options.other.size.width - size.width) / 2 - options.offsets.size.width,
+        Math.round(origin.x + (options.other.size.width - size.width) / 2 - options.offsets.size.width),
         origin.y,
         size.width,
         size.height,
@@ -518,7 +518,7 @@ export class PopoverPlacements {
       const { origin, size } = this.parent().frame(options);
 
       return new Frame(
-        origin.x + (options.other.size.width - size.width) / 2 - options.offsets.size.width,
+        Math.round(origin.x + (options.other.size.width - size.width) / 2 - options.offsets.size.width),
         origin.y,
         size.width,
         size.height,
