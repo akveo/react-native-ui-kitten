@@ -60,7 +60,7 @@ export class PopoverView extends React.Component<PopoverViewProps> {
   };
 
   private getDirectionStyle = (): StyleType => {
-    const { direction, alignment } = this.placement.flex();
+    const { direction, alignment } = this.placement.orientation();
 
     const isVertical: boolean = direction.startsWith('column');
     const isStart: boolean = alignment.endsWith('start');

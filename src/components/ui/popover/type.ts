@@ -147,11 +147,9 @@ export interface PopoverPlacement {
 
   frame(options: PlacementOptions): Frame;
 
-  flex(): FlexPlacement;
+  orientation(): FlexPlacement;
 
   parent(): PopoverPlacement;
-
-  reverse(): PopoverPlacement;
 
   family(): PopoverPlacement[];
 
@@ -174,19 +172,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'row-reverse',
+        direction: 'row',
         alignment: 'flex-start',
       };
     }
 
     parent(): PopoverPlacement {
       return PopoverPlacements.RIGHT;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.LEFT_START;
     }
 
     family(): PopoverPlacement[] {
@@ -211,19 +205,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'row',
+        direction: 'row-reverse',
         alignment: 'flex-start',
       };
     }
 
     parent(): PopoverPlacement {
       return PopoverPlacements.LEFT;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.RIGHT_START;
     }
 
     family(): PopoverPlacement[] {
@@ -248,19 +238,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'row-reverse',
+        direction: 'row',
         alignment: 'flex-end',
       };
     }
 
     parent(): PopoverPlacement {
       return PopoverPlacements.RIGHT;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.LEFT_END;
     }
 
     family(): PopoverPlacement[] {
@@ -285,19 +271,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'row',
+        direction: 'row-reverse',
         alignment: 'flex-end',
       };
     }
 
     parent(): PopoverPlacement {
       return PopoverPlacements.LEFT;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.RIGHT_END;
     }
 
     family(): PopoverPlacement[] {
@@ -327,19 +309,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'row-reverse',
+        direction: 'row',
         alignment: 'center',
       };
     }
 
     parent(): PopoverPlacement {
       return this;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.LEFT;
     }
 
     family(): PopoverPlacement[] {
@@ -373,19 +351,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'row',
+        direction: 'row-reverse',
         alignment: 'center',
       };
     }
 
     parent(): PopoverPlacement {
       return this;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.RIGHT;
     }
 
     family(): PopoverPlacement[] {
@@ -414,19 +388,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'column-reverse',
+        direction: 'column',
         alignment: 'flex-start',
       };
     }
 
     parent(): PopoverPlacement {
       return PopoverPlacements.BOTTOM;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.TOP_START;
     }
 
     family(): PopoverPlacement[] {
@@ -451,19 +421,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'column',
+        direction: 'column-reverse',
         alignment: 'flex-start',
       };
     }
 
     parent(): PopoverPlacement {
       return PopoverPlacements.TOP;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.BOTTOM_START;
     }
 
     family(): PopoverPlacement[] {
@@ -488,19 +454,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'column-reverse',
+        direction: 'column',
         alignment: 'flex-end',
       };
     }
 
     parent(): PopoverPlacement {
       return PopoverPlacements.BOTTOM;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.TOP_END;
     }
 
     family(): PopoverPlacement[] {
@@ -525,9 +487,9 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'column',
+        direction: 'column-reverse',
         alignment: 'flex-end',
       };
     }
@@ -536,62 +498,12 @@ export class PopoverPlacements {
       return PopoverPlacements.TOP;
     }
 
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.BOTTOM_END;
-    }
-
     family(): PopoverPlacement[] {
       return this.parent().family();
     }
 
     fits(frame: Frame, other: Frame): boolean {
       return this.parent().fits(frame, other);
-    }
-  };
-  static BOTTOM: PopoverPlacement = new class implements PopoverPlacement {
-    rawValue = 'bottom';
-
-    frame(options: PlacementOptions): Frame {
-      const { origin, size } = options.source.bottomOf(options.other).centerHorizontalOf(options.other);
-
-      const x: number = RTLService.select(
-        origin.x,
-        options.bounds.size.width - (origin.x + size.width),
-      );
-
-      return new Frame(
-        x,
-        origin.y - options.offsets.size.height,
-        size.width,
-        size.height,
-      );
-    }
-
-    flex(): FlexPlacement {
-      return {
-        direction: 'column-reverse',
-        alignment: 'center',
-      };
-    }
-
-    parent(): PopoverPlacement {
-      return this;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.TOP;
-    }
-
-    family(): PopoverPlacement[] {
-      return [
-        PopoverPlacements.BOTTOM,
-        PopoverPlacements.BOTTOM_START,
-        PopoverPlacements.BOTTOM_END,
-      ];
-    }
-
-    fits(frame: Frame, other: Frame): boolean {
-      return fitsBottom(frame, other) && fitsLeft(frame, other) && fitsRight(frame, other);
     }
   };
   static INNER: PopoverPlacement = new class implements PopoverPlacement {
@@ -613,7 +525,7 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
         direction: 'column',
         alignment: 'center',
@@ -622,10 +534,6 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return this;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.INNER;
     }
 
     family(): PopoverPlacement[] {
@@ -638,48 +546,6 @@ export class PopoverPlacements {
 
     fits(frame: Frame, other: Frame): boolean {
       return fitsBottom(frame, other) && fitsLeft(frame, other) && fitsRight(frame, other);
-    }
-  };
-  static INNER_BOTTOM: PopoverPlacement = new class implements PopoverPlacement {
-    rawValue = 'inner bottom';
-
-    frame(options: PlacementOptions): Frame {
-      const { origin, size } = options.source.bottomIn(options.other).centerHorizontalOf(options.other);
-
-      const x: number = RTLService.select(
-        origin.x,
-        options.bounds.size.width - (origin.x + size.width),
-      );
-
-      return new Frame(
-        x,
-        origin.y - options.offsets.size.height,
-        size.width,
-        size.height,
-      );
-    }
-
-    flex(): FlexPlacement {
-      return {
-        direction: 'column',
-        alignment: 'center',
-      };
-    }
-
-    parent(): PopoverPlacement {
-      return PopoverPlacements.INNER;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.INNER_TOP;
-    }
-
-    family(): PopoverPlacement[] {
-      return this.parent().family();
-    }
-
-    fits(frame: Frame, other: Frame): boolean {
-      return this.parent().fits(frame, other);
     }
   };
   static INNER_TOP: PopoverPlacement = new class implements PopoverPlacement {
@@ -701,9 +567,9 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'column-reverse',
+        direction: 'column',
         alignment: 'center',
       };
     }
@@ -712,8 +578,42 @@ export class PopoverPlacements {
       return PopoverPlacements.INNER;
     }
 
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.INNER_BOTTOM;
+    family(): PopoverPlacement[] {
+      return this.parent().family();
+    }
+
+    fits(frame: Frame, other: Frame): boolean {
+      return this.parent().fits(frame, other);
+    }
+  };
+  static INNER_BOTTOM: PopoverPlacement = new class implements PopoverPlacement {
+    rawValue = 'inner bottom';
+
+    frame(options: PlacementOptions): Frame {
+      const { origin, size } = options.source.bottomIn(options.other).centerHorizontalOf(options.other);
+
+      const x: number = RTLService.select(
+        origin.x,
+        options.bounds.size.width - (origin.x + size.width),
+      );
+
+      return new Frame(
+        x,
+        origin.y - options.offsets.size.height,
+        size.width,
+        size.height,
+      );
+    }
+
+    orientation(): FlexPlacement {
+      return {
+        direction: 'column-reverse',
+        alignment: 'center',
+      };
+    }
+
+    parent(): PopoverPlacement {
+      return PopoverPlacements.INNER;
     }
 
     family(): PopoverPlacement[] {
@@ -744,19 +644,15 @@ export class PopoverPlacements {
       );
     }
 
-    flex(): FlexPlacement {
+    orientation(): FlexPlacement {
       return {
-        direction: 'column',
+        direction: 'column-reverse',
         alignment: 'center',
       };
     }
 
     parent(): PopoverPlacement {
       return this;
-    }
-
-    reverse(): PopoverPlacement {
-      return PopoverPlacements.BOTTOM;
     }
 
     family(): PopoverPlacement[] {
@@ -769,6 +665,48 @@ export class PopoverPlacements {
 
     fits(frame: Frame, other: Frame): boolean {
       return fitsTop(frame, other) && fitsLeft(frame, other) && fitsRight(frame, other);
+    }
+  };
+  static BOTTOM: PopoverPlacement = new class implements PopoverPlacement {
+    rawValue = 'bottom';
+
+    frame(options: PlacementOptions): Frame {
+      const { origin, size } = options.source.bottomOf(options.other).centerHorizontalOf(options.other);
+
+      const x: number = RTLService.select(
+        origin.x,
+        options.bounds.size.width - (origin.x + size.width),
+      );
+
+      return new Frame(
+        x,
+        origin.y - options.offsets.size.height,
+        size.width,
+        size.height,
+      );
+    }
+
+    orientation(): FlexPlacement {
+      return {
+        direction: 'column',
+        alignment: 'center',
+      };
+    }
+
+    parent(): PopoverPlacement {
+      return this;
+    }
+
+    family(): PopoverPlacement[] {
+      return [
+        PopoverPlacements.BOTTOM,
+        PopoverPlacements.BOTTOM_START,
+        PopoverPlacements.BOTTOM_END,
+      ];
+    }
+
+    fits(frame: Frame, other: Frame): boolean {
+      return fitsBottom(frame, other) && fitsLeft(frame, other) && fitsRight(frame, other);
     }
   };
 
