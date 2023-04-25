@@ -188,7 +188,7 @@ export class Popover extends React.Component<PopoverProps, State> {
       <PopoverView
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
-        flex={PopoverPlacements.parse(this.state.actualPlacement).flex()}
+        layoutDirection={PopoverPlacements.parse(this.state.actualPlacement).flex()}
       >
         {this.renderContentElement()}
       </PopoverView>

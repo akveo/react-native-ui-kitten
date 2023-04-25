@@ -29,7 +29,7 @@ type AnimatedViewStyle = ViewStyle;
 
 export interface PopoverViewProps extends ViewProps, StyledComponentProps {
   contentContainerStyle?: StyleProp<AnimatedViewStyle>;
-  flex?: FlexPlacement;
+  layoutDirection?: FlexPlacement;
   indicator?: (props: ViewProps) => React.ReactElement;
 }
 
@@ -54,7 +54,7 @@ export class PopoverView extends React.Component<PopoverViewProps> {
   };
 
   private getDirectionStyle = (): StyleType => {
-    const { direction, alignment } = this.props.flex;
+    const { direction, alignment } = this.props.layoutDirection;
 
     const isVertical: boolean = direction.startsWith('column');
     const isStart: boolean = alignment.endsWith('start');
