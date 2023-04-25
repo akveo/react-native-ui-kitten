@@ -22,15 +22,14 @@ import {
   StyleType,
 } from '../../theme';
 import {
-  PopoverPlacement,
-  PopoverPlacements,
+  FlexPlacement,
 } from './type';
 
 type AnimatedViewStyle = ViewStyle;
 
 export interface PopoverViewProps extends ViewProps, StyledComponentProps {
   contentContainerStyle?: StyleProp<AnimatedViewStyle>;
-  placement?: PopoverPlacement | string;
+  orientation?: FlexPlacement;
   indicator?: (props: ViewProps) => React.ReactElement;
 }
 
@@ -41,11 +40,6 @@ const INDICATOR_WIDTH = 6;
 
 @styled('Popover')
 export class PopoverView extends React.Component<PopoverViewProps> {
-
-  private get placement(): PopoverPlacement {
-    return PopoverPlacements.parse(this.props.placement);
-  }
-
   private getComponentStyle = (source: StyleType): StyleType => {
     const { indicatorWidth, indicatorHeight, indicatorBackgroundColor, ...containerParameters } = source;
 
@@ -60,7 +54,7 @@ export class PopoverView extends React.Component<PopoverViewProps> {
   };
 
   private getDirectionStyle = (): StyleType => {
-    const { direction, alignment } = this.placement.orientation();
+    const { direction, alignment } = this.props.orientation;
 
     const isVertical: boolean = direction.startsWith('column');
     const isStart: boolean = alignment.endsWith('start');
