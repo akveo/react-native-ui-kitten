@@ -34,7 +34,14 @@ export class PopoverPlacementService {
       return oneOfCurrentFamily;
     }
 
+    const oneOfReversedFamily: PopoverPlacement = this.findFromFamily(placement.reverse(), options);
+
+    if (oneOfReversedFamily) {
+      return oneOfReversedFamily;
+    }
+
     delete families[families.indexOf(placement.parent().rawValue)];
+    delete families[families.indexOf(placement.reverse().parent().rawValue)];
 
     const firstTruthy: string = families.filter(Boolean)[0];
 

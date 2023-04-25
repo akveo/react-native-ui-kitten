@@ -147,7 +147,9 @@ export interface PopoverPlacement {
 
   frame(options: PlacementOptions): Frame;
 
-  orientation(): FlexPlacement;
+  flex(): FlexPlacement;
+
+  reverse(): PopoverPlacement;
 
   parent(): PopoverPlacement;
 
@@ -172,7 +174,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'row',
         alignment: 'flex-start',
@@ -181,6 +183,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.RIGHT;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.LEFT_START;
     }
 
     family(): PopoverPlacement[] {
@@ -205,7 +211,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'row-reverse',
         alignment: 'flex-start',
@@ -214,6 +220,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.LEFT;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.RIGHT_START;
     }
 
     family(): PopoverPlacement[] {
@@ -238,7 +248,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'row',
         alignment: 'flex-end',
@@ -247,6 +257,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.RIGHT;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.LEFT_END;
     }
 
     family(): PopoverPlacement[] {
@@ -271,7 +285,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'row-reverse',
         alignment: 'flex-end',
@@ -280,6 +294,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.LEFT;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.RIGHT_END;
     }
 
     family(): PopoverPlacement[] {
@@ -309,7 +327,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'row',
         alignment: 'center',
@@ -318,6 +336,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return this;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.LEFT;
     }
 
     family(): PopoverPlacement[] {
@@ -351,7 +373,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'row-reverse',
         alignment: 'center',
@@ -360,6 +382,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return this;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.RIGHT;
     }
 
     family(): PopoverPlacement[] {
@@ -388,7 +414,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column',
         alignment: 'flex-start',
@@ -397,6 +423,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.BOTTOM;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.TOP_START;
     }
 
     family(): PopoverPlacement[] {
@@ -421,7 +451,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column-reverse',
         alignment: 'flex-start',
@@ -430,6 +460,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.TOP;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.BOTTOM_START;
     }
 
     family(): PopoverPlacement[] {
@@ -454,7 +488,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column',
         alignment: 'flex-end',
@@ -463,6 +497,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.BOTTOM;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.TOP_END;
     }
 
     family(): PopoverPlacement[] {
@@ -487,7 +525,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column-reverse',
         alignment: 'flex-end',
@@ -496,6 +534,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.TOP;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.BOTTOM_END;
     }
 
     family(): PopoverPlacement[] {
@@ -525,7 +567,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column',
         alignment: 'center',
@@ -534,6 +576,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return this;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.INNER;
     }
 
     family(): PopoverPlacement[] {
@@ -567,7 +613,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column',
         alignment: 'center',
@@ -576,6 +622,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.INNER;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.INNER_BOTTOM;
     }
 
     family(): PopoverPlacement[] {
@@ -605,7 +655,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column-reverse',
         alignment: 'center',
@@ -614,6 +664,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return PopoverPlacements.INNER;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.INNER_TOP;
     }
 
     family(): PopoverPlacement[] {
@@ -644,7 +698,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column-reverse',
         alignment: 'center',
@@ -653,6 +707,10 @@ export class PopoverPlacements {
 
     parent(): PopoverPlacement {
       return this;
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.BOTTOM;
     }
 
     family(): PopoverPlacement[] {
@@ -686,7 +744,7 @@ export class PopoverPlacements {
       );
     }
 
-    orientation(): FlexPlacement {
+    flex(): FlexPlacement {
       return {
         direction: 'column',
         alignment: 'center',
@@ -703,6 +761,10 @@ export class PopoverPlacements {
         PopoverPlacements.BOTTOM_START,
         PopoverPlacements.BOTTOM_END,
       ];
+    }
+
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.TOP;
     }
 
     fits(frame: Frame, other: Frame): boolean {
