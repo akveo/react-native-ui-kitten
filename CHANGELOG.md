@@ -1,3 +1,12 @@
+## <small>5.3.1 (2023-04-26)</small>
+
+* fix: BottomNavigation vertical align [issue](https://github.com/akveo/react-native-ui-kitten/issues/ ([254f451](https://github.com/akveo/react-native-ui-kitten/commit/254f451)), closes [#1721](https://github.com/akveo/react-native-ui-kitten/issues/1721)
+* fix: Datepicker selecting month error (#1694, #1687, #1713) (#1725) ([8e7aefd](https://github.com/akveo/react-native-ui-kitten/commit/8e7aefd)), closes [#1694](https://github.com/akveo/react-native-ui-kitten/issues/1694) [#1687](https://github.com/akveo/react-native-ui-kitten/issues/1687) [#1713](https://github.com/akveo/react-native-ui-kitten/issues/1713) [#1725](https://github.com/akveo/react-native-ui-kitten/issues/1725)
+* fix: ViewPager docs ([3e155d8](https://github.com/akveo/react-native-ui-kitten/commit/3e155d8))
+* fix: Popover fixes (#1727, #1723) ([d59fb29](https://github.com/akveo/react-native-ui-kitten/commit/d59fb29)), closes [#1727](https://github.com/akveo/react-native-ui-kitten/issues/1727) [#1723](https://github.com/akveo/react-native-ui-kitten/issues/1723)
+
+
+
 ## 5.3.0 (2023-04-14)
 
 * release: v5.2.0 (#1715) ([ef892df](https://github.com/akveo/react-native-ui-kitten/commit/ef892df)), closes [#1715](https://github.com/akveo/react-native-ui-kitten/issues/1715)
