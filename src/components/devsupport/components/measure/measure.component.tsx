@@ -64,9 +64,13 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
   };
 
   const onUIManagerMeasure = (x: number, y: number, w: number, h: number): void => {
-    const originY = props.shouldUseTopInsets ? y + StatusBar.currentHeight || 0 : y;
-    const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
-    props.onMeasure(frame);
+    if (!w && !h) {
+      measureSelf();
+    } else {
+      const originY = props.shouldUseTopInsets ? y + StatusBar.currentHeight || 0 : y;
+      const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
+      props.onMeasure(frame);
+    }
   };
 
   const measureSelf = (): void => {

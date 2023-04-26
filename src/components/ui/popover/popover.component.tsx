@@ -36,6 +36,7 @@ type PopoverModalProps = Omit<ModalProps, ' children'>;
 
 export interface PopoverProps extends PopoverViewProps, PopoverModalProps, RNModalProps {
   children?: React.ReactElement;
+  placement: PopoverPlacement;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   anchor: RenderFCProp<any>;
   fullWidth?: boolean;
@@ -135,7 +136,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   public static getDerivedStateFromProps(props, state): State {
-    if (!props.visible) {
+    if (!props.visible && !Point.outscreen().equals(state.contentPosition)) {
       return {
         ...state,
         contentPosition: Point.outscreen(),
@@ -187,7 +188,7 @@ export class Popover extends React.Component<PopoverProps, State> {
       <PopoverView
         {...this.props}
         contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
-        placement={this.state.actualPlacement.reverse()}
+        layoutDirection={PopoverPlacements.parse(this.state.actualPlacement).flex()}
       >
         {this.renderContentElement()}
       </PopoverView>
