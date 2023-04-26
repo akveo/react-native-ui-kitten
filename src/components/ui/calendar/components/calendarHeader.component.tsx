@@ -60,13 +60,12 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderTitleIcon = (): ChevronDownElement => {
     const { tintColor, ...svgStyle } = this.props.iconStyle;
-    const rotateStyle = this.props.viewModeId === CalendarViewModes.DATE.id ?
-      {} :
-      styles.rotateIcon;
+    const rotation = this.props.viewModeId === CalendarViewModes.DATE.id ? 0 : 180;
 
     return (
       <ChevronDown
-        style={[styles.headerButtonIcon, rotateStyle, svgStyle]}
+        style={[styles.headerButtonIcon, svgStyle]}
+        rotation={rotation}
         fill={tintColor}
       />
     );
@@ -185,8 +184,5 @@ const styles = StyleSheet.create({
   subContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  rotateIcon: {
-    transform: [{ rotate: '180deg' }],
   },
 });
