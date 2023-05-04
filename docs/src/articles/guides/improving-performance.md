@@ -40,11 +40,32 @@ By using it with extra configuration, we may compile Eva packages during the app
 This means, the application will start with ready-to-go stylings.
 
 Create **metro.config.js** at the root of your project (if you don't have this file yet) and use the `MetroConfig.create` method to add necessary handlers into default config object (or previously specified if you already had customizations). 
-If your application uses [mapping customization](design-system/customize-mapping) feature, or you have created another mapping.json during the previous steps, you can specify a path to custom mapping.json file:
+If your application uses [mapping customization](design-system/customize-mapping) feature, or you have created another mapping.json during the previous steps, you can specify a path to custom mapping.json file.
 
+For bare React Native project:
 ```js
-const { getDefaultConfig } = require('metro-config'); // If you have a bare react-native project
-// const { getDefaultConfig } = require("expo/metro-config"); // If your project is an expo one
+const MetroConfig = require('@ui-kitten/metro-config');
+
+const evaConfig = {
+  evaPackage: '@eva-design/eva',
+  // Optional, but may be useful when using mapping customization feature.
+  // customMappingPath: './custom-mapping.json',
+};
+
+module.exports = (() => {
+  // previousConfig - can be empty object or the react native default one (created by 'react native init') 
+  // or previously merged config object if you already have other customizations
+  const previousConfig = {};
+  // Other possible customizations...
+  const uiKittenMixedConfig = MetroConfig.create(evaConfig, previousConfig);
+  // Other possible customizations...
+  return uiKittenMixedConfig;
+})();
+```
+
+For Expo project:
+```js
+const { getDefaultConfig } = require("expo/metro-config");
 
 const MetroConfig = require('@ui-kitten/metro-config');
 
@@ -54,10 +75,13 @@ const evaConfig = {
   // customMappingPath: './custom-mapping.json',
 };
 
-module.exports = async () => {
+module.exports = (async () => {
   const defaultConfig = await getDefaultConfig(__dirname);
-  return MetroConfig.create(evaConfig, defaultConfig);
-};
+  // Other possible customizations...
+  const uiKittenMixedConfig = MetroConfig.create(evaConfig, defaultConfig);
+  // Other possible customizations...
+  return uiKittenMixedConfig;
+})();
 ```
 
 Shut down the current bundler process and restart the app with clearing cache.

@@ -74,5 +74,5 @@ export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): Met
     },
   };
 
-  return LodashMerge({}, libConfig, metroConfig);
+  return LodashMerge({}, metroConfig, libConfig);
 };
