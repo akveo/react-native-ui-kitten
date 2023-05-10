@@ -39,7 +39,7 @@ export type TextElement = React.ReactElement<TextProps>;
  * @extends React.Component
  *
  * @property {ReactText | ReactElement<TextProps>} children - String or number to be rendered as text.
- * Also can be ReactElement<TextProps> - nested Text component.
+ * Also can be ReactElement<TextProps> (nested Text component).
  *
  * @property {string} appearance - Can be `default`, `alternative` or `hint`.
  * Use `alternative` for displaying light text on a dark content and vice versa.

@@ -21,7 +21,7 @@ export type DrawerGroupElement = React.ReactElement<DrawerGroupProps>;
  * @extends React.Component
  *
  * @property {ReactElement<DrawerItemProps> | ReactElement<DrawerItemProps>[]} children -
- * items to be rendered within group.
+ * Items to be rendered within group.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the group.

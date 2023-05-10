@@ -82,7 +82,7 @@ interface State {
  *
  * @property {Array<'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right'>}
  * supportedOrientations -
- * allows the modal to be rotated to any of the specified orientations.
+ * Allows the modal to be rotated to any of the specified orientations.
  * On iOS, the modal is still restricted by what's specified
  * in your app's Info.plist's UISupportedInterfaceOrientations field
  *

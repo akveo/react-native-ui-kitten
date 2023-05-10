@@ -82,7 +82,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Defaults to *CalendarViewModes.DATE*.
  *
  * @property {(D, D, CalendarViewMode) => string} title - A function to transform visible date to a string displayed in
- * header for the specific view mode: first date - date picker, second date - year and month picker.
+ * header for the specific view mode: first date is date picker, second date is year and month picker.
  *
  * @property {(date: D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *

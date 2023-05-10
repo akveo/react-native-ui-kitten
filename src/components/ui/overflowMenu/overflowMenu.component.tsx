@@ -41,7 +41,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * @extends React.Component
  *
  * @property {ReactElement<MenuItemProps> | ReactElement<MenuItemProps>[]} children -
- * items to be rendered within menu.
+ * Items to be rendered within menu.
  *
  * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
