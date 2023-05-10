@@ -14,14 +14,11 @@ import {
   View,
 } from 'react-native';
 import {
-  EvaStatus,
   FalsyText,
   RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -38,10 +35,11 @@ import {
   Minus,
   MinusProps,
 } from '../shared/minus.component';
+import { CheckBoxAppearance, CheckBoxStatus } from '@eva-design/eva/mapping.types';
 
-type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default' | string>;
-}>;
+interface CheckBoxStyledProps extends StyledComponentProps {
+  appearance?: CheckBoxAppearance;
+}
 
 type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
@@ -50,7 +48,7 @@ export interface CheckBoxProps extends TouchableWebPropsWithoutChildren, CheckBo
   checked?: boolean;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
   indeterminate?: boolean;
-  status?: EvaStatus;
+  status?: CheckBoxStatus;
 }
 
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
@@ -77,8 +75,8 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * If it is a function, expected to return a Text.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *basic*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *basic*.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.

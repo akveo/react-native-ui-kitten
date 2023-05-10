@@ -20,14 +20,11 @@ import {
   ViewProps,
 } from 'react-native';
 import {
-  EvaStatus,
   FalsyText,
   RenderProp,
   RTLService,
   TouchableWeb,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -37,10 +34,11 @@ import {
 } from '../../theme';
 import { TextProps } from '../text/text.component';
 import { CheckMark } from '../shared/checkmark.component';
+import { ToggleAppearance, ToggleStatus } from '@eva-design/eva/mapping.types';
 
-type ToggleStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface ToggleStyledProps extends StyledComponentProps {
+  appearance?: ToggleAppearance;
+}
 
 type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
@@ -48,7 +46,7 @@ export interface ToggleProps extends TouchableWebPropsWithoutChildren, ToggleSty
   children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
-  status?: EvaStatus;
+  status?: ToggleStatus;
 }
 
 export type ToggleElement = React.ReactElement<ToggleProps>;
@@ -69,8 +67,8 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * If it is a function, expected to return a Text.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *basic*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *basic*.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.

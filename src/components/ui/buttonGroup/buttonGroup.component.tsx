@@ -13,10 +13,6 @@ import {
 } from 'react-native';
 import {
   ChildrenWithProps,
-  EvaSize,
-  EvaStatus,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -27,15 +23,16 @@ import {
   ButtonElement,
   ButtonProps,
 } from '../button/button.component';
+import { ButtonGroupAppearance, ButtonGroupSize, ButtonGroupStatus } from '@eva-design/eva/mapping.types';
 
-type ButtonGroupStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'filled' | 'outline' | 'ghost'>;
-}>;
+interface ButtonGroupStyledProps extends StyledComponentProps {
+  appearance?: ButtonGroupAppearance;
+}
 
 export interface ButtonGroupProps extends ViewProps, ButtonGroupStyledProps {
   children: ChildrenWithProps<ButtonProps>;
-  status?: EvaStatus;
-  size?: EvaSize;
+  status?: ButtonGroupStatus;
+  size?: ButtonGroupSize;
 }
 
 export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;

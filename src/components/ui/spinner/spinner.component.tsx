@@ -13,11 +13,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  EvaSize,
-  EvaStatus,
   Size,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -27,15 +23,16 @@ import {
   SpinnerAnimation,
   SpinnerAnimationStyle,
 } from './animation';
+import { SpinnerAppearance, SpinnerSize, SpinnerStatus } from '@eva-design/eva/mapping.types';
 
-type SpinnerStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface SpinnerStyledProps extends StyledComponentProps {
+  appearance?: SpinnerAppearance;
+}
 
 export interface SpinnerProps extends ViewProps, SpinnerStyledProps {
   animating?: boolean;
-  status?: EvaStatus;
-  size?: EvaSize;
+  status?: SpinnerStatus;
+  size?: SpinnerSize;
 }
 
 export type SpinnerElement = React.ReactElement<SpinnerProps>;
@@ -55,13 +52,13 @@ interface ArcElementStyle {
  * Default is *true*.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *primary*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *primary*.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {string} size - Size of the component.
- * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Defaults to *medium*.
+ * The predefined ones are `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Can be extended with custom mapping feature. Defaults to *medium*.
  *
  * @overview-example SpinnerSimpleUsage
  * Default Spinner status is `primary` and size is `medium`.

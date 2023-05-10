@@ -20,8 +20,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  EvaSize,
-  EvaStatus,
   FalsyFC,
   FalsyText,
   FlexViewCrossStyleProps,
@@ -30,8 +28,6 @@ import {
   WebEventResponder,
   WebEventResponderCallbacks,
   WebEventResponderInstance,
-  Overwrite,
-  LiteralUnion,
   TouchableWithoutFeedback,
 } from '../../devsupport';
 import {
@@ -41,14 +37,15 @@ import {
   StyleType,
 } from '../../theme';
 import { TextProps } from '../text/text.component';
+import { InputAppearance, InputSize, InputStatus } from '@eva-design/eva/mapping.types';
 
-type InputStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface InputStyledProps extends StyledComponentProps {
+  appearance?: InputAppearance;
+}
 
 export interface InputProps extends TextInputProps, InputStyledProps {
-  status?: EvaStatus;
-  size?: EvaSize;
+  status?: InputStatus;
+  size?: InputSize;
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
   caption?: RenderProp<TextProps> | React.ReactText;
@@ -94,14 +91,14 @@ export type InputElement = React.ReactElement<InputProps>;
  * Expected to return an Image.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *basic*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *basic*.
  * Useful for giving user a hint on the input validity.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {string} size - Size of the component.
- * Can be `small`, `medium` or `large`.
- * Defaults to *medium*.
+ * The predefined ones are `small`, `medium` or `large`.
+ * Can be extended with custom mapping feature. Defaults to *medium*.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes the style of the text field.
  *

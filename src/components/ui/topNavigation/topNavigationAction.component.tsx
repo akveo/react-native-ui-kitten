@@ -17,8 +17,6 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -26,10 +24,11 @@ import {
   StyledComponentProps,
   StyleType,
 } from '../../theme';
+import { TopNavigationActionAppearance } from '@eva-design/eva/mapping.types';
 
-type TopNavigationActionStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default' | 'control'>;
-}>;
+interface TopNavigationActionStyledProps extends StyledComponentProps {
+  appearance?: TopNavigationActionAppearance;
+}
 
 export interface TopNavigationActionProps extends TouchableWebProps, TopNavigationActionStyledProps {
   icon?: RenderProp<Partial<ImageProps>>;
@@ -49,7 +48,7 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  * Expected to return an Image.
  *
  * @property {string} appearance - Appearance of the component.
- * Can be `default` and `control`.
+ * The predefined ones are `default` and `control`. Can be extended with custom mapping feature.
  * Use *control* appearance when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.

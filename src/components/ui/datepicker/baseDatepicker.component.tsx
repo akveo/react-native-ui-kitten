@@ -16,8 +16,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  EvaInputSize,
-  EvaStatus,
   FalsyFC,
   FalsyText,
   RenderProp,
@@ -38,6 +36,7 @@ import {
   PopoverPlacements,
 } from '../popover/type';
 import { TextProps } from '../text/text.component';
+import { DatepickerSize, DatepickerStatus } from '@eva-design/eva/mapping.types';
 
 export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   TouchableOpacityProps,
@@ -48,8 +47,8 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   caption?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
-  status?: EvaStatus;
-  size?: EvaInputSize;
+  status?: DatepickerStatus;
+  size?: DatepickerSize;
   placeholder?: RenderProp<TextProps> | React.ReactText;
   placement?: PopoverPlacement | string;
   backdropStyle?: StyleProp<ViewStyle>;

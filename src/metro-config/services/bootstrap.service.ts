@@ -1,17 +1,20 @@
 import {
-  CustomSchemaType,
   SchemaType,
   ThemeStyleType,
 } from '@eva-design/dss';
+import { generateThemeTypes, generateMappingTypes } from '@eva-design/processor/js/scripts/generateTypes';
 import { SchemaProcessor } from '@eva-design/processor';
 import Fs from 'fs';
 import LodashMerge from 'lodash.merge';
 import EvaConfigService, { EvaConfig } from './eva-config.service';
 import LogService from './log.service';
 import ProjectService from './project.service';
+import { light } from '@eva-design/eva';
 
 const DEFAULT_CHECKSUM = 'default';
 const CACHE_FILE_NAME = 'generated.json';
+const MAPPING_TYPES_FILE_NAME = 'mapping.types.ts';
+const THEME_TYPES_FILE_NAME = 'theme.types.ts';
 const CACHE_EXPORT_SIGNATURE = `\n\nexports.styles = require('./${CACHE_FILE_NAME}').styles`;
 
 const RELATIVE_PATHS = {
@@ -26,6 +29,12 @@ const RELATIVE_PATHS = {
   },
   cache: (evaPackage: string): string => {
     return `node_modules/${evaPackage}/${CACHE_FILE_NAME}`;
+  },
+  mappingTypes: (evaPackage: string): string => {
+    return `node_modules/${evaPackage}/${MAPPING_TYPES_FILE_NAME}`;
+  },
+  themeTypes: (evaPackage: string): string => {
+    return `node_modules/${evaPackage}/${THEME_TYPES_FILE_NAME}`;
   },
 };
 
@@ -58,13 +67,42 @@ interface EvaCache {
  */
 // eslint-disable-next-line no-restricted-syntax
 export default class BootstrapService {
-
   static run = (config: EvaConfig): void => {
     const hasAtLeastOneEvaPackage: boolean = BootstrapService.ensureEvaPackagesInstalledOrWarn();
     const isValidConfig: boolean = EvaConfigService.validateConfigOrWarn(config);
+    const evaMappingPath: string = RELATIVE_PATHS.evaMapping(config.evaPackage);
+    const evaMapping: SchemaType = ProjectService.requireModule(evaMappingPath);
 
     if (hasAtLeastOneEvaPackage && isValidConfig) {
-      BootstrapService.processMappingIfNeeded(config);
+      if (!BootstrapService.isBootstrappedBefore(config) || BootstrapService.isRebootstrapNeeded(config)) {
+        let customMapping = {};
+        let customTheme = {};
+        let nextChecksum = DEFAULT_CHECKSUM;
+        if (config.customMappingPath) {
+          const customMappingString: string = ProjectService.requireActualModule(config.customMappingPath);
+          customMapping = JSON.parse(customMappingString);
+          nextChecksum = BootstrapService.createChecksum(customMappingString);
+        }
+        if (config.customThemePath) {
+          const customThemeString: string = ProjectService.requireActualModule(config.customThemePath);
+          customTheme = JSON.parse(customThemeString);
+        }
+        const combinedMapping: SchemaType = LodashMerge({}, evaMapping, customMapping);
+        const combinedTheme: Record<string, string> = LodashMerge({}, light, customTheme);
+        const styles: ThemeStyleType = schemaProcessor.process(combinedMapping);
+        const writableCache: string = BootstrapService.createWritableCache(nextChecksum, styles);
+        const outputCachePath: string = RELATIVE_PATHS.cache(config.evaPackage);
+        Fs.writeFileSync(outputCachePath, writableCache);
+        Fs.appendFileSync(RELATIVE_PATHS.evaIndex(config.evaPackage), CACHE_EXPORT_SIGNATURE);
+
+        const mappingFileContent = generateMappingTypes(combinedMapping);
+        Fs.writeFileSync(RELATIVE_PATHS.mappingTypes(config.evaPackage), mappingFileContent);
+
+        const themeFileContent = generateThemeTypes(combinedTheme);
+        Fs.writeFileSync(RELATIVE_PATHS.themeTypes(config.evaPackage), themeFileContent);
+
+        LogService.success(`Successfully bootstrapped ${config.evaPackage}`);
+      }
     }
   };
 
@@ -90,65 +128,26 @@ export default class BootstrapService {
     return true;
   };
 
-  private static processMappingIfNeeded = (config: EvaConfig): void => {
-    const evaMappingPath: string = RELATIVE_PATHS.evaMapping(config.evaPackage);
+  private static isRebootstrapNeeded(config: EvaConfig): boolean {
     const outputCachePath: string = RELATIVE_PATHS.cache(config.evaPackage);
-
-    /*
-     * Use `require` for eva mapping as it is static module and should not be changed.
-     * Require actual cache by reading file at cache file as it may change by file system.
-     */
-    const evaMapping: SchemaType = ProjectService.requireModule(evaMappingPath);
     const actualCacheString: string = ProjectService.requireActualModule(outputCachePath);
     const actualCache: EvaCache = JSON.parse(actualCacheString);
-
-    let customMapping: CustomSchemaType;
-    let actualChecksum: string = DEFAULT_CHECKSUM;
+    const actualChecksum: string = actualCache?.checksum || DEFAULT_CHECKSUM;
     let nextChecksum: string = DEFAULT_CHECKSUM;
-
-    if (actualCache?.checksum) {
-      actualChecksum = actualCache.checksum;
-    }
-
     if (config.customMappingPath) {
-
-      /*
-       * Require custom mapping by reading file at `customMappingPath` as it may change by user.
-       */
       const customMappingString: string = ProjectService.requireActualModule(config.customMappingPath);
-      customMapping = JSON.parse(customMappingString);
-      /*
-       * Calculate checksum only for custom mapping,
-       * but not for styles we generate because eva mapping is a static module.
-       */
       nextChecksum = BootstrapService.createChecksum(customMappingString);
     }
+    return actualChecksum !== nextChecksum;
+  }
 
-    /*
-     * Write if it is the first call
-     * Or re-write if custom mapping was changed
-     */
-    if (actualChecksum === DEFAULT_CHECKSUM || actualChecksum !== nextChecksum) {
-      const mapping: SchemaType = LodashMerge({}, evaMapping, customMapping);
-      const styles: ThemeStyleType = schemaProcessor.process(mapping);
-      const writableCache: string = BootstrapService.createWritableCache(nextChecksum, styles);
-
-      Fs.writeFileSync(outputCachePath, writableCache);
-    }
-
-    const hasCacheExports: boolean = BootstrapService.hasCacheExports(config);
-    if (!hasCacheExports) {
-      const evaIndexPath: string = RELATIVE_PATHS.evaIndex(config.evaPackage);
-
-      Fs.appendFileSync(evaIndexPath, CACHE_EXPORT_SIGNATURE);
-      LogService.success(`Successfully bootstrapped ${config.evaPackage}`);
-    }
-  };
+  private static isBootstrappedBefore(config: EvaConfig): boolean {
+    return BootstrapService.hasCacheExports(config);
+  }
 
   private static hasCacheExports = (config: EvaConfig): boolean => {
     const evaIndexPath: string = RELATIVE_PATHS.evaIndex(config.evaPackage);
     const evaIndexString = ProjectService.requireActualModule(evaIndexPath);
-
     return evaIndexString.includes(CACHE_EXPORT_SIGNATURE);
   };
 
