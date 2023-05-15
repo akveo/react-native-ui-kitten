@@ -236,7 +236,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
         anchor={() => this.renderAnchorInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}
       >
-        <>
+        <View>
           {this.renderInputElement(inputProps)}
           <List
             style={styles.list}
@@ -245,7 +245,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
             bounces={false}
             renderItem={this.renderItem}
           />
-        </>
+        </View>
       </Popover>
     );
   }
