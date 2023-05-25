@@ -83,7 +83,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   private containerRef = React.createRef<View>();
   private contentWidth = 0;
   private contentOffsetValue = 0;
-  private contentOffset: Animated.Value = new Animated.Value(this.contentOffsetValue);
+  private contentOffsetAnimatedValue: Animated.Value = new Animated.Value(this.contentOffsetValue);
   private panResponder: PanResponderInstance = PanResponder.create(this);
 
   private get children(): React.ReactElement<ChildrenProps>[] {
@@ -91,7 +91,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   }
 
   public componentDidMount(): void {
-    this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
+    this.contentOffsetAnimatedValue.addListener(this.onContentOffsetAnimationStateChanged);
   }
 
   public componentDidUpdate(prevProps: ViewPagerProps): void {
@@ -102,7 +102,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   }
 
   public componentWillUnmount(): void {
-    this.contentOffset.removeAllListeners();
+    this.contentOffsetAnimatedValue.removeAllListeners();
   }
 
   public onMoveShouldSetPanResponder = (_event: GestureResponderEvent, state: PanResponderGestureState): boolean => {
@@ -121,7 +121,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     const i18nOffset: number = RTLService.select(this.contentWidth, -this.contentWidth);
     const selectedPageOffset: number = this.props.selectedIndex * i18nOffset;
 
-    this.contentOffset.setValue(state.dx - selectedPageOffset);
+    this.contentOffsetAnimatedValue.setValue(state.dx - selectedPageOffset);
   };
 
   public onPanResponderRelease = (event: GestureResponderEvent, state: PanResponderGestureState): void => {
@@ -139,7 +139,6 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     const { index, ...rest } = params;
     const childCount = this.children.length - 1;
     const offset: number = this.contentWidth * (index < 0 ? 0 : index > childCount ? childCount : index);
-
     this.scrollToOffset({ offset, ...rest });
   }
 
@@ -149,12 +148,11 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
 
   private onLayout = (event: LayoutChangeEvent): void => {
     this.contentWidth = event.nativeEvent.layout.width / this.children.length;
-    this.scrollToIndex({ index: this.props.selectedIndex });
+    this.scrollToIndex({ index: this.props.selectedIndex, animated: true });
   };
 
   private onContentOffsetAnimationStateChanged = (state: { value: number }): void => {
     this.contentOffsetValue = RTLService.select(-state.value, state.value);
-
     if (this.props.onOffsetChange) {
       this.props.onOffsetChange(this.contentOffsetValue);
     }
@@ -162,16 +160,14 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
 
   private onContentOffsetAnimationStateEnd = (_result: { finished: boolean }): void => {
     const selectedIndex: number = this.contentOffsetValue / this.contentWidth;
-
-    if (selectedIndex !== this.props.selectedIndex && this.props.onSelect) {
+    if (selectedIndex !== this.props.selectedIndex && this.props.onSelect && _result.finished) {
       this.props.onSelect(Math.round(selectedIndex));
     }
   };
 
   private createOffsetAnimation = (params: { offset: number; animated?: boolean }): Animated.CompositeAnimation => {
     const animationDuration: number = params.animated ? this.props.animationDuration : 0;
-
-    return Animated.timing(this.contentOffset, {
+    return Animated.timing(this.contentOffsetAnimatedValue, {
       toValue: RTLService.select(-params.offset, params.offset),
       easing: Easing.linear,
       duration: animationDuration,
@@ -184,7 +180,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
       width: `${100 * this.children.length}%`,
 
       // @ts-ignore: RN has no types for `Animated` styles
-      transform: [{ translateX: this.contentOffset }],
+      transform: [{ translateX: this.contentOffsetAnimatedValue }],
     };
   };
 
