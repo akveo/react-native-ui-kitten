@@ -24,7 +24,7 @@ export type SelectGroupElement = React.ReactElement<SelectItemProps>;
  * @extends React.Component
  *
  * @property {ReactElement<SelectItemProps> | ReactElement<SelectItemProps>[]} children -
- * items to be rendered within group.
+ * Items to be rendered within group.
  *
  * @property {ReactElement | ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the group.
