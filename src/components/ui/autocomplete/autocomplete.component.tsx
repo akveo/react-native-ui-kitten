@@ -256,6 +256,8 @@ const styles = StyleSheet.create({
     maxHeight: 192,
     overflow: 'hidden',
     borderWidth: 0,
+    // this is here to fix the component's popover misplacement in Android
+    marginBottom: -1 * (react_native_1.StatusBar.currentHeight || 0),
   },
   list: {
     flexGrow: 0,
