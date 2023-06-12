@@ -6,7 +6,7 @@ const requestData = (): Promise<Response> => fetch('https://reactnative.dev/movi
 const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400);
 
 export const AutocompleteAsyncShowcase = (): React.ReactElement => {
-
+  const autocompleteRef = React.useRef(null);
   const [query, setQuery] = React.useState(null);
   const [data, setData] = React.useState([]);
 
@@ -42,6 +42,7 @@ export const AutocompleteAsyncShowcase = (): React.ReactElement => {
 
   return (
     <Autocomplete
+      ref={autocompleteRef}
       placeholder='For example, Star Wars'
       value={query}
       placement='inner top'
