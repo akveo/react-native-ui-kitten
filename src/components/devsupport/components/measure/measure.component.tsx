@@ -75,7 +75,7 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
 
   const measureSelf = (): void => {
     const node: number = findNodeHandle(ref.current);
-    UIManager.measureInWindow(node, onUIManagerMeasure);
+    if (typeof node === 'number') UIManager.measureInWindow(node, onUIManagerMeasure);
   };
 
   if (props.force) {
