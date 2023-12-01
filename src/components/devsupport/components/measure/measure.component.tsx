@@ -74,8 +74,14 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
   };
 
   const measureSelf = (): void => {
-    const node: number = findNodeHandle(ref.current);
-    UIManager.measureInWindow(node, onUIManagerMeasure);
+    try {
+      const node: number = findNodeHandle(ref.current);
+      UIManager.measureInWindow(node, onUIManagerMeasure);
+    } catch (error) {
+      // measureInWindow can throw an exception if the UI manager isn't read yet.
+      // Try again with a short delay
+      setTimeout(measureSelf, 100);
+    }
   };
 
   if (props.force) {
