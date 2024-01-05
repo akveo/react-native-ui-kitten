@@ -87,14 +87,14 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @property {(date: D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *basic*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *basic*.
  * Useful for giving user a hint on the input validity.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {string} size - Size of the component.
- * Can be `small`, `medium` or `large`.
- * Defaults to *medium*.
+ * The predefined ones are `small`, `medium` or `large`.
+ * Can be extended with custom mapping feature. Defaults to *medium*.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - String, number or a function
  * component to render when input field is empty.

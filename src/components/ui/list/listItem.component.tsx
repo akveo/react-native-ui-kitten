@@ -20,8 +20,6 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -30,10 +28,11 @@ import {
   StyleType,
 } from '../../theme';
 import { TextProps } from '../text/text.component';
+import { ListItemAppearance } from '@eva-design/eva/mapping.types';
 
-type ListItemStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface ListItemStyledProps extends StyledComponentProps {
+  appearance?: ListItemAppearance;
+}
 
 export interface ListItemProps extends TouchableWebProps, ListItemStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;

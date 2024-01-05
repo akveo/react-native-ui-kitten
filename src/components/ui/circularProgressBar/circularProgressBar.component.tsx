@@ -15,11 +15,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  EvaSize,
   LiteralUnion,
-  Overwrite,
   Size,
-  EvaStatus,
   RenderProp,
   FalsyFC,
 } from '@ui-kitten/components/devsupport';
@@ -31,10 +28,15 @@ import {
   Text,
 } from '@ui-kitten/components';
 import { CircularProgressBarAnimation, CircularProgressBarAnimationConfig } from './animation';
+import {
+  CircularProgressBarAppearance,
+  CircularProgressBarSize,
+  CircularProgressBarStatus,
+} from '@eva-design/eva/mapping.types';
 
-type CircularProgressBarStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface CircularProgressBarStyledProps extends StyledComponentProps {
+  appearance?: CircularProgressBarAppearance;
+}
 
 interface IndicatorStyle {
   width: number;
@@ -62,8 +64,8 @@ export interface CircularProgressBarProps extends ViewProps, CircularProgressBar
   progress?: number;
   animating?: boolean;
   renderIcon?: RenderProp<Partial<IconProps>>;
-  size?: EvaSize;
-  status?: EvaStatus;
+  size?: CircularProgressBarSize;
+  status?: CircularProgressBarStatus;
   textStyle?: TextStyle;
   iconStyle?: IconStyle;
   animationConfig?: Partial<CircularProgressBarAnimationConfig>;
@@ -83,12 +85,12 @@ export type CircularProgressBarElement = React.ReactElement<CircularProgressBarP
  * Default is *true*.
  *
  * @property {string} size - Size of the component.
- * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Defaults to *medium*.
+ * The predefined ones are `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Can be extended with custom mapping feature. Defaults to *medium*.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *primary*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *primary*.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {ReactElement | (IconProps) => ReactElement} renderIcon - Function component
@@ -326,7 +328,7 @@ export class CircularProgressBar extends React.PureComponent<CircularProgressBar
 
   private renderAccessory = (
     progress: number,
-    status: EvaStatus,
+    status: CircularProgressBarStatus,
     evaStyle: ComponentStyles
   ): React.ReactElement<ViewProps> => {
     const showIcon = this.props.renderIcon;

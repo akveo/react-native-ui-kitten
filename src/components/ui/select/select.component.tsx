@@ -21,8 +21,6 @@ import {
 } from 'react-native';
 import {
   ChildrenWithProps,
-  EvaInputSize,
-  EvaStatus,
   FalsyFC,
   FalsyText,
   IndexPath,
@@ -30,8 +28,6 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -51,10 +47,11 @@ import {
   SelectItemDescriptor,
   SelectService,
 } from './select.service';
+import { SelectAppearance, SelectSize, SelectStatus } from '@eva-design/eva/mapping.types';
 
-type SelectStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface SelectStyledProps extends StyledComponentProps {
+  appearance?: SelectAppearance;
+}
 
 export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   children?: ChildrenWithProps<SelectItemProps | SelectGroupProps>;
@@ -67,8 +64,8 @@ export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   caption?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
-  status?: EvaStatus;
-  size?: EvaInputSize;
+  status?: SelectStatus;
+  size?: SelectSize;
 }
 
 export type SelectElement = React.ReactElement<SelectProps>;
@@ -138,13 +135,13 @@ const CHEVRON_ANIM_DURATION = 200;
  * Expected to return an Image.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *basic*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *basic*.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {string} size - Size of the component.
- * Can be `small`, `medium` or `large`.
- * Defaults to *medium*.
+ * The predefined ones are `small`, `medium` or `large`.
+ * Can be extended with custom mapping feature. Defaults to *medium*.
  *
  * @property {() => void} onFocus - Called when options list becomes visible.
  *

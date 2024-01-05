@@ -12,14 +12,11 @@ import {
   ViewProps,
 } from 'react-native';
 import {
-  EvaStatus,
   FalsyFC,
   RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -28,17 +25,18 @@ import {
   StyleType,
 } from '../../theme';
 import { Divider } from '../divider/divider.component';
+import { CardAppearance, CardStatus } from '@eva-design/eva/mapping.types';
 
-type CardStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'filled' | 'outline'>;
-}>;
+interface CardStyledProps extends StyledComponentProps {
+  appearance?: CardAppearance;
+}
 
 export interface CardProps extends TouchableWebProps, CardStyledProps {
   children?: React.ReactNode;
   header?: RenderProp<ViewProps>;
   footer?: RenderProp<ViewProps>;
   accent?: RenderProp<ViewProps>;
-  status?: EvaStatus;
+  status?: CardStatus;
 }
 
 export type CardElement = React.ReactElement<CardProps>;
@@ -61,11 +59,12 @@ export type CardElement = React.ReactElement<CardProps>;
  * Accents may change it's color depending on *status* property.
  *
  * @property {string} appearance - Appearance of the component.
- * Can be `filled` or `outline`.
+ * The predefined ones are `filled` or `outline`. Can be extended with custom mapping feature.
  * Defaults to *outline*.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature.
  * Defaults to *basic*.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.

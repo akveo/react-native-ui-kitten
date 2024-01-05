@@ -9,19 +9,19 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite, LiteralUnion } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
+import { LayoutAppearance, LayoutLevel } from '@eva-design/eva/mapping.types';
 
-type LayoutStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface LayoutStyledProps extends StyledComponentProps {
+  appearance?: LayoutAppearance;
+}
 
 export interface LayoutProps extends ViewProps, LayoutStyledProps {
   children?: React.ReactNode;
-  level?: LiteralUnion<'1' | '2' | '3' | '4'>;
+  level?: LayoutLevel;
 }
 
 export type LayoutElement = React.ReactElement<LayoutProps>;
@@ -34,8 +34,8 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  * @property {ReactNode} children - Component to render within the layout.
  *
  * @property {string} level - Background color level of component.
- * Can be `1`, `2`, `3` or `4`.
- * Defaults to *1*.
+ * The predefined ones are `1`, `2`, `3` or `4`.
+ * Can be extended with custom mapping feature. Defaults to *1*.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *

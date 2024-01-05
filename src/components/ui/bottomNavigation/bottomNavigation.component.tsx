@@ -14,8 +14,6 @@ import {
 } from 'react-native';
 import {
   ChildrenWithProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -30,10 +28,11 @@ import {
   TabIndicator,
   TabIndicatorElement,
 } from '../shared/tabIndicator.component';
+import { BottomNavigationAppearance } from '@eva-design/eva/mapping.types';
 
-type BottomNavigationStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default' | 'noIndicator'>;
-}>;
+interface BottomNavigationStyledProps extends StyledComponentProps {
+  appearance?: BottomNavigationAppearance;
+}
 
 export interface BottomNavigationProps extends ViewProps, BottomNavigationStyledProps {
   children?: ChildrenWithProps<BottomNavigationTabProps>;
@@ -57,7 +56,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * @property {(number) => void} onSelect - Called when tab is pressed.
  *
  * @property {string} appearance - Appearance of the component.
- * Can be `default` or `noIndicator`.
+ * The predefined ones are `default` or `noIndicator`. Can be extended with custom mapping feature.
  *
  * @property {StyleProp<ViewStyle>} indicatorStyle - Styles of the indicator.
  *

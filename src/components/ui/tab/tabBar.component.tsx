@@ -14,8 +14,6 @@ import {
 } from 'react-native';
 import {
   ChildrenWithProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -27,10 +25,11 @@ import {
   TabProps,
 } from './tab.component';
 import { TabIndicator } from '../shared/tabIndicator.component';
+import { TabBarAppearance } from '@eva-design/eva/mapping.types';
 
-type TabBarStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface TabBarStyledProps extends StyledComponentProps {
+  appearance?: TabBarAppearance;
+}
 
 export interface TabBarProps extends ViewProps, TabBarStyledProps {
   children?: ChildrenWithProps<TabProps>;

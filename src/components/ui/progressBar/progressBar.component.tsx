@@ -14,21 +14,16 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  EvaSize,
-  EvaStatus,
-  LiteralUnion,
-  Overwrite,
-} from '@ui-kitten/components/devsupport';
-import {
   styled,
   StyledComponentProps,
   StyleType,
 } from '@ui-kitten/components';
 import { ProgressBarAnimation, ProgressBarAnimationConfig } from './animation';
+import { ProgressBarAppearance, ProgressBarSize, ProgressBarStatus } from '@eva-design/eva/mapping.types';
 
-type ProgressBarStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface ProgressBarStyledProps extends StyledComponentProps {
+  appearance?: ProgressBarAppearance;
+}
 
 interface ComponentStyles {
   track: ViewStyle;
@@ -39,8 +34,8 @@ export interface ProgressBarProps extends ViewProps, ProgressBarStyledProps {
   progress?: number;
   animating?: boolean;
   animationConfig?: Partial<ProgressBarAnimationConfig>;
-  status?: EvaStatus;
-  size?: EvaSize;
+  status?: ProgressBarStatus;
+  size?: ProgressBarSize;
 }
 
 export type ProgressBarElement = React.ReactElement<ProgressBarProps>;
@@ -61,12 +56,12 @@ interface State {
  * Can be from 0 to 1.
  *
  * @property {string} size - Size of the component.
- * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Defaults to *small*.
+ * CThe predefined ones are `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Can be extended with custom mapping feature. Defaults to *small*.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *primary*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *primary*.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {Partial<ProgressBarAnimationConfig>} animationConfig - Animation configuration.

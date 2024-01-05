@@ -14,8 +14,6 @@ import {
   FalsyFC,
   FalsyText,
   RenderProp,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -23,22 +21,21 @@ import {
   StyleType,
 } from '../../theme';
 import { TextProps } from '../text/text.component';
+import { TopNavigationAlignment, TopNavigationAppearance } from '@eva-design/eva/mapping.types';
 
-type TopNavigationStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default' | 'control'>;
-}>;
+interface TopNavigationStyledProps extends StyledComponentProps {
+  appearance?: TopNavigationAppearance;
+}
 
 export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   subtitle?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: () => React.ReactElement;
   accessoryRight?: () => React.ReactElement;
-  alignment?: AlignmentProp;
+  alignment?: TopNavigationAlignment;
 }
 
 export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
-
-type AlignmentProp = 'start' | 'center';
 
 /**
  * TopNavigation provides a heading component for the entire page.
@@ -60,12 +57,12 @@ type AlignmentProp = 'start' | 'center';
  * to render to the right edge the top navigation.
  *
  * @property {string} appearance - Appearance of the component.
- * Can be `default`, `control`.
+ * The predefined ones are `default`, `control`. Can be extended with custom mapping feature.
  * Use *control* appearance when needed to display within a contrast container.
  *
  * @property {string} alignment - Alignment of nested components.
- * Can be `center` or `start`.
- * Defaults to *start*.
+ * The predefined ones are `center` or `start`.
+ * Can be extended with custom mapping feature. Defaults to *start*.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
@@ -99,7 +96,7 @@ type AlignmentProp = 'start' | 'center';
 @styled('TopNavigation')
 export class TopNavigation extends React.Component<TopNavigationProps> {
 
-  private getAlignmentDependentStyles = (alignment: AlignmentProp): StyleType => {
+  private getAlignmentDependentStyles = (alignment: TopNavigationAlignment): StyleType => {
     if (alignment === 'center') {
       return {
         container: styles.containerCentered,

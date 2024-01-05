@@ -19,6 +19,7 @@ import ProjectService from './project.service';
 export interface EvaConfig {
   evaPackage: EvaMappingPackageName;
   customMappingPath?: string;
+  customThemePath?: string;
   watch?: boolean;
 }
 

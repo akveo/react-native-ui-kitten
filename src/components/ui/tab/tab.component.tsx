@@ -18,8 +18,6 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -28,10 +26,11 @@ import {
   StyleType,
 } from '../../theme';
 import { TextProps } from '../text/text.component';
+import { TabAppearance } from '@eva-design/eva/mapping.types';
 
-type TabStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface TabStyledProps extends StyledComponentProps {
+  appearance?: TabAppearance;
+}
 
 export interface TabProps extends TouchableWebProps, TabStyledProps {
   children?: React.ReactElement;

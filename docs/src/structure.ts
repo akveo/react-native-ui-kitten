@@ -135,6 +135,20 @@ export const structure = [
         description: 'How to get rid of performance issues in UI Kitten when using mapping customization or React Native Navigation by Wix',
         keywords: 'ui kitten, react native apps, custom mapping path, evaConfig, evaPackage',
       },
+      {
+        type: 'page',
+        name: 'Code Autocompletion',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/code-autocompletion.md',
+          },
+        ],
+        title: 'Code Autocompletion',
+        description: 'How to use code autocompletion feature with UI Kitten',
+        keywords: 'ui kitten, react native apps, custom mapping path, evaConfig, evaPackage, code autocompletion',
+      },
     ],
   },
   {

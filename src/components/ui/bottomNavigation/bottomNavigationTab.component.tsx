@@ -18,8 +18,6 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -28,10 +26,11 @@ import {
   StyleType,
 } from '../../theme';
 import { TextProps } from '../text/text.component';
+import { BottomNavigationTabAppearance } from '@eva-design/eva/mapping.types';
 
-type BottomNavigationTabStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default' | string>;
-}>;
+interface BottomNavigationTabStyledProps extends StyledComponentProps {
+  appearance?: BottomNavigationTabAppearance;
+}
 
 export interface BottomNavigationTabProps extends TouchableWebProps, BottomNavigationTabStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;

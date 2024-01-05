@@ -18,8 +18,10 @@ import {
   Menu,
   MenuProps,
 } from '../menu/menu.component';
+import { DrawerAppearance } from '@eva-design/eva/mapping.types';
 
 export interface DrawerProps extends MenuProps {
+  appearance?: DrawerAppearance;
   header?: RenderProp<ViewProps>;
   footer?: RenderProp<ViewProps>;
 }
@@ -52,7 +54,8 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * where row - index of item in group, section - index of group in list.
  *
  * @property {string} appearance - Appearance of the component.
- * Can be `default` or `noDivider`.
+ * The predefined ones are `default` or `noDivider`.
+ * Can be extended with custom mapping feature.
  *
  * @property {ListProps} ...ListProps - Any props applied to List component,
  * excluding `renderItem` and `data`.

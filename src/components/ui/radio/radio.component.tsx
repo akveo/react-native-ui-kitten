@@ -13,14 +13,11 @@ import {
   View,
 } from 'react-native';
 import {
-  EvaStatus,
   FalsyText,
   RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -29,10 +26,11 @@ import {
   StyleType,
 } from '../../theme';
 import { TextProps } from '../text/text.component';
+import { RadioAppearance, RadioStatus } from '@eva-design/eva/mapping.types';
 
-type RadioStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface RadioStyledProps extends StyledComponentProps {
+  appearance?: RadioAppearance;
+}
 
 type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
@@ -40,7 +38,7 @@ export interface RadioProps extends TouchableWebPropsWithoutChildren, RadioStyle
   children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
-  status?: EvaStatus;
+  status?: RadioStatus;
 }
 
 export type RadioElement = React.ReactElement<RadioProps>;
@@ -61,8 +59,8 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * If it is a function, expected to return a Text.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Defaults to *basic*.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature. Defaults to *basic*.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.

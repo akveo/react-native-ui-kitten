@@ -9,15 +9,15 @@ import {
   FlatList,
   FlatListProps,
 } from 'react-native';
-import { Overwrite, LiteralUnion } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
+import { ListAppearance } from '@eva-design/eva/mapping.types';
 
-type ListStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface ListStyledProps extends StyledComponentProps {
+  appearance?: ListAppearance;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ListProps<ItemT = any> = FlatListProps<ItemT> & ListStyledProps;
