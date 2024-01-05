@@ -49,11 +49,11 @@ npx react-native init MyApp --template @ui-kitten/template-ts
 This will setup a new React Native application configured with UI Kitten.
 Refer to the [Documentation][link:doc-where-start] for more options to start.
 
-## Mobile backend Bundles
+## UI Bakery
 
-Easy way to integrate UI Kitten with backend ([Java][link:ui-kitten-bundle-java], [.NET Core][link:ui-kitten-bundle-dotnet-core]).
+Need to quickly build an admin panel for your mobile app? Check out UI builder [UI Bakery](https://uibakery.io).
 
-[<img src="https://i.imgur.com/HVNZQGR.jpg">][link:ui-kitten-bundles]
+<a href="https://uibakery.io"><img src="https://storage.uibakery.io/video-assets/landing/Logo/UIB%20400x150.png" height="80" /></a>
 
 ## How can I support the developers?
 - Star our GitHub repo :star:
