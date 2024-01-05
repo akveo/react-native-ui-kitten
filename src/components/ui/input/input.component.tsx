@@ -163,10 +163,18 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
   // WebEventResponderCallbacks
 
   public onMouseEnter = (): void => {
+    if (this.isFocused()) {
+      return;
+    }
+
     this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
+    if (this.isFocused()) {
+      return;
+    }
+
     this.props.eva.dispatch([]);
   };
 
