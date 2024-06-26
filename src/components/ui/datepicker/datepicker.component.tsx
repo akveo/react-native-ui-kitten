@@ -4,17 +4,20 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { DateService, NativeDateService } from '@ui-kitten/components';
 import React from 'react';
 import { RenderProp } from '../../devsupport';
 import { styled } from '../../theme';
 import {
   BaseDatepickerComponent,
   BaseDatepickerProps,
+  BaseDatepickerRef,
 } from './baseDatepicker.component';
 import {
   Calendar,
   CalendarElement,
   CalendarProps,
+  CalendarRef,
 } from '../calendar/calendar.component';
 import { TextProps } from '../text/text.component';
 
@@ -23,6 +26,10 @@ export interface DatepickerProps<D = Date> extends BaseDatepickerProps<D>, Calen
 }
 
 export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>;
+
+export type DatepickerRef<D = Date> = BaseDatepickerRef<D> & {
+  clear: () => void;
+};
 
 /**
  * Date picker provides a simple way to select a date within a picker displayed in modal.
@@ -187,69 +194,95 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @overview-example DatepickerTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-@styled('Datepicker')
-export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
+function Datepicker<D = Date>(
+  {
+    autoDismiss = true,
+    placeholder = 'dd/mm/yyyy',
+    ...props
+  }: DatepickerProps<D>,
+  ref: React.RefObject<DatepickerRef<D>>
+): React.ReactElement<DatepickerProps<D>> {
+  const calendarRef = React.useRef<CalendarRef<D>>(null);
+  const baseDatepickerRef = React.useRef<BaseDatepickerRef<D>>(null);
+  const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
 
-  static defaultProps: DatepickerProps = {
-    ...BaseDatepickerComponent.defaultProps,
-    autoDismiss: true,
-  };
+  React.useImperativeHandle(ref, () => ({
+    focus: baseDatepickerRef.current?.focus,
+    blur: baseDatepickerRef.current?.blur,
+    isFocused: baseDatepickerRef.current?.isFocused,
+    scrollToToday: calendarRef.current?.scrollToToday,
+    scrollToDate: calendarRef.current?.scrollToDate,
+    state: calendarRef.current?.state,
+    dataService: calendarRef.current?.dataService,
+    clear,
+  }));
 
-  constructor(props: DatepickerProps<D>) {
-    super(props);
-    this.clear = this.clear.bind(this);
-  }
+  const calendarProps: CalendarProps<D> = ({
+    dateService,
+    min: props.min,
+    max: props.max,
+    date: props.date,
+    initialVisibleDate: props.initialVisibleDate,
+    boundingMonth: props.boundingMonth,
+    startView: props.startView,
+    filter: props.filter,
+    title: props.title,
+    onSelect: props.onSelect,
+    renderDay: props.renderDay,
+    renderMonth: props.renderMonth,
+    renderYear: props.renderYear,
+    renderFooter: props.renderFooter,
+    renderArrowRight: props.renderArrowRight,
+    renderArrowLeft: props.renderArrowLeft,
+    onVisibleDateChange: props.onVisibleDateChange,
+  });
 
-  private get calendarProps(): CalendarProps<D> {
-    return {
-      min: this.props.min,
-      max: this.props.max,
-      date: this.props.date,
-      initialVisibleDate: this.props.initialVisibleDate,
-      dateService: this.props.dateService,
-      boundingMonth: this.props.boundingMonth,
-      startView: this.props.startView,
-      filter: this.props.filter,
-      title: this.props.title,
-      onSelect: this.props.onSelect,
-      renderDay: this.props.renderDay,
-      renderMonth: this.props.renderMonth,
-      renderYear: this.props.renderYear,
-      renderFooter: this.props.renderFooter,
-      renderArrowRight: this.props.renderArrowRight,
-      renderArrowLeft: this.props.renderArrowLeft,
-      onVisibleDateChange: this.props.onVisibleDateChange,
-    };
-  }
-
-  public clear = (): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(null);
+  const clear = (): void => {
+    if (props.onSelect) {
+      props.onSelect(null);
     }
   };
 
   // BaseDatepickerComponent
 
-  protected getComponentTitle(): RenderProp<TextProps> | React.ReactText {
-    if (this.props.date) {
-      return this.props.dateService.format(this.props.date, null);
+  const getComponentTitle = (): RenderProp<TextProps> | string | number => {
+    if (props.date) {
+      return dateService.format(props.date, null);
     } else {
-      return this.props.placeholder;
+      return placeholder;
     }
-  }
-
-  protected onSelect = (date: D): void => {
-    this.props.onSelect?.(date);
-    this.props.autoDismiss && this.blur();
   };
 
-  protected renderCalendar(): CalendarElement<D> {
+  const onSelect = (date: D): void => {
+    props.onSelect?.(date);
+    autoDismiss && baseDatepickerRef.current?.blur?.();
+  };
+
+  const renderCalendar = (): CalendarElement<D> => {
     return (
       <Calendar
-        {...this.calendarProps}
-        ref={this.calendarRef}
-        onSelect={this.onSelect}
+        ref={calendarRef}
+        {...calendarProps}
+        onSelect={onSelect}
       />
     );
-  }
+  };
+
+  return (
+    <BaseDatepickerComponent
+      {...props}
+      dateService={dateService}
+      placeholder={placeholder}
+      ref={baseDatepickerRef}
+      renderCalendar={renderCalendar}
+      getComponentTitle={getComponentTitle}
+      clear={clear}
+    />
+  );
 }
+
+const Component = styled('Datepicker')(React.forwardRef(Datepicker));
+
+export {
+  Component as Datepicker,
+};

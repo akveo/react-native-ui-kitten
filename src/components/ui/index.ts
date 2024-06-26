@@ -38,6 +38,7 @@ export {
   Calendar,
   CalendarElement,
   CalendarProps,
+  CalendarRef,
 } from './calendar/calendar.component';
 export {
   Card,
@@ -48,6 +49,7 @@ export {
   RangeCalendar,
   RangeCalendarProps,
   RangeCalendarElement,
+  RangeCalendarRef,
 } from './calendar/rangeCalendar.component';
 export {
   CalendarRange,
@@ -64,11 +66,13 @@ export {
   Datepicker,
   DatepickerProps,
   DatepickerElement,
+  DatepickerRef,
 } from './datepicker/datepicker.component';
 export {
   RangeDatepicker,
   RangeDatepickerProps,
   RangeDatepickerElement,
+  RangeDatepickerRef,
 } from './datepicker/rangeDatepicker.component';
 export {
   Drawer,

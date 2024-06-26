@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { DateService, NativeDateService } from '@ui-kitten/components';
 import React from 'react';
 import {
   styled,
@@ -12,6 +13,7 @@ import {
 import {
   BaseCalendarComponent,
   BaseCalendarProps,
+  BaseCalendarRef,
 } from './baseCalendar.component';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
 import { DateBatch } from './service/calendarData.service';
@@ -22,6 +24,8 @@ export interface CalendarProps<D = Date> extends StyledComponentProps, BaseCalen
 }
 
 export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
+
+export type CalendarRef<D = Date> = BaseCalendarRef<D>;
 
 /**
  * Calendar provides a simple way to select a date.
@@ -127,47 +131,48 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  * @overview-example CalendarTheming
  * Styling of the calendar is possible with [configuring a custom theme](guides/branding).
  */
+function Calendar <D = Date> (
+  props: CalendarProps<D>,
+  ref: React.RefObject<BaseCalendarRef<D>>,
+): CalendarElement<D> {
+  const baseCalendarRef = React.useRef<BaseCalendarRef<D>>(null);
+  const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
 
-@styled('Calendar')
-export class Calendar<D = Date> extends BaseCalendarComponent<CalendarProps<D>, D> {
+  React.useImperativeHandle(ref, () => ({
+    ...baseCalendarRef.current,
+  }));
 
-  constructor(props: CalendarProps<D>) {
-    super(props);
+  const createDates = (date: D): DateBatch<D> => {
+    if (baseCalendarRef.current) {
+      return baseCalendarRef.current.dataService.createDayPickerData(date);
+    }
+    return [];
+  };
 
-    this.createDates = this.createDates.bind(this);
-    this.selectedDate = this.selectedDate.bind(this);
-    this.onDateSelect = this.onDateSelect.bind(this);
-    this.isDateSelected = this.isDateSelected.bind(this);
-    this.shouldUpdateDate = this.shouldUpdateDate.bind(this);
-  }
+  const selectedDate = (): D | undefined => {
+    return props.date;
+  };
 
-  // BaseCalendarComponent
+  const onDateSelect = (date: D): void => {
+    props.onSelect?.(date);
+  };
 
-  protected createDates(date: D): DateBatch<D> {
-    return this.dataService.createDayPickerData(date);
-  }
+  const isDateSelected = (date: D): boolean => {
+    return dateService.isSameDaySafe(date, selectedDate());
+  };
 
-  protected selectedDate(): D | undefined {
-    return this.props.date;
-  }
-
-  protected onDateSelect(date: D): void {
-    this.props.onSelect?.(date);
-  }
-
-  protected isDateSelected(date: D): boolean {
-    return this.dateService.isSameDaySafe(date, this.selectedDate());
-  }
-
-  protected shouldUpdateDate(props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>): boolean {
-    const dateChanged: boolean = this.dateService.compareDatesSafe(props.date.date, nextProps.date.date) !== 0;
+  const shouldUpdateDate = (prevProps: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>): boolean => {
+    const dateChanged: boolean = dateService.compareDatesSafe(
+      prevProps.date.date,
+      nextProps.date.date,
+    ) !== 0;
 
     if (dateChanged) {
       return true;
     }
 
-    const selectionChanged: boolean = props.selected !== nextProps.selected;
-    const disablingChanged: boolean = props.disabled !== nextProps.disabled;
+    const selectionChanged: boolean = prevProps.selected !== nextProps.selected;
+    const disablingChanged: boolean = prevProps.disabled !== nextProps.disabled;
 
     const value: boolean = selectionChanged || disablingChanged;
 
@@ -175,6 +180,25 @@ export class Calendar<D = Date> extends BaseCalendarComponent<CalendarProps<D>, 
       return true;
     }
 
-    return props.eva.theme !== nextProps.eva.theme;
-  }
+    return prevProps.eva.theme !== nextProps.eva.theme;
+  };
+
+  return (
+    <BaseCalendarComponent
+      {...props}
+      dateService={dateService}
+      ref={baseCalendarRef}
+      createDates={createDates}
+      selectedDate={selectedDate}
+      onDateSelect={onDateSelect}
+      isDateSelected={isDateSelected}
+      shouldUpdateDate={shouldUpdateDate}
+    />
+  );
 }
+
+const component = styled('Calendar')(React.forwardRef(Calendar));
+
+export {
+  component as Calendar,
+};
