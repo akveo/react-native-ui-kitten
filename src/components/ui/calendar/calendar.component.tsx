@@ -16,7 +16,7 @@ import {
   BaseCalendarRef,
 } from './baseCalendar.component';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
-import { DateBatch } from './service/calendarData.service';
+import { CalendarDataService, DateBatch } from './service/calendarData.service';
 
 export interface CalendarProps<D = Date> extends StyledComponentProps, BaseCalendarProps<D> {
   date?: D;
@@ -25,7 +25,9 @@ export interface CalendarProps<D = Date> extends StyledComponentProps, BaseCalen
 
 export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
 
-export type CalendarRef<D = Date> = BaseCalendarRef<D>;
+export type CalendarRef<D = Date> = BaseCalendarRef<D> & {
+  dataService: CalendarDataService<D>;
+};
 
 /**
  * Calendar provides a simple way to select a date.
@@ -133,20 +135,18 @@ export type CalendarRef<D = Date> = BaseCalendarRef<D>;
  */
 function Calendar <D = Date> (
   props: CalendarProps<D>,
-  ref: React.RefObject<BaseCalendarRef<D>>,
+  ref: React.RefObject<CalendarRef<D>>,
 ): CalendarElement<D> {
-  const baseCalendarRef = React.useRef<BaseCalendarRef<D>>(null);
   const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
+  const dataService: CalendarDataService<D> = new CalendarDataService(dateService);
 
   React.useImperativeHandle(ref, () => ({
-    ...baseCalendarRef.current,
-  }));
+    ...ref.current,
+    dataService,
+  }), [dataService]);
 
   const createDates = (date: D): DateBatch<D> => {
-    if (baseCalendarRef.current) {
-      return baseCalendarRef.current.dataService.createDayPickerData(date);
-    }
-    return [];
+    return dataService.createDayPickerData(date);
   };
 
   const selectedDate = (): D | undefined => {
@@ -187,7 +187,8 @@ function Calendar <D = Date> (
     <BaseCalendarComponent
       {...props}
       dateService={dateService}
-      ref={baseCalendarRef}
+      dataService={dataService}
+      ref={ref}
       createDates={createDates}
       selectedDate={selectedDate}
       onDateSelect={onDateSelect}

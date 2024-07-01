@@ -15,7 +15,6 @@ import {
 } from './baseDatepicker.component';
 import {
   Calendar,
-  CalendarElement,
   CalendarProps,
   CalendarRef,
 } from '../calendar/calendar.component';
@@ -27,7 +26,7 @@ export interface DatepickerProps<D = Date> extends BaseDatepickerProps<D>, Calen
 
 export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>;
 
-export type DatepickerRef<D = Date> = BaseDatepickerRef<D> & {
+export type DatepickerRef<D = Date> = CalendarRef<D> & BaseDatepickerRef & {
   clear: () => void;
 };
 
@@ -201,9 +200,9 @@ function Datepicker<D = Date>(
     ...props
   }: DatepickerProps<D>,
   ref: React.RefObject<DatepickerRef<D>>
-): React.ReactElement<DatepickerProps<D>> {
+): DatepickerElement<D> {
   const calendarRef = React.useRef<CalendarRef<D>>(null);
-  const baseDatepickerRef = React.useRef<BaseDatepickerRef<D>>(null);
+  const baseDatepickerRef = React.useRef<BaseDatepickerRef>(null);
   const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
 
   React.useImperativeHandle(ref, () => ({
@@ -258,26 +257,21 @@ function Datepicker<D = Date>(
     autoDismiss && baseDatepickerRef.current?.blur?.();
   };
 
-  const renderCalendar = (): CalendarElement<D> => {
-    return (
-      <Calendar
-        ref={calendarRef}
-        {...calendarProps}
-        onSelect={onSelect}
-      />
-    );
-  };
-
   return (
     <BaseDatepickerComponent
       {...props}
       dateService={dateService}
       placeholder={placeholder}
       ref={baseDatepickerRef}
-      renderCalendar={renderCalendar}
       getComponentTitle={getComponentTitle}
       clear={clear}
-    />
+    >
+      <Calendar
+        ref={calendarRef}
+        {...calendarProps}
+        onSelect={onSelect}
+      />
+    </BaseDatepickerComponent>
   );
 }
 

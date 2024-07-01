@@ -18,12 +18,12 @@ import {
   RangeCalendarRef,
 } from '../calendar/rangeCalendar.component';
 import { RenderProp } from '@ui-kitten/components/devsupport';
-import { TextProps } from '@ui-kitten/components';
+import { DateService, NativeDateService, TextProps } from '@ui-kitten/components';
 
 export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> & RangeCalendarProps<D>;
 export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepickerProps<D>>;
 
-export type RangeDatepickerRef<D = Date> = RangeCalendarRef<D> & BaseDatepickerRef<D> & {
+export type RangeDatepickerRef<D = Date> = RangeCalendarRef<D> & BaseDatepickerRef & {
   clear: () => void;
 };
 
@@ -150,22 +150,20 @@ function RangeDatepicker<D = Date> (
   }: RangeDatepickerProps<D>,
   ref: React.RefObject<RangeDatepickerRef<D>>,
 ): RangeCalendarElement {
-  const calendarRef = React.useRef<RangeCalendarRef<D>>(null);
-  const baseDatepickerRef = React.useRef<BaseDatepickerRef<D>>(null);
+  const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
 
   React.useImperativeHandle(ref, () => ({
-    ...calendarRef.current,
-    ...baseDatepickerRef.current,
+    ...ref.current,
     clear,
   }));
 
   const calendarProps = (): RangeCalendarProps<D> => {
     return {
+      dateService,
       min: props.min,
       max: props.max,
       range: props.range,
       initialVisibleDate: props.initialVisibleDate,
-      dateService: props.dateService,
       boundingMonth: props.boundingMonth,
       startView: props.startView,
       filter: props.filter,
@@ -191,8 +189,8 @@ function RangeDatepicker<D = Date> (
     const { startDate, endDate } = props.range;
 
     if (startDate || endDate) {
-      const start: string = startDate ? props.dateService.format(startDate, null) : '';
-      const end: string = endDate ? props.dateService.format(endDate, null) : '';
+      const start: string = startDate ? dateService.format(startDate, null) : '';
+      const end: string = endDate ? dateService.format(endDate, null) : '';
 
       return `${start} - ${end}`;
     } else {
@@ -200,28 +198,23 @@ function RangeDatepicker<D = Date> (
     }
   };
 
-  const renderCalendar = (): RangeCalendarElement<D> => {
-    return (
-      <RangeCalendar
-        ref={calendarRef}
-        {...calendarProps}
-      />
-    );
-  };
-
   return (
     <BaseDatepickerComponent
       {...props}
       placeholder={placeholder}
-      ref={baseDatepickerRef}
-      renderCalendar={renderCalendar}
+      ref={ref}
       getComponentTitle={getComponentTitle}
       clear={clear}
-    />
+    >
+      <RangeCalendar
+        ref={ref}
+        {...calendarProps}
+      />
+    </BaseDatepickerComponent>
   );
 }
 
-const Component = styled('RangeDatepicker')(React.forwardRef(RangeDatepicker));
+const Component = styled('Datepicker')(React.forwardRef(RangeDatepicker));
 
 export {
   Component as RangeDatepicker,

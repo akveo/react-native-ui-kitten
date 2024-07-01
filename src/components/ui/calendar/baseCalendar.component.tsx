@@ -54,6 +54,7 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   max?: D;
   initialVisibleDate?: D;
   dateService?: DateService<D>;
+  dataService?: CalendarDataService<D>;
   boundingMonth?: boolean;
   startView?: CalendarViewMode;
   title?: (datePickerDate: D, monthYearPickerDate: D, viewMode: CalendarViewMode) => string;
@@ -77,7 +78,6 @@ const VIEWS_IN_PICKER: number = PICKER_ROWS * PICKER_COLUMNS;
 export interface BaseCalendarRef<D = Date> {
   scrollToToday: () => void;
   scrollToDate: (date: D) => void;
-  dataService: CalendarDataService<D>;
   state: State<D>;
 }
 
@@ -90,20 +90,14 @@ interface State<D> {
 function BaseCalendarComponent<D = Date>(
   {
     dateService,
+    dataService,
     boundingMonth = true,
     startView = CalendarViewModes.DATE,
     ...props
   }: DerivedCalendarProps<D>,
   ref: React.RefObject<BaseCalendarRef<D>>
 ): BaseCalendarElement<D> {
-  if (!dateService) {
-    throw Error('No dateService');
-  }
-  const dataService: CalendarDataService<D> = new CalendarDataService(dateService);
   const [viewMode, setViewMode] = React.useState<CalendarViewMode>(startView);
-
-
-  console.log('base current ref', ref.current);
 
   const initialVisibleDate = (): D => {
     return props.initialVisibleDate || props.selectedDate() || dateService.today();
@@ -131,17 +125,6 @@ function BaseCalendarComponent<D = Date>(
     return props.max || dateService.getYearEnd(dateService.today());
   };
 
-  React.useImperativeHandle(ref, () => ({
-    scrollToToday,
-    scrollToDate,
-    dataService,
-    state: {
-      viewMode,
-      visibleDate,
-      pickerDate,
-    },
-  }));
-
   const scrollToToday = (): void => {
     setViewMode(CalendarViewModes.DATE);
     setVisibleDate(dateService.today());
@@ -155,6 +138,16 @@ function BaseCalendarComponent<D = Date>(
       setPickerDate(date);
     }
   };
+
+  React.useImperativeHandle(ref, () => ({
+    scrollToToday,
+    scrollToDate,
+    state: {
+      pickerDate,
+      viewMode,
+      visibleDate,
+    },
+  }));
 
   const getCalendarStyle = (source: StyleType): StyleType => {
     return {

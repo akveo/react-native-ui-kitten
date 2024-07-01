@@ -514,7 +514,6 @@ describe('@datepicker: component checks', () => {
 
     componentRef.current.focus();
 
-    // @ts-ignore: private calendarRef
     const visibleDate = componentRef.current.state.visibleDate;
     expect(visibleDate.getFullYear()).toEqual(initialDate.getFullYear());
     expect(visibleDate.getMonth()).toEqual(initialDate.getMonth());

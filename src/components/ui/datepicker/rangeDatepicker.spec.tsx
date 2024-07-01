@@ -51,8 +51,10 @@ describe('@range-datepicker: component checks', () => {
     jest.clearAllMocks();
   });
 
-  const TestRangeDatepicker = React.forwardRef((props: Partial<RangeDatepickerProps>,
-    ref: React.Ref<RangeDatepickerRef>) => {
+  const TestRangeDatepicker = React.forwardRef((
+    props: Partial<RangeDatepickerProps>,
+    ref: React.Ref<RangeDatepickerRef>,
+  ) => {
     const [range, setRange] = React.useState(props.range || {});
 
     const onSelect = (nextRange: CalendarRange<Date>): void => {
@@ -128,7 +130,7 @@ describe('@range-datepicker: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render label as pure JSX component', async () => {
+  it('should render label as pure JSX component', () => {
     const component = render(
       <TestRangeDatepicker label={(
         <Text>
@@ -483,8 +485,7 @@ describe('@range-datepicker: component checks', () => {
 
     componentRef.current.focus();
 
-    // @ts-ignore: private calendarRef
-    const calendarState = componentRef.current.calendarRef.current.state;
+    const calendarState = componentRef.current.state;
     expect(calendarState.visibleDate.getFullYear()).toEqual(date.getFullYear());
     expect(calendarState.visibleDate.getMonth()).toEqual(date.getMonth());
   });
@@ -502,8 +503,7 @@ describe('@range-datepicker: component checks', () => {
 
     componentRef.current.focus();
 
-    // @ts-ignore: private calendarRef
-    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    const visibleDate = componentRef.current.state.visibleDate;
     expect(visibleDate.getFullYear()).toEqual(initialDate.getFullYear());
     expect(visibleDate.getMonth()).toEqual(initialDate.getMonth());
   });
@@ -522,7 +522,7 @@ describe('@range-datepicker: component checks', () => {
     componentRef.current.scrollToToday();
 
     // @ts-ignore: private calendarRef
-    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    const visibleDate = componentRef.current.state.visibleDate;
     expect(visibleDate.getFullYear()).toEqual(today.getFullYear());
     expect(visibleDate.getMonth()).toEqual(today.getMonth());
   });
@@ -541,8 +541,7 @@ describe('@range-datepicker: component checks', () => {
     componentRef.current.focus();
     componentRef.current.scrollToDate(dateToScroll);
 
-    // @ts-ignore: private calendarRef
-    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    const visibleDate = componentRef.current.state.visibleDate;
     expect(visibleDate.getFullYear()).toEqual(dateToScroll.getFullYear());
     expect(visibleDate.getMonth()).toEqual(dateToScroll.getMonth());
   });
@@ -573,7 +572,7 @@ describe('@range-datepicker: component checks', () => {
       />
     );
 
-    componentRef.current?.focus();
+    componentRef.current.focus();
 
     const leftArrow = component.queryByTestId('@arrow/left');
     fireEvent.press(leftArrow);
@@ -607,7 +606,7 @@ describe('@range-datepicker: component checks', () => {
       />
     );
 
-    componentRef.current?.focus();
+    componentRef.current.focus();
 
     const leftArrow = component.queryByTestId('@arrow/right');
     fireEvent.press(leftArrow);

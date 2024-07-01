@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { DateService, NativeDateService } from '@ui-kitten/components';
 import React from 'react';
 import {
   styled,
@@ -15,7 +16,7 @@ import {
   BaseCalendarRef,
 } from './baseCalendar.component';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
-import { DateBatch } from './service/calendarData.service';
+import { CalendarDataService, DateBatch } from './service/calendarData.service';
 import { RangeDateService } from './service/rangeDate.service';
 import { CalendarRange } from './type';
 
@@ -119,18 +120,12 @@ function RangeCalendar <D = Date> (
   }: RangeCalendarProps<D>,
   ref: React.RefObject<RangeCalendarRef<D>>,
 ): RangeCalendarElement {
-  const baseCalendarRef = React.useRef<BaseCalendarRef<D>>(null);
-  const rangeDateService: RangeDateService<D> = new RangeDateService(props.dateService);
-
-  React.useImperativeHandle(ref, () => ({
-    ...baseCalendarRef.current,
-  }));
+  const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
+  const rangeDateService: RangeDateService<D> = new RangeDateService(dateService);
+  const dataService: CalendarDataService<D> = new CalendarDataService(dateService);
 
   const createDates = (date: D): DateBatch<D> => {
-    if (baseCalendarRef.current) {
-      return baseCalendarRef.current.dataService.createDayPickerData(date, range);
-    }
-    return [];
+    return dataService.createDayPickerData(date, range);
   };
 
   const selectedDate = (): D | undefined => {
@@ -149,7 +144,7 @@ function RangeCalendar <D = Date> (
   };
 
   const shouldUpdateDate = (prevProps: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>): boolean => {
-    const dateChanged: boolean = props.dateService.compareDatesSafe(prevProps.date.date, nextProps.date.date) !== 0;
+    const dateChanged: boolean = dateService.compareDatesSafe(prevProps.date.date, nextProps.date.date) !== 0;
 
     if (dateChanged) {
       return true;
@@ -178,7 +173,9 @@ function RangeCalendar <D = Date> (
   return (
     <BaseCalendarComponent
       {...props}
-      ref={baseCalendarRef}
+      ref={ref}
+      dateService={dateService}
+      dataService={dataService}
       createDates={createDates}
       selectedDate={selectedDate}
       onDateSelect={onDateSelect}
@@ -188,7 +185,7 @@ function RangeCalendar <D = Date> (
   );
 }
 
-const Component = styled('RangeCalendar')(React.forwardRef(RangeCalendar));
+const Component = styled('Calendar')(React.forwardRef(RangeCalendar));
 
 export {
   Component as RangeCalendar,

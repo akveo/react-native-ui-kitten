@@ -26,7 +26,7 @@ import {
   Interaction,
   StyledComponentProps,
 } from '../../theme';
-import { BaseCalendarProps, BaseCalendarRef } from '../calendar/baseCalendar.component';
+import { BaseCalendarProps } from '../calendar/baseCalendar.component';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
 import { Popover } from '../popover/popover.component';
@@ -40,7 +40,6 @@ import { getComponentStyle } from './baseDatepicker.utils';
 export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   TouchableOpacityProps,
   BaseCalendarProps<D> {
-
   controlStyle?: StyleProp<ViewStyle>;
   label?: RenderProp<TextProps> | string | number;
   caption?: RenderProp<TextProps> | string | number;
@@ -56,12 +55,12 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
 }
 
 interface DerivedDatepickerProps<D = Date> extends BaseDatepickerProps<D> {
-  renderCalendar: () => CalendarElement<D> | RangeCalendarElement<D>;
+  children: CalendarElement<D> | RangeCalendarElement<D>;
   getComponentTitle: () => RenderProp<TextProps> | string | number;
   clear: () => void;
 }
 
-export interface BaseDatepickerRef<D = Date> extends BaseCalendarRef<D> {
+export interface BaseDatepickerRef {
   focus: () => void;
   blur: () => void;
   isFocused: () => boolean;
@@ -69,7 +68,7 @@ export interface BaseDatepickerRef<D = Date> extends BaseCalendarRef<D> {
 
 function BaseDatepickerComponent<D = Date>(
   props: DerivedDatepickerProps<D>,
-  ref: React.RefObject<BaseDatepickerRef<D>>,
+  ref: React.RefObject<BaseDatepickerRef>,
 ): React.ReactElement<DerivedDatepickerProps<D>> {
   const {
     eva,
@@ -81,20 +80,12 @@ function BaseDatepickerComponent<D = Date>(
     placement = PopoverPlacements.BOTTOM_START,
     onFocus,
     onBlur,
-    renderCalendar,
     getComponentTitle,
+    children,
   } = props;
   const evaStyle = getComponentStyle(eva.style);
 
-  const calendarRef = React.useRef<BaseCalendarRef<D>>(null);
   const [visible, setVisible] = React.useState(false);
-
-  React.useImperativeHandle(ref, () => ({
-    ...calendarRef.current,
-    focus,
-    blur,
-    isFocused,
-  }));
 
   const focus = (): void => {
     setVisible(true);
@@ -109,6 +100,12 @@ function BaseDatepickerComponent<D = Date>(
   const isFocused = (): boolean => {
     return visible;
   };
+
+  React.useImperativeHandle(ref, () => ({
+    focus,
+    blur,
+    isFocused,
+  }), [focus, blur, isFocused]);
 
   const onPress = (event: GestureResponderEvent): void => {
     setPickerVisible();
@@ -189,7 +186,7 @@ function BaseDatepickerComponent<D = Date>(
         anchor={renderInputElement}
         onBackdropPress={setPickerInvisible}
       >
-        {renderCalendar()}
+        {children}
       </Popover>
       <FalsyText
         style={[evaStyle.captionLabel, styles.captionLabel]}
