@@ -537,7 +537,7 @@ describe('@datepicker: component checks', () => {
     expect(visibleDate.getMonth()).toEqual(today.getMonth());
   });
 
-  it('should scroll to the specific date when scrollToDate called', async () => {
+  it('should scroll to the specific date when scrollToDate called', () => {
     const dateToScroll = new Date(2021, 2, 1);
     const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
@@ -548,10 +548,8 @@ describe('@datepicker: component checks', () => {
       />,
     );
 
-    await act(() => {
-      componentRef.current.focus();
-      componentRef.current.scrollToDate(dateToScroll);
-    });
+    componentRef.current.focus();
+    componentRef.current.scrollToDate(dateToScroll);
 
     const visibleDate = componentRef.current.state.visibleDate;
     expect(visibleDate.getFullYear()).toEqual(dateToScroll.getFullYear());

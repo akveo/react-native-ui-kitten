@@ -140,6 +140,7 @@ function BaseCalendarComponent<D = Date>(
   };
 
   React.useImperativeHandle(ref, () => ({
+    ...ref.current,
     scrollToToday,
     scrollToDate,
     state: {

@@ -150,10 +150,12 @@ function RangeDatepicker<D = Date> (
   }: RangeDatepickerProps<D>,
   ref: React.RefObject<RangeDatepickerRef<D>>,
 ): RangeCalendarElement {
+  const baseDatepickerRef = React.useRef<BaseDatepickerRef>();
   const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
 
   React.useImperativeHandle(ref, () => ({
     ...ref.current,
+    ...baseDatepickerRef.current,
     clear,
   }));
 

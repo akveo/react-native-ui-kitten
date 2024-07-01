@@ -102,10 +102,11 @@ function BaseDatepickerComponent<D = Date>(
   };
 
   React.useImperativeHandle(ref, () => ({
+    ...ref.current,
     focus,
     blur,
     isFocused,
-  }), [focus, blur, isFocused]);
+  }));
 
   const onPress = (event: GestureResponderEvent): void => {
     setPickerVisible();
@@ -195,6 +196,8 @@ function BaseDatepickerComponent<D = Date>(
     </View>
   );
 }
+
+BaseDatepickerComponent.displayName = 'BaseDatepickerComponent';
 
 const Component = React.forwardRef(BaseDatepickerComponent);
 

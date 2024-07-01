@@ -199,20 +199,14 @@ function Datepicker<D = Date>(
     placeholder = 'dd/mm/yyyy',
     ...props
   }: DatepickerProps<D>,
-  ref: React.RefObject<DatepickerRef<D>>
+  ref: React.MutableRefObject<DatepickerRef<D>>
 ): DatepickerElement<D> {
-  const calendarRef = React.useRef<CalendarRef<D>>(null);
-  const baseDatepickerRef = React.useRef<BaseDatepickerRef>(null);
+  const baseDatepickerRef = React.useRef<BaseDatepickerRef>();
   const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
 
   React.useImperativeHandle(ref, () => ({
-    focus: baseDatepickerRef.current?.focus,
-    blur: baseDatepickerRef.current?.blur,
-    isFocused: baseDatepickerRef.current?.isFocused,
-    scrollToToday: calendarRef.current?.scrollToToday,
-    scrollToDate: calendarRef.current?.scrollToDate,
-    state: calendarRef.current?.state,
-    dataService: calendarRef.current?.dataService,
+    ...ref.current,
+    ...baseDatepickerRef.current,
     clear,
   }));
 
@@ -254,7 +248,7 @@ function Datepicker<D = Date>(
 
   const onSelect = (date: D): void => {
     props.onSelect?.(date);
-    autoDismiss && baseDatepickerRef.current?.blur?.();
+    autoDismiss && baseDatepickerRef?.current?.blur?.();
   };
 
   return (
@@ -267,8 +261,8 @@ function Datepicker<D = Date>(
       clear={clear}
     >
       <Calendar
-        ref={calendarRef}
         {...calendarProps}
+        ref={ref}
         onSelect={onSelect}
       />
     </BaseDatepickerComponent>
