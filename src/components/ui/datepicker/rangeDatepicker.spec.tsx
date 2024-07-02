@@ -24,6 +24,7 @@ import { ApplicationProvider } from '../../theme';
 import {
   RangeDatepicker,
   RangeDatepickerProps,
+  RangeDatepickerRef,
 } from './rangeDatepicker.component';
 import { RangeCalendar } from '../calendar/rangeCalendar.component';
 import {
@@ -50,8 +51,10 @@ describe('@range-datepicker: component checks', () => {
     jest.clearAllMocks();
   });
 
-  const TestRangeDatepicker = React.forwardRef((props: Partial<RangeDatepickerProps>,
-    ref: React.Ref<RangeDatepicker>) => {
+  const TestRangeDatepicker = React.forwardRef((
+    props: Partial<RangeDatepickerProps>,
+    ref: React.Ref<RangeDatepickerRef>,
+  ) => {
     const [range, setRange] = React.useState(props.range || {});
 
     const onSelect = (nextRange: CalendarRange<Date>): void => {
@@ -127,7 +130,7 @@ describe('@range-datepicker: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('should render label as pure JSX component', async () => {
+  it('should render label as pure JSX component', () => {
     const component = render(
       <TestRangeDatepicker label={(
         <Text>
@@ -372,7 +375,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should show calendar by calling `focus` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
     const component = render(
       <TestRangeDatepicker ref={componentRef} />,
     );
@@ -384,7 +387,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should hide calendar by calling `blur` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
     const component = render(
       <TestRangeDatepicker ref={componentRef} />,
     );
@@ -399,7 +402,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should return false if calendar not visible by calling `isFocused` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
     render(
       <TestRangeDatepicker ref={componentRef} />,
     );
@@ -408,7 +411,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should return true if calendar visible by calling `isFocused` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
     render(
       <TestRangeDatepicker ref={componentRef} />,
     );
@@ -420,7 +423,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should call onSelect with empty object when calling `clear` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
     const onSelect = jest.fn();
 
     render(
@@ -468,7 +471,7 @@ describe('@range-datepicker: component checks', () => {
 
   it('should show startDate of the selected range on load provided by range prop', () => {
     const date = new Date(2021, 2, 1);
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
 
     render(
       <TestRangeDatepicker
@@ -482,15 +485,14 @@ describe('@range-datepicker: component checks', () => {
 
     componentRef.current.focus();
 
-    // @ts-ignore: private calendarRef
-    const calendarState = componentRef.current.calendarRef.current.state;
+    const calendarState = componentRef.current.state;
     expect(calendarState.visibleDate.getFullYear()).toEqual(date.getFullYear());
     expect(calendarState.visibleDate.getMonth()).toEqual(date.getMonth());
   });
 
   it('should show the specific date on load provided by initialVisibleDate prop', () => {
     const initialDate = new Date(2021, 2, 1);
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
 
     render(
       <TestRangeDatepicker
@@ -501,14 +503,13 @@ describe('@range-datepicker: component checks', () => {
 
     componentRef.current.focus();
 
-    // @ts-ignore: private calendarRef
-    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    const visibleDate = componentRef.current.state.visibleDate;
     expect(visibleDate.getFullYear()).toEqual(initialDate.getFullYear());
     expect(visibleDate.getMonth()).toEqual(initialDate.getMonth());
   });
 
   it('should scroll to current month when scrollToToday called', () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
 
     render(
       <TestRangeDatepicker
@@ -521,14 +522,14 @@ describe('@range-datepicker: component checks', () => {
     componentRef.current.scrollToToday();
 
     // @ts-ignore: private calendarRef
-    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    const visibleDate = componentRef.current.state.visibleDate;
     expect(visibleDate.getFullYear()).toEqual(today.getFullYear());
     expect(visibleDate.getMonth()).toEqual(today.getMonth());
   });
 
   it('should scroll to the specific date when scrollToDate called', () => {
     const dateToScroll = new Date(2020, 1, 1);
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
 
     render(
       <TestRangeDatepicker
@@ -540,14 +541,13 @@ describe('@range-datepicker: component checks', () => {
     componentRef.current.focus();
     componentRef.current.scrollToDate(dateToScroll);
 
-    // @ts-ignore: private calendarRef
-    const visibleDate = componentRef.current.calendarRef.current.state.visibleDate;
+    const visibleDate = componentRef.current.state.visibleDate;
     expect(visibleDate.getFullYear()).toEqual(dateToScroll.getFullYear());
     expect(visibleDate.getMonth()).toEqual(dateToScroll.getMonth());
   });
 
   it('should render custom left arrow', () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
 
     const onVisibleDateChange = jest.fn();
 
@@ -572,7 +572,7 @@ describe('@range-datepicker: component checks', () => {
       />
     );
 
-    componentRef.current?.focus();
+    componentRef.current.focus();
 
     const leftArrow = component.queryByTestId('@arrow/left');
     fireEvent.press(leftArrow);
@@ -581,7 +581,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should render custom right arrow', () => {
-    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepickerRef> = React.createRef();
 
     const onVisibleDateChange = jest.fn();
 
@@ -606,7 +606,7 @@ describe('@range-datepicker: component checks', () => {
       />
     );
 
-    componentRef.current?.focus();
+    componentRef.current.focus();
 
     const leftArrow = component.queryByTestId('@arrow/right');
     fireEvent.press(leftArrow);

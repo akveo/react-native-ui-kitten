@@ -10,7 +10,7 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   RangeCalendar,
-  RangeCalendarProps,
+  RangeCalendarProps, RangeCalendarRef,
 } from './rangeCalendar.component';
 import { CalendarRange } from './type';
 import { TouchableOpacity } from 'react-native';
@@ -38,7 +38,7 @@ describe('@range-calendar: component checks', () => {
 
   const TestRangeCalendar = React.forwardRef((
     props: Partial<RangeCalendarProps>,
-    ref: React.Ref<RangeCalendar>) => {
+    ref: React.Ref<RangeCalendarRef>) => {
 
     const [range, setRange] = React.useState<CalendarRange<Date>>(props.range || {});
 
@@ -122,7 +122,7 @@ describe('@range-calendar: component checks', () => {
 
   it('should show startDate of the selected range on load provided by range prop', () => {
     const date = new Date(2021, 2, 1);
-    const componentRef = React.createRef<RangeCalendar>();
+    const componentRef = React.createRef<RangeCalendarRef>();
     render(
       <TestRangeCalendar
         ref={componentRef}
