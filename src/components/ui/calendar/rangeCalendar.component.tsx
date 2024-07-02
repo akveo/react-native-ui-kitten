@@ -124,6 +124,11 @@ function RangeCalendar <D = Date> (
   const rangeDateService: RangeDateService<D> = new RangeDateService(dateService);
   const dataService: CalendarDataService<D> = new CalendarDataService(dateService);
 
+  React.useImperativeHandle(ref, () => ({
+    ...ref.current,
+    dataService,
+  }), [dataService]);
+
   const createDates = (date: D): DateBatch<D> => {
     return dataService.createDayPickerData(date, range);
   };
@@ -173,9 +178,9 @@ function RangeCalendar <D = Date> (
   return (
     <BaseCalendarComponent
       {...props}
-      ref={ref}
       dateService={dateService}
       dataService={dataService}
+      ref={ref}
       createDates={createDates}
       selectedDate={selectedDate}
       onDateSelect={onDateSelect}

@@ -148,44 +148,38 @@ function RangeDatepicker<D = Date> (
     placeholder = 'dd/mm/yyyy',
     ...props
   }: RangeDatepickerProps<D>,
-  ref: React.RefObject<RangeDatepickerRef<D>>,
+  ref: React.MutableRefObject<RangeDatepickerRef<D>>,
 ): RangeCalendarElement {
-  const baseDatepickerRef = React.useRef<BaseDatepickerRef>();
   const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
 
   React.useImperativeHandle(ref, () => ({
     ...ref.current,
-    ...baseDatepickerRef.current,
     clear,
   }));
 
-  const calendarProps = (): RangeCalendarProps<D> => {
-    return {
-      dateService,
-      min: props.min,
-      max: props.max,
-      range: props.range,
-      initialVisibleDate: props.initialVisibleDate,
-      boundingMonth: props.boundingMonth,
-      startView: props.startView,
-      filter: props.filter,
-      title: props.title,
-      onSelect: props.onSelect,
-      renderDay: props.renderDay,
-      renderMonth: props.renderMonth,
-      renderYear: props.renderYear,
-      renderFooter: props.renderFooter,
-      renderArrowRight: props.renderArrowRight,
-      renderArrowLeft: props.renderArrowLeft,
-      onVisibleDateChange: props.onVisibleDateChange,
-    };
-  };
+  const calendarProps: RangeCalendarProps<D> = ({
+    dateService,
+    min: props.min,
+    max: props.max,
+    range: props.range,
+    initialVisibleDate: props.initialVisibleDate,
+    boundingMonth: props.boundingMonth,
+    startView: props.startView,
+    filter: props.filter,
+    title: props.title,
+    onSelect: props.onSelect,
+    renderDay: props.renderDay,
+    renderMonth: props.renderMonth,
+    renderYear: props.renderYear,
+    renderFooter: props.renderFooter,
+    renderArrowRight: props.renderArrowRight,
+    renderArrowLeft: props.renderArrowLeft,
+    onVisibleDateChange: props.onVisibleDateChange,
+  });
 
   const clear = (): void => {
     props.onSelect?.({});
   };
-
-  // BaseDatepickerComponent
 
   const getComponentTitle = (): RenderProp<TextProps> | string | number => {
     const { startDate, endDate } = props.range;
@@ -209,8 +203,8 @@ function RangeDatepicker<D = Date> (
       clear={clear}
     >
       <RangeCalendar
-        ref={ref}
         {...calendarProps}
+        ref={ref}
       />
     </BaseDatepickerComponent>
   );
