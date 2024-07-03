@@ -107,10 +107,6 @@ interface State {
  */
 export class Popover extends React.Component<PopoverProps, State> {
 
-  static defaultProps: Partial<PopoverProps> = {
-    placement: PopoverPlacements.BOTTOM,
-  };
-
   public state: State = {
     childFrame: Frame.zero(),
     forceMeasure: false,
@@ -120,8 +116,12 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   private placementService: PopoverPlacementService = new PopoverPlacementService();
 
+  private get placement(): PopoverPlacement | string {
+    return this.props.placement ?? PopoverPlacements.BOTTOM;
+  }
+
   private get preferredPlacement(): PopoverPlacement {
-    return PopoverPlacements.parse(this.props.placement);
+    return PopoverPlacements.parse(this.placement);
   }
 
   private get contentFlexPosition(): StyleProp<ViewStyle> {
