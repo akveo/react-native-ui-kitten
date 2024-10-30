@@ -8,7 +8,7 @@ export type ChildrenWithProps<Props> = ChildrenProp<ReactElement<Props>>;
  * https://github.com/microsoft/TypeScript/issues/29729#issuecomment-505826972
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type LiteralUnion<T extends U, U = string> = T | (U & {});
+export type LiteralUnion<T extends U, U = string> = T | (string & {});
 
 export type EvaStatus = LiteralUnion<'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control'>;
 export type EvaSize = LiteralUnion<'tiny' | 'small' | 'medium' | 'large' | 'giant'>;
