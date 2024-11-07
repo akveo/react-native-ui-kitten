@@ -18,6 +18,7 @@ import {
   TextStyle,
   View,
   ViewProps,
+  TextInput,
 } from 'react-native';
 import {
   ChildrenWithProps,
@@ -75,6 +76,8 @@ export type SelectElement = React.ReactElement<SelectProps>;
 
 interface State {
   listVisible: boolean;
+  searchQuery: string;
+  filteredOptions: string[];
 }
 
 const CHEVRON_DEG_COLLAPSED = -180;
@@ -219,6 +222,8 @@ export class Select extends React.Component<SelectProps, State> {
 
   public state: State = {
     listVisible: false,
+    searchQuery: '',
+    filteredOptions: []
   };
 
   private service: SelectService = new SelectService();
@@ -229,8 +234,15 @@ export class Select extends React.Component<SelectProps, State> {
   }
 
   private get data(): Array<Exclude<ReactNode, boolean | null | undefined>> {
-    return React.Children.toArray(this.props.children || []);
+    const options = React.Children.toArray(this.props.children || []);
+    if (this.state.searchQuery) {
+      return options.filter((option) =>
+        option.toString().toLowerCase().includes(this.state.searchQuery.toLowerCase())
+      );
+    }
+    return options;
   }
+
 
   private get selectedIndices(): IndexPath[] {
     if (!this.props.selectedIndex) {
@@ -258,9 +270,24 @@ export class Select extends React.Component<SelectProps, State> {
     return this.state.listVisible;
   };
 
+
+  public onSearch = (): void => {
+    const { searchQuery, filteredOptions } = this.state;
+    const filtered = filteredOptions.filter((option: string) =>
+      option.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    this.setState({ filteredOptions: filtered });
+  };
+
+
+  public handleSearch = (query: string): void => {
+    this.setState({ searchQuery: query }, this.onSearch);
+  };
+
   public clear = (): void => {
     this.props.onSelect?.(null);
   };
+
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
@@ -304,6 +331,7 @@ export class Select extends React.Component<SelectProps, State> {
       this.props.onFocus?.(null);
     });
   };
+
 
   private onListInvisible = (): void => {
     this.props.eva.dispatch([]);
@@ -473,6 +501,20 @@ export class Select extends React.Component<SelectProps, State> {
     );
   };
 
+  private renderSearchInput = (): React.ReactElement => {
+    return (
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search..."
+        value={this.state.searchQuery}
+        onChangeText={this.handleSearch}
+      />
+    );
+  };
+
+
+
+
   public render(): React.ReactElement<ViewProps> {
     const { eva, style, label, caption, children, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
@@ -490,12 +532,15 @@ export class Select extends React.Component<SelectProps, State> {
           anchor={() => this.renderInputElement(touchableProps, evaStyle)}
           onBackdropPress={this.onBackdropPress}
         >
-          <List
-            style={styles.list}
-            data={this.data}
-            bounces={false}
-            renderItem={this.renderItem}
-          />
+          <>
+            {this.renderSearchInput()}
+            <List
+              style={styles.list}
+              data={this.data}
+              bounces={false}
+              renderItem={this.renderItem}
+            />
+          </>
         </Popover>
         <FalsyText
           style={[styles.caption, evaStyle.caption]}
@@ -527,5 +572,10 @@ const styles = StyleSheet.create({
   },
   caption: {
     textAlign: 'left',
+  },
+  searchInput: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
   },
 });
