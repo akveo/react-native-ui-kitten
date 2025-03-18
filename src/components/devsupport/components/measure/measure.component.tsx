@@ -44,7 +44,12 @@ export type MeasuringElement = React.ReactElement;
  * but `force` property may be used to measure any time it's needed.
  * DON'T USE THIS FLAG IF THE COMPONENT RENDERS FIRST TIME OR YOU KNOW `onLayout` WILL BE CALLED.
  */
-export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringElement => {
+export const MeasureElement: React.FC<MeasureElementProps> = ({
+  force = false,
+  shouldUseTopInsets = false,
+  onMeasure,
+  children
+}): MeasuringElement => {
 
   const ref = React.useRef();
 
@@ -67,9 +72,9 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
     if (!w && !h) {
       measureSelf();
     } else {
-      const originY = props.shouldUseTopInsets ? y + StatusBar.currentHeight || 0 : y;
+      const originY = shouldUseTopInsets ? y + StatusBar.currentHeight || 0 : y;
       const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
-      props.onMeasure(frame);
+      onMeasure(frame);
     }
   };
 
@@ -78,13 +83,9 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
     UIManager.measureInWindow(node, onUIManagerMeasure);
   };
 
-  if (props.force) {
+  if (force) {
     measureSelf();
   }
 
-  return React.cloneElement(props.children, { ref, onLayout: measureSelf });
-};
-
-MeasureElement.defaultProps = {
-  shouldUseTopInsets: false,
+  return React.cloneElement(children, { ref, onLayout: measureSelf });
 };
