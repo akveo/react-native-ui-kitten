@@ -10,8 +10,9 @@ And the most awesome thing: the themes can be changed in the runtime, with no ne
 
 100% Free and Open Source!
 
-![Kitten Material](https://camo.githubusercontent.com/f0487d92194f3c685213539c53e9784113cd8a4b/68747470733a2f2f692e696d6775722e636f6d2f58384f344748622e706e67)
 ![link:doc-homepage](https://user-images.githubusercontent.com/1452064/115417233-212a0100-a201-11eb-8bcf-0a60cca2e081.png)
+
+Need professional support? Visit [Akveo's React Native](https://www.akveo.com/services/mobile-application-development/react-native) experts to scale your solutions.
 
 ## What's included
 
