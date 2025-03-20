@@ -38,13 +38,13 @@ There is a huge variety of customizable layouts, use “as is” or add new bloc
 Start a new app with UI Kitten template from a scratch:
 
 ```bash
-npx react-native init MyApp --template @ui-kitten/template-js
+npx @react-native-community/cli init MyApp --template @ui-kitten/template-js
 ```
 
 Or, if you want to init with TypeScript:
 
 ```bash
-npx react-native init MyApp --template @ui-kitten/template-ts
+npx @react-native-community/cli init MyApp --template @ui-kitten/template-ts
 ```
 
 This will setup a new React Native application configured with UI Kitten.
