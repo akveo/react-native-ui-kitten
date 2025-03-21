@@ -56,8 +56,8 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
     const boundFrame: Frame = new Frame(
       frame.origin.x - window.size.width,
       frame.origin.y,
-      frame.size.width,
-      frame.size.height,
+      Math.floor(frame.size.width),
+      Math.floor(frame.size.height),
     );
 
     return bindToWindow(boundFrame, window);
@@ -68,14 +68,14 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
       measureSelf();
     } else {
       const originY = props.shouldUseTopInsets ? y + StatusBar.currentHeight || 0 : y;
-      const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
+      const frame: Frame = bindToWindow(new Frame(x, originY, Math.floor(w), Math.floor(h)), Frame.window());
       props.onMeasure(frame);
     }
   };
 
   const measureSelf = (): void => {
     const node: number = findNodeHandle(ref.current);
-    UIManager.measureInWindow(node, onUIManagerMeasure);
+    if (node) UIManager.measureInWindow(node, onUIManagerMeasure);
   };
 
   if (props.force) {
