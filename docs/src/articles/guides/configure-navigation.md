@@ -8,7 +8,7 @@ This guide will help you to configure the app to navigate between screens. UI Ki
 
 Let's start with installing React Navigation and it's required dependencies.
 
-Please refer to the [official documentation](https://reactnavigation.org/docs/en/getting-started.html) to complete this step, since it may differ for Expo and Bare React Native projects. 
+Please refer to the [official documentation](https://reactnavigation.org/docs/getting-started/) to complete this step, since it may differ for Expo and Bare React Native projects. 
 
 <hr>
 
@@ -174,6 +174,6 @@ in other navigation libraries like React Native Navigation by Wix. By default, U
 
 ## Conclusion
 
-In this guide, we used React Navigation library to configure routing within React Native app. Consider reading the <a href="https://reactnavigation.org/docs/en/getting-started.html" target="_blank">documentation</a> to become more familiar with it as it is most popular solution in the React world.
+In this guide, we used React Navigation library to configure routing within React Native app. Consider reading the <a href="https://reactnavigation.org/docs/getting-started/" target="_blank">documentation</a> to become more familiar with it as it is most popular solution in the React world.
 
 By moving to the [next guide](guides/runtime-theming), you will learn how to change theme in runtime using UI Kitten.
