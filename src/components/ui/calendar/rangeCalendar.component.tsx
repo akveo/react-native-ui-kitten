@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { DateService, NativeDateService } from '@ui-kitten/components';
 import React from 'react';
 import {
   styled,
@@ -12,9 +13,10 @@ import {
 import {
   BaseCalendarComponent,
   BaseCalendarProps,
+  BaseCalendarRef,
 } from './baseCalendar.component';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
-import { DateBatch } from './service/calendarData.service';
+import { CalendarDataService, DateBatch } from './service/calendarData.service';
 import { RangeDateService } from './service/rangeDate.service';
 import { CalendarRange } from './type';
 
@@ -24,6 +26,8 @@ export interface RangeCalendarProps<D = Date> extends StyledComponentProps, Base
 }
 
 export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarProps<D>>;
+
+export type RangeCalendarRef<D = Date> = BaseCalendarRef<D>;
 
 /**
  * Range Calendar provides a simple way to select a date range.
@@ -109,59 +113,53 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * }
  * ```
  */
-@styled('Calendar')
-export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendarProps<D>, D> {
+function RangeCalendar <D = Date> (
+  {
+    range = {},
+    ...props
+  }: RangeCalendarProps<D>,
+  ref: React.RefObject<RangeCalendarRef<D>>,
+): RangeCalendarElement {
+  const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
+  const rangeDateService: RangeDateService<D> = new RangeDateService(dateService);
+  const dataService: CalendarDataService<D> = new CalendarDataService(dateService);
 
-  static defaultProps: Partial<RangeCalendarProps> = {
-    ...BaseCalendarComponent.defaultProps,
-    range: {},
+  React.useImperativeHandle(ref, () => ({
+    ...ref.current,
+    dataService,
+  }), [dataService]);
+
+  const createDates = (date: D): DateBatch<D> => {
+    return dataService.createDayPickerData(date, range);
   };
 
-  private rangeDateService: RangeDateService<D> = new RangeDateService(this.dateService);
+  const selectedDate = (): D | undefined => {
+    return range.startDate;
+  };
 
-  constructor(props: RangeCalendarProps<D>) {
-    super(props);
-
-    this.createDates = this.createDates.bind(this);
-    this.selectedDate = this.selectedDate.bind(this);
-    this.onDateSelect = this.onDateSelect.bind(this);
-    this.isDateSelected = this.isDateSelected.bind(this);
-    this.shouldUpdateDate = this.shouldUpdateDate.bind(this);
-  }
-
-  // BaseCalendarComponent
-
-  protected createDates(date: D): DateBatch<D> {
-    return this.dataService.createDayPickerData(date, this.props.range);
-  }
-
-  protected selectedDate(): D | undefined {
-    return this.props.range?.startDate;
-  }
-
-  protected onDateSelect(date: D): void {
-    if (this.props.onSelect) {
-      const range: CalendarRange<D> = this.rangeDateService.createRange(this.props.range, date);
-      this.props.onSelect(range);
+  const onDateSelect = (date: D): void => {
+    if (props.onSelect) {
+      const calendarRange: CalendarRange<D> = rangeDateService.createRange(range, date);
+      props.onSelect(calendarRange);
     }
-  }
+  };
 
-  protected isDateSelected(): boolean {
+  const isDateSelected = (): boolean => {
     return false;
-  }
+  };
 
-  protected shouldUpdateDate(props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>): boolean {
-    const dateChanged: boolean = this.dateService.compareDatesSafe(props.date.date, nextProps.date.date) !== 0;
+  const shouldUpdateDate = (prevProps: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>): boolean => {
+    const dateChanged: boolean = dateService.compareDatesSafe(prevProps.date.date, nextProps.date.date) !== 0;
 
     if (dateChanged) {
       return true;
     }
 
-    const selectionChanged: boolean = props.selected !== nextProps.selected;
-    const disablingChanged: boolean = props.disabled !== nextProps.disabled;
-    const rangeChanged: boolean = props.range !== nextProps.range;
-    const rangeStartPlaceChanged: boolean = props.firstRangeItem !== nextProps.firstRangeItem;
-    const rangeEndPlaceChanged: boolean = props.lastRangeItem !== nextProps.lastRangeItem;
+    const selectionChanged: boolean = prevProps.selected !== nextProps.selected;
+    const disablingChanged: boolean = prevProps.disabled !== nextProps.disabled;
+    const rangeChanged: boolean = prevProps.range !== nextProps.range;
+    const rangeStartPlaceChanged: boolean = prevProps.firstRangeItem !== nextProps.firstRangeItem;
+    const rangeEndPlaceChanged: boolean = prevProps.lastRangeItem !== nextProps.lastRangeItem;
 
     const shouldUpdate: boolean =
       selectionChanged ||
@@ -174,6 +172,26 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
       return true;
     }
 
-    return props.eva.theme !== nextProps.eva.theme;
-  }
+    return prevProps.eva.theme !== nextProps.eva.theme;
+  };
+
+  return (
+    <BaseCalendarComponent
+      {...props}
+      dateService={dateService}
+      dataService={dataService}
+      ref={ref}
+      createDates={createDates}
+      selectedDate={selectedDate}
+      onDateSelect={onDateSelect}
+      isDateSelected={isDateSelected}
+      shouldUpdateDate={shouldUpdateDate}
+    />
+  );
 }
+
+const Component = styled('Calendar')(React.forwardRef(RangeCalendar));
+
+export {
+  Component as RangeCalendar,
+};

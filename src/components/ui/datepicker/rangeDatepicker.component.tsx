@@ -9,17 +9,23 @@ import { styled } from '../../theme';
 import {
   BaseDatepickerComponent,
   BaseDatepickerProps,
+  BaseDatepickerRef,
 } from './baseDatepicker.component';
 import {
   RangeCalendar,
   RangeCalendarElement,
   RangeCalendarProps,
+  RangeCalendarRef,
 } from '../calendar/rangeCalendar.component';
 import { RenderProp } from '@ui-kitten/components/devsupport';
-import { TextProps } from '@ui-kitten/components';
+import { DateService, NativeDateService, TextProps } from '@ui-kitten/components';
 
 export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> & RangeCalendarProps<D>;
 export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepickerProps<D>>;
+
+export type RangeDatepickerRef<D = Date> = RangeCalendarRef<D> & BaseDatepickerRef & {
+  clear: () => void;
+};
 
 /**
  * Range date picker provides a simple way to select a date range within a picker displayed in modal.
@@ -137,63 +143,75 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Ranged picker works with special range object - CalendarRange: `{ startDate: Date, endDate: Date }`.
  * For incomplete ranges, there is only a `startDate` property.
  */
-@styled('Datepicker')
-export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
+function RangeDatepicker<D = Date> (
+  {
+    placeholder = 'dd/mm/yyyy',
+    ...props
+  }: RangeDatepickerProps<D>,
+  ref: React.MutableRefObject<RangeDatepickerRef<D>>,
+): RangeCalendarElement {
+  const dateService = props.dateService ?? new NativeDateService() as unknown as DateService<D>;
 
-  static styledComponentName = 'Datepicker';
+  React.useImperativeHandle(ref, () => ({
+    ...ref.current,
+    clear,
+  }));
 
-  constructor(props: RangeDatepickerProps<D>) {
-    super(props);
-    this.clear = this.clear.bind(this);
-  }
+  const calendarProps: RangeCalendarProps<D> = ({
+    dateService,
+    min: props.min,
+    max: props.max,
+    range: props.range,
+    initialVisibleDate: props.initialVisibleDate,
+    boundingMonth: props.boundingMonth,
+    startView: props.startView,
+    filter: props.filter,
+    title: props.title,
+    onSelect: props.onSelect,
+    renderDay: props.renderDay,
+    renderMonth: props.renderMonth,
+    renderYear: props.renderYear,
+    renderFooter: props.renderFooter,
+    renderArrowRight: props.renderArrowRight,
+    renderArrowLeft: props.renderArrowLeft,
+    onVisibleDateChange: props.onVisibleDateChange,
+  });
 
-  private get calendarProps(): RangeCalendarProps<D> {
-    return {
-      min: this.props.min,
-      max: this.props.max,
-      range: this.props.range,
-      initialVisibleDate: this.props.initialVisibleDate,
-      dateService: this.props.dateService,
-      boundingMonth: this.props.boundingMonth,
-      startView: this.props.startView,
-      filter: this.props.filter,
-      title: this.props.title,
-      onSelect: this.props.onSelect,
-      renderDay: this.props.renderDay,
-      renderMonth: this.props.renderMonth,
-      renderYear: this.props.renderYear,
-      renderFooter: this.props.renderFooter,
-      renderArrowRight: this.props.renderArrowRight,
-      renderArrowLeft: this.props.renderArrowLeft,
-      onVisibleDateChange: this.props.onVisibleDateChange,
-    };
-  }
-
-  public clear = (): void => {
-    this.props.onSelect?.({});
+  const clear = (): void => {
+    props.onSelect?.({});
   };
 
-  // BaseDatepickerComponent
-
-  protected getComponentTitle(): RenderProp<TextProps> | React.ReactText {
-    const { startDate, endDate } = this.props.range;
+  const getComponentTitle = (): RenderProp<TextProps> | string | number => {
+    const { startDate, endDate } = props.range;
 
     if (startDate || endDate) {
-      const start: string = startDate ? this.props.dateService.format(startDate, null) : '';
-      const end: string = endDate ? this.props.dateService.format(endDate, null) : '';
+      const start: string = startDate ? dateService.format(startDate, null) : '';
+      const end: string = endDate ? dateService.format(endDate, null) : '';
 
       return `${start} - ${end}`;
     } else {
-      return this.props.placeholder;
+      return placeholder;
     }
-  }
+  };
 
-  protected renderCalendar(): RangeCalendarElement<D> {
-    return (
+  return (
+    <BaseDatepickerComponent
+      {...props}
+      placeholder={placeholder}
+      ref={ref}
+      getComponentTitle={getComponentTitle}
+      clear={clear}
+    >
       <RangeCalendar
-        ref={this.calendarRef}
-        {...this.calendarProps}
+        {...calendarProps}
+        ref={ref}
       />
-    );
-  }
+    </BaseDatepickerComponent>
+  );
 }
+
+const Component = styled('Datepicker')(React.forwardRef(RangeDatepicker));
+
+export {
+  Component as RangeDatepicker,
+};
