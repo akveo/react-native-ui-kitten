@@ -12,23 +12,19 @@ import {
   StyleSheet,
 } from 'react-native';
 import {
-  EvaSize,
-  Overwrite,
-  LiteralUnion,
-} from '../../devsupport';
-import {
   styled,
   StyledComponentProps,
   StyleType,
 } from '../../theme';
+import { AvatarAppearance, AvatarShape, AvatarSize } from '@eva-design/eva/mapping.types';
 
-type AvatarStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface AvatarStyledProps extends StyledComponentProps {
+  appearance?: AvatarAppearance;
+}
 
 export type AvatarProps<P = ImageProps> = AvatarStyledProps & P & {
-  shape?: 'round' | 'rounded' | 'square' | string;
-  size?: EvaSize;
+  shape?: AvatarShape;
+  size?: AvatarSize;
   /**
    * We use `any` here to prevent ts complains for most of the libraries that use
    * React.ComponentType & SomeType to describe static / instance methods for the components.
@@ -44,12 +40,19 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  *
  * @extends React.Component
  *
+ * @property {string} appearance - Appearance of the component.
+ * The predefined one is `default`.
+ * Can be extended with custom mapping feature.
+ * Defaults to *default*.
+ *
  * @property {string} shape - Shape of the component.
- * Can be `round`, `rounded` or `square`.
+ * The predefined ones are `round`, `rounded` or `square`.
+ * Can be extended with custom mapping feature.
  * Defaults to *round*.
  *
  * @property {string} size - Size of the component.
- * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
+ * The predefined ones are `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Can be extended with custom mapping feature.
  * Defaults to *medium*.
  *
  * @property {React.ComponentType} ImageComponent - A component to render.

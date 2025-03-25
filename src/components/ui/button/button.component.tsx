@@ -13,16 +13,12 @@ import {
   TargetedEvent,
 } from 'react-native';
 import {
-  EvaSize,
-  EvaStatus,
   FalsyFC,
   FalsyText,
   RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -31,10 +27,11 @@ import {
   StyleType,
 } from '../../theme';
 import { TextProps } from '../text/text.component';
+import { ButtonAppearance, ButtonSize, ButtonStatus } from '@eva-design/eva/mapping.types';
 
-type ButtonStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'filled' | 'outline' | 'ghost'>;
-}>;
+interface ButtonStyledProps extends StyledComponentProps {
+  appearance?: ButtonAppearance;
+}
 
 type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
@@ -42,8 +39,8 @@ export interface ButtonProps extends TouchableWebPropsWithoutChildren, ButtonSty
   children?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
-  status?: EvaStatus;
-  size?: EvaSize;
+  status?: ButtonStatus;
+  size?: ButtonSize;
 }
 
 export type ButtonElement = React.ReactElement<ButtonProps>;
@@ -66,16 +63,19 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * Expected to return an Image.
  *
  * @property {string} appearance - Appearance of the component.
- * Can be `filled`, `outline` or `ghost`.
+ * The predefined ones are `filled`, `outline` or `ghost`.
+ * Can be extended with custom mapping feature.
  * Defaults to *filled*.
  *
  * @property {string} status - Status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * The predefined ones are `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Can be extended with custom mapping feature.
  * Defaults to *primary*.
  * Use *control* status when needed to display within a contrast container.
  *
  * @property {string} size - Size of the component.
- * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
+ * The predefined ones are `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Can be extended with custom mapping feature.
  * Defaults to *medium*.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
@@ -87,7 +87,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * Button can be disabled with `disabled` property.
  *
  * @overview-example ButtonAppearances
- * Within Eva Design System, it can be `filled`, `outline` or `ghost`.
+ * The predefined appearances are `filled`, `outline` or `ghost`.
  *
  * @overview-example ButtonAccessories
  * Also, it may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.

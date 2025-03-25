@@ -21,7 +21,6 @@ import {
   TouchableWeb,
   TouchableWebProps,
   Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   Interaction,
@@ -31,10 +30,11 @@ import {
 } from '../../theme';
 import { TextProps } from '../text/text.component';
 import { MenuItemDescriptor } from './menu.service';
+import { MenuItemAppearance } from '@eva-design/eva/mapping.types';
 
-type MenuItemStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default' | 'grouped'>;
-}>;
+interface MenuItemStyledProps extends StyledComponentProps {
+  appearance?: MenuItemAppearance;
+}
 
 type TouchableMenuItemProps = Overwrite<TouchableWebProps, {
   onPress?: (descriptor: MenuItemDescriptor, event?: GestureResponderEvent) => void;

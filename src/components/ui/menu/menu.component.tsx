@@ -10,7 +10,6 @@ import {
   ChildrenWithProps,
   IndexPath,
   Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import { styled } from '../../theme';
 import { Divider } from '../divider/divider.component';
@@ -27,9 +26,10 @@ import {
   MenuItemDescriptor,
   MenuService,
 } from './menu.service';
+import { MenuAppearance } from '@eva-design/eva/mapping.types';
 
 type MenuStyledProps = Overwrite<ListProps, {
-  appearance?: LiteralUnion<'default' | 'noDivider'>;
+  appearance?: MenuAppearance;
 }>;
 
 type MenuListProps = Omit<MenuStyledProps, 'data' | 'renderItem'>;
@@ -49,7 +49,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * @extends React.Component
  *
  * @property {string} appearance - Appearance of the component.
- * Can be `default` or `noDivider`.
+ * The predefined ones are `default` or `noDivider`. Can be extended with custom mapping feature.
  *
  * @property {ReactElement<MenuItemProps> | ReactElement<MenuItemProps>[]} children -
  * Items to be rendered within menu.

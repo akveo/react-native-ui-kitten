@@ -11,8 +11,6 @@ import {
 } from 'react-native';
 import {
   ChildrenWithProps,
-  Overwrite,
-  LiteralUnion,
 } from '../../devsupport';
 import {
   styled,
@@ -23,10 +21,11 @@ import {
   RadioElement,
   RadioProps,
 } from '../radio/radio.component';
+import { RadioGroupAppearance } from '@eva-design/eva/mapping.types';
 
-type RadioGroupStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+interface RadioGroupStyledProps extends StyledComponentProps {
+  appearance?: RadioGroupAppearance;
+}
 
 export interface RadioGroupProps extends ViewProps, RadioGroupStyledProps {
   children?: ChildrenWithProps<RadioProps>;
