@@ -45,7 +45,7 @@ type ToggleStyledProps = Overwrite<StyledComponentProps, {
 type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
 export interface ToggleProps extends TouchableWebPropsWithoutChildren, ToggleStyledProps {
-  children?: RenderProp<TextProps> | React.ReactText;
+  children?: RenderProp<TextProps> | string | number;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   status?: EvaStatus;
@@ -244,9 +244,11 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
   };
 
   private onPress = (): void => {
-    if (this.props.onChange) {
-      this.props.onChange(!this.props.checked);
+    if (this.props.disabled) {
+      return;
     }
+
+    this.props.onChange?.(!this.props.checked);
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -383,6 +385,7 @@ export class Toggle extends React.Component<ToggleProps> implements PanResponder
       >
         <TouchableWeb
           {...touchableProps}
+          disabled={this.props.disabled}
           style={styles.toggleContainer}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}

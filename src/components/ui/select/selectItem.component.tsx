@@ -169,7 +169,7 @@ export class SelectItem extends React.Component<SelectItemProps> {
   };
 
   public render(): TouchableWebElement {
-    const { eva, style, title, accessoryLeft, accessoryRight, ...touchableProps } = this.props;
+    const { eva, style, title, accessoryLeft, accessoryRight, disabled, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (

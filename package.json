@@ -26,14 +26,13 @@
   },
   "dependencies": {
     "react": "18.1.0",
-    "react-native": "0.70.6"
+    "react-native": "0.70.6",
+    "react-native-eva-icons": "^1.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-decorators": "^7.18.10",
     "@babel/runtime": "^7.12.5",
-    "@ui-cat/eva-design-eva": "^2.2.0",
-    "@ui-cat/eva-design-material": "^2.2.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@tsconfig/react-native": "^2.0.2",
     "@types/gulp": "ts3.8",
@@ -45,10 +44,12 @@
     "@types/rimraf": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "@ui-cat/eva-design-eva": "^2.2.0",
+    "@ui-cat/eva-design-material": "^2.2.0",
     "babel-jest": "^26.6.3",
     "change-case": "^4.1.2",
     "doc-prsr": "2.2.5",
-    "eslint": "^7.32.0",
+    "eslint": "^8.16.0",
     "eslint-config-akveo": "^1.0.1",
     "eslint-plugin-react-native": "^4.0.0",
     "gulp": "^4.0.2",

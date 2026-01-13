@@ -1,12 +1,26 @@
 import { IconProvider } from '@ui-cat/components';
 import { SvgProps } from 'react-native-svg';
-import { findIconByName } from 'react-native-eva-icons/icons';
-import { EvaIcon } from './evaIcon.component';
+import { findIconByName } from 'react-native-eva-icons';
+import React from 'react';
 
-export const createIconsMap = (): { [key: string]: IconProvider<SvgProps> } => {
+export const createIconsMap = (): Record<string, IconProvider<SvgProps>> => {
   return new Proxy({}, {
-    get(target, name: string): IconProvider<SvgProps> {
-      return new EvaIcon(findIconByName(name));
+    get(_: unknown, name: string): IconProvider<SvgProps> {
+      const icon = findIconByName(name);
+
+      return {
+        toReactElement: (props?: SvgProps) => {
+          if (!icon) {
+            return null;
+          }
+
+          return icon.toSvg({
+            ...props,
+            width: props?.width ?? 24,
+            height: props?.height ?? 24,
+          });
+        },
+      };
     },
   });
 };
