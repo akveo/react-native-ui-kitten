@@ -35,10 +35,9 @@ jobs:
       - name: Setup Expo
         uses: expo/expo-github-action@v5
         with:
-          expo-version: 4.2.1
+          expo-version: 6.3.10
           expo-username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD_UI_KITTEN }}
-          expo-cache: true
 
       - name: Get yarn cache
         id: yarn-cache

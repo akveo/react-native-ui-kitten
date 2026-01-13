@@ -209,12 +209,9 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     evaStyle: StyleType,
   ): React.ReactElement => {
     const {
-      onPress,
-      onPressIn,
-      onPressOut,
       disabled,
       accessibilityLabel,
-      testID
+      testID,
     } = props;
 
     return (
