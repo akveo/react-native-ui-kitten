@@ -259,7 +259,9 @@ export class Select extends React.Component<SelectProps, State> {
   };
 
   public clear = (): void => {
-    this.props.onSelect?.(this.isMultiSelect ? [] : null as any);
+    this.props.onSelect?.(
+      this.isMultiSelect ? [] : null
+    );
   };
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {

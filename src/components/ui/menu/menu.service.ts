@@ -17,10 +17,10 @@ export class MenuService {
   };
 
   public createDescriptorForNestedElement =
-  (groupDescriptor: MenuItemDescriptor, index: number): MenuItemDescriptor => {
-    return {
-      index: new IndexPath(index, groupDescriptor.index.row),
-      groupIndices: null,
+    (groupDescriptor: MenuItemDescriptor, index: number): MenuItemDescriptor => {
+      return {
+        index: new IndexPath(index, groupDescriptor.index.row),
+        groupIndices: null,
+      };
     };
-  };
 }

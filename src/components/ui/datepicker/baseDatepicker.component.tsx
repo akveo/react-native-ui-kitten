@@ -204,15 +204,17 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     }
   };
 
-  private renderInputElement = (props, evaStyle): React.ReactElement => {
+  private renderInputElement = (
+    props: TouchableOpacityProps,
+    evaStyle: StyleType,
+  ): React.ReactElement => {
     const {
       onPress,
       onPressIn,
       onPressOut,
       disabled,
       accessibilityLabel,
-      testID,
-      ...rest
+      testID
     } = props;
 
     return (
@@ -225,14 +227,20 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
       >
-        <FalsyFC style={evaStyle.icon} component={this.props.accessoryLeft} />
+        <FalsyFC
+          style={evaStyle.icon}
+          component={this.props.accessoryLeft}
+        />
         <FalsyText
           style={evaStyle.text}
           numberOfLines={1}
           ellipsizeMode="tail"
           component={this.getComponentTitle()}
         />
-        <FalsyFC style={evaStyle.icon} component={this.props.accessoryRight} />
+        <FalsyFC
+          style={evaStyle.icon}
+          component={this.props.accessoryRight}
+        />
       </TouchableWithoutFeedback>
     );
   };
