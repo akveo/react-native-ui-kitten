@@ -20,7 +20,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {},
   "peerDependencies": {
     "@ui-cat/components": "5.4.0",
     "react-native-svg": "*"

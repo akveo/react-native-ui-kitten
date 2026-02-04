@@ -12,7 +12,7 @@ import { Styles } from '../style/style.service';
 import { EvaProp } from '../style/styled';
 
 interface PrivateProps<T> {
-  forwardedRef?: React.RefObject<T>;
+  forwardedRef?: React.Ref<T>;
 }
 
 export interface ThemedComponentProps<T extends Styles<T>> {
@@ -20,10 +20,6 @@ export interface ThemedComponentProps<T extends Styles<T>> {
 }
 
 export type ThemedComponentClass<P, S extends Styles<S>> = React.ComponentClass<ThemedComponentProps<S> & P>;
-
-interface PrivateProps<T> {
-  forwardedRef?: React.RefObject<T>;
-}
 
 type CreateStylesFunction<T extends Styles<T>> = (theme: ThemeType) => T;
 
@@ -51,12 +47,13 @@ type CreateStylesFunction<T extends Styles<T>> = (theme: ThemeType) => T;
 export const withStyles = <P extends object, S>(Component: React.ComponentType<P>,
   createStyles?: CreateStylesFunction<S>): ThemedComponentClass<P, S> => {
 
-  type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
+  type WrappingProps = WrappedProps;
   type WrappedProps = ThemedComponentProps<S> & P;
   type WrappingElementType = React.ReactElement<WrappingProps>;
   type WrappedElementInstance = React.ReactInstance;
+  type WrapperProps = WrappingProps & {forwardedRef?: React.Ref<WrappedElementInstance>;};
 
-  class Wrapper extends React.PureComponent<WrappingProps> {
+  class Wrapper extends React.PureComponent<WrapperProps> {
 
     private withThemedProps = (props: P, theme: ThemeType): WrappedProps => {
       const style = createStyles?.(theme);
@@ -90,16 +87,18 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
     }
   }
 
-  const WrappingElement = (props: WrappingProps, ref: React.Ref<WrappedElementInstance>): WrappingElementType => {
+  const WrappingElement: React.ForwardRefRenderFunction<
+    WrappedElementInstance,
+    React.PropsWithoutRef<WrappingProps>
+  > = (props, ref) => {
     return (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       <Wrapper
-        {...props}
+        {...(props as WrappingProps)}
         forwardedRef={ref}
       />
     );
   };
+
 
   const ThemedComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement);
 
