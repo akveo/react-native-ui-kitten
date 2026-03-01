@@ -1,6 +1,6 @@
 {
-  "name": "@kittsune/core",
-  "version": "2.0.0",
+  "name": "@ui-kitten/core",
+  "version": "6.0.0-beta.0",
   "description": "Shared hooks and utilities for interaction state management",
   "main": "./lib/module/index.js",
   "types": "./index.ts",
@@ -23,14 +23,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bataevvlad/kittsune.git"
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
   },
-  "author": "Kitsune Contributors",
+  "author": "UI Kitten Contributors",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bataevvlad/kittsune/issues"
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
-  "homepage": "https://github.com/bataevvlad/kittsune#readme",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-native": ">=0.70.0"

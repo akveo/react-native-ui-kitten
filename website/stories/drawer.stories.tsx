@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Drawer, DrawerGroup, DrawerItem, IndexPath } from '@kittsune/components';
+import { Drawer, DrawerGroup, DrawerItem, IndexPath } from '@ui-kitten/components';
 
 const meta: Meta<typeof Drawer> = {
   title: 'Components/Drawer',

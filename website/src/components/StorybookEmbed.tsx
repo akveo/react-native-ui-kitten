@@ -12,7 +12,7 @@ export default function StorybookEmbed({ storyId, height = 400 }: StorybookEmbed
       {() => (
         <div className="storybook-embed">
           <iframe
-            src={`/kittsune/storybook/iframe.html?id=${storyId}&viewMode=story`}
+            src={`/react-native-ui-kitten/storybook/iframe.html?id=${storyId}&viewMode=story`}
             height={height}
             title={`Storybook: ${storyId}`}
           />

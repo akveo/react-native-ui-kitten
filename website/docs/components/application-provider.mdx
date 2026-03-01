@@ -5,7 +5,7 @@ sidebar_label: ApplicationProvider
 description: ApplicationProvider is the root component of the application that provides Eva Design System styles and theming.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - ApplicationProvider
   - Eva
   - theming
@@ -13,12 +13,12 @@ keywords:
 
 # ApplicationProvider
 
-ApplicationProvider is the root component of a Kittsune application. It provides Eva Design System styles, theme variables, and icon packs to all descendant components. Every Kittsune app must wrap its root component tree with `ApplicationProvider`.
+ApplicationProvider is the root component of a UI Kitten application. It provides Eva Design System styles, theme variables, and icon packs to all descendant components. Every UI Kitten app must wrap its root component tree with `ApplicationProvider`.
 
 ## Import
 
 ```tsx
-import { ApplicationProvider } from '@kittsune/components';
+import { ApplicationProvider } from '@ui-kitten/components';
 ```
 
 ## Basic Usage
@@ -26,12 +26,12 @@ import { ApplicationProvider } from '@kittsune/components';
 ```tsx
 import React from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text } from '@kittsune/components';
+import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 
 const App = () => (
   <ApplicationProvider {...eva} theme={eva.light}>
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text category="h1">Welcome to Kittsune</Text>
+      <Text category="h1">Welcome to UI Kitten</Text>
     </Layout>
   </ApplicationProvider>
 );

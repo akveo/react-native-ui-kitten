@@ -1,12 +1,12 @@
 import React from 'react';
 import { enableScreens } from 'react-native-screens';
-import * as eva from '@kittsune/eva';
-import * as material from '@kittsune/material';
+import * as eva from '@ui-kitten/eva';
+import * as material from '@ui-kitten/material';
 import {
   ApplicationProvider,
   IconRegistry,
-} from '@kittsune/components';
-import { EvaIconsPack } from '@kittsune/eva-icons';
+} from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { default as customMapping } from './mapping.json';
 import { themes } from './themes';
 import { AppNavigator } from '../navigation/app.navigator';

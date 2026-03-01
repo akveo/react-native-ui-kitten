@@ -1,14 +1,14 @@
 {
-  "name": "kittsune",
+  "name": "react-native-ui-kitten",
   "version": "1.0.0",
   "private": true,
   "packageManager": "yarn@3.6.4",
   "license": "MIT",
-  "author": "Kitsune Contributors",
-  "homepage": "https://github.com/bataevvlad/kittsune#readme",
-  "repository": "git+https://github.com/bataevvlad/kittsune.git",
+  "author": "UI Kitten Contributors",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
   "bugs": {
-    "url": "https://github.com/bataevvlad/kittsune/issues"
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
   "workspaces": {
     "packages": [

@@ -1,13 +1,13 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ThemeStyleType } from '@kittsune/processor';
+import { ThemeStyleType } from '@ui-kitten/processor';
 import { StyleConsumerService } from './styleConsumer.service';
 import {
   Interaction,

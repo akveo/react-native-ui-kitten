@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -22,13 +22,13 @@ import {
   EvaStatus,
   RenderProp,
   FalsyFC,
-} from '@kittsune/components/devsupport';
+} from '@ui-kitten/components/devsupport';
 import {
   IconProps,
   useStyled,
   StyleType,
   Text,
-} from '@kittsune/components';
+} from '@ui-kitten/components';
 import { CircularProgressBarAnimation, CircularProgressBarAnimationConfig } from './animation';
 
 interface IndicatorStyle {

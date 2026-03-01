@@ -15,7 +15,7 @@
     "noEmit": false,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@kittsune/*": [
+      "@ui-kitten/*": [
         "./src/*"
       ]
     }

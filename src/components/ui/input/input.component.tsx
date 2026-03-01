@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -167,7 +167,7 @@ export interface InputRef {
  * @overview-example InputStyling
  * Input and it's inner views can be styled by passing them as function components.
  * ```
- * import { Input, Text } from '@kittsune/components';
+ * import { Input, Text } from '@ui-kitten/components';
  *
  * <Input
  *   textStyle={{ ... }}

@@ -1,14 +1,14 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
 import {
   NativeDateService,
   NativeDateServiceOptions,
-} from '@kittsune/components';
+} from '@ui-kitten/components';
 import { parse as dateFnsParse, format as dateFnsFormat } from 'date-fns';
 
 export interface DateFnsOptions extends NativeDateServiceOptions {

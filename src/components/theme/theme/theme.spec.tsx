@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -26,8 +26,8 @@ import {
   ThemeType,
 } from './theme.service';
 import { StyleProvider } from '../style/styleProvider.component';
-import { mapping } from '@kittsune/eva';
-import { ThemeStyleType } from '@kittsune/processor';
+import { mapping } from '@ui-kitten/eva';
+import { ThemeStyleType } from '@ui-kitten/processor';
 
 const theme = {
   defaultColor: '#000000',

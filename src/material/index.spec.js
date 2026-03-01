@@ -1,6 +1,6 @@
 "use strict";
 
-describe('@kittsune/material: exports', () => {
+describe('@ui-kitten/material: exports', () => {
     const material = require('./index');
 
     describe('synchronous exports (backward compatible)', () => {

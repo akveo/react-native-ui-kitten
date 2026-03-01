@@ -1,21 +1,21 @@
 {
-  "name": "@kittsune/processor",
-  "description": "Eva Design System Schema Processor for Kittsune",
-  "version": "2.0.0",
+  "name": "@ui-kitten/processor",
+  "description": "Eva Design System Schema Processor for UI Kitten",
+  "version": "6.0.0-beta.0",
   "main": "index.js",
   "types": "index.d.ts",
   "license": "MIT",
-  "author": "Kitsune Contributors",
-  "homepage": "https://github.com/bataevvlad/kittsune#readme",
+  "author": "UI Kitten Contributors",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bataevvlad/kittsune.git"
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
   },
   "bugs": {
-    "url": "https://github.com/bataevvlad/kittsune/issues"
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
   "keywords": [
-    "kittsune",
+    "ui-kitten",
     "eva",
     "processor",
     "schema",

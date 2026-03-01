@@ -1,4 +1,4 @@
-import { ThemeMappingType, ThemedStyleType } from '@kittsune/processor/dss';
+import { ThemeMappingType, ThemedStyleType } from '@ui-kitten/processor/dss';
 export declare const SEPARATOR_MAPPING_ENTRY = ".";
 /**
  * Creates style object for variant/list of variants(optional) and its state/list of states(optional)

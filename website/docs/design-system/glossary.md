@@ -2,10 +2,10 @@
 id: glossary
 title: Design System Glossary
 sidebar_label: Design System Glossary
-description: This document contains a glossary used to describe a process of styling UI components in Kittsune.
+description: This document contains a glossary used to describe a process of styling UI components in UI Kitten.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - Eva Design System
   - glossary
 ---

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Datepicker, Layout, Text } from '@kittsune/components';
+import { Datepicker, Layout, Text } from '@ui-kitten/components';
 
 export const DatepickerThemingShowcase = (): React.ReactElement => {
 

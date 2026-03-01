@@ -13,7 +13,7 @@ import {
 import {
   light,
   mapping,
-} from '@kittsune/eva';
+} from '@ui-kitten/eva';
 import { ApplicationProvider } from '../../theme';
 import {
   Tab,

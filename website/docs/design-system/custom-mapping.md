@@ -5,7 +5,7 @@ sidebar_label: Custom Component Mapping
 description: Creating a mapping for a custom component is a very similar process to Mapping Customization.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - Eva Design System
   - custom mapping
   - custom component
@@ -28,7 +28,7 @@ Create a component:
 ```js
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { styled } from '@kittsune/components';
+import { styled } from '@ui-kitten/components';
 
 const CircleButton = styled('CircleButton')((props) => {
   const { eva, style, ...restProps } = props;
@@ -70,8 +70,8 @@ And pass it to an `ApplicationProvider` component:
 
 ```js
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, Layout } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, Layout } from '@ui-kitten/components';
 import { default as mapping } from './path-to/mapping.json'; // <-- Import mapping
 import { CircleButton } from './path-to/CircleButton'; // <-- Import component
 
@@ -88,7 +88,7 @@ export default () => (
 ```
 
 :::info
-Custom Mapping is applied automatically in case of using `@kittsune/metro-config` package, meaning there is no need to modify ApplicationProvider. To check this, see if it used in metro.config.js. [Relative guide](/docs/guides/improving-performance).
+Custom Mapping is applied automatically in case of using `@ui-kitten/metro-config` package, meaning there is no need to modify ApplicationProvider. To check this, see if it used in metro.config.js. [Relative guide](/docs/guides/improving-performance).
 :::
 
 ---
@@ -171,8 +171,8 @@ What we did is that we added a rounded [variant](/docs/design-system/glossary#va
 
 ```js
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, Layout } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, Layout } from '@ui-kitten/components';
 import { default as mapping } from './path-to/mapping.json';
 import { CircleButton } from './path-to/CircleButton';
 
@@ -228,7 +228,7 @@ And dispatch this state from a component.
 ```js
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { styled, Interaction } from '@kittsune/components';
+import { styled, Interaction } from '@ui-kitten/components';
 
 const CircleButton = styled('CircleButton')((props) => {
   const { eva, style, ...restProps } = props;
@@ -265,7 +265,7 @@ That's it. Here is the result:
 
 ## Conclusion
 
-Using this way of styling components, you can also declare more [semantic parameters](/docs/design-system/glossary#semantic-properties) to get more flexibility. Try adding one more variant or appearance following the steps described above to feel the real power of Kittsune theme system.
+Using this way of styling components, you can also declare more [semantic parameters](/docs/design-system/glossary#semantic-properties) to get more flexibility. Try adding one more variant or appearance following the steps described above to feel the real power of UI Kitten theme system.
 
 ---
 

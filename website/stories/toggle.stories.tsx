@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Toggle } from '@kittsune/components';
+import { Toggle } from '@ui-kitten/components';
 
 const meta: Meta<typeof Toggle> = {
   title: 'Components/Toggle',

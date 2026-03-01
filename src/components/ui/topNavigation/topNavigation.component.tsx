@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -84,7 +84,7 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * In most cases, this is redundant, if [custom theme is configured](guides/branding).
  * ```
- * import { TopNavigation, Text } from '@kittsune/components';
+ * import { TopNavigation, Text } from '@ui-kitten/components';
  *
  * <TopNavigation
  *   title={evaProps => <Text {...evaProps}>Title</Text>}

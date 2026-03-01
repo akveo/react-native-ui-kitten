@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Menu, MenuGroup, MenuItem, IndexPath } from '@kittsune/components';
+import { Menu, MenuGroup, MenuItem, IndexPath } from '@ui-kitten/components';
 
 const meta: Meta<typeof Menu> = {
   title: 'Components/Menu',

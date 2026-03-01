@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CircularProgressBar } from '@kittsune/components';
+import { CircularProgressBar } from '@ui-kitten/components';
 
 const meta: Meta<typeof CircularProgressBar> = {
   title: 'Components/CircularProgressBar',

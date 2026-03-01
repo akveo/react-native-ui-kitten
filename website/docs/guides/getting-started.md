@@ -2,23 +2,23 @@
 id: getting-started
 title: Getting Started
 sidebar_label: Getting Started
-description: The guide which helps you to initialize the application with Kittsune from scratch.
+description: The guide which helps you to initialize the application with UI Kitten from scratch.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - installation
   - manual installation
 ---
 
 # Getting Started
 
-This guide will help you to initialize the application with Kittsune from scratch. If you have an existing code base, refer to the [Manual Installation](#manual-installation).
+This guide will help you to initialize the application with UI Kitten from scratch. If you have an existing code base, refer to the [Manual Installation](#manual-installation).
 
 ---
 
 ## New Apps
 
-This guide will help you to init an application using Kittsune template project. First, make sure you have the right React Native CLI installed:
+This guide will help you to init an application using UI Kitten template project. First, make sure you have the right React Native CLI installed:
 
 ```bash
 npm un -g react-native-cli && npm i -g @react-native-community/cli
@@ -27,10 +27,10 @@ npm un -g react-native-cli && npm i -g @react-native-community/cli
 ### Create a New Project
 
 ```bash
-npx react-native init MyApp --template @kittsune/template-js
+npx react-native init MyApp --template @ui-kitten/template-js
 
 // Wish Typescript?
-// npx react-native init MyApp --template @kittsune/template-ts
+// npx react-native init MyApp --template @ui-kitten/template-ts
 ```
 
 ### Start your App
@@ -52,15 +52,15 @@ You can also learn more about starting React Native Apps by reading [React Nativ
 
 ## Manual Installation
 
-If you have an existing code base and want to use Kittsune in your project, follow the steps below to configure your application.
+If you have an existing code base and want to use UI Kitten in your project, follow the steps below to configure your application.
 
-### Install Kittsune
+### Install UI Kitten
 
 ```bash
-npm i @kittsune/components @kittsune/eva react-native-svg
+npm i @ui-kitten/components @ui-kitten/eva react-native-svg
 
 // Using Yarn?
-// yarn add @kittsune/components @kittsune/eva react-native-svg
+// yarn add @ui-kitten/components @ui-kitten/eva react-native-svg
 ```
 
 :::warning
@@ -68,7 +68,7 @@ If you use Expo, you should use `expo install react-native-svg` to install svg p
 :::
 
 :::warning
-If you use Expo for Web, you need to add the following underneath the `"web"` key in `app.json`: `"build": { "babel": { "include": [ "@kittsune/components" ] } }`
+If you use Expo for Web, you need to add the following underneath the `"web"` key in `app.json`: `"build": { "babel": { "include": [ "@ui-kitten/components" ] } }`
 :::
 
 Within non-expo environment, we also need to complete installation for iOS by linking react-native-svg.
@@ -85,8 +85,8 @@ Wrap the root component of your App into `ApplicationProvider` component. In you
 
 ```jsx
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, Layout, Text } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -101,4 +101,4 @@ export default () => (
 );
 ```
 
-That's it. Kittsune is ready now. Next, you might be interested in [branding](/docs/guides/branding) the application with Eva Design System.
+That's it. UI Kitten is ready now. Next, you might be interested in [branding](/docs/guides/branding) the application with Eva Design System.

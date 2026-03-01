@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Card, Modal, Text } from '@kittsune/components';
+import { Button, Card, Modal, Text } from '@ui-kitten/components';
 
 export const ModalWithBackdropShowcase = (): React.ReactElement => {
 

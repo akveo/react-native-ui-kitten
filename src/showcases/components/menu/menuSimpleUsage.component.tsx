@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexPath, Menu, MenuItem } from '@kittsune/components';
+import { IndexPath, Menu, MenuItem } from '@ui-kitten/components';
 
 export const MenuSimpleUsageShowcase = (): React.ReactElement => {
 

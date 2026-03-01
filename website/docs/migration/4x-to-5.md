@@ -2,19 +2,19 @@
 id: 4x-to-5
 title: 4.x - 5.0.0 Migration
 sidebar_label: 4.x to 5.0.0 Migration
-description: Migration process and purposes to new Kittsune 5.0.0 version.
+description: Migration process and purposes to new UI Kitten 5.0.0 version.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - migration
   - version 5
 ---
 
 # 4.x - 5.0.0 Migration
 
-Kittsune v5.0 is a significant improvement and rework of the previous version. We believe these changes bring Kittsune to the new level of quality and feature richness. To achieve this and allow Kittsune to grow faster and better, we had to refactor a lot of internal implementations, as well as public APIs.
+UI Kitten v5.0 is a significant improvement and rework of the previous version. We believe these changes bring UI Kitten to the new level of quality and feature richness. To achieve this and allow UI Kitten to grow faster and better, we had to refactor a lot of internal implementations, as well as public APIs.
 
-We hope that next Kittsune versions won't receive such significant upgrades and the amount of breaking changes will be kept as low as possible.
+We hope that next UI Kitten versions won't receive such significant upgrades and the amount of breaking changes will be kept as low as possible.
 
 ### Migration Purposes
 
@@ -43,27 +43,27 @@ To slightly simplify the migration process we strongly recommend getting familia
 
 The following migration steps are required to update:
 
-- Update `@kittsune/*` packages to version 5 *required*
-- Update `@kittsune/eva` package to version 2 *required*
+- Update `@ui-kitten/*` packages to version 5 *required*
+- Update `@ui-kitten/eva` package to version 2 *required*
 
 ---
 
-## Update Kittsune
+## Update UI Kitten
 
 ```bash
-npm i @kittsune/components @kittsune/eva
+npm i @ui-kitten/components @ui-kitten/eva
 
 // Using Yarn?
-yarn add @kittsune/components @kittsune/eva
+yarn add @ui-kitten/components @ui-kitten/eva
 ```
 
-Additionally, if you use any other Kittsune packages, you can add them like this:
+Additionally, if you use any other UI Kitten packages, you can add them like this:
 
 ```bash
-npm i @kittsune/eva-icons
+npm i @ui-kitten/eva-icons
 
 // Using Yarn?
-yarn add @kittsune/eva-icons
+yarn add @ui-kitten/eva-icons
 ```
 
 ---
@@ -75,7 +75,7 @@ yarn add @kittsune/eva-icons
 [Button](/docs/components/button) does not accept `textStyle` property anymore. Instead, if having custom styles is required, function component with additional text style should be used as a child element.
 
 ```js
-import { Button, Text } from '@kittsune/components';
+import { Button, Text } from '@ui-kitten/components';
 
 <Button>
   {evaProps => <Text {...evaProps} style={[evaProps.style, myStyle]}>BUTTON</Text>}
@@ -85,7 +85,7 @@ import { Button, Text } from '@kittsune/components';
 Icons within Button now are rendered with `accessoryLeft` or `accessoryRight` properties, replacing the old `icon` property.
 
 ```js
-import { Button, Icon } from '@kittsune/components';
+import { Button, Icon } from '@ui-kitten/components';
 
 const StarIcon = (evaProps) => (
   <Icon {...evaProps} name='star' />
@@ -99,7 +99,7 @@ const StarIcon = (evaProps) => (
 [Radio](/docs/components/radio) does not accept `text` property anymore. It was moved to children in favor of using a declarative way of building components.
 
 ```js
-import { Radio } from '@kittsune/components';
+import { Radio } from '@ui-kitten/components';
 
 <Radio>Place your Text</Radio>
 ```
@@ -109,7 +109,7 @@ import { Radio } from '@kittsune/components';
 [CheckBox](/docs/components/checkbox) does not accept `text` property anymore. It was moved to children in favor of using a declarative way of building components.
 
 ```js
-import { CheckBox } from '@kittsune/components';
+import { CheckBox } from '@ui-kitten/components';
 
 <CheckBox>Place your Text</CheckBox>
 ```
@@ -119,7 +119,7 @@ import { CheckBox } from '@kittsune/components';
 [Toggle](/docs/components/toggle) does not accept `text` property anymore. It was moved to children in favor of using a declarative way of building components.
 
 ```js
-import { Toggle } from '@kittsune/components';
+import { Toggle } from '@ui-kitten/components';
 
 <Toggle>Place your Text</Toggle>
 ```
@@ -129,7 +129,7 @@ import { Toggle } from '@kittsune/components';
 [Input](/docs/components/input) has no `icon` property anymore. Instead, `accessoryRight` or `accessoryLeft` properties should be used.
 
 ```js
-import { Input, Icon } from '@kittsune/components';
+import { Input, Icon } from '@ui-kitten/components';
 
 const StarIcon = (evaProps) => (
   <Icon {...evaProps} name='star' />
@@ -143,7 +143,7 @@ const StarIcon = (evaProps) => (
 [Select](/docs/components/select) now exports two related components - `SelectItem` and `SelectGroup`, which makes it possible to accept any type of data. Now its contents are fully controlled by you as a developer and should be passed as child elements.
 
 ```js
-import { Select, SelectItem } from '@kittsune/components';
+import { Select, SelectItem } from '@ui-kitten/components';
 
 <Select>
   <SelectItem title='Option 1' />
@@ -159,7 +159,7 @@ import { Select, SelectItem } from '@kittsune/components';
 [Autocomplete](/docs/components/autocomplete) now exports a related component - `AutocompleteItem`. It removes `renderItem` and `placeholderData` properties in favor of children.
 
 ```js
-import { Autocomplete, AutocompleteItem } from '@kittsune/components';
+import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
 <Autocomplete>
   <AutocompleteItem title='Option 1' />
@@ -173,7 +173,7 @@ import { Autocomplete, AutocompleteItem } from '@kittsune/components';
 [Popover](/docs/components/popover) now accepts its content as child element. A component relative to which the content is rendered is now passed to `anchor` property.
 
 ```js
-import { Popover, Layout, Text, Button } from '@kittsune/components';
+import { Popover, Layout, Text, Button } from '@ui-kitten/components';
 
 const renderToggleButton = () => (
   <Button>TOGGLE POPOVER</Button>
@@ -181,7 +181,7 @@ const renderToggleButton = () => (
 
 <Popover anchor={renderToggleButton}>
   <Layout>
-    <Text>Welcome to Kittsune</Text>
+    <Text>Welcome to UI Kitten</Text>
   </Layout>
 </Popover>
 ```
@@ -191,14 +191,14 @@ const renderToggleButton = () => (
 [Tooltip](/docs/components/tooltip) now accepts its text as child element. A component relative to which the content is rendered is now passed to `anchor` property.
 
 ```js
-import { Tooltip, Button } from '@kittsune/components';
+import { Tooltip, Button } from '@ui-kitten/components';
 
 const renderToggleButton = () => (
   <Button>TOGGLE TOOLTIP</Button>
 );
 
 <Tooltip anchor={renderToggleButton}>
-  Welcome to Kittsune
+  Welcome to UI Kitten
 </Tooltip>
 ```
 
@@ -207,7 +207,7 @@ const renderToggleButton = () => (
 [OverflowMenu](/docs/components/overflow-menu) `data` property is replaced in favor of child elements. A component relative to which the menu is rendered is now passed to `anchor` property.
 
 ```js
-import { OverflowMenu, MenuItem, Button } from '@kittsune/components';
+import { OverflowMenu, MenuItem, Button } from '@ui-kitten/components';
 
 const renderToggleButton = () => (
   <Button>TOGGLE MENU</Button>
@@ -225,7 +225,7 @@ const renderToggleButton = () => (
 [Drawer](/docs/components/drawer) now exports two related components - `DrawerItem` and `DrawerGroup`.
 
 ```js
-import { Drawer, DrawerItem, DrawerGroup } from '@kittsune/components';
+import { Drawer, DrawerItem, DrawerGroup } from '@ui-kitten/components';
 
 <Drawer>
   <DrawerItem title='Option 1'/>
@@ -241,7 +241,7 @@ import { Drawer, DrawerItem, DrawerGroup } from '@kittsune/components';
 [Menu](/docs/components/menu) now exports two related components - `MenuItem` and `MenuGroup`.
 
 ```js
-import { Menu, MenuItem, MenuGroup } from '@kittsune/components';
+import { Menu, MenuItem, MenuGroup } from '@ui-kitten/components';
 
 <Menu>
   <MenuItem title='Option 1'/>
@@ -262,7 +262,7 @@ Now injects a single `eva` property, which combines `theme` and `style`.
 
 ```js
 import { View } from 'react-native';
-import { withStyles } from '@kittsune/components';
+import { withStyles } from '@ui-kitten/components';
 
 const MyComponent = (props) => (
   <View style={props.eva.style.container}/>
@@ -282,7 +282,7 @@ Now injects a single `eva` property, which combines `dispatch` function, `theme`
 ```js
 import React from 'react';
 import { View } from 'react-native';
-import { styled } from '@kittsune/components';
+import { styled } from '@ui-kitten/components';
 
 const MyComponent = styled('MyComponent')((props) => {
   const { eva, ...restProps } = props;

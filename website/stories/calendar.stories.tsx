@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Calendar } from '@kittsune/components';
+import { Calendar } from '@ui-kitten/components';
 
 const meta: Meta<typeof Calendar> = {
   title: 'Components/Calendar',

@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -11,7 +11,7 @@ import { render } from '@testing-library/react-native';
 import {
   light,
   mapping,
-} from '@kittsune/eva';
+} from '@ui-kitten/eva';
 import { ApplicationProvider } from '../../theme';
 import {
   Layout,

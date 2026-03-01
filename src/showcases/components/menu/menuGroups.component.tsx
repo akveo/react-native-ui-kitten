@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, IconElement, Menu, MenuGroup, MenuItem } from '@kittsune/components';
+import { Icon, IconElement, Menu, MenuGroup, MenuItem } from '@ui-kitten/components';
 
 const SmartphoneIcon = (props): IconElement => (
   <Icon

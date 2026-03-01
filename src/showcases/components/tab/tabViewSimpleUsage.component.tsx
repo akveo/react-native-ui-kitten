@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Tab, TabView, Text } from '@kittsune/components';
+import { Layout, Tab, TabView, Text } from '@ui-kitten/components';
 
 export const TabViewSimpleUsageShowcase = (): React.ReactElement => {
 

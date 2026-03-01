@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageProps, StyleSheet, View } from 'react-native';
-import { Button, Icon, IconElement, Layout, Spinner, Text } from '@kittsune/components';
+import { Button, Icon, IconElement, Layout, Spinner, Text } from '@ui-kitten/components';
 
 const STATUSES = ['primary', 'success', 'info', 'warning', 'danger', 'basic'] as const;
 

@@ -8,7 +8,7 @@ jest.mock('react-native-eva-icons/icons', () => ({
   }),
 }));
 
-jest.mock('@kittsune/components', () => ({
+jest.mock('@ui-kitten/components', () => ({
   IconProvider: class {},
 }));
 

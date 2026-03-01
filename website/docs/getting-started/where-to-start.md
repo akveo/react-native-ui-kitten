@@ -2,16 +2,16 @@
 id: where-to-start
 title: Where to start?
 sidebar_label: Where to start?
-description: Kittsune is a framework of UI components powered by Eva Design System for your next React Native application.
+description: UI Kitten is a framework of UI components powered by Eva Design System for your next React Native application.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - getting started
 ---
 
 # Where to start?
 
-Kittsune is a framework of UI components powered by Eva Design System for your next [React Native](https://facebook.github.io/react-native/) application. Despite it is not required to know React Native framework to set up your first Kittsune project, it is highly recommended to go through the React Native tutorial beforehand and be familiar with basic React Native concepts.
+UI Kitten is a framework of UI components powered by Eva Design System for your next [React Native](https://facebook.github.io/react-native/) application. Despite it is not required to know React Native framework to set up your first UI Kitten project, it is highly recommended to go through the React Native tutorial beforehand and be familiar with basic React Native concepts.
 
 ---
 

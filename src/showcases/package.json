@@ -1,6 +1,6 @@
 {
-  "name": "@kittsune/showcases",
-  "version": "1.0.0",
+  "name": "@ui-kitten/showcases",
+  "version": "6.0.0-beta.0",
   "main": "index.ts",
   "private": true,
   "workspaces": {

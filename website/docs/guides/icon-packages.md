@@ -2,10 +2,10 @@
 id: icon-packages
 title: Icon Packages
 sidebar_label: Icon Packages
-description: Eva Icons is a pack of beautifully crafted Open Source icons for common actions and items. Kittsune has its own module to run it in React Native.
+description: Eva Icons is a pack of beautifully crafted Open Source icons for common actions and items. UI Kitten has its own module to run it in React Native.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - icons
   - Eva Icons
   - icon packages
@@ -13,10 +13,10 @@ keywords:
 
 # Icon Packages
 
-[Eva Icons](https://akveo.github.io/eva-icons) is a pack of beautifully crafted Open Source icons for common actions and items. Kittsune has its own module to run it in React Native, adopting for better usage with Kittsune components. If you're not interested in using Eva Icons, learn how to integrate [3rd party Icon packages](#3rd-party-icon-packages).
+[Eva Icons](https://akveo.github.io/eva-icons) is a pack of beautifully crafted Open Source icons for common actions and items. UI Kitten has its own module to run it in React Native, adopting for better usage with UI Kitten components. If you're not interested in using Eva Icons, learn how to integrate [3rd party Icon packages](#3rd-party-icon-packages).
 
 :::note
-You might not be interested in this guide, if you have initialized the app using Kittsune template since it already includes Eva Icons.
+You might not be interested in this guide, if you have initialized the app using UI Kitten template since it already includes Eva Icons.
 :::
 
 ---
@@ -26,10 +26,10 @@ You might not be interested in this guide, if you have initialized the app using
 Let's start with installing Eva Icons and its required dependencies.
 
 ```bash
-npm i @kittsune/eva-icons react-native-svg
+npm i @ui-kitten/eva-icons react-native-svg
 
 // Using Yarn?
-// yarn add @kittsune/eva-icons react-native-svg
+// yarn add @ui-kitten/eva-icons react-native-svg
 ```
 
 :::warning
@@ -57,9 +57,9 @@ Open `App.js` and paste the code below.
 
 ```jsx
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, IconRegistry, Layout, Text } from '@kittsune/components';
-import { EvaIconsPack } from '@kittsune/eva-icons';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -83,7 +83,7 @@ That's it. Let's see how it can be used in the project.
 
 ```jsx
 import React from 'react';
-import { Button, Icon } from '@kittsune/components';
+import { Button, Icon } from '@ui-kitten/components';
 
 const FacebookIcon = (props) => (
   <Icon name='facebook' {...props} />
@@ -104,7 +104,7 @@ The complete list of available icons could be found on [Eva Icons page](https://
 
 ## 3rd party Icon packages
 
-If you're not interested in using Eva Icons, learn how to integrate Kittsune with other icon packages with a simple 3 steps.
+If you're not interested in using Eva Icons, learn how to integrate UI Kitten with other icon packages with a simple 3 steps.
 
 ### Installation
 
@@ -152,8 +152,8 @@ Open `App.js` and paste the code below.
 
 ```jsx
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, IconRegistry, Layout, Text } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { FeatherIconsPack } from './feather-icons';
 
 const HomeScreen = () => (
@@ -178,7 +178,7 @@ That's it. Let's see how it can be used in the project.
 
 ```jsx
 import React from 'react';
-import { Button, Icon } from '@kittsune/components';
+import { Button, Icon } from '@ui-kitten/components';
 
 export const FacebookIcon = (props) => (
   <Icon name='facebook' {...props} />
@@ -197,7 +197,7 @@ As a result, you should have a Button looking similar to this:
 
 ## Multiple Icon packages
 
-Kittsune API allows you to register multiple icon packages. Let's also create a Material Icons provider.
+UI Kitten API allows you to register multiple icon packages. Let's also create a Material Icons provider.
 
 With a similar to [3rd party Icon packages guide](#3rd-party-icon-packages) way, create a Material Icons provider.
 
@@ -237,8 +237,8 @@ By passing an array of icon packs, we can register it in the application:
 
 ```jsx
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, IconRegistry, Layout, Text } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { FeatherIconsPack } from './feather-icons'; // <-- Import Feather icons
 import { MaterialIconsPack } from './material-icons'; // <-- Import Material icons
 
@@ -264,7 +264,7 @@ When using multiple icon packages, you're able to choose an icon library with si
 
 ```jsx
 import React from 'react';
-import { Button, Icon } from '@kittsune/components';
+import { Button, Icon } from '@ui-kitten/components';
 
 export const HomeIcon = (props) => (
   <Icon {...props} name='home' pack='material' />
@@ -319,9 +319,9 @@ By passing an array of icon packs, we can register it in the application:
 
 ```jsx
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, IconRegistry, Layout, Text } from '@kittsune/components';
-import { EvaIconsPack } from '@kittsune/eva-icons';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AssetIconsPack } from './asset-icons'; // <-- Import Asset icons
 
 const HomeScreen = () => (
@@ -346,7 +346,7 @@ When using multiple icon packages, you're able to choose an icon library with si
 
 ```jsx
 import React from 'react';
-import { Button, Icon } from '@kittsune/components';
+import { Button, Icon } from '@ui-kitten/components';
 
 export const GithubIcon = (props) => (
   <Icon {...props} name='github' pack='assets' />
@@ -361,6 +361,6 @@ export const GithubButton = () => (
 
 ## Conclusion
 
-In this guide, you learned how to use Kittsune Icon component. Since Eva Icons relies on svg icons, consider reading [react-native-svg documentation](https://github.com/react-native-community/react-native-svg#react-native-svg) to become more familiar with it.
+In this guide, you learned how to use UI Kitten Icon component. Since Eva Icons relies on svg icons, consider reading [react-native-svg documentation](https://github.com/react-native-community/react-native-svg#react-native-svg) to become more familiar with it.
 
 Next, when UI part is configured, let's move to the [next guide](/docs/guides/configure-navigation) to configure navigation.

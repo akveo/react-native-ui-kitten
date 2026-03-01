@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { RangeCalendar, CalendarRange } from '@kittsune/components';
+import { RangeCalendar, CalendarRange } from '@ui-kitten/components';
 
 const meta: Meta<typeof RangeCalendar> = {
   title: 'Components/RangeCalendar',

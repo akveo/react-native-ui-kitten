@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircularProgressBar } from '@kittsune/components';
+import { CircularProgressBar } from '@ui-kitten/components';
 import { useProgress } from '../../helpers/progress.hook';
 
 export const CircularProgressBarThemingShowcase = (): React.ReactElement => {

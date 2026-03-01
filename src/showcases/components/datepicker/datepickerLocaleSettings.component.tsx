@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Datepicker, DatepickerProps, I18nConfig, Layout, NativeDateService } from '@kittsune/components';
+import { Datepicker, DatepickerProps, I18nConfig, Layout, NativeDateService } from '@ui-kitten/components';
 
 const useDatepickerState = (initialDate = null): DatepickerProps => {
   const [date, setDate] = React.useState(initialDate);

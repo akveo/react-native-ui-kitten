@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -23,8 +23,8 @@
  *
  * ```
  * import React from 'react';
- * import * as eva from '@kittsune/eva';
- * import { ApplicationProvider, Layout, Text, ModalService } from '@kittsune/components';
+ * import * as eva from '@ui-kitten/eva';
+ * import { ApplicationProvider, Layout, Text, ModalService } from '@ui-kitten/components';
  *
  * ModalService.setShouldUseTopInsets = true //applies StatusBar additional offset
  *

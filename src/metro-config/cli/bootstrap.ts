@@ -3,16 +3,16 @@ import BootstrapService from '../services/bootstrap.service';
 
 const BOOTSTRAP_COMMAND_DESCRIPTION = `
 Compile mapping.json into style object, optionally merging it with another mapping
-https://github.com/bataevvlad/kittsune#readme
+https://github.com/akveo/react-native-ui-kitten#readme
 `;
 
 const BOOTSTRAP_COMMAND_USAGE = `
 
 - To compile the only Eva package:
-kittsune bootstrap @kittsune/eva
+ui-kitten bootstrap @ui-kitten/eva
 
 - To compile Eva package by merging it with another mapping:
-kittsune bootstrap @kittsune/eva ./path-to/mapping.json
+ui-kitten bootstrap @ui-kitten/eva ./path-to/mapping.json
 `;
 
 // eslint-disable-next-line no-restricted-syntax

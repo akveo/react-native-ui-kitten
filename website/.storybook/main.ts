@@ -40,12 +40,12 @@ const config: StorybookConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
-      // Map @kittsune/* packages to monorepo source directories
-      '@kittsune/components': path.resolve(srcRoot, 'components'),
-      '@kittsune/eva': path.resolve(srcRoot, 'eva'),
-      '@kittsune/eva-icons': path.resolve(srcRoot, 'eva-icons'),
-      '@kittsune/processor': path.resolve(srcRoot, 'processor'),
-      '@kittsune/mapping-base': path.resolve(srcRoot, 'mapping-base'),
+      // Map @ui-kitten/* packages to monorepo source directories
+      '@ui-kitten/components': path.resolve(srcRoot, 'components'),
+      '@ui-kitten/eva': path.resolve(srcRoot, 'eva'),
+      '@ui-kitten/eva-icons': path.resolve(srcRoot, 'eva-icons'),
+      '@ui-kitten/processor': path.resolve(srcRoot, 'processor'),
+      '@ui-kitten/mapping-base': path.resolve(srcRoot, 'mapping-base'),
       // SVG web polyfill
       'react-native-svg': svgWebPath,
     };
@@ -56,9 +56,9 @@ const config: StorybookConfig = {
     config.optimizeDeps = config.optimizeDeps || {};
     config.optimizeDeps.include = [
       ...(config.optimizeDeps.include || []),
-      '@kittsune/eva',
-      '@kittsune/processor',
-      '@kittsune/mapping-base',
+      '@ui-kitten/eva',
+      '@ui-kitten/processor',
+      '@ui-kitten/mapping-base',
     ];
 
     // Ensure source files outside website/ can resolve website/node_modules

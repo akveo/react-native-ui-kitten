@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Datepicker } from '@kittsune/components';
+import { Datepicker } from '@ui-kitten/components';
 
 const meta: Meta<typeof Datepicker> = {
   title: 'Components/Datepicker',

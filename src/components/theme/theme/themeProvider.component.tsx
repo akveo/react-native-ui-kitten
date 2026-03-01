@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -42,11 +42,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ theme, children })
     prevThemeRef.current = theme;
   }
 
-  // Update store when theme changes (for useSyncExternalStore subscribers)
-  useEffect(() => {
-    store.setTheme(theme);
-  }, [theme, store]);
-
   // Compute themeId synchronously during render so children get the correct ID
   const themeId = useMemo(() => computeThemeId(theme), [theme]);
 
@@ -62,6 +57,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ theme, children })
       __themeId: themeId,
     };
   }, [processedTheme, themeId]);
+
+  // Synchronously update the store snapshot during render so children
+  // reading via useSyncExternalStore see the correct theme immediately.
+  store.setSnapshotSilent(themedWithId);
+
+  // Notify useSyncExternalStore subscribers after render (for memo'd/external components)
+  useEffect(() => {
+    store.notify();
+  }, [themedWithId, store]);
 
   return (
     <ThemeStoreContext.Provider value={store}>

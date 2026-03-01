@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Layout, Text } from '@kittsune/components';
+import { Layout, Text } from '@ui-kitten/components';
 
 const meta: Meta<typeof Layout> = {
   title: 'Components/Layout',

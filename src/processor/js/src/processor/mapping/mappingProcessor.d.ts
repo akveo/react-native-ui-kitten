@@ -1,4 +1,4 @@
-import { ThemeMappingType } from '@kittsune/processor/dss';
+import { ThemeMappingType } from '@ui-kitten/processor/dss';
 import { Processor } from '../processor';
 export interface MappingMetaType {
     name: string;

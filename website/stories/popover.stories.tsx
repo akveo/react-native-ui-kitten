@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Popover, Button, Text, Layout } from '@kittsune/components';
+import { Popover, Button, Text, Layout } from '@ui-kitten/components';
 
 const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',

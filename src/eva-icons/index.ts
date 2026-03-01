@@ -1,4 +1,4 @@
-import { IconPack } from '@kittsune/components';
+import { IconPack } from '@ui-kitten/components';
 import { SvgProps } from 'react-native-svg';
 import { createIconsMap, clearIconCache, getIconCacheSize } from './createIconsMap';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Autocomplete, AutocompleteItem } from '@kittsune/components';
+import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
 const meta: Meta<typeof Autocomplete> = {
   title: 'Components/Autocomplete',

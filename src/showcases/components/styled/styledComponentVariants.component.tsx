@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Interaction, useStyled } from '@kittsune/components';
+import { Interaction, useStyled } from '@ui-kitten/components';
 
 interface Props {
   status?: string;

@@ -5,7 +5,7 @@ sidebar_label: Design System Theme
 description: "In Eva Design System a theme is a set of semantic variables and connections between them, that represents the application's look & feel."
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - Eva Design System
   - theme
 ---
@@ -23,7 +23,7 @@ In Eva Design System a **theme** is a set of semantic variables and connections 
 
 ## A Theme
 
-In Kittsune terms - **theme** is a json or a JavaScript object, structured in a particular way. Here's a gist of how it looks like:
+In UI Kitten terms - **theme** is a json or a JavaScript object, structured in a particular way. Here's a gist of how it looks like:
 
 ```json
 {

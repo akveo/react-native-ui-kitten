@@ -3,15 +3,15 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Kittsune',
+  title: 'UI Kitten',
   tagline: 'React Native UI Components powered by Eva Design System',
   favicon: 'img/favicon.ico',
 
-  url: 'https://bataevvlad.github.io',
-  baseUrl: '/kittsune/',
+  url: 'https://akveo.github.io',
+  baseUrl: '/react-native-ui-kitten/',
 
-  organizationName: 'bataevvlad',
-  projectName: 'kittsune',
+  organizationName: 'akveo',
+  projectName: 'react-native-ui-kitten',
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -27,7 +27,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/bataevvlad/kittsune/tree/master/website/',
+          editUrl: 'https://github.com/akveo/react-native-ui-kitten/tree/master/website/',
         },
         blog: false,
         theme: {
@@ -39,7 +39,7 @@ const config: Config = {
 
   themeConfig: {
     navbar: {
-      title: 'Kittsune',
+      title: 'UI Kitten',
       items: [
         {
           type: 'docSidebar',
@@ -53,12 +53,12 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: '/kittsune/storybook/',
+          href: '/react-native-ui-kitten/storybook/',
           label: 'Storybook',
           position: 'left',
         },
         {
-          href: 'https://github.com/bataevvlad/kittsune',
+          href: 'https://github.com/akveo/react-native-ui-kitten',
           label: 'GitHub',
           position: 'right',
         },
@@ -70,7 +70,7 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
-            {label: 'Getting Started', to: '/docs/getting-started/what-is-kittsune'},
+            {label: 'Getting Started', to: '/docs/getting-started/what-is-ui-kitten'},
             {label: 'Guides', to: '/docs/guides/getting-started'},
             {label: 'Design System', to: '/docs/design-system/intro'},
           ],
@@ -86,12 +86,12 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            {label: 'GitHub', href: 'https://github.com/bataevvlad/kittsune'},
-            {label: 'Storybook', href: '/kittsune/storybook/'},
+            {label: 'GitHub', href: 'https://github.com/akveo/react-native-ui-kitten'},
+            {label: 'Storybook', href: '/react-native-ui-kitten/storybook/'},
           ],
         },
       ],
-      copyright: `Copyright ${new Date().getFullYear()} Kittsune Contributors. Built with Docusaurus.`,
+      copyright: `Copyright ${new Date().getFullYear()} UI Kitten Contributors. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

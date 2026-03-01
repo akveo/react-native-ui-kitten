@@ -1,10 +1,10 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "bataevvlad/kittsune" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "akveo/react-native-ui-kitten" }],
   "commit": false,
-  "linked": [["@kittsune/*"]],
+  "linked": [["@ui-kitten/*"]],
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": ["@kittsune/showcases"]
+  "ignore": ["@ui-kitten/showcases"]
 }

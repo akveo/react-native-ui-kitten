@@ -22,13 +22,13 @@ jest.mock('path', () => {
 describe('@bootstrap-service: instance checks', () => {
 
   const evaConfig: EvaConfig = {
-    evaPackage: '@kittsune/eva',
+    evaPackage: '@ui-kitten/eva',
   };
 
   // New cache location outside of node_modules packages
-  const CACHE_DIR = 'node_modules/.cache/kittsune';
+  const CACHE_DIR = 'node_modules/.cache/ui-kitten';
   const getCacheFilePath = (evaPackage: string): string => {
-    const packageName = evaPackage.replace('@kittsune/', '');
+    const packageName = evaPackage.replace('@ui-kitten/', '');
     return `${CACHE_DIR}/${packageName}-generated.json`;
   };
 
@@ -80,7 +80,7 @@ describe('@bootstrap-service: instance checks', () => {
     jest.resetAllMocks();
   });
 
-  it('should bootstrap @kittsune/eva package', () => {
+  it('should bootstrap @ui-kitten/eva package', () => {
     BootstrapService.run(evaConfig);
 
     const cacheFilePath = getCacheFilePath(evaConfig.evaPackage);
@@ -92,7 +92,7 @@ describe('@bootstrap-service: instance checks', () => {
     expect(outputAsObject.styles).toBeTruthy();
   });
 
-  it('should bootstrap @kittsune/eva package with custom styles', () => {
+  it('should bootstrap @ui-kitten/eva package with custom styles', () => {
     BootstrapService.run({ ...evaConfig, customMappingPath: 'src/metro-config/tests/custom-mapping.json' });
 
     const cacheFilePath = getCacheFilePath(evaConfig.evaPackage);
@@ -104,7 +104,7 @@ describe('@bootstrap-service: instance checks', () => {
     expect(outputAsObject.styles.StatusBar).toBeTruthy();
   });
 
-  it('should store cache in node_modules/.cache/kittsune directory', () => {
+  it('should store cache in node_modules/.cache/ui-kitten directory', () => {
     BootstrapService.run(evaConfig);
 
     const cacheFilePath = getCacheFilePath(evaConfig.evaPackage);

@@ -1,4 +1,4 @@
-import { ThemeMappingType, ControlMappingType, MappingType, StatelessMappingType } from '@kittsune/processor/dss';
+import { ThemeMappingType, ControlMappingType, MappingType, StatelessMappingType } from '@ui-kitten/processor/dss';
 export declare function getComponentDefaultAppearance(mapping: ThemeMappingType, component: string): string | undefined;
 export declare function getComponentDefaultVariants(mapping: ThemeMappingType, component: string): string[] | undefined;
 export declare function getComponentDefaultState(mapping: ThemeMappingType, component: string): string | undefined;

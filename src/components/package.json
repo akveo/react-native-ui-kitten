@@ -1,7 +1,7 @@
 {
-  "name": "@kittsune/components",
+  "name": "@ui-kitten/components",
   "description": "React Native UI components based on Eva Design System",
-  "version": "2.0.0",
+  "version": "6.0.0-beta.0",
   "main": "./lib/module/index.js",
   "types": "./index.ts",
   "react-native": "./index.ts",
@@ -24,19 +24,19 @@
     "!**/__tests__",
     "!**/*.spec.*"
   ],
-  "author": "Kitsune Contributors",
+  "author": "UI Kitten Contributors",
   "license": "MIT",
-  "homepage": "https://github.com/bataevvlad/kittsune#readme",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bataevvlad/kittsune.git"
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
   },
   "bugs": {
-    "url": "https://github.com/bataevvlad/kittsune/issues"
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
   "keywords": [
     "react-native",
-    "kittsune",
+    "ui-kitten",
     "ui-kit",
     "eva-design"
   ],
@@ -48,8 +48,8 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@kittsune/mapping-base": "^2.0.0",
-    "@kittsune/processor": "^2.0.0",
+    "@ui-kitten/mapping-base": "^6.0.0-beta.0",
+    "@ui-kitten/processor": "^6.0.0-beta.0",
     "fecha": "3.0.3",
     "hoist-non-react-statics": "^3.2.1"
   },

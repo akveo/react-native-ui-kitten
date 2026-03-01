@@ -5,7 +5,7 @@ sidebar_label: Using Theme
 description: useTheme, useStyleSheet, and withStyles hooks and HOC for creating styles mapped to the current Eva theme.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - useTheme
   - useStyleSheet
   - withStyles
@@ -14,12 +14,12 @@ keywords:
 
 # Using Theme
 
-Kittsune provides hooks and a higher-order component for accessing the current Eva theme and creating theme-aware stylesheets.
+UI Kitten provides hooks and a higher-order component for accessing the current Eva theme and creating theme-aware stylesheets.
 
 ## Import
 
 ```tsx
-import { useTheme, useStyleSheet, withStyles } from '@kittsune/components';
+import { useTheme, useStyleSheet, withStyles } from '@ui-kitten/components';
 ```
 
 ## useTheme
@@ -29,7 +29,7 @@ Returns the current Eva theme object containing all design tokens (colors, spaci
 ```tsx
 import React from 'react';
 import { View } from 'react-native';
-import { useTheme } from '@kittsune/components';
+import { useTheme } from '@ui-kitten/components';
 
 const ThemedComponent = () => {
   const theme = useTheme();
@@ -47,7 +47,7 @@ Creates a memoized stylesheet that recalculates when the theme changes.
 ```tsx
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useStyleSheet, useTheme } from '@kittsune/components';
+import { useStyleSheet, useTheme } from '@ui-kitten/components';
 
 const ThemedComponent = () => {
   const styles = useStyleSheet(themedStyles);
@@ -76,7 +76,7 @@ A higher-order component alternative to the hooks. Injects `eva.theme` and `eva.
 ```tsx
 import React from 'react';
 import { View, Text } from 'react-native';
-import { withStyles } from '@kittsune/components';
+import { withStyles } from '@ui-kitten/components';
 
 const MyComponent = ({ eva }) => (
   <View style={eva.style.container}>

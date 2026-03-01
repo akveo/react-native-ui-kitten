@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -92,7 +92,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * @overview-example MenuStyling
  * Menu and it's inner views can be styled by passing them as function components.
  * ```
- * import { MenuItem, Text } from '@kittsune/components';
+ * import { MenuItem, Text } from '@ui-kitten/components';
  *
  * <MenuItem
  *   title={evaProps => <Text {...evaProps}>USERS</Text>}>

@@ -5,7 +5,7 @@ sidebar_label: Customize Mapping
 description: This configuration file is later processed by Eva Design System Processor to provide a final style applied by a component.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - Eva Design System
   - component mapping
   - customization
@@ -13,11 +13,11 @@ keywords:
 
 # Customize Component Mapping
 
-Kittsune components are styled with Eva Design System configuration files and themes. When we talk about configuration files we mean a mapping provided by Eva Design System. This configuration file is later processed by Eva Design System Processor to provide a final style applied by a component.
+UI Kitten components are styled with Eva Design System configuration files and themes. When we talk about configuration files we mean a mapping provided by Eva Design System. This configuration file is later processed by Eva Design System Processor to provide a final style applied by a component.
 
-In terms of Kittsune the mapping configuration file is a JSON or a JavaScript object which describes the rules and behavior for each component provided by Kittsune.
+In terms of UI Kitten the mapping configuration file is a JSON or a JavaScript object which describes the rules and behavior for each component provided by UI Kitten.
 
-Working with mappings is a quite difficult process, but it gives you a lot of flexibility to style components. Let's take a look at some simple examples of customizing Kittsune components.
+Working with mappings is a quite difficult process, but it gives you a lot of flexibility to style components. Let's take a look at some simple examples of customizing UI Kitten components.
 
 ---
 
@@ -53,7 +53,7 @@ The code above contains a bare minimum of code to start customizing a Button com
 
 ## Change a single parameter
 
-Let's assume we want to change the default `backgroundColor` of a Button. Before we do this, let's take a look at how it is configured by Eva Design System. Open a configuration file. It should be located in `./PROJECT_ROOT/node_modules/@kittsune/eva/mapping.json`.
+Let's assume we want to change the default `backgroundColor` of a Button. Before we do this, let's take a look at how it is configured by Eva Design System. Open a configuration file. It should be located in `./PROJECT_ROOT/node_modules/@ui-kitten/eva/mapping.json`.
 
 In order to change the **default** parameter, you need to find out where it is declared. To do that, we can quickly look through a meta-information about a component.
 
@@ -136,8 +136,8 @@ The only thing we have to do is to pass our mapping to an `ApplicationProvider` 
 
 ```js
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider } from '@ui-kitten/components';
 import { default as mapping } from './path-to/mapping.json'; // <-- import mapping
 
 export default () => (
@@ -150,7 +150,7 @@ export default () => (
 ```
 
 :::info
-Custom Mapping is applied automatically in case of using `@kittsune/metro-config` package, meaning there is no need to modify ApplicationProvider. To check this, see if it used in metro.config.js. [Relative guide](/docs/guides/improving-performance).
+Custom Mapping is applied automatically in case of using `@ui-kitten/metro-config` package, meaning there is no need to modify ApplicationProvider. To check this, see if it used in metro.config.js. [Relative guide](/docs/guides/improving-performance).
 :::
 
 Here we are. Now the default `backgroundColor` of a Button should be `pink`. Here is a result:
@@ -181,7 +181,7 @@ You are also able to make one of the semantic parameters to be used by default. 
 }
 ```
 
-That's it. Now you're able to use Kittsune Button without passing `appearance` property.
+That's it. Now you're able to use UI Kitten Button without passing `appearance` property.
 
 ---
 

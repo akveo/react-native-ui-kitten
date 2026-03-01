@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -68,7 +68,7 @@ export interface TabBarRef {
  * import React from 'react';
  * import { NavigationContainer } from '@react-navigation/native';
  * import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
- * import { TabBar, Tab, Layout, Text } from '@kittsune/components';
+ * import { TabBar, Tab, Layout, Text } from '@ui-kitten/components';
  *
  * const { Navigator, Screen } = createMaterialTopTabNavigator();
  *
@@ -113,7 +113,7 @@ export interface TabBarRef {
  * @overview-example TabStyling
  * Tab and it's inner views can be styled by passing them as function components.
  * ```
- * import { Tab, Text } from '@kittsune/components';
+ * import { Tab, Text } from '@ui-kitten/components';
  *
  * <Tab
  *   title={evaProps => <Text {...evaProps}>USERS</Text>}

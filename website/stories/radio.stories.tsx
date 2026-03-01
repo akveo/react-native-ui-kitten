@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Radio, RadioGroup } from '@kittsune/components';
+import { Radio, RadioGroup } from '@ui-kitten/components';
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'Components/Radio',

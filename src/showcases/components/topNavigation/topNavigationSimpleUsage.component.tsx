@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, IconElement, TopNavigation, TopNavigationAction } from '@kittsune/components';
+import { Icon, IconElement, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
 const BackIcon = (props): IconElement => (
   <Icon

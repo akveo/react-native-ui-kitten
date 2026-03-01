@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Icon, Layout } from '@kittsune/components';
+import { Icon, Layout } from '@ui-kitten/components';
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',

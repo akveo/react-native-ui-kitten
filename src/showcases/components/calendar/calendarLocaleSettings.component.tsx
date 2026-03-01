@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, I18nConfig, NativeDateService } from '@kittsune/components';
+import { Calendar, I18nConfig, NativeDateService } from '@ui-kitten/components';
 
 const i18n: I18nConfig = {
   dayNames: {

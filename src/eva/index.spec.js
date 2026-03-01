@@ -1,6 +1,6 @@
 "use strict";
 
-describe('@kittsune/eva: exports', () => {
+describe('@ui-kitten/eva: exports', () => {
     const eva = require('./index');
 
     describe('synchronous exports (backward compatible)', () => {

@@ -12,10 +12,10 @@
   "dependencies": {
     "react": "18.1.0",
     "react-native": "0.70.6",
-    "@kittsune/eva": "^2.2.0",
-    "@kittsune/components": "5.3.1",
-    "@kittsune/eva-icons": "5.3.1",
-    "@kittsune/metro-config": "5.3.1",
+    "@ui-kitten/eva": "^6.0.0-beta.0",
+    "@ui-kitten/components": "^6.0.0-beta.0",
+    "@ui-kitten/eva-icons": "^6.0.0-beta.0",
+    "@ui-kitten/metro-config": "^6.0.0-beta.0",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {

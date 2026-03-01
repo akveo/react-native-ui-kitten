@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -119,6 +119,66 @@ describe('ThemeStore', () => {
       expect(listener1).toHaveBeenCalledTimes(2);
       expect(listener2).toHaveBeenCalledTimes(1); // Not called again
       expect(listener3).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('setSnapshotSilent', () => {
+    it('should update snapshot without notifying listeners', () => {
+      const listener = jest.fn();
+      store.subscribe(listener);
+
+      const processedTheme = {
+        'color-primary-default': '#3366FF',
+        __themeId: 'theme_test',
+      };
+
+      store.setSnapshotSilent(processedTheme);
+
+      expect(listener).not.toHaveBeenCalled();
+      expect(store.getSnapshot()).toBe(processedTheme);
+      expect(store.getSnapshot()['color-primary-default']).toEqual('#3366FF');
+    });
+
+    it('should be returned by getSnapshot after silent update', () => {
+      const theme1 = { key1: 'value1', __themeId: 'id1' };
+      const theme2 = { key2: 'value2', __themeId: 'id2' };
+
+      store.setSnapshotSilent(theme1);
+      expect(store.getSnapshot()).toBe(theme1);
+
+      store.setSnapshotSilent(theme2);
+      expect(store.getSnapshot()).toBe(theme2);
+    });
+  });
+
+  describe('notify', () => {
+    it('should trigger all subscribed listeners', () => {
+      const listener1 = jest.fn();
+      const listener2 = jest.fn();
+
+      store.subscribe(listener1);
+      store.subscribe(listener2);
+
+      store.notify();
+
+      expect(listener1).toHaveBeenCalledTimes(1);
+      expect(listener2).toHaveBeenCalledTimes(1);
+    });
+
+    it('should work with setSnapshotSilent for two-phase update', () => {
+      const listener = jest.fn();
+      store.subscribe(listener);
+
+      const processedTheme = { color: 'red', __themeId: 'test' };
+
+      // Phase 1: silent update
+      store.setSnapshotSilent(processedTheme);
+      expect(listener).not.toHaveBeenCalled();
+      expect(store.getSnapshot()).toBe(processedTheme);
+
+      // Phase 2: notify
+      store.notify();
+      expect(listener).toHaveBeenCalledTimes(1);
     });
   });
 

@@ -8,10 +8,10 @@ import ProjectService from './project.service';
  * @param {string} customMappingPath - relative path to custom mapping.
  * @param {boolean} watch - watch custom mapping file for changes (defaults to true)
  *
- * @example Config for @kittsune/eva package with custom mapping
+ * @example Config for @ui-kitten/eva package with custom mapping
  * ```
  * const evaConfig = {
- *   evaPackage: '@kittsune/eva',
+ *   evaPackage: '@ui-kitten/eva',
  *   customMappingPath: './custom-mapping.json',
  * };
  * ```
@@ -22,14 +22,14 @@ export interface EvaConfig {
   watch?: boolean;
 }
 
-export type EvaMappingPackageName = '@kittsune/eva' | '@kittsune/material';
+export type EvaMappingPackageName = '@ui-kitten/eva' | '@ui-kitten/material';
 
 // eslint-disable-next-line no-restricted-syntax
 export default class EvaConfigService {
 
   static MAPPING_PACKAGE_NAMES: EvaMappingPackageName[] = [
-    '@kittsune/eva',
-    '@kittsune/material',
+    '@ui-kitten/eva',
+    '@ui-kitten/material',
   ];
 
   static validateConfigOrWarn = (config: EvaConfig): boolean => {

@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -28,8 +28,9 @@ import {
   useStyleSheet,
 } from './style.service';
 import { useStyled } from './useStyled';
-import { ThemeStyleType } from '@kittsune/processor';
-import { ThemeType } from '@kittsune/components';
+import { styleCache } from './styleCache';
+import { ThemeStyleType } from '@ui-kitten/processor';
+import { ThemeType } from '@ui-kitten/components';
 
 const theme = {
   defaultColor: '#000000',
@@ -400,6 +401,176 @@ describe('@useStyled: functional component checks', () => {
         backgroundColor: '#ffffff',
       });
     });
+  });
+});
+
+describe('@useStyled: selective re-rendering', () => {
+
+  beforeEach(() => {
+    styleCache.clear();
+  });
+
+  const selectiveMapping = {
+    Test: {
+      meta: {
+        scope: 'all',
+        parameters: {
+          backgroundColor: {
+            type: 'string',
+          },
+        },
+        appearances: {
+          default: {
+            default: true,
+          },
+        },
+        variantGroups: {},
+        states: {},
+      },
+      styles: {
+        'default': {
+          backgroundColor: 'defaultColor',
+        },
+      },
+    },
+  };
+
+  it('should NOT re-render when an unrelated theme key changes', async () => {
+    const renderCount = { current: 0 };
+
+    const ChildComponent = React.memo(() => {
+      renderCount.current++;
+      // Uses 'Test' which only accesses 'defaultColor'
+      useStyled('Test', {});
+      return <Text>{`renders:${renderCount.current}`}</Text>;
+    });
+    ChildComponent.displayName = 'ChildComponent';
+
+    const themeChangeTouchableId = '@selective/touchable';
+
+    const ParentComponent = (): React.ReactElement => {
+      const [currentTheme, setCurrentTheme] = React.useState({
+        ...theme,
+        unrelatedColor: '#111111',
+      });
+
+      return (
+        <StyleProvider styles={selectiveMapping} theme={currentTheme}>
+          <TouchableOpacity
+            testID={themeChangeTouchableId}
+            onPress={() => setCurrentTheme({
+              ...currentTheme,
+              // Change only an unrelated key
+              unrelatedColor: '#222222',
+            })}
+          >
+            <ChildComponent />
+          </TouchableOpacity>
+        </StyleProvider>
+      );
+    };
+
+    const component = render(<ParentComponent />);
+
+    await waitFor(() => {
+      expect(component.queryByText('renders:1')).toBeTruthy();
+    });
+
+    // Change an unrelated theme key
+    fireEvent.press(component.getByTestId(themeChangeTouchableId));
+
+    // Child should NOT have re-rendered (still at 1)
+    await waitFor(() => {
+      expect(renderCount.current).toBe(1);
+    });
+  });
+
+  it('should re-render when a used theme key changes', async () => {
+    const renderCount = { current: 0 };
+
+    const ChildComponent = React.memo(() => {
+      renderCount.current++;
+      // Uses 'Test' which accesses 'defaultColor'
+      const result = useStyled('Test', {});
+      return <Text>{`renders:${renderCount.current}:${JSON.stringify(result.style)}`}</Text>;
+    });
+    ChildComponent.displayName = 'ChildComponent';
+
+    const themeChangeTouchableId = '@selective/touchable2';
+
+    const ParentComponent = (): React.ReactElement => {
+      const [currentTheme, setCurrentTheme] = React.useState(theme);
+
+      return (
+        <StyleProvider styles={selectiveMapping} theme={currentTheme}>
+          <TouchableOpacity
+            testID={themeChangeTouchableId}
+            onPress={() => setCurrentTheme({
+              ...currentTheme,
+              // Change a key used by the component
+              defaultColor: '#FFFFFF',
+            })}
+          >
+            <ChildComponent />
+          </TouchableOpacity>
+        </StyleProvider>
+      );
+    };
+
+    const component = render(<ParentComponent />);
+
+    await waitFor(() => {
+      expect(renderCount.current).toBe(1);
+    });
+
+    // Change a used theme key
+    fireEvent.press(component.getByTestId(themeChangeTouchableId));
+
+    // Child SHOULD re-render
+    await waitFor(() => {
+      expect(renderCount.current).toBeGreaterThan(1);
+    });
+  });
+
+  it('should correctly compute styles via ThemeStore within StyleProvider', async () => {
+    let capturedResult: { style: object; theme: object } | null = null;
+
+    const TestComponent: React.FC = () => {
+      const result = useStyled('Test', {});
+      React.useEffect(() => {
+        capturedResult = result;
+      }, [result]);
+      return <View style={result.style} />;
+    };
+
+    render(
+      <StyleProvider styles={selectiveMapping} theme={theme}>
+        <TestComponent />
+      </StyleProvider>,
+    );
+
+    await waitFor(() => {
+      expect(capturedResult).not.toBeNull();
+    });
+
+    expect(capturedResult!.style).toEqual({
+      backgroundColor: theme.defaultColor,
+    });
+  });
+
+  it('should return empty styles when no provider is present', () => {
+    let capturedResult: { style: object; theme: object } | null = null;
+
+    const TestComponent: React.FC = () => {
+      const result = useStyled('Test', {});
+      capturedResult = result;
+      return <View />;
+    };
+
+    render(<TestComponent />);
+
+    expect(capturedResult).not.toBeNull();
+    expect(capturedResult!.style).toEqual({});
   });
 });
 

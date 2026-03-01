@@ -2,16 +2,16 @@
 id: intro
 title: Eva Design System Intro
 sidebar_label: Eva Design System Intro
-description: Kittsune is a React Native implementation of Eva Design System. The components visual style and behavior are based on Design System rules and agreements.
+description: UI Kitten is a React Native implementation of Eva Design System. The components visual style and behavior are based on Design System rules and agreements.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - Eva Design System
 ---
 
 # Eva Design System
 
-Kittsune is a React Native implementation of [Eva Design System](https://eva.design). This means that components visual style and behavior are based on Design System rules and agreements.
+UI Kitten is a React Native implementation of [Eva Design System](https://eva.design). This means that components visual style and behavior are based on Design System rules and agreements.
 
 ---
 
@@ -25,7 +25,7 @@ Eva is a customizable Design System based on Atomic Design Principles. All compo
 
 Eva Design System is implemented for two platforms:
 
-- Mobile - Kittsune
+- Mobile - UI Kitten
 - Web - [Nebular](https://github.com/akveo/nebular)
 
 Both implementations have a single source of truth for styles and unified theming system.
@@ -45,4 +45,4 @@ Theme extension mechanism allows modifying one theme with another.
 
 ## Enterprise ready
 
-Being a part of Eva Ecosystem, Kittsune is a great choice for Enterprise-grade products, providing complete control over application look & feel.
+Being a part of Eva Ecosystem, UI Kitten is a great choice for Enterprise-grade products, providing complete control over application look & feel.

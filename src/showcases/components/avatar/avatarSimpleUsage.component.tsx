@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Avatar, Layout, Text } from '@kittsune/components';
+import { Avatar, Layout, Text } from '@ui-kitten/components';
 
 const SIZES = ['tiny', 'small', 'medium', 'large', 'giant'] as const;
 const SHAPES = ['round', 'rounded', 'square'] as const;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tab, TabBar, TabView, Text, Layout } from '@kittsune/components';
+import { Tab, TabBar, TabView, Text, Layout } from '@ui-kitten/components';
 
 const meta: Meta<typeof TabBar> = {
   title: 'Components/Tab',

@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -83,8 +83,8 @@ export interface DatepickerRef<D = Date> {
  * @property {DateService<D>} dateService - Date service that is able to work with a date objects.
  * Defaults to Native Date service that works with JS Date.
  * Allows using different types of date like Moment.js or date-fns.
- * Moment.js service can be provided by installing `@kittsune/moment` package.
- * date-fns service can be provided by installing `@kittsune/date-fns` package.
+ * Moment.js service can be provided by installing `@ui-kitten/moment` package.
+ * date-fns service can be provided by installing `@ui-kitten/date-fns` package.
  *
  * @property {boolean} boundingMonth - Defines if previous and next months should be rendered in the current month view.
  *
@@ -190,7 +190,7 @@ export interface DatepickerRef<D = Date> {
  *
  * @overview-example DatepickerMoment
  * Datepicker is able to work with Moment, by configuring date service.
- * In order to use Moment, `@kittsune/moment` package is required.
+ * In order to use Moment, `@ui-kitten/moment` package is required.
  *
  * @overview-example DatepickerCustomDay
  * To render custom cells, `renderDay`, `renderMonth` and `renderYear` properties may be used.
@@ -198,7 +198,7 @@ export interface DatepickerRef<D = Date> {
  * @overview-example DatepickerStyling
  * Datepicker and it's inner views can be styled by passing them as function components.
  * ```
- * import { Datepicker, Text } '@kittsune/components';
+ * import { Datepicker, Text } '@ui-kitten/components';
  *
  * <Datepicker
  *   controlStyle={{ ... }}

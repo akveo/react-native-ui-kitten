@@ -1,8 +1,8 @@
 {
-  "name": "@kittsune/mapping-base",
-  "description": "Shared mapping base for Kittsune design systems",
-  "version": "2.0.0",
-  "author": "Kittsune Contributors",
+  "name": "@ui-kitten/mapping-base",
+  "description": "Shared mapping base for UI Kitten design systems",
+  "version": "6.0.0-beta.0",
+  "author": "UI Kitten Contributors",
   "license": "MIT",
   "main": "index.js",
   "types": "index.d.ts",
@@ -22,13 +22,13 @@
   "scripts": {
     "build": "echo 'Pre-compiled, no build needed'"
   },
-  "homepage": "https://github.com/bataevvlad/kittsune#readme",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bataevvlad/kittsune.git"
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
   },
   "bugs": {
-    "url": "https://github.com/bataevvlad/kittsune/issues"
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
   "sideEffects": false,
   "publishConfig": {

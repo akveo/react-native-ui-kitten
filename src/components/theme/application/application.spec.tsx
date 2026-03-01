@@ -1,4 +1,4 @@
-import * as eva from '@kittsune/eva';
+import * as eva from '@ui-kitten/eva';
 
 it('should be able to provide styles to all `styled` components in the library', () => {
   // Verify that the eva mapping contains styles for all expected components

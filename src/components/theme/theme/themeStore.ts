@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -22,6 +22,8 @@ export interface ThemeStoreInterface {
   getServerSnapshot: () => ThemedThemeType;
   subscribe: (listener: () => void) => () => void;
   setTheme: (theme: ThemeType) => void;
+  setSnapshotSilent: (processedTheme: ThemedThemeType) => void;
+  notify: () => void;
 }
 
 /**
@@ -103,6 +105,22 @@ export class ThemeStore implements ThemeStoreInterface {
       __themeId: themeId,
     };
 
+    this.notifyListeners();
+  };
+
+  /**
+   * Update the snapshot without notifying listeners.
+   * Use this for synchronous updates during render, followed by notify() in useEffect.
+   */
+  setSnapshotSilent = (processedTheme: ThemedThemeType): void => {
+    this.currentTheme = processedTheme;
+  };
+
+  /**
+   * Notify all subscribed listeners of a theme change.
+   * Public wrapper around notifyListeners for use with setSnapshotSilent.
+   */
+  notify = (): void => {
     this.notifyListeners();
   };
 

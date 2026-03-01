@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, CircularProgressBar } from '@kittsune/components';
+import { Layout, CircularProgressBar } from '@ui-kitten/components';
 import { useProgress } from '../../helpers/progress.hook';
 
 export const CircularProgressBarStatesShowcase = (): React.ReactElement => {

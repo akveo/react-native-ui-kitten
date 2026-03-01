@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Avatar, Button, Layout, Popover, Text } from '@kittsune/components';
+import { Avatar, Button, Layout, Popover, Text } from '@ui-kitten/components';
 
 export const PopoverFullWidthShowcase = (): React.ReactElement => {
 

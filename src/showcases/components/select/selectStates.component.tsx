@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { IndexPath, Layout, Select, SelectItem } from '@kittsune/components';
+import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
 export const SelectStatesShowcase = (): React.ReactElement => {
 

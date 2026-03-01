@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Radio } from '@kittsune/components';
+import { Layout, Radio } from '@ui-kitten/components';
 
 export const RadioThemingShowcase = (): React.ReactElement => {
 

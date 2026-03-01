@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -90,7 +90,7 @@ export type TextElement = React.ReactElement<TextProps>;
  * Text can be styled with `style` property.
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  * ```
- * import { Text } from '@kittsune/components';
+ * import { Text } from '@ui-kitten/components';
  *
  * <Text style={...}>Place your Text</Text>
  * ```

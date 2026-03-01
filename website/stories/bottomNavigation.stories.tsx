@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { BottomNavigation, BottomNavigationTab } from '@kittsune/components';
+import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 
 const meta: Meta<typeof BottomNavigation> = {
   title: 'Components/BottomNavigation',

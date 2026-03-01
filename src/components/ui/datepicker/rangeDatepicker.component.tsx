@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -78,8 +78,8 @@ export interface RangeDatepickerRef<D = Date> {
  * @property {DateService<D>} dateService - Date service that is able to work with a date objects.
  * Defaults to Native Date service that works with JS Date.
  * Allows using different types of date like Moment.js or date-fns.
- * Moment.js service can be provided by installing `@kittsune/moment` package.
- * date-fns service can be provided by installing `@kittsune/date-fns` package.
+ * Moment.js service can be provided by installing `@ui-kitten/moment` package.
+ * date-fns service can be provided by installing `@ui-kitten/date-fns` package.
  *
  * @property {boolean} boundingMonth - Whether previous and next months in the current month view should be rendered.
  *

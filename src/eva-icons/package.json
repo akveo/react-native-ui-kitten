@@ -1,7 +1,7 @@
 {
-  "name": "@kittsune/eva-icons",
-  "description": "Eva Icons for Kittsune / React Native",
-  "version": "2.0.0",
+  "name": "@ui-kitten/eva-icons",
+  "description": "Eva Icons for UI Kitten / React Native",
+  "version": "6.0.0-beta.0",
   "main": "./lib/module/index.js",
   "types": "./index.ts",
   "react-native": "./index.ts",
@@ -22,19 +22,19 @@
     "!**/__tests__",
     "!**/*.spec.*"
   ],
-  "author": "Kitsune Contributors",
+  "author": "UI Kitten Contributors",
   "license": "MIT",
-  "homepage": "https://github.com/bataevvlad/kittsune#readme",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bataevvlad/kittsune.git"
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
   },
   "bugs": {
-    "url": "https://github.com/bataevvlad/kittsune/issues"
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
   "keywords": [
     "react-native",
-    "kittsune",
+    "ui-kitten",
     "eva-icons",
     "icons"
   ],
@@ -49,7 +49,7 @@
     "react-native-eva-icons": "^1.3.1"
   },
   "peerDependencies": {
-    "@kittsune/components": "^2.0.0",
+    "@ui-kitten/components": "^6.0.0-beta.0",
     "react-native-svg": "*"
   },
   "sideEffects": false,

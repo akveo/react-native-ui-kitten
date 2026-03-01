@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Layout, Radio, RadioProps } from '@kittsune/components';
+import { Layout, Radio, RadioProps } from '@ui-kitten/components';
 
 const useRadioState = (initialCheck = false): RadioProps => {
   const [checked, setChecked] = React.useState(initialCheck);

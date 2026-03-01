@@ -2,10 +2,10 @@
 id: use-theme-variables
 title: Use Theme Variables
 sidebar_label: Use Theme Variables
-description: Kittsune allows you using the theme you have provided in the application root. This allows you to easily create themed components.
+description: UI Kitten allows you using the theme you have provided in the application root. This allows you to easily create themed components.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - theme variables
   - useTheme
   - useStyleSheet
@@ -14,7 +14,7 @@ keywords:
 
 # Using Theme Variables
 
-Kittsune allows you using the theme you have provided in the application root. This allows you to easily create themed components.
+UI Kitten allows you using the theme you have provided in the application root. This allows you to easily create themed components.
 
 ---
 
@@ -25,7 +25,7 @@ Let's declare a `View` and set its `backgroundColor` to any color of current the
 ```js
 import React from 'react';
 import { View } from 'react-native';
-import { withStyles } from '@kittsune/components';
+import { withStyles } from '@ui-kitten/components';
 
 const AwesomeView = (props) => {
   const { eva, style, ...restProps } = props;
@@ -42,14 +42,14 @@ export const ThemedAwesomeView = withStyles(AwesomeView, (theme) => ({
 }));
 ```
 
-In the example above we use `withStyles` function imported from Kittsune. This allows us create styles like you usually do with `StyleSheet` but with an ability to use current theme.
+In the example above we use `withStyles` function imported from UI Kitten. This allows us create styles like you usually do with `StyleSheet` but with an ability to use current theme.
 
 You can also use hooks `useTheme` and `useStyleSheet` in order to get styles & current theme variables. Here's an example:
 
 ```js
 import React from 'react';
 import { View } from 'react-native';
-import { useTheme, useStyleSheet, StyleService } from '@kittsune/components';
+import { useTheme, useStyleSheet, StyleService } from '@ui-kitten/components';
 
 export const ThemedAwesomeView = () => {
   const theme = useTheme();
@@ -67,7 +67,7 @@ const themedStyles = StyleService.create({
 });
 ```
 
-In the example above we use `useTheme` and `useStyleSheet` hooks imported from Kittsune. `useStyleSheet` allows you to create styles with supported variables defined inside your theme config. `useTheme` allows you to get access to theme variables directly and use them inside React component.
+In the example above we use `useTheme` and `useStyleSheet` hooks imported from UI Kitten. `useStyleSheet` allows you to create styles with supported variables defined inside your theme config. `useTheme` allows you to get access to theme variables directly and use them inside React component.
 
 That's it! Now you're done and able to use your themed component.
 

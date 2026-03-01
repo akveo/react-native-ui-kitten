@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tooltip, Button, Layout } from '@kittsune/components';
+import { Tooltip, Button, Layout } from '@ui-kitten/components';
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Components/Tooltip',

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ProgressBar } from '@kittsune/components';
+import { ProgressBar } from '@ui-kitten/components';
 
 const meta: Meta<typeof ProgressBar> = {
   title: 'Components/ProgressBar',

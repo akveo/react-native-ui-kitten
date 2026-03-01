@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Input } from '@kittsune/components';
+import { Input } from '@ui-kitten/components';
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',

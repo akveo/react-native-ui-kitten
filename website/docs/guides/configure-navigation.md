@@ -2,17 +2,17 @@
 id: configure-navigation
 title: Configure Navigation
 sidebar_label: Configure Navigation
-description: Kittsune has built-in components to fit React Navigation API. This guide will help you to configure the app to navigate between screens.
+description: UI Kitten has built-in components to fit React Navigation API. This guide will help you to configure the app to navigate between screens.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - navigation
   - React Navigation
 ---
 
 # Configure Navigation
 
-This guide will help you to configure the app to navigate between screens. Kittsune has built-in components to fit [React Navigation](https://reactnavigation.org) API. Let's use it to complete this guide with a simple 3 steps.
+This guide will help you to configure the app to navigate between screens. UI Kitten has built-in components to fit [React Navigation](https://reactnavigation.org) API. Let's use it to complete this guide with a simple 3 steps.
 
 ---
 
@@ -35,7 +35,7 @@ Create a `home.component.js` file and paste the code below.
 ```jsx
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { Button, Divider, Layout, TopNavigation } from '@kittsune/components';
+import { Button, Divider, Layout, TopNavigation } from '@ui-kitten/components';
 
 export const HomeScreen = ({ navigation }) => {
 
@@ -70,7 +70,7 @@ Create a `details.component.js` file and paste the code below.
 ```jsx
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@kittsune/components';
+import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back' />
@@ -146,9 +146,9 @@ Go back to the `App.js` and paste the following code.
 
 ```jsx
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, IconRegistry } from '@kittsune/components';
-import { EvaIconsPack } from '@kittsune/eva-icons';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from './navigation.component';
 
 export default () => (
@@ -167,7 +167,7 @@ That's it! By this guide, you learned how to create screens and perform simple n
 
 ## Other navigation components
 
-Kittsune includes much more components that can be used with React Navigation:
+UI Kitten includes much more components that can be used with React Navigation:
 
 - [BottomNavigation](/docs/components/bottom-tabs) - renders the tabs at the bottom.
 - [TabBar](/docs/components/top-tabs) - renders the tabs at the top.
@@ -177,7 +177,7 @@ Kittsune includes much more components that can be used with React Navigation:
 
 ## Note on the other navigation libraries
 
-Since React Navigation is not the only solution to perform routing within the React Native app, you might be interested in other navigation libraries like React Native Navigation by Wix. By default, Kittsune is not well adopted to work with this library, and you may need to [improve its performance](/docs/guides/improving-performance).
+Since React Navigation is not the only solution to perform routing within the React Native app, you might be interested in other navigation libraries like React Native Navigation by Wix. By default, UI Kitten is not well adopted to work with this library, and you may need to [improve its performance](/docs/guides/improving-performance).
 
 ---
 
@@ -185,4 +185,4 @@ Since React Navigation is not the only solution to perform routing within the Re
 
 In this guide, we used React Navigation library to configure routing within React Native app. Consider reading the [documentation](https://reactnavigation.org/docs/en/getting-started.html) to become more familiar with it as it is most popular solution in the React world.
 
-By moving to the [next guide](/docs/guides/runtime-theming), you will learn how to change theme in runtime using Kittsune.
+By moving to the [next guide](/docs/guides/runtime-theming), you will learn how to change theme in runtime using UI Kitten.

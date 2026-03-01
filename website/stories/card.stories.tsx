@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Card, Text } from '@kittsune/components';
+import { Card, Text } from '@ui-kitten/components';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon, IconElement, List, ListItem } from '@kittsune/components';
+import { Button, Icon, IconElement, List, ListItem } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
 interface IListItem {

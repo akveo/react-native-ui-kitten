@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Spinner } from '@kittsune/components';
+import { Layout, Spinner } from '@ui-kitten/components';
 
 export const SpinnerSizesShowcase = (): React.ReactElement => (
   <Layout

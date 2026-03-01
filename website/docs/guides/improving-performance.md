@@ -2,10 +2,10 @@
 id: improving-performance
 title: Improving Performance
 sidebar_label: Improving Performance
-description: How to get rid of performance issues in Kittsune when using mapping customization or React Native Navigation by Wix.
+description: How to get rid of performance issues in UI Kitten when using mapping customization or React Native Navigation by Wix.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - performance
   - custom mapping
   - metro config
@@ -13,27 +13,27 @@ keywords:
 
 # Improving Performance
 
-By default, Kittsune is configured with processing Eva mapping packages during the runtime. This may lead to performance issues when using [mapping customization](/docs/design-system/customize-mapping) or React Native Navigation by Wix. By following this guide, you will know how to get rid of these issues and save the time your application takes on loading.
+By default, UI Kitten is configured with processing Eva mapping packages during the runtime. This may lead to performance issues when using [mapping customization](/docs/design-system/customize-mapping) or React Native Navigation by Wix. By following this guide, you will know how to get rid of these issues and save the time your application takes on loading.
 
 ---
 
 ## Requirements
 
-The following steps are only possible with installing Kittsune package, which manages these issues:
+The following steps are only possible with installing UI Kitten package, which manages these issues:
 
 ```bash
-npm i -D @kittsune/metro-config
+npm i -D @ui-kitten/metro-config
 
 // Using Yarn?
-yarn add -D @kittsune/metro-config
+yarn add -D @ui-kitten/metro-config
 ```
 
 The props passed to ApplicationProvider should also be modified:
 
 ```jsx
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider } from '@ui-kitten/components';
 
 export default () => (
   <ApplicationProvider {...eva} theme={eva.light}>
@@ -42,7 +42,7 @@ export default () => (
 );
 ```
 
-By spreading `eva` we say Kittsune to use compiled Eva mapping if there is such. If there is no, it still be compiled during the runtime. Notice we omit `customMapping` property as well, since it's not required anymore.
+By spreading `eva` we say UI Kitten to use compiled Eva mapping if there is such. If there is no, it still be compiled during the runtime. Notice we omit `customMapping` property as well, since it's not required anymore.
 
 ---
 
@@ -55,10 +55,10 @@ Create **metro.config.js** at the root of your project (if you don't have this f
 For bare React Native project:
 
 ```js
-const MetroConfig = require('@kittsune/metro-config');
+const MetroConfig = require('@ui-kitten/metro-config');
 
 const evaConfig = {
-  evaPackage: '@kittsune/eva',
+  evaPackage: '@ui-kitten/eva',
   // Optional, but may be useful when using mapping customization feature.
   // customMappingPath: './custom-mapping.json',
 };
@@ -75,10 +75,10 @@ For Expo project:
 ```js
 const { getDefaultConfig } = require("expo/metro-config");
 
-const MetroConfig = require('@kittsune/metro-config');
+const MetroConfig = require('@ui-kitten/metro-config');
 
 const evaConfig = {
-  evaPackage: '@kittsune/eva',
+  evaPackage: '@ui-kitten/eva',
   // Optional, but may be useful when using mapping customization feature.
   // customMappingPath: './custom-mapping.json',
 };
@@ -105,16 +105,16 @@ expo start -c
 
 Despite that configuring Metro Bundler may cover most of the use cases, we also provide a command line interface to do the same job, but manually. Running within the CI environment is one of the cases when it should be done before the application is built.
 
-Assuming `@kittsune/metro-config` package [is installed](#requirements), we may run the following command:
+Assuming `@ui-kitten/metro-config` package [is installed](#requirements), we may run the following command:
 
 ```bash
-kittsune bootstrap @kittsune/eva
+ui-kitten bootstrap @ui-kitten/eva
 ```
 
 Or, if there is a custom mapping:
 
 ```bash
-kittsune bootstrap @kittsune/eva ./path-to/mapping.json
+ui-kitten bootstrap @ui-kitten/eva ./path-to/mapping.json
 ```
 
 ---
@@ -123,8 +123,8 @@ kittsune bootstrap @kittsune/eva ./path-to/mapping.json
 
 Let's take a look on the **evaConfig** we define:
 
-**evaPackage** represents the name of Eva Design System package installed. In this example, we use `@kittsune/eva`. It may be one of the valid Eva Design System packages.
+**evaPackage** represents the name of Eva Design System package installed. In this example, we use `@ui-kitten/eva`. It may be one of the valid Eva Design System packages.
 
 **customMappingPath** represents a path to custom mapping if you use [mapping customization](/docs/design-system/customize-mapping) feature. You may omit it if you do not customize Eva.
 
-The second argument of `create` function is a standard configuration of Metro Bundler. In case you had `metro.config.js` previously, pass the object you had to merge it with Kittsune configuration.
+The second argument of `create` function is a standard configuration of Metro Bundler. In case you had `metro.config.js` previously, pass the object you had to merge it with UI Kitten configuration.

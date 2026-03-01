@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
@@ -22,7 +22,7 @@ import {
   Point,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
-import { Backdrop, BackdropPresentingConfig } from '@kittsune/components/theme/backdrop/backdrop.component';
+import { Backdrop, BackdropPresentingConfig } from '@ui-kitten/components/theme/backdrop/backdrop.component';
 
 export type RNModalProps =
   Pick<ReactNativeModalProps, 'animationType' | 'hardwareAccelerated' | 'supportedOrientations' | 'onShow'>;

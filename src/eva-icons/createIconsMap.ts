@@ -1,4 +1,4 @@
-import { IconProvider } from '@kittsune/components';
+import { IconProvider } from '@ui-kitten/components';
 import { SvgProps } from 'react-native-svg';
 import { findIconByName } from 'react-native-eva-icons/icons';
 import { EvaIcon } from './evaIcon.component';

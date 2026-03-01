@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Avatar } from '@kittsune/components';
+import { Avatar } from '@ui-kitten/components';
 
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',

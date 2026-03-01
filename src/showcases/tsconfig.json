@@ -4,13 +4,13 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@kittsune/components": ["../components"],
-      "@kittsune/eva": ["../eva"],
-      "@kittsune/material": ["../material"],
-      "@kittsune/processor": ["../processor"],
-      "@kittsune/eva-icons": ["../eva-icons"],
-      "@kittsune/date-fns": ["../date-fns"],
-      "@kittsune/moment": ["../moment"]
+      "@ui-kitten/components": ["../components"],
+      "@ui-kitten/eva": ["../eva"],
+      "@ui-kitten/material": ["../material"],
+      "@ui-kitten/processor": ["../processor"],
+      "@ui-kitten/eva-icons": ["../eva-icons"],
+      "@ui-kitten/date-fns": ["../date-fns"],
+      "@ui-kitten/moment": ["../moment"]
     }
   },
   "include": [

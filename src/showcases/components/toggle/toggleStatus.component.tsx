@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Layout, Toggle, ToggleProps } from '@kittsune/components';
+import { Layout, Toggle, ToggleProps } from '@ui-kitten/components';
 
 const useToggleState = (initialState = false): ToggleProps => {
   const [checked, setChecked] = React.useState(initialState);

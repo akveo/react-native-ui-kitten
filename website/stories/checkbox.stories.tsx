@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CheckBox } from '@kittsune/components';
+import { CheckBox } from '@ui-kitten/components';
 
 const meta: Meta<typeof CheckBox> = {
   title: 'Components/CheckBox',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeStyleType } from '@kittsune/processor';
+import { ThemeStyleType } from '@ui-kitten/processor';
 
 const defaultValue: ThemeStyleType = {};
 

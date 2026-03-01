@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Datepicker, DatepickerRef, Layout, Text } from '@kittsune/components';
+import { Button, Datepicker, DatepickerRef, Layout, Text } from '@ui-kitten/components';
 
 const now = new Date();
 const date = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());

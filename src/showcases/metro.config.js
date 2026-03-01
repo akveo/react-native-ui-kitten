@@ -22,11 +22,11 @@ const moduleDependencies = [
   // root node_modules
   path.resolve(workspaceRoot, 'node_modules'),
 
-  // @kittsune/components dependencies
+  // @ui-kitten/components dependencies
   path.resolve(workspaceRoot, 'node_modules/hoist-non-react-statics'),
   path.resolve(workspaceRoot, 'node_modules/fecha'),
 
-  // @kittsune/eva-icons
+  // @ui-kitten/eva-icons
   path.resolve(workspaceRoot, 'node_modules/react-native-eva-icons'),
 
   // external
@@ -42,16 +42,16 @@ const extraNodeModules = {
   'react-native-svg': path.resolve(workspaceRoot, 'node_modules/react-native-svg'),
   '@babel/runtime': path.resolve(workspaceRoot, 'node_modules/@babel/runtime'),
 
-  // Map @kittsune packages to local source
-  '@kittsune/components': path.resolve(srcRoot, 'components'),
-  '@kittsune/core': path.resolve(srcRoot, 'core'),
-  '@kittsune/eva-icons': path.resolve(srcRoot, 'eva-icons'),
-  '@kittsune/date-fns': path.resolve(srcRoot, 'date-fns'),
-  '@kittsune/moment': path.resolve(srcRoot, 'moment'),
-  '@kittsune/eva': path.resolve(srcRoot, 'eva'),
-  '@kittsune/material': path.resolve(srcRoot, 'material'),
-  '@kittsune/processor': path.resolve(srcRoot, 'processor'),
-  '@kittsune/mapping-base': path.resolve(srcRoot, 'mapping-base'),
+  // Map @ui-kitten packages to local source
+  '@ui-kitten/components': path.resolve(srcRoot, 'components'),
+  '@ui-kitten/core': path.resolve(srcRoot, 'core'),
+  '@ui-kitten/eva-icons': path.resolve(srcRoot, 'eva-icons'),
+  '@ui-kitten/date-fns': path.resolve(srcRoot, 'date-fns'),
+  '@ui-kitten/moment': path.resolve(srcRoot, 'moment'),
+  '@ui-kitten/eva': path.resolve(srcRoot, 'eva'),
+  '@ui-kitten/material': path.resolve(srcRoot, 'material'),
+  '@ui-kitten/processor': path.resolve(srcRoot, 'processor'),
+  '@ui-kitten/mapping-base': path.resolve(srcRoot, 'mapping-base'),
 };
 
 config.projectRoot = path.resolve(__dirname);

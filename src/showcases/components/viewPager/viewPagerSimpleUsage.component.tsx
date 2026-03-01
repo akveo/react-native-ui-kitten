@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Text, ViewPager } from '@kittsune/components';
+import { Layout, Text, ViewPager } from '@ui-kitten/components';
 
 export const ViewPagerSimpleUsageShowcase = (): React.ReactElement => {
 

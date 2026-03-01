@@ -1,11 +1,11 @@
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
- * Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors.
+ * Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { DateService } from '@kittsune/components';
+import { DateService } from '@ui-kitten/components';
 import { MomentDateService } from './momentDate.service';
 import moment from 'moment';
 

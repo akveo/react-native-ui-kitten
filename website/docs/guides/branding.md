@@ -5,7 +5,7 @@ sidebar_label: Branding
 description: Learn how to create a custom theme, apply fonts and understand how theme variables are used within Eva.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - theme
   - branding
   - Eva colors
@@ -14,12 +14,12 @@ keywords:
 
 # Branding
 
-Kittsune supports 2 visual themes provided by Eva Design System: Light and Dark. Both of them are designed to use as default themes in your products and may be used as a core theme, when needed to build a custom, branded solution.
+UI Kitten supports 2 visual themes provided by Eva Design System: Light and Dark. Both of them are designed to use as default themes in your products and may be used as a core theme, when needed to build a custom, branded solution.
 
 In this guide, we will learn how to create a custom theme, apply fonts and give an explanation on how theme variables are used within Eva. If your team has a designer, it may be useful to see the original [Sketch file](https://akveo.gumroad.com/l/eva-sketch) (it's free).
 
 :::warning IMPORTANT
-We strongly recommend paying enough attention on this guide in order to have better developer experience when using Kittsune.
+We strongly recommend paying enough attention on this guide in order to have better developer experience when using UI Kitten.
 :::
 
 Before we start, let's pretend we want to create a deep orange theme. Just like the one used in this documentation, but with the dark mode in mind. If your application relies on a light theme, the same technique may be used.
@@ -32,24 +32,24 @@ Primary color defines the brand color of the product and shows-up its the main l
 
 In Eva, there are 6 semantic colors: `basic`, `primary`, `success`, `info`, `warning`, and `danger`. In general, Primary and Basic colors are the main colors within the semantic group and are used by each component in its default state. For instance, buttons in its default state are primary, and Inputs are basic. Inputs become primary when the user starts interacting.
 
-The easiest way to create Kittsune theme is to use [Eva Colors](https://colors.eva.design) - a deep learning color generator. Start with picking the primary color. Our choice is orange.
+The easiest way to create UI Kitten theme is to use [Eva Colors](https://colors.eva.design) - a deep learning color generator. Start with picking the primary color. Our choice is orange.
 
 <video autoPlay loop muted playsInline width="100%">
-  <source src="/kittsune/img/articles/guides/branding-pick-color.webm" type="video/webm" />
+  <source src="/react-native-ui-kitten/img/articles/guides/branding-pick-color.webm" type="video/webm" />
 </video>
 
 The same way you can pick the rest of semantic colors. In this example, we just trust the color generator and leave it as it is. When the theme is ready, click the `Export` button and select `JSON` option.
 
 <video autoPlay loop muted playsInline width="100%">
-  <source src="/kittsune/img/articles/guides/branding-export-theme.webm" type="video/webm" />
+  <source src="/react-native-ui-kitten/img/articles/guides/branding-export-theme.webm" type="video/webm" />
 </video>
 
 Copy the downloaded file into your project. To apply a theme, we should choose the theme provided by Eva to use it as a core for ours. In order to build dark theme, use `eva.dark` or `eva.light` otherwise. Our choice is dark.
 
 ```js
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, Layout, Button } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, Layout, Button } from '@ui-kitten/components';
 import { default as theme } from './theme.json'; // <-- Import app theme
 
 export default () => (
@@ -61,7 +61,7 @@ export default () => (
 );
 ```
 
-With a single step by configuring primary color, we made Kittsune components be orange.
+With a single step by configuring primary color, we made UI Kitten components be orange.
 
 ![image](/img/articles/guides/branding-overview-primary.png)
 
@@ -118,7 +118,7 @@ Sometimes it is required to make Text lighter or darker without modifying Basic 
 - `text-hint-color` used for placeholders, labels, captions, subtitles and icons in its default state.
 - `text-disabled-color` used within every control in a disabled state.
 
-So, to tweak text more accurately, we may add these variables to `theme.json` to override its default value. Let's make the default text darker. We may use the value of another theme variable by creating a reference with `$` sign. This will be handled by Kittsune.
+So, to tweak text more accurately, we may add these variables to `theme.json` to override its default value. Let's make the default text darker. We may use the value of another theme variable by creating a reference with `$` sign. This will be handled by UI Kitten.
 
 ```json
 {
@@ -146,7 +146,7 @@ module.exports = {
 };
 ```
 
-Run `npx react-native link` from the project root to link fonts with the native side. When it's done, create a `mapping.json` file and paste the code below to apply fonts to Kittsune components.
+Run `npx react-native link` from the project root to link fonts with the native side. When it's done, create a `mapping.json` file and paste the code below to apply fonts to UI Kitten components.
 
 ```json
 {
@@ -160,8 +160,8 @@ Then go to the `App.js` and add `customMapping` property:
 
 ```js
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, Layout, Button } from '@kittsune/components';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, Layout, Button } from '@ui-kitten/components';
 import { default as theme } from './theme.json'; // <-- Import app theme
 import { default as mapping } from './mapping.json'; // <-- Import app mapping
 
@@ -190,7 +190,7 @@ There are 13 text categories in Eva:
 - Captions: c1 and c2
 - Label.
 
-You may configure text categories with saving the consistency across Kittsune components by modifying `mapping.json`:
+You may configure text categories with saving the consistency across UI Kitten components by modifying `mapping.json`:
 
 ```json
 {

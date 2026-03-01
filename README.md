@@ -1,9 +1,9 @@
 
-# Kitsune 🦊
+# UI Kitten 🦊
 
 > **Modern React Native UI Library** — New Architecture Ready
 
-A modernized fork of [UI Kitten](https://github.com/akveo/react-native-ui-kitten), rebuilt for React Native's **New Architecture** (Fabric & TurboModules).
+UI Kitten v6 — rebuilt for React Native's **New Architecture** (Fabric & TurboModules), React 19, and Expo 54.
 
 ---
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Modal, Button, Card, Text } from '@kittsune/components';
+import { Modal, Button, Card, Text } from '@ui-kitten/components';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',

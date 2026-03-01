@@ -1,8 +1,8 @@
 import React from 'react';
 import type { Preview } from '@storybook/react-vite';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, IconRegistry } from '@kittsune/components';
-import { EvaIconsPack } from '@kittsune/eva-icons';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
 const preview: Preview = {
   parameters: {

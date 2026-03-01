@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Divider, Layout, Text } from '@kittsune/components';
+import { Divider, Layout, Text } from '@ui-kitten/components';
 
 const meta: Meta<typeof Divider> = {
   title: 'Components/Divider',

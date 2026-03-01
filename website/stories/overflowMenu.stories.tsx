@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { OverflowMenu, MenuItem, Button, Layout, IndexPath } from '@kittsune/components';
+import { OverflowMenu, MenuItem, Button, Layout, IndexPath } from '@ui-kitten/components';
 
 const meta: Meta<typeof OverflowMenu> = {
   title: 'Components/OverflowMenu',

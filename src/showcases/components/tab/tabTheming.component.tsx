@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, IconElement, Tab, TabBar } from '@kittsune/components';
+import { Icon, IconElement, Tab, TabBar } from '@ui-kitten/components';
 
 const PersonIcon = (props): IconElement => (
   <Icon

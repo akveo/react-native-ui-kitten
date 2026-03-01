@@ -2,27 +2,27 @@ import {
   CustomSchemaType,
   SchemaType,
   ThemeStyleType,
-} from '@kittsune/processor';
-import { SchemaProcessor } from '@kittsune/processor';
+} from '@ui-kitten/processor';
+import { SchemaProcessor } from '@ui-kitten/processor';
 import Fs from 'fs';
-import { deepMerge } from '@kittsune/mapping-base';
+import { deepMerge } from '@ui-kitten/mapping-base';
 import EvaConfigService, { EvaConfig } from './eva-config.service';
 import LogService from './log.service';
 import ProjectService from './project.service';
 
 const DEFAULT_CHECKSUM = 'default';
 const CACHE_FILE_NAME = 'generated.json';
-const CACHE_DIR = 'node_modules/.cache/kittsune';
+const CACHE_DIR = 'node_modules/.cache/ui-kitten';
 
 /**
  * Generates the require path for the cache file from the eva package index.
  * Uses relative path from eva package to cache directory.
  */
 const getCacheRequirePath = (evaPackage: string): string => {
-  // From node_modules/@kittsune/eva to node_modules/.cache/kittsune
-  // = ../../.cache/kittsune/eva-generated.json or material-generated.json
-  const packageName = evaPackage.replace('@kittsune/', '');
-  return `../../.cache/kittsune/${packageName}-generated.json`;
+  // From node_modules/@ui-kitten/eva to node_modules/.cache/ui-kitten
+  // = ../../.cache/ui-kitten/eva-generated.json or material-generated.json
+  const packageName = evaPackage.replace('@ui-kitten/', '');
+  return `../../.cache/ui-kitten/${packageName}-generated.json`;
 };
 
 const CACHE_EXPORT_SIGNATURE = (evaPackage: string): string =>
@@ -39,7 +39,7 @@ const RELATIVE_PATHS = {
     return `node_modules/${evaPackage}/index.js`;
   },
   cache: (evaPackage: string): string => {
-    const packageName = evaPackage.replace('@kittsune/', '');
+    const packageName = evaPackage.replace('@ui-kitten/', '');
     return `${CACHE_DIR}/${packageName}-${CACHE_FILE_NAME}`;
   },
   cacheDir: (): string => {
@@ -55,11 +55,11 @@ interface EvaCache {
 }
 
 /**
- * Generates styles for `@kittsune/*` package specified in EvaConfig
+ * Generates styles for `@ui-kitten/*` package specified in EvaConfig
  *
  * @see EvaConfig
  *
- * 1. Finds installed `@kittsune/*` packages.
+ * 1. Finds installed `@ui-kitten/*` packages.
  * Will warn if there is no valid eva mapping packages installed and do nothing.
  *
  * @see EvaConfigService.MAPPING_PACKAGE_NAMES
@@ -71,8 +71,8 @@ interface EvaCache {
  * @see {CACHE_FILE_NAME}
  * @see {EvaCache}
  *
- * E.g, if `evaPackage` is `@kittsune/eva`:
- * The result will be stored at `./node_modules/.cache/kittsune/eva-generated.json`
+ * E.g, if `evaPackage` is `@ui-kitten/eva`:
+ * The result will be stored at `./node_modules/.cache/ui-kitten/eva-generated.json`
  *
  * This location is preferred over storing in the package directory because:
  * - It doesn't modify installed packages (cleaner package management)

@@ -10,7 +10,7 @@ import {
   Select,
   SelectItem,
   Tooltip,
-} from '@kittsune/components';
+} from '@ui-kitten/components';
 
 const StarIcon = (props): IconElement => (
   <Icon

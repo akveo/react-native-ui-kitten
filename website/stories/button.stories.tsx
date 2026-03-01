@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Button } from '@kittsune/components';
+import { Button } from '@ui-kitten/components';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TopNavigation, TopNavigationAction, Icon } from '@kittsune/components';
+import { TopNavigation, TopNavigationAction, Icon } from '@ui-kitten/components';
 
 const meta: Meta<typeof TopNavigation> = {
   title: 'Components/TopNavigation',

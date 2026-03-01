@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Avatar, Button, Divider, Text } from '@kittsune/components';
+import { Avatar, Button, Divider, Text } from '@ui-kitten/components';
 
 export const DividerSimpleUsageShowcase = (): React.ReactElement => (
   <>

@@ -2,17 +2,17 @@
 id: runtime-theming
 title: Runtime Theming
 sidebar_label: Runtime Theming
-description: Kittsune supports 2 built-in Eva Design System color schemes - Light and Dark. It is possible to change the theme statically and dynamically during the runtime.
+description: UI Kitten supports 2 built-in Eva Design System color schemes - Light and Dark. It is possible to change the theme statically and dynamically during the runtime.
 keywords:
   - React Native
-  - Kittsune
+  - UI Kitten
   - runtime theming
   - Eva Design themes
 ---
 
 # Runtime Theming
 
-Kittsune supports 2 built-in Eva Design System color schemes - Light and Dark. It is both possible to change the theme statically and dynamically during the runtime.
+UI Kitten supports 2 built-in Eva Design System color schemes - Light and Dark. It is both possible to change the theme statically and dynamically during the runtime.
 
 :::note
 This guide uses some code snippets implemented in previous tutorials.
@@ -48,9 +48,9 @@ Open `App.js` and paste the code below.
 
 ```js
 import React from 'react';
-import * as eva from '@kittsune/eva';
-import { ApplicationProvider, IconRegistry } from '@kittsune/components';
-import { EvaIconsPack } from '@kittsune/eva-icons';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from './navigation.component';
 import { ThemeContext } from './theme-context';
 
@@ -92,7 +92,7 @@ Let's modify `home.component.js` to switch the theme by pressing a button.
 ```js
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { Button, Layout } from '@kittsune/components';
+import { Button, Layout } from '@ui-kitten/components';
 import { ThemeContext } from './theme-context';
 
 export const HomeScreen = ({ navigation }) => {

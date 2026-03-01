@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Layout, Text, Divider } from '@kittsune/components';
+import { Button, Layout, Text, Divider } from '@ui-kitten/components';
 import { AppMapping, AppTheme, ThemeContext } from '../services/theme.service';
 
 // Basic components
@@ -108,7 +108,7 @@ export const AppNavigator = (): React.ReactElement => {
     <Layout style={styles.container}>
       <ThemeSwitchHeader />
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text category="h1" style={styles.title}>Kitsune Components</Text>
+        <Text category="h1" style={styles.title}>UI Kitten Components</Text>
         <Text category="p1" style={styles.subtitle}>Component Showcase</Text>
 
         {/* Basic Components */}

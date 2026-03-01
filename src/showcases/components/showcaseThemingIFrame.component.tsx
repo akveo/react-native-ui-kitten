@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider, ThemeProviderProps, ThemeType } from '@kittsune/components';
+import { ThemeProvider, ThemeProviderProps, ThemeType } from '@ui-kitten/components';
 import { ShowcaseIFrame } from './showcaseIFrame.component';
 import { ThemeContext } from '../services/theme.service';
 import { themes } from '../app/themes';

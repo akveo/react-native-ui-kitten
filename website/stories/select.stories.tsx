@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Select, SelectItem } from '@kittsune/components';
+import { Select, SelectItem } from '@ui-kitten/components';
 
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',

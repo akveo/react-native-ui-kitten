@@ -1,12 +1,6 @@
-Kittsune
-Copyright (c) 2024-2026 Vlad Bataev and Kittsune Contributors
-
-This project is a fork of React Native UI Kitten
-(https://github.com/akveo/react-native-ui-kitten)
-
-Original work:
-  Copyright (c) 2016 akveo.com
-  Licensed under the MIT License
+UI Kitten
+Copyright (c) 2016 akveo.com
+Copyright (c) 2024-2026 Vlad Bataev and UI Kitten Contributors
 
 The Eva Design System processor (src/processor/) is derived from
 @eva-design/processor, Copyright (c) akveo.com, licensed under the MIT License.

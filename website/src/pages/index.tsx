@@ -15,7 +15,7 @@ function HeroBanner() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/getting-started/what-is-kittsune">
+            to="/docs/getting-started/what-is-ui-kitten">
             Get Started
           </Link>
           <Link
@@ -76,7 +76,7 @@ function QuickStart() {
         <h2>Quick Start</h2>
         <pre className={styles.codeBlock}>
           <code>
-            {`npm i @kittsune/components @kittsune/eva react-native-svg`}
+            {`npm i @ui-kitten/components @ui-kitten/eva react-native-svg`}
           </code>
         </pre>
       </div>

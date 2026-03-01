@@ -1,7 +1,7 @@
 {
-  "name": "@kittsune/metro-config",
-  "description": "Kittsune config for Metro Bundler",
-  "version": "2.0.0",
+  "name": "@ui-kitten/metro-config",
+  "description": "UI Kitten config for Metro Bundler",
+  "version": "6.0.0-beta.0",
   "main": "./lib/module/index.js",
   "types": "./index.ts",
   "react-native": "./index.ts",
@@ -25,19 +25,19 @@
     "!**/*.spec.*",
     "!**/tests"
   ],
-  "author": "Kitsune Contributors",
+  "author": "UI Kitten Contributors",
   "license": "MIT",
-  "homepage": "https://github.com/bataevvlad/kittsune#readme",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bataevvlad/kittsune.git"
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
   },
   "bugs": {
-    "url": "https://github.com/bataevvlad/kittsune/issues"
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
   "keywords": [
     "react-native",
-    "kittsune",
+    "ui-kitten",
     "metro",
     "bundler"
   ],
@@ -45,15 +45,15 @@
     "access": "public"
   },
   "bin": {
-    "kittsune": "./bin/kittsune"
+    "ui-kitten": "./bin/ui-kitten"
   },
   "scripts": {
     "build": "bob build",
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@kittsune/mapping-base": "^2.0.0",
-    "@kittsune/processor": "^2.0.0",
+    "@ui-kitten/mapping-base": "^6.0.0-beta.0",
+    "@ui-kitten/processor": "^6.0.0-beta.0",
     "chalk": "^3.0.0",
     "commander": "^4.1.1"
   },

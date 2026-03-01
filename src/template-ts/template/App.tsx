@@ -22,9 +22,9 @@ import {
   IconRegistry,
   Layout,
   Text,
-} from '@kittsune/components';
-import { EvaIconsPack } from '@kittsune/eva-icons';
-import * as eva from '@kittsune/eva';
+} from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import * as eva from '@ui-kitten/eva';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)

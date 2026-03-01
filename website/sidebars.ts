@@ -6,7 +6,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Getting Started',
       items: [
-        'getting-started/what-is-kittsune',
+        'getting-started/what-is-ui-kitten',
         'getting-started/where-to-start',
       ],
     },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Spinner, Layout, Text } from '@kittsune/components';
+import { Spinner, Layout, Text } from '@ui-kitten/components';
 
 const STATUSES = ['primary', 'success', 'info', 'warning', 'danger', 'basic'] as const;
 const SIZES = ['tiny', 'small', 'medium', 'large', 'giant'] as const;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ViewProps } from 'react-native';
-import { Button, Card, Layout, Text } from '@kittsune/components';
+import { Button, Card, Layout, Text } from '@ui-kitten/components';
 
 const Header = (props: ViewProps): React.ReactElement => (
   <View {...props}>
