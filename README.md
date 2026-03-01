@@ -67,7 +67,7 @@ Refer to the [Documentation][link:doc-where-start] for more options to start.
 - [Eva Icons][link:eva-icons] - 480+ beautiful Open Source icons
 
 ## From Developers
-Made with :heart: by [Akveo team][link:akveo-homepage] and [UI Kitten Contributors](https://github.com/akveo/react-native-ui-kitten/graphs/contributors). Follow us on [Twitter][link:akveo-twitter] to get the latest news first!
+Originally created by [Akveo team][link:akveo-homepage]. v6 rewrite and current maintenance by [Vlad Bataev](https://github.com/bataevvlad) and [UI Kitten Contributors](https://github.com/akveo/react-native-ui-kitten/graphs/contributors).
 We're always happy to receive your feedback!
 
 [badge:license]: https://img.shields.io/npm/l/react-native-ui-kitten.svg
