@@ -1,7 +1,7 @@
 name: Release
 on:
   push:
-    branches: [master, next]
+    branches: [master, v6-beta]
 
 jobs:
   release:
