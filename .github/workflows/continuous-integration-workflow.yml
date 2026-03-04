@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: [master, v6-beta]
+    branches: [master, next]
   pull_request:
-    branches: [master, v6-beta]
+    branches: [master, next]
 
 jobs:
   build-and-test:
