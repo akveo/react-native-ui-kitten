@@ -9219,29 +9219,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kittsune-docs@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "kittsune-docs@workspace:."
-  dependencies:
-    "@docusaurus/core": ^3.7.0
-    "@docusaurus/module-type-aliases": ^3.7.0
-    "@docusaurus/preset-classic": ^3.7.0
-    "@docusaurus/tsconfig": ^3.7.0
-    "@mdx-js/react": ^3.0.0
-    "@storybook/react-native-web-vite": ^10.2.0
-    clsx: ^2.1.0
-    prism-react-renderer: ^2.3.0
-    react: 19.1.0
-    react-dom: 19.1.0
-    react-native-svg: 15.12.1
-    react-native-svg-web: ^1.0.9
-    react-native-web: ~0.21.2
-    storybook: ^10.2.0
-    typescript: ~5.3.0
-    vite: ^6.0.0
-  languageName: unknown
-  linkType: soft
-
 "kleur@npm:^3.0.3":
   version: 3.0.3
   resolution: "kleur@npm:3.0.3"
@@ -14014,6 +13991,29 @@ __metadata:
   checksum: a57c258ea3a242ade7601460ddf9a7e990d8d8bffc15df2ca87057a81993ca19f5045432c744d07bf2d9f280665d84aebb08630c5af5bea3922fdbe8f6fe6cb0
   languageName: node
   linkType: hard
+
+"ui-kitten-docs@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "ui-kitten-docs@workspace:."
+  dependencies:
+    "@docusaurus/core": ^3.7.0
+    "@docusaurus/module-type-aliases": ^3.7.0
+    "@docusaurus/preset-classic": ^3.7.0
+    "@docusaurus/tsconfig": ^3.7.0
+    "@mdx-js/react": ^3.0.0
+    "@storybook/react-native-web-vite": ^10.2.0
+    clsx: ^2.1.0
+    prism-react-renderer: ^2.3.0
+    react: 19.1.0
+    react-dom: 19.1.0
+    react-native-svg: 15.12.1
+    react-native-svg-web: ^1.0.9
+    react-native-web: ~0.21.2
+    storybook: ^10.2.0
+    typescript: ~5.3.0
+    vite: ^6.0.0
+  languageName: unknown
+  linkType: soft
 
 "undici-types@npm:~7.16.0":
   version: 7.16.0
