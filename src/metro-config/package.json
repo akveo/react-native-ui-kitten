@@ -1,7 +1,7 @@
 {
   "name": "@ui-cat/metro-config",
   "description": "UI Cat config for Metro Bundler",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "author": "akveo <contact@akveo.com>",
   "license": "MIT",
   "homepage": "https://github.com/ui-cat/react-native-ui-cat#readme",

@@ -1,7 +1,7 @@
 {
   "name": "@ui-cat/components",
   "description": "React Native components based on Eva Design System",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "license": "MIT",
   "homepage": "https://github.com/ui-cat/react-native-ui-cat#readme",
   "repository": {
