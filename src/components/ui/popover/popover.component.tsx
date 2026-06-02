@@ -109,6 +109,7 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   static defaultProps: Partial<PopoverProps> = {
     placement: PopoverPlacements.BOTTOM,
+    supportedOrientations: ['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right'],
   };
 
   public state: State = {
