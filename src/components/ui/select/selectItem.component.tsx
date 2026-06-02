@@ -169,12 +169,13 @@ export class SelectItem extends React.Component<SelectItemProps> {
   };
 
   public render(): TouchableWebElement {
-    const { eva, style, title, accessoryLeft, accessoryRight, ...touchableProps } = this.props;
+    const { eva, style, title, accessoryLeft, accessoryRight, disabled, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <TouchableWeb
         {...touchableProps}
+        disabled={disabled}
         style={[styles.container, evaStyle.container, style]}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}

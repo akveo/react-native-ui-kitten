@@ -256,6 +256,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       accessoryLeft,
       accessoryRight,
       testID,
+      disabled,
       ...textInputProps
     } = this.props;
 
@@ -284,7 +285,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             {...this.webEventResponder.eventHandlers}
             testID={`@${testID}/input`}
             style={[evaStyle.text, styles.text, platformStyles.text, textStyle]}
-            editable={!textInputProps.disabled}
+            editable={!disabled}
             onFocus={this.onTextFieldFocus}
             onBlur={this.onTextFieldBlur}
           />

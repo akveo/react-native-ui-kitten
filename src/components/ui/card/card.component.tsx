@@ -82,11 +82,19 @@ export type CardElement = React.ReactElement<CardProps>;
 export class Card extends React.Component<CardProps> {
 
   private onPressIn = (event: GestureResponderEvent): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
     this.props.eva.dispatch([Interaction.ACTIVE]);
     this.props.onPressIn?.(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
     this.props.eva.dispatch([]);
     this.props.onPressOut?.(event);
   };
@@ -138,6 +146,7 @@ export class Card extends React.Component<CardProps> {
     return (
       <TouchableWeb
         {...touchableProps}
+        disabled={this.props.disabled}
         style={[styles.container, evaStyle.container, style]}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}

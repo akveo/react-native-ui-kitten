@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   Animated,
+  DimensionValue,
   LayoutChangeEvent,
   StyleSheet,
   View,
@@ -177,7 +178,7 @@ export class ProgressBar extends React.PureComponent<ProgressBarProps> {
       indicatorStyles.push(animationStyles);
     } else {
       const validProgress = this.clamp(progress);
-      const width = `${validProgress * 100}%`;
+      const width: DimensionValue = `${validProgress * 100}%`;
 
       indicatorStyles.push({ width });
     }

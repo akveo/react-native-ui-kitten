@@ -31,11 +31,20 @@ export type TouchableWithoutFeedbackElement = React.ReactElement<TouchableWithou
  */
 export class TouchableWithoutFeedback extends React.Component<TouchableWithoutFeedbackProps> {
 
+  private touchableRef = React.createRef<React.ElementRef<typeof TouchableOpacity>>();
+
+  /**
+   * Returns underlying host component ref (used by MeasureElement on web).
+   */
+  public getNode = (): unknown => {
+    return this.touchableRef.current;
+  };
+
   private createHitSlopInsets = (): Insets => {
     const flatStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});
 
-    // @ts-ignore: `width` is restricted to be a number
-    const value: number = 40 - flatStyle.height || 0;
+    const height: number = typeof flatStyle.height === 'number' ? flatStyle.height : 0;
+    const value: number = Math.max(0, 40 - height);
 
     return {
       left: value,
@@ -48,8 +57,9 @@ export class TouchableWithoutFeedback extends React.Component<TouchableWithoutFe
   public render(): React.ReactElement {
     return (
       <TouchableOpacity
+        ref={this.touchableRef}
         activeOpacity={1.0}
-        hitSlop={this.props.useDefaultHitSlop && this.createHitSlopInsets()}
+        hitSlop={this.props.useDefaultHitSlop ? this.createHitSlopInsets() : undefined}
         {...this.props}
       />
     );

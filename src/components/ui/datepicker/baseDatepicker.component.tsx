@@ -85,7 +85,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   public focus = (): void => {
-    this.setState({ visible: true }, this.onPickerVisible);
+    this.setPickerVisible();
   };
 
   public blur = (): void => {
@@ -193,17 +193,32 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   private setPickerVisible = (): void => {
-    this.setState({ visible: true }, this.onPickerVisible);
+    if (!this.state.visible) {
+      this.setState({ visible: true }, this.onPickerVisible);
+    }
   };
 
   private setPickerInvisible = (): void => {
-    this.setState({ visible: false }, this.onPickerInvisible);
+    if (this.state.visible) {
+      this.setState({ visible: false }, this.onPickerInvisible);
+    }
   };
 
-  private renderInputElement = (props, evaStyle): React.ReactElement => {
+  private renderInputElement = (
+    props: TouchableOpacityProps,
+    evaStyle: StyleType,
+  ): React.ReactElement => {
+    const {
+      disabled,
+      accessibilityLabel,
+      testID,
+    } = props;
+
     return (
       <TouchableWithoutFeedback
-        {...props}
+        disabled={disabled}
+        accessibilityLabel={accessibilityLabel}
+        testID={testID}
         style={[evaStyle.control, styles.control, this.props.controlStyle]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
@@ -216,7 +231,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         <FalsyText
           style={evaStyle.text}
           numberOfLines={1}
-          ellipsizeMode='tail'
+          ellipsizeMode="tail"
           component={this.getComponentTitle()}
         />
         <FalsyFC
@@ -226,6 +241,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       </TouchableWithoutFeedback>
     );
   };
+
 
   public render(): React.ReactElement<ViewProps> {
     const {

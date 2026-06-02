@@ -123,13 +123,30 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   };
 
   private renderContentElement = (): React.ReactElement<ViewProps> => {
+    const {
+      children,
+      style,
+      visible,
+      shouldUseContainer,
+      onBackdropPress,
+      backdropStyle,
+      animationType,
+      hardwareAccelerated,
+      supportedOrientations,
+      onShow,
+      ...viewProps
+    } = this.props;
+
     return (
       <View
-        {...this.props}
-        style={[this.props.style, styles.modalView, this.contentFlexPosition]}
-      />
+        {...viewProps}
+        style={[style, styles.modalView, this.contentFlexPosition]}
+      >
+        {children}
+      </View>
     );
   };
+
 
   private renderMeasuringContentElement = (): MeasuringElement => {
     return (

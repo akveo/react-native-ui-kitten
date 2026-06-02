@@ -16,5 +16,5 @@ export interface IconPack<T> {
 }
 
 export interface IconProvider<T> {
-  toReactElement(props?: T): React.ReactElement<T>;
+  toReactElement(props?: T): React.ReactElement<T> | null;
 }

@@ -24,7 +24,7 @@
     "moment": "^2.24.0"
   },
   "peerDependencies": {
-    "@ui-cat/components": "5.3.1",
+    "@ui-cat/components": "5.4.0",
     "moment": "^2.24.0"
   },
   "sideEffects": false

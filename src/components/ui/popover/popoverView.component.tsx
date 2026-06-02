@@ -40,6 +40,16 @@ const INDICATOR_WIDTH = 6;
 
 @styled('Popover')
 export class PopoverView extends React.Component<PopoverViewProps> {
+
+  private containerRef = React.createRef<React.ElementRef<typeof View>>();
+
+  /**
+   * Returns underlying host component ref (used by MeasureElement on web).
+   */
+  public getNode = (): unknown => {
+    return this.containerRef.current;
+  };
+
   private getComponentStyle = (source: StyleType): StyleType => {
     const { indicatorWidth, indicatorHeight, indicatorBackgroundColor, ...containerParameters } = source;
 
@@ -115,6 +125,7 @@ export class PopoverView extends React.Component<PopoverViewProps> {
 
     return (
       <View
+        ref={this.containerRef}
         style={[directionStyle.container, contentContainerStyle]}
         onLayout={onLayout}
       >

@@ -30,11 +30,21 @@ export type TouchableWebElement = React.ReactElement<TouchableWebProps>;
  */
 export class TouchableWeb extends React.Component<TouchableWebProps> {
 
+  private touchableRef = React.createRef<TouchableWithoutFeedback>();
+
+  /**
+   * Returns underlying host component ref (used by MeasureElement on web).
+   */
+  public getNode = (): unknown => {
+    return this.touchableRef.current?.getNode?.() ?? this.touchableRef.current;
+  };
+
   public render(): React.ReactElement {
     const { style, ...touchableProps } = this.props;
 
     return (
       <TouchableWithoutFeedback
+        ref={this.touchableRef}
         {...touchableProps}
         style={[styles.container, style]}
       />

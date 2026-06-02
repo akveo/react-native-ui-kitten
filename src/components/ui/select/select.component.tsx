@@ -59,7 +59,7 @@ type SelectStyledProps = Overwrite<StyledComponentProps, {
 export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   children?: ChildrenWithProps<SelectItemProps | SelectGroupProps>;
   selectedIndex?: IndexPath | IndexPath[];
-  onSelect?: (index: IndexPath | IndexPath[]) => void;
+  onSelect?: (index: IndexPath | IndexPath[] | null) => void;
   value?: RenderProp<TextProps> | React.ReactText;
   multiSelect?: boolean;
   placeholder?: RenderProp<TextProps> | React.ReactText;
@@ -259,7 +259,9 @@ export class Select extends React.Component<SelectProps, State> {
   };
 
   public clear = (): void => {
-    this.props.onSelect?.(null);
+    this.props.onSelect?.(
+      this.isMultiSelect ? [] : null
+    );
   };
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
@@ -474,7 +476,7 @@ export class Select extends React.Component<SelectProps, State> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, label, caption, children, ...touchableProps } = this.props;
+    const { eva, style, label, caption, children, disabled, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -487,7 +489,7 @@ export class Select extends React.Component<SelectProps, State> {
           style={[styles.popover, evaStyle.popover]}
           visible={this.state.listVisible}
           fullWidth={true}
-          anchor={() => this.renderInputElement(touchableProps, evaStyle)}
+          anchor={() => this.renderInputElement({ ...touchableProps, disabled }, evaStyle)}
           onBackdropPress={this.onBackdropPress}
         >
           <List

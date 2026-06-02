@@ -20,12 +20,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "peerDependencies": {
+    "@ui-cat/components": "5.4.0",
+    "react-native-svg": "*"
+  },
   "dependencies": {
     "react-native-eva-icons": "^1.3.1"
-  },
-  "peerDependencies": {
-    "@ui-cat/components": "5.3.1",
-    "react-native-svg": "*"
   },
   "sideEffects": false
 }
