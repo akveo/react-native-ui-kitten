@@ -10,8 +10,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <a class="btn get-started" routerLink="docs">Get Started</a>
         <a class="btn" href="https://itunes.apple.com/us/app/kitten-tricks/id1246143230"
            target="_blank">IOS Demo</a>
-        <a class="btn" href="https://play.google.com/store/apps/details?id=com.akveo.kittenTricks"
-           target="_blank">Android Demo</a>
+        <a class="btn" href="https://github.com/akveo/kittenTricks"
+           target="_blank">Demo Source</a>
       </div>
       <div class="hero-features">
         <div class="hero-feature">
