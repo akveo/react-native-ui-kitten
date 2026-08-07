@@ -8,7 +8,6 @@ const srcRoot = path.resolve(__dirname, '..');
 
 const frameworkModules = [
   path.resolve(srcRoot, 'components'),
-  path.resolve(srcRoot, 'core'),
   path.resolve(srcRoot, 'date-fns'),
   path.resolve(srcRoot, 'eva-icons'),
   path.resolve(srcRoot, 'mapping-base'),
@@ -44,7 +43,6 @@ const extraNodeModules = {
 
   // Map @ui-kitten packages to local source
   '@ui-kitten/components': path.resolve(srcRoot, 'components'),
-  '@ui-kitten/core': path.resolve(srcRoot, 'core'),
   '@ui-kitten/eva-icons': path.resolve(srcRoot, 'eva-icons'),
   '@ui-kitten/date-fns': path.resolve(srcRoot, 'date-fns'),
   '@ui-kitten/moment': path.resolve(srcRoot, 'moment'),

@@ -3,7 +3,6 @@
   "tag": "beta",
   "initialVersions": {
     "@ui-kitten/components": "6.0.0-beta.0",
-    "@ui-kitten/core": "6.0.0-beta.0",
     "@ui-kitten/date-fns": "6.0.0-beta.0",
     "@ui-kitten/eva": "6.0.0-beta.0",
     "@ui-kitten/eva-icons": "6.0.0-beta.0",

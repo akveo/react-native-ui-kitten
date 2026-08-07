@@ -3818,15 +3818,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ui-kitten/core@workspace:src/core":
-  version: 0.0.0-use.local
-  resolution: "@ui-kitten/core@workspace:src/core"
-  peerDependencies:
-    react: ">=18.0.0"
-    react-native: ">=0.70.0"
-  languageName: unknown
-  linkType: soft
-
 "@ui-kitten/date-fns@workspace:src/date-fns":
   version: 0.0.0-use.local
   resolution: "@ui-kitten/date-fns@workspace:src/date-fns"

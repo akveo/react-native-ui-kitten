@@ -1,6 +1,5 @@
 ---
 "@ui-kitten/components": major
-"@ui-kitten/core": major
 "@ui-kitten/eva": major
 "@ui-kitten/eva-icons": major
 "@ui-kitten/processor": major
