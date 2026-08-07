@@ -16,6 +16,9 @@
     "@ui-kitten/template-ts": "6.0.0-beta.0"
   },
   "changesets": [
+    "declare-devsupport-subpath",
+    "export-component-ref-types",
+    "ship-type-definitions",
     "v6-beta-release"
   ]
 }
