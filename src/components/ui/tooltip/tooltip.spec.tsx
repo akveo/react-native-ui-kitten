@@ -48,8 +48,7 @@ describe('@tooltip: component checks', () => {
     jest.clearAllMocks();
   });
 
-  const TestTooltip = React.forwardRef((props: Partial<TooltipProps>,
-    ref: React.Ref<Tooltip>) => {
+  const TestTooltip = (props: Partial<TooltipProps>): React.ReactElement => {
 
     const [visible, setVisible] = React.useState(props.visible || false);
 
@@ -63,7 +62,6 @@ describe('@tooltip: component checks', () => {
         theme={light}
       >
         <Tooltip
-          ref={ref}
           visible={visible}
           anchor={() => (
             <Button
@@ -78,7 +76,7 @@ describe('@tooltip: component checks', () => {
         </Tooltip>
       </ApplicationProvider>
     );
-  });
+  };
 
   TestTooltip.displayName = 'TestTooltip';
 

@@ -10,6 +10,7 @@ import {
   Button,
   StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -62,7 +63,7 @@ describe('@popover: component checks', () => {
     findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
 
-  const TestPopover = React.forwardRef((props: Partial<PopoverProps>, ref: React.Ref<Popover>) => {
+  const TestPopover = React.forwardRef((props: Partial<PopoverProps>, ref: React.Ref<View>) => {
     const [visible, setVisible] = React.useState(props.visible || false);
 
     const togglePopover = (): void => {

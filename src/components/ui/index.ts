@@ -3,6 +3,7 @@ export {
   Autocomplete,
   type AutocompleteProps,
   type AutocompleteElement,
+  type AutocompleteRef,
 } from './autocomplete/autocomplete.component';
 export {
   AutocompleteItem,
@@ -125,6 +126,7 @@ export {
   Input,
   type InputProps,
   type InputElement,
+  type InputRef,
 } from './input/input.component';
 export {
   Layout,
@@ -135,6 +137,7 @@ export {
   List,
   type ListProps,
   type ListElement,
+  type ListRef,
 } from './list/list.component';
 export {
   ListItem,

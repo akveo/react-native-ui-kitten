@@ -26,6 +26,7 @@ import { ApplicationProvider } from '../../theme';
 import {
   Datepicker,
   DatepickerProps,
+  DatepickerRef,
 } from './datepicker.component';
 import { Calendar } from '../calendar/calendar.component';
 import { CalendarViewModes } from '../calendar/type';
@@ -49,7 +50,7 @@ describe('@datepicker: component checks', () => {
     jest.clearAllMocks();
   });
 
-  const TestDatepicker = React.forwardRef((props: Partial<DatepickerProps>, ref: React.Ref<Datepicker>) => {
+  const TestDatepicker = React.forwardRef((props: Partial<DatepickerProps>, ref: React.Ref<DatepickerRef>) => {
     const [date, setDate] = React.useState(props.date);
 
     const onSelect = (nextDate: Date): void => {
@@ -393,7 +394,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should show calendar by calling `focus` with ref', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     const component = render(
       <TestDatepicker ref={componentRef} />,
@@ -406,7 +407,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should hide calendar by calling `blur` with ref', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     const component = render(
       <TestDatepicker ref={componentRef} />,
@@ -426,7 +427,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should return false if calendar not visible by calling `isFocused` with ref', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     render(
       <TestDatepicker ref={componentRef} />,
@@ -436,7 +437,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should return true if calendar visible by calling `isFocused` with ref', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     render(
       <TestDatepicker ref={componentRef} />,
@@ -449,7 +450,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should call onSelect with null when calling `clear` with ref', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
     const onSelect = jest.fn();
 
     render(
@@ -497,7 +498,7 @@ describe('@datepicker: component checks', () => {
 
   it('should show the selected date on load provided by date prop', async () => {
     const date = new Date(2021, 2, 1);
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     render(
       <TestDatepicker
@@ -518,7 +519,7 @@ describe('@datepicker: component checks', () => {
 
   it('should show the specific date on load provided by initialVisibleDate prop', async () => {
     const initialDate = new Date(2021, 2, 1);
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     render(
       <TestDatepicker
@@ -539,7 +540,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should scroll to current month when scrollToToday called', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     render(
       <TestDatepicker
@@ -562,7 +563,7 @@ describe('@datepicker: component checks', () => {
 
   it('should scroll to the specific date when scrollToDate called', async () => {
     const dateToScroll = new Date(2021, 2, 1);
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     render(
       <TestDatepicker
@@ -584,7 +585,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should render custom left arrow', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     const onVisibleDateChange = jest.fn();
 
@@ -622,7 +623,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should render custom right arrow', async () => {
-    const componentRef: React.RefObject<Datepicker> = React.createRef();
+    const componentRef: React.RefObject<DatepickerRef> = React.createRef();
 
     const onVisibleDateChange = jest.fn();
 

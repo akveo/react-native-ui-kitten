@@ -24,11 +24,12 @@ import { ApplicationProvider } from '../../theme';
 import {
   Input,
   InputProps,
+  InputRef,
 } from './input.component';
 
 describe('@input: component checks', () => {
 
-  const TestInput = React.forwardRef((props: InputProps, ref: React.Ref<Input>) => (
+  const TestInput = React.forwardRef((props: InputProps, ref: React.Ref<InputRef>) => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}
@@ -43,7 +44,7 @@ describe('@input: component checks', () => {
   TestInput.displayName = 'TestInput';
 
   it('should be able to call focus via ref', () => {
-    const componentRef: React.RefObject<Input> = React.createRef();
+    const componentRef: React.RefObject<InputRef> = React.createRef();
     render(
       <TestInput ref={componentRef} />,
     );
@@ -52,7 +53,7 @@ describe('@input: component checks', () => {
   });
 
   it('should be able to call blur via ref', () => {
-    const componentRef: React.RefObject<Input> = React.createRef();
+    const componentRef: React.RefObject<InputRef> = React.createRef();
     render(
       <TestInput ref={componentRef} />,
     );
@@ -61,7 +62,7 @@ describe('@input: component checks', () => {
   });
 
   it('should be able to call isFocused via ref', () => {
-    const componentRef: React.RefObject<Input> = React.createRef();
+    const componentRef: React.RefObject<InputRef> = React.createRef();
     render(
       <TestInput ref={componentRef} />,
     );
@@ -70,7 +71,7 @@ describe('@input: component checks', () => {
   });
 
   it('should be able to call clear via ref', () => {
-    const componentRef: React.RefObject<Input> = React.createRef();
+    const componentRef: React.RefObject<InputRef> = React.createRef();
     render(
       <TestInput ref={componentRef} />,
     );

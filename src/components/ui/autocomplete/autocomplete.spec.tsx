@@ -26,6 +26,7 @@ import { ApplicationProvider } from '../../theme';
 import {
   Autocomplete,
   AutocompleteProps,
+  AutocompleteRef,
 } from './autocomplete.component';
 import {
   AutocompleteItem,
@@ -174,7 +175,7 @@ describe('@autocomplete: component checks', () => {
 
   const filter = (item, query): { title: string } => item.title.toLowerCase().includes(query.toLowerCase());
 
-  const TestAutocomplete = React.forwardRef((props: Partial<AutocompleteProps>, ref: React.Ref<Autocomplete>) => {
+  const TestAutocomplete = React.forwardRef((props: Partial<AutocompleteProps>, ref: React.Ref<AutocompleteRef>) => {
     const [value, setValue] = React.useState(props.value);
     const [data, setData] = React.useState(movies);
 
@@ -342,7 +343,7 @@ describe('@autocomplete: component checks', () => {
   });
 
   it('should be able to call focus with ref', async () => {
-    const componentRef: React.RefObject<Autocomplete> = React.createRef();
+    const componentRef: React.RefObject<AutocompleteRef> = React.createRef();
     render(
       <TestAutocomplete ref={componentRef} />,
     );
@@ -352,7 +353,7 @@ describe('@autocomplete: component checks', () => {
   });
 
   it('should be able to call blur with ref', async () => {
-    const componentRef: React.RefObject<Autocomplete> = React.createRef();
+    const componentRef: React.RefObject<AutocompleteRef> = React.createRef();
     render(
       <TestAutocomplete ref={componentRef} />,
     );
@@ -362,7 +363,7 @@ describe('@autocomplete: component checks', () => {
   });
 
   it('should be able to call isFocused with ref', () => {
-    const componentRef: React.RefObject<Autocomplete> = React.createRef();
+    const componentRef: React.RefObject<AutocompleteRef> = React.createRef();
     render(
       <TestAutocomplete ref={componentRef} />,
     );
@@ -372,7 +373,7 @@ describe('@autocomplete: component checks', () => {
   });
 
   it('should be able to call clear with ref', () => {
-    const componentRef: React.RefObject<Autocomplete> = React.createRef();
+    const componentRef: React.RefObject<AutocompleteRef> = React.createRef();
     render(
       <TestAutocomplete ref={componentRef} />,
     );

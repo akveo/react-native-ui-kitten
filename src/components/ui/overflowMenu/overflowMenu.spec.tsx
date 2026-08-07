@@ -57,8 +57,7 @@ describe('@overflow-menu: component checks', () => {
     findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
 
-  const TestOverflowMenu = React.forwardRef((props: Partial<OverflowMenuProps>,
-    ref: React.Ref<OverflowMenu>) => {
+  const TestOverflowMenu = (props: Partial<OverflowMenuProps>): React.ReactElement => {
 
     const [visible, setVisible] = React.useState(props.visible || false);
 
@@ -72,7 +71,6 @@ describe('@overflow-menu: component checks', () => {
         theme={light}
       >
         <OverflowMenu
-          ref={ref}
           visible={visible}
           anchor={() => (
             <Button
@@ -88,7 +86,7 @@ describe('@overflow-menu: component checks', () => {
         </OverflowMenu>
       </ApplicationProvider>
     );
-  });
+  };
 
   TestOverflowMenu.displayName = 'TestOverflowMenu';
 

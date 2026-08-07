@@ -27,6 +27,7 @@ import { ApplicationProvider } from '../../theme';
 import {
   Select,
   SelectProps,
+  SelectRef,
 } from './select.component';
 import { SelectGroup } from './selectGroup.component';
 import {
@@ -155,7 +156,7 @@ I love Babel
 
 describe('@select: component checks', () => {
 
-  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
+  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<SelectRef>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onSelect = (index: IndexPath | IndexPath[]): void => {
@@ -513,7 +514,7 @@ I love Babel
   });
 
   it('should be able to call focus with ref', async () => {
-    const componentRef: React.RefObject<Select> = React.createRef();
+    const componentRef: React.RefObject<SelectRef> = React.createRef();
     render(
       <TestSelect ref={componentRef} />,
     );
@@ -523,7 +524,7 @@ I love Babel
   });
 
   it('should be able to call blur with ref', async () => {
-    const componentRef: React.RefObject<Select> = React.createRef();
+    const componentRef: React.RefObject<SelectRef> = React.createRef();
     render(
       <TestSelect ref={componentRef} />,
     );
@@ -533,7 +534,7 @@ I love Babel
   });
 
   it('should be able to call isFocused with ref', () => {
-    const componentRef: React.RefObject<Select> = React.createRef();
+    const componentRef: React.RefObject<SelectRef> = React.createRef();
     render(
       <TestSelect ref={componentRef} />,
     );
@@ -543,7 +544,7 @@ I love Babel
   });
 
   it('should be able to call clear with ref', () => {
-    const componentRef: React.RefObject<Select> = React.createRef();
+    const componentRef: React.RefObject<SelectRef> = React.createRef();
     render(
       <TestSelect ref={componentRef} />,
     );
@@ -556,7 +557,7 @@ I love Babel
 
 describe('@select: component checks with groups', () => {
 
-  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
+  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<SelectRef>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onSelect = (index: IndexPath | IndexPath[]): void => {
