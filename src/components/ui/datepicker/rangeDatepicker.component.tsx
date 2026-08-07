@@ -26,6 +26,7 @@ import {
   RangeCalendarProps,
   RangeCalendarRef,
 } from '../calendar/rangeCalendar.component';
+import { DateService } from '../calendar/service/date.service';
 import { NativeDateService } from '../calendar/service/nativeDate.service';
 import { Popover } from '../popover/popover.component';
 import { PopoverPlacements } from '../popover/type';
@@ -206,7 +207,10 @@ function RangeDatepickerComponent<D = Date>(
   } = props;
 
   const { style: evaStyle, dispatch } = useStyled('Datepicker', { status, size });
-  const dateService = useMemo(() => dateServiceProp || new NativeDateService(), [dateServiceProp]);
+  const dateService = useMemo<DateService<D>>(
+    () => dateServiceProp || (new NativeDateService() as unknown as DateService<D>),
+    [dateServiceProp],
+  );
   const calendarRef = useRef<RangeCalendarRef<D>>(null);
 
   const {
@@ -246,7 +250,7 @@ function RangeDatepickerComponent<D = Date>(
     getCalendarVisibleDate,
   }), [focus, blur, isFocused, clear, scrollToToday, scrollToDate, getCalendarVisibleDate]);
 
-  const getComponentTitle = useCallback((): RenderProp<TextProps> | React.ReactText => {
+  const getComponentTitle = useCallback((): RenderProp<TextProps> | string | number => {
     const { startDate, endDate } = range;
 
     if (startDate || endDate) {

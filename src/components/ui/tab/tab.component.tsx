@@ -30,7 +30,7 @@ import { TextProps } from '../text/text.component';
 
 export interface TabProps extends TouchableWebProps {
   children?: React.ReactElement;
-  title?: RenderProp<TextProps> | React.ReactText;
+  title?: RenderProp<TextProps> | string | number;
   icon?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;

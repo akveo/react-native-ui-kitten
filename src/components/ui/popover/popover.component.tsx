@@ -290,7 +290,7 @@ export const Popover = forwardRef<View, PopoverProps>(({
 
   // Render helpers
   const renderContentElement = (): React.ReactElement => {
-    const contentElement = children as React.ReactElement;
+    const contentElement = children as React.ReactElement<{ style?: StyleProp<ViewStyle> }>;
     const fullWidthStyle = { width: childFrame.size.width };
 
     return React.cloneElement(contentElement, {

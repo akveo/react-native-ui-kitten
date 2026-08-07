@@ -8,6 +8,7 @@
 import React from 'react';
 import {
   findNodeHandle,
+  LayoutChangeEvent,
   Platform,
   UIManager,
   StatusBar,
@@ -18,7 +19,10 @@ export interface MeasureElementProps {
   force?: boolean;
   shouldUseTopInsets?: boolean;
   onMeasure: (frame: Frame) => void;
-  children: React.ReactElement;
+  children: React.ReactElement<{
+    ref?: React.Ref<unknown>;
+    onLayout?: (_event: LayoutChangeEvent) => void;
+  }>;
 }
 
 export type MeasuringElement = React.ReactElement;

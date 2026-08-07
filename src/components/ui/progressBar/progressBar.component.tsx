@@ -158,7 +158,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       indicatorStyles.push(animationStyles);
     } else {
       const validProgress = clamp(progress);
-      const width = `${validProgress * 100}%`;
+      const width = `${validProgress * 100}%` as `${number}%`;
       indicatorStyles.push({ width });
     }
 

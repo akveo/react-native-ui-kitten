@@ -42,7 +42,7 @@ import {
 type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
 export interface CheckBoxProps extends TouchableWebPropsWithoutChildren {
-  children?: RenderProp<TextProps> | React.ReactText;
+  children?: RenderProp<TextProps> | string | number;
   checked?: boolean;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
   indeterminate?: boolean;

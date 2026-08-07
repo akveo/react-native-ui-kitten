@@ -23,7 +23,7 @@ import { PopoverIndicator } from '../popover/popoverIndicator.component';
 import { TextProps } from '../text/text.component';
 
 type TooltipPopoverProps = Overwrite<PopoverProps, {
-  children: RenderProp<TextProps> | React.ReactText;
+  children: RenderProp<TextProps> | string | number;
 }>;
 
 export interface TooltipProps extends TooltipPopoverProps {

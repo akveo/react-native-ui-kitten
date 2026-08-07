@@ -26,6 +26,7 @@ import {
   CalendarProps,
   CalendarRef,
 } from '../calendar/calendar.component';
+import { DateService } from '../calendar/service/date.service';
 import { NativeDateService } from '../calendar/service/nativeDate.service';
 import { Popover } from '../popover/popover.component';
 import { PopoverPlacements } from '../popover/type';
@@ -33,7 +34,8 @@ import { TextProps } from '../text/text.component';
 import { useDatepickerState } from './useDatepickerState';
 import { useDatepickerStyles } from './useDatepickerStyles';
 
-export interface DatepickerProps<D = Date> extends BaseDatepickerProps<D>, CalendarProps<D> {
+export interface DatepickerProps<D = Date>
+  extends BaseDatepickerProps<D>, Omit<CalendarProps<D>, 'onBlur' | 'onFocus'> {
   autoDismiss?: boolean;
 }
 
@@ -255,7 +257,10 @@ function DatepickerComponent<D = Date>(
   } = props;
 
   const { style: evaStyle, dispatch } = useStyled('Datepicker', { status, size });
-  const dateService = useMemo(() => dateServiceProp || new NativeDateService(), [dateServiceProp]);
+  const dateService = useMemo<DateService<D>>(
+    () => dateServiceProp || (new NativeDateService() as unknown as DateService<D>),
+    [dateServiceProp],
+  );
   const calendarRef = useRef<CalendarRef<D>>(null);
 
   const {
@@ -295,7 +300,7 @@ function DatepickerComponent<D = Date>(
     getCalendarVisibleDate,
   }), [focus, blur, isFocused, clear, scrollToToday, scrollToDate, getCalendarVisibleDate]);
 
-  const getComponentTitle = useCallback((): RenderProp<TextProps> | React.ReactText => {
+  const getComponentTitle = useCallback((): RenderProp<TextProps> | string | number => {
     if (date) {
       return dateService.format(date, null);
     }

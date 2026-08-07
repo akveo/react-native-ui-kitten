@@ -17,7 +17,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-type ChildElement = React.ReactElement;
+type ChildElement = React.ReactElement<{ style?: StyleProp<ViewStyle> }>;
 type ChildrenProp = ChildElement | ChildElement[] | React.ReactNode;
 
 export interface BackdropPresentingConfig {

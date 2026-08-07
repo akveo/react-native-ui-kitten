@@ -6,7 +6,7 @@ import {
 } from '../../../ui/text/text.component';
 
 export interface FalsyTextProps extends Omit<TextProps, 'children'> {
-  component?: RenderProp<TextProps> | React.ReactText;
+  component?: RenderProp<TextProps> | string | number;
 }
 
 /**

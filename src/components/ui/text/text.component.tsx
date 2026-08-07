@@ -16,7 +16,7 @@ import {
 } from '../../devsupport';
 import { useStyled } from '../../theme';
 
-type ChildElement = React.ReactText | TextElement;
+type ChildElement = string | number | TextElement;
 
 export interface TextProps extends RNTextProps {
   children?: ChildElement | ChildElement[];

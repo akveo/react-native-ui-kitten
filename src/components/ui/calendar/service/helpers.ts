@@ -6,7 +6,7 @@
  */
 
 export const batch = <T>(target: T[], batchSize: number, offset = 0): T[][] => {
-  return target.reduce((res, item, index): T[] => {
+  return target.reduce<T[][]>((res, item, index) => {
     const chunkIndex = Math.floor((index + offset) / batchSize);
     if (!res[chunkIndex]) {
       res[chunkIndex] = [];

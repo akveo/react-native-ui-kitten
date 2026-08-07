@@ -346,7 +346,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     }
   };
 
-  private renderDayIfNeeded = (item: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+  private renderDayIfNeeded = (item: CalendarDateInfo<D>, style: StyleType): React.ReactElement => {
     const shouldRender: boolean = !item.bounding || this.props.boundingMonth;
 
     if (shouldRender) {

@@ -26,8 +26,8 @@ import { TextProps } from '../text/text.component';
 type AlignmentProp = 'start' | 'center';
 
 export interface TopNavigationProps extends ViewProps {
-  title?: RenderProp<TextProps> | React.ReactText;
-  subtitle?: RenderProp<TextProps> | React.ReactText;
+  title?: RenderProp<TextProps> | string | number;
+  subtitle?: RenderProp<TextProps> | string | number;
   accessoryLeft?: () => React.ReactElement;
   accessoryRight?: () => React.ReactElement;
   alignment?: AlignmentProp;

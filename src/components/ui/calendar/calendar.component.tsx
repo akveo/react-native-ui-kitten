@@ -15,7 +15,7 @@ import { CalendarMonthHeader } from './components/calendarMonthHeader.component'
 import { CalendarPicker } from './components/picker/calendarPicker.component';
 import { CalendarDateContent, CalendarDateContentElement } from './components/calendarDateContent.component';
 import { Divider } from '../divider/divider.component';
-import { CalendarDateInfo, CalendarViewModes } from './type';
+import { CalendarDateInfo, CalendarViewMode, CalendarViewModes } from './type';
 import { TranslationWidth } from './i18n/type';
 import { DateService } from './service/date.service';
 import { NativeDateService } from './service/nativeDate.service';
@@ -38,7 +38,7 @@ export interface CalendarRef<D = Date> {
   scrollToToday: () => void;
   scrollToDate: (date: D) => void;
   getVisibleDate: () => D;
-  getViewMode: () => string;
+  getViewMode: () => CalendarViewMode;
   getPickerDate: () => D;
 }
 
@@ -368,7 +368,7 @@ function CalendarComponent<D = Date>(
     );
   }, [dateService]);
 
-  const renderDayIfNeeded = useCallback((item: CalendarDateInfo<D>, cellStyle: StyleType): CalendarDateContentElement => {
+  const renderDayIfNeeded = useCallback((item: CalendarDateInfo<D>, cellStyle: StyleType): React.ReactElement => {
     const shouldRender = !item.bounding || boundingMonth;
     if (shouldRender) {
       const renderSelector = renderDay || renderDayElement;

@@ -33,7 +33,7 @@ import {TextElement, TextProps} from '../text/text.component';
 type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
 export interface ButtonProps extends TouchableWebPropsWithoutChildren {
-  children?: RenderProp<TextProps> | TextElement;
+  children?: RenderProp<TextProps> | TextElement | string | number;
   /**
    * Function component to render to start of the text.
    * Expected to return an Image.

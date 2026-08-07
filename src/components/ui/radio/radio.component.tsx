@@ -33,7 +33,7 @@ import { TextProps } from '../text/text.component';
 type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
 export interface RadioProps extends TouchableWebPropsWithoutChildren {
-  children?: RenderProp<TextProps> | React.ReactText;
+  children?: RenderProp<TextProps> | string | number;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   status?: EvaStatus;

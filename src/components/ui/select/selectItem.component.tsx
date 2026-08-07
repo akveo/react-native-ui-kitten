@@ -45,7 +45,7 @@ export interface SelectItemProps extends TouchableSelectProps {
    * String, number or a function component to render within the item.
    * If it is a function, expected to return a Text.
    */
-  title?: RenderProp<TextProps> | React.ReactText;
+  title?: RenderProp<TextProps> | string | number;
   /**
    * Function component to render to start of the title.
    * Expected to return an Image.

@@ -55,11 +55,11 @@ export interface SelectProps extends TouchableWebProps {
   children?: ChildrenWithProps<SelectItemProps | SelectGroupProps>;
   selectedIndex?: IndexPath | IndexPath[];
   onSelect?: (index: IndexPath | IndexPath[]) => void;
-  value?: RenderProp<TextProps> | TextElement;
+  value?: RenderProp<TextProps> | TextElement | string | number;
   multiSelect?: boolean;
-  placeholder?: RenderProp<TextProps> | TextElement;
-  label?: RenderProp<TextProps> | TextElement;
-  caption?: RenderProp<TextProps> | TextElement;
+  placeholder?: RenderProp<TextProps> | TextElement | string | number;
+  label?: RenderProp<TextProps> | TextElement | string | number;
+  caption?: RenderProp<TextProps> | TextElement | string | number;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;

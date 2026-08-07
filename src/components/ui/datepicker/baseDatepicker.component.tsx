@@ -45,13 +45,13 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   BaseCalendarProps<D> {
 
   controlStyle?: StyleProp<ViewStyle>;
-  label?: RenderProp<TextProps> | TextElement;
-  caption?: RenderProp<TextProps> | TextElement;
+  label?: RenderProp<TextProps> | TextElement | string | number;
+  caption?: RenderProp<TextProps> | TextElement | string | number;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;
   size?: EvaInputSize;
-  placeholder?: RenderProp<TextProps> | TextElement | string;
+  placeholder?: RenderProp<TextProps> | TextElement | string | number;
   placement?: PopoverPlacement | string;
   backdropStyle?: StyleProp<ViewStyle>;
   onFocus?: () => void;
@@ -99,7 +99,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   public abstract clear(): void;
 
-  protected abstract getComponentTitle(): RenderProp<TextProps> | TextElement;
+  protected abstract getComponentTitle(): RenderProp<TextProps> | TextElement | string | number;
 
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
 

@@ -91,7 +91,13 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
     }
   }
 
-  const WrappingElement = (props: WrappingProps, ref: React.Ref<WrappedElementInstance>): WrappingElementType => {
+  const WrappingElement: React.ForwardRefRenderFunction<
+    WrappedElementInstance,
+    React.PropsWithoutRef<WrappingProps>
+  > = (
+    props,
+    ref,
+  ): WrappingElementType => {
     return (
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -102,7 +108,7 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
     );
   };
 
-  const ThemedComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement);
+  const ThemedComponent = React.forwardRef(WrappingElement);
 
   ThemedComponent.displayName = Component.displayName || Component.name;
 

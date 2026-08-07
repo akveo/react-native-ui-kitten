@@ -352,7 +352,7 @@ function RangeCalendarComponent<D = Date>(
     );
   }, [dateService]);
 
-  const renderDayIfNeeded = useCallback((item: CalendarDateInfo<D>, cellStyle: StyleType): CalendarDateContentElement => {
+  const renderDayIfNeeded = useCallback((item: CalendarDateInfo<D>, cellStyle: StyleType): React.ReactElement => {
     const shouldRender = !item.bounding || boundingMonth;
     if (shouldRender) {
       const renderSelector = renderDay || renderDayElement;

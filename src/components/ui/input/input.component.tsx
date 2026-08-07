@@ -69,12 +69,12 @@ export interface InputProps extends TextInputPropsWithoutChildren {
    * String, number or a function component to render above the input field.
    * If it is a function, expected to return a Text.
    */
-  label?: RenderProp<TextProps> | React.ReactText;
+  label?: RenderProp<TextProps> | string | number;
   /**
    * Function component to render below Input view.
    * Expected to return View.
    */
-  caption?: RenderProp<TextProps> | React.ReactText;
+  caption?: RenderProp<TextProps> | string | number;
   /**
    * Function component to render to start of the text.
    * Expected to return an Image.

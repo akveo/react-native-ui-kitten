@@ -8,7 +8,10 @@ export interface MenuItemDescriptor {
 
 export class MenuService {
 
-  public createDescriptorForElement = (element: React.ReactElement, index: number): MenuItemDescriptor => {
+  public createDescriptorForElement = (
+    element: React.ReactElement<{ children?: React.ReactNode }>,
+    index: number,
+  ): MenuItemDescriptor => {
     const groupIndices = React.Children.map(element.props.children, ((child: React.ReactElement, row: number) => {
       return new IndexPath(row, index);
     }));

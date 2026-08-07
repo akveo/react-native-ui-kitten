@@ -34,12 +34,12 @@ export interface ListItemProps extends TouchableWebProps {
    * String, number or a function component to render within the item.
    * If it is a function, expected to return a Text.
    */
-  title?: RenderProp<TextProps> | React.ReactText;
+  title?: RenderProp<TextProps> | string | number;
   /**
    * String, number or a function component to render within the item.
    * If it is a function, expected to return a Text.
    */
-  description?: RenderProp<TextProps> | React.ReactText;
+  description?: RenderProp<TextProps> | string | number;
   /**
    * Function component to render to start of the text.
    * Expected to return an Image.

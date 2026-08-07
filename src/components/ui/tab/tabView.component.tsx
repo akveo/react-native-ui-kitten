@@ -21,6 +21,7 @@ import { TabBar, TabBarRef } from './tabBar.component';
 import {
   ViewPager,
   ViewPagerProps,
+  ViewPagerRef,
 } from '../viewPager/viewPager.component';
 
 interface TabViewChildElement {
@@ -80,7 +81,7 @@ export const TabView: React.FC<TabViewProps> = ({
   shouldLoadComponent,
   ...viewProps
 }) => {
-  const viewPagerRef = useRef<ViewPager>(null);
+  const viewPagerRef = useRef<ViewPagerRef>(null);
   const tabBarRef = useRef<TabBarRef>(null);
 
   const onBarSelect = useCallback((index: number) => {
