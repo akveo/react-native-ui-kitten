@@ -33,7 +33,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * Navigation panel which slides from the side of the screen.
  * Drawer should contain DrawerItem or DrawerGroup components to provide a useful component.
  *
- * @extends React.Component
+ * @extends React.FC
  *
  * @property {ReactElement<DrawerItemProps> | ReactElement<DrawerItemProps>[]} children -
  * Items to be rendered within drawer.

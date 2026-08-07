@@ -42,7 +42,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * A versatile menu for navigation.
  * Menu should contain MenuItem or MenuGroup components to provide a useful component.
  *
- * @extends React.Component
+ * @extends React.FC
  *
  * @property {string} appearance - Appearance of the component.
  * Can be `default` or `noDivider`.

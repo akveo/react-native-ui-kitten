@@ -84,7 +84,7 @@ const CHEVRON_ANIM_DURATION = 200;
  * A dropdown menu for selecting options.
  * Select accepts SelectItem or SelectGroup components as children.
  *
- * @extends React.Component
+ * @extends React.FC
  *
  * @property {ReactElement<SelectItemProps> | ReactElement<SelectItemProps>[]} children -
  * Items to be rendered within the Select.

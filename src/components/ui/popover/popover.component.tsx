@@ -197,7 +197,7 @@ export function usePopoverMeasurement({
 /**
  * Displays a content positioned relative to another view.
  *
- * @extends React.Component
+ * @extends React.FC
  *
  * @property {boolean} visible - Whether content component is visible.
  * Defaults to false.

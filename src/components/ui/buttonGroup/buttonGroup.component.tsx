@@ -40,7 +40,7 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * A group of buttons with additional styles provided by Eva.
  * ButtonGroup should contain Button components to provide a usable component.
  *
- * @extends React.Component
+ * @extends React.FC
  *
  * @property {ReactElement<ButtonProps> | ReactElement<ButtonProps>[]} children -
  * Buttons to be rendered within the group.
