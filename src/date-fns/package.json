@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/date-fns",
   "description": "date-fns services for UI Kitten",
-  "version": "6.0.0-beta.0",
+  "version": "6.0.0-beta.1",
   "main": "./lib/module/index.js",
   "types": "./index.ts",
   "react-native": "./index.ts",
@@ -47,7 +47,7 @@
     "date-fns": "^3.0.0"
   },
   "peerDependencies": {
-    "@ui-kitten/components": "^6.0.0-beta.0",
+    "@ui-kitten/components": "^6.0.0-beta.1",
     "date-fns": ">=2.0.0"
   },
   "sideEffects": false,
