@@ -49,6 +49,7 @@
   },
   "scripts": {
     "build": "bob build",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
     "clean": "rm -rf lib"
   },
   "dependencies": {

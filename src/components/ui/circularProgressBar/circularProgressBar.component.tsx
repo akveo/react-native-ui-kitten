@@ -22,13 +22,13 @@ import {
   EvaStatus,
   RenderProp,
   FalsyFC,
-} from '@ui-kitten/components/devsupport';
+} from '../../devsupport';
 import {
-  IconProps,
   useStyled,
   StyleType,
-  Text,
-} from '@ui-kitten/components';
+} from '../../theme';
+import { IconProps } from '../icon/icon.component';
+import { Text } from '../text/text.component';
 import { CircularProgressBarAnimation, CircularProgressBarAnimationConfig } from './animation';
 
 interface IndicatorStyle {

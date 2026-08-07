@@ -13,6 +13,12 @@
       "source": "./index.ts",
       "default": "./lib/module/index.js"
     },
+    "./devsupport": {
+      "types": "./lib/typescript/devsupport/index.d.ts",
+      "react-native": "./devsupport/index.ts",
+      "source": "./devsupport/index.ts",
+      "default": "./lib/module/devsupport/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -45,6 +51,7 @@
   },
   "scripts": {
     "build": "bob build",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
     "clean": "rm -rf lib"
   },
   "dependencies": {

@@ -22,7 +22,7 @@ import {
   Point,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
-import { Backdrop, BackdropPresentingConfig } from '@ui-kitten/components/theme/backdrop/backdrop.component';
+import { Backdrop, BackdropPresentingConfig } from '../../theme/backdrop/backdrop.component';
 
 export type RNModalProps =
   Pick<ReactNativeModalProps, 'animationType' | 'hardwareAccelerated' | 'supportedOrientations' | 'onShow'>;

@@ -26,4 +26,6 @@ jobs:
 
       - run: yarn build
 
+      - run: yarn typecheck
+
       - run: yarn test

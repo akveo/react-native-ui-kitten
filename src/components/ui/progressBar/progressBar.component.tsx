@@ -18,11 +18,11 @@ import {
   EvaSize,
   EvaStatus,
   LiteralUnion,
-} from '@ui-kitten/components/devsupport';
+} from '../../devsupport';
 import {
   useStyled,
   StyleType,
-} from '@ui-kitten/components';
+} from '../../theme';
 import { ProgressBarAnimation, ProgressBarAnimationConfig } from './animation';
 
 interface ComponentStyles {

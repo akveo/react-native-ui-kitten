@@ -25,6 +25,7 @@
   "dependencies": {
     "@react-navigation/native": "^7.0.0",
     "@react-navigation/native-stack": "^7.0.0",
+    "awesome-debounce-promise": "^2.1.0",
     "expo": "~54.0.0",
     "expo-status-bar": "~2.2.0",
     "react": "19.1.0",

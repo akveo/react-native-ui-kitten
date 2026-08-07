@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, ViewProps } from 'react-native';
-import { SvgProps } from 'react-native-svg';
-import { Button, ButtonGroup, Icon, IconElement, Layout, LayoutElement } from '@ui-kitten/components';
+import { Button, ButtonGroup, Icon, IconElement, IconRef, Layout, LayoutElement } from '@ui-kitten/components';
 import { AppMapping, AppTheme, ThemeContext, ThemeContextType } from '../services/theme.service';
 
 export const ShowcaseSettings = (props: ViewProps): LayoutElement => {
 
-  const themeIconRef = React.useRef<Icon<SvgProps>>();
+  const themeIconRef = React.useRef<IconRef>(null);
   const themeContext: ThemeContextType = React.useContext(ThemeContext);
 
   const nextMapping: AppMapping = themeContext.mapping === AppMapping.eva ? AppMapping.material : AppMapping.eva;
