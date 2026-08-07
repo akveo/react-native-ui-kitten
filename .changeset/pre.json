@@ -15,5 +15,7 @@
     "@ui-kitten/template-js": "6.0.0-beta.0",
     "@ui-kitten/template-ts": "6.0.0-beta.0"
   },
-  "changesets": []
+  "changesets": [
+    "v6-beta-release"
+  ]
 }

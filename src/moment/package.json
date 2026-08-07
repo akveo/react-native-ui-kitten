@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/moment",
   "description": "moment.js services for UI Kitten",
-  "version": "6.0.0-beta.0",
+  "version": "6.0.0-beta.1",
   "main": "./lib/module/index.js",
   "types": "./index.ts",
   "react-native": "./index.ts",
@@ -47,7 +47,7 @@
     "moment": "^2.30.0"
   },
   "peerDependencies": {
-    "@ui-kitten/components": "^6.0.0-beta.0",
+    "@ui-kitten/components": "^6.0.0-beta.1",
     "moment": ">=2.24.0"
   },
   "sideEffects": false,

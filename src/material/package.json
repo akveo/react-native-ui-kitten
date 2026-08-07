@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/material",
   "description": "Material Design System themes and mappings for UI Kitten",
-  "version": "6.0.0-beta.0",
+  "version": "6.0.0-beta.1",
   "main": "index.js",
   "types": "index.d.ts",
   "license": "MIT",
