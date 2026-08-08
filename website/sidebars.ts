@@ -20,6 +20,7 @@ const sidebars: SidebarsConfig = {
         'guides/configure-navigation',
         'guides/runtime-theming',
         'guides/running-on-the-web',
+        'guides/testing',
         'guides/improving-performance',
       ],
     },
