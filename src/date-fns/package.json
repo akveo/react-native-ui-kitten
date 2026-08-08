@@ -55,6 +55,7 @@
   "react-native-builder-bob": {
     "source": ".",
     "output": "lib",
+    "exclude": "{**/{__tests__,__fixtures__,__mocks__,node_modules,tests}/**,**/*.spec.*,package.json,CHANGELOG.md,tsconfig*.json,lib/**}",
     "targets": [
       [
         "module",

@@ -39,7 +39,8 @@
     "*.map",
     "dss/",
     "js/",
-    "!*.spec.*"
+    "!**/*.spec.*",
+    "!**/__tests__/**"
   ],
   "scripts": {
     "build": "echo 'Pre-compiled, no build needed'"
