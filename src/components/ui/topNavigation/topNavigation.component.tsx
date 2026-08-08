@@ -28,8 +28,8 @@ type AlignmentProp = 'start' | 'center';
 export interface TopNavigationProps extends ViewProps {
   title?: RenderProp<TextProps> | string | number;
   subtitle?: RenderProp<TextProps> | string | number;
-  accessoryLeft?: () => React.ReactElement;
-  accessoryRight?: () => React.ReactElement;
+  accessoryLeft?: RenderProp;
+  accessoryRight?: RenderProp;
   alignment?: AlignmentProp;
   appearance?: LiteralUnion<'default' | 'control'>;
 }
