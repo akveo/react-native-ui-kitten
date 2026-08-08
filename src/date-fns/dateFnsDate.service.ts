@@ -22,8 +22,10 @@ export interface DateFnsOptions extends NativeDateServiceOptions {
   };
 }
 
+const DEFAULT_FORMAT = 'dd/MM/yyyy';
+
 const DEFAULT_OPTIONS: DateFnsOptions = {
-  format: 'dd/MM/yyyy',
+  format: DEFAULT_FORMAT,
   parseOptions: {
     useAdditionalDayOfYearTokens: true,
     useAdditionalWeekYearTokens: true,
@@ -40,16 +42,29 @@ export class DateFnsService extends NativeDateService {
     super(locale, { ...DEFAULT_OPTIONS, ...options });
   }
 
+  /**
+   * `NativeDateServiceOptions.format` is optional, so fall back to the default rather than
+   * handing date-fns an undefined format string.
+   */
+  private resolveFormat(format?: string): string {
+    return format || this.options.format || DEFAULT_FORMAT;
+  }
+
   public format(date: Date, format: string): string {
     if (date) {
-      return dateFnsFormat(date, format || this.options.format, (this.options as DateFnsOptions).formatOptions);
+      return dateFnsFormat(date, this.resolveFormat(format), (this.options as DateFnsOptions).formatOptions);
     }
 
     return '';
   }
 
   public parse(date: string, format: string): Date {
-    return dateFnsParse(date, format || this.options.format, new Date(), (this.options as DateFnsOptions).parseOptions);
+    return dateFnsParse(
+      date,
+      this.resolveFormat(format),
+      new Date(),
+      (this.options as DateFnsOptions).parseOptions,
+    );
   }
 
   public getId(): string {
