@@ -1,5 +1,6 @@
 import Fs from 'fs';
 import Path from 'path';
+import { fileURLToPath } from 'url';
 import LogService from './log.service';
 
 /**
@@ -8,6 +9,8 @@ import LogService from './log.service';
  * - /metro.config.js
  * - /package.json
  */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = Path.dirname(__filename);
 const PROJECT_PATH: string = Path.resolve(__dirname, '../../../../');
 
 // eslint-disable-next-line no-restricted-syntax
