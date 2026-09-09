@@ -33,7 +33,7 @@ Read the great documentation from Expo team to [add web support in existing Expo
 
 ## Regular React Native Applications
 
-In case you don't use Expo, and have already initialized React Native Application using `react-native init`, please follow [official React Native Web Guide](https://necolas.github.io/react-native-web/docs/?path=/docs/guides-multi-platform--page).
+In case you don't use Expo, and have already initialized a bare React Native application, please follow [official React Native Web Guide](https://necolas.github.io/react-native-web/docs/?path=/docs/guides-multi-platform--page).
 
 ---
 

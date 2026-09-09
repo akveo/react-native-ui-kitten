@@ -338,7 +338,7 @@ const inputRef = useRef<InputRef>(null);
 
 ## Known gaps
 
-- v6 is a beta. There is no `latest` release, and the `@ui-kitten/template-js` and `@ui-kitten/template-ts` starter templates have not been republished — the versions on npm still install React Native 0.70 and UI Kitten 5.3.1. Prefer [manual installation](/docs/guides/getting-started#manual-installation) until they are updated.
+- v6 is a beta. There is no `latest` release. The `@ui-kitten/template-js` and `@ui-kitten/template-ts` starter templates have been retired — the versions still on npm install React Native 0.70 and UI Kitten 5.3.1 and should not be used. Start from [Getting Started](/docs/guides/getting-started#new-apps) instead.
 - New Architecture support is claimed on the basis that the library contains no native modules and no legacy bridge usage. It has not been verified against a Fabric build in this documentation pass.
 - The library is developed against React Native 0.81 and Expo 54. Newer versions are known to bundle and run, but only the declared peer-dependency minimums are guaranteed.
 

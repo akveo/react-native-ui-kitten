@@ -45,8 +45,6 @@ module.exports = {
     },
   },
   ignorePatterns: [
-    'src/template-js',
-    'src/template-ts',
     'lib',
     'dist',
     'docs/',

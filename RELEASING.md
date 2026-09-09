@@ -21,8 +21,8 @@ There is no staging registry. Merging a Version Packages PR publishes for real.
 | `@ui-kitten/date-fns` | |
 
 `@ui-kitten/showcases` is in `.changeset/config.json`'s `ignore` list.
-`@ui-kitten/template-js` and `@ui-kitten/template-ts` are `private: true` and frozen on npm at
-`5.3.1`; they are not part of the release set.
+`@ui-kitten/template-js` and `@ui-kitten/template-ts` were removed from the repository in
+`6.0.0-beta.3`; their npm entries stay frozen at `5.3.1` and are not part of the release set.
 
 ## When a package bumps
 

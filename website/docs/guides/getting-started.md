@@ -18,37 +18,64 @@ This guide will help you to initialize the application with UI Kitten from scrat
 
 ## New Apps
 
-This guide will help you to init an application using UI Kitten template project.
+This guide will help you to create a React Native application and add UI Kitten to it.
 
 :::warning
-The starter templates have not been republished for UI Kitten 6. `@ui-kitten/template-js` and `@ui-kitten/template-ts` still install React Native 0.70 and UI Kitten 5.3.1. If you want v6, use [Manual Installation](#manual-installation) instead.
+If you previously installed a global `react-native-cli` package, remove it — it may cause unexpected issues:
+
+```bash
+npm uninstall -g react-native-cli @react-native-community/cli
+```
 :::
 
 ### Create a New Project
 
-The `react-native init` command was removed from the React Native CLI. Use the community CLI directly:
+The quickest way to start is with [Expo](https://docs.expo.dev/):
 
 ```bash
-npx @react-native-community/cli init MyApp --template @ui-kitten/template-js
-
-// Wish Typescript?
-// npx @react-native-community/cli init MyApp --template @ui-kitten/template-ts
+npx create-expo-app@latest MyApp
+cd MyApp
 ```
+
+<details>
+<summary>Without a framework (bare React Native)</summary>
+
+If you need a bare React Native project, invoke the Community CLI directly:
+
+```bash
+npx @react-native-community/cli@latest init MyApp
+cd MyApp
+```
+
+</details>
+
+### Install UI Kitten
+
+```bash
+npx expo install @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+```
+
+<details>
+<summary>Without a framework (bare React Native)</summary>
+
+```bash
+npm i @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+cd ios && pod install
+```
+
+</details>
+
+Then wrap the root component of your app as described in [Configure Application Root](#configure-application-root).
 
 ### Start your App
 
-By following command-line instructions after successful init, go to the project folder and start your app:
-
 ```bash
-npm run ios
-
-// Using Yarn?
-// yarn ios
+npx expo start
 ```
 
 That's it! By moving to the [next guide](/docs/guides/configure-navigation) you will learn how to configure navigation in React Native App.
 
-You can also learn more about starting React Native Apps by reading [React Native CLI documentation](https://github.com/react-native-community/cli/blob/master/docs/commands.md#commands).
+You can also learn more about starting React Native Apps by reading the [React Native documentation](https://reactnative.dev/docs/environment-setup).
 
 ---
 
@@ -70,7 +97,7 @@ UI Kitten 6 is published under the `beta` dist-tag. Do not omit `@beta` — `@ui
 :::
 
 :::warning
-If you use Expo, you should use `expo install react-native-svg` to install svg package.
+If you use Expo, use `npx expo install react-native-svg` to install the svg package.
 :::
 
 :::warning
