@@ -23,6 +23,14 @@ type ChildrenProp = ChildElement | ChildElement[] | React.ReactNode;
 export interface BackdropPresentingConfig {
   backdropStyle?: StyleProp<ViewStyle>;
   onBackdropPress?: () => void;
+  /**
+   * Accessible name for the dismissable backdrop, e.g. `'Close'`.
+   * When omitted the backdrop is hidden from assistive technology, since an
+   * unlabelled full-screen target is noise rather than information.
+   * No default is provided: the library ships no translations, so a built-in
+   * English string would be wrong for most apps.
+   */
+  backdropAccessibilityLabel?: string;
 }
 
 export interface BackdropProps extends ViewProps, BackdropPresentingConfig {
@@ -87,6 +95,13 @@ export class Backdrop extends React.Component<BackdropProps> {
         <View
           style={[StyleSheet.absoluteFill, this.props.backdropStyle]}
           testID='@backdrop'
+          // Only becomes an accessibility element once it has a name. Without
+          // one it stays a plain View, which is not focusable by assistive
+          // technology anyway — dismissal remains available via the iOS escape
+          // gesture and the Android back button.
+          accessible={this.props.backdropAccessibilityLabel ? true : undefined}
+          role={this.props.backdropAccessibilityLabel ? 'button' : undefined}
+          aria-label={this.props.backdropAccessibilityLabel}
           {...this.panResponder.panHandlers}
         />
         {componentChildren}

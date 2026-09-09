@@ -14,6 +14,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  buildAccessibilityProps,
   EvaSize,
   EvaStatus,
   Size,
@@ -189,7 +190,20 @@ export const Spinner: React.FC<SpinnerProps> = (props) => {
   const componentStyle = getComponentStyle(animationRef.current.toProps());
 
   return (
-    <View testID={testID} style={containerSize} {...viewProps}>
+    <View
+      testID={testID}
+      style={containerSize}
+      // A plain View is not an accessibility element, so the role alone would
+      // never reach VoiceOver or TalkBack.
+      accessible={true}
+      {...viewProps}
+      {...buildAccessibilityProps({
+        // A spinner reports no position, so it is an indeterminate
+        // progressbar: `busy` is the only state worth announcing.
+        role: 'progressbar',
+        busy: animating,
+      }, viewProps)}
+    >
       {renderArcElement(componentStyle.start, containerSize)}
       {renderArcElement(componentStyle.end, containerSize)}
     </View>

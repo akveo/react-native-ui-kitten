@@ -107,4 +107,44 @@ describe('@toggle: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
+
+  describe('accessibility', () => {
+
+    it('should expose the switch role', () => {
+      const component = render(<TestToggle />);
+
+      expect(component.getByRole('switch')).toBeTruthy();
+    });
+
+    it('should expose checked state', () => {
+      const component = render(<TestToggle checked={true} />);
+
+      expect(component.getByRole('switch')).toBeChecked();
+    });
+
+    it('should expose unchecked state', () => {
+      const component = render(<TestToggle checked={false} />);
+
+      expect(component.getByRole('switch')).not.toBeChecked();
+    });
+
+    it('should expose disabled state', () => {
+      const component = render(<TestToggle disabled={true} />);
+
+      expect(component.getByRole('switch')).toBeDisabled();
+    });
+
+    it('should name itself from a string label rendered outside the touchable', () => {
+      const component = render(<TestToggle>Dark mode</TestToggle>);
+
+      expect(component.getByRole('switch')).toHaveAccessibleName('Dark mode');
+    });
+
+    it('should let a consumer label override a string label', () => {
+      const component = render(<TestToggle aria-label='Custom'>Dark mode</TestToggle>);
+
+      expect(component.getByRole('switch')).toHaveAccessibleName('Custom');
+    });
+  });
+
 });

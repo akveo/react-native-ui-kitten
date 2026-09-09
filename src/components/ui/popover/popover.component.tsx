@@ -234,6 +234,9 @@ export function usePopoverMeasurement({
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
+ * @property {string} backdropAccessibilityLabel - Accessible name for the dismissable backdrop.
+ * When omitted, the backdrop is hidden from assistive technology.
+ *
  * @property {(event: NativeSyntheticEvent<any>) => void} onShow -
  * Allows passing a function that will be called once the modal has been shown.
  *
@@ -258,6 +261,7 @@ export const Popover = forwardRef<View, PopoverProps>(({
   fullWidth = false,
   visible = false,
   backdropStyle,
+  backdropAccessibilityLabel,
   animationType,
   hardwareAccelerated,
   supportedOrientations,
@@ -301,6 +305,10 @@ export const Popover = forwardRef<View, PopoverProps>(({
   const renderPopoverElement = (): PopoverViewElement => {
     return (
       <PopoverView
+        // Popover renders with `shouldUseContainer={false}`, so it bypasses
+        // Modal's content wrapper and has to carry the modal semantics itself.
+        aria-modal={true}
+        onAccessibilityEscape={onBackdropPress}
         {...viewProps}
         contentContainerStyle={[contentContainerStyle, styles.popoverView, contentFlexPosition]}
         layoutDirection={PopoverPlacements.parse(actualPlacement).flex()}
@@ -337,6 +345,7 @@ export const Popover = forwardRef<View, PopoverProps>(({
         visible={visible}
         shouldUseContainer={false}
         backdropStyle={backdropStyle}
+        backdropAccessibilityLabel={backdropAccessibilityLabel}
         animationType={animationType}
         hardwareAccelerated={hardwareAccelerated}
         supportedOrientations={supportedOrientations}

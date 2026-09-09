@@ -16,6 +16,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  buildAccessibilityProps,
   EvaSize,
   LiteralUnion,
   Size,
@@ -329,7 +330,17 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
 
   return (
     <View
+      // A plain View is not an accessibility element, so the role alone would
+      // never reach VoiceOver or TalkBack.
+      accessible={true}
       {...viewProps}
+      {...buildAccessibilityProps({
+        role: 'progressbar',
+        valueMin: 0,
+        valueMax: 100,
+        valueNow: Math.round(validProgress * 100),
+        valueText: `${Math.round(validProgress * 100)}%`,
+      }, viewProps)}
       style={[evaStyle.container, style]}
     >
       {renderCircularProgress(validProgress, animating, evaStyle)}

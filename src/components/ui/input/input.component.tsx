@@ -20,6 +20,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  accessibleInputName,
+  buildAccessibilityProps,
   EvaSize,
   EvaStatus,
   FalsyFC,
@@ -325,6 +327,10 @@ export const Input = React.forwardRef<InputRef, InputProps>(
         testID={`@${testID}/container`}
         style={componentStyle.container}
         focusable={false}
+        // The wrapper exists only to forward taps to the TextInput. Leaving it
+        // accessible would put a second, unlabelled stop in the a11y tree.
+        accessible={false}
+        role='none'
         onPress={focus}
       >
         <FalsyText
@@ -340,6 +346,14 @@ export const Input = React.forwardRef<InputRef, InputProps>(
             ref={textInputRef}
             placeholderTextColor={componentStyle.placeholder.color}
             {...textInputProps}
+            {...buildAccessibilityProps({
+              disabled: Boolean(disabled),
+              // `label` and `caption` render as siblings of the TextInput, so
+              // they are never picked up as its accessible name. Composed
+              // here instead: cross-platform, unlike `aria-labelledby`, which
+              // react-native only honours on Android.
+              label: accessibleInputName(label, caption, status),
+            }, props)}
             {...getWebEventResponder().eventHandlers}
             testID={`@${testID}/input`}
             style={[componentStyle.text, styles.text, platformStyles.text, textStyle]}

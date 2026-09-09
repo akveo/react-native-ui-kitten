@@ -14,6 +14,7 @@ import {
   TargetedEvent,
 } from 'react-native';
 import {
+  buildAccessibilityProps,
   EvaSize,
   EvaStatus,
   FalsyFC,
@@ -233,6 +234,10 @@ export const Button = React.forwardRef<TouchableWeb, ButtonProps>(
       <TouchableWeb
         ref={ref}
         {...touchableProps}
+        {...buildAccessibilityProps({
+          role: 'button',
+          disabled: Boolean(disabled),
+        }, props)}
         disabled={disabled}
         style={[componentStyle.container, styles.container, style]}
         onMouseEnter={onMouseEnter}

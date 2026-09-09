@@ -14,6 +14,7 @@ import {
   TargetedEvent,
 } from 'react-native';
 import {
+  buildAccessibilityProps,
   FalsyFC,
   FalsyText,
   PropsService,
@@ -201,6 +202,10 @@ export const SelectItem = React.forwardRef<TouchableWeb, SelectItemProps>(
 
       return (
         <CheckBox
+          // The row already conveys `option` + `aria-selected`. Leaving the
+          // checkbox accessible would announce the same state twice.
+          accessible={false}
+          aria-hidden={true}
           style={iconStyle}
           checked={selected}
           disabled={disabled}
@@ -213,6 +218,11 @@ export const SelectItem = React.forwardRef<TouchableWeb, SelectItemProps>(
       <TouchableWeb
         ref={ref}
         {...touchableProps}
+        {...buildAccessibilityProps({
+          role: 'option',
+          selected: Boolean(selected),
+          disabled: Boolean(disabled),
+        }, props)}
         disabled={disabled}
         style={[staticStyles.container, componentStyle.container, style]}
         onMouseEnter={onMouseEnter}

@@ -553,6 +553,65 @@ I love Babel
     componentRef.current.clear();
   });
 
+  describe('accessibility', () => {
+
+    it('should expose the combobox role on the trigger', () => {
+      const component = render(<TestSelect />);
+
+      expect(component.getByRole('combobox')).toBeTruthy();
+    });
+
+    it('should report collapsed while the list is closed', () => {
+      const component = render(<TestSelect />);
+
+      expect(component.getByRole('combobox')).not.toBeExpanded();
+    });
+
+    it('should report expanded once the list opens', async () => {
+      const component = render(<TestSelect />);
+
+      fireEvent.press(component.getByRole('combobox'));
+
+      await waitFor(() => {
+        expect(component.getByRole('combobox')).toBeExpanded();
+      });
+    });
+
+    it('should expose disabled state', () => {
+      const component = render(<TestSelect disabled={true} />);
+
+      expect(component.getByRole('combobox')).toBeDisabled();
+    });
+
+    it('should name the trigger from its label', () => {
+      const component = render(<TestSelect label='Country' />);
+
+      expect(component.getByRole('combobox')).toHaveAccessibleName('Country');
+    });
+
+    it('should let a consumer label reach the trigger', () => {
+      // SelectProps extends TouchableWebProps, but the anchor used to drop
+      // every pass-through prop, so aria-label never arrived.
+      const component = render(<TestSelect aria-label='Custom' />);
+
+      expect(component.getByRole('combobox')).toHaveAccessibleName('Custom');
+    });
+
+    it('should expose options with their selected state', async () => {
+      const component = render(<TestSelect selectedIndex={new IndexPath(1)} />);
+
+      fireEvent.press(component.getByRole('combobox'));
+
+      await waitFor(() => {
+        const options = component.getAllByRole('menuitem');
+
+        expect(options).toHaveLength(2);
+        expect(options[0]).not.toBeSelected();
+        expect(options[1]).toBeSelected();
+      });
+    });
+  });
+
 });
 
 describe('@select: component checks with groups', () => {
@@ -634,6 +693,8 @@ describe('@select: component checks with groups', () => {
 
     fireEvent.press(group2Touchable);
   });
+
+
 });
 
 

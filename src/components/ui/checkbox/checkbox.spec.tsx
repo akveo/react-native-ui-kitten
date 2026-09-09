@@ -193,4 +193,56 @@ describe('@checkbox component checks', () => {
     expect(onBlur).toBeCalled();
   });
 
+
+  describe('accessibility', () => {
+
+    it('should expose the checkbox role', () => {
+      const component = render(<TestCheckBox />);
+
+      expect(component.getByRole('checkbox')).toBeTruthy();
+    });
+
+    it('should expose checked state', () => {
+      const component = render(<TestCheckBox checked={true} />);
+
+      expect(component.getByRole('checkbox')).toBeChecked();
+    });
+
+    it('should expose unchecked state', () => {
+      const component = render(<TestCheckBox checked={false} />);
+
+      expect(component.getByRole('checkbox')).not.toBeChecked();
+    });
+
+    it('should expose indeterminate state as partially checked', () => {
+      const component = render(<TestCheckBox indeterminate={true} />);
+
+      expect(component.getByRole('checkbox')).toBePartiallyChecked();
+    });
+
+    it('should expose disabled state', () => {
+      const component = render(<TestCheckBox disabled={true} />);
+
+      expect(component.getByRole('checkbox')).toBeDisabled();
+    });
+
+    it('should derive the accessible name from the label', () => {
+      const component = render(<TestCheckBox>Remember me</TestCheckBox>);
+
+      expect(component.getByRole('checkbox')).toHaveAccessibleName('Remember me');
+    });
+
+    it('should let a consumer override the role and label', () => {
+      const component = render(
+        <TestCheckBox
+          role='switch'
+          aria-label='Custom'
+        />,
+      );
+
+      expect(component.getByRole('switch')).toBeTruthy();
+      expect(component.getByRole('switch')).toHaveAccessibleName('Custom');
+    });
+  });
+
 });

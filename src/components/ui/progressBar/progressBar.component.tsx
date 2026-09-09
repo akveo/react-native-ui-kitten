@@ -15,6 +15,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  buildAccessibilityProps,
   EvaSize,
   EvaStatus,
   LiteralUnion,
@@ -169,7 +170,20 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
   return (
     <View
+      // A plain View is not an accessibility element, so the role alone would
+      // never reach VoiceOver or TalkBack.
+      accessible={true}
       {...viewProps}
+      {...buildAccessibilityProps({
+        role: 'progressbar',
+        // While animating the bar is indeterminate: there is no meaningful
+        // position to report, so `busy` is announced instead of a value.
+        busy: animating || undefined,
+        valueMin: animating ? undefined : 0,
+        valueMax: animating ? undefined : 100,
+        valueNow: animating ? undefined : Math.round(clamp(progress) * 100),
+        valueText: animating ? undefined : `${Math.round(clamp(progress) * 100)}%`,
+      }, viewProps)}
       style={[evaStyle.track, styles.noOverflow, style]}
       onLayout={onLayout}
     >
