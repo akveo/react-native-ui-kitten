@@ -58,7 +58,10 @@ const CheckBoxExample = () => {
 | `indeterminate` | `boolean` | `false` | Whether the checkbox displays an indeterminate state. |
 | `onChange` | `(checked: boolean) => void` | - | Called when the checkbox value changes. |
 | `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Semantic color of the checkbox. |
-| `children` | `ReactText \| (props) => ReactElement` | `undefined` | Label text or render function displayed next to the checkbox. |
+| `children` | `string \| number \| (props) => ReactElement` | `undefined` | Label text or render function displayed next to the checkbox. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+CheckBox also accepts all standard React Native `TouchableOpacity` props, including `disabled`.
 
 ## Storybook
 

@@ -40,6 +40,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Migration',
       items: [
+        'migration/5x-to-6',
         'migration/4x-to-5',
       ],
     },

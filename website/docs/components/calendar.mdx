@@ -76,6 +76,28 @@ const RangeCalendarExample = () => {
 | `dateService` | `DateService` | `NativeDateService` | Custom date service for localization and date formatting. |
 | `filter` | `(date: Date) => boolean` | `undefined` | Predicate to disable specific dates. Return `false` to disable a date. |
 | `renderDay` | `(info, style) => ReactElement` | `undefined` | Custom render function for day cells. |
+| `initialVisibleDate` | `Date` | `undefined` | Date the calendar opens on. Falls back to the selected date, then today. |
+| `boundingMonth` | `boolean` | `true` | Whether days of the neighbouring months are rendered in the current month's grid. |
+| `startView` | `CalendarViewMode` | `CalendarViewModes.DATE` | View the calendar opens in — `DATE`, `MONTH` or `YEAR`. |
+| `title` | `(pickerDate, monthYearPickerDate, viewMode) => string` | `undefined` | Custom header title. |
+| `renderFooter` | `() => ReactElement` | `undefined` | Render function for content below the calendar grid. |
+| `renderMonth` | `(info, style) => ReactElement` | `undefined` | Custom render function for month cells. |
+| `renderYear` | `(info, style) => ReactElement` | `undefined` | Custom render function for year cells. |
+| `renderArrowLeft` | `ComponentType<{ onPress: () => void }> \| null` | `undefined` | Custom left navigation arrow. Pass `null` to hide it. |
+| `renderArrowRight` | `ComponentType<{ onPress: () => void }> \| null` | `undefined` | Custom right navigation arrow. Pass `null` to hide it. |
+| `onVisibleDateChange` | `(date: Date, viewModeId: CalendarViewModeId) => void` | `undefined` | Called when the visible date or view mode changes. |
+
+Calendar also accepts all standard React Native `View` props.
+
+Calendar exposes an imperative API through a ref typed as `CalendarRef`:
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `scrollToToday` | `() => void` | Scrolls the calendar to the current date. |
+| `scrollToDate` | `(date: Date) => void` | Scrolls the calendar to a given date. |
+| `getVisibleDate` | `() => Date` | Returns the currently visible date. |
+| `getViewMode` | `() => CalendarViewMode` | Returns the current view mode. |
+| `getPickerDate` | `() => Date` | Returns the date shown by the month/year picker. |
 
 ### RangeCalendar
 
@@ -87,6 +109,8 @@ const RangeCalendarExample = () => {
 | `max` | `Date` | `undefined` | Maximum selectable date. |
 | `dateService` | `DateService` | `NativeDateService` | Custom date service for localization and date formatting. |
 | `filter` | `(date: Date) => boolean` | `undefined` | Predicate to disable specific dates. |
+
+RangeCalendar accepts the same presentation properties as Calendar — `initialVisibleDate`, `boundingMonth`, `startView`, `title`, `renderDay`, `renderFooter`, `renderMonth`, `renderYear`, `renderArrowLeft`, `renderArrowRight` and `onVisibleDateChange` — and exposes `scrollToToday()`, `scrollToDate()` and `getVisibleDate()` through a ref typed as `RangeCalendarRef`.
 
 ## Storybook
 

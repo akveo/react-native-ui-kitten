@@ -55,7 +55,11 @@ const TooltipExample = () => {
 | `anchor` | `() => ReactElement` | - | Render function for the anchor element the tooltip is positioned relative to. |
 | `onBackdropPress` | `() => void` | `undefined` | Called when the area outside the tooltip is pressed. |
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Position of the tooltip relative to the anchor. |
-| `children` | `ReactText \| (props) => ReactElement` | - | Tooltip content text or render function. |
+| `children` | `string \| number \| (props) => ReactElement` | - | Tooltip content text or render function. |
+| `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the start of the text. |
+| `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the end of the text. |
+
+Tooltip is built on Popover and accepts its properties too, including `backdropStyle` and `fullWidth`.
 
 ## Storybook
 

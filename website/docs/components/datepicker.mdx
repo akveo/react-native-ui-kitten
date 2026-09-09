@@ -79,9 +79,33 @@ const RangeDatepickerExample = () => {
 | `min` | `Date` | `undefined` | Minimum selectable date. |
 | `max` | `Date` | `undefined` | Maximum selectable date. |
 | `dateService` | `DateService` | `NativeDateService` | Custom date service for localization and formatting. |
-| `label` | `ReactText \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
-| `caption` | `ReactText \| (props) => ReactElement` | `undefined` | Caption displayed below the input. |
-| `placeholder` | `string` | `undefined` | Placeholder text displayed when no date is selected. |
+| `label` | `string \| number \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
+| `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the input. |
+| `placeholder` | `string \| number \| (props) => ReactElement` | `'dd/mm/yyyy'` | Placeholder displayed when no date is selected. |
+| `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Status of the control. |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the control. |
+| `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the start of the control. |
+| `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the end of the control. |
+| `controlStyle` | `ViewStyle` | `undefined` | Style applied to the control that opens the calendar. |
+| `placement` | `PopoverPlacement \| string` | `'bottom start'` | Position of the calendar relative to the control. |
+| `backdropStyle` | `ViewStyle` | `undefined` | Style applied to the backdrop behind the calendar. |
+| `autoDismiss` | `boolean` | `true` | Whether the calendar closes as soon as a date is selected. |
+| `onFocus` | `() => void` | `undefined` | Called when the calendar opens. |
+| `onBlur` | `() => void` | `undefined` | Called when the calendar closes. |
+
+Datepicker embeds a Calendar and accepts all of its presentation properties too — `filter`, `initialVisibleDate`, `boundingMonth`, `startView`, `title`, `renderDay`, `renderFooter`, `renderMonth`, `renderYear`, `renderArrowLeft`, `renderArrowRight` and `onVisibleDateChange` — plus all React Native `TouchableOpacity` props.
+
+Datepicker exposes an imperative API through a ref typed as `DatepickerRef`:
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `focus` | `() => void` | Opens the calendar. |
+| `blur` | `() => void` | Closes the calendar. |
+| `isFocused` | `() => boolean` | Whether the calendar is open. |
+| `clear` | `() => void` | Clears the selected date. |
+| `scrollToToday` | `() => void` | Scrolls the calendar to the current date. |
+| `scrollToDate` | `(date: Date) => void` | Scrolls the calendar to a given date. |
+| `getCalendarVisibleDate` | `() => Date \| undefined` | Returns the currently visible calendar date. |
 
 ### RangeDatepicker
 
@@ -92,8 +116,10 @@ const RangeDatepickerExample = () => {
 | `min` | `Date` | `undefined` | Minimum selectable date. |
 | `max` | `Date` | `undefined` | Maximum selectable date. |
 | `dateService` | `DateService` | `NativeDateService` | Custom date service for localization and formatting. |
-| `label` | `ReactText \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
-| `caption` | `ReactText \| (props) => ReactElement` | `undefined` | Caption displayed below the input. |
+| `label` | `string \| number \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
+| `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the input. |
+
+RangeDatepicker accepts the same control and calendar properties as Datepicker, and exposes the same ref API, typed as `RangeDatepickerRef`. Note that it does not accept `autoDismiss` — a range needs two taps, so the calendar stays open until both ends are picked.
 
 ## Storybook
 

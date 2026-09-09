@@ -27,7 +27,7 @@ import { Icon, IconRegistry } from '@ui-kitten/components';
 import React from 'react';
 import { ApplicationProvider, Layout, Icon, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import * as eva from '@eva-design/eva';
+import * as eva from '@ui-kitten/eva';
 
 const App = () => (
   <>
@@ -47,17 +47,26 @@ const App = () => (
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `name` | `string` | - | Name of the icon in the registered icon pack. |
+| `name` | `string` | - | Name of the icon in the registered icon pack. Required. |
 | `pack` | `string` | `undefined` | Name of the icon pack to use. Defaults to the first registered pack. |
-| `animation` | `'zoom' \| 'pulse' \| 'shake'` | `undefined` | Animation type applied to the icon. |
-| `fill` | `string` | `undefined` | Fill color for the icon. |
-| `style` | `ViewStyle` | - | Style containing `width` and `height` for the icon. |
+| `animation` | `'zoom' \| 'pulse' \| 'shake' \| null` | `'zoom'` | Animation type applied to the icon. Pass `null` to disable animation. |
+| `animationConfig` | `AnimationConfig` | `undefined` | Animation configuration — duration, easing, cycles. |
+
+`IconProps` is generic over the props of the element the icon pack renders. Any additional property — `fill`, `style`, `width`, `height` — is passed straight through to that element, so the accepted set depends on the icon pack in use. With `@ui-kitten/eva-icons` these are `react-native-svg` props.
+
+Icon exposes an imperative API through a ref typed as `IconRef`:
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `startAnimation` | `(callback?: Animated.EndCallback) => void` | Starts the configured animation. |
+| `stopAnimation` | `() => void` | Stops the animation. |
 
 ### IconRegistry
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `icons` | `IconPack \| IconPack[]` | - | One or more icon packs to register. |
+| `defaultIcons` | `string \| string[]` | `undefined` | Name of the pack, or packs, to use when `Icon` is rendered without an explicit `pack`. |
 
 ## Storybook
 

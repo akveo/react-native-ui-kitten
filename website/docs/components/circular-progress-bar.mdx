@@ -45,6 +45,11 @@ const CircularProgressBarExample = () => (
 | `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'primary'` | Semantic color of the progress indicator. |
 | `size` | `'tiny' \| 'small' \| 'medium' \| 'large' \| 'giant'` | `'medium'` | Size of the circular progress indicator. |
 | `animating` | `boolean` | `true` | Whether the progress indicator animates value changes. |
+| `renderIcon` | `(props) => ReactElement` | `undefined` | Render function for an icon displayed inside the circle instead of the progress text. |
+| `textStyle` | `StyleProp<TextStyle>` | `undefined` | Additional styles applied to the progress text. |
+| `iconStyle` | `StyleProp<ImageStyle>` | `undefined` | Additional styles applied to the icon returned by `renderIcon`. |
+| `animationConfig` | `Partial<CircularProgressBarAnimationConfig>` | `undefined` | Animation configuration — duration and easing. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
 
 ## Storybook
 

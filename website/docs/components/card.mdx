@@ -61,10 +61,10 @@ const CardExample = () => (
 | `appearance` | `'filled' \| 'outline'` | `'outline'` | Visual style variant. |
 | `header` | `(props) => ReactElement` | `undefined` | Render function for the card header. |
 | `footer` | `(props) => ReactElement` | `undefined` | Render function for the card footer. |
-| `onPress` | `() => void` | `undefined` | Called when the card is pressed. |
+| `accent` | `(props) => ReactElement` | `undefined` | Render function for the accent strip above the card. Its color follows `status`. |
 | `children` | `ReactNode` | - | Body content of the card. |
 
-Card also accepts all standard React Native `TouchableOpacity` props.
+Card also accepts all standard React Native `TouchableOpacity` props, including `onPress` and `disabled`.
 
 ## Storybook
 

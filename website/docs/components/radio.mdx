@@ -54,7 +54,10 @@ const RadioExample = () => {
 | `checked` | `boolean` | `false` | Whether the radio is selected. |
 | `onChange` | `(checked: boolean) => void` | - | Called when the radio value changes. |
 | `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Semantic color of the radio. |
-| `children` | `ReactText \| (props) => ReactElement` | `undefined` | Label text or render function displayed next to the radio. |
+| `children` | `string \| number \| (props) => ReactElement` | `undefined` | Label text or render function displayed next to the radio. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+Radio also accepts all standard React Native `TouchableOpacity` props, including `disabled`.
 
 ### RadioGroup
 

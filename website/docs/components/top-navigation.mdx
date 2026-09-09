@@ -53,18 +53,23 @@ const TopNavigationExample = () => (
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | `undefined` | Title text or render function. |
-| `subtitle` | `ReactText \| (props) => ReactElement` | `undefined` | Subtitle text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | `undefined` | Title text or render function. |
+| `subtitle` | `string \| number \| (props) => ReactElement` | `undefined` | Subtitle text or render function. |
 | `alignment` | `'start' \| 'center'` | `'start'` | Title alignment within the navigation bar. |
 | `accessoryLeft` | `() => ReactElement` | `undefined` | Render function for the left accessory (e.g., back action). |
 | `accessoryRight` | `() => ReactElement` | `undefined` | Render function for the right accessory (e.g., menu action). |
+| `appearance` | `'default' \| 'control'` | `'default'` | Appearance defined in the Eva mapping. Use `control` on a contrast background. |
+
+TopNavigation also accepts all standard React Native `View` props.
 
 ### TopNavigationAction
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `icon` | `(props) => ReactElement` | - | Render function for the action icon. |
-| `onPress` | `() => void` | `undefined` | Called when the action is pressed. |
+| `appearance` | `'default' \| 'control'` | `'default'` | Appearance defined in the Eva mapping. Use `control` on a contrast background. |
+
+TopNavigationAction also accepts all standard React Native `TouchableOpacity` props, including `onPress` and `disabled`.
 
 ## Storybook
 

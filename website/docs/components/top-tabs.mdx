@@ -81,6 +81,9 @@ const TabViewExample = () => {
 | `onSelect` | `(index: number) => void` | - | Called when a tab is selected. |
 | `indicatorStyle` | `ViewStyle` | `undefined` | Style applied to the active tab indicator. |
 | `children` | `Tab[]` | - | Tab elements. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+TabBar also accepts all standard React Native `View` props.
 
 ### TabView
 
@@ -89,14 +92,27 @@ const TabViewExample = () => {
 | `selectedIndex` | `number` | `0` | Index of the currently selected tab. |
 | `onSelect` | `(index: number) => void` | - | Called when a tab is selected. |
 | `children` | `Tab[]` | - | Tab elements with content as their children. |
+| `tabBarStyle` | `ViewStyle` | `undefined` | Style applied to the tab bar. |
+| `indicatorStyle` | `ViewStyle` | `undefined` | Style applied to the active tab indicator. |
+| `swipeEnabled` | `boolean` | `true` | Whether tabs can be changed by swiping the content. |
+| `shouldLoadComponent` | `(index: number) => boolean` | `() => true` | Predicate to lazily load tab content. Return `false` to skip rendering. |
+| `animationDuration` | `number` | `undefined` | Duration of the tab transition animation, in milliseconds. |
+| `onOffsetChange` | `(offset: number) => void` | `undefined` | Called while the content scrolls, with the current horizontal offset. |
+
+TabView is built on ViewPager and accepts its properties too.
 
 ### Tab
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | `undefined` | Tab title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | `undefined` | Tab title text or render function. |
 | `icon` | `(props) => ReactElement` | `undefined` | Render function for the tab icon. |
 | `children` | `ReactNode` | `undefined` | Content displayed when the tab is selected (used with TabView). |
+| `selected` | `boolean` | `false` | Whether the tab is rendered as selected. Managed by TabBar. |
+| `onSelect` | `(selected: boolean) => void` | `undefined` | Called when the tab is selected. Managed by TabBar. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+Tab also accepts all standard React Native `TouchableOpacity` props.
 
 ## Storybook
 

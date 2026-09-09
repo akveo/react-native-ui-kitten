@@ -71,8 +71,13 @@ const BottomTabsExample = () => {
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | `undefined` | Tab title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | `undefined` | Tab title text or render function. |
 | `icon` | `(props) => ReactElement` | `undefined` | Render function for the tab icon. |
+| `selected` | `boolean` | `false` | Whether the tab is rendered as selected. Managed by BottomNavigation. |
+| `onSelect` | `(selected: boolean) => void` | `undefined` | Called when the tab is selected. Managed by BottomNavigation. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+BottomNavigationTab also accepts all standard React Native `TouchableOpacity` props.
 
 ## Storybook
 

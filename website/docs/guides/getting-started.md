@@ -18,19 +18,21 @@ This guide will help you to initialize the application with UI Kitten from scrat
 
 ## New Apps
 
-This guide will help you to init an application using UI Kitten template project. First, make sure you have the right React Native CLI installed:
+This guide will help you to init an application using UI Kitten template project.
 
-```bash
-npm un -g react-native-cli && npm i -g @react-native-community/cli
-```
+:::warning
+The starter templates have not been republished for UI Kitten 6. `@ui-kitten/template-js` and `@ui-kitten/template-ts` still install React Native 0.70 and UI Kitten 5.3.1. If you want v6, use [Manual Installation](#manual-installation) instead.
+:::
 
 ### Create a New Project
 
+The `react-native init` command was removed from the React Native CLI. Use the community CLI directly:
+
 ```bash
-npx react-native init MyApp --template @ui-kitten/template-js
+npx @react-native-community/cli init MyApp --template @ui-kitten/template-js
 
 // Wish Typescript?
-// npx react-native init MyApp --template @ui-kitten/template-ts
+// npx @react-native-community/cli init MyApp --template @ui-kitten/template-ts
 ```
 
 ### Start your App
@@ -57,11 +59,15 @@ If you have an existing code base and want to use UI Kitten in your project, fol
 ### Install UI Kitten
 
 ```bash
-npm i @ui-kitten/components @ui-kitten/eva react-native-svg
+npm i @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
 
 // Using Yarn?
-// yarn add @ui-kitten/components @ui-kitten/eva react-native-svg
+// yarn add @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
 ```
+
+:::warning
+UI Kitten 6 is published under the `beta` dist-tag. Do not omit `@beta` — `@ui-kitten/components@latest` is still `5.3.1`, while `@ui-kitten/eva` only exists as a v6 package, so an untagged install mixes the two major versions. If you are upgrading an existing app, read the [5.x to 6.0.0 Migration](/docs/migration/5x-to-6) guide.
+:::
 
 :::warning
 If you use Expo, you should use `expo install react-native-svg` to install svg package.

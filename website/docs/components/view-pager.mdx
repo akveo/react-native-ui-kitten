@@ -54,6 +54,9 @@ const ViewPagerExample = () => {
 | `onSelect` | `(index: number) => void` | - | Called when the visible page changes via swipe. |
 | `shouldLoadComponent` | `(index: number) => boolean` | `() => true` | Predicate to lazily load page content. Return `false` to skip rendering. |
 | `children` | `ReactNode[]` | - | Page content elements. |
+| `swipeEnabled` | `boolean` | `true` | Whether pages can be changed by swiping. |
+| `animationDuration` | `number` | `undefined` | Duration of the page transition animation, in milliseconds. |
+| `onOffsetChange` | `(offset: number) => void` | `undefined` | Called while the pager scrolls, with the current horizontal offset. |
 
 ViewPager also accepts all standard React Native `View` props.
 

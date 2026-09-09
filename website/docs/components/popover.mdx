@@ -62,6 +62,21 @@ const PopoverExample = () => {
 | `placement` | `'top' \| 'top start' \| 'top end' \| 'bottom' \| 'bottom start' \| 'bottom end' \| 'left' \| 'left start' \| 'left end' \| 'right' \| 'right start' \| 'right end' \| 'inner' \| 'inner top' \| 'inner bottom'` | `'bottom'` | Position of the popover relative to the anchor. |
 | `backdropStyle` | `ViewStyle` | `undefined` | Style applied to the backdrop. |
 | `children` | `ReactNode` | - | Content rendered inside the popover. |
+| `fullWidth` | `boolean` | `false` | Whether the popover matches the width of its anchor. |
+| `onPlacementChange` | `(placement: PopoverPlacement) => void` | `undefined` | Called when the resolved placement differs from the requested one because of available space. |
+| `indicator` | `(props) => ReactElement` | `undefined` | Render function for the arrow pointing at the anchor. |
+| `contentContainerStyle` | `ViewStyle` | `undefined` | Style applied to the content container. |
+| `shouldUseContainer` | `boolean` | `true` | Whether the content is wrapped in a positioning container. |
+
+Popover also accepts all standard React Native `Modal` props.
+
+### PopoverPlacements
+
+`PopoverPlacements` is exported alongside the component and holds the placement constants used by `placement`, so you can write `PopoverPlacements.TOP_START` instead of the `'top start'` string literal.
+
+### usePopoverMeasurement
+
+`usePopoverMeasurement` is the hook Popover, Tooltip and OverflowMenu use to measure the anchor and compute a placement that fits on screen. It is exported for building custom overlay components on top of the same measurement logic.
 
 ## Storybook
 

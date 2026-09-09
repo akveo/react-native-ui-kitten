@@ -64,15 +64,18 @@ const InputExample = () => {
 |----------|------|---------|-------------|
 | `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Semantic color applied to the input border and label. |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the input. |
-| `label` | `ReactText \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
-| `caption` | `ReactText \| (props) => ReactElement` | `undefined` | Caption displayed below the input (e.g., validation message). |
+| `label` | `string \| number \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
+| `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the input (e.g., validation message). |
 | `placeholder` | `string` | `undefined` | Placeholder text displayed when the input is empty. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory (e.g., icon). |
 | `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory (e.g., icon). |
 | `disabled` | `boolean` | `false` | Whether the input is disabled. |
 | `textStyle` | `TextStyle` | `undefined` | Style applied to the input text. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
 
-Input also accepts all standard React Native `TextInput` props.
+Input also accepts all standard React Native `TextInput` props, including `placeholder`.
+
+Input exposes an imperative API through a ref typed as `InputRef`, with `focus()`, `blur()`, `isFocused()` and `clear()`.
 
 ## Storybook
 

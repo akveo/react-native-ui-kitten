@@ -28,14 +28,16 @@ Create a component:
 ```js
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { styled } from '@ui-kitten/components';
+import { useStyled } from '@ui-kitten/components';
 
-const CircleButton = styled('CircleButton')((props) => {
-  const { eva, style, ...restProps } = props;
+const CircleButton = (props) => {
+  const { appearance, style, ...restProps } = props;
+  const { style: evaStyle } = useStyled('CircleButton', { appearance });
+
   return (
-    <TouchableOpacity style={[eva.style, style]} {...restProps} />
+    <TouchableOpacity style={[evaStyle, style]} {...restProps} />
   );
-});
+};
 
 export { CircleButton };
 ```
@@ -228,34 +230,35 @@ And dispatch this state from a component.
 ```js
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { styled, Interaction } from '@ui-kitten/components';
+import { useStyled, Interaction } from '@ui-kitten/components';
 
-const CircleButton = styled('CircleButton')((props) => {
-  const { eva, style, ...restProps } = props;
+const CircleButton = (props) => {
+  const { appearance, style, ...restProps } = props;
+  const { style: evaStyle, dispatch } = useStyled('CircleButton', { appearance });
 
   const onPressIn = () => {
-    eva.dispatch([Interaction.ACTIVE]);
+    dispatch([Interaction.ACTIVE]);
   };
 
   const onPressOut = () => {
-    eva.dispatch([]);
+    dispatch([]);
   };
 
   return (
     <TouchableOpacity
       {...restProps}
       activeOpacity={1.0}
-      style={[eva.style, style]}
+      style={[evaStyle, style]}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
     />
   );
-});
+};
 
 export { CircleButton };
 ```
 
-What we have done here is we used `dispatch` prop provided by a `styled` HOC we previously wrapped our component. And now, when we press a Button, it will be re-rendered with a new color. But when we release it, it will be filled with a default color.
+What we have done here is we used the `dispatch` function returned by the `useStyled` hook. And now, when we press a Button, it will be re-rendered with a new color. But when we release it, it will be filled with a default color.
 
 That's it. Here is the result:
 

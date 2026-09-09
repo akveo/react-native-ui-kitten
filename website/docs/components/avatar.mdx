@@ -56,8 +56,10 @@ const AvatarExample = () => (
 | `shape` | `'round' \| 'rounded' \| 'square'` | `'round'` | Shape of the avatar. |
 | `size` | `'tiny' \| 'small' \| 'medium' \| 'large' \| 'giant'` | `'medium'` | Size of the avatar. |
 | `style` | `ImageStyle` | `undefined` | Additional styles applied to the avatar image. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+| `ImageComponent` | `ComponentType` | `Image` | Component used to render the image. Pass a custom one to use a caching or SVG image library. |
 
-Avatar also accepts all standard React Native `Image` props.
+Avatar also accepts all props of the component given to `ImageComponent`, which by default is React Native's `Image`.
 
 ## Storybook
 

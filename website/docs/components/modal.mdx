@@ -64,6 +64,9 @@ const styles = StyleSheet.create({
 | `onBackdropPress` | `() => void` | `undefined` | Called when the backdrop is pressed. |
 | `backdropStyle` | `ViewStyle` | `undefined` | Style applied to the backdrop. |
 | `children` | `ReactNode` | - | Content rendered inside the modal. |
+| `shouldUseContainer` | `boolean` | `true` | Whether the content is wrapped in a positioning container. Set to `false` to control layout yourself. |
+
+Modal also accepts all standard React Native `Modal` and `View` props.
 
 ## Storybook
 

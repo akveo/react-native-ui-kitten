@@ -49,6 +49,10 @@ const ProgressBarExample = () => (
 | `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'primary'` | Semantic color of the progress bar. |
 | `size` | `'tiny' \| 'small' \| 'medium' \| 'large' \| 'giant'` | `'medium'` | Height of the progress bar. |
 | `animating` | `boolean` | `true` | Whether the progress bar animates value changes. |
+| `animationConfig` | `Partial<ProgressBarAnimationConfig>` | `undefined` | Animation configuration — duration and easing. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+ProgressBar also accepts all standard React Native `View` props.
 
 ## Storybook
 

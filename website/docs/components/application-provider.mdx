@@ -25,7 +25,7 @@ import { ApplicationProvider } from '@ui-kitten/components';
 
 ```tsx
 import React from 'react';
-import * as eva from '@eva-design/eva';
+import * as eva from '@ui-kitten/eva';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 
 const App = () => (
@@ -43,10 +43,16 @@ export default App;
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `mapping` | `SchemaType` | - | Eva mapping configuration object. |
+| `mapping` | `SchemaType` | - | Eva mapping configuration object. Required unless `styles` is given. |
 | `theme` | `ThemeType` | - | Eva theme object (e.g., `eva.light` or `eva.dark`). |
 | `customMapping` | `CustomSchemaType` | `undefined` | Custom mapping overrides for component styles. |
+| `styles` | `ThemeStyleType` | - | Pre-processed styles, used instead of `mapping` and `customMapping`. |
 | `children` | `ReactNode` | - | The application component tree. |
+
+`ApplicationProvider` accepts the mapping in one of two shapes, and exactly one of them is required:
+
+- `mapping` (plus optional `customMapping`) — the mapping is processed at runtime, on every app start.
+- `styles` — an already-processed style object, produced at build time by [`@ui-kitten/metro-config`](/docs/guides/improving-performance). Faster to start, and what you should use in production.
 
 ## Storybook
 
