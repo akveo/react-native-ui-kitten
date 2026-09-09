@@ -211,4 +211,44 @@ I love Babel
     expect(onBlur).toBeCalled();
   });
 
+
+  describe('accessibility', () => {
+
+    it('should expose the button role', () => {
+      const component = render(<TestButton />);
+
+      expect(component.getByRole('button')).toBeTruthy();
+    });
+
+    it('should expose disabled state', () => {
+      const component = render(<TestButton disabled={true} />);
+
+      expect(component.getByRole('button')).toBeDisabled();
+    });
+
+    it('should not report disabled when enabled', () => {
+      const component = render(<TestButton />);
+
+      expect(component.getByRole('button')).not.toBeDisabled();
+    });
+
+    it('should derive the accessible name from the text child', () => {
+      const component = render(<TestButton>Save</TestButton>);
+
+      expect(component.getByRole('button')).toHaveAccessibleName('Save');
+    });
+
+    it('should let a consumer label an icon-only button', () => {
+      const component = render(<TestButton aria-label='Delete' />);
+
+      expect(component.getByRole('button')).toHaveAccessibleName('Delete');
+    });
+
+    it('should let a consumer override the role', () => {
+      const component = render(<TestButton role='link' />);
+
+      expect(component.getByRole('link')).toBeTruthy();
+    });
+  });
+
 });

@@ -68,6 +68,9 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
+ * @property {string} backdropAccessibilityLabel - Accessible name for the dismissable backdrop.
+ * When omitted, the backdrop is hidden from assistive technology.
+ *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ModalSimpleUsage
@@ -83,6 +86,7 @@ export const Modal: React.FC<ModalProps> = ({
   shouldUseContainer = true,
   children,
   backdropStyle,
+  backdropAccessibilityLabel,
   onBackdropPress,
   animationType,
   hardwareAccelerated,
@@ -121,6 +125,11 @@ export const Modal: React.FC<ModalProps> = ({
   const renderContentElement = (): React.ReactElement<ViewProps> => {
     return (
       <View
+        // Scopes VoiceOver to the modal contents on iOS, and emits
+        // `aria-modal` on the web. Android already gets this from the
+        // underlying native modal window.
+        aria-modal={true}
+        onAccessibilityEscape={onBackdropPress}
         {...viewProps}
         style={[style, styles.modalView, contentFlexPosition]}
       >
@@ -158,6 +167,7 @@ export const Modal: React.FC<ModalProps> = ({
       <Backdrop
         visible={visible}
         backdropStyle={backdropStyle}
+        backdropAccessibilityLabel={backdropAccessibilityLabel}
         onBackdropPress={onBackdropPress}
       >
         {shouldUseContainer ? renderMeasuringContentElement() : children}

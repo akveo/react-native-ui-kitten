@@ -11,6 +11,7 @@ import {
   ViewProps,
 } from 'react-native';
 import {
+  buildAccessibilityProps,
   ChildrenWithProps,
   LiteralUnion,
 } from '../../devsupport';
@@ -84,6 +85,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   return (
     <View
       {...viewProps}
+      {...buildAccessibilityProps({ role: 'radiogroup' }, viewProps)}
       style={[evaStyle.container, style]}
     >
       {radioElements}

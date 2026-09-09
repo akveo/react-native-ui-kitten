@@ -16,6 +16,7 @@ import {
   View,
 } from 'react-native';
 import {
+  buildAccessibilityProps,
   EvaStatus,
   FalsyText,
   RenderProp,
@@ -198,7 +199,13 @@ export const CheckBox: React.FC<CheckBoxProps> = (props): TouchableWebElement =>
 
   return (
     <TouchableWeb
+      accessibilityLiveRegion='polite'
       {...touchableProps}
+      {...buildAccessibilityProps({
+        role: 'checkbox',
+        checked: indeterminate ? 'mixed' : Boolean(checked),
+        disabled: Boolean(disabled),
+      }, props)}
       style={[styles.container, style]}
       disabled={disabled}
       onMouseEnter={onMouseEnter}

@@ -29,6 +29,14 @@ export {
   WebEventResponderInstance,
   type WebEventResponderCallbacks,
 } from './services/web/webEventResponder';
+export {
+  buildAccessibilityProps,
+  accessibleNameOf,
+  accessibleInputName,
+  type AccessibilitySemantics,
+  type AccessibilityOverrides,
+  type AccessibilityDOMProps,
+} from './services/accessibility/accessibility.service';
 export { RTLService } from './services/rtl/rtl.service';
 export {
   PropsService,

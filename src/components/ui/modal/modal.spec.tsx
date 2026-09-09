@@ -78,7 +78,11 @@ describe('@modal: component checks', () => {
    */
   const touchables = {
     findToggleButton: (api: RenderAPI) => api.queryByTestId('@modal/toggle-button'),
-    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
+    // `includeHiddenElements` is required because the modal content sets
+    // `aria-modal`, which hides its siblings — the backdrop among them — from
+    // assistive technology. That is the intended iOS behaviour; the backdrop is
+    // still present and still receives touches.
+    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop', { includeHiddenElements: true }),
     findChangeTextButton: (api: RenderAPI) => api.queryByTestId('@modal/change-text-button'),
   };
 
@@ -156,6 +160,39 @@ describe('@modal: component checks', () => {
     const backdrop = await waitFor(() => touchables.findBackdropTouchable(component));
 
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
+  });
+
+
+  describe('accessibility', () => {
+
+    it('should mark the content as a modal so siblings are hidden', () => {
+      const component = render(<TestModal visible={true} />);
+
+      // `aria-modal` scopes VoiceOver to the content; the backdrop is a
+      // sibling and is therefore hidden from assistive technology.
+      expect(component.getByText('I love Babel')).toBeTruthy();
+      expect(component.queryByTestId('@backdrop')).toBeFalsy();
+      expect(component.queryByTestId('@backdrop', { includeHiddenElements: true })).toBeTruthy();
+    });
+
+    it('should name the backdrop only when a label is given', () => {
+      const withoutLabel = render(<TestModal visible={true} />);
+
+      expect(
+        withoutLabel.getByTestId('@backdrop', { includeHiddenElements: true }).props.accessible,
+      ).toBeUndefined();
+
+      const withLabel = render(
+        <TestModal
+          visible={true}
+          backdropAccessibilityLabel='Close'
+        />,
+      );
+      const backdrop = withLabel.getByTestId('@backdrop', { includeHiddenElements: true });
+
+      expect(backdrop.props.accessible).toEqual(true);
+      expect(backdrop.props['aria-label']).toEqual('Close');
+    });
   });
 
 });

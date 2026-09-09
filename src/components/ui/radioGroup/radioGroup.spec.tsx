@@ -87,4 +87,23 @@ describe('@radio-group: component checks', () => {
     expect(onChange).toHaveBeenCalledWith(1);
   });
 
+
+  describe('accessibility', () => {
+
+    it('should expose the radiogroup role', () => {
+      const component = render(<TestRadioGroup selectedIndex={0} />);
+
+      expect(component.UNSAFE_getByProps({ role: 'radiogroup' })).toBeTruthy();
+    });
+
+    it('should expose each child as a radio reflecting group selection', () => {
+      const component = render(<TestRadioGroup selectedIndex={1} />);
+      const radios = component.getAllByRole('radio');
+
+      expect(radios).toHaveLength(2);
+      expect(radios[0]).not.toBeChecked();
+      expect(radios[1]).toBeChecked();
+    });
+  });
+
 });

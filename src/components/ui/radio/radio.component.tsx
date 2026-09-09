@@ -15,6 +15,7 @@ import {
   View,
 } from 'react-native';
 import {
+  buildAccessibilityProps,
   EvaStatus,
   FalsyText,
   RenderProp,
@@ -180,7 +181,13 @@ export const Radio: React.FC<RadioProps> = (props): TouchableWebElement => {
 
   return (
     <TouchableWeb
+      accessibilityLiveRegion='polite'
       {...touchableProps}
+      {...buildAccessibilityProps({
+        role: 'radio',
+        checked: Boolean(checked),
+        disabled: Boolean(disabled),
+      }, props)}
       style={[styles.container, style]}
       disabled={disabled}
       onMouseEnter={onMouseEnter}

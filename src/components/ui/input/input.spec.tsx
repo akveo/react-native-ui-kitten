@@ -273,4 +273,55 @@ describe('@input: component checks', () => {
     fireEvent(component.UNSAFE_queryByType(TextInput), 'blur');
     expect(onBlur).toBeCalled();
   });
+
+  describe('accessibility', () => {
+
+    it('should name the text input from its label', () => {
+      const component = render(<TestInput label='Email' />);
+
+      expect(component.getByLabelText('Email')).toBeTruthy();
+    });
+
+    it('should not fold a non-error caption into the name', () => {
+      const component = render(
+        <TestInput
+          label='Email'
+          caption='We never share it'
+        />,
+      );
+
+      expect(component.getByLabelText('Email')).toBeTruthy();
+      expect(component.queryByLabelText('Email We never share it')).toBeFalsy();
+    });
+
+    it('should fold the caption into the name when status is danger', () => {
+      const component = render(
+        <TestInput
+          label='Email'
+          caption='Invalid address'
+          status='danger'
+        />,
+      );
+
+      expect(component.getByLabelText('Email Invalid address')).toBeTruthy();
+    });
+
+    it('should let a consumer label override the derived name', () => {
+      const component = render(
+        <TestInput
+          label='Email'
+          aria-label='Custom'
+        />,
+      );
+
+      expect(component.getByLabelText('Custom')).toBeTruthy();
+    });
+
+    it('should keep the tap-forwarding wrapper out of the accessibility tree', () => {
+      const component = render(<TestInput testID='input' label='Email' />);
+
+      expect(component.getByTestId('@input/container').props.accessible).toEqual(false);
+    });
+  });
+
 });

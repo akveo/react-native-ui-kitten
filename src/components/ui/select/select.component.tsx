@@ -13,6 +13,7 @@ import {
   ListRenderItemInfo,
   NativeSyntheticEvent,
   Platform,
+  Role,
   StyleSheet,
   TargetedEvent,
   TextProps,
@@ -20,6 +21,8 @@ import {
   View,
 } from 'react-native';
 import {
+  accessibleNameOf,
+  buildAccessibilityProps,
   ChildrenWithProps,
   EvaInputSize,
   EvaStatus,
@@ -142,7 +145,7 @@ export const Select = React.forwardRef<SelectRef, SelectProps>(
       onPressIn: onPressInProp,
       onPressOut: onPressOutProp,
       testID,
-      ...touchableProps // eslint-disable-line @typescript-eslint/no-unused-vars
+      ...touchableProps
     } = props;
 
     const [listVisible, setListVisible] = useState(false);
@@ -370,6 +373,15 @@ export const Select = React.forwardRef<SelectRef, SelectProps>(
 
       return (
         <TouchableWeb
+          {...touchableProps}
+          {...buildAccessibilityProps({
+            role: 'combobox',
+            expanded: listVisible,
+            disabled: Boolean(disabled),
+            // `label` renders as a sibling of the trigger, so it is not picked
+            // up by React Native's child-Text name derivation.
+            label: accessibleNameOf(label),
+          }, props)}
           testID={testID}
           style={[staticStyles.input, componentStyle.input]}
           onPress={onPress}
@@ -399,7 +411,8 @@ export const Select = React.forwardRef<SelectRef, SelectProps>(
     }, [
       value, service, selectedIndices, componentStyle, testID, onPress,
       onMouseEnter, onMouseLeave, onPressIn, onPressOut, disabled,
-      accessoryLeft, accessoryRight, placeholder, renderDefaultIconElement
+      accessoryLeft, accessoryRight, placeholder, renderDefaultIconElement,
+      touchableProps, props, listVisible, label
     ]);
 
     return (
@@ -417,6 +430,10 @@ export const Select = React.forwardRef<SelectRef, SelectProps>(
           animationType="fade"
         >
           <List
+            // ARIA expects combobox -> listbox -> option. `listbox` has no
+            // member in react-native's `AccessibilityRole`, so it degrades to
+            // `list` on native while the web keeps the exact ARIA role.
+            {...buildAccessibilityProps({ role: 'listbox' as Role })}
             style={staticStyles.list}
             data={data}
             bounces={false}

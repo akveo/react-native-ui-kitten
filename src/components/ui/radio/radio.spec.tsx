@@ -160,4 +160,44 @@ I love Babel
     expect(onBlur).toBeCalled();
   });
 
+
+  describe('accessibility', () => {
+
+    it('should expose the radio role', () => {
+      const component = render(<TestRadio />);
+
+      expect(component.getByRole('radio')).toBeTruthy();
+    });
+
+    it('should expose checked state', () => {
+      const component = render(<TestRadio checked={true} />);
+
+      expect(component.getByRole('radio')).toBeChecked();
+    });
+
+    it('should expose unchecked state', () => {
+      const component = render(<TestRadio checked={false} />);
+
+      expect(component.getByRole('radio')).not.toBeChecked();
+    });
+
+    it('should expose disabled state', () => {
+      const component = render(<TestRadio disabled={true} />);
+
+      expect(component.getByRole('radio')).toBeDisabled();
+    });
+
+    it('should derive the accessible name from the label', () => {
+      const component = render(<TestRadio>Option A</TestRadio>);
+
+      expect(component.getByRole('radio')).toHaveAccessibleName('Option A');
+    });
+
+    it('should let a consumer override the label', () => {
+      const component = render(<TestRadio aria-label='Custom' />);
+
+      expect(component.getByRole('radio')).toHaveAccessibleName('Custom');
+    });
+  });
+
 });

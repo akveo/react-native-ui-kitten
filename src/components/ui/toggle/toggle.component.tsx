@@ -16,6 +16,8 @@ import {
   ViewProps,
 } from 'react-native';
 import {
+  accessibleNameOf,
+  buildAccessibilityProps,
   EvaStatus,
   FalsyText,
   RenderProp,
@@ -241,6 +243,15 @@ export const Toggle: React.FC<ToggleProps> = (props): React.ReactElement<ViewPro
     <View testID={testID} style={[styles.container, style]}>
       <TouchableWeb
         {...touchableProps}
+        {...buildAccessibilityProps({
+          role: 'switch',
+          checked: Boolean(checked),
+          disabled: Boolean(disabled),
+          // The label renders outside the touchable, so React Native cannot
+          // derive the accessible name from child Text nodes here. Plain string
+          // labels are surfaced explicitly; render props require `aria-label`.
+          label: accessibleNameOf(children),
+        }, props)}
         style={styles.toggleContainer}
         onPress={handlePress}
         onPressIn={handlePressIn}

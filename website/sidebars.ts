@@ -21,6 +21,7 @@ const sidebars: SidebarsConfig = {
         'guides/runtime-theming',
         'guides/running-on-the-web',
         'guides/testing',
+        'guides/accessibility',
         'guides/improving-performance',
       ],
     },
