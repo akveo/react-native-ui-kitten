@@ -15,10 +15,6 @@ keywords:
 
 [Eva Icons](https://akveo.github.io/eva-icons) is a pack of beautifully crafted Open Source icons for common actions and items. UI Kitten has its own module to run it in React Native, adopting for better usage with UI Kitten components. If you're not interested in using Eva Icons, learn how to integrate [3rd party Icon packages](#3rd-party-icon-packages).
 
-:::note
-You might not be interested in this guide, if you have initialized the app using UI Kitten template since it already includes Eva Icons.
-:::
-
 ---
 
 ## Eva Icons

@@ -3923,18 +3923,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ui-kitten/template-js@workspace:src/template-js":
-  version: 0.0.0-use.local
-  resolution: "@ui-kitten/template-js@workspace:src/template-js"
-  languageName: unknown
-  linkType: soft
-
-"@ui-kitten/template-ts@workspace:src/template-ts":
-  version: 0.0.0-use.local
-  resolution: "@ui-kitten/template-ts@workspace:src/template-ts"
-  languageName: unknown
-  linkType: soft
-
 "@ungap/structured-clone@npm:^1.2.0, @ungap/structured-clone@npm:^1.3.0":
   version: 1.3.0
   resolution: "@ungap/structured-clone@npm:1.3.0"

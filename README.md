@@ -38,20 +38,18 @@ npm install @ui-kitten/components@beta @ui-kitten/eva@beta @ui-kitten/eva-icons@
 
 ## Quick Start
 
-Start a new app with UI Kitten template from a scratch:
+Start a new app from scratch:
 
 ```bash
-npx react-native init MyApp --template @ui-kitten/template-js
+npx create-expo-app@latest MyApp
+cd MyApp
+npx expo install @ui-kitten/components@beta @ui-kitten/eva@beta @ui-kitten/eva-icons@beta react-native-svg
 ```
 
-Or, if you want to init with TypeScript:
+Prefer bare React Native? Swap the first command for `npx @react-native-community/cli@latest init MyApp`.
 
-```bash
-npx react-native init MyApp --template @ui-kitten/template-ts
-```
-
-This will setup a new React Native application configured with UI Kitten.
-Refer to the [Documentation][link:doc-where-start] for more options to start.
+Then wrap your app root in `ApplicationProvider`.
+Refer to the [Documentation][link:doc-where-start] for the full walkthrough.
 
 ## How can I support the developers?
 - Star our GitHub repo :star:
