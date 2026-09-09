@@ -1,0 +1,25 @@
+{
+  "name": "uikitten-v5-app",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "bootstrap": "ui-kitten bootstrap @eva-design/eva",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@eva-design/eva": "^2.2.0",
+    "@ui-kitten/components": "5.3.1",
+    "@ui-kitten/eva-icons": "5.3.1",
+    "react": "19.1.0",
+    "react-native": "0.81.1"
+  },
+  "devDependencies": {
+    "@ui-kitten/metro-config": "5.3.1"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)/)"
+    ]
+  }
+}

@@ -35,12 +35,16 @@ module.exports = {
   },
   modulePathIgnorePatterns: [
     '<rootDir>/src/showcases/',
+    '<rootDir>/src/codemod/__testfixtures__/',
+    '<rootDir>/src/codemod/__e2e__/',
     '/lib/',
   ],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules',
     '<rootDir>/dist',
     '<rootDir>/docs',
+    '<rootDir>/src/codemod/__testfixtures__/',
+    '<rootDir>/src/codemod/__e2e__/',
     '/lib/',
   ],
 };
