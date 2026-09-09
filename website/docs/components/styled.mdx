@@ -2,10 +2,11 @@
 id: styled
 title: Using Mapping
 sidebar_label: Using Mapping
-description: Use the styled higher-order function to apply Eva Design System style mappings to custom components.
+description: Use the useStyled hook to apply Eva Design System style mappings to custom components.
 keywords:
   - React Native
   - UI Kitten
+  - useStyled
   - styled
   - mapping
   - Eva Design System
@@ -13,45 +14,97 @@ keywords:
 
 # Using Mapping
 
-The `styled` higher-order function connects a custom component to the Eva Design System style mapping. It resolves Eva styles based on the component's interaction state (focused, pressed, disabled, etc.) and passes computed styles as props.
+The `useStyled` hook connects a custom component to the Eva Design System style mapping. It resolves Eva styles based on the component's semantic properties and interaction state (focused, pressed, disabled, etc.) and returns them to the component.
+
+:::warning
+`useStyled` replaces the `styled` higher-order function, which was removed in UI Kitten 6.0.0. See the [5.x to 6.0.0 Migration](/docs/migration/5x-to-6) guide.
+:::
 
 ## Import
 
 ```tsx
-import { styled } from '@ui-kitten/components';
+import { useStyled } from '@ui-kitten/components';
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { View } from 'react-native';
-import { styled } from '@ui-kitten/components';
+import { TouchableOpacity } from 'react-native';
+import { useStyled } from '@ui-kitten/components';
 
-const MyComponent = ({ eva, style, ...props }) => {
+const MyComponent = ({ appearance, status, size, style, ...props }) => {
+  const { style: evaStyle } = useStyled('MyComponent', { appearance, status, size });
+
   return (
-    <View style={[eva.style, style]} {...props} />
+    <TouchableOpacity style={[evaStyle, style]} {...props} />
   );
 };
 
-export default styled('MyComponent')(MyComponent);
+export default MyComponent;
 ```
 
-The `styled` function accepts the Eva mapping name as its first argument and returns a wrapper that injects `eva.style` into the component props. These styles are resolved from your Eva theme and mapping configuration.
+The hook takes the component name as defined in your Eva mapping and the semantic properties to resolve it against. It returns the computed style, the current theme, and a `dispatch` function for interaction states.
+
+## Interaction States
+
+Call `dispatch` to tell Eva which interaction states are active. The style is recalculated for the states you pass.
+
+```tsx
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import { useStyled, Interaction } from '@ui-kitten/components';
+
+const MyComponent = ({ appearance, style, ...props }) => {
+  const { style: evaStyle, dispatch } = useStyled('MyComponent', { appearance });
+
+  return (
+    <TouchableOpacity
+      {...props}
+      activeOpacity={1.0}
+      style={[evaStyle, style]}
+      onPressIn={() => dispatch([Interaction.ACTIVE])}
+      onPressOut={() => dispatch([])}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+`Interaction` is an enum of `HOVER`, `ACTIVE`, `FOCUSED`, `INDETERMINATE`, and `VISIBLE`.
 
 ## Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `name` | `string` | The component name as defined in the Eva mapping configuration. |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `componentName` | `string` | - | The component name as defined in the Eva mapping configuration. |
+| `options` | `UseStyledOptions` | `{}` | Semantic properties to resolve the mapping against. |
 
-## Injected Props
+### UseStyledOptions
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `eva.style` | `object` | The resolved style object from the Eva mapping for the current interaction state. |
-| `eva.dispatch` | `function` | Dispatches interaction state changes (e.g., focus, press) to recalculate styles. |
-| `eva.theme` | `object` | The current Eva theme variables. |
+| `appearance` | `string` | Appearance defined in the component mapping. |
+| `status` | `string` | Status variant, e.g. `primary`, `danger`. |
+| `size` | `string` | Size variant, e.g. `small`, `large`. |
+| `category` | `string` | Category variant, used by `Text`. |
+| `disabled` | `boolean` | Whether the disabled state mapping applies. |
+| `checked` | `boolean` | Whether the checked state mapping applies. |
+| `selected` | `boolean` | Whether the selected state mapping applies. |
+| `indeterminate` | `boolean` | Whether the indeterminate state mapping applies. |
+| `level` | `string` | Level variant, used by `Layout`. |
+| `shape` | `string` | Shape variant, e.g. `round`, `rounded`. |
+
+Any other key is passed through to the mapping resolver, which is how the Calendar mapping consumes `bounding`, `today`, and `range`.
+
+## Return Value
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `style` | `StyleType` | The resolved style object for the current properties and interactions. |
+| `theme` | `ThemeType` | The current Eva theme variables. |
+| `dispatch` | `(interactions: Interaction[]) => void` | Sets the active interaction states and recalculates the style. |
 
 ## Storybook
 

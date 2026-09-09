@@ -83,12 +83,16 @@ const OverflowMenuExample = () => {
 | `onSelect` | `(index: IndexPath) => void` | - | Called when a menu item is selected. |
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Position of the menu relative to the anchor. |
 | `children` | `MenuItem[]` | - | Menu item elements. |
+| `backdropStyle` | `ViewStyle` | `undefined` | Style applied to the backdrop. |
+| `fullWidth` | `boolean` | `false` | Whether the menu matches the width of its anchor. |
+
+OverflowMenu is a Menu rendered inside a Popover, so it accepts the properties of both, including every React Native `Modal` property.
 
 ### MenuItem
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | - | Item title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | - | Item title text or render function. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory. |
 | `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory. |
 | `disabled` | `boolean` | `false` | Whether the item is disabled. |

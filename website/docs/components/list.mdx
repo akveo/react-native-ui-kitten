@@ -53,18 +53,24 @@ const ListExample = () => (
 
 ### List
 
-List accepts all React Native `FlatList` props.
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+List accepts all React Native `FlatList` props, and exposes `scrollToEnd()`, `scrollToIndex()` and `scrollToOffset()` through a ref typed as `ListRef`.
 
 ### ListItem
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | `undefined` | Primary text content of the list item. |
-| `description` | `ReactText \| (props) => ReactElement` | `undefined` | Secondary text content displayed below the title. |
+| `title` | `string \| number \| (props) => ReactElement` | `undefined` | Primary text content of the list item. |
+| `description` | `string \| number \| (props) => ReactElement` | `undefined` | Secondary text content displayed below the title. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory (e.g., icon or avatar). |
-| `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory (e.g., icon or button). |
-| `onPress` | `() => void` | `undefined` | Called when the list item is pressed. |
-| `children` | `ReactNode` | `undefined` | Custom content replacing the default layout. |
+| `accessoryRight` | `(props: ViewProps) => ReactElement` | `undefined` | Render function for the right accessory. Unlike `accessoryLeft`, it receives `ViewProps`, so it can hold any view — a button, a toggle. |
+| `children` | `ReactNode` | `undefined` | Custom content replacing the default layout. When provided, `title` and the accessories are ignored. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+ListItem also accepts all standard React Native `TouchableOpacity` props, including `onPress` and `disabled`.
 
 ## Storybook
 

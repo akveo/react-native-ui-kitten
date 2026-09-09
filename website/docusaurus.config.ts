@@ -13,8 +13,13 @@ const config: Config = {
   organizationName: 'akveo',
   projectName: 'react-native-ui-kitten',
 
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
+  },
 
   i18n: {
     defaultLocale: 'en',
@@ -27,7 +32,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/akveo/react-native-ui-kitten/tree/master/website/',
+          editUrl: 'https://github.com/akveo/react-native-ui-kitten/tree/next/website/',
         },
         blog: false,
         theme: {
@@ -53,7 +58,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: '/react-native-ui-kitten/storybook/',
+          href: 'https://akveo.github.io/react-native-ui-kitten/storybook/',
           label: 'Storybook',
           position: 'left',
         },
@@ -87,7 +92,7 @@ const config: Config = {
           title: 'More',
           items: [
             {label: 'GitHub', href: 'https://github.com/akveo/react-native-ui-kitten'},
-            {label: 'Storybook', href: '/react-native-ui-kitten/storybook/'},
+            {label: 'Storybook', href: 'https://akveo.github.io/react-native-ui-kitten/storybook/'},
           ],
         },
       ],

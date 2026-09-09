@@ -27,7 +27,9 @@ jobs:
       - run: yarn install --immutable
       - run: yarn build
       - run: cd website && yarn install
-      - run: cd website && yarn build
+      # build:all runs `storybook build -o static/storybook` before the Docusaurus
+      # build, so the Storybook link in the navbar and footer resolves.
+      - run: cd website && yarn build:all
       - uses: actions/upload-pages-artifact@v3
         with:
           path: website/build

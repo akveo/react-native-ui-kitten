@@ -54,7 +54,10 @@ const ToggleExample = () => {
 | `checked` | `boolean` | `false` | Whether the toggle is on. |
 | `onChange` | `(checked: boolean) => void` | - | Called when the toggle value changes. |
 | `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Semantic color of the toggle. |
-| `children` | `ReactText \| (props) => ReactElement` | `undefined` | Label text or render function displayed next to the toggle. |
+| `children` | `string \| number \| (props) => ReactElement` | `undefined` | Label text or render function displayed next to the toggle. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+Toggle also accepts all standard React Native `TouchableOpacity` props, including `disabled`.
 
 ## Storybook
 

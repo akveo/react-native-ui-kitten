@@ -68,12 +68,13 @@ const DrawerExample = () => {
 | `header` | `(props) => ReactElement` | `undefined` | Render function for the drawer header. |
 | `footer` | `(props) => ReactElement` | `undefined` | Render function for the drawer footer. |
 | `children` | `DrawerItem[] \| DrawerGroup[]` | - | Drawer items and groups. |
+| `appearance` | `'default' \| 'noDivider'` | `'default'` | Appearance defined in the Eva mapping. Use `noDivider` to hide the separators. |
 
 ### DrawerGroup
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | - | Group title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | - | Group title text or render function. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory. |
 | `children` | `DrawerItem[]` | - | Nested drawer items. |
 
@@ -81,10 +82,12 @@ const DrawerExample = () => {
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | `undefined` | Item title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | `undefined` | Item title text or render function. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory. |
 | `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory. |
-| `onPress` | `() => void` | `undefined` | Called when the item is pressed. |
+| `selected` | `boolean` | `false` | Whether the item is rendered as selected. Managed by Drawer. |
+
+`DrawerItem` and `DrawerGroup` are aliases of `MenuItem` and `MenuGroup` and accept exactly the same properties, including `initiallyExpanded` on the group and all React Native `TouchableOpacity` props on the item. `onPress` is called with `(descriptor: MenuItemDescriptor, event?: GestureResponderEvent)`.
 
 ## Storybook
 

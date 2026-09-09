@@ -68,19 +68,24 @@ const AutocompleteExample = () => {
 | `onChangeText` | `(text: string) => void` | - | Called when the input text changes. |
 | `onSelect` | `(index: number) => void` | - | Called when a suggestion item is selected. |
 | `placeholder` | `string` | `undefined` | Placeholder text displayed when the input is empty. |
-| `label` | `ReactText \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
-| `caption` | `ReactText \| (props) => ReactElement` | `undefined` | Caption displayed below the input. |
+| `label` | `string \| number \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
+| `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the input. |
 | `children` | `AutocompleteItem[]` | - | Suggestion items. |
+| `placement` | `string \| PopoverPlacement` | `'inner top'` | Position of the suggestions list relative to the input. |
 
 ### AutocompleteItem
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | - | Item title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | - | Item title text or render function. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory. |
 | `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory. |
 
-Autocomplete also accepts all standard `Input` props.
+Autocomplete also accepts all `Input` properties — `status`, `size`, `disabled`, `textStyle`, `accessoryLeft`, `accessoryRight`, `appearance` — and every React Native `TextInput` property.
+
+Autocomplete exposes an imperative API through a ref typed as `AutocompleteRef`, with `focus()`, `blur()`, `isFocused()` and `clear()`.
+
+AutocompleteItem accepts the same properties as `ListItem`.
 
 ## Storybook
 

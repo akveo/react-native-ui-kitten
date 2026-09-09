@@ -146,7 +146,7 @@ module.exports = {
 };
 ```
 
-Run `npx react-native link` from the project root to link fonts with the native side. When it's done, create a `mapping.json` file and paste the code below to apply fonts to UI Kitten components.
+Run `npx react-native-asset` from the project root to link fonts with the native side. The `react-native link` command was removed from the React Native CLI in 0.69 and no longer exists. When it's done, create a `mapping.json` file and paste the code below to apply fonts to UI Kitten components.
 
 ```json
 {

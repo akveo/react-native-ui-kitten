@@ -63,18 +63,24 @@ const MenuExample = () => {
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | - | Group title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | - | Group title text or render function. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory. |
 | `children` | `MenuItem[]` | - | Nested menu items. |
+| `initiallyExpanded` | `boolean` | `false` | Whether the group renders expanded on mount. |
+
+MenuGroup accepts every MenuItem property in addition to the above.
 
 ### MenuItem
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | `undefined` | Item title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | `undefined` | Item title text or render function. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory. |
 | `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory. |
-| `onPress` | `() => void` | `undefined` | Called when the item is pressed. |
+| `selected` | `boolean` | `false` | Whether the item is rendered as selected. Managed by Menu. |
+| `appearance` | `'default' \| 'grouped'` | `'default'` | Appearance defined in the Eva mapping. `grouped` is applied to items inside a MenuGroup. |
+
+MenuItem also accepts all standard React Native `TouchableOpacity` props, including `disabled`. Its `onPress` is called with `(descriptor: MenuItemDescriptor, event?: GestureResponderEvent)` rather than the plain press event.
 
 ## Storybook
 

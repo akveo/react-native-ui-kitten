@@ -61,28 +61,40 @@ const SelectExample = () => {
 |----------|------|---------|-------------|
 | `selectedIndex` | `IndexPath \| IndexPath[]` | `undefined` | The selected item index (or array for multi-select). |
 | `onSelect` | `(index: IndexPath \| IndexPath[]) => void` | - | Called when an item is selected. |
-| `placeholder` | `ReactText \| (props) => ReactElement` | `undefined` | Placeholder displayed when no item is selected. |
-| `label` | `ReactText \| (props) => ReactElement` | `undefined` | Label displayed above the select. |
-| `caption` | `ReactText \| (props) => ReactElement` | `undefined` | Caption displayed below the select. |
+| `placeholder` | `string \| number \| (props) => ReactElement` | `'Select Option'` | Placeholder displayed when no item is selected. |
+| `label` | `string \| number \| (props) => ReactElement` | `undefined` | Label displayed above the select. |
+| `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the select. |
 | `multiSelect` | `boolean` | `false` | Whether multiple items can be selected. |
-| `value` | `ReactText \| (props) => ReactElement` | `undefined` | Display value text or render function. |
+| `value` | `string \| number \| (props) => ReactElement` | `undefined` | Display value text or render function. |
 | `children` | `SelectItem[] \| SelectGroup[]` | - | Select items and groups. |
+| `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the start of the control. |
+| `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the end of the control. Defaults to the chevron. |
+| `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Status of the control. |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the control. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+Select exposes an imperative API through a ref typed as `SelectRef`, with `focus()`, `blur()`, `isFocused()` and `clear()`.
 
 ### SelectGroup
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | - | Group title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | - | Group title text or render function. |
 | `children` | `SelectItem[]` | - | Nested select items. |
+| `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the start of the title. |
+| `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the end of the title. |
 
 ### SelectItem
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `title` | `ReactText \| (props) => ReactElement` | - | Item title text or render function. |
+| `title` | `string \| number \| (props) => ReactElement` | - | Item title text or render function. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory. |
 | `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory. |
-| `disabled` | `boolean` | `false` | Whether the item is disabled. |
+| `selected` | `boolean` | `false` | Whether the item is rendered as selected. Managed by Select. |
+| `appearance` | `'default' \| 'grouped'` | `'default'` | Appearance defined in the Eva mapping. `grouped` is applied to items inside a SelectGroup. |
+
+SelectItem also accepts all standard React Native `TouchableOpacity` props, including `disabled`. Its `onPress` is called with `(descriptor: SelectItemDescriptor, event?: GestureResponderEvent)` rather than the plain press event.
 
 ## Storybook
 

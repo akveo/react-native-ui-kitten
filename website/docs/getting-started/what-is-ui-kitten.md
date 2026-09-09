@@ -26,6 +26,8 @@ UI Kitten modules are distributed as separated npm packages:
   - UI Components - high-quality React Native components with no 3rd party dependencies.
   - Browser support with [React Native Web](https://github.com/necolas/react-native-web).
   - Right-to-left writing system support for all components.
+- Eva Design System `@ui-kitten/eva`
+  - The mapping and the Light and Dark themes consumed by `ApplicationProvider`. Required alongside `@ui-kitten/components`.
 - UI Kitten Eva Icons `@ui-kitten/eva-icons`
   - [Eva Icons](https://akveo.github.io/eva-icons) is a pack of more than 480 beautifully crafted icons. This module runs it in React Native, adopting for better usage with UI Kitten components.
 - UI Kitten Moment `@ui-kitten/moment`
