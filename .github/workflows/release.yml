@@ -23,7 +23,11 @@ jobs:
           cache: yarn
           registry-url: https://registry.npmjs.org
 
-      - run: npm install -g npm@latest
+      # Pinned to a major on purpose. npm >= 11.5.1 is required for OIDC trusted
+      # publishing, but `npm@latest` silently rolled the runner onto npm 12, whose
+      # breaking `npm view --json` change (always returns an array) made changesets
+      # misread every package as unpublished. See RELEASING.md.
+      - run: npm install -g npm@12
 
       - run: yarn install --immutable
 
