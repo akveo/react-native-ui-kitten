@@ -4,7 +4,7 @@
   "commit": false,
   "linked": [["@ui-kitten/*"]],
   "access": "public",
-  "baseBranch": "master",
+  "baseBranch": "next",
   "updateInternalDependencies": "patch",
   "ignore": ["@ui-kitten/showcases"]
 }
