@@ -7,8 +7,13 @@ import LogService from './log.service';
  * - /
  * - /metro.config.js
  * - /package.json
+ *
+ * Metro (and every CLI that loads metro.config.js) runs from the project root, so the working
+ * directory is the project root. Deriving it from the module's own location instead would depend
+ * on how deep inside node_modules this file was published, and `__dirname` does not exist at all
+ * once the package is emitted as ESM.
  */
-const PROJECT_PATH: string = Path.resolve(__dirname, '../../../../');
+const PROJECT_PATH: string = Path.resolve(process.cwd());
 
 // eslint-disable-next-line no-restricted-syntax
 export default class ProjectService {

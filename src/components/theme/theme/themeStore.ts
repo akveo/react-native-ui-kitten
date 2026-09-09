@@ -10,9 +10,12 @@ import { ThemeType, ThemeService } from './theme.service';
 /**
  * Extended theme type with stable identifier for caching.
  */
-export interface ThemedThemeType extends ThemeType {
+// Intersection rather than interface extension: an optional property on an interface that
+// extends an index-signature type widens to `string | undefined` and is not assignable to the
+// index type, which leaks a TS2411 error into the emitted declarations.
+export type ThemedThemeType = ThemeType & {
   __themeId?: string;
-}
+};
 
 /**
  * Interface for ThemeStore compatible with React 18's useSyncExternalStore.

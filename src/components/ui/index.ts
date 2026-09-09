@@ -262,4 +262,15 @@ export {
   TranslationWidth,
   type I18nConfig,
 } from './calendar/i18n/type';
-export { IndexPath } from '../devsupport';
+export {
+  IndexPath,
+  // Types used by public component props, so they have to be reachable from the
+  // package root and not only through the ./devsupport subpath.
+  type ChildrenWithProps,
+  type EvaInputSize,
+  type EvaSize,
+  type EvaStatus,
+  type LiteralUnion,
+  type RenderFCProp,
+  type RenderProp,
+} from '../devsupport';

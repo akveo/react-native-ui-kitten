@@ -13,7 +13,8 @@ import moment, { Moment } from 'moment';
 
 export class MomentDateService extends DateService<Moment> {
 
-  protected localeData: {
+  // Assigned by setLocale() from the constructor, which TypeScript cannot see.
+  protected localeData!: {
     firstDayOfWeek: number;
     defaultFormat: string;
     months: { [key: string]: string[] };

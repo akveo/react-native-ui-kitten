@@ -10,7 +10,9 @@ class RTLServiceStatic {
    * @returns true if it is Right-to-Left layout
    */
   public isRTL(): boolean {
-    return I18nManager.isRTL;
+    // react-native-web leaves I18nManager.isRTL undefined, so coerce rather than
+    // returning undefined from a method declared to return boolean.
+    return !!I18nManager.isRTL;
   }
 
   public select<T>(ltr: T, rtl: T): T {
