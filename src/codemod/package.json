@@ -1,0 +1,63 @@
+{
+  "name": "@ui-kitten/codemod",
+  "description": "Codemod that upgrades an application from UI Kitten v5 to v6",
+  "version": "6.0.0-beta.1",
+  "private": true,
+  "main": "./lib/commonjs/index.js",
+  "types": "./index.ts",
+  "source": "./index.ts",
+  "exports": {
+    ".": {
+      "source": "./index.ts",
+      "types": "./index.ts",
+      "default": "./lib/commonjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "*.ts",
+    "lib",
+    "bin",
+    "README.md",
+    "!**/__tests__",
+    "!**/__testfixtures__",
+    "!**/__e2e__",
+    "!**/*.spec.*"
+  ],
+  "author": "UI Kitten Contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
+  },
+  "keywords": [
+    "react-native",
+    "ui-kitten",
+    "codemod",
+    "migration"
+  ],
+  "bin": {
+    "ui-kitten-codemod": "./bin/ui-kitten-codemod"
+  },
+  "scripts": {
+    "build": "bob build",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "clean": "rm -rf lib"
+  },
+  "dependencies": {
+    "ts-morph": "^24.0.0"
+  },
+  "react-native-builder-bob": {
+    "source": ".",
+    "output": "lib",
+    "exclude": "**/{__tests__,__testfixtures__,__e2e__,node_modules}/**",
+    "targets": [
+      "commonjs"
+    ]
+  }
+}

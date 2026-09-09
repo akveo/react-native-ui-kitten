@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./lib/typescript",
+    "rootDir": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "lib": ["ESNext"],
+    "types": ["node", "jest"],
+    "paths": {}
+  },
+  "include": ["src", "*.ts"],
+  "exclude": [
+    "**/__tests__",
+    "**/__testfixtures__",
+    "**/__e2e__",
+    "**/*.spec.*",
+    "lib",
+    "bin"
+  ]
+}

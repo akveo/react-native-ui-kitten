@@ -26,6 +26,8 @@
     "./src/**/package.json"
   ],
   "exclude": [
+    "./src/codemod/__testfixtures__",
+    "./src/codemod/__e2e__",
     "node_modules",
     "babel.config.js",
     "metro.config.js",

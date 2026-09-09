@@ -45,6 +45,9 @@ module.exports = {
     },
   },
   ignorePatterns: [
+    // Deliberately-broken v5 sources the codemod transforms; they must not typecheck or lint.
+    'src/codemod/__testfixtures__',
+    'src/codemod/__e2e__',
     'lib',
     'dist',
     'docs/',
