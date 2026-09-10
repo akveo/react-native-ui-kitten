@@ -10,7 +10,6 @@ import EvaConfigService, { EvaConfig } from './eva-config.service';
 import LogService from './log.service';
 import ProjectService from './project.service';
 
-const DEFAULT_CHECKSUM = 'default';
 const CACHE_FILE_NAME = 'generated.json';
 const CACHE_DIR = 'node_modules/.cache/ui-kitten';
 
@@ -60,8 +59,17 @@ interface EvaCache {
 
 interface CustomMappingSource {
   mapping: CustomSchemaType;
-  checksum: string;
+  source: string;
 }
+
+/**
+ * Outcome of a bootstrap attempt.
+ *
+ * - `compiled`: the cache was written and/or the `exports.styles` line was appended.
+ * - `up-to-date`: nothing had to change.
+ * - `failed`: the project or the config is invalid; the reason was already reported as a warning.
+ */
+export type BootstrapStatus = 'compiled' | 'up-to-date' | 'failed';
 
 /**
  * Generates styles for `@ui-kitten/*` package specified in EvaConfig
@@ -100,11 +108,20 @@ export default class BootstrapService {
    * because the same code runs inside Metro.
    */
   static run = (config: EvaConfig): boolean => {
+    return BootstrapService.bootstrap(config) !== 'failed';
+  };
+
+  /**
+   * Same as `run`, but tells whether any work was done.
+   * `success` is logged only when something changed; a no-op logs nothing,
+   * so a bundler that bootstraps twice or a `postinstall` script does not repeat the line.
+   */
+  static bootstrap = (config: EvaConfig): BootstrapStatus => {
     const hasAtLeastOneEvaPackage: boolean = BootstrapService.ensureEvaPackagesInstalledOrWarn();
     const isValidConfig: boolean = EvaConfigService.validateConfigOrWarn(config);
 
     if (!hasAtLeastOneEvaPackage || !isValidConfig) {
-      return false;
+      return 'failed';
     }
 
     return BootstrapService.processMappingIfNeeded(config);
@@ -132,7 +149,7 @@ export default class BootstrapService {
     return true;
   };
 
-  private static processMappingIfNeeded = (config: EvaConfig): boolean => {
+  private static processMappingIfNeeded = (config: EvaConfig): BootstrapStatus => {
     const evaMappingPath: string = RELATIVE_PATHS.evaMapping(config.evaPackage);
     const outputCachePath: string = RELATIVE_PATHS.cache(config.evaPackage);
     const cacheDirPath: string = RELATIVE_PATHS.cacheDir();
@@ -145,7 +162,7 @@ export default class BootstrapService {
     if (config.customMappingPath) {
       customMappingSource = BootstrapService.readCustomMappingOrWarn(config.customMappingPath);
       if (!customMappingSource) {
-        return false;
+        return 'failed';
       }
     }
 
@@ -155,45 +172,50 @@ export default class BootstrapService {
     BootstrapService.ensureCacheDirectoryExists(cacheDirPath);
 
     /*
-     * Use `require` for eva mapping as it is static module and should not be changed.
-     * Require actual cache by reading file at cache file as it may change by file system.
+     * Read the eva mapping and the current cache from disk rather than through `require`,
+     * so that a changed file (an upgraded eva package, an edited custom mapping) is seen
+     * without a stale module cache getting in the way.
      */
-    const evaMapping: SchemaType = ProjectService.requireModule(evaMappingPath);
-    const actualCacheString: string = ProjectService.requireActualModule(outputCachePath);
-    const actualCache: EvaCache = actualCacheString ? JSON.parse(actualCacheString) : null;
+    const evaMappingString: string = ProjectService.requireActualModule(evaMappingPath) || '';
+    const evaMapping: SchemaType = JSON.parse(evaMappingString);
+    const actualCacheString: string | null = ProjectService.requireActualModule(outputCachePath);
+    const actualCache: EvaCache | null = actualCacheString ? JSON.parse(actualCacheString) : null;
 
-    let actualChecksum: string = DEFAULT_CHECKSUM;
-    let nextChecksum: string = DEFAULT_CHECKSUM;
-
-    if (actualCache?.checksum) {
-      actualChecksum = actualCache.checksum;
-    }
-
-    if (customMappingSource) {
-      /*
-       * Calculate checksum only for custom mapping,
-       * but not for styles we generate because eva mapping is a static module.
-       */
-      nextChecksum = customMappingSource.checksum;
-    }
+    /*
+     * The checksum covers the eva mapping and the custom mapping (if any),
+     * so the cache is rebuilt exactly when one of them changed.
+     */
+    const nextChecksum: string = BootstrapService.createChecksum(
+      evaMappingString + (customMappingSource?.source ?? ''),
+    );
+    const actualChecksum: string | null = actualCache?.checksum ?? null;
 
     /*
      * Write if it is the first call
      * Or re-write if custom mapping was changed
      */
-    if (actualChecksum === DEFAULT_CHECKSUM || actualChecksum !== nextChecksum) {
+    let didWork = false;
+    if (!actualCache || actualChecksum !== nextChecksum) {
       const mapping: SchemaType = deepMerge(evaMapping, customMappingSource?.mapping);
       const styles: ThemeStyleType = schemaProcessor.process(mapping);
       const writableCache: string = BootstrapService.createWritableCache(nextChecksum, styles);
 
       const absoluteCachePath: string = ProjectService.resolvePath(outputCachePath);
       Fs.writeFileSync(absoluteCachePath, writableCache);
+      didWork = true;
     }
 
-    BootstrapService.ensureCacheExports(config);
+    if (BootstrapService.ensureCacheExports(config)) {
+      didWork = true;
+    }
+
+    if (!didWork) {
+      return 'up-to-date';
+    }
+
     LogService.success(`Successfully bootstrapped ${config.evaPackage}`);
 
-    return true;
+    return 'compiled';
   };
 
   /**
@@ -244,7 +266,7 @@ export default class BootstrapService {
 
     return {
       mapping,
-      checksum: BootstrapService.createChecksum(customMappingString),
+      source: customMappingString,
     };
   };
 
@@ -259,20 +281,24 @@ export default class BootstrapService {
    * Appends the `exports.styles` line to the eva package index once.
    * The file is rewritten so that it always ends with the signature followed by exactly one newline,
    * regardless of how many trailing blank lines the index had before.
+   *
+   * @returns `true` when the line was appended, `false` when it was already there.
    */
-  private static ensureCacheExports = (config: EvaConfig): void => {
+  private static ensureCacheExports = (config: EvaConfig): boolean => {
     const evaIndexPath: string = RELATIVE_PATHS.evaIndex(config.evaPackage);
     const evaIndexString: string = ProjectService.requireActualModule(evaIndexPath) || '';
     const expectedSignature: string = CACHE_EXPORT_SIGNATURE(config.evaPackage);
 
     if (evaIndexString.includes(expectedSignature)) {
-      return;
+      return false;
     }
 
     const absoluteEvaIndexPath: string = ProjectService.resolvePath(evaIndexPath);
     const trimmedIndexString: string = evaIndexString.replace(/\s+$/, '');
 
     Fs.writeFileSync(absoluteEvaIndexPath, `${trimmedIndexString}\n\n${expectedSignature}\n`);
+
+    return true;
   };
 
   private static createWritableCache = (checksum: string, styles: ThemeStyleType): string => {

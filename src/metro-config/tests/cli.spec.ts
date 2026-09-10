@@ -30,6 +30,20 @@ describe('@cli: bootstrap command', () => {
 
     expect(process.exitCode).toBeUndefined();
     expect(consoleSpies.log.mock.calls.join('\n')).toContain('Successfully bootstrapped @ui-kitten/eva');
+    expect(consoleSpies.log.mock.calls.join('\n')).not.toContain('up to date');
+  });
+
+  it('should print an up-to-date line instead of success when nothing changed', () => {
+    runCli('@ui-kitten/eva');
+    consoleSpies.log.mockClear();
+
+    runCli('@ui-kitten/eva');
+
+    const output = consoleSpies.log.mock.calls.join('\n');
+    expect(process.exitCode).toBeUndefined();
+    expect(output).toContain('@ui-kitten/eva styles are up to date');
+    expect(output).not.toContain('Successfully bootstrapped');
+    expect(consoleSpies.log).toHaveBeenCalledTimes(1);
   });
 
   it('should set exit code 1 for an unknown eva package', () => {
