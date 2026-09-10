@@ -32,8 +32,9 @@
   "files": [
     "*.ts",
     "lib",
-    "!**/__tests__",
-    "!**/*.spec.*"
+    "!**/__tests__/**",
+    "!**/*.spec.*",
+    "!**/tests/**"
   ],
   "author": "UI Kitten Contributors",
   "license": "MIT",
