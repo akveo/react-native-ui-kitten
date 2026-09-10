@@ -4,6 +4,24 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react-hooks'],
   overrides: [
     {
+      // Plain Node build scripts: no TypeScript project, so no type-aware rules.
+      files: ['scripts/**/*.js'],
+      parser: 'espree',
+      parserOptions: {
+        project: null,
+        ecmaVersion: 2022,
+        sourceType: 'script',
+      },
+      env: {
+        node: true,
+        es2022: true,
+      },
+      extends: ['eslint:recommended'],
+      rules: {
+        'no-console': 'off',
+      },
+    },
+    {
       files: ['*.ts', '*.tsx'],
       rules: {
         // Keep meaningful rules
