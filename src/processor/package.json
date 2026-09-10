@@ -39,12 +39,10 @@
     "*.map",
     "dss/",
     "js/",
+    "!**/__tests__/**",
     "!**/*.spec.*",
-    "!**/__tests__/**"
+    "!**/tests/**"
   ],
-  "scripts": {
-    "build": "echo 'Pre-compiled, no build needed'"
-  },
   "publishConfig": {
     "access": "public"
   }

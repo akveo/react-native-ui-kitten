@@ -12,22 +12,34 @@ import LogService from './log.service';
  * directory is the project root. Deriving it from the module's own location instead would depend
  * on how deep inside node_modules this file was published, and `__dirname` does not exist at all
  * once the package is emitted as ESM.
+ *
+ * The working directory is read on every call rather than captured at load time so that the
+ * service follows `process.chdir` (which is how the specs sandbox it in a temporary project).
  */
-const PROJECT_PATH: string = Path.resolve(process.cwd());
+const getProjectPath = (): string => Path.resolve(process.cwd());
 
 // eslint-disable-next-line no-restricted-syntax
 export default class ProjectService {
 
-  static resolvePath = (path: string): string => {
+  /**
+   * Resolves a project-relative path against the project root.
+   * Returns `null` for an empty path instead of falling back to the project root itself,
+   * so callers can never accidentally read, require or watch the whole project directory.
+   */
+  static resolvePath = (path: string | undefined | null): string | null => {
     if (!path) {
-      return './';
+      return null;
     }
 
-    return Path.resolve(PROJECT_PATH, path);
+    return Path.resolve(getProjectPath(), path);
   };
 
   static requireModule = <T = Record<string, unknown>>(path: string): T | null => {
-    const modulePath: string = ProjectService.resolvePath(path);
+    const modulePath: string | null = ProjectService.resolvePath(path);
+
+    if (!modulePath) {
+      return null;
+    }
 
     try {
       return require(modulePath);
@@ -41,7 +53,11 @@ export default class ProjectService {
   };
 
   static requireActualModule = (relativePath: string): string | null => {
-    const modulePath: string = ProjectService.resolvePath(relativePath);
+    const modulePath: string | null = ProjectService.resolvePath(relativePath);
+
+    if (!modulePath) {
+      return null;
+    }
 
     // Check if file exists directly (for non-JS files like JSON cache files)
     if (Fs.existsSync(modulePath)) {
@@ -56,7 +72,16 @@ export default class ProjectService {
     return Fs.readFileSync(modulePath, { encoding: 'utf8' });
   };
 
+  /**
+   * Whether a file or directory exists at the project-relative path.
+   *
+   * This deliberately does not `require` the module: the eva package index requires the
+   * generated cache once it has been bootstrapped, so loading it would report the package as
+   * missing whenever `node_modules/.cache` was wiped, which is exactly when a bootstrap is needed.
+   */
   static hasModule = (path: string): boolean => {
-    return ProjectService.requireModule(path) !== null;
+    const modulePath: string | null = ProjectService.resolvePath(path);
+
+    return !!modulePath && Fs.existsSync(modulePath);
   };
 }

@@ -34,11 +34,10 @@
     "*.json",
     "*.map",
     "themes/",
-    "!*.spec.*"
+    "!**/__tests__/**",
+    "!**/*.spec.*",
+    "!**/tests/**"
   ],
-  "scripts": {
-    "build": "echo 'Pre-compiled, no build needed'"
-  },
   "publishConfig": {
     "access": "public"
   }

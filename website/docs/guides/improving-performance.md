@@ -90,13 +90,58 @@ module.exports = (async () => {
 })();
 ```
 
-Shut down the current bundler process and restart the app with clearing cache.
+### What happens when Metro loads the config
+
+`MetroConfig.create` compiles the styles at the moment `metro.config.js` is loaded, before Metro starts
+bundling. It does not wait for any bundler event, so it works the same under `expo start`,
+`expo export`, EAS builds and the bare `react-native start` / `bundle` commands:
+
+1. The Eva mapping (merged with `customMappingPath`, if set) is compiled and written to
+   `node_modules/.cache/ui-kitten/eva-generated.json` (or `material-generated.json`).
+2. `node_modules/@ui-kitten/eva/index.js` gains a single line, `exports.styles = require(...)`,
+   which is what `<ApplicationProvider {...eva}>` picks up. The line is added once; running the
+   compilation again is a no-op unless the custom mapping changed.
+3. When a `customMappingPath` is set and the file exists, the file is watched (polled every
+   100 ms) from the moment the config is loaded, under any bundler, and the styles are recompiled
+   whenever it changes. Nothing is watched otherwise, and the watcher never keeps a one-shot
+   process such as `expo export` alive. Set `watch: false` in `evaConfig` to disable it.
+
+Because step 2 changes a file that Metro has already cached, restart the bundler once with the cache
+cleared so it picks the updated `@ui-kitten/eva` up:
 
 ```bash
 npm start -- --reset-cache
 
 // Using Expo?
-expo start -c
+npx expo start -c
+```
+
+A misconfiguration (unknown `evaPackage`, a package that is not installed, a `customMappingPath`
+that does not exist or is not valid JSON) is reported as a `warn` message and the styles are left
+uncompiled; the app then falls back to compiling Eva at runtime. The Metro config is still returned,
+so the bundler keeps working.
+
+### Projects that cannot change their Metro config
+
+The command line interface below does exactly the same work. Run it as a `postinstall` script so
+the styles are compiled every time dependencies are installed:
+
+```json
+{
+  "scripts": {
+    "postinstall": "npx ui-kitten bootstrap @ui-kitten/eva"
+  }
+}
+```
+
+Or, with a custom mapping:
+
+```json
+{
+  "scripts": {
+    "postinstall": "npx ui-kitten bootstrap @ui-kitten/eva ./custom-mapping.json"
+  }
+}
 ```
 
 ---
@@ -116,6 +161,10 @@ Or, if there is a custom mapping:
 ```bash
 ui-kitten bootstrap @ui-kitten/eva ./path-to/mapping.json
 ```
+
+The command prints `success Successfully bootstrapped @ui-kitten/eva` and exits with code 0. On a
+configuration mistake it prints a `warn` message explaining what was tried and exits with code 1, so
+a CI script can fail early. It is safe to run repeatedly: `exports.styles` is only appended once.
 
 ---
 

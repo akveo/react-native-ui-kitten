@@ -1,5 +1,7 @@
-import { CommanderStatic } from 'commander';
-import BootstrapService from '../services/bootstrap.service';
+import { Command } from 'commander';
+import BootstrapService, { BootstrapStatus } from '../services/bootstrap.service';
+import LogService from '../services/log.service';
+import { EvaMappingPackageName } from '../services/eva-config.service';
 
 const BOOTSTRAP_COMMAND_DESCRIPTION = `
 Compile mapping.json into style object, optionally merging it with another mapping
@@ -16,9 +18,23 @@ ui-kitten bootstrap @ui-kitten/eva ./path-to/mapping.json
 `;
 
 // eslint-disable-next-line no-restricted-syntax
-export default (program: CommanderStatic): void => {
+export default (program: Command): void => {
   program.command('bootstrap <evaPackage> [mappingPath]')
     .description(BOOTSTRAP_COMMAND_DESCRIPTION)
     .usage(BOOTSTRAP_COMMAND_USAGE)
-    .action((evaPackage, customMappingPath) => BootstrapService.run({ evaPackage, customMappingPath }));
+    .action((evaPackage: EvaMappingPackageName, customMappingPath?: string) => {
+      const status: BootstrapStatus = BootstrapService.bootstrap({ evaPackage, customMappingPath });
+
+      /*
+       * Signal the failure through the exit code so CI scripts can detect it,
+       * without calling `process.exit` (the service also runs inside Metro).
+       */
+      if (status === 'failed') {
+        process.exitCode = 1;
+      }
+
+      if (status === 'up-to-date') {
+        LogService.info(`${evaPackage} styles are up to date`);
+      }
+    });
 };

@@ -2,16 +2,30 @@
   "name": "@ui-kitten/eva-icons",
   "description": "Eva Icons for UI Kitten / React Native",
   "version": "6.0.0-beta.1",
-  "main": "./lib/module/index.js",
-  "types": "./index.ts",
+  "main": "./lib/commonjs/index.js",
+  "module": "./lib/module/index.js",
+  "types": "./lib/typescript/commonjs/index.d.ts",
   "react-native": "./index.ts",
   "source": "./index.ts",
   "exports": {
     ".": {
-      "react-native": "./index.ts",
       "source": "./index.ts",
-      "types": "./index.ts",
-      "default": "./lib/module/index.js"
+      "react-native": {
+        "types": "./lib/typescript/module/index.d.ts",
+        "default": "./index.ts"
+      },
+      "import": {
+        "types": "./lib/typescript/module/index.d.ts",
+        "default": "./lib/module/index.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/index.d.ts",
+        "default": "./lib/commonjs/index.js"
+      },
+      "default": {
+        "types": "./lib/typescript/commonjs/index.d.ts",
+        "default": "./lib/commonjs/index.js"
+      }
     },
     "./package.json": "./package.json"
   },
@@ -19,8 +33,9 @@
     "*.ts",
     "*.tsx",
     "lib",
-    "!**/__tests__",
-    "!**/*.spec.*"
+    "!**/__tests__/**",
+    "!**/*.spec.*",
+    "!**/tests/**"
   ],
   "author": "UI Kitten Contributors",
   "license": "MIT",
@@ -42,7 +57,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "bob build",
+    "build": "bob build && node ../../scripts/esm-declaration-extensions.js",
     "typecheck": "tsc -p tsconfig.build.json --noEmit",
     "clean": "rm -rf lib"
   },
@@ -60,11 +75,27 @@
     "exclude": "{**/{__tests__,__fixtures__,__mocks__,node_modules,tests}/**,**/*.spec.*,package.json,CHANGELOG.md,tsconfig*.json,lib/**}",
     "targets": [
       [
+        "commonjs",
+        {
+          "esm": true,
+          "sourceMaps": false
+        }
+      ],
+      [
         "module",
         {
           "esm": true
         }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
       ]
     ]
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
   }
 }

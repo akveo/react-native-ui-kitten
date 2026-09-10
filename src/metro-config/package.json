@@ -19,9 +19,9 @@
     "*.ts",
     "lib",
     "bin",
-    "!**/__tests__",
+    "!**/__tests__/**",
     "!**/*.spec.*",
-    "!**/tests"
+    "!**/tests/**"
   ],
   "author": "UI Kitten Contributors",
   "license": "MIT",
