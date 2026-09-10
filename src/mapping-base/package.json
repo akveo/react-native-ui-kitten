@@ -17,7 +17,9 @@
     "*.js",
     "*.d.ts",
     "*.json",
-    "!*.spec.*"
+    "!**/__tests__/**",
+    "!**/*.spec.*",
+    "!**/tests/**"
   ],
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
