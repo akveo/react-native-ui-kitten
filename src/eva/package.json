@@ -36,9 +36,6 @@
     "themes/",
     "!*.spec.*"
   ],
-  "scripts": {
-    "build": "echo 'Pre-compiled, no build needed'"
-  },
   "publishConfig": {
     "access": "public"
   }
