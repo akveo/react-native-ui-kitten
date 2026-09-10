@@ -42,9 +42,6 @@
     "!**/*.spec.*",
     "!**/__tests__/**"
   ],
-  "scripts": {
-    "build": "echo 'Pre-compiled, no build needed'"
-  },
   "publishConfig": {
     "access": "public"
   }

@@ -15,7 +15,6 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build": "echo 'Showcases app, no library build needed'",
     "build:web": "npx expo export:web",
     "clean": "rimraf ./web-build",
     "env": "node ./env/set-env.js",

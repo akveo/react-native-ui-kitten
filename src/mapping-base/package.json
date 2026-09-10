@@ -19,9 +19,6 @@
     "*.json",
     "!*.spec.*"
   ],
-  "scripts": {
-    "build": "echo 'Pre-compiled, no build needed'"
-  },
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
