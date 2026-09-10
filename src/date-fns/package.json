@@ -21,6 +21,10 @@
       "require": {
         "types": "./lib/typescript/commonjs/index.d.ts",
         "default": "./lib/commonjs/index.js"
+      },
+      "default": {
+        "types": "./lib/typescript/commonjs/index.d.ts",
+        "default": "./lib/commonjs/index.js"
       }
     },
     "./package.json": "./package.json"
