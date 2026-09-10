@@ -1,5 +1,6 @@
 import { Command } from 'commander';
-import BootstrapService from '../services/bootstrap.service';
+import BootstrapService, { BootstrapStatus } from '../services/bootstrap.service';
+import LogService from '../services/log.service';
 import { EvaMappingPackageName } from '../services/eva-config.service';
 
 const BOOTSTRAP_COMMAND_DESCRIPTION = `
@@ -22,14 +23,18 @@ export default (program: Command): void => {
     .description(BOOTSTRAP_COMMAND_DESCRIPTION)
     .usage(BOOTSTRAP_COMMAND_USAGE)
     .action((evaPackage: EvaMappingPackageName, customMappingPath?: string) => {
-      const isBootstrapped: boolean = BootstrapService.run({ evaPackage, customMappingPath });
+      const status: BootstrapStatus = BootstrapService.bootstrap({ evaPackage, customMappingPath });
 
       /*
        * Signal the failure through the exit code so CI scripts can detect it,
        * without calling `process.exit` (the service also runs inside Metro).
        */
-      if (!isBootstrapped) {
+      if (status === 'failed') {
         process.exitCode = 1;
+      }
+
+      if (status === 'up-to-date') {
+        LogService.info(`${evaPackage} styles are up to date`);
       }
     });
 };

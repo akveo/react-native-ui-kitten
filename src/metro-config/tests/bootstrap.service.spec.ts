@@ -39,9 +39,23 @@ describe('@bootstrap-service: instance checks', () => {
     const outputAsObject = JSON.parse(outputString);
 
     expect(result).toBe(true);
-    expect(outputAsObject.checksum).toEqual('default');
+    expect(outputAsObject.checksum).toBeTruthy();
     expect(outputAsObject.styles).toBeTruthy();
     expect(consoleSpies.warn).not.toHaveBeenCalled();
+  });
+
+  it('should rebuild the cache when the eva mapping changes', () => {
+    BootstrapService.run(evaConfig);
+    const before = JSON.parse(Fs.readFileSync(project.cachePath(evaConfig.evaPackage)).toString());
+
+    const mappingPath = `node_modules/${evaConfig.evaPackage}/mapping.json`;
+    const mapping = JSON.parse(Fs.readFileSync(`${project.root}/${mappingPath}`).toString());
+    mapping.strict['text-font-family'] = 'Serif';
+    project.writeFile(mappingPath, JSON.stringify(mapping));
+
+    expect(BootstrapService.bootstrap(evaConfig)).toBe('compiled');
+    const after = JSON.parse(Fs.readFileSync(project.cachePath(evaConfig.evaPackage)).toString());
+    expect(after.checksum).not.toEqual(before.checksum);
   });
 
   it('should bootstrap @ui-kitten/eva package with custom styles', () => {
@@ -52,8 +66,13 @@ describe('@bootstrap-service: instance checks', () => {
     const outputString = Fs.readFileSync(project.cachePath(evaConfig.evaPackage)).toString();
     const outputAsObject = JSON.parse(outputString);
 
+    const plainChecksum = ((): string => {
+      BootstrapService.run(evaConfig);
+      return JSON.parse(Fs.readFileSync(project.cachePath(evaConfig.evaPackage)).toString()).checksum;
+    })();
+
     expect(result).toBe(true);
-    expect(outputAsObject.checksum).not.toEqual('default');
+    expect(outputAsObject.checksum).not.toEqual(plainChecksum);
     expect(outputAsObject.styles.StatusBar).toBeTruthy();
   });
 
@@ -72,12 +91,36 @@ describe('@bootstrap-service: instance checks', () => {
     expect(Fs.existsSync(`${project.root}/node_modules/.cache/ui-kitten`)).toBe(true);
   });
 
-  it('should print success message on every successful run', () => {
-    BootstrapService.run(evaConfig);
-    BootstrapService.run(evaConfig);
+  it('should print success message only when work was done', () => {
+    expect(BootstrapService.bootstrap(evaConfig)).toBe('compiled');
+    expect(BootstrapService.bootstrap(evaConfig)).toBe('up-to-date');
+    expect(BootstrapService.bootstrap(evaConfig)).toBe('up-to-date');
 
     const output = consoleSpies.log.mock.calls.map((call) => call.join(' ')).join('\n');
-    expect(countOccurrences(output, 'Successfully bootstrapped @ui-kitten/eva')).toBe(2);
+    expect(countOccurrences(output, 'Successfully bootstrapped @ui-kitten/eva')).toBe(1);
+    expect(consoleSpies.log).toHaveBeenCalledTimes(1);
+  });
+
+  it('should report compiled again when the custom mapping changes', () => {
+    project.writeFile('custom-mapping.json', readCustomMappingFixture());
+    const config = { ...evaConfig, customMappingPath: './custom-mapping.json' };
+
+    expect(BootstrapService.bootstrap(config)).toBe('compiled');
+    expect(BootstrapService.bootstrap(config)).toBe('up-to-date');
+
+    project.writeFile('custom-mapping.json', readCustomMappingFixture().replace('dark-content', 'light-content'));
+    expect(BootstrapService.bootstrap(config)).toBe('compiled');
+  });
+
+  it('should report compiled when only the export line was missing', () => {
+    BootstrapService.run(evaConfig);
+    project.writeFile('node_modules/@ui-kitten/eva/index.js', 'exports.mapping = require(\'./mapping.json\');\n');
+
+    expect(BootstrapService.bootstrap(evaConfig)).toBe('compiled');
+  });
+
+  it('should report failed for invalid configuration', () => {
+    expect(BootstrapService.bootstrap({ ...evaConfig, customMappingPath: './does-not-exist.json' })).toBe('failed');
   });
 
   describe('exports.styles append', () => {
