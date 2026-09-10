@@ -27,3 +27,18 @@ no problems for `node10`, `node16` (CJS and ESM) and `bundler`.
 Every export object also ends with a `default` condition pointing at the CommonJS build with
 matching types, as a fallback for resolvers that match none of `source`, `react-native`,
 `import` or `require`.
+
+The dual layout costs tarball size. Measured with `npm pack` (bytes, gzip):
+
+| package                  | 6.0.0-beta.2 (ESM only) | dual build | dual build, trimmed |
+| ------------------------ | ----------------------: | ---------: | ------------------: |
+| `@ui-kitten/components`  |                 375 697 |    479 774 |             421 524 |
+| `@ui-kitten/moment`      |                   3 780 |      6 240 |               5 458 |
+| `@ui-kitten/eva-icons`   |                   2 760 |      4 591 |               4 082 |
+| `@ui-kitten/date-fns`    |                   2 343 |      3 651 |               3 362 |
+
+The trimmed column drops the `.js.map` files from `lib/commonjs` (the `module` tree keeps its
+source maps). The `.d.ts.map` files are kept in both declaration trees: without them,
+go-to-definition lands on the generated `.d.ts` instead of the shipped `.ts` source. The
+remaining growth is the second JavaScript build and the second copy of the declarations,
+which is the price of resolving correctly under both `require` and `import`.

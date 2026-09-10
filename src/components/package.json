@@ -103,7 +103,8 @@
       [
         "commonjs",
         {
-          "esm": true
+          "esm": true,
+          "sourceMaps": false
         }
       ],
       [
