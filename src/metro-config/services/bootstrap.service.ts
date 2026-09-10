@@ -25,8 +25,12 @@ const getCacheRequirePath = (evaPackage: string): string => {
   return `../../.cache/ui-kitten/${packageName}-generated.json`;
 };
 
+/**
+ * The single line appended to the eva package index so that `import * as eva` exposes
+ * the compiled styles. It is matched literally to keep the append idempotent.
+ */
 const CACHE_EXPORT_SIGNATURE = (evaPackage: string): string =>
-  `\n\nexports.styles = require('${getCacheRequirePath(evaPackage)}').styles`;
+  `exports.styles = require('${getCacheRequirePath(evaPackage)}').styles`;
 
 const RELATIVE_PATHS = {
   evaPackage: (evaPackage: string): string => {
@@ -52,6 +56,11 @@ const schemaProcessor = new SchemaProcessor();
 interface EvaCache {
   checksum: string;
   styles: ThemeStyleType;
+}
+
+interface CustomMappingSource {
+  mapping: CustomSchemaType;
+  checksum: string;
 }
 
 /**
@@ -82,13 +91,23 @@ interface EvaCache {
 // eslint-disable-next-line no-restricted-syntax
 export default class BootstrapService {
 
-  static run = (config: EvaConfig): void => {
+  /**
+   * Compiles the configured Eva package.
+   *
+   * @returns `true` when the styles were compiled (or were already up to date),
+   * `false` when the project or the config is invalid. Every failure is reported through
+   * `LogService.warn`; this never throws for a configuration mistake and never exits the process,
+   * because the same code runs inside Metro.
+   */
+  static run = (config: EvaConfig): boolean => {
     const hasAtLeastOneEvaPackage: boolean = BootstrapService.ensureEvaPackagesInstalledOrWarn();
     const isValidConfig: boolean = EvaConfigService.validateConfigOrWarn(config);
 
-    if (hasAtLeastOneEvaPackage && isValidConfig) {
-      BootstrapService.processMappingIfNeeded(config);
+    if (!hasAtLeastOneEvaPackage || !isValidConfig) {
+      return false;
     }
+
+    return BootstrapService.processMappingIfNeeded(config);
   };
 
   private static ensureEvaPackagesInstalledOrWarn = (): boolean => {
@@ -113,10 +132,22 @@ export default class BootstrapService {
     return true;
   };
 
-  private static processMappingIfNeeded = (config: EvaConfig): void => {
+  private static processMappingIfNeeded = (config: EvaConfig): boolean => {
     const evaMappingPath: string = RELATIVE_PATHS.evaMapping(config.evaPackage);
     const outputCachePath: string = RELATIVE_PATHS.cache(config.evaPackage);
     const cacheDirPath: string = RELATIVE_PATHS.cacheDir();
+
+    /*
+     * Validate the custom mapping before touching anything on disk,
+     * so a typo in `customMappingPath` produces a warning instead of a half-written cache.
+     */
+    let customMappingSource: CustomMappingSource | null = null;
+    if (config.customMappingPath) {
+      customMappingSource = BootstrapService.readCustomMappingOrWarn(config.customMappingPath);
+      if (!customMappingSource) {
+        return false;
+      }
+    }
 
     /*
      * Ensure cache directory exists
@@ -131,7 +162,6 @@ export default class BootstrapService {
     const actualCacheString: string = ProjectService.requireActualModule(outputCachePath);
     const actualCache: EvaCache = actualCacheString ? JSON.parse(actualCacheString) : null;
 
-    let customMapping: CustomSchemaType;
     let actualChecksum: string = DEFAULT_CHECKSUM;
     let nextChecksum: string = DEFAULT_CHECKSUM;
 
@@ -139,18 +169,12 @@ export default class BootstrapService {
       actualChecksum = actualCache.checksum;
     }
 
-    if (config.customMappingPath) {
-
-      /*
-       * Require custom mapping by reading file at `customMappingPath` as it may change by user.
-       */
-      const customMappingString: string = ProjectService.requireActualModule(config.customMappingPath);
-      customMapping = JSON.parse(customMappingString);
+    if (customMappingSource) {
       /*
        * Calculate checksum only for custom mapping,
        * but not for styles we generate because eva mapping is a static module.
        */
-      nextChecksum = BootstrapService.createChecksum(customMappingString);
+      nextChecksum = customMappingSource.checksum;
     }
 
     /*
@@ -158,7 +182,7 @@ export default class BootstrapService {
      * Or re-write if custom mapping was changed
      */
     if (actualChecksum === DEFAULT_CHECKSUM || actualChecksum !== nextChecksum) {
-      const mapping: SchemaType = deepMerge(evaMapping, customMapping);
+      const mapping: SchemaType = deepMerge(evaMapping, customMappingSource?.mapping);
       const styles: ThemeStyleType = schemaProcessor.process(mapping);
       const writableCache: string = BootstrapService.createWritableCache(nextChecksum, styles);
 
@@ -166,13 +190,62 @@ export default class BootstrapService {
       Fs.writeFileSync(absoluteCachePath, writableCache);
     }
 
-    const hasCacheExports: boolean = BootstrapService.hasCacheExports(config);
-    if (!hasCacheExports) {
-      const evaIndexPath: string = RELATIVE_PATHS.evaIndex(config.evaPackage);
+    BootstrapService.ensureCacheExports(config);
+    LogService.success(`Successfully bootstrapped ${config.evaPackage}`);
 
-      Fs.appendFileSync(evaIndexPath, CACHE_EXPORT_SIGNATURE(config.evaPackage));
-      LogService.success(`Successfully bootstrapped ${config.evaPackage}`);
+    return true;
+  };
+
+  /**
+   * Reads and parses the custom mapping. Reports a missing file or invalid JSON as a warning
+   * that names the path that was tried, and returns `null` so the caller can skip processing.
+   */
+  private static readCustomMappingOrWarn = (customMappingPath: string): CustomMappingSource | null => {
+    const absolutePath: string = ProjectService.resolvePath(customMappingPath);
+
+    if (!Fs.existsSync(absolutePath) || !Fs.statSync(absolutePath).isFile()) {
+      LogService.warn(
+        `Custom mapping file was not found at ${absolutePath}`,
+        `(resolved from "customMappingPath": "${customMappingPath}").`,
+        '',
+        'Check the path is relative to the project root and that the file exists.',
+      );
+      return null;
     }
+
+    let customMappingString: string;
+    try {
+      customMappingString = Fs.readFileSync(absolutePath, { encoding: 'utf8' });
+    } catch (error) {
+      LogService.warn(
+        `Custom mapping file at ${absolutePath} could not be read:`,
+        error.message,
+      );
+      return null;
+    }
+
+    let mapping: CustomSchemaType;
+    try {
+      mapping = JSON.parse(customMappingString);
+    } catch (error) {
+      LogService.warn(
+        `Custom mapping file at ${absolutePath} is not valid JSON:`,
+        error.message,
+      );
+      return null;
+    }
+
+    if (!mapping || typeof mapping !== 'object' || Array.isArray(mapping)) {
+      LogService.warn(
+        `Custom mapping file at ${absolutePath} must contain a JSON object.`,
+      );
+      return null;
+    }
+
+    return {
+      mapping,
+      checksum: BootstrapService.createChecksum(customMappingString),
+    };
   };
 
   private static ensureCacheDirectoryExists = (cacheDirPath: string): void => {
@@ -182,12 +255,24 @@ export default class BootstrapService {
     }
   };
 
-  private static hasCacheExports = (config: EvaConfig): boolean => {
+  /**
+   * Appends the `exports.styles` line to the eva package index once.
+   * The file is rewritten so that it always ends with the signature followed by exactly one newline,
+   * regardless of how many trailing blank lines the index had before.
+   */
+  private static ensureCacheExports = (config: EvaConfig): void => {
     const evaIndexPath: string = RELATIVE_PATHS.evaIndex(config.evaPackage);
-    const evaIndexString = ProjectService.requireActualModule(evaIndexPath);
-    const expectedSignature = CACHE_EXPORT_SIGNATURE(config.evaPackage);
+    const evaIndexString: string = ProjectService.requireActualModule(evaIndexPath) || '';
+    const expectedSignature: string = CACHE_EXPORT_SIGNATURE(config.evaPackage);
 
-    return evaIndexString.includes(expectedSignature);
+    if (evaIndexString.includes(expectedSignature)) {
+      return;
+    }
+
+    const absoluteEvaIndexPath: string = ProjectService.resolvePath(evaIndexPath);
+    const trimmedIndexString: string = evaIndexString.replace(/\s+$/, '');
+
+    Fs.writeFileSync(absoluteEvaIndexPath, `${trimmedIndexString}\n\n${expectedSignature}\n`);
   };
 
   private static createWritableCache = (checksum: string, styles: ThemeStyleType): string => {
