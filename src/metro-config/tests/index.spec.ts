@@ -101,36 +101,45 @@ describe('@metro-config: create', () => {
 
     it('should not watch anything when no custom mapping is configured', () => {
       const { reporter } = MetroConfig.create(evaConfig);
-      reporter.update(INITIALIZE_STARTED);
+      expect(watchFileSpy).not.toHaveBeenCalled();
 
+      reporter.update(INITIALIZE_STARTED);
       expect(watchFileSpy).not.toHaveBeenCalled();
     });
 
     it('should not watch anything when the custom mapping file does not exist', () => {
       const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './does-not-exist.json' });
-      reporter.update(INITIALIZE_STARTED);
+      expect(watchFileSpy).not.toHaveBeenCalled();
 
+      reporter.update(INITIALIZE_STARTED);
       expect(watchFileSpy).not.toHaveBeenCalled();
     });
 
-    it('should watch the custom mapping file when it is configured and exists', () => {
+    it('should watch the custom mapping from create() alone, without any reporter event', () => {
       const customMappingPath = project.writeFile('custom-mapping.json', readCustomMappingFixture());
 
-      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json' });
-      expect(watchFileSpy).not.toHaveBeenCalled();
-
-      reporter.update(INITIALIZE_STARTED);
+      MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json' });
 
       expect(watchFileSpy).toHaveBeenCalledTimes(1);
       expect(watchFileSpy.mock.calls[0][0]).toEqual(customMappingPath);
+      expect(watchFileSpy.mock.calls[0][1]).toEqual({ interval: 100, persistent: false });
+    });
+
+    it('should not register a second watcher when the reporter hook fires afterwards', () => {
+      project.writeFile('custom-mapping.json', readCustomMappingFixture());
+
+      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json' });
+      reporter.update(INITIALIZE_STARTED);
+      reporter.update(INITIALIZE_STARTED);
+
+      expect(watchFileSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should re-run bootstrap when the watched custom mapping changes', () => {
       project.writeFile('custom-mapping.json', readCustomMappingFixture());
       const runSpy = jest.spyOn(BootstrapService, 'run');
 
-      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json' });
-      reporter.update(INITIALIZE_STARTED);
+      MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json' });
       const callsBeforeChange = runSpy.mock.calls.length;
 
       const listener = watchFileSpy.mock.calls[0][2];
@@ -143,8 +152,9 @@ describe('@metro-config: create', () => {
       project.writeFile('custom-mapping.json', readCustomMappingFixture());
 
       const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json', watch: false });
-      reporter.update(INITIALIZE_STARTED);
+      expect(watchFileSpy).not.toHaveBeenCalled();
 
+      reporter.update(INITIALIZE_STARTED);
       expect(watchFileSpy).not.toHaveBeenCalled();
     });
   });
