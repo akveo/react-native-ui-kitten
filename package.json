@@ -18,7 +18,7 @@
   "scripts": {
     "build": "turbo run build --filter='./src/**'",
     "test": "jest --runInBand",
-    "lint": "eslint -c .eslintrc.js ./src",
+    "lint": "eslint -c .eslintrc.js ./src ./scripts",
     "typecheck": "turbo run typecheck --filter='./src/**'",
     "typecheck:all": "tsc --noEmit",
     "clean": "turbo run clean --filter='./src/**'",
