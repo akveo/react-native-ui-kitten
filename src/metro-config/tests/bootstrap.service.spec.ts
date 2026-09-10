@@ -1,4 +1,5 @@
 import Fs from 'fs';
+import { rimrafSync } from 'rimraf';
 import BootstrapService from '../services/bootstrap.service';
 import { EvaConfig } from '../services/eva-config.service';
 import {
@@ -117,6 +118,15 @@ describe('@bootstrap-service: instance checks', () => {
     project.writeFile('node_modules/@ui-kitten/eva/index.js', 'exports.mapping = require(\'./mapping.json\');\n');
 
     expect(BootstrapService.bootstrap(evaConfig)).toBe('compiled');
+  });
+
+  it('should recover when the cache directory was deleted after a previous bootstrap', () => {
+    BootstrapService.run(evaConfig);
+    rimrafSync(`${project.root}/node_modules/.cache`);
+
+    expect(BootstrapService.bootstrap(evaConfig)).toBe('compiled');
+    expect(Fs.existsSync(project.cachePath(evaConfig.evaPackage))).toBe(true);
+    expect(consoleSpies.warn).not.toHaveBeenCalled();
   });
 
   it('should report failed for invalid configuration', () => {
