@@ -18,18 +18,18 @@ Exactly one name left the public export surface — the `styled` higher-order fu
 
 v6 is currently published under the `beta` dist-tag. `latest` still points at `5.3.1`, so every install command below is explicit about the tag.
 
-Most of this page can be done for you:
+Most of this page can be done for you by `@ui-kitten/codemod`:
 
 ```sh
 npx @ui-kitten/codemod          # dry run — nothing is written
 npx @ui-kitten/codemod --write  # apply
 ```
 
-The codemod leaves a report naming everything it refused to change and why. The sections below are what that report links to.
-
 :::note
-`@ui-kitten/codemod` is currently private to the UI Kitten repository. Until it is published, run it from a checkout: `node src/codemod/bin/ui-kitten-codemod <path-to-your-app>`.
+`@ui-kitten/codemod` is not published yet. Until it is, run it from a checkout of the UI Kitten repository instead of `npx`: `node src/codemod/bin/ui-kitten-codemod <path-to-your-app>`, with `--write` to apply.
 :::
+
+The codemod leaves a report naming everything it refused to change and why. The sections below are what that report links to.
 
 ### Migration Purposes
 
@@ -55,7 +55,7 @@ The codemod leaves a report naming everything it refused to change and why. The 
 | `@eva-design/dss` and `@eva-design/processor` replaced by `@ui-kitten/processor` | Only if you imported them directly | Import the same names from `@ui-kitten/processor` |
 | `lodash.merge` is no longer a transitive dependency | Only if you imported it directly | Add it to your own `dependencies` |
 | `React.ReactText` was removed by React 19 | Only in your own type annotations | Replace with `string \| number` |
-| `types` now points at generated `.d.ts` instead of source | No — this fixes a bug | Upgrade from `6.0.0-beta.1` to `6.0.0-beta.2` |
+| `types` now points at generated `.d.ts` instead of source | No — this fixes a bug | Upgrade to `6.0.0-beta.2` or later |
 | Button, Select and Datepicker text properties accept `string` and `number` | No | Nothing; `<Button>TEXT</Button>` now typechecks |
 | `AutocompleteRef`, `InputRef` and `ListRef` are exported | No | Nothing |
 
@@ -72,7 +72,7 @@ Before going through the list above, it is worth being clear about what you do *
 - `withStyles`, `useTheme`, `useStyleSheet`, `StyleService` and `ThemeProvider`.
 - `@eva-design/eva` still works as a mapping source at runtime. `@ui-kitten/eva` is the maintained one and what the documentation uses, but existing code that spreads `@eva-design/eva` into `ApplicationProvider` keeps working. See [@eva-design/eva](#eva-design-eva) for the one place it does not.
 
-The only symbol removed from the package root between `5.3.1` and `6.0.0-beta.2` is `styled`.
+The only symbol removed from the package root between `5.3.1` and v6 is `styled`.
 
 ---
 
@@ -93,7 +93,7 @@ npm i -D @ui-kitten/metro-config@beta
 ```
 
 :::warning
-Do not omit `@beta`. `@ui-kitten/components@latest` is still `5.3.1`, while `@ui-kitten/eva` only exists as `6.0.0-beta.1` — installing without the tag gives you a v5 library next to a v6 mapping package.
+Do not omit `@beta`. `@ui-kitten/components@latest` is still `5.3.1`, while `@ui-kitten/eva` only exists as a v6 package — installing without the tag gives you a v5 library next to a v6 mapping package.
 :::
 
 ---
@@ -159,7 +159,7 @@ SyntaxError: Unexpected token 'export'
 
 The fix is to let `@ui-kitten` through `transformIgnorePatterns`. Your Babel configuration already handles the rest.
 
-With `preset: 'react-native'`, before:
+With the React Native preset, before:
 
 ```js
 module.exports = {
@@ -192,6 +192,10 @@ module.exports = {
 ```
 
 Add `@ui-kitten` to whatever allow-list your preset already uses rather than replacing the pattern wholesale — the entry is a *negative* filter, and dropping an existing alternative stops transforming a package you rely on.
+
+:::note
+`preset: 'react-native'` is the form for React Native 0.84 and older. From 0.85 the preset lives in the separate `@react-native/jest-preset` package and `react-native/jest-preset` is only a shim that requires it — and throws if it is not installed. On 0.85 and newer, install `@react-native/jest-preset` at the same minor as `react-native` and reference `preset: '@react-native/jest-preset'`; the `transformIgnorePatterns` entry is the same either way. See [Testing](/docs/guides/testing#peer-packages).
+:::
 
 :::note
 If you already listed `@ui-kitten` in `transformIgnorePatterns` for v5, you need no change. v5 shipped untranspiled JSX in its CommonJS output, so it required the same allowance for a different reason.

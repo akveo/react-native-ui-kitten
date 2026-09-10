@@ -14,6 +14,7 @@ const config: Config = {
   projectName: 'react-native-ui-kitten',
 
   onBrokenLinks: 'throw',
+  onBrokenAnchors: 'throw',
 
   markdown: {
     hooks: {
