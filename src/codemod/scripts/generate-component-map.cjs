@@ -7,7 +7,7 @@
  *
  * Two inputs, both reproducible from this repository:
  *
- *   v6  `src/components/lib/typescript/index.d.ts` — the built public typings. Every component is
+ *   v6  `src/components/lib/typescript/commonjs/index.d.ts` — the built public typings. Every component is
  *       classified by asking the TypeScript checker to resolve `React.ComponentRef<typeof X>`,
  *       which is exactly the question "what does a ref on this component hold?".
  *
@@ -27,7 +27,7 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const REPO = path.resolve(__dirname, '../../..');
-const V6_TYPINGS = path.join(REPO, 'src/components/lib/typescript/index.d.ts');
+const V6_TYPINGS = path.join(REPO, 'src/components/lib/typescript/commonjs/index.d.ts');
 const OUTPUT = path.join(REPO, 'src/codemod/src/componentMap.ts');
 const V5_TAG = 'v5.3.1';
 
@@ -107,7 +107,7 @@ const declarationKind = (checker, symbol) => {
  * component accepts no ref (ComponentRef degenerates to `never`).
  */
 const resolveRefTypes = (componentNames) => {
-  const probePath = path.join(REPO, 'src/components/lib/typescript/__componentmap_probe__.ts');
+  const probePath = path.join(REPO, 'src/components/lib/typescript/commonjs/__componentmap_probe__.ts');
 
   const lines = [
     "import type * as React from 'react';",
@@ -266,7 +266,7 @@ const render = ({ entries, exportedRefTypes }) => {
  * Regenerate with:
  *   yarn build && node src/codemod/scripts/generate-component-map.cjs
  *
- * Derived from the built v6 typings (\`src/components/lib/typescript/index.d.ts\`) and the
+ * Derived from the built v6 typings (\`src/components/lib/typescript/commonjs/index.d.ts\`) and the
  * \`${V5_TAG}\` git tag. See src/codemod/VERIFIED.md for how each group was validated.
  */
 
