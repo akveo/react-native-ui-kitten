@@ -14,7 +14,18 @@ keywords:
 
 UI Kitten ships as ES modules, and Metro resolves `@ui-kitten/components` to its TypeScript
 source. Jest does neither by default: it ignores `node_modules` when transforming, so the first
-test that imports UI Kitten fails before it runs.
+test that imports UI Kitten fails before it runs. With Jest 30 (`jest-expo` 57) the failure reads:
+
+```
+● Test suite failed to run
+
+  Must use import to load ES Module: .../node_modules/@ui-kitten/components/index.ts
+  The file contains ESM syntax (import/export) that could not be executed as CommonJS. Either:
+    - Configure a transform (e.g. babel-jest) that compiles this file to CommonJS
+    - If the file is in "node_modules", allow it to be transformed by adjusting "transformIgnorePatterns"
+```
+
+Jest 29 reports the same problem as a syntax error instead:
 
 ```
 ● Test suite failed to run
@@ -59,6 +70,19 @@ a negative lookahead, so every package listed inside it **is** transformed.
 }
 ```
 
+## Peer packages
+
+- `jest-expo` 57 relies on `@react-native/jest-preset`, which must be installed at the same minor
+  version as `react-native` (for example `@react-native/jest-preset@0.86.x` next to
+  `react-native@0.86.x`). An older preset than the installed `react-native` can fail with
+  `Could not locate module react-native/setup-env`.
+- `@testing-library/react-native` 14 needs `test-renderer@^1.0.0` as a dev dependency;
+  `react-test-renderer` is no longer used.
+
+```bash
+npm i -D jest jest-expo @react-native/jest-preset @testing-library/react-native test-renderer
+```
+
 ---
 
 ## Verifying the setup
@@ -80,6 +104,34 @@ test('UI Kitten loads under Jest', () => {
   expect(new NativeDateService('en').getId()).toBe('native');
   expect(new Frame(1, 2, 3, 4).size.width).toBe(3);
   expect(new MomentDateService().getId()).toBe('moment');
+});
+```
+
+## Rendering components
+
+`@testing-library/react-native` 14 makes `render` asynchronous, so `await` it before querying.
+The example renders `TopNavigation` with an accessory passed as an element (rather than a render
+function) and finds it by its accessibility label:
+
+```tsx
+import React from 'react';
+import { render, screen } from '@testing-library/react-native';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+
+const BackAction = (): React.ReactElement => (
+  <TopNavigationAction icon={() => <Text>{'<'}</Text>} accessibilityLabel='back' />
+);
+
+test('renders TopNavigation with an element accessory', async () => {
+  await render(
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <TopNavigation title='Home' accessoryLeft={<BackAction />} />
+    </ApplicationProvider>,
+  );
+
+  expect(screen.getByText('Home')).toBeTruthy();
+  expect(screen.getByLabelText('back')).toBeTruthy();
 });
 ```
 
