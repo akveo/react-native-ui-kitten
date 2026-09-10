@@ -22,14 +22,26 @@ const customMappingWatchOptions = {
    * How often the custom mapping should be polled in milliseconds
    */
   interval: 100,
+  /*
+   * A long-lived dev server keeps polling, but the watcher must not keep a one-shot process
+   * (`expo export`, a script that merely requires metro.config.js, the CLI) alive on its own.
+   */
+  persistent: false,
 };
+
+/*
+ * Absolute paths that already have a watcher, so that running `create()` and the reporter hook
+ * in the same process (bare Metro does both) registers a single watcher per file.
+ */
+const watchedCustomMappingPaths: Set<string> = new Set();
 
 /**
  * Re-compiles styles whenever the custom mapping file changes.
  *
  * Only installed when a custom mapping path is configured and the file exists:
- * polling anything else (in particular the project root) would rebuild on unrelated file changes
- * and keep every Node process that loads metro.config.js alive.
+ * polling anything else (in particular the project root) would rebuild on unrelated file changes.
+ * It is installed from `create()` itself, so it works under any bundler regardless of whether
+ * Metro's reporter events are delivered.
  */
 const watchCustomMappingIfNeeded = (evaConfig: EvaConfig): void => {
   if (evaConfig.watch === false) {
@@ -42,6 +54,11 @@ const watchCustomMappingIfNeeded = (evaConfig: EvaConfig): void => {
     return;
   }
 
+  if (watchedCustomMappingPaths.has(customMappingPath)) {
+    return;
+  }
+
+  watchedCustomMappingPaths.add(customMappingPath);
   Fs.watchFile(customMappingPath, customMappingWatchOptions, () => {
     BootstrapService.run(evaConfig);
   });
@@ -84,6 +101,7 @@ export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): Met
    * idempotent, so running it again from the reporter hook for bare Metro is harmless.
    */
   BootstrapService.run(evaConfig);
+  watchCustomMappingIfNeeded(evaConfig);
 
   const handleMetroEvent = (event: MetroEvent): void => {
     const reporter = metroConfig?.reporter;

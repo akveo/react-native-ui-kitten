@@ -101,9 +101,10 @@ bundling. It does not wait for any bundler event, so it works the same under `ex
 2. `node_modules/@ui-kitten/eva/index.js` gains a single line, `exports.styles = require(...)`,
    which is what `<ApplicationProvider {...eva}>` picks up. The line is added once; running the
    compilation again is a no-op unless the custom mapping changed.
-3. When a `customMappingPath` is set and the file exists, Metro's dev server also watches that file
-   and recompiles when it changes. Nothing is watched otherwise. Set `watch: false` in `evaConfig`
-   to disable it.
+3. When a `customMappingPath` is set and the file exists, the file is watched (polled every
+   100 ms) from the moment the config is loaded, under any bundler, and the styles are recompiled
+   whenever it changes. Nothing is watched otherwise, and the watcher never keeps a one-shot
+   process such as `expo export` alive. Set `watch: false` in `evaConfig` to disable it.
 
 Because step 2 changes a file that Metro has already cached, restart the bundler once with the cache
 cleared so it picks the updated `@ui-kitten/eva` up:
