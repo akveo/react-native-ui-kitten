@@ -11,7 +11,7 @@
  * Regenerate with:
  *   yarn build && node src/codemod/scripts/generate-component-map.cjs
  *
- * Derived from the built v6 typings (`src/components/lib/typescript/index.d.ts`) and the
+ * Derived from the built v6 typings (`src/components/lib/typescript/commonjs/index.d.ts`) and the
  * `v5.3.1` git tag. See src/codemod/VERIFIED.md for how each group was validated.
  */
 
