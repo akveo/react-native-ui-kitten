@@ -21,6 +21,10 @@
       "require": {
         "types": "./lib/typescript/commonjs/index.d.ts",
         "default": "./lib/commonjs/index.js"
+      },
+      "default": {
+        "types": "./lib/typescript/commonjs/index.d.ts",
+        "default": "./lib/commonjs/index.js"
       }
     },
     "./devsupport": {
@@ -34,6 +38,10 @@
         "default": "./lib/module/devsupport/index.js"
       },
       "require": {
+        "types": "./lib/typescript/commonjs/devsupport/index.d.ts",
+        "default": "./lib/commonjs/devsupport/index.js"
+      },
+      "default": {
         "types": "./lib/typescript/commonjs/devsupport/index.d.ts",
         "default": "./lib/commonjs/devsupport/index.js"
       }

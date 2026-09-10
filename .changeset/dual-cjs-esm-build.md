@@ -23,3 +23,7 @@ relative imports in the ESM declarations carry explicit `.js` extensions. `expor
 `import` and `require` conditions with matching `types`; the `react-native` and `source`
 conditions still resolve to the TypeScript source for Metro. `@arethetypeswrong/cli` reports
 no problems for `node10`, `node16` (CJS and ESM) and `bundler`.
+
+Every export object also ends with a `default` condition pointing at the CommonJS build with
+matching types, as a fallback for resolvers that match none of `source`, `react-native`,
+`import` or `require`.
