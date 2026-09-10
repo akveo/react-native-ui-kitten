@@ -72,7 +72,16 @@ export default class ProjectService {
     return Fs.readFileSync(modulePath, { encoding: 'utf8' });
   };
 
+  /**
+   * Whether a file or directory exists at the project-relative path.
+   *
+   * This deliberately does not `require` the module: the eva package index requires the
+   * generated cache once it has been bootstrapped, so loading it would report the package as
+   * missing whenever `node_modules/.cache` was wiped, which is exactly when a bootstrap is needed.
+   */
   static hasModule = (path: string): boolean => {
-    return ProjectService.requireModule(path) !== null;
+    const modulePath: string | null = ProjectService.resolvePath(path);
+
+    return !!modulePath && Fs.existsSync(modulePath);
   };
 }
