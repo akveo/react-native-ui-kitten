@@ -1,0 +1,13 @@
+context platform=ios
+context timeout=180000
+open "com.uikitten.showcases" --relaunch --platform ios
+wait "id=\"toggle-theme\"" 60000
+react-native "dismiss-overlay"
+scroll "bottom"
+wait "id=\"section-Autocomplete-title\"" 10000
+press "id=\"@@autocomplete/input-anchor/input\" || value=\"Place your Text\""
+type "Inter"
+wait "text" "Interstellar" 5000
+press "role=\"other\" label=\"Interstellar\" || label=\"Interstellar\""
+wait "role=\"textfield\" value=\"Interstellar\"" 5000
+close
