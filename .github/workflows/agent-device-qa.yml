@@ -2,6 +2,11 @@ name: Agent Device QA
 
 on:
   workflow_dispatch:
+  push:
+    branches: [master, next, 'feat/**', 'fix/**']
+    paths:
+      - .github/workflows/agent-device-qa.yml
+      - src/showcases/e2e/**
   pull_request:
     types: [opened, synchronize, reopened, labeled]
     branches: [master, next]
@@ -12,8 +17,9 @@ concurrency:
 
 jobs:
   ios:
-    # macOS minutes are expensive: run on manual dispatch, or on PRs carrying the `agent-qa` label.
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'agent-qa')
+    # macOS minutes are expensive: run on manual dispatch, on pushes that touch the suite or this
+    # workflow, or on PRs carrying the `agent-qa` label.
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'agent-qa')
     runs-on: macos-15
     timeout-minutes: 60
     env:
