@@ -126,6 +126,23 @@ Every script must start with `context platform=ios` (add `context timeout=` if n
   `snapshot --raw`: React Native folds role + state into `value`, e.g.
   `"value":"checkbox, checked"`, which is what VoiceOver announces. That is RN's design, not a
   library bug. Switch/button/text-field have native traits and show their own type.
+- A `Card` exposes its children as one grouped `[other]` node ("Welcome…, SHOW TOOLTIP, DISMISS").
+  `find "DISMISS" press --first` then taps the group's centre, not the button. Read the button's
+  position from a screenshot and `press <x> <y> --settle`.
+- Overlay content covers the header, so `press 'id="toggle-theme"'` while a Popover is open only
+  closes the Popover. Flip the theme first, then open the overlay and inspect its colours.
+- When two calendars are on screen (Calendar showcase + an open Datepicker), `label="16"` is
+  ambiguous; the error lists candidates with `@eN~sM` refs, and the later one is the picker's.
+  A bare `@eN` from an older snapshot may silently do nothing: prefer the `~s` form it printed.
+- Closing a Tooltip by tapping "outside" must avoid the bubble itself; tap well below the anchor.
+- A `TextInput` focused inside a `Modal` makes the first tap on a nested `Select` option only blur
+  the input (Select's own list has no `keyboardShouldPersistTaps`). Tap twice or blur first.
+- Android emulator: if the app shows "Unable to load script" and logcat says
+  `Failed to connect to /10.0.2.2:8081`, the emulator's NAT is down. `adb reverse` plus editing
+  `debug_http_host` does not stick (the app rewrites it to `10.0.2.2:8081` on launch). Use a
+  Release build (`expo run:android --variant release`, embedded bundle) or reboot the emulator.
+- `expo run:android --device` wants an AVD *name* (`Pixel_7_API_34`), not `emulator-5554`; with a
+  single running emulator, omit it.
 
 ## 6. Close and report
 
