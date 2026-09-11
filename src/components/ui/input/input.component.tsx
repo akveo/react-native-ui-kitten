@@ -324,7 +324,7 @@ export const Input = React.forwardRef<InputRef, InputProps>(
 
     return (
       <TouchableWithoutFeedback
-        testID={`@${testID}/container`}
+        testID={testID && `@${testID}/container`}
         style={componentStyle.container}
         focusable={false}
         // The wrapper exists only to forward taps to the TextInput. Leaving it
@@ -355,7 +355,7 @@ export const Input = React.forwardRef<InputRef, InputProps>(
               label: accessibleInputName(label, caption, status),
             }, props)}
             {...getWebEventResponder().eventHandlers}
-            testID={`@${testID}/input`}
+            testID={testID && `@${testID}/input`}
             style={[componentStyle.text, styles.text, platformStyles.text, textStyle]}
             editable={!disabled}
             onFocus={onTextFieldFocus}
