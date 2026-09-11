@@ -138,9 +138,13 @@ Every script must start with `context platform=ios` (add `context timeout=` if n
 - A `TextInput` focused inside a `Modal` makes the first tap on a nested `Select` option only blur
   the input (Select's own list has no `keyboardShouldPersistTaps`). Tap twice or blur first.
 - Android emulator: if the app shows "Unable to load script" and logcat says
-  `Failed to connect to /10.0.2.2:8081`, the emulator's NAT is down. `adb reverse` plus editing
-  `debug_http_host` does not stick (the app rewrites it to `10.0.2.2:8081` on launch). Use a
-  Release build (`expo run:android --variant release`, embedded bundle) or reboot the emulator.
+  `Failed to connect to /10.0.2.2:8081`, the emulator's host NAT is down (no `default` route).
+  Cold-boot it (`emulator -avd Pixel_7_API_34 -no-snapshot-load`), run
+  `adb reverse tcp:8081 tcp:8081` again (a fresh boot drops it), then
+  `agent-device open com.uikitten.showcases --platform android --relaunch --metro-host localhost --metro-port 8081`;
+  that flag is what sets `debug_http_host` (editing the pref by hand gets overwritten). Reloading
+  from the RedBox can leave a blank surface: force-stop and open again instead. A Release build is
+  no way out: agent-device refuses non-debuggable Android apps (`run-as: package not debuggable`).
 - `expo run:android --device` wants an AVD *name* (`Pixel_7_API_34`), not `emulator-5554`; with a
   single running emulator, omit it.
 
