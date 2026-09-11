@@ -26,7 +26,12 @@
     "version-packages": "changeset version && yarn install --no-immutable",
     "release": "yarn build && changeset publish",
     "docs:dev": "cd website && yarn start",
-    "docs:build": "cd website && yarn build"
+    "docs:build": "cd website && yarn build",
+    "showcases:start": "cd src/showcases && npx expo start --port 8081",
+    "showcases:ios": "cd src/showcases && npx expo run:ios --no-bundler",
+    "showcases:android": "cd src/showcases && npx expo run:android --no-bundler",
+    "e2e:ios": "agent-device test src/showcases/e2e --platform ios --reporter default --reporter junit:.agent-device/junit-ios.xml --artifacts-dir .agent-device/test-artifacts",
+    "e2e:android": "agent-device test src/showcases/e2e --platform android --reporter default --reporter junit:.agent-device/junit-android.xml --artifacts-dir .agent-device/test-artifacts"
   },
   "dependencies": {
     "react": "19.1.0",

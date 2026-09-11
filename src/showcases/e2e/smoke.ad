@@ -1,0 +1,16 @@
+context platform=ios
+context timeout=180000
+open "com.uikitten.showcases" --relaunch --platform ios
+wait "id=\"toggle-theme\"" 15000
+react-native "dismiss-overlay"
+wait "id=\"section-Button-title\"" 10000
+press "id=\"toggle-theme\" || role=\"button\" label=\"DARK\" || label=\"DARK\""
+wait "text" "Eva / Dark" 5000
+press "id=\"toggle-mapping\" || role=\"button\" label=\"MATERIAL\" || label=\"MATERIAL\""
+wait "text" "Material / Dark" 5000
+press "id=\"toggle-theme\" || role=\"button\" label=\"LIGHT\" || label=\"LIGHT\""
+wait "text" "Material / Light" 5000
+press "id=\"toggle-mapping\" || role=\"button\" label=\"EVA\" || label=\"EVA\""
+wait "text" "Eva / Light" 5000
+press "role=\"button\" label=\"FILLED\" || label=\"FILLED\""
+close

@@ -30,3 +30,5 @@ website/.docusaurus/
 website/.yarn/
 website/build/
 website/static/storybook/
+
+.agent-device/
