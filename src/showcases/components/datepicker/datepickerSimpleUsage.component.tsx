@@ -17,6 +17,10 @@ export const DatepickerSimpleUsageShowcase = (): React.ReactElement => {
       </Text>
 
       <Datepicker
+
+        arrowLeftAccessibilityLabel='Previous month'
+
+        arrowRightAccessibilityLabel='Next month'
         date={date}
         onSelect={nextDate => setDate(nextDate)}
       />

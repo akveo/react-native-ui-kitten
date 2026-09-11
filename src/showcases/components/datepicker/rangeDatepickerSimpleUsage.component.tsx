@@ -13,6 +13,10 @@ export const RangeDatepickerSimpleUsageShowcase = (): React.ReactElement => {
     >
 
       <RangeDatepicker
+
+        arrowLeftAccessibilityLabel='Previous month'
+
+        arrowRightAccessibilityLabel='Next month'
         range={range}
         onSelect={nextRange => setRange(nextRange)}
       />
