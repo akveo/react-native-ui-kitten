@@ -322,6 +322,13 @@ describe('@input: component checks', () => {
 
       expect(component.getByTestId('@input/container').props.accessible).toEqual(false);
     });
+
+    it('should not derive test ids when testID is omitted', () => {
+      const component = render(<TestInput label='Email' />);
+
+      expect(component.queryByTestId('@undefined/container')).toBeNull();
+      expect(component.queryByTestId('@undefined/input')).toBeNull();
+    });
   });
 
 });
