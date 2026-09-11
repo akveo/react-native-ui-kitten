@@ -10,10 +10,29 @@ import {
   findNodeHandle,
   LayoutChangeEvent,
   Platform,
+  TurboModuleRegistry,
   UIManager,
   StatusBar,
 } from 'react-native';
 import { Frame } from './type';
+
+interface DeviceInfoConstants {
+  isEdgeToEdge?: boolean;
+}
+
+/**
+ * Whether React Native draws the Android app edge-to-edge (React Native 0.81+ reports it through
+ * the `DeviceInfo` constants). In that mode every native `Modal` window is presented edge-to-edge
+ * as well, so its coordinate space starts at the top of the screen, while `measureInWindow`
+ * keeps reporting positions relative to the visible window frame, i.e. below the status bar.
+ */
+const isAndroidEdgeToEdge = (): boolean => {
+  if (Platform.OS !== 'android') {
+    return false;
+  }
+  const constants = TurboModuleRegistry.get('DeviceInfo')?.getConstants?.() as DeviceInfoConstants | undefined;
+  return constants?.isEdgeToEdge === true;
+};
 
 export interface MeasureElementProps {
   force?: boolean;
@@ -89,7 +108,11 @@ export const MeasureElement: React.FC<MeasureElementProps> = ({
         measureSelf();
       }
     } else {
-      const originY = shouldUseTopInsets ? y + StatusBar.currentHeight || 0 : y;
+      // Modal windows with a translucent status bar (and every modal on edge-to-edge Android)
+      // start at the top of the screen, so the status bar height has to be added to land the
+      // measured frame in the modal coordinate space.
+      const useTopInsets = shouldUseTopInsets || isAndroidEdgeToEdge();
+      const originY = useTopInsets ? y + (StatusBar.currentHeight || 0) : y;
       const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
       onMeasure(frame);
     }
