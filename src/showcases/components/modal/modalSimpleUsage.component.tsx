@@ -43,7 +43,10 @@ export const ModalSimpleUsageShowcase = (): React.ReactElement => {
         TOGGLE MODAL
       </Button>
 
-      <Modal visible={visible}>
+      <Modal
+        visible={visible}
+        onBackdropPress={() => setVisible(false)}
+      >
         <Card disabled={true}>
           <Text>
 Welcome to UI Kitten 😻
