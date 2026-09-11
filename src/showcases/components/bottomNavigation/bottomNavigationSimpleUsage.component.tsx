@@ -1,21 +1,28 @@
 import React from 'react';
-import { BottomNavigation, BottomNavigationTab, Text } from '@ui-kitten/components';
-import { StyleSheet, View } from 'react-native';
+import { BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
 
 export const BottomNavigationSimpleUsageShowcase = (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
+    <Layout
+      style={styles.container}
+      level='2'
+    >
+      <Layout
+        style={styles.contentContainer}
+        level='2'
+      >
         <Text
           category='h4'
+          appearance='hint'
           style={styles.text}
         >
           Content
         </Text>
-      </View>
+      </Layout>
       <BottomNavigation
         selectedIndex={selectedIndex}
         onSelect={index => setSelectedIndex(index)}
@@ -24,21 +31,19 @@ export const BottomNavigationSimpleUsageShowcase = (): React.ReactElement => {
         <BottomNavigationTab title='ORDERS' />
         <BottomNavigationTab title='TRANSACTIONS' />
       </BottomNavigation>
-    </View>
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     height: 150,
-    backgroundColor: '#EEF1F6',
   },
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
   },
   text: {
-    color: 'white',
     textAlign: 'center',
   },
 });

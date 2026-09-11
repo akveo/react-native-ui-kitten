@@ -7,6 +7,8 @@ export const RangeCalendarSimpleUsageShowcase = (): React.ReactElement => {
 
   return (
     <RangeCalendar
+      arrowLeftAccessibilityLabel='Previous month'
+      arrowRightAccessibilityLabel='Next month'
       range={range}
       onSelect={nextRange => setRange(nextRange)}
     />

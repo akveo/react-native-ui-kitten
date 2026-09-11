@@ -14,6 +14,10 @@ export const CalendarSimpleUsageShowcase = (): React.ReactElement => {
       </Text>
 
       <Calendar
+
+        arrowLeftAccessibilityLabel='Previous month'
+
+        arrowRightAccessibilityLabel='Next month'
         date={date}
         onSelect={nextDate => setDate(nextDate)}
       />

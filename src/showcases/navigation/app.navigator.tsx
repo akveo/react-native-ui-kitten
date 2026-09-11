@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import React, { useCallback, useContext } from 'react';
+import { FlatList, ListRenderItemInfo, StyleSheet, View } from 'react-native';
 import { Button, Layout, Text, Divider } from '@ui-kitten/components';
 import { AppMapping, AppTheme, ThemeContext } from '../services/theme.service';
 
@@ -56,8 +56,17 @@ import { AutocompleteSimpleUsageShowcase } from '../components/autocomplete/auto
 import { ViewPagerSimpleUsageShowcase } from '../components/viewPager/viewPagerSimpleUsage.component';
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-  <View style={styles.section}>
-    <Text category="h6" style={styles.sectionTitle}>{title}</Text>
+  <View
+    style={styles.section}
+    testID={`section-${title}`}
+  >
+    <Text
+      category="h6"
+      style={styles.sectionTitle}
+      testID={`section-${title}-title`}
+    >
+      {title}
+    </Text>
     <View style={styles.sectionContent}>
       {children}
     </View>
@@ -78,7 +87,11 @@ const ThemeSwitchHeader: React.FC = () => {
 
   return (
     <Layout style={styles.header} level="1">
-      <Text category="s1" style={styles.headerLabel}>
+      <Text
+        category="s1"
+        style={styles.headerLabel}
+        testID="theme-label"
+      >
         {mapping} / {theme}
       </Text>
       <View style={styles.headerButtons}>
@@ -86,6 +99,7 @@ const ThemeSwitchHeader: React.FC = () => {
           size="small"
           appearance="outline"
           style={styles.headerButton}
+          testID="toggle-theme"
           onPress={toggleTheme}
         >
           {theme === AppTheme.light ? 'DARK' : 'LIGHT'}
@@ -94,6 +108,7 @@ const ThemeSwitchHeader: React.FC = () => {
           size="small"
           appearance="outline"
           style={styles.headerButton}
+          testID="toggle-mapping"
           onPress={toggleMapping}
         >
           {mapping === AppMapping.eva ? 'MATERIAL' : 'EVA'}
@@ -103,186 +118,99 @@ const ThemeSwitchHeader: React.FC = () => {
   );
 };
 
+interface ShowcaseSection {
+  title: string;
+  Component: React.ComponentType;
+}
+
+// One entry per component. The list renders each as a titled section, in order.
+const SECTIONS: ShowcaseSection[] = [
+  { title: 'Layout', Component: LayoutLevelShowcase },
+  { title: 'Button', Component: ButtonSimpleUsageShowcase },
+  { title: 'ButtonGroup', Component: ButtonGroupSimpleUsageShowcase },
+  { title: 'Input', Component: InputSimpleUsageShowcase },
+  { title: 'CheckBox', Component: CheckboxSimpleUsageShowcase },
+  { title: 'Toggle', Component: ToggleSimpleUsageShowcase },
+  { title: 'Radio', Component: RadioSimpleUsageShowcase },
+  { title: 'RadioGroup', Component: RadioGroupSimpleUsageShowcase },
+  { title: 'Card', Component: CardSimpleUsageShowcase },
+  { title: 'Avatar', Component: AvatarSimpleUsageShowcase },
+  { title: 'Spinner', Component: SpinnerSimpleUsageShowcase },
+  { title: 'ProgressBar', Component: ProgressBarSimpleUsageShowcase },
+  { title: 'CircularProgressBar', Component: CircularProgressBarSimpleUsageShowcase },
+  { title: 'Divider', Component: DividerSimpleUsageShowcase },
+  { title: 'Icon', Component: IconSimpleUsageShowcase },
+  { title: 'List', Component: ListSimpleUsageShowcase },
+  { title: 'ListItem', Component: ListItemSimpleUsageShowcase },
+  { title: 'Menu', Component: MenuSimpleUsageShowcase },
+  { title: 'MenuItem', Component: MenuItemSimpleUsageShowcase },
+  { title: 'Select', Component: SelectSimpleUsageShowcase },
+  { title: 'SelectItem', Component: SelectItemSimpleUsageShowcase },
+  { title: 'Popover', Component: PopoverSimpleUsageShowcase },
+  { title: 'Tooltip', Component: TooltipSimpleUsageShowcase },
+  { title: 'OverflowMenu', Component: OverflowMenuSimpleUsageShowcase },
+  { title: 'Modal', Component: ModalSimpleUsageShowcase },
+  { title: 'TopNavigation', Component: TopNavigationSimpleUsageShowcase },
+  { title: 'TopNavigationAction', Component: TopNavigationActionSimpleUsageShowcase },
+  { title: 'BottomNavigation', Component: BottomNavigationSimpleUsageShowcase },
+  { title: 'BottomNavigationTab', Component: BottomNavigationTabSimpleUsageShowcase },
+  { title: 'Tab', Component: TabSimpleUsageShowcase },
+  { title: 'TabBar', Component: TabBarSimpleUsageShowcase },
+  { title: 'TabView', Component: TabViewSimpleUsageShowcase },
+  { title: 'Drawer', Component: DrawerSimpleUsageShowcase },
+  { title: 'DrawerItem', Component: DrawerItemSimpleUsageShowcase },
+  { title: 'Calendar', Component: CalendarSimpleUsageShowcase },
+  { title: 'RangeCalendar', Component: RangeCalendarSimpleUsageShowcase },
+  { title: 'Datepicker', Component: DatepickerSimpleUsageShowcase },
+  { title: 'RangeDatepicker', Component: RangeDatepickerSimpleUsageShowcase },
+  { title: 'Autocomplete', Component: AutocompleteSimpleUsageShowcase },
+  { title: 'ViewPager', Component: ViewPagerSimpleUsageShowcase },
+];
+
+const keyExtractor = (item: ShowcaseSection): string => item.title;
+
+const ListHeader = (): React.ReactElement => (
+  <>
+    <Text category="h1" style={styles.title}>UI Kitten Components</Text>
+    <Text category="p1" style={styles.subtitle}>Component Showcase</Text>
+  </>
+);
+
+const ListFooter = (): React.ReactElement => (
+  <View style={styles.footer}>
+    <Text category="c1" appearance="hint">
+      End of Component Showcase
+    </Text>
+  </View>
+);
+
 export const AppNavigator = (): React.ReactElement => {
+  const renderSection = useCallback(({ item }: ListRenderItemInfo<ShowcaseSection>): React.ReactElement => (
+    <Section title={item.title}>
+      <item.Component />
+    </Section>
+  ), []);
+
   return (
     <Layout style={styles.container}>
       <ThemeSwitchHeader />
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text category="h1" style={styles.title}>UI Kitten Components</Text>
-        <Text category="p1" style={styles.subtitle}>Component Showcase</Text>
-
-        {/* Basic Components */}
-        <Section title="Layout">
-          <LayoutLevelShowcase />
-        </Section>
-
-        <Section title="Button">
-          <ButtonSimpleUsageShowcase />
-        </Section>
-
-        <Section title="ButtonGroup">
-          <ButtonGroupSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Input">
-          <InputSimpleUsageShowcase />
-        </Section>
-
-        <Section title="CheckBox">
-          <CheckboxSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Toggle">
-          <ToggleSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Radio">
-          <RadioSimpleUsageShowcase />
-        </Section>
-
-        <Section title="RadioGroup">
-          <RadioGroupSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Card">
-          <CardSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Avatar">
-          <AvatarSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Spinner">
-          <SpinnerSimpleUsageShowcase />
-        </Section>
-
-        <Section title="ProgressBar">
-          <ProgressBarSimpleUsageShowcase />
-        </Section>
-
-        <Section title="CircularProgressBar">
-          <CircularProgressBarSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Divider">
-          <DividerSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Icon">
-          <IconSimpleUsageShowcase />
-        </Section>
-
-        {/* List Components */}
-        <Section title="List">
-          <ListSimpleUsageShowcase />
-        </Section>
-
-        <Section title="ListItem">
-          <ListItemSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Menu">
-          <MenuSimpleUsageShowcase />
-        </Section>
-
-        <Section title="MenuItem">
-          <MenuItemSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Select">
-          <SelectSimpleUsageShowcase />
-        </Section>
-
-        <Section title="SelectItem">
-          <SelectItemSimpleUsageShowcase />
-        </Section>
-
-        {/* Popover-based Components */}
-        <Section title="Popover">
-          <PopoverSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Tooltip">
-          <TooltipSimpleUsageShowcase />
-        </Section>
-
-        <Section title="OverflowMenu">
-          <OverflowMenuSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Modal">
-          <ModalSimpleUsageShowcase />
-        </Section>
-
-        {/* Navigation Components */}
-        <Section title="TopNavigation">
-          <TopNavigationSimpleUsageShowcase />
-        </Section>
-
-        <Section title="TopNavigationAction">
-          <TopNavigationActionSimpleUsageShowcase />
-        </Section>
-
-        <Section title="BottomNavigation">
-          <BottomNavigationSimpleUsageShowcase />
-        </Section>
-
-        <Section title="BottomNavigationTab">
-          <BottomNavigationTabSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Tab">
-          <TabSimpleUsageShowcase />
-        </Section>
-
-        <Section title="TabBar">
-          <TabBarSimpleUsageShowcase />
-        </Section>
-
-        <Section title="TabView">
-          <TabViewSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Drawer">
-          <DrawerSimpleUsageShowcase />
-        </Section>
-
-        <Section title="DrawerItem">
-          <DrawerItemSimpleUsageShowcase />
-        </Section>
-
-        {/* Calendar/Date Components */}
-        <Section title="Calendar">
-          <CalendarSimpleUsageShowcase />
-        </Section>
-
-        <Section title="RangeCalendar">
-          <RangeCalendarSimpleUsageShowcase />
-        </Section>
-
-        <Section title="Datepicker">
-          <DatepickerSimpleUsageShowcase />
-        </Section>
-
-        <Section title="RangeDatepicker">
-          <RangeDatepickerSimpleUsageShowcase />
-        </Section>
-
-        {/* Other Components */}
-        <Section title="Autocomplete">
-          <AutocompleteSimpleUsageShowcase />
-        </Section>
-
-        <Section title="ViewPager">
-          <ViewPagerSimpleUsageShowcase />
-        </Section>
-
-        <View style={styles.footer}>
-          <Text category="c1" appearance="hint">
-            End of Component Showcase
-          </Text>
-        </View>
-      </ScrollView>
+      {/*
+        A FlatList rather than a ScrollView: several showcases (List, Menu, Drawer) are
+        VirtualizedLists, and React Native warns when those sit inside a plain ScrollView.
+        `keyboardShouldPersistTaps` lets the first tap on an Autocomplete option select it
+        instead of only dismissing the keyboard.
+      */}
+      <FlatList
+        data={SECTIONS}
+        renderItem={renderSection}
+        keyExtractor={keyExtractor}
+        ListHeaderComponent={ListHeader}
+        ListFooterComponent={ListFooter}
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        initialNumToRender={SECTIONS.length}
+        testID="showcase-scroll"
+      />
     </Layout>
   );
 };

@@ -17,14 +17,16 @@
       "assets/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.uikitten.showcases"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.uikitten.showcases"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +35,7 @@
       "ios",
       "android",
       "web"
-    ]
+    ],
+    "scheme": "uikitten-showcases"
   }
 }
