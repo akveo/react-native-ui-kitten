@@ -119,6 +119,11 @@ jobs:
           npm install -g "agent-device@${AGENT_DEVICE_VERSION}"
           agent-device --version
 
+      # First `open` on a fresh runner builds agent-device's XCTest runner; do it before the suite so
+      # the script's own waits only cover the app launch.
+      - name: Pre-warm agent-device runner
+        run: agent-device prepare ios-runner --platform ios --udid "${{ steps.sim.outputs.udid }}" --timeout 300000
+
       - name: Run replay suite
         run: |
           agent-device test src/showcases/e2e \

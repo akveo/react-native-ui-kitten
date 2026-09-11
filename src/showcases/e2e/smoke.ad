@@ -1,7 +1,7 @@
 context platform=ios
 context timeout=180000
 open "com.uikitten.showcases" --relaunch --platform ios
-wait "id=\"toggle-theme\"" 15000
+wait "id=\"toggle-theme\"" 60000
 react-native "dismiss-overlay"
 wait "id=\"section-Button-title\"" 10000
 press "id=\"toggle-theme\" || role=\"button\" label=\"DARK\" || label=\"DARK\""
