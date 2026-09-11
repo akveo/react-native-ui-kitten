@@ -269,6 +269,7 @@ export const Popover = forwardRef<View, PopoverProps>(({
   onBackdropPress,
   onPlacementChange,
   contentContainerStyle,
+  renderInline,
   ...viewProps
 }, ref) => {
   // Use the extracted custom hook for measurement logic
@@ -351,6 +352,7 @@ export const Popover = forwardRef<View, PopoverProps>(({
         supportedOrientations={supportedOrientations}
         onShow={onShow}
         onBackdropPress={onBackdropPress}
+        renderInline={renderInline}
       >
         {renderMeasuringPopoverElement()}
       </Modal>
