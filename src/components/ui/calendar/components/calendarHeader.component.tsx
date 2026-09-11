@@ -53,6 +53,8 @@ export interface CalendarHeaderProps extends ViewProps {
   onNavigationRightPress?: () => void;
   arrowLeftComponent?: React.ComponentType<{ onPress: () => void }> | null;
   arrowRightComponent?: React.ComponentType<{ onPress: () => void }> | null;
+  arrowLeftAccessibilityLabel?: string;
+  arrowRightAccessibilityLabel?: string;
 }
 
 export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
@@ -69,6 +71,8 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   onNavigationRightPress,
   arrowLeftComponent: ArrowLeftComponent,
   arrowRightComponent: ArrowRightComponent,
+  arrowLeftAccessibilityLabel,
+  arrowRightAccessibilityLabel,
   ...viewProps
 }) => {
   const renderTitleIcon = useCallback((): ChevronDownElement => {
@@ -116,11 +120,12 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     return (
       <Button
         appearance='ghost'
+        aria-label={arrowLeftAccessibilityLabel}
         accessoryRight={renderLeftIcon}
         onPress={onNavigationLeftPress}
       />
     );
-  }, [ArrowLeftComponent, onNavigationLeftPress, renderLeftIcon]);
+  }, [ArrowLeftComponent, arrowLeftAccessibilityLabel, onNavigationLeftPress, renderLeftIcon]);
 
   const renderRightArrow = useCallback((): React.ReactElement => {
     if (ArrowRightComponent) {
@@ -130,11 +135,12 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     return (
       <Button
         appearance='ghost'
+        aria-label={arrowRightAccessibilityLabel}
         accessoryRight={renderRightIcon}
         onPress={onNavigationRightPress}
       />
     );
-  }, [ArrowRightComponent, onNavigationRightPress, renderRightIcon]);
+  }, [ArrowRightComponent, arrowRightAccessibilityLabel, onNavigationRightPress, renderRightIcon]);
 
   const renderLateralNavigationControls = (): React.ReactElement<ViewProps> => {
     return (

@@ -12,7 +12,10 @@ import {
   TextStyle,
   TouchableOpacityProps,
 } from 'react-native';
-import { TouchableWithoutFeedback } from '../../../../devsupport';
+import {
+  buildAccessibilityProps,
+  TouchableWithoutFeedback,
+} from '../../../../devsupport';
 import {
   useStyled,
   StyleType,
@@ -143,6 +146,11 @@ function CalendarPickerCellComponent<D>({
   return (
     <TouchableWithoutFeedback
       {...touchableProps}
+      {...buildAccessibilityProps({
+        role: 'button',
+        selected: Boolean(selected),
+        disabled: Boolean(disabled),
+      })}
       disabled={disabled}
       style={[evaStyle.container, styles.container, style]}
       onPress={onPress}

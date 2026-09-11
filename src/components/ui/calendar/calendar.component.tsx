@@ -104,6 +104,12 @@ const PICKER_COLUMNS = 3;
  * to render right arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
  *
+ * @property {string} arrowLeftAccessibilityLabel - Accessible name for the header's left arrow,
+ * e.g. `'Previous month'`. Unset by default, since the library ships no translations.
+ *
+ * @property {string} arrowRightAccessibilityLabel - Accessible name for the header's right arrow,
+ * e.g. `'Next month'`. Unset by default, since the library ships no translations.
+ *
  * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous or next
  * month / year.
  * viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
@@ -169,6 +175,8 @@ function CalendarComponent<D = Date>(
     renderYear,
     renderArrowLeft,
     renderArrowRight,
+    arrowLeftAccessibilityLabel,
+    arrowRightAccessibilityLabel,
     onVisibleDateChange,
     style,
     ...viewProps
@@ -466,9 +474,15 @@ function CalendarComponent<D = Date>(
         onNavigationRightPress={onHeaderNavigationRightPress}
         arrowLeftComponent={renderArrowLeft}
         arrowRightComponent={renderArrowRight}
+        arrowLeftAccessibilityLabel={arrowLeftAccessibilityLabel}
+        arrowRightAccessibilityLabel={arrowRightAccessibilityLabel}
       />
     );
-  }, [viewMode.id, calendarStyles, headerTitle, isHeaderNavigationAllowed, onPickerNavigationPress, onHeaderNavigationLeftPress, onHeaderNavigationRightPress, renderArrowLeft, renderArrowRight]);
+  }, [
+    viewMode.id, calendarStyles, headerTitle, isHeaderNavigationAllowed, onPickerNavigationPress,
+    onHeaderNavigationLeftPress, onHeaderNavigationRightPress, renderArrowLeft, renderArrowRight,
+    arrowLeftAccessibilityLabel, arrowRightAccessibilityLabel,
+  ]);
 
   return (
     <View

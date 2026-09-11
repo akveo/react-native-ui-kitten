@@ -130,6 +130,28 @@ describe('@calendar: component checks', () => {
     expect(componentRef.current.getViewMode()).toEqual(CalendarViewModes.YEAR);
   });
 
+  it('should label header arrows when accessibility labels are provided', () => {
+    const component = render(
+      <TestCalendar
+        arrowLeftAccessibilityLabel='Previous month'
+        arrowRightAccessibilityLabel='Next month'
+      />,
+    );
+
+    expect(component.getByLabelText('Previous month')).toBeTruthy();
+    expect(component.getByLabelText('Next month')).toBeTruthy();
+  });
+
+  it('should expose day cells as buttons with selected state', () => {
+    const date = new Date(2024, 5, 15);
+    const component = render(<TestCalendar date={date} />);
+
+    const selectedCell = component.getByRole('button', { name: '15', selected: true });
+
+    expect(selectedCell).toBeTruthy();
+    expect(component.getByRole('button', { name: '16', selected: false })).toBeTruthy();
+  });
+
   it('should change month to next when navigation button pressed', () => {
     const componentRef = React.createRef<CalendarRef>();
     const component = render(
