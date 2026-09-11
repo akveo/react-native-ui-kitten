@@ -21,7 +21,7 @@ jobs:
     # workflow, or on PRs carrying the `agent-qa` label.
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'agent-qa')
     runs-on: macos-15
-    timeout-minutes: 60
+    timeout-minutes: 90
     env:
       AGENT_DEVICE_VERSION: 0.21.0
       SIMULATOR_NAME: iPhone 16
@@ -60,9 +60,55 @@ jobs:
           xcrun simctl boot "$UDID"
           echo "udid=$UDID" >> "$GITHUB_OUTPUT"
 
-      - name: Build showcase app (Release, bundle embedded)
+      # The build is split into explicit steps and throttled: a single `expo run:ios` on the
+      # 3-core / 7 GB hosted runner starved it until GitHub dropped the connection, leaving no log.
+      - name: Prebuild native project
         working-directory: src/showcases
-        run: npx expo run:ios --no-bundler --configuration Release --device "${{ steps.sim.outputs.udid }}"
+        run: npx expo prebuild --platform ios --no-install
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: |
+            src/showcases/ios/Pods
+            ~/Library/Caches/CocoaPods
+          key: pods-${{ runner.os }}-${{ hashFiles('src/showcases/ios/Podfile', 'yarn.lock') }}
+          restore-keys: pods-${{ runner.os }}-
+
+      - name: Install CocoaPods
+        working-directory: src/showcases/ios
+        run: pod install --deployment || pod install
+
+      - name: Cache DerivedData
+        uses: actions/cache@v4
+        with:
+          path: src/showcases/ios/build
+          key: derived-${{ runner.os }}-${{ hashFiles('src/showcases/ios/Podfile.lock') }}
+          restore-keys: derived-${{ runner.os }}-
+
+      - name: Build showcase app (Release simulator, bundle embedded)
+        working-directory: src/showcases/ios
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -workspace UIKittenShowcases.xcworkspace \
+            -scheme UIKittenShowcases \
+            -configuration Release \
+            -sdk iphonesimulator \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -derivedDataPath build \
+            -jobs 2 \
+            CODE_SIGNING_ALLOWED=NO \
+            COMPILER_INDEX_STORE_ENABLE=NO \
+            build | tail -n 200
+
+      - name: Install app on simulator
+        run: |
+          APP=$(find src/showcases/ios/build/Build/Products/Release-iphonesimulator -maxdepth 1 -name '*.app' | head -1)
+          test -n "$APP"
+          xcrun simctl install "${{ steps.sim.outputs.udid }}" "$APP"
 
       - name: Install agent-device
         run: |
