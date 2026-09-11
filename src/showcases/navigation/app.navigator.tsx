@@ -197,8 +197,8 @@ export const AppNavigator = (): React.ReactElement => {
       {/*
         A FlatList rather than a ScrollView: several showcases (List, Menu, Drawer) are
         VirtualizedLists, and React Native warns when those sit inside a plain ScrollView.
-        `keyboardShouldPersistTaps` lets the first tap on an Autocomplete option select it
-        instead of only dismissing the keyboard.
+        No `keyboardShouldPersistTaps` on purpose: the default `'never'` is what exercises the
+        library's modal panel (the first tap on an Autocomplete option must select it).
       */}
       <FlatList
         data={SECTIONS}
@@ -207,7 +207,6 @@ export const AppNavigator = (): React.ReactElement => {
         ListHeaderComponent={ListHeader}
         ListFooterComponent={ListFooter}
         contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
         initialNumToRender={SECTIONS.length}
         testID="showcase-scroll"
       />
