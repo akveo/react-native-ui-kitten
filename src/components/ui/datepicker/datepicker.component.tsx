@@ -160,6 +160,12 @@ export interface DatepickerRef<D = Date> {
  * to render right arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
  *
+ * @property {string} arrowLeftAccessibilityLabel - Accessible name for the header's left arrow,
+ * e.g. `'Previous month'`. Unset by default, since the library ships no translations.
+ *
+ * @property {string} arrowRightAccessibilityLabel - Accessible name for the header's right arrow,
+ * e.g. `'Next month'`. Unset by default, since the library ships no translations.
+ *
  * @property {(D, CalendarViewMode) => void} onVisibleDateChange - Called when navigating to the previous
  * or next month / year. viewMode returns string with current calendar view ("YEAR", "MONTH", "DATE").
  *
@@ -235,6 +241,8 @@ function DatepickerComponent<D = Date>(
     renderFooter,
     renderArrowLeft,
     renderArrowRight,
+    arrowLeftAccessibilityLabel,
+    arrowRightAccessibilityLabel,
     onVisibleDateChange,
     style,
     testID,
@@ -352,11 +360,14 @@ function DatepickerComponent<D = Date>(
     renderFooter,
     renderArrowRight,
     renderArrowLeft,
+    arrowLeftAccessibilityLabel,
+    arrowRightAccessibilityLabel,
     onVisibleDateChange,
   }), [
     min, max, date, initialVisibleDate, dateService, boundingMonth, startView,
     filter, title, handleSelect, renderDay, renderMonth, renderYear,
     renderFooter, renderArrowRight, renderArrowLeft, onVisibleDateChange,
+    arrowLeftAccessibilityLabel, arrowRightAccessibilityLabel,
   ]);
 
   const renderInputElement = useCallback((): React.ReactElement => {

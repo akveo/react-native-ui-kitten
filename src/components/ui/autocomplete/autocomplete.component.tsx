@@ -61,6 +61,12 @@ export interface AutocompleteRef {
  *
  * @property {(number) => void} onSelect - Called when option is pressed.
  *
+ * @note When the component is rendered inside a `ScrollView`, `FlatList` or `SectionList`, set
+ * `keyboardShouldPersistTaps='handled'` on that list. With the default `'never'`, React Native
+ * uses the first tap on an option to dismiss the keyboard instead of selecting the option, so
+ * users have to tap twice. The options popup is a React descendant of the enclosing list even
+ * though it renders in a native modal.
+ *
  * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Defaults to *basic*.
