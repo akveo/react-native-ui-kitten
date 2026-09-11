@@ -6,6 +6,12 @@ export {
 export {
   ModalService,
 } from './modal/modal.service';
+export {
+  ModalPanel,
+  ModalPanelContext,
+  type ModalPanelProps,
+  type ModalPanelRegistry,
+} from './modal/modalPanel.component';
 // Note: @styled decorator has been removed in favor of useStyled hook
 // StyledComponentProps and EvaProp are kept for backward compatibility
 export {

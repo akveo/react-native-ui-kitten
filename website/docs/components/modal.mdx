@@ -65,8 +65,37 @@ const styles = StyleSheet.create({
 | `backdropStyle` | `ViewStyle` | `undefined` | Style applied to the backdrop. |
 | `children` | `ReactNode` | - | Content rendered inside the modal. |
 | `shouldUseContainer` | `boolean` | `true` | Whether the content is wrapped in a positioning container. Set to `false` to control layout yourself. |
+| `renderInline` | `boolean` | `false` | Render the native modal at the call site instead of through the `ApplicationProvider` panel. See [Where the content renders](#where-the-content-renders). |
 
 Modal also accepts all standard React Native `Modal` and `View` props.
+
+## Where the content renders
+
+`Modal` (and every component built on it: `Popover`, `Select`, `Autocomplete`, `Datepicker`,
+`Tooltip`, `OverflowMenu`) presents its content through a panel that `ApplicationProvider`
+renders around your app. The native modal is still a React Native `Modal`, but in the React
+tree it is a sibling of your app content, not a descendant of the view that opened it. This is
+what makes a single tap on modal content work while the keyboard is open: a `ScrollView` or
+`FlatList` with the default `keyboardShouldPersistTaps='never'` claims the first tap on any
+descendant to dismiss the keyboard, and modal content is no longer its descendant.
+
+Two consequences:
+
+- **React contexts provided below `ApplicationProvider` are not visible inside the modal.**
+  UI Kitten's theme and mapping contexts are carried along, so a nested `ThemeProvider`
+  around the anchor still applies. For your own providers (navigation, i18n, forms), either
+  render them above `ApplicationProvider`, wrap the modal content in them, or pass
+  `renderInline` to keep that one modal at the call site.
+- **An overlay opened from inside your own React Native `Modal`** would be presented from the
+  root while your modal is already showing, which iOS refuses (it presents a single chain of
+  modals). Wrap that modal's content in a nested `ApplicationProvider`, or pass `renderInline`
+  to the UI Kitten overlay. Overlays opened from inside a UI Kitten `Modal` need nothing: they
+  present inside the parent modal automatically.
+
+`renderInline` applies to everything nested inside that modal as well. To force inline
+rendering for a whole subtree, render `<ModalPanelContext.Provider value={null}>` around it.
+A `Modal` rendered without any `ApplicationProvider` above it falls back to inline rendering
+and warns once in development.
 
 ## Storybook
 

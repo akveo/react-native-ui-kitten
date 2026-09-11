@@ -14,6 +14,7 @@ import {
   ThemeStyleType,
 } from '@ui-kitten/processor';
 import { StyleProvider } from '../style/styleProvider.component';
+import { ModalPanel } from '../modal/modalPanel.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
 import { styleCache } from '../style/styleCache';
 
@@ -121,7 +122,9 @@ export function ApplicationProvider(props: ApplicationProviderProps): React.Reac
       theme={props.theme}
       styles={styles}
     >
-      {props.children}
+      <ModalPanel>
+        {props.children}
+      </ModalPanel>
     </StyleProvider>
   );
 }
