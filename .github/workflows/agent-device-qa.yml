@@ -44,8 +44,12 @@ jobs:
 
       - run: yarn install --immutable
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app || sudo xcode-select -s "$(ls -d /Applications/Xcode*.app | tail -1)"
+      # Use the image's default Xcode: pinning an older one (16.2) selected an Xcode whose iOS
+      # platform is not installed on the runner, so no simulator was an eligible destination.
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          xcrun simctl list runtimes available | tail -n +2
 
       - name: Boot simulator
         id: sim
@@ -97,7 +101,7 @@ jobs:
             -scheme UIKittenShowcases \
             -configuration Release \
             -sdk iphonesimulator \
-            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -destination "generic/platform=iOS Simulator" \
             -derivedDataPath build \
             -jobs 2 \
             CODE_SIGNING_ALLOWED=NO \
