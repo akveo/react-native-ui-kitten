@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "agent-device": {
+      "type": "stdio",
+      "command": "agent-device",
+      "args": [
+        "mcp"
+      ],
+      "env": {}
+    }
+  }
+}

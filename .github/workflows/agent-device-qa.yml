@@ -1,0 +1,84 @@
+name: Agent Device QA
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    branches: [master, next]
+
+concurrency:
+  group: agent-device-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ios:
+    # macOS minutes are expensive: run on manual dispatch, or on PRs carrying the `agent-qa` label.
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'agent-qa')
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      AGENT_DEVICE_VERSION: 0.21.0
+      SIMULATOR_NAME: iPhone 16
+      AGENT_DEVICE_PLATFORM: ios
+      AGENT_DEVICE_SESSION: ci-ios
+      AGENT_DEVICE_SESSION_LOCK: strip
+      AGENT_DEVICE_DAEMON_TIMEOUT_MS: "180000"
+      AGENT_DEVICE_IOS_BOOT_TIMEOUT_MS: "180000"
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: corepack enable
+        env:
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - run: yarn install --immutable
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app || sudo xcode-select -s "$(ls -d /Applications/Xcode*.app | tail -1)"
+
+      - name: Boot simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | node -e '
+            const d = JSON.parse(require("fs").readFileSync(0, "utf8")).devices;
+            const all = Object.values(d).flat();
+            const hit = all.find(x => x.name === process.env.SIMULATOR_NAME) ?? all.find(x => /^iPhone/.test(x.name));
+            if (!hit) { console.error("no iPhone simulator"); process.exit(1); }
+            process.stdout.write(hit.udid);
+          ')
+          xcrun simctl boot "$UDID"
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+
+      - name: Build showcase app (Release, bundle embedded)
+        working-directory: src/showcases
+        run: npx expo run:ios --no-bundler --configuration Release --device "${{ steps.sim.outputs.udid }}"
+
+      - name: Install agent-device
+        run: |
+          npm install -g "agent-device@${AGENT_DEVICE_VERSION}"
+          agent-device --version
+
+      - name: Run replay suite
+        run: |
+          agent-device test src/showcases/e2e \
+            --platform ios \
+            --udid "${{ steps.sim.outputs.udid }}" \
+            --retries 1 \
+            --reporter default \
+            --reporter junit:.agent-device/junit-ios.xml \
+            --artifacts-dir .agent-device/test-artifacts
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-device-ios
+          path: |
+            .agent-device/junit-ios.xml
+            .agent-device/test-artifacts
+          if-no-files-found: warn
