@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { TouchableWithoutFeedback } from '../../devsupport';
+import { TouchableWeb } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -147,7 +147,7 @@ describe('@menu-item: component checks', () => {
       <TestMenuItem onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWeb));
     expect(onPress).toHaveBeenCalled();
   });
 
@@ -157,7 +157,7 @@ describe('@menu-item: component checks', () => {
       <TestMenuItem onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -167,7 +167,7 @@ describe('@menu-item: component checks', () => {
       <TestMenuItem onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { TouchableWithoutFeedback } from '../../devsupport';
+import { TouchableWeb } from '../../devsupport';
 import { TouchableOpacity } from 'react-native';
 import {
   fireEvent,
@@ -74,7 +74,7 @@ describe('@radio-group: component checks', () => {
       <TestRadioGroup selectedIndex={1} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0]);
+    fireEvent.press(component.UNSAFE_queryAllByType(TouchableWeb)[0]);
     expect(component.getAllByRole('radio')[0]).toBeChecked();
   });
 
@@ -84,7 +84,7 @@ describe('@radio-group: component checks', () => {
       <TestRadioGroup onChange={onChange} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[1]);
+    fireEvent.press(component.UNSAFE_queryAllByType(TouchableWeb)[1]);
     expect(onChange).toHaveBeenCalledWith(1);
   });
 

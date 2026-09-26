@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { TouchableWithoutFeedback } from '../../devsupport';
+import { TouchableWeb } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -142,7 +142,7 @@ describe('@drawer-item: component checks', () => {
       <TestDrawerItem onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWeb));
 
     expect(onPress).toHaveBeenCalled();
   });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableWithoutFeedback } from '../../devsupport';
+import { TouchableWeb } from '../../devsupport';
 import {
   Image,
   ImageProps, StyleSheet,
@@ -135,7 +135,7 @@ describe('@tab-bar: component checks', () => {
   };
 
   const touchables = {
-    findTabTouchable: (api: RenderAPI, index: number) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[index],
+    findTabTouchable: (api: RenderAPI, index: number) => api.UNSAFE_queryAllByType(TouchableWeb)[index],
   };
 
   it('should render 2 tabs passed to children', () => {

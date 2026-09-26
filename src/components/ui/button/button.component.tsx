@@ -247,18 +247,24 @@ const ButtonComponent = React.forwardRef<TouchableWeb, ButtonProps>(
         onPressIn={onPressIn}
         onPressOut={onPressOut}
       >
-        <FalsyFC
-          style={componentStyle.icon}
-          component={accessoryLeft}
-        />
-        <FalsyText
-          style={componentStyle.text}
-          component={children}
-        />
-        <FalsyFC
-          style={componentStyle.icon}
-          component={accessoryRight}
-        />
+        {accessoryLeft && (
+          <FalsyFC
+            style={componentStyle.icon}
+            component={accessoryLeft}
+          />
+        )}
+        {children && (
+          <FalsyText
+            style={componentStyle.text}
+            component={children}
+          />
+        )}
+        {accessoryRight && (
+          <FalsyFC
+            style={componentStyle.icon}
+            component={accessoryRight}
+          />
+        )}
       </TouchableWeb>
     );
   },

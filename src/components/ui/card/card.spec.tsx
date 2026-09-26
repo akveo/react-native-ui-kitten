@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { TouchableWithoutFeedback } from '../../devsupport';
+import { TouchableWeb } from '../../devsupport';
 import {
   Text,
   TouchableOpacity,
@@ -132,7 +132,7 @@ describe('@card: component checks', () => {
       <TestCard onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWeb));
     expect(onPress).toBeCalled();
   });
 
@@ -142,7 +142,7 @@ describe('@card: component checks', () => {
       <TestCard onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -152,7 +152,7 @@ describe('@card: component checks', () => {
       <TestCard onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 });

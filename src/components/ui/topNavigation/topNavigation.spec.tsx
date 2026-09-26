@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { TouchableWithoutFeedback } from '../../devsupport';
+import { TouchableWeb } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -83,7 +83,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWeb));
     expect(onPress).toBeCalled();
   });
 
@@ -93,7 +93,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -103,7 +103,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 
@@ -114,7 +114,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onMouseEnter={onMouseEnter} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseEnter');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'mouseEnter');
     expect(onMouseEnter).toBeCalled();
   });
 
@@ -125,7 +125,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onMouseLeave={onMouseLeave} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseLeave');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'mouseLeave');
     expect(onMouseLeave).toBeCalled();
   });
 
@@ -136,7 +136,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onFocus={onFocus} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'focus');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'focus');
     expect(onFocus).toBeCalled();
   });
 
@@ -147,7 +147,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onBlur={onBlur} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'blur');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'blur');
     expect(onBlur).toBeCalled();
   });
 

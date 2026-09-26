@@ -5,6 +5,7 @@ import { ApplicationProvider } from '../../theme';
 import { Button } from './button.component';
 import { Text } from '../text/text.component';
 import { Toggle } from '../toggle/toggle.component';
+import { Layout } from '../layout/layout.component';
 
 /*
  * Exported components are memoized: a parent re-render with referentially equal props must not
@@ -78,19 +79,35 @@ describe('@memo: component checks', () => {
   });
 
   it('should still repaint on theme change', () => {
+    // `color-basic-default` is the same in both Eva themes, so assert on values that differ:
+    // Layout background (background-basic-color-1) and Text colour (text-basic-color).
     const App = (props: { theme: typeof light }): React.ReactElement => (
       <ApplicationProvider mapping={mapping} theme={props.theme}>
-        <Button appearance='outline' status='basic'>
-          STATIC
-        </Button>
+        <Layout testID='layout'>
+          <Button appearance='filled' status='basic'>
+            STATIC
+          </Button>
+          <Text testID='text'>
+            STATIC TEXT
+          </Text>
+        </Layout>
       </ApplicationProvider>
     );
     const component = render(<App theme={light} />);
-    const before = JSON.stringify(component.getByText('STATIC').props.style);
+    const flatten = (style: unknown): Record<string, unknown> => Object.assign({}, ...([] as unknown[]).concat(style as unknown[]).flat(Infinity).filter(Boolean));
+    const before = {
+      layout: flatten(component.getByTestId('layout').props.style).backgroundColor,
+      text: flatten(component.getByTestId('text').props.style).color,
+    };
 
     component.rerender(<App theme={dark} />);
-    const after = JSON.stringify(component.getByText('STATIC').props.style);
+    const after = {
+      layout: flatten(component.getByTestId('layout').props.style).backgroundColor,
+      text: flatten(component.getByTestId('text').props.style).color,
+    };
 
-    expect(after).not.toEqual(before);
+    expect(String(before.layout)).toMatch(/^#/);
+    expect(after.layout).not.toEqual(before.layout);
+    expect(after.text).not.toEqual(before.text);
   });
 });

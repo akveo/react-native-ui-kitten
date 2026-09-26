@@ -238,10 +238,12 @@ const CheckBoxComponent: React.FC<CheckBoxProps> = (props): TouchableWebElement 
           </Animated.View>
         </View>
       </Animated.View>
-      <FalsyText
-        style={componentStyle.text}
-        component={children}
-      />
+      {children && (
+        <FalsyText
+          style={componentStyle.text}
+          component={children}
+        />
+      )}
     </TouchableWeb>
   );
 };
