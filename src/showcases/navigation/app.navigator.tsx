@@ -27,6 +27,7 @@ import { ListItemSimpleUsageShowcase } from '../components/list/listItemSimpleUs
 import { MenuSimpleUsageShowcase } from '../components/menu/menuSimpleUsage.component';
 import { MenuItemSimpleUsageShowcase } from '../components/menu/menuItemSimpleUsage.component';
 import { SelectSimpleUsageShowcase } from '../components/select/selectSimpleUsage.component';
+import { SelectSizeShowcase } from '../components/select/selectSize.component';
 import { SelectItemSimpleUsageShowcase } from '../components/select/selectItemSimpleUsage.component';
 
 // Popover-based components
@@ -48,7 +49,10 @@ import { DrawerItemSimpleUsageShowcase } from '../components/drawer/drawerItemSi
 
 // Calendar/Date components
 import { CalendarSimpleUsageShowcase } from '../components/calendar/calendarSimpleUsage.component';
+import { CalendarFiltersShowcase } from '../components/calendar/calendarFilters.component';
+import { CalendarMomentShowcase } from '../components/calendar/calendarMoment.component';
 import { RangeCalendarSimpleUsageShowcase } from '../components/calendar/rangeCalendarSimpleUsage.component';
+import { RangeCalendarFiltersShowcase } from '../components/calendar/rangeCalendarFilters.component';
 import { DatepickerSimpleUsageShowcase } from '../components/datepicker/datepickerSimpleUsage.component';
 import { RangeDatepickerSimpleUsageShowcase } from '../components/datepicker/rangeDatepickerSimpleUsage.component';
 
@@ -147,6 +151,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'Menu', Component: MenuSimpleUsageShowcase },
   { title: 'MenuItem', Component: MenuItemSimpleUsageShowcase },
   { title: 'Select', Component: SelectSimpleUsageShowcase },
+  { title: 'SelectSize', Component: SelectSizeShowcase },
   { title: 'SelectItem', Component: SelectItemSimpleUsageShowcase },
   { title: 'Popover', Component: PopoverSimpleUsageShowcase },
   { title: 'Tooltip', Component: TooltipSimpleUsageShowcase },
@@ -162,7 +167,10 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'Drawer', Component: DrawerSimpleUsageShowcase },
   { title: 'DrawerItem', Component: DrawerItemSimpleUsageShowcase },
   { title: 'Calendar', Component: CalendarSimpleUsageShowcase },
+  { title: 'CalendarFilters', Component: CalendarFiltersShowcase },
+  { title: 'CalendarMoment', Component: CalendarMomentShowcase },
   { title: 'RangeCalendar', Component: RangeCalendarSimpleUsageShowcase },
+  { title: 'RangeCalendarFilters', Component: RangeCalendarFiltersShowcase },
   { title: 'Datepicker', Component: DatepickerSimpleUsageShowcase },
   { title: 'RangeDatepicker', Component: RangeDatepickerSimpleUsageShowcase },
   { title: 'Autocomplete', Component: AutocompleteSimpleUsageShowcase },
