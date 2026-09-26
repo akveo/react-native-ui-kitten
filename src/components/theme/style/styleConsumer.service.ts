@@ -37,6 +37,9 @@ export class StyleConsumerService {
 
   private readonly name: string;
   private readonly meta: ControlMetaType;
+  private readonly stateNames: Set<string>;
+  private readonly parameterNames: Set<string>;
+  private readonly variantGroupNames: Set<string>;
 
   constructor(name: string, style: StyleType) {
     this.name = name;
@@ -56,6 +59,10 @@ export class StyleConsumerService {
 
       console.error(message);
     }
+
+    this.stateNames = new Set(this.meta ? Object.keys(this.meta.states) : []);
+    this.parameterNames = new Set(this.meta ? Object.keys(this.meta.parameters) : []);
+    this.variantGroupNames = new Set(this.meta ? Object.keys(this.meta.variantGroups) : []);
   }
 
   public createDefaultProps(): StyledComponentProps {
@@ -107,7 +114,7 @@ export class StyleConsumerService {
 
   private withValidInteraction(interaction: Interaction[]): Interaction[] {
     const validInteractions: Interaction[] = interaction.filter((key: Interaction) => {
-      return Object.keys(this.meta.states).includes(key);
+      return this.stateNames.has(key);
     });
 
     if (validInteractions.length < interaction.length) {
@@ -126,12 +133,12 @@ export class StyleConsumerService {
   private withValidParameters(mapping: StyleType): StyleType {
     const invalidParameters: string[] = [];
 
-    Object.keys(mapping).forEach((key: string) => {
-      if (!Object.keys(this.meta.parameters).includes(key)) {
+    for (const key in mapping) {
+      if (!this.parameterNames.has(key)) {
         invalidParameters.push(key);
         delete mapping[key];
       }
-    });
+    }
 
     if (invalidParameters.length !== 0) {
       const message: string = [
@@ -190,20 +197,15 @@ export class StyleConsumerService {
     });
   }
 
-  private getDerivedVariants<P extends StyledComponentProps>(meta: ControlMetaType, props: P): Partial<P> {
+  private getDerivedVariants<P extends StyledComponentProps>(_meta: ControlMetaType, props: P): Partial<P> {
     return this.transformObject(props, (p: P, prop: string): string | undefined => {
-      const isVariant: boolean = Object.keys(meta.variantGroups).includes(prop);
-
-      return isVariant ? p[prop] : undefined;
+      return this.variantGroupNames.has(prop) ? p[prop] : undefined;
     });
   }
 
-  private getDerivedStates<P extends StyledComponentProps>(meta: ControlMetaType, props: P): Partial<P> {
+  private getDerivedStates<P extends StyledComponentProps>(_meta: ControlMetaType, props: P): Partial<P> {
     return this.transformObject(props, (p: P, prop: string): boolean => {
-      const isState: boolean = Object.keys(meta.states).includes(prop);
-      const isAssigned: boolean = p[prop] === true;
-
-      return isState && isAssigned;
+      return this.stateNames.has(prop) && p[prop] === true;
     });
   }
 
@@ -216,14 +218,14 @@ export class StyleConsumerService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private transformObject<V extends object>(value: V, transform: (value: V, key: string) => any): Partial<V> {
-    return Object.keys(value).reduce((acc: Partial<V>, key: string) => {
+    const result: Partial<V> = {};
+    for (const key in value) {
       const nextValue = transform(value, key);
-
-      return nextValue ? {
-        ...acc,
-        [key]: nextValue,
-      } : acc;
-    }, {});
+      if (nextValue) {
+        result[key] = nextValue;
+      }
+    }
+    return result;
   }
 
   /**
