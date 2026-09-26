@@ -4,24 +4,47 @@ open "com.uikitten.showcases" --relaunch --platform ios
 wait "id=\"toggle-theme\"" 60000
 react-native "dismiss-overlay"
 wait "id=\"section-Button-title\"" 10000
-scroll "bottom"
-wait "id=\"section-Autocomplete-title\"" 10000
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
-scroll "up" 0.5
+scroll "top"
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
 wait "label=\"TOGGLE MODAL\"" 10000
 press "role=\"button\" label=\"TOGGLE MODAL\" || label=\"TOGGLE MODAL\""
 wait "text" "Pick an option" 5000
