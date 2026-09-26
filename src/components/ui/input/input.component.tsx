@@ -202,6 +202,7 @@ export const Input = React.forwardRef<InputRef, InputProps>(
 
     const textInputRef = useRef<TextInput>(null);
     const webEventResponderRef = useRef<WebEventResponderInstance | null>(null);
+    const focusedRef = useRef(false);
 
     const { style: evaStyle, dispatch } = useStyled('Input', {
       appearance,
@@ -218,12 +219,19 @@ export const Input = React.forwardRef<InputRef, InputProps>(
       clear: () => textInputRef.current?.clear(),
     }), []);
 
-    // WebEventResponder callbacks for hover
+    // WebEventResponder callbacks for hover. Eva has no combined hover + focused state, so while
+    // the field is focused the pointer must not replace or clear the focused styling.
     const onMouseEnter = useCallback(() => {
+      if (focusedRef.current) {
+        return;
+      }
       dispatch([Interaction.HOVER]);
     }, [dispatch]);
 
     const onMouseLeave = useCallback(() => {
+      if (focusedRef.current) {
+        return;
+      }
       dispatch([]);
     }, [dispatch]);
 
@@ -240,11 +248,13 @@ export const Input = React.forwardRef<InputRef, InputProps>(
 
     // Event handlers
     const onTextFieldFocus = useCallback((event: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      focusedRef.current = true;
       dispatch([Interaction.FOCUSED]);
       onFocusProp?.(event);
     }, [dispatch, onFocusProp]);
 
     const onTextFieldBlur = useCallback((event: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      focusedRef.current = false;
       dispatch([]);
       onBlurProp?.(event);
     }, [dispatch, onBlurProp]);

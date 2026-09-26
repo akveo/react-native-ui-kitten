@@ -9,6 +9,7 @@ import React from 'react';
 import {
   Image,
   ImageProps,
+  StyleSheet,
   Text,
   TextInput,
 } from 'react-native';
@@ -26,6 +27,15 @@ import {
   InputProps,
   InputRef,
 } from './input.component';
+
+
+const themeValue = (name: string): string => {
+  let value: string = light[name];
+  while (typeof value === 'string' && value.startsWith('$')) {
+    value = light[value.slice(1)];
+  }
+  return value;
+};
 
 describe('@input: component checks', () => {
 
@@ -272,6 +282,35 @@ describe('@input: component checks', () => {
 
     fireEvent(component.UNSAFE_queryByType(TextInput), 'blur');
     expect(onBlur).toBeCalled();
+  });
+
+  it('should keep the focused style while the pointer enters and leaves a focused field', () => {
+    const component = render(
+      <TestInput />,
+    );
+
+    const textInput = component.UNSAFE_getByType(TextInput);
+    const backgroundColor = (): string => StyleSheet.flatten(textInput.parent.props.style).backgroundColor;
+
+    expect(backgroundColor()).toEqual(themeValue('background-basic-color-2'));
+
+    fireEvent(textInput, 'focus');
+    expect(backgroundColor()).toEqual(themeValue('background-basic-color-1'));
+
+    fireEvent(textInput, 'mouseEnter');
+    expect(backgroundColor()).toEqual(themeValue('background-basic-color-1'));
+
+    fireEvent(textInput, 'mouseLeave');
+    expect(backgroundColor()).toEqual(themeValue('background-basic-color-1'));
+
+    fireEvent(textInput, 'blur');
+    expect(backgroundColor()).toEqual(themeValue('background-basic-color-2'));
+
+    fireEvent(textInput, 'mouseEnter');
+    expect(backgroundColor()).toEqual(themeValue('background-basic-color-3'));
+
+    fireEvent(textInput, 'mouseLeave');
+    expect(backgroundColor()).toEqual(themeValue('background-basic-color-2'));
   });
 
   describe('accessibility', () => {
