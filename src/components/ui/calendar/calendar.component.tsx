@@ -217,6 +217,8 @@ function CalendarComponent<D = Date>(
     isHeaderNavigationAllowed,
   } = useCalendarNavigation<D>({
     dateService,
+    min,
+    max,
     viewMode,
     visibleDate,
     pickerDate,

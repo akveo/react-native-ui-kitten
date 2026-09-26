@@ -427,4 +427,51 @@ describe('@calendar: component checks', () => {
     expect(onVisibleDateChange).toBeCalled();
   });
 
+  it('should not navigate past min or max with the header arrows', () => {
+    const componentRef = React.createRef<CalendarRef>();
+    const component = render(
+      <TestCalendar
+        ref={componentRef}
+        date={new Date(2024, 5, 15)}
+        min={new Date(2024, 0, 10)}
+        max={new Date(2024, 11, 20)}
+      />,
+    );
+
+    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableOpacity)[1];
+    const navigationNextButton = component.UNSAFE_queryAllByType(TouchableOpacity)[2];
+
+    for (let i = 0; i < 10; i++) {
+      fireEvent.press(navigationPrevButton);
+    }
+    expect((componentRef.current.getVisibleDate() as Date).getFullYear()).toEqual(2024);
+    expect((componentRef.current.getVisibleDate() as Date).getMonth()).toEqual(0);
+
+    for (let i = 0; i < 20; i++) {
+      fireEvent.press(navigationNextButton);
+    }
+    expect((componentRef.current.getVisibleDate() as Date).getFullYear()).toEqual(2024);
+    expect((componentRef.current.getVisibleDate() as Date).getMonth()).toEqual(11);
+  });
+
+  it('should not page the year picker past min or max', () => {
+    const componentRef = React.createRef<CalendarRef>();
+    const component = render(
+      <TestCalendar
+        ref={componentRef}
+        startView={CalendarViewModes.YEAR}
+        date={new Date(2024, 5, 15)}
+        min={new Date(2020, 0, 1)}
+        max={new Date(2030, 11, 31)}
+      />,
+    );
+
+    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableOpacity)[1];
+    for (let i = 0; i < 5; i++) {
+      fireEvent.press(navigationPrevButton);
+    }
+
+    expect((componentRef.current.getPickerDate() as Date).getFullYear()).toEqual(2020);
+  });
+
 });
