@@ -1,5 +1,19 @@
 # @ui-kitten/components
 
+## 6.0.1
+
+### Patch Changes
+
+- [#1875](https://github.com/akveo/react-native-ui-kitten/pull/1875) [`8683243`](https://github.com/akveo/react-native-ui-kitten/commit/868324319a37495f40cfdbd1599d43198a587e41) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Datepicker` and `RangeDatepicker` render their placeholder with the Eva `placeholderColor` and
+  the text font instead of the selected-value text style. The placeholder style was computed but
+  never applied, so the placeholder and a selected date looked identical (#1224). Ported from
+  #1240 by @rmarquois.
+
+- [#1875](https://github.com/akveo/react-native-ui-kitten/pull/1875) [`db57a62`](https://github.com/akveo/react-native-ui-kitten/commit/db57a62a6bc2c7d850ed83fc8bcd690b31cc52aa) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Input` no longer loses its focused styling on web when the pointer enters or leaves the field.
+  Eva has no combined hover + focused state, so the hover handlers used to replace the focused
+  interaction with hover and then clear it on mouse-out, leaving a focused field styled as idle
+  (#1401). Hover is now ignored while the field is focused. Ported from #1779 by @raqso.
+
 ## 6.0.0
 
 ### Major Changes

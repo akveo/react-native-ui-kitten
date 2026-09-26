@@ -1,5 +1,13 @@
 # @ui-kitten/eva
 
+## 6.0.1
+
+### Patch Changes
+
+- [#1875](https://github.com/akveo/react-native-ui-kitten/pull/1875) [`8683243`](https://github.com/akveo/react-native-ui-kitten/commit/868324319a37495f40cfdbd1599d43198a587e41) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Datepicker` with the default `basic` status now uses `text-basic-color` for the selected date,
+  matching `Input` and `Select`. It used `text-hint-color`, the same value as its placeholder, so a
+  selected date was indistinguishable from an empty picker (#1224).
+
 ## 6.0.0
 
 ### Major Changes
