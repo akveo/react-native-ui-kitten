@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -141,7 +142,7 @@ describe('@drawer-item: component checks', () => {
       <TestDrawerItem onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
 
     expect(onPress).toHaveBeenCalled();
   });

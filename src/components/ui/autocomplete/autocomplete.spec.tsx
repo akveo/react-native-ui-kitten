@@ -137,7 +137,7 @@ I love Babel
       <TestAutocompleteItem onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onPress).toHaveBeenCalled();
   });
 
@@ -147,7 +147,7 @@ I love Babel
       <TestAutocompleteItem onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -157,7 +157,7 @@ I love Babel
       <TestAutocompleteItem onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 });

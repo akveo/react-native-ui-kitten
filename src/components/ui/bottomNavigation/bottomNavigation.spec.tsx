@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -115,7 +116,7 @@ describe('@bottom-navigation-tab: component checks', () => {
       <TestBottomNavigationTab onMouseEnter={onMouseEnter} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseEnter');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseEnter');
     expect(onMouseEnter).toBeCalled();
   });
 
@@ -126,7 +127,7 @@ describe('@bottom-navigation-tab: component checks', () => {
       <TestBottomNavigationTab onMouseLeave={onMouseLeave} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseLeave');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseLeave');
     expect(onMouseLeave).toBeCalled();
   });
 });
@@ -200,7 +201,7 @@ describe('@bottom-navigation: component checks', () => {
       <TestBottomNavigation selectedIndex={1} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryAllByType(TouchableOpacity)[0]);
+    fireEvent.press(component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0]);
     expect(component.UNSAFE_queryAllByType(BottomNavigationTab)[0].props.selected).toEqual(true);
   });
 
@@ -211,7 +212,7 @@ describe('@bottom-navigation: component checks', () => {
       <TestBottomNavigation onSelect={onSelect} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryAllByType(TouchableOpacity)[1]);
+    fireEvent.press(component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[1]);
     expect(onSelect).toHaveBeenCalledWith(1);
   });
 

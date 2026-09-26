@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   TouchableOpacity,
   View,
@@ -159,7 +160,7 @@ describe('@calendar: component checks', () => {
     );
 
     const initialDate = componentRef.current.getVisibleDate();
-    const navigationNextButton = component.UNSAFE_queryAllByType(TouchableOpacity)[2];
+    const navigationNextButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[2];
 
     fireEvent.press(navigationNextButton);
 
@@ -175,7 +176,7 @@ describe('@calendar: component checks', () => {
     );
 
     const initialDate = componentRef.current.getVisibleDate();
-    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableOpacity)[1];
+    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[1];
 
     fireEvent.press(navigationPrevButton);
 
@@ -194,7 +195,7 @@ describe('@calendar: component checks', () => {
     );
 
     const initialDate = componentRef.current.getVisibleDate();
-    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableOpacity)[2];
+    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[2];
 
     fireEvent.press(navigationPrevButton);
 
@@ -214,7 +215,7 @@ describe('@calendar: component checks', () => {
     );
 
     const initialDate = componentRef.current.getVisibleDate();
-    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableOpacity)[1];
+    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[1];
 
     fireEvent.press(navigationPrevButton);
 
@@ -358,8 +359,8 @@ describe('@calendar: component checks', () => {
       <TestCalendar onVisibleDateChange={onVisibleDateChange} />,
     );
 
-    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableOpacity)[1];
-    const navigationNextButton = component.UNSAFE_queryAllByType(TouchableOpacity)[2];
+    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[1];
+    const navigationNextButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[2];
 
     fireEvent.press(navigationPrevButton);
     expect(onVisibleDateChange).toBeCalledTimes(1);
@@ -438,8 +439,8 @@ describe('@calendar: component checks', () => {
       />,
     );
 
-    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableOpacity)[1];
-    const navigationNextButton = component.UNSAFE_queryAllByType(TouchableOpacity)[2];
+    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[1];
+    const navigationNextButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[2];
 
     for (let i = 0; i < 10; i++) {
       fireEvent.press(navigationPrevButton);
@@ -466,7 +467,7 @@ describe('@calendar: component checks', () => {
       />,
     );
 
-    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableOpacity)[1];
+    const navigationPrevButton = component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[1];
     for (let i = 0; i < 5; i++) {
       fireEvent.press(navigationPrevButton);
     }

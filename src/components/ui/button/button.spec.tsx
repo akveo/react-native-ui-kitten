@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -142,7 +143,7 @@ I love Babel
       <TestButton onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onPress).toBeCalled();
   });
 
@@ -153,7 +154,7 @@ I love Babel
       <TestButton onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -164,7 +165,7 @@ I love Babel
       <TestButton onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 
@@ -175,7 +176,7 @@ I love Babel
       <TestButton onMouseEnter={onMouseEnter} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseEnter');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseEnter');
     expect(onMouseEnter).toBeCalled();
   });
 
@@ -186,7 +187,7 @@ I love Babel
       <TestButton onMouseLeave={onMouseLeave} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseLeave');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseLeave');
     expect(onMouseLeave).toBeCalled();
   });
 
@@ -197,7 +198,7 @@ I love Babel
       <TestButton onFocus={onFocus} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'focus');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'focus');
     expect(onFocus).toBeCalled();
   });
 
@@ -208,7 +209,7 @@ I love Babel
       <TestButton onBlur={onBlur} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'blur');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'blur');
     expect(onBlur).toBeCalled();
   });
 
@@ -260,7 +261,7 @@ I love Babel
       />,
     );
 
-    const style = StyleSheet.flatten(component.UNSAFE_queryByType(TouchableOpacity).props.style);
+    const style = StyleSheet.flatten(component.UNSAFE_queryByType(TouchableWithoutFeedback).props.style);
     expect(style.backgroundColor).toEqual('transparent');
   });
 
