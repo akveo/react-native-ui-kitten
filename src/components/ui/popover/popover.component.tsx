@@ -287,6 +287,13 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
     onPlacementChange,
   });
 
+  // Measurement and modal machinery are mounted the first time the popover becomes visible;
+  // until then a closed popover costs exactly its anchor.
+  const everVisibleRef = useRef<boolean>(visible);
+  if (visible) {
+    everVisibleRef.current = true;
+  }
+
   // Ref for the container
   const containerRef = useRef<View>(null);
 
@@ -332,6 +339,14 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
       </MeasureElement>
     );
   };
+
+  if (!everVisibleRef.current) {
+    return (
+      <View ref={containerRef}>
+        {anchor()}
+      </View>
+    );
+  }
 
   return (
     <View ref={containerRef}>
