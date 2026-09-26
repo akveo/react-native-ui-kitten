@@ -38,6 +38,17 @@ const config: StorybookConfig = {
       ...(config.resolve.conditions || []),
     ];
 
+    // Library sources live in ../../src and would otherwise resolve react / react-dom /
+    // react-native-web from the root node_modules, giving the production bundle a second
+    // React copy next to the one Storybook renders with (hooks then throw
+    // "Cannot read properties of null (reading 'useRef')"). Force a single copy from website/.
+    config.resolve.dedupe = [
+      ...(config.resolve.dedupe || []),
+      'react',
+      'react-dom',
+      'react-native-web',
+    ];
+
     config.resolve.alias = {
       ...config.resolve.alias,
       // Map @ui-kitten/* packages to monorepo source directories
