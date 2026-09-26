@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { useCallback, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useCallback, useRef, forwardRef, useImperativeHandle, memo } from 'react';
 import {
   FlatList,
   FlatListProps,
@@ -104,6 +104,6 @@ function ListComponent<ItemT = any>(
   );
 }
 
-export const List = forwardRef(ListComponent) as <ItemT = any>(
+export const List = memo(forwardRef(ListComponent)) as <ItemT = any>(
   props: ListProps<ItemT> & { ref?: React.Ref<ListRef> }
 ) => React.ReactElement;

@@ -38,6 +38,7 @@ export {
   type AccessibilityDOMProps,
 } from './services/accessibility/accessibility.service';
 export { RTLService } from './services/rtl/rtl.service';
+export { areEqualProps } from './services/memo/memo.service';
 export {
   PropsService,
   TextStyleProps,

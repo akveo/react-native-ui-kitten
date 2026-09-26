@@ -12,7 +12,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { ChildrenWithProps } from '../../devsupport';
+import { ChildrenWithProps, areEqualProps } from '../../devsupport';
 import {
   TabElement,
   TabProps,
@@ -71,7 +71,7 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  * Tab contents may be loaded lazily, by configuring `shouldLoadComponent` property.
  */
 
-export const TabView: React.FC<TabViewProps> = ({
+const TabViewComponent: React.FC<TabViewProps> = ({
   style,
   children,
   selectedIndex = 0,
@@ -141,6 +141,9 @@ export const TabView: React.FC<TabViewProps> = ({
   );
 };
 
+TabViewComponent.displayName = 'TabView';
+
+export const TabView = React.memo(TabViewComponent, areEqualProps);
 TabView.displayName = 'TabView';
 
 const styles = StyleSheet.create({

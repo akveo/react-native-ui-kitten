@@ -20,6 +20,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -89,7 +90,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const BottomNavigationTab: React.FC<BottomNavigationTabProps> = ({
+const BottomNavigationTabComponent: React.FC<BottomNavigationTabProps> = ({
   style,
   title,
   icon,
@@ -137,6 +138,9 @@ export const BottomNavigationTab: React.FC<BottomNavigationTabProps> = ({
   );
 };
 
+BottomNavigationTabComponent.displayName = 'BottomNavigationTab';
+
+export const BottomNavigationTab = React.memo(BottomNavigationTabComponent, areEqualProps);
 BottomNavigationTab.displayName = 'BottomNavigationTab';
 
 const styles = StyleSheet.create({

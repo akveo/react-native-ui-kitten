@@ -16,6 +16,7 @@ import {
   FalsyText,
   RenderProp,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -140,7 +141,7 @@ const getAlignmentDependentStyles = (alignment?: AlignmentProp): StyleType => {
   };
 };
 
-export const TopNavigation: React.FC<TopNavigationProps> = ({
+const TopNavigationComponent: React.FC<TopNavigationProps> = ({
   style,
   title,
   subtitle,
@@ -179,6 +180,9 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
   );
 };
 
+TopNavigationComponent.displayName = 'TopNavigation';
+
+export const TopNavigation = React.memo(TopNavigationComponent, areEqualProps);
 TopNavigation.displayName = 'TopNavigation';
 
 const styles = StyleSheet.create({

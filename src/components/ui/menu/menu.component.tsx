@@ -11,6 +11,7 @@ import {
   ChildrenWithProps,
   IndexPath,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import { useStyled } from '../../theme';
 import { Divider } from '../divider/divider.component';
@@ -107,7 +108,7 @@ export interface MenuRef {
   clear: () => void;
 }
 
-export const Menu: React.FC<MenuProps> = ({
+const MenuComponent: React.FC<MenuProps> = ({
   children,
   selectedIndex,
   onSelect,
@@ -165,4 +166,7 @@ export const Menu: React.FC<MenuProps> = ({
   );
 };
 
+MenuComponent.displayName = 'Menu';
+
+export const Menu = React.memo(MenuComponent, areEqualProps);
 Menu.displayName = 'Menu';

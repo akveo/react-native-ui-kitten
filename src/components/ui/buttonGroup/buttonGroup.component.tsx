@@ -17,6 +17,7 @@ import {
   EvaSize,
   EvaStatus,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -93,7 +94,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const ButtonGroup: React.FC<ButtonGroupProps> = ({
+const ButtonGroupComponent: React.FC<ButtonGroupProps> = ({
   style,
   children,
   appearance,
@@ -156,6 +157,9 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
   );
 };
 
+ButtonGroupComponent.displayName = 'ButtonGroup';
+
+export const ButtonGroup = React.memo(ButtonGroupComponent, areEqualProps);
 ButtonGroup.displayName = 'ButtonGroup';
 
 const styles = StyleSheet.create({

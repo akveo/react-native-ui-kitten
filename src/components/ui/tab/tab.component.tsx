@@ -20,6 +20,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -92,7 +93,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const Tab: React.FC<TabProps> = ({
+const TabComponent: React.FC<TabProps> = ({
   style,
   title,
   icon,
@@ -140,6 +141,9 @@ export const Tab: React.FC<TabProps> = ({
   );
 };
 
+TabComponent.displayName = 'Tab';
+
+export const Tab = React.memo(TabComponent, areEqualProps);
 Tab.displayName = 'Tab';
 
 const styles = StyleSheet.create({

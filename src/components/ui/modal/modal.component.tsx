@@ -29,6 +29,7 @@ import {
   MeasureElement,
   MeasuringElement,
   Point,
+  areEqualProps,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
 import { Backdrop, BackdropPresentingConfig } from '../../theme/backdrop/backdrop.component';
@@ -116,7 +117,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  */
 let didWarnMissingPanel = false;
 
-export const Modal: React.FC<ModalProps> = ({
+const ModalComponent: React.FC<ModalProps> = ({
   style,
   visible = false,
   shouldUseContainer = true,
@@ -290,6 +291,9 @@ export const Modal: React.FC<ModalProps> = ({
   return renderRNModal();
 };
 
+ModalComponent.displayName = 'Modal';
+
+export const Modal = React.memo(ModalComponent, areEqualProps);
 Modal.displayName = 'Modal';
 
 const styles = StyleSheet.create({

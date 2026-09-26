@@ -15,7 +15,7 @@ import {
   ViewProps,
 } from 'react-native';
 import { SvgProps } from 'react-native-svg';
-import { RTLService } from '../../../devsupport';
+import { RTLService, areEqualProps } from '../../../devsupport';
 import { Button } from '../../button/button.component';
 import {
   Text,
@@ -59,7 +59,7 @@ export interface CalendarHeaderProps extends ViewProps {
 
 export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
 
-export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
+const CalendarHeaderComponent: React.FC<CalendarHeaderProps> = ({
   style,
   viewModeId,
   title,
@@ -179,6 +179,9 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   );
 };
 
+CalendarHeaderComponent.displayName = 'CalendarHeader';
+
+export const CalendarHeader = React.memo(CalendarHeaderComponent, areEqualProps);
 CalendarHeader.displayName = 'CalendarHeader';
 
 const styles = StyleSheet.create({

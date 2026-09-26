@@ -19,6 +19,7 @@ import {
   EvaSize,
   EvaStatus,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -98,7 +99,7 @@ const clamp = (progress: number): number => {
  * Styling of ProgressBar is possible with [configuring a custom theme](guides/branding).
  *
  */
-export const ProgressBar: React.FC<ProgressBarProps> = ({
+const ProgressBarComponent: React.FC<ProgressBarProps> = ({
   style,
   progress = 0,
   animating = true,
@@ -192,6 +193,9 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   );
 };
 
+ProgressBarComponent.displayName = 'ProgressBar';
+
+export const ProgressBar = React.memo(ProgressBarComponent, areEqualProps);
 ProgressBar.displayName = 'ProgressBar';
 
 const styles = StyleSheet.create({

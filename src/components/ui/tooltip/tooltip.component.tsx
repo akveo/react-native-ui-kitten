@@ -10,6 +10,7 @@ import {
   FalsyText,
   RenderProp,
   Overwrite,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -128,7 +129,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const Tooltip: React.FC<TooltipProps> = ({
+const TooltipComponent: React.FC<TooltipProps> = ({
   style,
   accessoryLeft,
   accessoryRight,
@@ -172,6 +173,9 @@ export const Tooltip: React.FC<TooltipProps> = ({
   );
 };
 
+TooltipComponent.displayName = 'Tooltip';
+
+export const Tooltip = React.memo(TooltipComponent, areEqualProps);
 Tooltip.displayName = 'Tooltip';
 
 const styles = StyleSheet.create({

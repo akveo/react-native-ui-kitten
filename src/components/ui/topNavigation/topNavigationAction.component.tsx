@@ -19,6 +19,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -73,7 +74,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const TopNavigationAction: React.FC<TopNavigationActionProps> = ({
+const TopNavigationActionComponent: React.FC<TopNavigationActionProps> = ({
   style,
   icon,
   appearance,
@@ -137,4 +138,7 @@ export const TopNavigationAction: React.FC<TopNavigationActionProps> = ({
   );
 };
 
+TopNavigationActionComponent.displayName = 'TopNavigationAction';
+
+export const TopNavigationAction = React.memo(TopNavigationActionComponent, areEqualProps);
 TopNavigationAction.displayName = 'TopNavigationAction';

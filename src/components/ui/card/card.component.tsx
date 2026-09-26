@@ -20,6 +20,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -96,7 +97,7 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @overview-example CardStatuses
  */
-export const Card: React.FC<CardProps> = (props): TouchableWebElement => {
+const CardComponent: React.FC<CardProps> = (props): TouchableWebElement => {
   const {
     appearance,
     status,
@@ -197,6 +198,9 @@ export const Card: React.FC<CardProps> = (props): TouchableWebElement => {
   );
 };
 
+CardComponent.displayName = 'Card';
+
+export const Card = React.memo(CardComponent, areEqualProps);
 Card.displayName = 'Card';
 
 const styles = StyleSheet.create({

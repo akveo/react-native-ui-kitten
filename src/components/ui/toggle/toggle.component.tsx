@@ -25,6 +25,7 @@ import {
   TouchableWeb,
   TouchableWebProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -51,7 +52,7 @@ const ANIMATION_DURATION = 200;
 /**
  * Switches toggle the state of a single setting on or off.
  */
-export const Toggle: React.FC<ToggleProps> = (props): React.ReactElement<ViewProps> => {
+const ToggleComponent: React.FC<ToggleProps> = (props): React.ReactElement<ViewProps> => {
   const {
     appearance,
     status,
@@ -299,6 +300,9 @@ export const Toggle: React.FC<ToggleProps> = (props): React.ReactElement<ViewPro
   );
 };
 
+ToggleComponent.displayName = 'Toggle';
+
+export const Toggle = React.memo(ToggleComponent, areEqualProps);
 Toggle.displayName = 'Toggle';
 
 const styles = StyleSheet.create({

@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, memo } from 'react';
 import {
   GestureResponderEvent,
   StyleSheet,
@@ -436,7 +436,7 @@ function DatepickerComponent<D = Date>(
   );
 }
 
-export const Datepicker = forwardRef(DatepickerComponent) as <D = Date>(
+export const Datepicker = memo(forwardRef(DatepickerComponent)) as <D = Date>(
   props: DatepickerProps<D> & { ref?: React.Ref<DatepickerRef<D>> }
 ) => React.ReactElement<ViewProps>;
 

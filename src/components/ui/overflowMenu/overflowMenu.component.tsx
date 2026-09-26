@@ -10,6 +10,7 @@ import { StyleSheet } from 'react-native';
 import {
   ChildrenWithProps,
   Overwrite,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -114,7 +115,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const OverflowMenu: React.FC<OverflowMenuProps> = ({
+const OverflowMenuComponent: React.FC<OverflowMenuProps> = ({
   style,
   children,
   appearance,
@@ -150,6 +151,9 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   );
 };
 
+OverflowMenuComponent.displayName = 'OverflowMenu';
+
+export const OverflowMenu = React.memo(OverflowMenuComponent, areEqualProps);
 OverflowMenu.displayName = 'OverflowMenu';
 
 const styles = StyleSheet.create({

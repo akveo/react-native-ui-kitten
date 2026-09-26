@@ -5,6 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { areEqualProps } from '../../../devsupport';
 import React from 'react';
 import {
   StyleSheet,
@@ -21,7 +22,7 @@ export interface CalendarMonthHeaderProps extends ViewPropsWithoutChildren {
 
 export type CalendarMonthHeaderElement = React.ReactElement<CalendarMonthHeaderProps>;
 
-export const CalendarMonthHeader: React.FC<CalendarMonthHeaderProps> = ({
+const CalendarMonthHeaderComponent: React.FC<CalendarMonthHeaderProps> = ({
   style,
   data,
   children,
@@ -37,6 +38,9 @@ export const CalendarMonthHeader: React.FC<CalendarMonthHeaderProps> = ({
   );
 };
 
+CalendarMonthHeaderComponent.displayName = 'CalendarMonthHeader';
+
+export const CalendarMonthHeader = React.memo(CalendarMonthHeaderComponent, areEqualProps);
 CalendarMonthHeader.displayName = 'CalendarMonthHeader';
 
 const styles = StyleSheet.create({

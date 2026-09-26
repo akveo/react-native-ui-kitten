@@ -16,6 +16,7 @@ import {
 import {
   ChildrenWithProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -140,7 +141,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const BottomNavigation: React.FC<BottomNavigationProps> = ({
+const BottomNavigationComponent: React.FC<BottomNavigationProps> = ({
   style,
   children,
   selectedIndex = 0,
@@ -194,6 +195,9 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
   );
 };
 
+BottomNavigationComponent.displayName = 'BottomNavigation';
+
+export const BottomNavigation = React.memo(BottomNavigationComponent, areEqualProps);
 BottomNavigation.displayName = 'BottomNavigation';
 
 const styles = StyleSheet.create({
