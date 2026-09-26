@@ -187,4 +187,40 @@ describe('@range-calendar: component checks', () => {
     expect(onVisibleDateChange).toBeCalled();
   });
 
+  it('should restart the range instead of spanning a filtered day', () => {
+    const onSelect = jest.fn();
+    const component = render(
+      <TestRangeCalendar
+        range={{ startDate: new Date(now.getFullYear(), now.getMonth(), 3) }}
+        filter={(date: Date) => date.getDate() !== 5}
+        onSelect={onSelect}
+      />,
+    );
+
+    fireEvent.press(component.queryAllByText('8')[0]);
+
+    expect(onSelect).toHaveBeenLastCalledWith({
+      startDate: new Date(now.getFullYear(), now.getMonth(), 8),
+      endDate: null,
+    });
+  });
+
+  it('should keep a range that contains no filtered day', () => {
+    const onSelect = jest.fn();
+    const component = render(
+      <TestRangeCalendar
+        range={{ startDate: new Date(now.getFullYear(), now.getMonth(), 3) }}
+        filter={(date: Date) => date.getDate() !== 15}
+        onSelect={onSelect}
+      />,
+    );
+
+    fireEvent.press(component.queryAllByText('8')[0]);
+
+    expect(onSelect).toHaveBeenLastCalledWith({
+      startDate: new Date(now.getFullYear(), now.getMonth(), 3),
+      endDate: new Date(now.getFullYear(), now.getMonth(), 8),
+    });
+  });
+
 });
