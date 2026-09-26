@@ -236,4 +236,19 @@ describe('@moment-date: service checks', () => {
       moment().year(2018).month(6).date(16),
     )).toBe(0);
   });
+
+  it('* should order day of week names from the locale first day of week', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require('moment/locale/nl');
+    const nlService = new MomentDateService('nl');
+    const localeData = moment.localeData('nl');
+
+    expect(localeData.firstDayOfWeek()).toEqual(1);
+    expect(nlService.getFirstDayOfWeek()).toEqual(1);
+    expect(nlService.getDayOfWeekNames()[0]).toEqual(localeData.weekdaysShort()[1]);
+    expect(nlService.getDayOfWeekNames()[6]).toEqual(localeData.weekdaysShort()[0]);
+
+    moment.locale('en');
+  });
+
 });
