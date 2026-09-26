@@ -938,7 +938,7 @@
                                     },
                                     "disabled": {
                                         "borderColor": "transparent",
-                                        "backgroundColor": "color-basic-transparent-200",
+                                        "backgroundColor": "transparent",
                                         "textColor": "text-disabled-color",
                                         "iconTintColor": "text-disabled-color"
                                     }
@@ -970,7 +970,7 @@
                                     },
                                     "disabled": {
                                         "borderColor": "transparent",
-                                        "backgroundColor": "color-basic-transparent-200",
+                                        "backgroundColor": "transparent",
                                         "textColor": "text-disabled-color",
                                         "iconTintColor": "text-disabled-color"
                                     }
@@ -1002,7 +1002,7 @@
                                     },
                                     "disabled": {
                                         "borderColor": "transparent",
-                                        "backgroundColor": "color-basic-transparent-200",
+                                        "backgroundColor": "transparent",
                                         "textColor": "text-disabled-color",
                                         "iconTintColor": "text-disabled-color"
                                     }
@@ -1034,7 +1034,7 @@
                                     },
                                     "disabled": {
                                         "borderColor": "transparent",
-                                        "backgroundColor": "color-basic-transparent-200",
+                                        "backgroundColor": "transparent",
                                         "textColor": "text-disabled-color",
                                         "iconTintColor": "text-disabled-color"
                                     }
@@ -1066,7 +1066,7 @@
                                     },
                                     "disabled": {
                                         "borderColor": "transparent",
-                                        "backgroundColor": "color-basic-transparent-200",
+                                        "backgroundColor": "transparent",
                                         "textColor": "text-disabled-color",
                                         "iconTintColor": "text-disabled-color"
                                     }
@@ -1098,7 +1098,7 @@
                                     },
                                     "disabled": {
                                         "borderColor": "transparent",
-                                        "backgroundColor": "color-basic-transparent-200",
+                                        "backgroundColor": "transparent",
                                         "textColor": "text-disabled-color",
                                         "iconTintColor": "text-disabled-color"
                                     }
@@ -1130,7 +1130,7 @@
                                     },
                                     "disabled": {
                                         "borderColor": "transparent",
-                                        "backgroundColor": "color-basic-transparent-200",
+                                        "backgroundColor": "transparent",
                                         "textColor": "text-disabled-color",
                                         "iconTintColor": "text-disabled-color"
                                     }
