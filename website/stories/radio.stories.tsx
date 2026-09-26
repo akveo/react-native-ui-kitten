@@ -5,12 +5,6 @@ import { Radio, RadioGroup } from '@ui-kitten/components';
 const meta: Meta<typeof RadioGroup> = {
   title: 'Components/Radio',
   component: RadioGroup,
-  argTypes: {
-    status: {
-      control: 'select',
-      options: ['basic', 'primary', 'success', 'info', 'warning', 'danger', 'control'],
-    },
-  },
 };
 
 export default meta;
