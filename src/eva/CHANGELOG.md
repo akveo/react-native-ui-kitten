@@ -1,5 +1,16 @@
 # @ui-kitten/eva
 
+## 6.0.0
+
+### Major Changes
+
+- [`e6651ad`](https://github.com/akveo/react-native-ui-kitten/commit/e6651adc16b6157fed425cee44e563752470409a) Thanks [@bataevvlad](https://github.com/bataevvlad)! - UI Kitten v6: React 19, React Native 0.81, Expo 54, all components migrated to functional, ESM build system, New Architecture ready.
+
+### Patch Changes
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`2652958`](https://github.com/akveo/react-native-ui-kitten/commit/265295803872bef2249b954d912996fe3023774d) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Remove stale trailing blank lines from `index.js`, left behind by earlier `exports.styles`
+  appends. The file now ends with a single newline.
+
 ## 6.0.0-beta.1
 
 ### Major Changes

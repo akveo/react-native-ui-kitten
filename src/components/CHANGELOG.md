@@ -1,5 +1,234 @@
 # @ui-kitten/components
 
+## 6.0.0
+
+### Major Changes
+
+- [`e6651ad`](https://github.com/akveo/react-native-ui-kitten/commit/e6651adc16b6157fed425cee44e563752470409a) Thanks [@bataevvlad](https://github.com/bataevvlad)! - UI Kitten v6: React 19, React Native 0.81, Expo 54, all components migrated to functional, ESM build system, New Architecture ready.
+
+### Minor Changes
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`83bf8fd`](https://github.com/akveo/react-native-ui-kitten/commit/83bf8fd2e1aeed367e0fe7e6a6e9b7c93eeb7e7f) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Add accessibility support for `Button`, `Input`, `CheckBox`, `Radio`, `RadioGroup`, `Toggle`,
+  `Select`, `SelectItem`, `ProgressBar`, `CircularProgressBar`, `Spinner`, `Modal` and `Popover`.
+
+  These components now expose a role, and where applicable their checked, selected, expanded,
+  disabled, busy and numeric value state, to VoiceOver, TalkBack and web screen readers. Before
+  this change no component in the library set a single accessibility prop, so screen reader
+  users received an unlabelled view hierarchy.
+
+  The props are emitted as `role` and `aria-*` rather than `accessibilityState` and
+  `accessibilityValue`. React Native Web does not read either of those objects, so the
+  conventional spelling would have produced correct native output and no web accessibility at
+  all. `accessibilityRole` is emitted alongside `role` because `TouchableOpacity` ignores
+  `role`. Anything a consumer passes — in modern or legacy spelling — still takes precedence.
+
+  Overlays gain `aria-modal` and support the iOS escape gesture. `Modal` and `Popover` accept a
+  new `backdropAccessibilityLabel` prop; without it the backdrop stays out of the accessibility
+  tree rather than appearing as an unnamed control.
+
+  Coverage is deliberately partial. Focus management in overlays, `Menu`, `Drawer`, the
+  navigation components, `Autocomplete` and the calendar grid are not addressed — see the
+  accessibility guide for the full list and for the touch-target sizes that fall below the
+  platform minimums.
+
+  **Behaviour change:** `Select` previously discarded every pass-through prop before rendering
+  its trigger, so `aria-label`, `accessibilityLabel` and other `TouchableWebProps` members
+  declared by `SelectProps` had no effect. They now reach the trigger as the type always
+  implied. Code that passed such a prop to `Select` and relied on it being ignored will see it
+  apply.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`c0e274d`](https://github.com/akveo/react-native-ui-kitten/commit/c0e274d5afcd6b1ee7d96782419617b6e8b778bd) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Calendar navigation is now reachable for assistive technology. `Calendar`, `RangeCalendar`,
+  `Datepicker` and `RangeDatepicker` accept `arrowLeftAccessibilityLabel` and
+  `arrowRightAccessibilityLabel` to name the header's previous / next controls, which were
+  unlabelled buttons before. Day, month and year cells expose a `button` role with their selected
+  and disabled state.
+
+  `Autocomplete` documents that the enclosing `ScrollView` or list needs
+  `keyboardShouldPersistTaps='handled'`; with React Native's default the first tap on an option
+  only dismisses the keyboard.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`6ce4786`](https://github.com/akveo/react-native-ui-kitten/commit/6ce4786b85b05611ee888c3b5cfbbdd46c21f463) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Modal` (and therefore `Popover`, `Select`, `Autocomplete`, `Datepicker`, `RangeDatepicker`,
+  `Tooltip` and `OverflowMenu`) now presents its content through a root-level panel that
+  `ApplicationProvider` renders around the app, instead of rendering the React Native `Modal`
+  at the call site.
+
+  **What moved.** The native modal is still a React Native `Modal`, but in the React tree it is
+  now a sibling of the app content rather than a descendant of the view that opened it. With
+  the keyboard open, a `ScrollView`, `FlatList` or `SectionList` with the default
+  `keyboardShouldPersistTaps='never'` used to claim the first tap on modal content during the
+  responder capture phase (root to target, first `true` wins) and only dismiss the keyboard, so
+  an `Autocomplete` option needed two taps. Modal content is no longer inside that list, so a
+  single tap selects. Setting `keyboardShouldPersistTaps='handled'` on the host list is no
+  longer required; it stays harmless.
+
+  **Nesting.** iOS presents one chain of modals only: a second modal presented from a view
+  controller that is already presenting is refused. An overlay opened from inside a UI Kitten
+  `Modal` therefore registers with that modal as its parent and renders inside the parent's
+  native modal, so Select, Tooltip, Popover and Datepicker keep working inside a `Modal`.
+
+  **Consumer contexts.** The presented element leaves the call site, so React contexts
+  provided _below_ `ApplicationProvider` (navigation, i18n, form libraries, your own providers)
+  are no longer visible inside modal content. UI Kitten's own theme and mapping contexts are
+  bridged, so nested `ThemeProvider` overrides still apply. Either move those providers above
+  `ApplicationProvider`, wrap the modal content in them, or opt a given modal out with the new
+  `renderInline` prop on `Modal` and `Popover`, which restores the previous inline rendering
+  (and the first-tap behaviour) for that modal and everything nested inside it.
+
+  **Overlay inside your own React Native `Modal`.** Such an overlay has no hoisted parent and
+  would be presented from the root, which iOS refuses while your modal is showing. Either wrap
+  that modal's content in a nested `ApplicationProvider` (its panel then presents overlays from
+  inside your modal) or pass `renderInline`. Rendering
+  `<ModalPanelContext.Provider value={null}>` forces inline rendering for a whole subtree.
+
+  A `Modal` rendered without any `ApplicationProvider` above it still works: it renders inline
+  as before and warns once in development.
+
+### Patch Changes
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`efe22dd`](https://github.com/akveo/react-native-ui-kitten/commit/efe22dd04ab91af058a77a82269d81eea4cc3900) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Fix Popover, Tooltip, OverflowMenu, Select, Autocomplete and Datepicker content rendering on top of
+  its anchor on edge-to-edge Android (React Native 0.81+, Expo 54). React Native presents every
+  `Modal` window edge-to-edge there, so the anchor position measured below the status bar is now
+  shifted by the status bar height without requiring `ModalService.setShouldUseTopInsets`. Also
+  guards the `shouldUseTopInsets` offset against a missing `StatusBar.currentHeight`.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`657fc23`](https://github.com/akveo/react-native-ui-kitten/commit/657fc23e8710a920454223f010ae0c886430d26a) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Stop shipping build leftovers in the published tarballs.
+
+  builder-bob is configured with `source: "."`, so it swept the package root into the build output. Every ESM package published a `lib/module/package.json` that was a **copy of its own manifest** — with no `"type": "module"` field and a `main` pointing at a path that does not exist — alongside `lib/module/CHANGELOG.md` and `lib/module/tsconfig.build.json`. Toolchains that determine module type from the nearest `package.json` would read the ESM output as CommonJS; it only worked because Node falls back to syntax detection. bob now writes its own `{"type": "module"}` marker instead.
+
+  `@ui-kitten/processor` also shipped 38 spec and spec-config files (its `!*.spec.*` exclusion only matched the package root, not `js/`), which is a third of the tarball.
+
+- [`e8e14be`](https://github.com/akveo/react-native-ui-kitten/commit/e8e14bedfc93c86cfdc96947e7372b1c8e7f244b) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Declare the `./devsupport` subpath in `exports` and stop the package importing itself.
+
+  Four internal modules imported through the package's own name — `progressBar` and
+  `circularProgressBar` pulled from `@ui-kitten/components` itself, a circular import of the
+  package barrel, while `modal` and `calendarHeader` reached in via undeclared subpaths.
+  Metro reported these as `not listed in the "exports"` and fell back to file-based
+  resolution; they now use relative imports.
+
+  `./devsupport` is a real public surface (`RenderProp`, `TouchableWebElement`) and is now a
+  declared export with its own types, react-native, source, and default conditions.
+  Bundling a consumer app produces no `exports` warnings.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`561a0ac`](https://github.com/akveo/react-native-ui-kitten/commit/561a0acb5778f16c6aadd3cb8e1051fea295363b) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Ship a dual CommonJS + ES module build with type definitions that work under every
+  TypeScript module resolution.
+
+  `@ui-kitten/components` published ESM-only output whose `.d.ts` files sat in an ES-module
+  scope (`lib/typescript/package.json` with `"type": "module"`) but used extensionless relative
+  imports. Under `moduleResolution: node16` / `nodenext` TypeScript rejected them with TS2834,
+  which made every root export disappear (`Module '"@ui-kitten/components"' has no exported
+member 'Button'`). `@ui-kitten/date-fns`, `@ui-kitten/eva-icons` and `@ui-kitten/moment`
+  pointed `main` at ESM without a `"type"` field and `types` at their raw `.ts` source, so they
+  were reported as `Masquerading as CJS` and consumers compiled the library's TypeScript under
+  their own tsconfig.
+
+  All four packages now build `lib/commonjs`, `lib/module` and generated declarations for both
+  (`lib/typescript/commonjs`, `lib/typescript/module`) via react-native-builder-bob, and the
+  relative imports in the ESM declarations carry explicit `.js` extensions. `exports` exposes
+  `import` and `require` conditions with matching `types`; the `react-native` and `source`
+  conditions still resolve to the TypeScript source for Metro. `@arethetypeswrong/cli` reports
+  no problems for `node10`, `node16` (CJS and ESM) and `bundler`.
+
+  Every export object also ends with a `default` condition pointing at the CommonJS build with
+  matching types, as a fallback for resolvers that match none of `source`, `react-native`,
+  `import` or `require`.
+
+  The dual layout costs tarball size. Measured with `npm pack` (bytes, gzip):
+
+  | package                 | 6.0.0-beta.2 (ESM only) | dual build | dual build, trimmed |
+  | ----------------------- | ----------------------: | ---------: | ------------------: |
+  | `@ui-kitten/components` |                 375 697 |    479 774 |             421 524 |
+  | `@ui-kitten/moment`     |                   3 780 |      6 240 |               5 458 |
+  | `@ui-kitten/eva-icons`  |                   2 760 |      4 591 |               4 082 |
+  | `@ui-kitten/date-fns`   |                   2 343 |      3 651 |               3 362 |
+
+  The trimmed column drops the `.js.map` files from `lib/commonjs` (the `module` tree keeps its
+  source maps). The `.d.ts.map` files are kept in both declaration trees: without them,
+  go-to-definition lands on the generated `.d.ts` instead of the shipped `.ts` source. The
+  remaining growth is the second JavaScript build and the second copy of the declarations,
+  which is the price of resolving correctly under both `require` and `import`.
+
+- [`73e517f`](https://github.com/akveo/react-native-ui-kitten/commit/73e517fdb764c5499938375bca750264e7777ddf) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Export `AutocompleteRef`, `InputRef`, and `ListRef` from the package root.
+
+  All three were defined and exported by their own modules but never re-exported from the
+  barrel, so consumers had no way to type a ref for `Autocomplete`, `Input`, or `List` —
+  the same gap that made `IconRef` unusable in practice. They now sit alongside the
+  already-exported `CalendarRef`, `DatepickerRef`, `RangeCalendarRef`, `RangeDatepickerRef`,
+  and `SelectRef`.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`2bee712`](https://github.com/akveo/react-native-ui-kitten/commit/2bee712af38ba086eeee32b3966a173909ac4303) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Export the types used by public component props from the package root.
+
+  `EvaStatus`, `EvaSize`, `EvaInputSize`, `LiteralUnion`, `RenderProp`, `RenderFCProp` and `ChildrenWithProps` type props such as `ButtonProps.status`, `.size` and `.accessoryLeft`, but were only reachable through `@ui-kitten/components/devsupport` — a path whose name tells users not to import it. Anyone typing a wrapper component needed them.
+
+  `RenderProp` and `RenderFCProp` also now default their type parameter, so the documented bare spelling compiles:
+
+  ```ts
+  import type { RenderProp } from "@ui-kitten/components";
+
+  const accessory: RenderProp = <Icon name="star" />; // previously: TS2314
+  ```
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`48f2806`](https://github.com/akveo/react-native-ui-kitten/commit/48f280674cc91d7f122f14548d9e5514c8e8c6cb) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Stop leaking type errors into consumer projects under `strict` without `skipLibCheck`.
+
+  Six errors reached apps that typecheck their `node_modules`:
+
+  - `ThemedThemeType` declared an optional `__themeId` on an interface extending an index-signature type, which emitted a TS2411 error in `themeStore.d.ts`.
+  - `withStyles` left its style generic unconstrained, so the returned `ThemedComponentClass` emitted two TS2344 errors.
+  - `MomentDateService.localeData` is assigned via `setLocale()` from the constructor, which TypeScript cannot see (TS2564).
+  - `DateFnsService` passed the optional `options.format` straight to date-fns (TS2345, twice).
+
+  `@ui-kitten/moment` and `@ui-kitten/date-fns` publish no `.d.ts` and point `types` at their raw TypeScript, so their source is typechecked directly by consumers — the last two now compile cleanly under `strict`.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`918ef23`](https://github.com/akveo/react-native-ui-kitten/commit/918ef23f15cad205efbf26ec1a87ff5b66d9c8a6) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Input` no longer derives `@undefined/container` and `@undefined/input` test identifiers when
+  no `testID` is passed. Derived identifiers are only emitted for an explicit `testID`, so the
+  wrapper and the text field stay free of placeholder identifiers in the accessibility tree.
+  Components that wrap `Input`, such as `Autocomplete`, are covered by the same guard.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`1d65240`](https://github.com/akveo/react-native-ui-kitten/commit/1d65240b75fdaa88305c89c5b4b6639f24676fc4) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Fix the web bundle breaking with `"TurboModuleRegistry" is not exported by "react-native-web"`.
+  The edge-to-edge Android check in `MeasureElement` now reads the `DeviceInfo` constants through
+  `NativeModules`, which react-native-web ships as a shim and bridgeless React Native forwards to the
+  TurboModule registry, so web bundlers such as Vite, Rollup and webpack resolve the import again.
+
+- [`92eedc8`](https://github.com/akveo/react-native-ui-kitten/commit/92eedc8a7d329caca1a363cf8cdab3a782e495df) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Ship generated type definitions instead of raw source.
+
+  `types` pointed at `./index.ts`, so consuming projects typechecked the library's own
+  source under their tsconfig and saw 221 errors from `node_modules` — with no workaround,
+  since `skipLibCheck` only skips `.d.ts` files. The package now builds `.d.ts` via
+  react-native-builder-bob's `typescript` target and points `types` at
+  `./lib/typescript/index.d.ts`.
+
+  Fixing the 22 type errors that blocked declaration output also corrected real bugs:
+
+  - `React.ReactText` was removed in React 19; replaced with `string | number` across 19 sites
+  - `Calendar`'s `getViewMode()` was typed `() => string` but returns a `CalendarViewMode`
+  - `TabView`'s view pager ref was typed as the component value rather than `ViewPagerRef`
+  - `DatepickerProps` declared conflicting `onBlur`/`onFocus` inherited from `ViewProps`
+  - `dateService` widened to `NativeDateService | DateService<D>` instead of `DateService<D>`
+
+  `Button`, `Select`, and `Datepicker` now accept `string | number` for text props, matching
+  `CheckBox`/`Toggle`/`Radio` and the runtime behaviour of `FalsyText`. Previously the
+  idiomatic `<Button>TEXT</Button>` did not typecheck.
+
+  Type-only changes — the compiled bundle is byte-identical.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`f00c66b`](https://github.com/akveo/react-native-ui-kitten/commit/f00c66bcec65d0d088f7eaf52bc844b16f547c7e) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Accept elements for `TopNavigation` accessories, and fix `RTLService.isRTL()` on web.
+
+  `TopNavigationProps.accessoryLeft` and `accessoryRight` were typed `() => ReactElement` while the JSDoc promised `ReactElement | () => ReactElement` and the runtime accepted both — the element form rendered correctly but failed to typecheck. They are now `RenderProp`, matching `Button` and the rest of the library.
+
+  `RTLService.isRTL()` returned `I18nManager.isRTL` unguarded. react-native-web leaves that undefined, so a method declared to return `boolean` returned `undefined` on web, and `ignoreRTL()`'s default argument came out undefined with it.
+
+- [#1871](https://github.com/akveo/react-native-ui-kitten/pull/1871) [`f8ca657`](https://github.com/akveo/react-native-ui-kitten/commit/f8ca65740fc59bf4d27c27bcd525a6a70e07f516) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Document the v5 → v6 migration and ship a codemod that performs most of it.
+
+  `website/docs/migration/5x-to-6.md` is new: ref types, the React 19 fallout, the `styled` removal,
+  the `@eva-design/*` moves, and the Jest change the ESM-only build requires.
+
+  The codemod itself lives at `src/codemod` and is private for now, so it does not join the release
+  set. Two documentation samples that still imported `@eva-design/eva` now import `@ui-kitten/eva`,
+  matching the install instructions.
+
+- Updated dependencies [[`657fc23`](https://github.com/akveo/react-native-ui-kitten/commit/657fc23e8710a920454223f010ae0c886430d26a), [`03cad37`](https://github.com/akveo/react-native-ui-kitten/commit/03cad375ea68dc1bb7f10871edc44ef9228d2c99), [`e6651ad`](https://github.com/akveo/react-native-ui-kitten/commit/e6651adc16b6157fed425cee44e563752470409a)]:
+  - @ui-kitten/processor@6.0.0
+  - @ui-kitten/mapping-base@6.0.0
+
 ## 6.0.0-beta.2
 
 ### Patch Changes
