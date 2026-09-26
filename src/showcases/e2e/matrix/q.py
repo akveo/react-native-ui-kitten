@@ -26,7 +26,7 @@ if mode == 'to':
     if tgt is None:
         vis = [ident(n)[8:-6] for n in nodes if ident(n).startswith('section-') and ident(n).endswith('-title')]
         vis = [v for v in vis if v in ORDER]
-        DIRF = os.path.join(os.environ.get('TMPDIR', '/tmp'), 'adq-lastdir-' + os.environ.get('AGENT_DEVICE_SESSION', 'default'))
+        DIRF = '/tmp/adq-lastdir'
         if section.startswith('section-') and section.endswith('-title') and not vis:
             try: d = open(DIRF).read().strip() or 'down'
             except Exception: d = 'down'

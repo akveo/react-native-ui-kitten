@@ -33,7 +33,7 @@ Files:
   off-screen nodes with negative `y`; Android exposes only visible nodes, so `q.py to` falls back to
   the section order to pick a scroll direction.
 - `capture.sh` — screenshot + raw rect dump of every section in all four theme/mapping combos, for
-  a master-vs-branch parity diff with `compare.py <masterDir> <branchDir> <outDir>` (needs Pillow).
+  a master-vs-branch parity diff with `compare.py <masterDir> <branchDir> <outDir>` (needs Pillow; aligns screenshots by content and writes `parity.md` plus master/branch/diff triptychs).
 
 Gotchas learned while writing it: a tap outside a focused `TextInput` only dismisses the keyboard
 (the showcase `FlatList` keeps `keyboardShouldPersistTaps='never'`), so dismiss before pressing an
