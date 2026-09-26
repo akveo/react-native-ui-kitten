@@ -19,7 +19,10 @@ export const InputAccessoriesShowcase = (): React.ReactElement => {
   };
 
   const renderIcon = (props): React.ReactElement => (
-    <TouchableWithoutFeedback onPress={toggleSecureEntry}>
+    <TouchableWithoutFeedback
+      testID='input-accessories-toggle'
+      onPress={toggleSecureEntry}
+    >
       <Icon
         {...props}
         name={secureTextEntry ? 'eye-off' : 'eye'}

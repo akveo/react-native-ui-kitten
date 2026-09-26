@@ -6,6 +6,7 @@ import { AppMapping, AppTheme, ThemeContext } from '../services/theme.service';
 // Basic components
 import { ButtonSimpleUsageShowcase } from '../components/button/buttonSimpleUsage.component';
 import { InputSimpleUsageShowcase } from '../components/input/inputSimpleUsage.component';
+import { InputAccessoriesShowcase } from '../components/input/inputAccessories.component';
 import { CheckboxSimpleUsageShowcase } from '../components/checkbox/checkboxSimpleUsage.component';
 import { ToggleSimpleUsageShowcase } from '../components/toggle/toggleSimpleUsage.component';
 import { RadioSimpleUsageShowcase } from '../components/radio/radioSimpleUsage.component';
@@ -129,6 +130,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'Button', Component: ButtonSimpleUsageShowcase },
   { title: 'ButtonGroup', Component: ButtonGroupSimpleUsageShowcase },
   { title: 'Input', Component: InputSimpleUsageShowcase },
+  { title: 'InputAccessories', Component: InputAccessoriesShowcase },
   { title: 'CheckBox', Component: CheckboxSimpleUsageShowcase },
   { title: 'Toggle', Component: ToggleSimpleUsageShowcase },
   { title: 'Radio', Component: RadioSimpleUsageShowcase },
