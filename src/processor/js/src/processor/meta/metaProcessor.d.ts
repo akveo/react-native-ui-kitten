@@ -8,7 +8,7 @@ export interface MappingProcessorParamsType {
 }
 export declare class MetaProcessor implements Processor<MappingProcessorParamsType, ThemeStyleType> {
     process(params: MappingProcessorParamsType): ThemeStyleType;
-    private processStrictTheme;
+    processStrictTheme(theme: StrictTheme): StrictTheme;
     private getStrictThemeValue;
     private findValue;
     private isReference;

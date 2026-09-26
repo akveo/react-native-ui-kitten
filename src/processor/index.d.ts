@@ -1,4 +1,5 @@
-export { SchemaProcessor } from './js/src/processor';
+export { SchemaProcessor, MetaProcessor } from './js/src/processor';
+export { createStyle, needsAllVariantCases } from './js/src/service/style/style.service';
 export {
   SchemaType,
   StrictTheme,
