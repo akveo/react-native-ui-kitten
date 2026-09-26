@@ -139,7 +139,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * @overview-example ButtonTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export const Button = React.forwardRef<TouchableWeb, ButtonProps>(
+const ButtonComponent = React.forwardRef<TouchableWeb, ButtonProps>(
   (props, ref) => {
     const {
       appearance,
@@ -264,6 +264,9 @@ export const Button = React.forwardRef<TouchableWeb, ButtonProps>(
   },
 );
 
+ButtonComponent.displayName = 'Button';
+
+export const Button = React.memo(ButtonComponent);
 Button.displayName = 'Button';
 
 const styles = StyleSheet.create({

@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { useState, useCallback, useMemo, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef, forwardRef, useImperativeHandle, memo } from 'react';
 import {
   Platform,
   StyleSheet,
@@ -254,7 +254,7 @@ export function usePopoverMeasurement({
  * @overview-example PopoverStyledBackdrop
  * To style the underlying view, `backdropStyle` property may be used.
  */
-export const Popover = forwardRef<View, PopoverProps>(({
+const PopoverComponent = forwardRef<View, PopoverProps>(({
   children,
   placement = PopoverPlacements.BOTTOM,
   anchor,
@@ -360,8 +360,12 @@ export const Popover = forwardRef<View, PopoverProps>(({
   );
 });
 
-// Display name for debugging
+PopoverComponent.displayName = 'Popover';
+
+export const Popover = memo(PopoverComponent);
 Popover.displayName = 'Popover';
+
+// Display name for debugging
 
 const styles = StyleSheet.create({
   popoverView: {

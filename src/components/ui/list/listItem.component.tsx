@@ -110,7 +110,7 @@ type WebStyles = {
  * />
  * ```
  */
-export const ListItem = React.forwardRef<TouchableWeb, ListItemProps>(
+const ListItemComponent = React.forwardRef<TouchableWeb, ListItemProps>(
   (props, ref) => {
     const {
       appearance,
@@ -230,6 +230,9 @@ export const ListItem = React.forwardRef<TouchableWeb, ListItemProps>(
   },
 );
 
+ListItemComponent.displayName = 'ListItem';
+
+export const ListItem = React.memo(ListItemComponent);
 ListItem.displayName = 'ListItem';
 
 const staticStyles = StyleSheet.create({

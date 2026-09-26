@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState, memo } from 'react';
 import {
   ListRenderItemInfo,
   NativeSyntheticEvent,
@@ -263,7 +263,8 @@ const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
 
 AutocompleteComponent.displayName = 'Autocomplete';
 
-export const Autocomplete = AutocompleteComponent;
+export const Autocomplete = memo(AutocompleteComponent);
+Autocomplete.displayName = 'Autocomplete';
 
 const styles = StyleSheet.create({
   popover: {

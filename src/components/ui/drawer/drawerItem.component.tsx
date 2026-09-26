@@ -5,6 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { areEqualProps } from '../../devsupport';
 import React from 'react';
 import {
   MenuItem,
@@ -37,10 +38,13 @@ export type DrawerItemElement = React.ReactElement<DrawerItemProps>;
  *
  * @overview-example DrawerItemSimpleUsage
  */
-export const DrawerItem: React.FC<MenuItemProps> = (props): MenuItemElement => {
+const DrawerItemComponent: React.FC<MenuItemProps> = (props): MenuItemElement => {
   return (
     <MenuItem {...props} />
   );
 };
 
+DrawerItemComponent.displayName = 'DrawerItem';
+
+export const DrawerItem = React.memo(DrawerItemComponent, areEqualProps);
 DrawerItem.displayName = 'DrawerItem';

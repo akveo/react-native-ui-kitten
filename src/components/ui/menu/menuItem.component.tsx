@@ -93,7 +93,7 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @overview-example MenuItemSimpleUsage
  */
-export const MenuItem = React.forwardRef<TouchableWeb, MenuItemProps>(
+const MenuItemComponent = React.forwardRef<TouchableWeb, MenuItemProps>(
   (props, ref) => {
     const {
       appearance,
@@ -222,6 +222,9 @@ export const MenuItem = React.forwardRef<TouchableWeb, MenuItemProps>(
   },
 );
 
+MenuItemComponent.displayName = 'MenuItem';
+
+export const MenuItem = React.memo(MenuItemComponent);
 MenuItem.displayName = 'MenuItem';
 
 const staticStyles = StyleSheet.create({

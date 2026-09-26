@@ -32,7 +32,7 @@ export type DividerElement = React.ReactElement<DividerProps>;
  *
  * @overview-example DividerSimpleUsage
  */
-export const Divider = React.forwardRef<View, DividerProps>(
+const DividerComponent = React.forwardRef<View, DividerProps>(
   (props, ref) => {
     const {
       appearance,
@@ -54,4 +54,7 @@ export const Divider = React.forwardRef<View, DividerProps>(
   },
 );
 
+DividerComponent.displayName = 'Divider';
+
+export const Divider = React.memo(DividerComponent);
 Divider.displayName = 'Divider';

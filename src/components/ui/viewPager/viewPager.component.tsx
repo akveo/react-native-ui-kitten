@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { useCallback, useEffect, useMemo, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, forwardRef, useImperativeHandle, memo } from 'react';
 import {
   Animated,
   Easing,
@@ -209,7 +209,7 @@ function ViewPagerComponent<ChildrenProps = {}>(
   );
 }
 
-export const ViewPager = forwardRef(ViewPagerComponent) as <ChildrenProps = {}>(
+export const ViewPager = memo(forwardRef(ViewPagerComponent)) as <ChildrenProps = {}>(
   props: ViewPagerProps<ChildrenProps> & { ref?: React.Ref<ViewPagerRef> }
 ) => React.ReactElement<ViewProps>;
 

@@ -51,7 +51,7 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  * Layouts can be used in different levels.
  * It is useful, when needed to highlight the container relative to another.
  */
-export const Layout = React.forwardRef<View, LayoutProps>(
+const LayoutComponent = React.forwardRef<View, LayoutProps>(
   (props, ref) => {
     const {
       appearance,
@@ -79,4 +79,7 @@ export const Layout = React.forwardRef<View, LayoutProps>(
   },
 );
 
+LayoutComponent.displayName = 'Layout';
+
+export const Layout = React.memo(LayoutComponent);
 Layout.displayName = 'Layout';

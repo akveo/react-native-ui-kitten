@@ -25,6 +25,27 @@ Note that the build-time styles are only used when they reach `ApplicationProvid
 package (`<ApplicationProvider {...eva}>`) or pass `styles={eva.styles}`. Passing
 `mapping={eva.mapping}` explicitly opts back into runtime compilation.
 
+## Re-renders
+
+Since 6.1 every exported component is wrapped in `React.memo`, so a parent state change does not
+re-render UI Kitten components whose props are referentially equal. To benefit, keep props stable:
+
+```jsx
+// Re-created on every render: Button re-renders every time
+<Button accessoryLeft={(props) => <Icon {...props} name='star' />} onPress={() => save()} />
+
+// Stable: Button skips re-render until a prop actually changes
+const StarIcon = (props) => <Icon {...props} name='star' />;
+const onSave = useCallback(() => save(), []);
+<Button accessoryLeft={StarIcon} onPress={onSave} />
+```
+
+Strings as children (`<Button>Save</Button>`) are stable; element children
+(`<Button><Text>Save</Text></Button>`) are not, unless you hoist the element.
+
+Interactive components press through `Pressable` and paint press, hover and focus states from Eva
+mapping, so there is no opacity animation to configure; `activeOpacity` is ignored.
+
 ---
 
 ## Requirements

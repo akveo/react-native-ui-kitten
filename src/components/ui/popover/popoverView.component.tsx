@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { useMemo, forwardRef } from 'react';
+import React, { useMemo, forwardRef, memo } from 'react';
 import {
   StyleProp,
   TransformsStyle,
@@ -42,7 +42,7 @@ const INDICATOR_WIDTH = 6;
  * Internal view component for Popover that renders the content and indicator.
  * Uses Eva Design System styling.
  */
-export const PopoverView = forwardRef<View, PopoverViewProps>(({
+const PopoverViewComponent = forwardRef<View, PopoverViewProps>(({
   style,
   contentContainerStyle,
   onLayout,
@@ -148,5 +148,9 @@ export const PopoverView = forwardRef<View, PopoverViewProps>(({
   );
 });
 
-// Display name for debugging
+PopoverViewComponent.displayName = 'PopoverView';
+
+export const PopoverView = memo(PopoverViewComponent);
 PopoverView.displayName = 'PopoverView';
+
+// Display name for debugging

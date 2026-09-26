@@ -181,7 +181,7 @@ export interface InputRef {
  * @overview-example InputTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export const Input = React.forwardRef<InputRef, InputProps>(
+const InputComponent = React.forwardRef<InputRef, InputProps>(
   (props, ref) => {
     const {
       appearance,
@@ -385,6 +385,9 @@ export const Input = React.forwardRef<InputRef, InputProps>(
   },
 );
 
+InputComponent.displayName = 'Input';
+
+export const Input = React.memo(InputComponent);
 Input.displayName = 'Input';
 
 const styles = StyleSheet.create({

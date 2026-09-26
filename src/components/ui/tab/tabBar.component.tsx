@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { useCallback, useMemo, useRef, useImperativeHandle, forwardRef } from 'react';
+import React, { useCallback, useMemo, useRef, useImperativeHandle, forwardRef, memo } from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -143,7 +143,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const TabBar = forwardRef<TabBarRef, TabBarProps>(({
+const TabBarComponent = forwardRef<TabBarRef, TabBarProps>(({
   style,
   children,
   selectedIndex = 0,
@@ -203,6 +203,9 @@ export const TabBar = forwardRef<TabBarRef, TabBarProps>(({
   );
 });
 
+TabBarComponent.displayName = 'TabBar';
+
+export const TabBar = memo(TabBarComponent);
 TabBar.displayName = 'TabBar';
 
 const styles = StyleSheet.create({

@@ -11,6 +11,7 @@ import {
   FalsyFC,
   RenderProp,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -166,7 +167,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
   };
 };
 
-export const Drawer: React.FC<DrawerProps> = ({
+const DrawerComponent: React.FC<DrawerProps> = ({
   style,
   header,
   footer,
@@ -196,4 +197,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   );
 };
 
+DrawerComponent.displayName = 'Drawer';
+
+export const Drawer = React.memo(DrawerComponent, areEqualProps);
 Drawer.displayName = 'Drawer';

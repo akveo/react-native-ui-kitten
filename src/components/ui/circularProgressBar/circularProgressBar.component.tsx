@@ -23,6 +23,7 @@ import {
   EvaStatus,
   RenderProp,
   FalsyFC,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -112,7 +113,7 @@ const clamp = (progress: number): number => {
  * Styling of CircularProgressBar is possible with [configuring a custom theme](guides/branding).
  *
  */
-export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
+const CircularProgressBarComponent: React.FC<CircularProgressBarProps> = ({
   style,
   progress = 0,
   animating = true,
@@ -349,6 +350,9 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   );
 };
 
+CircularProgressBarComponent.displayName = 'CircularProgressBar';
+
+export const CircularProgressBar = React.memo(CircularProgressBarComponent, areEqualProps);
 CircularProgressBar.displayName = 'CircularProgressBar';
 
 const styles = StyleSheet.create({

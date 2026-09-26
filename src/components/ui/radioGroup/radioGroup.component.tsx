@@ -14,6 +14,7 @@ import {
   buildAccessibilityProps,
   ChildrenWithProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   useStyled,
@@ -58,7 +59,7 @@ const getComponentStyle = (source: StyleType): StyleType => {
  *
  * @overview-example RadioGroupSimpleUsage
  */
-export const RadioGroup: React.FC<RadioGroupProps> = ({
+const RadioGroupComponent: React.FC<RadioGroupProps> = ({
   style,
   children,
   selectedIndex = -1,
@@ -93,4 +94,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   );
 };
 
+RadioGroupComponent.displayName = 'RadioGroup';
+
+export const RadioGroup = React.memo(RadioGroupComponent, areEqualProps);
 RadioGroup.displayName = 'RadioGroup';

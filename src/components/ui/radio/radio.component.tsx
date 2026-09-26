@@ -23,6 +23,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -46,7 +47,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
 /**
  * Radio buttons allow the user to select one option from a set.
  */
-export const Radio: React.FC<RadioProps> = (props): TouchableWebElement => {
+const RadioComponent: React.FC<RadioProps> = (props): TouchableWebElement => {
   const {
     appearance,
     status,
@@ -225,6 +226,9 @@ export const Radio: React.FC<RadioProps> = (props): TouchableWebElement => {
   );
 };
 
+RadioComponent.displayName = 'Radio';
+
+export const Radio = React.memo(RadioComponent, areEqualProps);
 Radio.displayName = 'Radio';
 
 const styles = StyleSheet.create({

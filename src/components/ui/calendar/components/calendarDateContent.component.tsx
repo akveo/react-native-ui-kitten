@@ -5,6 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { areEqualProps } from '../../../devsupport';
 import React from 'react';
 import {
   StyleProp,
@@ -22,7 +23,7 @@ export interface CalendarDateContentProps extends ViewProps {
 
 export type CalendarDateContentElement = React.ReactElement<CalendarDateContentProps>;
 
-export const CalendarDateContent: React.FC<CalendarDateContentProps> = ({
+const CalendarDateContentComponent: React.FC<CalendarDateContentProps> = ({
   style,
   textStyle,
   children,
@@ -40,6 +41,9 @@ export const CalendarDateContent: React.FC<CalendarDateContentProps> = ({
   );
 };
 
+CalendarDateContentComponent.displayName = 'CalendarDateContent';
+
+export const CalendarDateContent = React.memo(CalendarDateContentComponent, areEqualProps);
 CalendarDateContent.displayName = 'CalendarDateContent';
 
 const styles = StyleSheet.create({

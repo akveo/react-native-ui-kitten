@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { useMemo, forwardRef } from 'react';
+import React, { useMemo, forwardRef, memo } from 'react';
 import {
   StyleSheet,
   View,
@@ -21,7 +21,7 @@ export type PopoverIndicatorElement = React.ReactElement<PopoverIndicatorProps>;
  * Triangle indicator component for Popover.
  * Creates a triangle shape using CSS borders.
  */
-export const PopoverIndicator = forwardRef<View, PopoverIndicatorProps>(({
+const PopoverIndicatorComponent = forwardRef<View, PopoverIndicatorProps>(({
   style,
   ...props
 }, ref) => {
@@ -53,5 +53,9 @@ export const PopoverIndicator = forwardRef<View, PopoverIndicatorProps>(({
   );
 });
 
-// Display name for debugging
+PopoverIndicatorComponent.displayName = 'PopoverIndicator';
+
+export const PopoverIndicator = memo(PopoverIndicatorComponent);
 PopoverIndicator.displayName = 'PopoverIndicator';
+
+// Display name for debugging

@@ -120,7 +120,7 @@ const CHEVRON_ANIM_DURATION = 200;
  * @overview-example SelectSimpleUsage
  * @overview-example SelectMultiSelect
  */
-export const Select = React.forwardRef<SelectRef, SelectProps>(
+const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
   (props, ref) => {
     const {
       appearance,
@@ -449,6 +449,9 @@ export const Select = React.forwardRef<SelectRef, SelectProps>(
   },
 );
 
+SelectComponent.displayName = 'Select';
+
+export const Select = React.memo(SelectComponent);
 Select.displayName = 'Select';
 
 const staticStyles = StyleSheet.create({

@@ -19,6 +19,7 @@ import {
   EvaStatus,
   Size,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import { useStyled } from '../../theme';
 import {
@@ -91,7 +92,7 @@ interface ArcElementStyle {
  *
  * @example SpinnerDataLoading
  */
-export const Spinner: React.FC<SpinnerProps> = (props) => {
+const SpinnerComponent: React.FC<SpinnerProps> = (props) => {
   const {
     animating = true,
     status,
@@ -210,6 +211,9 @@ export const Spinner: React.FC<SpinnerProps> = (props) => {
   );
 };
 
+SpinnerComponent.displayName = 'Spinner';
+
+export const Spinner = React.memo(SpinnerComponent, areEqualProps);
 Spinner.displayName = 'Spinner';
 
 const styles = StyleSheet.create({

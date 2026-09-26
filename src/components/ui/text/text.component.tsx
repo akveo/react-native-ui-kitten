@@ -95,7 +95,7 @@ export type TextElement = React.ReactElement<TextProps>;
  * <Text style={...}>Place your Text</Text>
  * ```
  */
-export const Text = React.forwardRef<RNText, TextProps>(
+const TextComponent = React.forwardRef<RNText, TextProps>(
   (props, ref) => {
     const {
       appearance,
@@ -125,4 +125,7 @@ export const Text = React.forwardRef<RNText, TextProps>(
   },
 );
 
+TextComponent.displayName = 'Text';
+
+export const Text = React.memo(TextComponent);
 Text.displayName = 'Text';

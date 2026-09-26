@@ -24,6 +24,7 @@ import {
   TouchableWebElement,
   TouchableWebProps,
   LiteralUnion,
+  areEqualProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -56,7 +57,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
 /**
  * Checkboxes allow the user to select one or more items from a set.
  */
-export const CheckBox: React.FC<CheckBoxProps> = (props): TouchableWebElement => {
+const CheckBoxComponent: React.FC<CheckBoxProps> = (props): TouchableWebElement => {
   const {
     appearance,
     status,
@@ -245,6 +246,9 @@ export const CheckBox: React.FC<CheckBoxProps> = (props): TouchableWebElement =>
   );
 };
 
+CheckBoxComponent.displayName = 'CheckBox';
+
+export const CheckBox = React.memo(CheckBoxComponent, areEqualProps);
 CheckBox.displayName = 'CheckBox';
 
 const styles = StyleSheet.create({

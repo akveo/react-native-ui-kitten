@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useMemo, memo } from 'react';
 import { View } from 'react-native';
 import { useStyled, StyleType } from '../../theme';
 import { BaseCalendarProps } from './baseCalendar.component';
@@ -487,6 +487,6 @@ function RangeCalendarComponent<D = Date>(
   );
 }
 
-export const RangeCalendar = forwardRef(RangeCalendarComponent) as <D = Date>(
+export const RangeCalendar = memo(forwardRef(RangeCalendarComponent)) as <D = Date>(
   props: RangeCalendarProps<D> & { ref?: React.Ref<RangeCalendarRef<D>> }
 ) => React.ReactElement<RangeCalendarProps<D>>;

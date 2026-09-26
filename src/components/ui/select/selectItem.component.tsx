@@ -103,7 +103,7 @@ export type SelectItemElement = React.ReactElement<SelectItemProps>;
  *
  * @overview-example SelectItemSimpleUsage
  */
-export const SelectItem = React.forwardRef<TouchableWeb, SelectItemProps>(
+const SelectItemComponent = React.forwardRef<TouchableWeb, SelectItemProps>(
   (props, ref) => {
     const {
       appearance,
@@ -259,6 +259,9 @@ export const SelectItem = React.forwardRef<TouchableWeb, SelectItemProps>(
   },
 );
 
+SelectItemComponent.displayName = 'SelectItem';
+
+export const SelectItem = React.memo(SelectItemComponent);
 SelectItem.displayName = 'SelectItem';
 
 const staticStyles = StyleSheet.create({
