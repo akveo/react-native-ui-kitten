@@ -1,5 +1,8 @@
 import React from 'react';
-import { Text } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+} from 'react-native';
 import { render } from '@testing-library/react-native';
 import {
   light,
@@ -115,4 +118,24 @@ it('should be able to render valid element', () => {
   const textComponent = component.getByText('I love Babel');
   expect(textComponent).toBeTruthy();
   expect(textComponent.props.style).toEqual(styles);
+});
+
+it('should keep the style an element child was created with', () => {
+  const component = render(
+    <FalsyText
+      style={{ fontSize: 14, color: '#FFFFFF' }}
+      component={(
+        <Text
+          testID='child'
+          style={{ fontSize: 42, color: 'rgb(1, 2, 3)' }}
+        >
+          I love Babel
+        </Text>
+      )}
+    />,
+  );
+
+  const style = StyleSheet.flatten(component.getByTestId('child').props.style);
+  expect(style.fontSize).toEqual(42);
+  expect(style.color).toEqual('rgb(1, 2, 3)');
 });

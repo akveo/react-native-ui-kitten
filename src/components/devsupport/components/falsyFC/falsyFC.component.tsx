@@ -36,6 +36,21 @@ export type FalsyFCProps<Props> = Props & {
  * );
  * ```
  */
+/*
+ * `cloneElement` replaces props, so a style passed by the parent (a Button's text style, an
+ * Input's icon style) used to wipe out whatever style the element itself was created with. The
+ * element's own style is appended so it wins over the parent's defaults.
+ */
+export const mergeElementStyle = <P extends { style?: unknown }>(element: React.ReactElement, props: P): P => {
+  const ownStyle = (element.props as { style?: unknown })?.style;
+
+  if (ownStyle === undefined) {
+    return props;
+  }
+
+  return { ...props, style: [props.style, ownStyle] };
+};
+
 export class FalsyFC<Props> extends React.Component<FalsyFCProps<Props>> {
 
   public render(): React.ReactElement {
@@ -46,7 +61,7 @@ export class FalsyFC<Props> extends React.Component<FalsyFCProps<Props>> {
     }
 
     if (React.isValidElement(component)) {
-      return React.cloneElement(component, props);
+      return React.cloneElement(component, mergeElementStyle(component, props));
     }
 
     return React.createElement(component as RenderFCProp<Props>, props as Props);

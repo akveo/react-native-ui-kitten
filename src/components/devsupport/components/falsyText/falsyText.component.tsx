@@ -1,5 +1,8 @@
 import React from 'react';
-import { RenderProp } from '../falsyFC/falsyFC.component';
+import {
+  mergeElementStyle,
+  RenderProp,
+} from '../falsyFC/falsyFC.component';
 import {
   Text,
   TextProps,
@@ -58,7 +61,7 @@ export class FalsyText extends React.Component<FalsyTextProps> {
     }
 
     if (React.isValidElement(component)) {
-      return React.cloneElement(component, textProps as TextProps);
+      return React.cloneElement(component, mergeElementStyle(component, textProps as TextProps));
     }
 
     if (typeof component === 'function') {
