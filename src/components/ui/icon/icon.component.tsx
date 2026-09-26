@@ -8,6 +8,7 @@
 import React, { useRef, useEffect, useImperativeHandle } from 'react';
 import {
   Animated,
+  Platform,
   ViewProps,
 } from 'react-native';
 import {
@@ -97,6 +98,35 @@ export interface IconRef {
  *
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
+/*
+ * Handlers that only exist for DOM hosts. `Pressability` includes them in the handler set that
+ * `TouchableWithoutFeedback` and friends clone onto their child, so an `Icon` used as a touchable's
+ * child receives them. Native icon views cannot take them: on the legacy architecture
+ * react-native-svg crashed with `-[RNSVGSvgView setOnClick]: unrecognized selector`. Responder
+ * handlers are kept, since the svg host wants those. On web they are real DOM props and stay.
+ */
+const DOM_ONLY_HANDLERS: string[] = [
+  'onClick',
+  'onMouseDown',
+  'onMouseUp',
+  'onMouseEnter',
+  'onMouseLeave',
+  'onMouseMove',
+  'onMouseOver',
+  'onMouseOut',
+];
+
+const withoutDomOnlyProps = <P extends object>(props: P): P => {
+  if (Platform.OS === 'web') {
+    return props;
+  }
+  const result = { ...props };
+  for (const key of DOM_ONLY_HANDLERS) {
+    delete result[key];
+  }
+  return result;
+};
+
 function IconComponent<T = WrappedElementProps>(
   props: IconProps<T>,
   ref: React.ForwardedRef<IconRef>,
@@ -133,7 +163,7 @@ function IconComponent<T = WrappedElementProps>(
 
   // Get icon from registry
   const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
-  const iconElement = registeredIcon.icon.toReactElement(iconProps as IconProps);
+  const iconElement = registeredIcon.icon.toReactElement(withoutDomOnlyProps(iconProps) as IconProps);
 
   if (!animationRef.current) {
     return iconElement;

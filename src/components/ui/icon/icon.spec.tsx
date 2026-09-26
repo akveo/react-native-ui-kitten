@@ -105,6 +105,25 @@ describe('@icon: component checks', () => {
     expect(component.queryByTestId('custom-test-id')).toBeTruthy();
   });
 
+  it('should not forward DOM-only handlers to the icon element', () => {
+    const onClick = jest.fn();
+    const onResponderRelease = jest.fn();
+    const component = render(
+      <Icon
+        name='home'
+        testID='custom-test-id'
+        onClick={onClick}
+        onMouseEnter={onClick}
+        onResponderRelease={onResponderRelease}
+      />,
+    );
+
+    const iconProps = component.getByTestId('custom-test-id').props;
+    expect(iconProps.onClick).toBeUndefined();
+    expect(iconProps.onMouseEnter).toBeUndefined();
+    expect(iconProps.onResponderRelease).toBe(onResponderRelease);
+  });
+
   it('should throw while rendering not registered icon', () => {
     expect(() => {
       render(
