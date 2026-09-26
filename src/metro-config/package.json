@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/metro-config",
   "description": "UI Kitten config for Metro Bundler",
-  "version": "6.0.0-beta.1",
+  "version": "6.0.0",
   "main": "./lib/commonjs/index.js",
   "types": "./lib/typescript/index.d.ts",
   "source": "./index.ts",
@@ -51,8 +51,8 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@ui-kitten/mapping-base": "^6.0.0-beta.1",
-    "@ui-kitten/processor": "^6.0.0-beta.1",
+    "@ui-kitten/mapping-base": "^6.0.0",
+    "@ui-kitten/processor": "^6.0.0",
     "chalk": "^3.0.0",
     "commander": "^4.1.1"
   },

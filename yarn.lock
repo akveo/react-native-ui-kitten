@@ -3891,8 +3891,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ui-kitten/components@workspace:src/components"
   dependencies:
-    "@ui-kitten/mapping-base": ^6.0.0-beta.1
-    "@ui-kitten/processor": ^6.0.0-beta.1
+    "@ui-kitten/mapping-base": ^6.0.0
+    "@ui-kitten/processor": ^6.0.0
     fecha: 3.0.3
     hoist-non-react-statics: ^3.2.1
     typescript: ^5.3.0
@@ -3910,7 +3910,7 @@ __metadata:
     date-fns: ^3.0.0
     typescript: ^5.3.0
   peerDependencies:
-    "@ui-kitten/components": ^6.0.0-beta.1
+    "@ui-kitten/components": ^6.0.0
     date-fns: ">=2.0.0"
   languageName: unknown
   linkType: soft
@@ -3922,7 +3922,7 @@ __metadata:
     react-native-eva-icons: ^1.3.1
     typescript: ^5.3.0
   peerDependencies:
-    "@ui-kitten/components": ^6.0.0-beta.1
+    "@ui-kitten/components": ^6.0.0
     react-native-svg: "*"
   languageName: unknown
   linkType: soft
@@ -3933,7 +3933,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ui-kitten/mapping-base@^6.0.0-beta.1, @ui-kitten/mapping-base@workspace:src/mapping-base":
+"@ui-kitten/mapping-base@^6.0.0, @ui-kitten/mapping-base@workspace:src/mapping-base":
   version: 0.0.0-use.local
   resolution: "@ui-kitten/mapping-base@workspace:src/mapping-base"
   languageName: unknown
@@ -3949,8 +3949,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ui-kitten/metro-config@workspace:src/metro-config"
   dependencies:
-    "@ui-kitten/mapping-base": ^6.0.0-beta.1
-    "@ui-kitten/processor": ^6.0.0-beta.1
+    "@ui-kitten/mapping-base": ^6.0.0
+    "@ui-kitten/processor": ^6.0.0
     chalk: ^3.0.0
     commander: ^4.1.1
     typescript: ^5.3.0
@@ -3968,12 +3968,12 @@ __metadata:
     moment: ^2.30.0
     typescript: ^5.3.0
   peerDependencies:
-    "@ui-kitten/components": ^6.0.0-beta.1
+    "@ui-kitten/components": ^6.0.0
     moment: ">=2.24.0"
   languageName: unknown
   linkType: soft
 
-"@ui-kitten/processor@^6.0.0-beta.1, @ui-kitten/processor@workspace:src/processor":
+"@ui-kitten/processor@^6.0.0, @ui-kitten/processor@workspace:src/processor":
   version: 0.0.0-use.local
   resolution: "@ui-kitten/processor@workspace:src/processor"
   languageName: unknown
