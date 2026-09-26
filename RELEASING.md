@@ -1,7 +1,7 @@
 # Releasing
 
 UI Kitten publishes 9 packages from this monorepo with [changesets](https://github.com/changesets/changesets).
-Releases are automated: pushing to `master` or `next` runs `.github/workflows/release.yml`, which
+Releases are automated: pushing to `master` runs `.github/workflows/release.yml`, which
 either opens/updates a **Version Packages** PR or, once that PR is merged, publishes to npm.
 
 There is no staging registry. Merging a Version Packages PR publishes for real.
@@ -56,7 +56,7 @@ yarn changeset status
 ```
 
 `baseBranch` in `.changeset/config.json` must be the branch releases actually run from — `master`.
-The v6 line was developed and released from `next` up to `6.0.0`; `master` was fast-forwarded to it
+The v6 line was developed and released from a `next` branch up to `6.0.0`; `master` was fast-forwarded to it
 afterwards and is the release branch again. `baseBranch` only affects `changeset add` and
 `changeset status`; it does **not** affect `version` or `publish`. If the release branch ever moves,
 change it too, or `changeset status` will fail with *"Some packages have been changed but no
@@ -108,7 +108,7 @@ This is how `6.0.0` was cut on 2026-09-26 (#1871, #1872). Order matters:
 5. The prerelease dist-tag still points at the last prerelease. Leave it; repointing it needs an npm
    token with 2FA bypass (see below).
 
-Branch protection on `master` and `next` requires the `build-and-test` check and one approving
+Branch protection on `master` requires the `build-and-test` check and one approving
 review. Release PRs are merged with `gh pr merge <n> --admin`.
 
 ## CI and npm auth
