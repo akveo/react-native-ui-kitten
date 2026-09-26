@@ -7,8 +7,10 @@ import React from 'react';
 import { Calendar } from '@ui-kitten/components';
 import { MomentDateService } from '@ui-kitten/moment';
 import moment from 'moment';
+import 'moment/locale/en-gb';
 
-const dateService = new MomentDateService();
+// en-gb starts the week on Monday, so the weekday header must begin with "Mo".
+const dateService = new MomentDateService('en-gb');
 
 export const CalendarMomentShowcase = (): React.ReactElement => {
 

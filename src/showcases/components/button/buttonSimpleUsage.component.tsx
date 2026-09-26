@@ -71,6 +71,7 @@ export const ButtonSimpleUsageShowcase = (): React.ReactElement => (
     <Layout style={styles.row} level="1">
       <Button style={styles.button}>ENABLED</Button>
       <Button style={styles.button} disabled>DISABLED</Button>
+      <Button style={styles.button} appearance="ghost" disabled testID="button-ghost-disabled">GHOST</Button>
     </Layout>
 
     <Label>Accessories</Label>
