@@ -1,5 +1,35 @@
 # @ui-kitten/components
 
+## 6.0.2
+
+### Patch Changes
+
+- [#1882](https://github.com/akveo/react-native-ui-kitten/pull/1882) [`f9d07a9`](https://github.com/akveo/react-native-ui-kitten/commit/f9d07a9ca810a18834b928e8108f543650704691) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Calendar`, `RangeCalendar`, `Datepicker` and `RangeDatepicker` header arrows no longer page past an
+  explicit `min` or `max`. Navigating in the month, year-picker and month-picker views clamps to the
+  bounds, so a picker with `min={2020}` cannot be paged back to year -16 (#1759).
+
+- [#1880](https://github.com/akveo/react-native-ui-kitten/pull/1880) [`6038239`](https://github.com/akveo/react-native-ui-kitten/commit/60382394566708e3b4cf9b8fc279eb5894411eb0) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Icon` no longer forwards DOM-only handlers (`onClick` and the mouse events) to the icon element on
+  iOS and Android. `TouchableWithoutFeedback` and the other touchables clone React Native's full
+  `Pressability` handler set onto their child, so an `Icon` rendered as a touchable's child received
+  `onClick`; on the legacy architecture react-native-svg crashed with
+  `-[RNSVGSvgView setOnClick]: unrecognized selector` (#1801, #1733). Responder handlers still pass
+  through, and on web every handler is kept because they are real DOM props there.
+
+- [#1882](https://github.com/akveo/react-native-ui-kitten/pull/1882) [`24d8793`](https://github.com/akveo/react-native-ui-kitten/commit/24d8793f163a3fa1cd106f0b4fac95339f1f5112) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `RangeCalendar` and `RangeDatepicker` never produce a range that spans a filtered day. Picking an end
+  date on the far side of a day that `filter` disables restarts the range from that end date instead of
+  silently including the disabled day (#1654).
+
+- [#1880](https://github.com/akveo/react-native-ui-kitten/pull/1880) [`f4c271f`](https://github.com/akveo/react-native-ui-kitten/commit/f4c271f0f6f0673899670d072c7fadfc3fafc4a4) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Render props given as elements keep their own `style`. `accessoryLeft`, `accessoryRight`, `label`,
+  `caption`, `title` and every other `RenderProp` accepted a React element, but the style the parent
+  component passed in (a `Button`'s text style, an `Input`'s icon size) replaced the element's own,
+  so `<Button accessoryLeft={<Icon style={{ width: 32 }} />} />` rendered at the default icon size.
+  The element's style is now merged on top of the parent's defaults (#1497, #1792).
+
+- [#1882](https://github.com/akveo/react-native-ui-kitten/pull/1882) [`018d6b2`](https://github.com/akveo/react-native-ui-kitten/commit/018d6b2a719bc5633ba6a0085005d6b9f263e1d7) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Select`'s `size` now reaches its options. `SelectOption` gains a `size` variant group in the Eva
+  and Material mappings (`small`, `medium`, `large`: text size, row padding and icon size), `SelectItem`
+  accepts `size`, and `Select` forwards its own `size` to every item, so `<Select size='large'>` no longer
+  renders 15px rows regardless of size (#1417, #1764).
+
 ## 6.0.1
 
 ### Patch Changes
