@@ -272,12 +272,31 @@ function RangeCalendarComponent<D = Date>(
     return dateService.isSameYearSafe(info.date, dateService.today());
   }, [dateService]);
 
+  // `filter` disables cells, but a range picked around a disabled day would still span it. When
+  // the day just picked closes a range that contains a filtered day, the range restarts from that
+  // day instead (#1654).
+  const rangeSpansFilteredDate = useCallback((candidate: CalendarRange<D>): boolean => {
+    if (!filter || !candidate.startDate || !candidate.endDate) {
+      return false;
+    }
+
+    let cursor: D = dateService.addDay(candidate.startDate, 1);
+    while (dateService.compareDates(cursor, candidate.endDate) < 0) {
+      if (!filter(cursor)) {
+        return true;
+      }
+      cursor = dateService.addDay(cursor, 1);
+    }
+
+    return false;
+  }, [dateService, filter]);
+
   const onDaySelect = useCallback((info: CalendarDateInfo<D>): void => {
     if (onSelect) {
       const newRange = rangeDateService.createRange(range, info.date);
-      onSelect(newRange);
+      onSelect(rangeSpansFilteredDate(newRange) ? { startDate: info.date, endDate: null } : newRange);
     }
-  }, [onSelect, rangeDateService, range]);
+  }, [onSelect, rangeDateService, range, rangeSpansFilteredDate]);
 
   const handleMonthSelect = useCallback((info: CalendarDateInfo<D>): void => {
     onMonthSelect(info.date, onVisibleDateChange);
