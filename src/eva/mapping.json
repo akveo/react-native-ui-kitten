@@ -4248,7 +4248,19 @@
                         "default": false
                     }
                 },
-                "variantGroups": {},
+                "variantGroups": {
+                    "size": {
+                        "small": {
+                            "default": false
+                        },
+                        "medium": {
+                            "default": true
+                        },
+                        "large": {
+                            "default": false
+                        }
+                    }
+                },
                 "states": {
                     "hover": {
                         "default": false,
@@ -4279,6 +4291,28 @@
             },
             "appearances": {
                 "default": {
+                    "variantGroups": {
+                        "size": {
+                            "small": {
+                                "paddingVertical": 8,
+                                "textFontSize": "text-subtitle-2-font-size",
+                                "iconWidth": 16,
+                                "iconHeight": 16
+                            },
+                            "medium": {
+                                "paddingVertical": 12,
+                                "textFontSize": "text-subtitle-1-font-size",
+                                "iconWidth": 20,
+                                "iconHeight": 20
+                            },
+                            "large": {
+                                "paddingVertical": 16,
+                                "textFontSize": "text-subtitle-1-font-size",
+                                "iconWidth": 24,
+                                "iconHeight": 24
+                            }
+                        }
+                    },
                     "mapping": {
                         "paddingHorizontal": 8,
                         "paddingVertical": 12,
@@ -4318,6 +4352,28 @@
                     }
                 },
                 "grouped": {
+                    "variantGroups": {
+                        "size": {
+                            "small": {
+                                "paddingVertical": 8,
+                                "textFontSize": "text-subtitle-2-font-size",
+                                "iconWidth": 16,
+                                "iconHeight": 16
+                            },
+                            "medium": {
+                                "paddingVertical": 12,
+                                "textFontSize": "text-subtitle-1-font-size",
+                                "iconWidth": 20,
+                                "iconHeight": 20
+                            },
+                            "large": {
+                                "paddingVertical": 16,
+                                "textFontSize": "text-subtitle-1-font-size",
+                                "iconWidth": 24,
+                                "iconHeight": 24
+                            }
+                        }
+                    },
                     "mapping": {
                         "paddingLeft": 16
                     }
