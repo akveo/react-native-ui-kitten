@@ -3,13 +3,13 @@ name: Agent Device QA
 on:
   workflow_dispatch:
   push:
-    branches: [master, next, 'feat/**', 'fix/**']
+    branches: [master, 'feat/**', 'fix/**']
     paths:
       - .github/workflows/agent-device-qa.yml
       - src/showcases/e2e/**
   pull_request:
     types: [opened, synchronize, reopened, labeled]
-    branches: [master, next]
+    branches: [master]
 
 concurrency:
   group: agent-device-qa-${{ github.ref }}
