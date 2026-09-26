@@ -22,7 +22,7 @@ There is no staging registry. Merging a Version Packages PR publishes for real.
 
 `@ui-kitten/showcases` is in `.changeset/config.json`'s `ignore` list.
 `@ui-kitten/template-js` and `@ui-kitten/template-ts` were removed from the repository in
-`6.0.0-beta.3`; their npm entries stay frozen at `5.3.1` and are not part of the release set.
+`6.0.0`; their npm entries stay frozen at `5.3.1` and are not part of the release set.
 
 ## When a package bumps
 
@@ -63,7 +63,7 @@ the release branch ever moves back to `master`, change it back, or `changeset st
 
 ## Prerelease (beta) mode
 
-`.changeset/pre.json` currently has `"mode": "pre", "tag": "beta"`. While it exists:
+`.changeset/pre.json` has `"mode": "exit"` since the `6.0.0` release branch. While it has `"mode": "pre"`:
 
 - versions get a `-beta.N` suffix
 - publishes go to the `beta` dist-tag
