@@ -1,82 +1,158 @@
-# UI Kitten [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />][link:eva] [![npm][badge:license]]() [![Build Status][badge:github-actions]][link:github-actions]
+<p align="center">
+  <a href="https://akveo.github.io/react-native-ui-kitten">
+    <img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="60" />
+  </a>
+</p>
 
-[Documentation][link:doc-homepage]
+<h1 align="center">UI Kitten</h1>
 
-UI Kitten is a React Native UI Library that allows you creating stunning multi-brand cross-platform mobile applications.
-The library is based on Eva Design System which brings consistency and scalability in the design and development process.
-It contains a set of general purpose UI components styled in a similar way.
-And the most awesome thing: the themes can be changed in the runtime, with no need to reload the application.
+<p align="center">
+  React Native UI library built on the Eva Design System.<br />
+  30+ themeable components, light and dark themes, runtime theme switching, iOS, Android and web.
+</p>
 
-100% Free and Open Source!
+<p align="center">
+  <a href="https://www.npmjs.com/package/@ui-kitten/components"><img src="https://img.shields.io/npm/v/@ui-kitten/components/beta?label=npm%20%40beta" alt="npm beta version" /></a>
+  <a href="https://www.npmjs.com/package/@ui-kitten/components"><img src="https://img.shields.io/npm/dm/@ui-kitten/components" alt="npm downloads" /></a>
+  <a href="https://github.com/akveo/react-native-ui-kitten/actions/workflows/continuous-integration-workflow.yml"><img src="https://github.com/akveo/react-native-ui-kitten/actions/workflows/continuous-integration-workflow.yml/badge.svg" alt="CI" /></a>
+  <a href="LICENSE.txt"><img src="https://img.shields.io/npm/l/@ui-kitten/components" alt="MIT license" /></a>
+  <a href="https://github.com/akveo/react-native-ui-kitten/stargazers"><img src="https://img.shields.io/github/stars/akveo/react-native-ui-kitten?style=flat" alt="GitHub stars" /></a>
+</p>
 
-## v6 Beta
+<p align="center">
+  <a href="https://akveo.github.io/react-native-ui-kitten/docs/getting-started/what-is-ui-kitten">Documentation</a>
+  ·
+  <a href="https://akveo.github.io/react-native-ui-kitten/docs/guides/getting-started">Getting Started</a>
+  ·
+  <a href="https://akveo.github.io/react-native-ui-kitten/docs/components/overview">Components</a>
+  ·
+  <a href="https://akveo.github.io/react-native-ui-kitten/docs/migration/5x-to-6">Migrate from v5</a>
+  ·
+  <a href="src/components/CHANGELOG.md">Changelog</a>
+</p>
 
-> UI Kitten v6 is a major update — rebuilt for React Native's **New Architecture**, React 19, RN 0.81, and Expo 54.
+---
 
-**What's new in v6:**
-- All components migrated from class to functional components
-- React 19 + React Native 0.81 + Expo 54 support
-- New Architecture ready (Fabric & TurboModules)
-- ESM build system (react-native-builder-bob + Turborepo)
-- Headless `@ui-kitten/core` package
+> **UI Kitten 6 is in beta.** It is rebuilt for React 19, React Native 0.81 and the New Architecture, and is published under the `beta` dist-tag. `@ui-kitten/components@latest` still resolves to 5.3.1, so always install with `@beta` until 6.0.0 ships. Upgrading? Read the [5.x to 6 migration guide](https://akveo.github.io/react-native-ui-kitten/docs/migration/5x-to-6).
 
-```bash
-npm install @ui-kitten/components@beta @ui-kitten/eva@beta @ui-kitten/eva-icons@beta
+## Features
+
+- **30+ components** — buttons, inputs, selects, calendars, lists, tabs, drawers, modals, popovers, menus and more, each with Eva appearances, statuses and sizes.
+- **Eva Design System** — every component follows the [Eva](https://eva.design) specification. Ship the default look or supply your own mapping.
+- **Theming** — light and dark themes out of the box, custom brand themes, and theme switching at runtime with no reload.
+- **New Architecture ready** — function components and hooks throughout, verified on Fabric with React Native 0.81 and Expo 54.
+- **TypeScript first** — generated `.d.ts` files, exported ref types and prop types for every component.
+- **Cross-platform** — iOS, Android and the web via [React Native Web](https://necolas.github.io/react-native-web/).
+- **Accessible** — roles, states and values exposed to VoiceOver, TalkBack and screen readers. See the [accessibility guide](https://akveo.github.io/react-native-ui-kitten/docs/guides/accessibility) for current coverage.
+- **480+ Eva Icons** — optional SVG icon pack through `@ui-kitten/eva-icons`, or bring your own icon set.
+- **Dual CJS + ESM build** — works with Metro, Vite, Jest and Node without extra configuration.
+
+## Installation
+
+UI Kitten needs two packages plus `react-native-svg`:
+
+```sh
+# Expo
+npx expo install @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+
+# Bare React Native
+npm install @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+cd ios && pod install
 ```
 
-## What's included
+Optional packages, published under the same tag:
 
-- **30+ general-purpose components** designed and tested to save your time.
-
-- **Comprehensive clear documentation** with the tons of examples.
-
-- **Theming System -** Use Light and modern Dark themes and create your own.
-
-- **SVG Eva Icons support -** 480+ general purpose icons
-
-- **Eva Design System Support -** Construct an interface using basic components following Eva specifications and it will always have a stunning design.
-
-## Quick Start
-
-Start a new app from scratch:
-
-```bash
-npx create-expo-app@latest MyApp
-cd MyApp
-npx expo install @ui-kitten/components@beta @ui-kitten/eva@beta @ui-kitten/eva-icons@beta react-native-svg
+```sh
+npm install @ui-kitten/eva-icons@beta          # Eva Icons pack
+npm install @ui-kitten/moment@beta             # Calendar / Datepicker with moment
+npm install @ui-kitten/date-fns@beta           # Calendar / Datepicker with date-fns
+npm install -D @ui-kitten/metro-config@beta    # Build-time style processing
 ```
 
-Prefer bare React Native? Swap the first command for `npx @react-native-community/cli@latest init MyApp`.
+Starting from scratch? `npx create-expo-app@latest MyApp` and then run the Expo command above inside it. The [Getting Started guide](https://akveo.github.io/react-native-ui-kitten/docs/guides/getting-started) covers both paths in detail.
 
-Then wrap your app root in `ApplicationProvider`.
-Refer to the [Documentation][link:doc-where-start] for the full walkthrough.
+## Quick start
 
-## How can I support the developers?
-- Star our GitHub repo :star:
-- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
-- Read us on [Medium][link:akveo-medium]
-- Follow us on [Twitter][link:akveo-twitter]
-- Like our page on [Facebook][link:akveo-facebook]
+Wrap your app root in `ApplicationProvider` and pass it the Eva mapping and a theme:
+
+```tsx
+import React from 'react';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, Button, Layout, Text } from '@ui-kitten/components';
+
+const HomeScreen = () => (
+  <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text category='h1'>Hello UI Kitten</Text>
+    <Button appearance='outline' status='primary'>
+      GET STARTED
+    </Button>
+  </Layout>
+);
+
+export default () => (
+  <ApplicationProvider {...eva} theme={eva.light}>
+    <HomeScreen />
+  </ApplicationProvider>
+);
+```
+
+Switch to `eva.dark`, or spread your own theme over it, and every component re-renders with the new palette. See [Branding](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding) and [Runtime Theming](https://akveo.github.io/react-native-ui-kitten/docs/guides/runtime-theming).
+
+## Compatibility
+
+| Dependency         | Minimum                 | Tested with          |
+| ------------------ | ----------------------- | -------------------- |
+| `react`            | 18.2                    | 19.1                 |
+| `react-native`     | 0.72                    | 0.81 (New Architecture) |
+| `react-native-svg` | 13                      | 15.12                |
+| Expo               | SDK 49                  | SDK 54               |
+| React Native Web   | 0.19                    | 0.21                 |
+
+## Packages
+
+| Package                                          | Version                                                                                                                 | Description                                                                 |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [`@ui-kitten/components`](src/components)        | [![npm](https://img.shields.io/npm/v/@ui-kitten/components/beta?label=)](https://www.npmjs.com/package/@ui-kitten/components)   | The components, theming hooks and `ApplicationProvider`.                     |
+| [`@ui-kitten/eva`](src/eva)                      | [![npm](https://img.shields.io/npm/v/@ui-kitten/eva/beta?label=)](https://www.npmjs.com/package/@ui-kitten/eva)                 | Eva mapping plus the light and dark themes. Required.                        |
+| [`@ui-kitten/material`](src/material)            | [![npm](https://img.shields.io/npm/v/@ui-kitten/material/beta?label=)](https://www.npmjs.com/package/@ui-kitten/material)       | Alternative Material-flavoured mapping and themes.                           |
+| [`@ui-kitten/eva-icons`](src/eva-icons)          | [![npm](https://img.shields.io/npm/v/@ui-kitten/eva-icons/beta?label=)](https://www.npmjs.com/package/@ui-kitten/eva-icons)     | 480+ Eva Icons as an `IconRegistry` pack.                                    |
+| [`@ui-kitten/moment`](src/moment)                | [![npm](https://img.shields.io/npm/v/@ui-kitten/moment/beta?label=)](https://www.npmjs.com/package/@ui-kitten/moment)           | `moment` date service for Calendar and Datepicker.                           |
+| [`@ui-kitten/date-fns`](src/date-fns)            | [![npm](https://img.shields.io/npm/v/@ui-kitten/date-fns/beta?label=)](https://www.npmjs.com/package/@ui-kitten/date-fns)       | `date-fns` date service for Calendar and Datepicker.                         |
+| [`@ui-kitten/metro-config`](src/metro-config)    | [![npm](https://img.shields.io/npm/v/@ui-kitten/metro-config/beta?label=)](https://www.npmjs.com/package/@ui-kitten/metro-config) | Metro plugin that precompiles Eva mappings at build time.                    |
+| [`@ui-kitten/processor`](src/processor)          | [![npm](https://img.shields.io/npm/v/@ui-kitten/processor/beta?label=)](https://www.npmjs.com/package/@ui-kitten/processor)     | Mapping processor. Replaces `@eva-design/dss` and `@eva-design/processor`.   |
+| [`@ui-kitten/mapping-base`](src/mapping-base)    | [![npm](https://img.shields.io/npm/v/@ui-kitten/mapping-base/beta?label=)](https://www.npmjs.com/package/@ui-kitten/mapping-base) | Shared mapping schema used by `eva` and `material`.                          |
+
+## Migrating from v5
+
+Package names, component names and props are unchanged. The breaking changes are the move from class to function components (ref types), the removal of the `styled` decorator in favour of `useStyled`, and enforced peer dependencies. The [migration guide](https://akveo.github.io/react-native-ui-kitten/docs/migration/5x-to-6) lists every change with a fix.
+
+A codemod in [`src/codemod`](src/codemod) rewrites the mechanical parts and leaves a report of what it could not touch.
+
+## Documentation and examples
+
+- [Documentation site](https://akveo.github.io/react-native-ui-kitten) — guides, design system reference and a page per component.
+- [Showcase app](src/showcases) — an Expo app that renders every component with live theme and mapping toggles. Run it with `yarn showcases:start` and `yarn showcases:ios` or `yarn showcases:android`.
+- [Eva Design System](https://eva.design) — the specification the mappings implement.
+
+## Contributing
+
+Issues and pull requests are welcome. The repository is a Yarn 3 + Turborepo monorepo; the packages live in `src/*` and the docs site in `website/`.
+
+```sh
+yarn install
+yarn build       # build every package
+yarn test        # jest
+yarn lint
+yarn typecheck
+yarn docs:dev    # docs site at localhost:3000
+```
+
+Every user-facing change needs a [changeset](https://github.com/changesets/changesets) (`yarn changeset`). Releases are automated from `master` and `next`; see [RELEASING.md](RELEASING.md).
+
+Questions and ideas belong in [GitHub Discussions](https://github.com/akveo/react-native-ui-kitten/discussions); bugs in [Issues](https://github.com/akveo/react-native-ui-kitten/issues/new/choose).
 
 ## License
-[MIT](LICENSE.txt) license.
 
-## More from Akveo
-- [Eva Icons][link:eva-icons] - 480+ beautiful Open Source icons
+[MIT](LICENSE.txt).
 
-## From Developers
-Originally created by [Akveo team][link:akveo-homepage]. v6 rewrite and current maintenance by [Vlad Bataev](https://github.com/bataevvlad) and [UI Kitten Contributors](https://github.com/akveo/react-native-ui-kitten/graphs/contributors).
-We're always happy to receive your feedback!
-
-[badge:license]: https://img.shields.io/npm/l/react-native-ui-kitten.svg
-[badge:github-actions]: https://github.com/akveo/react-native-ui-kitten/workflows/Build/badge.svg
-
-[link:eva]: https://eva.design
-[link:github-actions]: https://github.com/akveo/react-native-ui-kitten/actions
-[link:doc-homepage]: https://akveo.github.io/react-native-ui-kitten
-[link:doc-where-start]: https://akveo.github.io/react-native-ui-kitten/docs/getting-started/where-to-start
-[link:eva-icons]: https://github.com/akveo/eva-icons
-[link:akveo-homepage]: https://www.akveo.com
-[link:akveo-medium]: https://medium.com/akveo-engineering
-[link:akveo-twitter]: https://twitter.com/akveo
-[link:akveo-facebook]: https://www.facebook.com/akveo
+UI Kitten was created by the [Akveo](https://www.akveo.com) team. The v6 rewrite and current maintenance are by [Vlad Bataev](https://github.com/bataevvlad) and the [UI Kitten contributors](https://github.com/akveo/react-native-ui-kitten/graphs/contributors). The Eva processor and mapping packages are derived from `@eva-design/*`; see [NOTICE](NOTICE).
