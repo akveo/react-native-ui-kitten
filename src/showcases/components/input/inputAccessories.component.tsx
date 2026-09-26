@@ -43,6 +43,7 @@ Should contain at least 8 symbols
 
   return (
     <Input
+      testID='input-password'
       value={value}
       label='Password'
       placeholder='Place your Text'

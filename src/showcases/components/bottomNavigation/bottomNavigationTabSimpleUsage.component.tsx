@@ -10,6 +10,7 @@ const StarIcon = (props): IconElement => (
 
 export const BottomNavigationTabSimpleUsageShowcase = (): React.ReactElement => (
   <BottomNavigationTab
+    testID='bottom-navigation-tab-single'
     title='USERS'
     icon={StarIcon}
   />

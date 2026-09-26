@@ -17,6 +17,7 @@ const ForwardIcon = (props): IconElement => (
 
 export const SelectItemSimpleUsageShowcase = (): React.ReactElement => (
   <SelectItem
+    testID='select-item-single'
     accessoryLeft={StarIcon}
     accessoryRight={ForwardIcon}
     title='Option 1'

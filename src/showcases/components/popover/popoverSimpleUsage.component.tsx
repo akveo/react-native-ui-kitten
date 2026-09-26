@@ -7,7 +7,7 @@ export const PopoverSimpleUsageShowcase = (): React.ReactElement => {
   const [visible, setVisible] = React.useState(false);
 
   const renderToggleButton = (): React.ReactElement => (
-    <Button onPress={() => setVisible(true)}>
+    <Button testID='popover-anchor' onPress={() => setVisible(true)}>
       TOGGLE POPOVER
     </Button>
   );
@@ -18,7 +18,7 @@ export const PopoverSimpleUsageShowcase = (): React.ReactElement => {
       anchor={renderToggleButton}
       onBackdropPress={() => setVisible(false)}
     >
-      <Layout style={styles.content}>
+      <Layout testID='popover-content' style={styles.content}>
         <Avatar
           style={styles.avatar}
           source={require('../../assets/icon.png')}

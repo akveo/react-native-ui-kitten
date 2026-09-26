@@ -9,7 +9,7 @@ const BackIcon = (props): IconElement => (
 );
 
 const BackAction = (): React.ReactElement => (
-  <TopNavigationAction icon={BackIcon} />
+  <TopNavigationAction testID='top-navigation-back' icon={BackIcon} />
 );
 
 export const TopNavigationSimpleUsageShowcase = (): React.ReactElement => (

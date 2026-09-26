@@ -32,6 +32,7 @@ export const CheckboxSimpleUsageShowcase = (): React.ReactElement => {
       <Label>States</Label>
       <Layout style={styles.row} level="1">
         <CheckBox
+          testID="checkbox-controlled"
           style={styles.checkbox}
           checked={checked}
           onChange={setChecked}
@@ -39,14 +40,15 @@ export const CheckboxSimpleUsageShowcase = (): React.ReactElement => {
           {`Checked: ${checked}`}
         </CheckBox>
         <CheckBox
+          testID="checkbox-indeterminate"
           style={styles.checkbox}
           checked={false}
           indeterminate={!indeterminate}
           onChange={() => setIndeterminate(!indeterminate)}
         >
-          Indeterminate
+          {`Indeterminate: ${!indeterminate}`}
         </CheckBox>
-        <CheckBox style={styles.checkbox} checked={false} disabled>
+        <CheckBox testID="checkbox-disabled" style={styles.checkbox} checked={false} disabled>
           Disabled
         </CheckBox>
         <CheckBox style={styles.checkbox} checked disabled>

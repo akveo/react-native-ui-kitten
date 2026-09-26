@@ -26,6 +26,7 @@ export const ModalSimpleUsageShowcase = (): React.ReactElement => {
 
   const renderTooltipAnchor = (): React.ReactElement => (
     <Button
+      testID='modal-tooltip-anchor'
       appearance='outline'
       onPress={() => setTooltipVisible(true)}
     >
@@ -39,11 +40,12 @@ export const ModalSimpleUsageShowcase = (): React.ReactElement => {
       level='1'
     >
 
-      <Button onPress={() => setVisible(true)}>
+      <Button testID='modal-toggle' onPress={() => setVisible(true)}>
         TOGGLE MODAL
       </Button>
 
       <Modal
+        testID='modal'
         visible={visible}
         onBackdropPress={() => setVisible(false)}
       >
@@ -83,7 +85,7 @@ Welcome to UI Kitten 😻
           >
             Presented above the modal
           </Tooltip>
-          <Button onPress={() => setVisible(false)}>
+          <Button testID='modal-dismiss' onPress={() => setVisible(false)}>
             DISMISS
           </Button>
         </Card>

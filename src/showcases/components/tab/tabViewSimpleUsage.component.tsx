@@ -7,25 +7,28 @@ export const TabViewSimpleUsageShowcase = (): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   return (
+    <>
+    <Text testID='tab-view-value'>{`Selected: ${selectedIndex + 1}`}</Text>
     <TabView
+      testID='tab-view'
       selectedIndex={selectedIndex}
       onSelect={index => setSelectedIndex(index)}
     >
-      <Tab title='USERS'>
+      <Tab testID='tab-view-tab-1' title='USERS'>
         <Layout style={styles.tabContainer}>
           <Text category='h5'>
 USERS
           </Text>
         </Layout>
       </Tab>
-      <Tab title='ORDERS'>
+      <Tab testID='tab-view-tab-2' title='ORDERS'>
         <Layout style={styles.tabContainer}>
           <Text category='h5'>
 ORDERS
           </Text>
         </Layout>
       </Tab>
-      <Tab title='TRANSACTIONS'>
+      <Tab testID='tab-view-tab-3' title='TRANSACTIONS'>
         <Layout style={styles.tabContainer}>
           <Text category='h5'>
 TRANSACTIONS
@@ -33,6 +36,7 @@ TRANSACTIONS
         </Layout>
       </Tab>
     </TabView>
+    </>
   );
 };
 

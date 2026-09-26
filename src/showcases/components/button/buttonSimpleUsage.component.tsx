@@ -18,14 +18,20 @@ const LoadingIndicator = (props: ImageProps): React.ReactElement => (
   </View>
 );
 
-export const ButtonSimpleUsageShowcase = (): React.ReactElement => (
+export const ButtonSimpleUsageShowcase = (): React.ReactElement => {
+  const [presses, setPresses] = React.useState(0);
+  const [longPresses, setLongPresses] = React.useState(0);
+  const onPress = (): void => setPresses((n) => n + 1);
+  const onLongPress = (): void => setLongPresses((n) => n + 1);
+  return (
   <Layout style={styles.container} level="1">
+    <Text testID="button-press-count" category="s1">{`Presses: ${presses} / Long: ${longPresses}`}</Text>
 
     <Label>Appearances</Label>
     <Layout style={styles.row} level="1">
-      <Button style={styles.button} appearance="filled">FILLED</Button>
-      <Button style={styles.button} appearance="outline">OUTLINE</Button>
-      <Button style={styles.button} appearance="ghost">GHOST</Button>
+      <Button testID="button-filled" style={styles.button} appearance="filled" onPress={onPress}>FILLED</Button>
+      <Button testID="button-outline" style={styles.button} appearance="outline" onPress={onPress}>OUTLINE</Button>
+      <Button testID="button-ghost" style={styles.button} appearance="ghost" onPress={onPress}>GHOST</Button>
     </Layout>
 
     <Label>Statuses (Filled)</Label>
@@ -64,27 +70,28 @@ export const ButtonSimpleUsageShowcase = (): React.ReactElement => (
       <Button style={styles.button} size="small">SMALL</Button>
       <Button style={styles.button} size="medium">MEDIUM</Button>
       <Button style={styles.button} size="large">LARGE</Button>
-      <Button style={styles.button} size="giant">GIANT</Button>
+      <Button testID="button-giant" style={styles.button} size="giant" onPress={onPress}>GIANT</Button>
     </Layout>
 
     <Label>States</Label>
     <Layout style={styles.row} level="1">
-      <Button style={styles.button}>ENABLED</Button>
-      <Button style={styles.button} disabled>DISABLED</Button>
-      <Button style={styles.button} appearance="ghost" disabled testID="button-ghost-disabled">GHOST</Button>
+      <Button testID="button-enabled" style={styles.button} onPress={onPress} onLongPress={onLongPress}>ENABLED</Button>
+      <Button testID="button-disabled" style={styles.button} disabled onPress={onPress}>DISABLED</Button>
+      <Button style={styles.button} appearance="ghost" disabled testID="button-ghost-disabled" onPress={onPress}>GHOST</Button>
     </Layout>
 
     <Label>Accessories</Label>
     <Layout style={styles.row} level="1">
-      <Button style={styles.button} accessoryLeft={StarIcon}>LEFT ICON</Button>
+      <Button testID="button-left-icon" style={styles.button} accessoryLeft={StarIcon} onPress={onPress}>LEFT ICON</Button>
       <Button style={styles.button} accessoryRight={StarIcon}>RIGHT ICON</Button>
-      <Button style={styles.button} accessoryLeft={StarIcon} />
-      <Button style={styles.button} appearance="ghost" accessoryLeft={StarIcon} />
+      <Button testID="button-icon-only" style={styles.button} accessoryLeft={StarIcon} onPress={onPress} />
+      <Button testID="button-ghost-icon-only" style={styles.button} appearance="ghost" accessoryLeft={StarIcon} onPress={onPress} />
       <Button style={styles.button} appearance="outline" accessoryLeft={LoadingIndicator}>LOADING</Button>
     </Layout>
 
   </Layout>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

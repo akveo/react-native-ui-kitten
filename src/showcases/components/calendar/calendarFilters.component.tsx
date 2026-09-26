@@ -33,7 +33,9 @@ export const CalendarFiltersShowcase = (): React.ReactElement => {
           Min / Max
         </Text>
 
+        <Text testID='calendar-minmax-value'>{`Selected: ${minMaxCalendarState.date ? minMaxCalendarState.date.getDate() : 'none'}`}</Text>
         <Calendar
+          testID='calendar-minmax'
           min={yesterday}
           max={tomorrow}
           {...minMaxCalendarState}
@@ -48,7 +50,9 @@ export const CalendarFiltersShowcase = (): React.ReactElement => {
           Filter
         </Text>
 
+        <Text testID='calendar-filter-value'>{`Selected: ${filterCalendarState.date ? filterCalendarState.date.getDate() : 'none'}`}</Text>
         <Calendar
+          testID='calendar-filter'
           filter={filter}
           {...filterCalendarState}
         />
@@ -62,7 +66,9 @@ export const CalendarFiltersShowcase = (): React.ReactElement => {
           Bounding Month
         </Text>
 
+        <Text testID='calendar-bounding-value'>{`Selected: ${boundingCalendarState.date ? boundingCalendarState.date.getDate() : 'none'}`}</Text>
         <Calendar
+          testID='calendar-bounding'
           boundingMonth={false}
           {...boundingCalendarState}
         />

@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Calendar } from '@ui-kitten/components';
+import { Calendar, Text } from '@ui-kitten/components';
 import { MomentDateService } from '@ui-kitten/moment';
 import moment from 'moment';
 import 'moment/locale/en-gb';
@@ -17,10 +17,14 @@ export const CalendarMomentShowcase = (): React.ReactElement => {
   const [date, setDate] = React.useState(moment());
 
   return (
+    <>
+    <Text testID='calendar-moment-value'>{`Selected: ${date.format('YYYY-MM-DD')}`}</Text>
     <Calendar
+      testID='calendar-moment'
       dateService={dateService}
       date={date}
       onSelect={nextDate => setDate(nextDate)}
     />
+    </>
   );
 };

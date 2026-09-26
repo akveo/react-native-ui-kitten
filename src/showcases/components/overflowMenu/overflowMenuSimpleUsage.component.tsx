@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
+import { Button, Layout, MenuItem, OverflowMenu, Text } from '@ui-kitten/components';
 
 export const OverflowMenuSimpleUsageShowcase = (): React.ReactElement => {
 
@@ -13,7 +13,7 @@ export const OverflowMenuSimpleUsageShowcase = (): React.ReactElement => {
   };
 
   const renderToggleButton = (): React.ReactElement => (
-    <Button onPress={() => setVisible(true)}>
+    <Button testID='overflow-menu-anchor' onPress={() => setVisible(true)}>
       TOGGLE MENU
     </Button>
   );
@@ -23,16 +23,18 @@ export const OverflowMenuSimpleUsageShowcase = (): React.ReactElement => {
       style={styles.container}
       level='1'
     >
+      <Text testID='overflow-menu-value'>{`Selected: ${selectedIndex ? selectedIndex.row + 1 : 'none'}`}</Text>
       <OverflowMenu
+        testID='overflow-menu'
         anchor={renderToggleButton}
         visible={visible}
         selectedIndex={selectedIndex}
         onSelect={onItemSelect}
         onBackdropPress={() => setVisible(false)}
       >
-        <MenuItem title='Users' />
-        <MenuItem title='Orders' />
-        <MenuItem title='Transactions' />
+        <MenuItem testID='overflow-menu-item-1' title='Users' />
+        <MenuItem testID='overflow-menu-item-2' title='Orders' />
+        <MenuItem testID='overflow-menu-item-3' title='Transactions' />
       </OverflowMenu>
     </Layout>
   );

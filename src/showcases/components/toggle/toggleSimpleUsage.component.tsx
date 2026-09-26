@@ -31,13 +31,14 @@ export const ToggleSimpleUsageShowcase = (): React.ReactElement => {
       <Label>States</Label>
       <Layout style={styles.row} level="1">
         <Toggle
+          testID="toggle-controlled"
           style={styles.toggle}
           checked={checked}
           onChange={setChecked}
         >
           {`Checked: ${checked}`}
         </Toggle>
-        <Toggle style={styles.toggle} checked={false} disabled>
+        <Toggle testID="toggle-disabled" style={styles.toggle} checked={false} disabled>
           Disabled Off
         </Toggle>
         <Toggle style={styles.toggle} checked disabled>
