@@ -13,7 +13,17 @@ keywords:
 
 # Improving Performance
 
-By default, UI Kitten is configured with processing Eva mapping packages during the runtime. This may lead to performance issues when using [mapping customization](/docs/design-system/customize-mapping) or React Native Navigation by Wix. By following this guide, you will know how to get rid of these issues and save the time your application takes on loading.
+By default, UI Kitten compiles Eva mapping during the runtime. Since 6.1 this happens per component
+and per combination of appearance, variants and states the first time it is rendered, so mounting
+`ApplicationProvider` with `mapping` costs a few milliseconds instead of compiling every possible
+combination up front. Build-time processing with `@ui-kitten/metro-config` is still available and
+removes even that per-component work; it is most useful with a large
+[custom mapping](/docs/design-system/customize-mapping) or when `ApplicationProvider` is mounted
+more than once, for example with React Native Navigation by Wix.
+
+Note that the build-time styles are only used when they reach `ApplicationProvider`: spread the Eva
+package (`<ApplicationProvider {...eva}>`) or pass `styles={eva.styles}`. Passing
+`mapping={eva.mapping}` explicitly opts back into runtime compilation.
 
 ---
 

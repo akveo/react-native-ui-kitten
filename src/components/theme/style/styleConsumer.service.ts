@@ -11,6 +11,7 @@ import {
   ThemedStyleType,
 } from '@ui-kitten/processor';
 import { StyledComponentProps } from './styled';
+import { OnDemandControlStyles } from './onDemandStyles';
 import {
   Interaction,
   StyleService,
@@ -93,6 +94,10 @@ export class StyleConsumerService {
   private getGeneratedStyleMapping(style: StyleType, info: StyleInfo): StyleType {
 
     return this.safe(style[this.name], (componentStyles: ControlThemedStyleType): ThemedStyleType => {
+      const onDemand = componentStyles as unknown as OnDemandControlStyles;
+      if (typeof onDemand.resolve === 'function') {
+        return onDemand.resolve(info);
+      }
       const styleKeys: string[] = Object.keys(componentStyles.styles);
       const query: string = this.findGeneratedQuery(info, styleKeys);
 
