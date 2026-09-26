@@ -74,7 +74,12 @@ export class MomentDateService extends DateService<Moment> {
   }
 
   public getDayOfWeekNames(style: TranslationWidth = TranslationWidth.SHORT): string[] {
-    return this.localeData.days[style];
+    const names: string[] = this.localeData.days[style];
+    // moment lists weekdays Sunday-first regardless of locale; the calendar lays its columns out
+    // from `getFirstDayOfWeek()`, so rotate the names to match (as NativeDateService does).
+    const offset: number = this.localeData.firstDayOfWeek;
+
+    return [...names.slice(offset), ...names.slice(0, offset)];
   }
 
   public getFirstDayOfWeek(): number {
