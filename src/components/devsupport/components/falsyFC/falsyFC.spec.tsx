@@ -1,5 +1,8 @@
 import React from 'react';
-import { Text } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+} from 'react-native';
 import { render } from '@testing-library/react-native';
 import { FalsyFC } from './falsyFC.component';
 
@@ -111,4 +114,40 @@ it('should be able to render valid element', () => {
   const textComponent = component.getByText('I love Babel');
   expect(textComponent).toBeTruthy();
   expect(textComponent.props.style).toEqual(styles);
+});
+
+it('should keep the style an element child was created with', () => {
+  const component = render(
+    <FalsyFC
+      style={{ fontSize: 14, color: '#FFFFFF' }}
+      component={(
+        <Text
+          testID='child'
+          style={{ fontSize: 42, color: 'rgb(1, 2, 3)' }}
+        />
+      )}
+    />,
+  );
+
+  const style = StyleSheet.flatten(component.getByTestId('child').props.style);
+  expect(style.fontSize).toEqual(42);
+  expect(style.color).toEqual('rgb(1, 2, 3)');
+});
+
+it('should apply the parent style where the element child has none', () => {
+  const component = render(
+    <FalsyFC
+      style={{ fontSize: 14, color: '#FFFFFF' }}
+      component={(
+        <Text
+          testID='child'
+          style={{ fontSize: 42 }}
+        />
+      )}
+    />,
+  );
+
+  const style = StyleSheet.flatten(component.getByTestId('child').props.style);
+  expect(style.fontSize).toEqual(42);
+  expect(style.color).toEqual('#FFFFFF');
 });
