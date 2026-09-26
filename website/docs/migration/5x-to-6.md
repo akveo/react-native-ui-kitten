@@ -16,7 +16,7 @@ UI Kitten v6 is a platform and packaging release rather than an API redesign. Ev
 
 Exactly one name left the public export surface — the `styled` higher-order function. The change most v5 apps actually trip over is a consequence of the function-component rewrite: a component name no longer doubles as its ref type, so `useRef<Input>()` is a compile error. Everything else on this page is about packaging: how the library is resolved, typechecked, and transformed by your tooling.
 
-v6 is currently published under the `beta` dist-tag. `latest` still points at `5.3.1`, so every install command below is explicit about the tag.
+v6 is published under the `latest` dist-tag, so a plain install resolves to it.
 
 Most of this page can be done for you by `@ui-kitten/codemod`:
 
@@ -44,7 +44,6 @@ The codemod leaves a report naming everything it refused to change and why. The 
 
 | What changed | Breaking | Fix |
 | --- | --- | --- |
-| Packages must be installed with the `@beta` tag | Yes | `npm i @ui-kitten/components@beta @ui-kitten/eva@beta` |
 | Jest cannot parse the package out of the box | Yes | Add `@ui-kitten` to `transformIgnorePatterns` |
 | Component names are no longer valid ref types | Yes, if you hold a ref | Use the exported `*Ref` types, or `React.ComponentRef<typeof X>` |
 | `useRef()` with no initial value, `createRef` under `strictNullChecks` | Yes, on React 19 typings | `useRef<T>(null)`; annotate `createRef` results `RefObject<T \| null>` |
@@ -55,7 +54,7 @@ The codemod leaves a report naming everything it refused to change and why. The 
 | `@eva-design/dss` and `@eva-design/processor` replaced by `@ui-kitten/processor` | Only if you imported them directly | Import the same names from `@ui-kitten/processor` |
 | `lodash.merge` is no longer a transitive dependency | Only if you imported it directly | Add it to your own `dependencies` |
 | `React.ReactText` was removed by React 19 | Only in your own type annotations | Replace with `string \| number` |
-| `types` now points at generated `.d.ts` instead of source | No — this fixes a bug | Upgrade to `6.0.0-beta.2` or later |
+| `types` now points at generated `.d.ts` instead of source | No — this fixes a bug | Upgrade to `6.0.0` or later |
 | Button, Select and Datepicker text properties accept `string` and `number` | No | Nothing; `<Button>TEXT</Button>` now typechecks |
 | `AutocompleteRef`, `InputRef` and `ListRef` are exported | No | Nothing |
 
@@ -79,22 +78,19 @@ The only symbol removed from the package root between `5.3.1` and v6 is `styled`
 ## Update UI Kitten
 
 ```bash
-npm i @ui-kitten/components@beta @ui-kitten/eva@beta
+npm i @ui-kitten/components @ui-kitten/eva
 
 // Using Yarn?
-yarn add @ui-kitten/components@beta @ui-kitten/eva@beta
+yarn add @ui-kitten/components @ui-kitten/eva
 ```
 
-Additionally, if you use any other UI Kitten packages, they all publish under the same tag:
+Additionally, if you use any other UI Kitten packages, update them too:
 
 ```bash
-npm i @ui-kitten/eva-icons@beta @ui-kitten/moment@beta @ui-kitten/date-fns@beta
-npm i -D @ui-kitten/metro-config@beta
+npm i @ui-kitten/eva-icons @ui-kitten/moment @ui-kitten/date-fns
+npm i -D @ui-kitten/metro-config
 ```
 
-:::warning
-Do not omit `@beta`. `@ui-kitten/components@latest` is still `5.3.1`, while `@ui-kitten/eva` only exists as a v6 package — installing without the tag gives you a v5 library next to a v6 mapping package.
-:::
 
 ---
 
@@ -105,9 +101,9 @@ The finished `package.json` looks like this:
 ```jsonc
 {
   "dependencies": {
-    "@ui-kitten/components": "^6.0.0-beta.2",
-    "@ui-kitten/eva": "^6.0.0-beta.1",       // replaces @eva-design/eva
-    "@ui-kitten/eva-icons": "^6.0.0-beta.1"
+    "@ui-kitten/components": "^6.0.0",
+    "@ui-kitten/eva": "^6.0.0",       // replaces @eva-design/eva
+    "@ui-kitten/eva-icons": "^6.0.0"
   }
 }
 ```
@@ -474,7 +470,7 @@ If you import from `@ui-kitten/components/devsupport` in a TypeScript project, u
 `@ui-kitten/metro-config` you must.**
 
 v6 ships its own mapping package, `@ui-kitten/eva`. It is the same document:
-`@eva-design/eva@2.2.0` and `@ui-kitten/eva@6.0.0-beta.1` have identical themes and identical
+`@eva-design/eva@2.2.0` and `@ui-kitten/eva@6.0.0` have identical themes and identical
 `mapping.json` files apart from the `$schema` pointer, which the style processor never reads. An app
 that keeps importing `@eva-design/eva` renders identically under v6 — this is pinned by a test in
 the UI Kitten repository.
@@ -584,7 +580,7 @@ const inputRef = useRef<InputRef>(null);
 
 ## Known gaps
 
-- v6 is a beta. There is no `latest` release. The `@ui-kitten/template-js` and `@ui-kitten/template-ts` starter templates have been retired — the versions still on npm install React Native 0.70 and UI Kitten 5.3.1 and should not be used. Start from [Getting Started](/docs/guides/getting-started#new-apps) instead.
+- The `@ui-kitten/template-js` and `@ui-kitten/template-ts` starter templates have been retired — the versions still on npm install React Native 0.70 and UI Kitten 5.3.1 and should not be used. Start from [Getting Started](/docs/guides/getting-started#new-apps) instead.
 - New Architecture support is claimed on the basis that the library contains no native modules and no legacy bridge usage. It has not been verified against a Fabric build in this documentation pass.
 - The library is developed against React Native 0.81 and Expo 54. Newer versions are known to bundle and run, but only the declared peer-dependency minimums are guaranteed.
 
