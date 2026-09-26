@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { TouchableWithoutFeedback } from '../../devsupport';
+import { TouchableWeb } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -145,7 +145,7 @@ I love Babel
       <TestSelectItem onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWeb));
     expect(onPress).toHaveBeenCalled();
   });
 
@@ -156,7 +156,7 @@ I love Babel
       <TestSelectItem onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressIn');
     expect(onPressIn).toHaveBeenCalled();
   });
 
@@ -166,7 +166,7 @@ I love Babel
       <TestSelectItem onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressOut');
     expect(onPressOut).toHaveBeenCalled();
   });
 });
@@ -208,9 +208,9 @@ describe('@select: component checks', () => {
    * ...rest for options
    */
   const touchables = {
-    findControlTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0],
-    findBackdropTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[1],
-    findOptionTouchable: (api: RenderAPI, index: number) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[index + 2],
+    findControlTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWeb)[0],
+    findBackdropTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWeb)[1],
+    findOptionTouchable: (api: RenderAPI, index: number) => api.UNSAFE_queryAllByType(TouchableWeb)[index + 2],
   };
 
   it('should forward its size to the options', async () => {
@@ -679,7 +679,7 @@ describe('@select: component checks with groups', () => {
   TestSelect.displayName = 'TestSelect';
 
   const touchables = {
-    findControlTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0],
+    findControlTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWeb)[0],
   };
 
   it('should select single option in group', async () => {

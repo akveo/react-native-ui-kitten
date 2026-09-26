@@ -1,5 +1,10 @@
 import React from 'react';
 import {
+  StyleSheet,
+  Text as RNText,
+  TextStyle,
+} from 'react-native';
+import {
   mergeElementStyle,
   RenderProp,
 } from '../falsyFC/falsyFC.component';
@@ -51,6 +56,23 @@ export interface FalsyTextProps extends Omit<TextProps, 'children'> {
  * );
  * ```
  */
+/**
+ * The `Text` mapping contributes exactly these four properties (plus nothing for the default
+ * appearance), so a style that sets all four with no appearance / category / status prop would
+ * resolve to the same output through the styled `Text`.
+ */
+const hasCompleteTextStyle = (props: TextProps): boolean => {
+  if (props.appearance || props.category || props.status) {
+    return false;
+  }
+  const style: TextStyle = StyleSheet.flatten(props.style) || {};
+
+  return style.color !== undefined
+    && style.fontFamily !== undefined
+    && style.fontSize !== undefined
+    && style.fontWeight !== undefined;
+};
+
 export class FalsyText extends React.Component<FalsyTextProps> {
 
   public render(): React.ReactElement {
@@ -66,6 +88,16 @@ export class FalsyText extends React.Component<FalsyTextProps> {
 
     if (typeof component === 'function') {
       return React.createElement(component, textProps as TextProps);
+    }
+
+    if (hasCompleteTextStyle(textProps as TextProps)) {
+      // The parent resolved the Eva text style already (Button, CheckBox, Toggle, ...); the styled
+      // Text would only re-resolve the same four typography values. Skip that hook and fiber.
+      return (
+        <RNText {...(textProps as TextProps)}>
+          {component}
+        </RNText>
+      );
     }
 
     return (

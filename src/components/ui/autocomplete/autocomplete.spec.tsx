@@ -32,7 +32,10 @@ import {
   AutocompleteItem,
   AutocompleteItemProps,
 } from './autocompleteItem.component';
-import { TouchableWithoutFeedback } from '../../devsupport';
+import {
+  TouchableWeb,
+  TouchableWithoutFeedback,
+} from '../../devsupport';
 
 /*
  * Mock UIManager since Autocomplete relies on native measurements
@@ -137,7 +140,7 @@ I love Babel
       <TestAutocompleteItem onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWeb));
     expect(onPress).toHaveBeenCalled();
   });
 
@@ -147,7 +150,7 @@ I love Babel
       <TestAutocompleteItem onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -157,7 +160,7 @@ I love Babel
       <TestAutocompleteItem onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWeb), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 });

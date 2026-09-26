@@ -13,7 +13,7 @@ import {
   TargetedEvent,
 } from 'react-native';
 import {
-  TouchableWithoutFeedback,
+  renderPressable,
   TouchableWithoutFeedbackProps,
 } from './touchableWithoutFeedback.component';
 
@@ -32,22 +32,17 @@ export type TouchableWebElement = React.ReactElement<TouchableWebProps>;
 export class TouchableWeb extends React.Component<TouchableWebProps> {
 
   public render(): React.ReactElement {
-    const { style, ...touchableProps } = this.props;
-
-    return (
-      <TouchableWithoutFeedback
-        {...touchableProps}
-        style={[styles.container, style]}
-      />
-    );
+    // Renders the Pressable directly rather than through TouchableWithoutFeedback: one fiber less
+    // on every interactive component.
+    return renderPressable(this.props, styles.container || undefined);
   }
 }
 
-const styles = Platform.OS === 'web' && StyleSheet.create({
+const styles = Platform.OS === 'web' ? StyleSheet.create({
   container: {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     outlineWidth: 0,
   },
-});
+}) : { container: undefined };
 
