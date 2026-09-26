@@ -2562,7 +2562,7 @@
                             "basic": {
                                 "borderColor": "color-basic-600",
                                 "backgroundColor": "background-basic-color-1",
-                                "textColor": "text-hint-color",
+                                "textColor": "text-basic-color",
                                 "labelColor": "text-hint-color",
                                 "captionColor": "text-hint-color",
                                 "placeholderColor": "text-hint-color",

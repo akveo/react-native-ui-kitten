@@ -7,6 +7,7 @@
 
 import React from 'react';
 import {
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -40,6 +41,15 @@ jest.mock('react-native', () => {
 
   return ActualReactNative;
 });
+
+
+const themeValue = (name: string): string => {
+  let value: string = light[name];
+  while (typeof value === 'string' && value.startsWith('$')) {
+    value = light[value.slice(1)];
+  }
+  return value;
+};
 
 const now = new Date();
 const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
@@ -144,6 +154,25 @@ describe('@datepicker: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render string placeholder with the placeholder color and the text font', async () => {
+    const component = render(
+      <TestDatepicker placeholder='I love Babel' />,
+    );
+
+    const style = StyleSheet.flatten(component.getByText('I love Babel').props.style);
+    expect(style.color).toEqual(themeValue('text-hint-color'));
+    expect(style.fontSize).toEqual(expect.any(Number));
+  });
+
+  it('should render selected date with the text color', async () => {
+    const component = render(
+      <TestDatepicker date={today} />,
+    );
+
+    const style = StyleSheet.flatten(component.getByText(/^\d{2}\/\d{2}\/\d{4}$/).props.style);
+    expect(style.color).toEqual(themeValue('text-basic-color'));
   });
 
   it('should render placeholder as component', async () => {

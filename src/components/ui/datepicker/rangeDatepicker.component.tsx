@@ -331,7 +331,7 @@ function RangeDatepickerComponent<D = Date>(
           component={accessoryLeft}
         />
         <FalsyText
-          style={componentStyles.text}
+          style={range.startDate || range.endDate ? componentStyles.text : componentStyles.placeholder}
           numberOfLines={1}
           ellipsizeMode='tail'
           component={getComponentTitle()}
@@ -344,7 +344,7 @@ function RangeDatepickerComponent<D = Date>(
     );
   }, [
     touchableProps, componentStyles, controlStyle, handlePress, handlePressIn,
-    handlePressOut, accessoryLeft, accessoryRight, getComponentTitle,
+    handlePressOut, accessoryLeft, accessoryRight, getComponentTitle, range,
   ]);
 
   const renderCalendar = useCallback((): RangeCalendarElement<D> => {

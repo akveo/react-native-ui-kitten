@@ -2543,7 +2543,7 @@
                             "basic": {
                                 "borderColor": "border-basic-color-4",
                                 "backgroundColor": "background-basic-color-2",
-                                "textColor": "text-hint-color",
+                                "textColor": "text-basic-color",
                                 "labelColor": "text-hint-color",
                                 "captionColor": "text-hint-color",
                                 "placeholderColor": "text-hint-color",
