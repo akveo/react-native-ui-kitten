@@ -30,19 +30,22 @@ export const InputSimpleUsageShowcase = (): React.ReactElement => {
       <Label>Sizes</Label>
       <Input style={styles.input} size="small" placeholder="Small" />
       <Input style={styles.input} size="medium" placeholder="Medium" />
-      <Input style={styles.input} size="large" placeholder="Large" />
+      <Input testID="input-large" style={styles.input} size="large" placeholder="Large" />
 
       <Label>States</Label>
       <Input
+        testID="input-active"
         style={styles.input}
         placeholder="Active"
         value={value}
         onChangeText={setValue}
       />
-      <Input style={styles.input} placeholder="Disabled" disabled />
+      <Text testID="input-value">{`Value: ${value}`}</Text>
+      <Input testID="input-disabled" style={styles.input} placeholder="Disabled" disabled />
 
       <Label>With Label & Caption</Label>
       <Input
+        testID="input-labeled"
         style={styles.input}
         label="Email"
         placeholder="john@example.com"
@@ -51,6 +54,7 @@ export const InputSimpleUsageShowcase = (): React.ReactElement => {
 
       <Label>Multiline</Label>
       <Input
+        testID="input-multiline"
         style={styles.input}
         multiline
         textStyle={styles.multiline}

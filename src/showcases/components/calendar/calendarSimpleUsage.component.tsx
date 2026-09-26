@@ -7,14 +7,12 @@ export const CalendarSimpleUsageShowcase = (): React.ReactElement => {
 
   return (
     <>
-      <Text category='h6'>
-        Selected date:
-        {' '}
-        {date.toLocaleDateString()}
+      <Text testID='calendar-value' category='h6'>
+        {`Selected date: ${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`}
       </Text>
 
       <Calendar
-
+        testID='calendar'
         arrowLeftAccessibilityLabel='Previous month'
 
         arrowRightAccessibilityLabel='Next month'

@@ -17,6 +17,7 @@ const ForwardIcon = (props): IconElement => (
 
 export const DrawerItemSimpleUsageShowcase = (): React.ReactElement => (
   <DrawerItem
+    testID='drawer-item-single'
     title='Users'
     accessoryLeft={StarIcon}
     accessoryRight={ForwardIcon}

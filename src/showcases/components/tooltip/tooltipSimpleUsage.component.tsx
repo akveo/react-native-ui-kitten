@@ -6,7 +6,7 @@ export const TooltipSimpleUsageShowcase = (): React.ReactElement => {
   const [visible, setVisible] = React.useState(false);
 
   const renderToggleButton = (): React.ReactElement => (
-    <Button onPress={() => setVisible(true)}>
+    <Button testID='tooltip-anchor' onPress={() => setVisible(true)}>
       TOGGLE TOOLTIP
     </Button>
   );

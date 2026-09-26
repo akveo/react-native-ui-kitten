@@ -12,12 +12,14 @@ export const DatepickerSimpleUsageShowcase = (): React.ReactElement => {
       level='1'
     >
 
-      <Text category='s1'>
-        {`Selected date: ${date.toLocaleDateString()}`}
+      <Text testID='datepicker-value' category='s1'>
+        {`Selected date: ${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`}
       </Text>
 
       <Datepicker
-
+        testID='datepicker'
+        label='Date'
+        caption='Pick a date'
         arrowLeftAccessibilityLabel='Previous month'
 
         arrowRightAccessibilityLabel='Next month'

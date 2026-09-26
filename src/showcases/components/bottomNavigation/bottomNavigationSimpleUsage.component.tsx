@@ -16,20 +16,22 @@ export const BottomNavigationSimpleUsageShowcase = (): React.ReactElement => {
         level='2'
       >
         <Text
+          testID='bottom-navigation-value'
           category='h4'
           appearance='hint'
           style={styles.text}
         >
-          Content
+          {`Content ${selectedIndex + 1}`}
         </Text>
       </Layout>
       <BottomNavigation
+        testID='bottom-navigation'
         selectedIndex={selectedIndex}
         onSelect={index => setSelectedIndex(index)}
       >
-        <BottomNavigationTab title='USERS' />
-        <BottomNavigationTab title='ORDERS' />
-        <BottomNavigationTab title='TRANSACTIONS' />
+        <BottomNavigationTab testID='bottom-navigation-tab-1' title='USERS' />
+        <BottomNavigationTab testID='bottom-navigation-tab-2' title='ORDERS' />
+        <BottomNavigationTab testID='bottom-navigation-tab-3' title='TRANSACTIONS' />
       </BottomNavigation>
     </Layout>
   );

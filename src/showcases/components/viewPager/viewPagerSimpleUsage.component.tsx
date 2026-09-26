@@ -7,7 +7,10 @@ export const ViewPagerSimpleUsageShowcase = (): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   return (
+    <>
+    <Text testID='view-pager-value'>{`Page: ${selectedIndex + 1}`}</Text>
     <ViewPager
+      testID='view-pager'
       selectedIndex={selectedIndex}
       onSelect={index => setSelectedIndex(index)}
     >
@@ -36,6 +39,7 @@ TRANSACTIONS
         </Text>
       </Layout>
     </ViewPager>
+    </>
   );
 };
 

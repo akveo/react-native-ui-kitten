@@ -10,6 +10,7 @@ const PersonIcon = (props): IconElement => (
 
 export const TabSimpleUsageShowcase = (): React.ReactElement => (
   <Tab
+    testID='tab-single'
     title='USERS'
     icon={PersonIcon}
   />

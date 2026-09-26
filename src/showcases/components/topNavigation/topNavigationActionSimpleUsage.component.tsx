@@ -1,6 +1,5 @@
 import React from 'react';
-import { Icon, IconElement, TopNavigationAction } from '@ui-kitten/components';
-import { TouchableWebElement } from '@ui-kitten/components/devsupport';
+import { Icon, IconElement, Text, TopNavigationAction } from '@ui-kitten/components';
 
 const BackIcon = (props): IconElement => (
   <Icon
@@ -9,6 +8,12 @@ const BackIcon = (props): IconElement => (
   />
 );
 
-export const TopNavigationActionSimpleUsageShowcase = (): TouchableWebElement => (
-  <TopNavigationAction icon={BackIcon} />
-);
+export const TopNavigationActionSimpleUsageShowcase = (): React.ReactElement => {
+  const [presses, setPresses] = React.useState(0);
+  return (
+    <>
+      <Text testID='top-navigation-action-count'>{`Presses: ${presses}`}</Text>
+      <TopNavigationAction testID='top-navigation-action' icon={BackIcon} onPress={() => setPresses((n) => n + 1)} />
+    </>
+  );
+};

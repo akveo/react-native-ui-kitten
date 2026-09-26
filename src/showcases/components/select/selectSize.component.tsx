@@ -17,6 +17,7 @@ export const SelectSizeShowcase = (): React.ReactElement => {
     <>
 
       <Select
+        testID='select-small'
         style={styles.select}
         size='small'
         placeholder='Small'
@@ -28,6 +29,7 @@ export const SelectSizeShowcase = (): React.ReactElement => {
       </Select>
 
       <Select
+        testID='select-medium'
         style={styles.select}
         size='medium'
         placeholder='Medium'
@@ -39,6 +41,7 @@ export const SelectSizeShowcase = (): React.ReactElement => {
       </Select>
 
       <Select
+        testID='select-large'
         style={styles.select}
         size='large'
         placeholder='Large'

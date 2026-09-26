@@ -17,6 +17,7 @@ const ForwardIcon = (props): IconElement => (
 
 export const MenuItemSimpleUsageShowcase = (): React.ReactElement => (
   <MenuItem
+    testID='menu-item-single'
     title='Users'
     accessoryLeft={StarIcon}
     accessoryRight={ForwardIcon}

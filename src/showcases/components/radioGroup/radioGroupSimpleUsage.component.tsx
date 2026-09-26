@@ -8,21 +8,22 @@ export const RadioGroupSimpleUsageShowcase = (): React.ReactElement => {
   return (
     <>
 
-      <Text category='h6'>
+      <Text testID='radio-group-value' category='h6'>
         {`Selected Option: ${selectedIndex + 1}`}
       </Text>
 
       <RadioGroup
+        testID='radio-group'
         selectedIndex={selectedIndex}
         onChange={index => setSelectedIndex(index)}
       >
-        <Radio>
+        <Radio testID='radio-group-1'>
 Option 1
         </Radio>
-        <Radio>
+        <Radio testID='radio-group-2'>
 Option 2
         </Radio>
-        <Radio>
+        <Radio testID='radio-group-3'>
 Option 3
         </Radio>
       </RadioGroup>

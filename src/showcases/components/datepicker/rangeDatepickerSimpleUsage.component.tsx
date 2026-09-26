@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { CalendarRange, Layout, RangeDatepicker } from '@ui-kitten/components';
+import { CalendarRange, Layout, RangeDatepicker, Text } from '@ui-kitten/components';
 
 export const RangeDatepickerSimpleUsageShowcase = (): React.ReactElement => {
 
@@ -12,8 +12,9 @@ export const RangeDatepickerSimpleUsageShowcase = (): React.ReactElement => {
       level='1'
     >
 
+      <Text testID='range-datepicker-value'>{`Range: ${range.startDate ? range.startDate.getDate() : '-'} to ${range.endDate ? range.endDate.getDate() : '-'}`}</Text>
       <RangeDatepicker
-
+        testID='range-datepicker'
         arrowLeftAccessibilityLabel='Previous month'
 
         arrowRightAccessibilityLabel='Next month'

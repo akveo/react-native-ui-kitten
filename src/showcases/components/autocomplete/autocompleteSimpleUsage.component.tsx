@@ -28,12 +28,14 @@ export const AutocompleteSimpleUsageShowcase = (): React.ReactElement => {
   const renderOption = (item, index): React.ReactElement => (
     <AutocompleteItem
       key={index}
+      testID={`autocomplete-item-${index + 1}`}
       title={item.title}
     />
   );
 
   return (
     <Autocomplete
+      testID='autocomplete'
       placeholder='Place your Text'
       value={value}
       placement='inner top'

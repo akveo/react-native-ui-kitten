@@ -31,13 +31,14 @@ export const RadioSimpleUsageShowcase = (): React.ReactElement => {
       <Label>States</Label>
       <Layout style={styles.row} level="1">
         <Radio
+          testID="radio-controlled"
           style={styles.radio}
           checked={checked}
           onChange={setChecked}
         >
           {`Checked: ${checked}`}
         </Radio>
-        <Radio style={styles.radio} checked={false} disabled>
+        <Radio testID="radio-disabled" style={styles.radio} checked={false} disabled>
           Disabled
         </Radio>
         <Radio style={styles.radio} checked disabled>
