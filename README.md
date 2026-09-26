@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@ui-kitten/components"><img src="https://img.shields.io/npm/v/@ui-kitten/components/beta?label=npm%20%40beta" alt="npm beta version" /></a>
+  <a href="https://www.npmjs.com/package/@ui-kitten/components"><img src="https://img.shields.io/npm/v/@ui-kitten/components?label=npm" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/@ui-kitten/components"><img src="https://img.shields.io/npm/dm/@ui-kitten/components" alt="npm downloads" /></a>
   <a href="https://github.com/akveo/react-native-ui-kitten/actions/workflows/continuous-integration-workflow.yml"><img src="https://github.com/akveo/react-native-ui-kitten/actions/workflows/continuous-integration-workflow.yml/badge.svg" alt="CI" /></a>
   <a href="LICENSE.txt"><img src="https://img.shields.io/npm/l/@ui-kitten/components" alt="MIT license" /></a>
@@ -33,7 +33,7 @@
 
 ---
 
-> **UI Kitten 6 is in beta.** It is rebuilt for React 19, React Native 0.81 and the New Architecture, and is published under the `beta` dist-tag. `@ui-kitten/components@latest` still resolves to 5.3.1, so always install with `@beta` until 6.0.0 ships. Upgrading? Read the [5.x to 6 migration guide](https://akveo.github.io/react-native-ui-kitten/docs/migration/5x-to-6).
+> **UI Kitten 6 is out.** It is rebuilt for React 19, React Native 0.81 and the New Architecture. Upgrading from 5.x? Read the [5.x to 6 migration guide](https://akveo.github.io/react-native-ui-kitten/docs/migration/5x-to-6).
 
 ## Features
 
@@ -53,20 +53,20 @@ UI Kitten needs two packages plus `react-native-svg`:
 
 ```sh
 # Expo
-npx expo install @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+npx expo install @ui-kitten/components @ui-kitten/eva react-native-svg
 
 # Bare React Native
-npm install @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+npm install @ui-kitten/components @ui-kitten/eva react-native-svg
 cd ios && pod install
 ```
 
-Optional packages, published under the same tag:
+Optional packages:
 
 ```sh
-npm install @ui-kitten/eva-icons@beta          # Eva Icons pack
-npm install @ui-kitten/moment@beta             # Calendar / Datepicker with moment
-npm install @ui-kitten/date-fns@beta           # Calendar / Datepicker with date-fns
-npm install -D @ui-kitten/metro-config@beta    # Build-time style processing
+npm install @ui-kitten/eva-icons          # Eva Icons pack
+npm install @ui-kitten/moment             # Calendar / Datepicker with moment
+npm install @ui-kitten/date-fns           # Calendar / Datepicker with date-fns
+npm install -D @ui-kitten/metro-config    # Build-time style processing
 ```
 
 Starting from scratch? `npx create-expo-app@latest MyApp` and then run the Expo command above inside it. The [Getting Started guide](https://akveo.github.io/react-native-ui-kitten/docs/guides/getting-started) covers both paths in detail.
@@ -112,15 +112,15 @@ Switch to `eva.dark`, or spread your own theme over it, and every component re-r
 
 | Package                                          | Version                                                                                                                 | Description                                                                 |
 | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [`@ui-kitten/components`](src/components)        | [![npm](https://img.shields.io/npm/v/@ui-kitten/components/beta?label=)](https://www.npmjs.com/package/@ui-kitten/components)   | The components, theming hooks and `ApplicationProvider`.                     |
-| [`@ui-kitten/eva`](src/eva)                      | [![npm](https://img.shields.io/npm/v/@ui-kitten/eva/beta?label=)](https://www.npmjs.com/package/@ui-kitten/eva)                 | Eva mapping plus the light and dark themes. Required.                        |
-| [`@ui-kitten/material`](src/material)            | [![npm](https://img.shields.io/npm/v/@ui-kitten/material/beta?label=)](https://www.npmjs.com/package/@ui-kitten/material)       | Alternative Material-flavoured mapping and themes.                           |
-| [`@ui-kitten/eva-icons`](src/eva-icons)          | [![npm](https://img.shields.io/npm/v/@ui-kitten/eva-icons/beta?label=)](https://www.npmjs.com/package/@ui-kitten/eva-icons)     | 480+ Eva Icons as an `IconRegistry` pack.                                    |
-| [`@ui-kitten/moment`](src/moment)                | [![npm](https://img.shields.io/npm/v/@ui-kitten/moment/beta?label=)](https://www.npmjs.com/package/@ui-kitten/moment)           | `moment` date service for Calendar and Datepicker.                           |
-| [`@ui-kitten/date-fns`](src/date-fns)            | [![npm](https://img.shields.io/npm/v/@ui-kitten/date-fns/beta?label=)](https://www.npmjs.com/package/@ui-kitten/date-fns)       | `date-fns` date service for Calendar and Datepicker.                         |
-| [`@ui-kitten/metro-config`](src/metro-config)    | [![npm](https://img.shields.io/npm/v/@ui-kitten/metro-config/beta?label=)](https://www.npmjs.com/package/@ui-kitten/metro-config) | Metro plugin that precompiles Eva mappings at build time.                    |
-| [`@ui-kitten/processor`](src/processor)          | [![npm](https://img.shields.io/npm/v/@ui-kitten/processor/beta?label=)](https://www.npmjs.com/package/@ui-kitten/processor)     | Mapping processor. Replaces `@eva-design/dss` and `@eva-design/processor`.   |
-| [`@ui-kitten/mapping-base`](src/mapping-base)    | [![npm](https://img.shields.io/npm/v/@ui-kitten/mapping-base/beta?label=)](https://www.npmjs.com/package/@ui-kitten/mapping-base) | Shared mapping schema used by `eva` and `material`.                          |
+| [`@ui-kitten/components`](src/components)        | [![npm](https://img.shields.io/npm/v/@ui-kitten/components?label=)](https://www.npmjs.com/package/@ui-kitten/components)   | The components, theming hooks and `ApplicationProvider`.                     |
+| [`@ui-kitten/eva`](src/eva)                      | [![npm](https://img.shields.io/npm/v/@ui-kitten/eva?label=)](https://www.npmjs.com/package/@ui-kitten/eva)                 | Eva mapping plus the light and dark themes. Required.                        |
+| [`@ui-kitten/material`](src/material)            | [![npm](https://img.shields.io/npm/v/@ui-kitten/material?label=)](https://www.npmjs.com/package/@ui-kitten/material)       | Alternative Material-flavoured mapping and themes.                           |
+| [`@ui-kitten/eva-icons`](src/eva-icons)          | [![npm](https://img.shields.io/npm/v/@ui-kitten/eva-icons?label=)](https://www.npmjs.com/package/@ui-kitten/eva-icons)     | 480+ Eva Icons as an `IconRegistry` pack.                                    |
+| [`@ui-kitten/moment`](src/moment)                | [![npm](https://img.shields.io/npm/v/@ui-kitten/moment?label=)](https://www.npmjs.com/package/@ui-kitten/moment)           | `moment` date service for Calendar and Datepicker.                           |
+| [`@ui-kitten/date-fns`](src/date-fns)            | [![npm](https://img.shields.io/npm/v/@ui-kitten/date-fns?label=)](https://www.npmjs.com/package/@ui-kitten/date-fns)       | `date-fns` date service for Calendar and Datepicker.                         |
+| [`@ui-kitten/metro-config`](src/metro-config)    | [![npm](https://img.shields.io/npm/v/@ui-kitten/metro-config?label=)](https://www.npmjs.com/package/@ui-kitten/metro-config) | Metro plugin that precompiles Eva mappings at build time.                    |
+| [`@ui-kitten/processor`](src/processor)          | [![npm](https://img.shields.io/npm/v/@ui-kitten/processor?label=)](https://www.npmjs.com/package/@ui-kitten/processor)     | Mapping processor. Replaces `@eva-design/dss` and `@eva-design/processor`.   |
+| [`@ui-kitten/mapping-base`](src/mapping-base)    | [![npm](https://img.shields.io/npm/v/@ui-kitten/mapping-base?label=)](https://www.npmjs.com/package/@ui-kitten/mapping-base) | Shared mapping schema used by `eva` and `material`.                          |
 
 ## Migrating from v5
 

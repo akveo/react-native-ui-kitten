@@ -55,15 +55,17 @@ Commit the generated `.changeset/*.md` alongside your change. `changeset status`
 yarn changeset status
 ```
 
-`baseBranch` in `.changeset/config.json` must be the branch releases actually run from — currently
-`next`, because that is where the v6 line lives and `master` still holds v5. `baseBranch` only
-affects `changeset add` and `changeset status`; it does **not** affect `version` or `publish`. If
-the release branch ever moves back to `master`, change it back, or `changeset status` will fail with
-*"Some packages have been changed but no changesets were found."*
+`baseBranch` in `.changeset/config.json` must be the branch releases actually run from — `master`.
+The v6 line was developed and released from `next` up to `6.0.0`; `master` was fast-forwarded to it
+afterwards and is the release branch again. `baseBranch` only affects `changeset add` and
+`changeset status`; it does **not** affect `version` or `publish`. If the release branch ever moves,
+change it too, or `changeset status` will fail with *"Some packages have been changed but no
+changesets were found."*
 
 ## Prerelease (beta) mode
 
-`.changeset/pre.json` has `"mode": "exit"` since the `6.0.0` release branch. While it has `"mode": "pre"`:
+`.changeset/pre.json` does not exist right now: `changeset version` deleted it when `6.0.0` was cut.
+`yarn changeset pre enter <tag>` recreates it with `"mode": "pre"`. While it is in that mode:
 
 - versions get a `-beta.N` suffix
 - publishes go to the `beta` dist-tag
@@ -72,45 +74,42 @@ the release branch ever moves back to `master`, change it back, or `changeset st
 Consumed changesets are recorded in `pre.json.changesets` rather than deleted, so the `.md` files
 staying in `.changeset/` after a release is expected.
 
-### Current npm state (verified 2026-08-08)
+### Current npm state (verified 2026-09-26, after the 6.0.0 publish)
 
 | Package | `latest` | `beta` | other |
 |---|---|---|---|
-| `components` | 5.3.1 | 6.0.0-beta.2 | `next: 6.0.0-beta.2` |
-| `eva-icons`, `moment`, `date-fns` | 5.3.1 | 6.0.0-beta.1 | |
-| `metro-config` | 5.3.1 | 6.0.0-beta.1 | `next: 6.0.0-beta.1`, `rc: 5.0.0-rc.0` |
-| `eva`, `processor`, `mapping-base`, `material` | **6.0.0-beta.1** | 6.0.0-beta.1 | |
+| `components` | 6.0.0 | 6.0.0-beta.2 | `next: 6.0.0-beta.2` |
+| `metro-config` | 6.0.0 | 6.0.0-beta.1 | `next: 6.0.0-beta.1`, `rc: 5.0.0-rc.0` |
+| the other seven | 6.0.0 | 6.0.0-beta.1 | |
 
-Two quirks are known and deliberate — do not "fix" them ad hoc:
+The stale `beta`, `next` and `rc` dist-tags are known and deliberate — do not "fix" them ad hoc.
+Moving or removing a dist-tag needs a non-bypass token plus an OTP, which the release account cannot
+currently produce. They are harmless: nobody installs `@beta` or `@next` by accident, and `latest`
+is what `npm install` resolves.
 
-- The four packages first published during v6 have `latest` pointing at a beta. npm assigns `latest`
-  on a package's first publish regardless of `--tag`, and there is no stable version to point at
-  instead. This corrects itself at 6.0.0 GA.
-- `metro-config` keeps an orphan `rc: 5.0.0-rc.0`. Removing a dist-tag needs a non-bypass token plus
-  an OTP, which the release account cannot currently produce.
+## Cutting a stable release after a prerelease line
 
-## Cutting 6.0.0 stable
+This is how `6.0.0` was cut on 2026-09-26 (#1871, #1872). Order matters:
 
-All nine packages carry a `major` changeset (`.changeset/v6-beta-release.md`) recorded in
-`pre.json`, so all nine land on `6.0.0` together. Order matters:
-
-1. On `next`, exit prerelease mode:
+1. On the integration branch, exit prerelease mode:
    ```
    yarn changeset pre exit
    ```
    This only rewrites `.changeset/pre.json` (`mode: "exit"`). It does not touch versions.
-2. Commit and push that change. `release.yml` opens a Version Packages PR whose versions are plain
-   `6.0.0` — **check the PR diff before merging**; this is the last cheap moment to catch a mistake.
-3. Merge the PR. `changeset publish` runs without prerelease mode, so every package publishes to the
-   `latest` dist-tag. That moves `latest` from `5.3.1` → `6.0.0` for the v5 packages and from
-   `6.0.0-beta.1` → `6.0.0` for the four v6-only packages, clearing the "latest points at a beta"
-   quirk automatically.
-4. After the publish, `beta` still points at the last beta. Leave it or repoint it to `6.0.0`; either
-   requires an npm token with 2FA bypass (see below).
-5. Delete `.changeset/pre.json` (or run `yarn changeset pre exit` cleanup) before starting the next
-   prerelease line.
-6. If the release branch moves to `master`, merge `next` → `master` and set `baseBranch` back to
-   `"master"`.
+2. Preview the result locally before pushing: `GITHUB_TOKEN=$(gh auth token) yarn changeset version`,
+   inspect the package versions and changelogs, then discard the working tree changes.
+3. Merge the integration PR into the release branch. `release.yml` opens a Version Packages PR whose
+   versions are plain — **check the PR diff before merging**; this is the last cheap moment to catch
+   a mistake. CI does not run on that PR (it is opened with `GITHUB_TOKEN`), so run
+   `yarn install --immutable && yarn build` on its branch locally instead.
+4. Merge the Version Packages PR. `changeset version` deletes `pre.json` and every consumed
+   changeset; `changeset publish` runs without prerelease mode, so every package publishes to the
+   `latest` dist-tag.
+5. The prerelease dist-tag still points at the last prerelease. Leave it; repointing it needs an npm
+   token with 2FA bypass (see below).
+
+Branch protection on `master` and `next` requires the `build-and-test` check and one approving
+review. Release PRs are merged with `gh pr merge <n> --admin`.
 
 ## CI and npm auth
 

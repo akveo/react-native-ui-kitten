@@ -52,14 +52,14 @@ cd MyApp
 ### Install UI Kitten
 
 ```bash
-npx expo install @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+npx expo install @ui-kitten/components @ui-kitten/eva react-native-svg
 ```
 
 <details>
 <summary>Without a framework (bare React Native)</summary>
 
 ```bash
-npm i @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+npm i @ui-kitten/components @ui-kitten/eva react-native-svg
 cd ios && pod install
 ```
 
@@ -86,14 +86,14 @@ If you have an existing code base and want to use UI Kitten in your project, fol
 ### Install UI Kitten
 
 ```bash
-npm i @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+npm i @ui-kitten/components @ui-kitten/eva react-native-svg
 
 // Using Yarn?
-// yarn add @ui-kitten/components@beta @ui-kitten/eva@beta react-native-svg
+// yarn add @ui-kitten/components @ui-kitten/eva react-native-svg
 ```
 
-:::warning
-UI Kitten 6 is published under the `beta` dist-tag. Do not omit `@beta` — `@ui-kitten/components@latest` is still `5.3.1`, while `@ui-kitten/eva` only exists as a v6 package, so an untagged install mixes the two major versions. If you are upgrading an existing app, read the [5.x to 6.0.0 Migration](/docs/migration/5x-to-6) guide.
+:::tip
+If you are upgrading an existing app, read the [5.x to 6.0.0 Migration](/docs/migration/5x-to-6) guide.
 :::
 
 :::warning
