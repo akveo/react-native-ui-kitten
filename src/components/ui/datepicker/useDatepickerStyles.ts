@@ -55,6 +55,9 @@ export function useDatepickerStyles(evaStyle: StyleType): DatepickerStyles {
       },
       placeholder: {
         marginHorizontal: textMarginHorizontal,
+        fontFamily: textFontFamily,
+        fontSize: textFontSize,
+        fontWeight: textFontWeight,
         color: placeholderColor,
       },
       icon: {

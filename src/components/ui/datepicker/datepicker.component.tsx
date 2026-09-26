@@ -384,7 +384,7 @@ function DatepickerComponent<D = Date>(
           component={accessoryLeft}
         />
         <FalsyText
-          style={componentStyles.text}
+          style={date ? componentStyles.text : componentStyles.placeholder}
           numberOfLines={1}
           ellipsizeMode='tail'
           component={getComponentTitle()}
@@ -397,7 +397,7 @@ function DatepickerComponent<D = Date>(
     );
   }, [
     touchableProps, componentStyles, controlStyle, handlePress, handlePressIn,
-    handlePressOut, accessoryLeft, accessoryRight, getComponentTitle,
+    handlePressOut, accessoryLeft, accessoryRight, getComponentTitle, date,
   ]);
 
   const renderCalendar = useCallback((): CalendarElement<D> => {

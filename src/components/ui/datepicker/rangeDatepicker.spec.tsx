@@ -7,6 +7,7 @@
 
 import React from 'react';
 import {
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -43,6 +44,15 @@ jest.mock('react-native', () => {
 
   return ActualReactNative;
 });
+
+
+const themeValue = (name: string): string => {
+  let value: string = light[name];
+  while (typeof value === 'string' && value.startsWith('$')) {
+    value = light[value.slice(1)];
+  }
+  return value;
+};
 
 const now = new Date();
 const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
@@ -649,6 +659,24 @@ describe('@range-datepicker: component checks', () => {
     fireEvent.press(rightArrow);
 
     expect(onVisibleDateChange).toBeCalled();
+  });
+
+  it('should render string placeholder with the placeholder color', async () => {
+    const component = render(
+      <TestRangeDatepicker placeholder='I love Babel' />,
+    );
+
+    const style = StyleSheet.flatten(component.getByText('I love Babel').props.style);
+    expect(style.color).toEqual(themeValue('text-hint-color'));
+  });
+
+  it('should render selected range with the text color', async () => {
+    const component = render(
+      <TestRangeDatepicker range={{ startDate: today, endDate: today }} />,
+    );
+
+    const style = StyleSheet.flatten(component.getByText(/^\d{2}\/\d{2}\/\d{4} - /).props.style);
+    expect(style.color).toEqual(themeValue('text-basic-color'));
   });
 
 });
