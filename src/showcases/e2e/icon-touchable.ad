@@ -7,7 +7,8 @@ scroll "down" 1
 scroll "down" 1
 scroll "down" 1
 scroll "down" 1
-wait "id=\"section-InputAccessories-title\"" 10000
+scroll "down" 0.5
+wait "id=\"input-accessories-toggle\"" 10000
 press "id=\"input-accessories-toggle\""
 wait "id=\"section-InputAccessories-title\"" 5000
 press "value=\"Place your Text\""

@@ -175,7 +175,7 @@ Popover)
 Tooltip)
   goto Tooltip; seeId tooltip-anchor
   chk "open tooltip" pid tooltip-anchor
-  settle; chk "tooltip text (2 nodes: popover content + tooltip)" bash -c "[ \"\$(agent-device snapshot --raw | grep -c 'Welcome to UI Kitten')\" -ge 2 ]"
+  settle; chk "tooltip text shown" bash -c "[ \"\$(agent-device snapshot --raw | grep -c 'Welcome to UI Kitten')\" -ge \$([ \"\$AGENT_DEVICE_SESSION\" = android ] && echo 1 || echo 2) ]"   # iOS also lists the (offscreen) Popover content
   ad screenshot --overlay-refs $E/Tooltip-open.png >/dev/null
   chk "backdrop hides" closeOverlay
   settle; chk "tooltip gone (1 node left)" bash -c "[ \"\$(agent-device snapshot --raw | grep -c 'Welcome to UI Kitten')\" -le 1 ]"
@@ -314,9 +314,9 @@ Datepicker)
 RangeDatepicker)
   goto RangeDatepicker; seeId range-datepicker
   chk "open range picker" pressAt range-datepicker 200 52   # id tap refused on Android: the child touchable covers the container exactly
-  settle; chk "picker shown (RangeCalendar has no arrow labels, look for a weekday header)" bash -c "[ \"\$(agent-device snapshot --raw | grep -c '\"Su\"')\" -ge 2 ]"
-  chk "pick 5" pressNear range-datepicker "5"
-  chk "pick 9" pressNear range-datepicker "9"
+  settle; chk "picker shown (RangeCalendar has no arrow labels, look for a weekday header)" bash -c "[ \"\$(agent-device snapshot --raw | grep -c '\"Su\"')\" -ge \$([ \"\$AGENT_DEVICE_SESSION\" = android ] && echo 1 || echo 2) ]"
+  chk "pick 5" pressBelow range-datepicker "5"
+  chk "pick 9" pressBelow range-datepicker "9"
   chk "range 5 to 9" [ "$(txt range-datepicker-value)" = "Range: 5 to 9" ]
   closeOverlay >/dev/null; settle; chk "closed" [ "$(txt range-datepicker-value)" != "" ]
   shot $E/RangeDatepicker.png

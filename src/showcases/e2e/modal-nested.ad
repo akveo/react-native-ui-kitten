@@ -45,6 +45,8 @@ scroll "down" 0.3
 scroll "down" 0.3
 scroll "down" 0.3
 scroll "down" 0.3
+scroll "down" 0.3
+scroll "down" 0.3
 wait "label=\"TOGGLE MODAL\"" 10000
 press "role=\"button\" label=\"TOGGLE MODAL\" || label=\"TOGGLE MODAL\""
 wait "text" "Pick an option" 5000
