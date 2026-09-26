@@ -352,8 +352,8 @@ export const Select = React.forwardRef<SelectRef, SelectProps>(
       const selected: boolean = service.isSelected(descriptor, selectedIndices);
       const itemDisabled: boolean = service.isDisabled(descriptor);
 
-      return cloneItemWithProps(info.item, { descriptor, selected, disabled: itemDisabled, onPress: onItemPress });
-    }, [service, multiSelect, selectedIndices, cloneItemWithProps, onItemPress]);
+      return cloneItemWithProps(info.item, { descriptor, selected, disabled: itemDisabled, size, onPress: onItemPress });
+    }, [service, multiSelect, selectedIndices, cloneItemWithProps, onItemPress, size]);
 
     const renderDefaultIconElement = useCallback((iconStyle: StyleType): React.ReactElement => {
       const { tintColor, ...svgStyle } = iconStyle;

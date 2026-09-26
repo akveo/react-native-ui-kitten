@@ -23,6 +23,7 @@ import {
   TouchableWebProps,
   Overwrite,
   LiteralUnion,
+  EvaInputSize,
 } from '../../devsupport';
 import {
   Interaction,
@@ -71,6 +72,11 @@ export interface SelectItemProps extends TouchableSelectProps {
    * Defaults to *default*.
    */
   appearance?: LiteralUnion<'default' | 'grouped'>;
+  /**
+   * Size of the item. Set by `Select` from its own `size`.
+   * Can be `small`, `medium` or `large`. Defaults to `medium`.
+   */
+  size?: EvaInputSize;
 }
 
 export type SelectItemElement = React.ReactElement<SelectItemProps>;
@@ -108,6 +114,7 @@ export const SelectItem = React.forwardRef<TouchableWeb, SelectItemProps>(
       selected,
       descriptor,
       disabled,
+      size,
       onMouseEnter: onMouseEnterProp,
       onMouseLeave: onMouseLeaveProp,
       onFocus: onFocusProp,
@@ -122,6 +129,7 @@ export const SelectItem = React.forwardRef<TouchableWeb, SelectItemProps>(
 
     const { style: evaStyle, dispatch } = useStyled('SelectOption', {
       appearance,
+      size,
       selected,
       disabled,
     });

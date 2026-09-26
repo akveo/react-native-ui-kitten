@@ -9,6 +9,7 @@ import React from 'react';
 import {
   Image,
   ImageProps,
+  StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -76,6 +77,21 @@ describe('@select-item: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should size the option text with the size prop', () => {
+    const fontSizeOf = (size: SelectItemProps['size']): number => {
+      const component = render(
+        <TestSelectItem
+          title='I love Babel'
+          size={size}
+        />,
+      );
+      return StyleSheet.flatten(component.getByText('I love Babel').props.style).fontSize;
+    };
+
+    expect(fontSizeOf('small')).toBeLessThan(fontSizeOf('medium'));
+    expect(fontSizeOf('medium')).toEqual(fontSizeOf(undefined));
   });
 
   it('should render component passed to title prop', () => {
@@ -195,6 +211,17 @@ describe('@select: component checks', () => {
     findBackdropTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableOpacity)[1],
     findOptionTouchable: (api: RenderAPI, index: number) => api.UNSAFE_queryAllByType(TouchableOpacity)[index + 2],
   };
+
+  it('should forward its size to the options', async () => {
+    const component = render(
+      <TestSelect size='small' />,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    const firstOption = await waitFor(() => component.queryByText('Option 1'));
+
+    expect(StyleSheet.flatten(firstOption.props.style).fontSize).toBeLessThan(15);
+  });
 
   it('should render placeholder', () => {
     const component = render(
