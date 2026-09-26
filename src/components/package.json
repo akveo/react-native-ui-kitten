@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/components",
   "description": "React Native UI components based on Eva Design System",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
   "types": "./lib/typescript/commonjs/index.d.ts",

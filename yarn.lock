@@ -3968,7 +3968,7 @@ __metadata:
     moment: ^2.30.0
     typescript: ^5.3.0
   peerDependencies:
-    "@ui-kitten/components": ^6.0.0
+    "@ui-kitten/components": ^6.0.2
     moment: ">=2.24.0"
   languageName: unknown
   linkType: soft

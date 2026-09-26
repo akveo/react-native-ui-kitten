@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/metro-config",
   "description": "UI Kitten config for Metro Bundler",
-  "version": "6.0.0",
+  "version": "6.0.2",
   "main": "./lib/commonjs/index.js",
   "types": "./lib/typescript/index.d.ts",
   "source": "./index.ts",

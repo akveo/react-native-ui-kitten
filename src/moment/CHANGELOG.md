@@ -1,5 +1,15 @@
 # @ui-kitten/moment
 
+## 6.0.2
+
+### Patch Changes
+
+- [#1882](https://github.com/akveo/react-native-ui-kitten/pull/1882) [`b326089`](https://github.com/akveo/react-native-ui-kitten/commit/b326089eefa35ee887e2159c4a5314bc868dfebe) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `MomentDateService.getDayOfWeekNames()` rotates the names to the locale's first day of week, matching
+  `NativeDateService` and the calendar's column layout. Locales that start the week on Monday (for
+  example `nl`, `de`, `en-gb`) showed the header one day off (#1603).
+- Updated dependencies [[`f9d07a9`](https://github.com/akveo/react-native-ui-kitten/commit/f9d07a9ca810a18834b928e8108f543650704691), [`6038239`](https://github.com/akveo/react-native-ui-kitten/commit/60382394566708e3b4cf9b8fc279eb5894411eb0), [`24d8793`](https://github.com/akveo/react-native-ui-kitten/commit/24d8793f163a3fa1cd106f0b4fac95339f1f5112), [`f4c271f`](https://github.com/akveo/react-native-ui-kitten/commit/f4c271f0f6f0673899670d072c7fadfc3fafc4a4), [`018d6b2`](https://github.com/akveo/react-native-ui-kitten/commit/018d6b2a719bc5633ba6a0085005d6b9f263e1d7)]:
+  - @ui-kitten/components@6.0.2
+
 ## 6.0.0
 
 ### Major Changes

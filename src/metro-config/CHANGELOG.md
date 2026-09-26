@@ -1,5 +1,14 @@
 # @ui-kitten/metro-config
 
+## 6.0.2
+
+### Patch Changes
+
+- [#1882](https://github.com/akveo/react-native-ui-kitten/pull/1882) [`e4129c4`](https://github.com/akveo/react-native-ui-kitten/commit/e4129c47ca0894e468367019040027a1378b8081) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `@ui-kitten/metro-config` no longer replaces Metro's default reporter. `create()` returned its own
+  `reporter` even when the project passed none, which shadowed Metro's `TerminalReporter` and silenced
+  every bundler log line and warning (#1763). A reporter the project supplies is still wrapped so the
+  `initialize_started` re-bootstrap keeps working.
+
 ## 6.0.0
 
 ### Major Changes
