@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { deepMerge } from '@ui-kitten/mapping-base';
-import { SchemaProcessor } from '@ui-kitten/processor';
 import {
   CustomSchemaType,
   SchemaType,
@@ -17,6 +16,7 @@ import { StyleProvider } from '../style/styleProvider.component';
 import { ModalPanel } from '../modal/modalPanel.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
 import { styleCache } from '../style/styleCache';
+import { createOnDemandStyles } from '../style/onDemandStyles';
 
 interface EvaRuntimeProcessingProps {
   mapping: SchemaType;
@@ -32,11 +32,11 @@ type EvaProcessingProps = EvaRuntimeProcessingProps | EvaBuildtimeProcessingProp
 export type ApplicationProviderProps = EvaProcessingProps & ThemeProviderProps;
 export type ApplicationProviderElement = React.ReactElement<ApplicationProviderProps>;
 
-const schemaProcessor = new SchemaProcessor();
-
 function createStyles(mapping: SchemaType, custom?: CustomSchemaType): ThemeStyleType {
   const customizedMapping: SchemaType = deepMerge(mapping, custom);
-  return schemaProcessor.process(customizedMapping);
+  // Styles are resolved per appearance/variant/state combination on first use instead of
+  // expanding every combination up front (thousands of entries, seconds on low-end Hermes).
+  return createOnDemandStyles(customizedMapping);
 }
 
 /**
@@ -47,8 +47,9 @@ function createStyles(mapping: SchemaType, custom?: CustomSchemaType): ThemeStyl
  *
  * @property {SchemaType} mapping - Mapping for UI Kitten components.
  * This is designed to be provided from any `@ui-kitten/*` package.
- * If provided, will be merged with *customMapping* and compiled into styles during the runtime.
- * Can be improved with build-time processing with `@ui-kitten/metro-config` package.
+ * If provided, will be merged with *customMapping*; each component style is compiled
+ * on first use during the runtime. Passing `styles` from `@ui-kitten/metro-config` instead
+ * skips runtime compilation entirely.
  *
  * @property {CustomSchemaType} customMapping - Customized mapping.
  *
