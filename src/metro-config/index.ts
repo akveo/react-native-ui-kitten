@@ -103,12 +103,19 @@ export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): Met
   BootstrapService.run(evaConfig);
   watchCustomMappingIfNeeded(evaConfig);
 
-  const handleMetroEvent = (event: MetroEvent): void => {
-    const reporter = metroConfig?.reporter;
+  const userReporter = metroConfig?.reporter;
 
-    if (reporter?.update) {
-      reporter.update(event);
-    }
+  /*
+   * Only wrap a reporter the project supplied. Returning our own `reporter` when the project has
+   * none replaces Metro's default `TerminalReporter`, which silenced every Metro log line and
+   * warning (#1763). The eager bootstrap above already covers bare Metro, so nothing is lost.
+   */
+  if (!userReporter?.update) {
+    return deepMerge(metroConfig || {}, {});
+  }
+
+  const handleMetroEvent = (event: MetroEvent): void => {
+    userReporter.update(event);
 
     if (event.type === 'initialize_started') {
       BootstrapService.run(evaConfig);

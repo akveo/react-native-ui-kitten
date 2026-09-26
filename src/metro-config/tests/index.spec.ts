@@ -36,7 +36,7 @@ describe('@metro-config: create', () => {
   it('should configure metro bundler with default values', () => {
     const { reporter, ...restConfig } = MetroConfig.create(evaConfig);
 
-    expect(reporter).toBeTruthy();
+    expect(reporter).toBeUndefined();
     expect(restConfig).toBeTruthy();
   });
 
@@ -49,7 +49,7 @@ describe('@metro-config: create', () => {
 
     const { reporter, watchFolders, ...restConfig } = MetroConfig.create(evaConfig, metroConfig);
 
-    expect(reporter).toBeTruthy();
+    expect(reporter).toBeUndefined();
     expect(watchFolders[0]).toEqual(metroConfig.watchFolders[0]);
     expect(restConfig).toBeTruthy();
   });
@@ -76,10 +76,10 @@ describe('@metro-config: create', () => {
       expect(consoleSpies.warn).not.toHaveBeenCalled();
     });
 
-    it('should bootstrap again on initialize_started for bare metro', () => {
+    it('should bootstrap again on initialize_started when a reporter is passed', () => {
       const runSpy = jest.spyOn(BootstrapService, 'run');
 
-      const { reporter } = MetroConfig.create(evaConfig);
+      const { reporter } = MetroConfig.create(evaConfig, { reporter: { update: jest.fn() } });
       expect(runSpy).toHaveBeenCalledTimes(1);
 
       reporter.update(INITIALIZE_STARTED);
@@ -92,7 +92,7 @@ describe('@metro-config: create', () => {
     it('should still return a config when the eva config is invalid', () => {
       const config = MetroConfig.create({ ...evaConfig, customMappingPath: './does-not-exist.json' });
 
-      expect(config.reporter).toBeTruthy();
+      expect(config).toBeTruthy();
       expect(consoleSpies.warnings()).toContain('does-not-exist.json');
     });
   });
@@ -100,7 +100,7 @@ describe('@metro-config: create', () => {
   describe('custom mapping watcher', () => {
 
     it('should not watch anything when no custom mapping is configured', () => {
-      const { reporter } = MetroConfig.create(evaConfig);
+      const { reporter } = MetroConfig.create(evaConfig, { reporter: { update: jest.fn() } });
       expect(watchFileSpy).not.toHaveBeenCalled();
 
       reporter.update(INITIALIZE_STARTED);
@@ -108,7 +108,7 @@ describe('@metro-config: create', () => {
     });
 
     it('should not watch anything when the custom mapping file does not exist', () => {
-      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './does-not-exist.json' });
+      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './does-not-exist.json' }, { reporter: { update: jest.fn() } });
       expect(watchFileSpy).not.toHaveBeenCalled();
 
       reporter.update(INITIALIZE_STARTED);
@@ -128,7 +128,7 @@ describe('@metro-config: create', () => {
     it('should not register a second watcher when the reporter hook fires afterwards', () => {
       project.writeFile('custom-mapping.json', readCustomMappingFixture());
 
-      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json' });
+      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json' }, { reporter: { update: jest.fn() } });
       reporter.update(INITIALIZE_STARTED);
       reporter.update(INITIALIZE_STARTED);
 
@@ -151,7 +151,7 @@ describe('@metro-config: create', () => {
     it('should not watch when watch is disabled', () => {
       project.writeFile('custom-mapping.json', readCustomMappingFixture());
 
-      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json', watch: false });
+      const { reporter } = MetroConfig.create({ ...evaConfig, customMappingPath: './custom-mapping.json', watch: false }, { reporter: { update: jest.fn() } });
       expect(watchFileSpy).not.toHaveBeenCalled();
 
       reporter.update(INITIALIZE_STARTED);
