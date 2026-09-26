@@ -17,6 +17,8 @@ export interface UseCalendarNavigationOptions<D> {
   viewMode: CalendarViewMode;
   visibleDate: D;
   pickerDate: D;
+  min?: D;
+  max?: D;
   setVisibleDate: (date: D) => void;
   setPickerDate: (date: D) => void;
   onVisibleDateChange?: (date: D, viewModeId: CalendarViewModeId) => void;
@@ -33,26 +35,40 @@ export function useCalendarNavigation<D>({
   viewMode,
   visibleDate,
   pickerDate,
+  min,
+  max,
   setVisibleDate,
   setPickerDate,
   onVisibleDateChange,
 }: UseCalendarNavigationOptions<D>): UseCalendarNavigationResult {
 
+  // Header arrows never leave the [min, max] window: paging past a bound lands on the bound
+  // itself, so the last reachable page is the one holding min or max (#1759).
+  const clampToBounds = useCallback((date: D): D => {
+    if (min && dateService.compareDates(date, min) < 0) {
+      return min;
+    }
+    if (max && dateService.compareDates(date, max) > 0) {
+      return max;
+    }
+    return date;
+  }, [dateService, min, max]);
+
   const createViewModeVisibleDate = useCallback((page: number): D => {
     switch (viewMode.id) {
       case CalendarViewModes.DATE.id: {
-        return dateService.addMonth(visibleDate, page);
+        return clampToBounds(dateService.addMonth(visibleDate, page));
       }
       case CalendarViewModes.MONTH.id: {
-        return dateService.addYear(pickerDate, page);
+        return clampToBounds(dateService.addYear(pickerDate, page));
       }
       case CalendarViewModes.YEAR.id: {
-        return dateService.addYear(pickerDate, VIEWS_IN_PICKER * page);
+        return clampToBounds(dateService.addYear(pickerDate, VIEWS_IN_PICKER * page));
       }
       default:
         return visibleDate;
     }
-  }, [dateService, viewMode.id, visibleDate, pickerDate]);
+  }, [dateService, viewMode.id, visibleDate, pickerDate, clampToBounds]);
 
   const onHeaderNavigationLeftPress = useCallback(() => {
     const nextDate = createViewModeVisibleDate(-1);
