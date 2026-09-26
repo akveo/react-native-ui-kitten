@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -82,7 +83,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onPress={onPress} />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onPress).toBeCalled();
   });
 
@@ -92,7 +93,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -102,7 +103,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 
@@ -113,7 +114,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onMouseEnter={onMouseEnter} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseEnter');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseEnter');
     expect(onMouseEnter).toBeCalled();
   });
 
@@ -124,7 +125,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onMouseLeave={onMouseLeave} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseLeave');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseLeave');
     expect(onMouseLeave).toBeCalled();
   });
 
@@ -135,7 +136,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onFocus={onFocus} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'focus');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'focus');
     expect(onFocus).toBeCalled();
   });
 
@@ -146,7 +147,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction onBlur={onBlur} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'blur');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'blur');
     expect(onBlur).toBeCalled();
   });
 

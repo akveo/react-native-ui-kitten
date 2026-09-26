@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   StyleSheet,
   Text,
@@ -91,7 +92,7 @@ describe('@datepicker: component checks', () => {
    * ...rest for calendar touchable components
    */
   const touchables = {
-    findInputTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableOpacity)[0],
+    findInputTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0],
     findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
 

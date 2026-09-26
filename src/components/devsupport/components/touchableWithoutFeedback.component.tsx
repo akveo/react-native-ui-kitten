@@ -8,9 +8,11 @@
 import React from 'react';
 import {
   Insets,
+  Platform,
+  Pressable,
   StyleSheet,
-  TouchableOpacity,
   TouchableOpacityProps,
+  View,
   ViewStyle,
 } from 'react-native';
 
@@ -23,12 +25,12 @@ export interface TouchableWithoutFeedbackProps extends TouchableOpacityProps {
 export type TouchableWithoutFeedbackElement = React.ReactElement<TouchableWithoutFeedbackProps>;
 
 /**
- * Helper component for the Touchable component with no opacity feedback.
+ * Press surface used by every interactive component.
  *
- * Applies recommended hitSlop by default.
- * @see https://reactnative.dev/docs/view#hitslop
- *
- * Allows passing ReactNode as children whereas original TouchableWithoutFeedback not.
+ * Renders a `Pressable`: UI Kitten paints its own press, hover and focus states through Eva
+ * styles, so the opacity animation `TouchableOpacity` sets up on every render was pure overhead.
+ * Keeps the `TouchableOpacityProps` public surface; `onMouseEnter` / `onMouseLeave` are forwarded
+ * as Pressable's hover events and `activeOpacity` is ignored.
  */
 export class TouchableWithoutFeedback extends React.Component<TouchableWithoutFeedbackProps> {
 
@@ -47,12 +49,34 @@ export class TouchableWithoutFeedback extends React.Component<TouchableWithoutFe
   };
 
   public render(): React.ReactElement {
+    const {
+      useDefaultHitSlop,
+      hitSlop,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      activeOpacity,
+      role,
+      accessibilityRole,
+      onMouseEnter,
+      onMouseLeave,
+      ...pressableProps
+    } = this.props as TouchableWithoutFeedbackProps & {
+      onMouseEnter?: (event: unknown) => void;
+      onMouseLeave?: (event: unknown) => void;
+    };
+
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        hitSlop={this.props.useDefaultHitSlop && this.createHitSlopInsets()}
-        {...this.props}
+      <Pressable
+        hitSlop={hitSlop ?? (useDefaultHitSlop ? this.createHitSlopInsets() : undefined)}
+        {...pressableProps}
+        // `TouchableOpacity` forwarded only `accessibilityRole` to the native view; keep that
+        // behaviour so native announcements do not change. On web `role` carries the exact ARIA value.
+        role={Platform.OS === 'web' || !accessibilityRole ? role : undefined}
+        accessibilityRole={accessibilityRole}
+        onHoverIn={onMouseEnter}
+        onHoverOut={onMouseLeave}
       />
     );
   }
 }
+
+export type TouchableWithoutFeedbackRef = View;

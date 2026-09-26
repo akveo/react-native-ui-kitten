@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   Text,
   TouchableOpacity,
@@ -44,7 +45,7 @@ describe('@radio: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onCheckedChange).toBeCalledWith(true);
   });
 
@@ -57,7 +58,7 @@ describe('@radio: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onCheckedChange).toBeCalledWith(false);
   });
 
@@ -103,7 +104,7 @@ I love Babel
       <TestRadio onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -113,7 +114,7 @@ I love Babel
       <TestRadio onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
   it('should call onMouseEnter', () => {
@@ -123,7 +124,7 @@ I love Babel
       <TestRadio onMouseEnter={onMouseEnter} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseEnter');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseEnter');
     expect(onMouseEnter).toBeCalled();
   });
 
@@ -134,7 +135,7 @@ I love Babel
       <TestRadio onMouseLeave={onMouseLeave} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseLeave');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseLeave');
     expect(onMouseLeave).toBeCalled();
   });
 
@@ -145,7 +146,7 @@ I love Babel
       <TestRadio onFocus={onFocus} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'focus');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'focus');
     expect(onFocus).toBeCalled();
   });
 
@@ -156,7 +157,7 @@ I love Babel
       <TestRadio onBlur={onBlur} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'blur');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'blur');
     expect(onBlur).toBeCalled();
   });
 

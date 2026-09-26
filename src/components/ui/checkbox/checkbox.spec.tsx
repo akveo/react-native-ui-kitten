@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   Text,
   TouchableOpacity,
@@ -44,7 +45,7 @@ describe('@checkbox component checks', () => {
       />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onCheckedChange).toBeCalledWith(true, false);
   });
 
@@ -57,7 +58,7 @@ describe('@checkbox component checks', () => {
       />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onCheckedChange).toBeCalledWith(false, false);
   });
 
@@ -71,7 +72,7 @@ describe('@checkbox component checks', () => {
       />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onCheckedChange).toBeCalledWith(true, false);
   });
 
@@ -85,7 +86,7 @@ describe('@checkbox component checks', () => {
       />,
     );
 
-    fireEvent.press(component.UNSAFE_queryByType(TouchableOpacity));
+    fireEvent.press(component.UNSAFE_queryByType(TouchableWithoutFeedback));
     expect(onCheckedChange).toBeCalledWith(false, false);
   });
 
@@ -135,7 +136,7 @@ describe('@checkbox component checks', () => {
       <TestCheckBox onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -145,7 +146,7 @@ describe('@checkbox component checks', () => {
       <TestCheckBox onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 
@@ -156,7 +157,7 @@ describe('@checkbox component checks', () => {
       <TestCheckBox onMouseEnter={onMouseEnter} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseEnter');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseEnter');
     expect(onMouseEnter).toBeCalled();
   });
 
@@ -167,7 +168,7 @@ describe('@checkbox component checks', () => {
       <TestCheckBox onMouseLeave={onMouseLeave} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'mouseLeave');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'mouseLeave');
     expect(onMouseLeave).toBeCalled();
   });
 
@@ -178,7 +179,7 @@ describe('@checkbox component checks', () => {
       <TestCheckBox onFocus={onFocus} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'focus');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'focus');
     expect(onFocus).toBeCalled();
   });
 
@@ -189,7 +190,7 @@ describe('@checkbox component checks', () => {
       <TestCheckBox onBlur={onBlur} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'blur');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'blur');
     expect(onBlur).toBeCalled();
   });
 

@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   Image,
   ImageProps,
@@ -176,7 +177,7 @@ I love Babel
       <TestListItem onPressIn={onPressIn} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressIn');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressIn');
     expect(onPressIn).toHaveBeenCalled();
   });
 
@@ -186,7 +187,7 @@ I love Babel
       <TestListItem onPressOut={onPressOut} />,
     );
 
-    fireEvent(component.UNSAFE_queryByType(TouchableOpacity), 'pressOut');
+    fireEvent(component.UNSAFE_queryByType(TouchableWithoutFeedback), 'pressOut');
     expect(onPressOut).toHaveBeenCalled();
   });
 });

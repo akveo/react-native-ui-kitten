@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { TouchableWithoutFeedback } from '../../devsupport';
 import {
   StyleSheet,
   Text,
@@ -95,7 +96,7 @@ describe('@range-datepicker: component checks', () => {
    * ...rest for calendar touchable components
    */
   const touchables = {
-    findInputTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableOpacity)[0],
+    findInputTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0],
     findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
 
@@ -323,7 +324,7 @@ describe('@range-datepicker: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.UNSAFE_queryAllByType(TouchableOpacity)[0]);
+    fireEvent.press(component.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0]);
 
     const cells = await waitFor(() => component.queryAllByTestId('@range-datepicker/cell'));
     expect(cells.length).not.toEqual(0);
