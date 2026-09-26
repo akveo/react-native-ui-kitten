@@ -37,15 +37,17 @@ export class StyleCacheClass {
     interactions: string[],
     themeId: string,
   ): string {
-    // Sort variants for deterministic key
-    const variantPairs = Object.entries(variants)
-      .filter(([, v]) => v !== undefined && v !== false)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([k, v]) => `${k}:${v}`)
-      .join('|');
+    // Deterministic key: variant keys in sorted order, interactions sorted.
+    let variantPairs = '';
+    const keys = Object.keys(variants).sort();
+    for (let i = 0; i < keys.length; i++) {
+      const v = variants[keys[i]];
+      if (v !== undefined && v !== false) {
+        variantPairs += (variantPairs ? '|' : '') + keys[i] + ':' + v;
+      }
+    }
 
-    // Sort interactions for deterministic key
-    const interactionKey = [...interactions].sort().join('|');
+    const interactionKey = interactions.length > 1 ? [...interactions].sort().join('|') : (interactions[0] ?? '');
 
     return `${componentName}::${appearance ?? 'default'}::${variantPairs}::${interactionKey}::${themeId}`;
   }

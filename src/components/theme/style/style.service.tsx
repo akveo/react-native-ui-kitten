@@ -94,19 +94,23 @@ export class StyleService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static createThemed = <T extends Styles<T>>(styles: Styles<T>, theme: ThemeType): any => {
-    return Object.keys(styles).reduce((acc, key: string) => {
-      return { ...acc, [key]: StyleService.createThemedEntry(styles[key], theme) };
-    }, {});
+    const themed: StyleType = {};
+    for (const key in styles) {
+      themed[key] = StyleService.createThemedEntry(styles[key], theme);
+    }
+    return themed;
   };
 
   /**
    * @returns a style mapped to theme
    */
   static createThemedEntry = (style: StyleType, theme: ThemeType): StyleType => {
-    return Object.keys(style).reduce((acc: StyleType, key: string): StyleType => {
+    const themed: StyleType = {};
+    for (const key in style) {
       const value = style[key];
-      return { ...acc, [key]: ThemeService.getValue(value, theme, value) };
-    }, {});
+      themed[key] = ThemeService.getValue(value, theme, value);
+    }
+    return themed;
   };
 }
 

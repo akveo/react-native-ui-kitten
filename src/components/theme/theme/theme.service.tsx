@@ -32,9 +32,11 @@ export class ThemeService {
    * @returns compiled theme since Eva theme may contain variables referencing each other.
    */
   static create = (theme: ThemeType): ThemeType => {
-    return Object.keys(theme).reduce((acc: ThemeType, key: string): ThemeType => {
-      return { ...acc, [key]: ThemeService.getValue(key, theme, key) };
-    }, {});
+    const compiled: ThemeType = {};
+    for (const key in theme) {
+      compiled[key] = ThemeService.getValue(key, theme, key);
+    }
+    return compiled;
   };
 
   /**
