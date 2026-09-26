@@ -1,8 +1,8 @@
 import React from 'react';
 import {
+  NativeModules,
   Platform,
   StatusBar,
-  TurboModuleRegistry,
   UIManager,
   View,
 } from 'react-native';
@@ -111,6 +111,11 @@ describe('@measure: element position checks', () => {
 
   const measureInWindowOriginal = UIManager.measureInWindow;
   const statusBarHeightOriginal = StatusBar.currentHeight;
+  const deviceInfoOriginal = NativeModules.DeviceInfo;
+
+  const mockDeviceInfo = (module: typeof DeviceInfo | null): void => {
+    NativeModules.DeviceInfo = module;
+  };
 
   const mockMeasureInWindow = (x: number, y: number, width: number, height: number): void => {
     UIManager.measureInWindow = (_node: number, callback: MeasureInWindowCallback): void => {
@@ -136,6 +141,7 @@ describe('@measure: element position checks', () => {
   afterEach(() => {
     UIManager.measureInWindow = measureInWindowOriginal;
     StatusBar.currentHeight = statusBarHeightOriginal;
+    NativeModules.DeviceInfo = deviceInfoOriginal;
     jest.restoreAllMocks();
   });
 
@@ -152,9 +158,7 @@ describe('@measure: element position checks', () => {
 
   it('should add status bar height on edge-to-edge android', async () => {
     jest.replaceProperty(Platform, 'OS', 'android');
-    jest.spyOn(TurboModuleRegistry, 'get').mockImplementation((name: string) => {
-      return name === 'DeviceInfo' ? DeviceInfo : null;
-    });
+    mockDeviceInfo(DeviceInfo);
     StatusBar.currentHeight = 52;
     mockMeasureInWindow(16, 413, 379, 46);
 
@@ -166,7 +170,7 @@ describe('@measure: element position checks', () => {
 
   it('should not add status bar height on android without edge-to-edge', async () => {
     jest.replaceProperty(Platform, 'OS', 'android');
-    jest.spyOn(TurboModuleRegistry, 'get').mockImplementation(() => null);
+    mockDeviceInfo(null);
     StatusBar.currentHeight = 52;
     mockMeasureInWindow(16, 413, 379, 46);
 

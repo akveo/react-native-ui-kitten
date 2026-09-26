@@ -9,8 +9,8 @@ import React from 'react';
 import {
   findNodeHandle,
   LayoutChangeEvent,
+  NativeModules,
   Platform,
-  TurboModuleRegistry,
   UIManager,
   StatusBar,
 } from 'react-native';
@@ -20,17 +20,26 @@ interface DeviceInfoConstants {
   isEdgeToEdge?: boolean;
 }
 
+interface DeviceInfoModule {
+  getConstants?: () => DeviceInfoConstants;
+}
+
 /**
  * Whether React Native draws the Android app edge-to-edge (React Native 0.81+ reports it through
  * the `DeviceInfo` constants). In that mode every native `Modal` window is presented edge-to-edge
  * as well, so its coordinate space starts at the top of the screen, while `measureInWindow`
  * keeps reporting positions relative to the visible window frame, i.e. below the status bar.
+ *
+ * Read through `NativeModules` rather than `TurboModuleRegistry`: bridgeless React Native forwards
+ * it to the TurboModule registry, and react-native-web ships a `NativeModules` shim but no
+ * `TurboModuleRegistry` export, so a named import breaks every web bundler that checks exports.
  */
 const isAndroidEdgeToEdge = (): boolean => {
   if (Platform.OS !== 'android') {
     return false;
   }
-  const constants = TurboModuleRegistry.get('DeviceInfo')?.getConstants?.() as DeviceInfoConstants | undefined;
+  const deviceInfo = NativeModules.DeviceInfo as DeviceInfoModule | null | undefined;
+  const constants = deviceInfo?.getConstants?.();
   return constants?.isEdgeToEdge === true;
 };
 
