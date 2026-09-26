@@ -9,6 +9,7 @@ import React from 'react';
 import {
   Image,
   ImageProps,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -249,6 +250,18 @@ I love Babel
 
       expect(component.getByRole('link')).toBeTruthy();
     });
+  });
+
+  it('should keep a disabled ghost button transparent', () => {
+    const component = render(
+      <TestButton
+        appearance='ghost'
+        disabled={true}
+      />,
+    );
+
+    const style = StyleSheet.flatten(component.UNSAFE_queryByType(TouchableOpacity).props.style);
+    expect(style.backgroundColor).toEqual('transparent');
   });
 
 });
