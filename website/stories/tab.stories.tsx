@@ -118,3 +118,30 @@ export const TabViewHidden: Story = {
     );
   },
 };
+
+// #1234: pages loaded on demand must not bounce when tapping tabs.
+export const TabViewLazy: Story = {
+  name: 'TabView lazy pages',
+  render: () => {
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selects, setSelects] = useState<number[]>([]);
+    const onSelect = (index: number): void => {
+      setSelects((all) => [...all, index]);
+      setSelectedIndex(index);
+    };
+    return (
+      <View>
+        <Text testID="lazy-state">{`selected: ${selectedIndex}, calls: ${selects.join(',')}`}</Text>
+        <TabView selectedIndex={selectedIndex} onSelect={onSelect} shouldLoadComponent={(index) => index === selectedIndex}>
+          {['One', 'Two', 'Three', 'Four'].map((title, index) => (
+            <Tab key={title} title={title}>
+              <Layout style={{ padding: 16, height: 60 + index * 40 }}>
+                <Text category="p1">{`${title} content`}</Text>
+              </Layout>
+            </Tab>
+          ))}
+        </TabView>
+      </View>
+    );
+  },
+};
