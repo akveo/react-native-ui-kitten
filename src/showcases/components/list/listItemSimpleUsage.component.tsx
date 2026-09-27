@@ -2,7 +2,8 @@ import React from 'react';
 import { ImageProps, StyleSheet } from 'react-native';
 import { Avatar, Button, ListItem, Text } from '@ui-kitten/components';
 
-const InstallButton = ({ onPress }: { onPress: () => void }): React.ReactElement => (
+// Built once per press handler (outside render) so the accessory keeps a stable component type.
+const createInstallAccessory = (onPress: () => void) => (): React.ReactElement => (
   <Button testID='list-item-install' size='tiny' onPress={onPress}>
     INSTALL
   </Button>
@@ -18,6 +19,7 @@ const ItemImage = (props: ImageProps): React.ReactElement => (
 
 export const ListItemSimpleUsageShowcase = (): React.ReactElement => {
   const [last, setLast] = React.useState('none');
+  const installAccessory = React.useMemo(() => createInstallAccessory(() => setLast('install')), []);
   return (
     <>
       <Text testID='list-item-value'>{`Last press: ${last}`}</Text>
@@ -26,7 +28,7 @@ export const ListItemSimpleUsageShowcase = (): React.ReactElement => {
         title='UI Kitten'
         description='A set of React Native components'
         accessoryLeft={ItemImage}
-        accessoryRight={() => <InstallButton onPress={() => setLast('install')} />}
+        accessoryRight={installAccessory}
         onPress={() => setLast('row')}
       />
     </>
