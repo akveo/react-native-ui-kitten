@@ -48,6 +48,7 @@ export const renderPressable = (
     accessibilityRole,
     onMouseEnter,
     onMouseLeave,
+    focusable,
     style,
     ...pressableProps
   } = props as TouchableWithoutFeedbackProps & {
@@ -59,6 +60,11 @@ export const renderPressable = (
     <Pressable
       hitSlop={hitSlop ?? (useDefaultHitSlop ? createHitSlopInsets(style) : undefined)}
       {...pressableProps}
+      focusable={focusable}
+      // react-native-web's Pressable always emits an explicit tabIndex (0, or -1 when
+      // disabled), which wins over `focusable`; mirror `focusable={false}` into tabIndex
+      // so a tap-forwarding wrapper (Input's container) is not a keyboard tab stop.
+      tabIndex={focusable === false ? -1 : (pressableProps as { tabIndex?: 0 | -1 }).tabIndex}
       style={extraStyle ? [extraStyle, style] : style}
       role={Platform.OS === 'web' || !accessibilityRole ? role : undefined}
       accessibilityRole={accessibilityRole}

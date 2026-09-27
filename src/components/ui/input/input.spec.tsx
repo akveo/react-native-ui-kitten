@@ -362,6 +362,14 @@ describe('@input: component checks', () => {
       expect(component.getByTestId('@input/container').props.accessible).toEqual(false);
     });
 
+    it('should keep the tap-forwarding wrapper out of the keyboard tab order', () => {
+      const component = render(<TestInput testID='input' label='Email' />);
+
+      const container = component.getByTestId('@input/container');
+      expect(container.props.focusable).toEqual(false);
+      expect(container.props.tabIndex).toEqual(-1);
+    });
+
     it('should not derive test ids when testID is omitted', () => {
       const component = render(<TestInput label='Email' />);
 
