@@ -1,5 +1,15 @@
 # @ui-kitten/components
 
+## 6.1.1
+
+### Patch Changes
+
+- [#1890](https://github.com/akveo/react-native-ui-kitten/pull/1890) [`db10b60`](https://github.com/akveo/react-native-ui-kitten/commit/db10b60de5b108e2b88e82ae00d41443bb7c7aed) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Card` accepts `contentContainerStyle` for the view that wraps its children. It overrides the body padding that the mapping applies and takes flex properties such as `flexDirection`, so a card body can be laid out as a row or fill the card without wrapping the children in a negative-margin view.
+
+- [#1889](https://github.com/akveo/react-native-ui-kitten/pull/1889) [`8f29793`](https://github.com/akveo/react-native-ui-kitten/commit/8f29793e4f9fe74e93f283575257e82f77239f45) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Stop `Modal` and `Popover` from vibrating by one pixel when their content has a fractional size. `MeasureElement` now reports whole points, and a re-measure that moves the content by at most one point no longer repositions it: native layout snaps a fractional width to the pixel grid, so the measured width alternated with every move and the modal repositioned itself forever.
+
+- [#1887](https://github.com/akveo/react-native-ui-kitten/pull/1887) [`cabcbb8`](https://github.com/akveo/react-native-ui-kitten/commit/cabcbb8660e0c262b0609cf4cc9824e34911b1b6) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Remove the unused `BaseCalendarComponent` class. `Calendar` and `RangeCalendar` have been hook-based since 6.0.0, and the class kept a second copy of the min/max and navigation logic that no longer ran. `BaseCalendarProps` now lives in `baseCalendar.props.ts`; it was never exported from the package entry point, so nothing changes for consumers.
+
 ## 6.1.0
 
 ### Minor Changes

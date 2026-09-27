@@ -1,5 +1,11 @@
 # @ui-kitten/moment
 
+## 6.1.1
+
+### Patch Changes
+
+- [#1888](https://github.com/akveo/react-native-ui-kitten/pull/1888) [`384758a`](https://github.com/akveo/react-native-ui-kitten/commit/384758af62a53b232dad44597224e4b55a55e754) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `MomentDateService.createDate` now builds a local-time moment, matching `today()` and `parse()`. It used `moment.utc`, so calendar dates constructed by the service drifted from "today" by the UTC offset.
+
 ## 6.0.2
 
 ### Patch Changes
