@@ -42,6 +42,12 @@ export interface PopoverProps extends PopoverViewProps, PopoverModalProps, RNMod
   placement?: PopoverPlacement | string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   anchor: RenderFCProp<any>;
+  /**
+   * Style of the view that wraps `anchor` and is measured for placement.
+   * Layout props meant for the anchor's slot in its parent (`flex`, `alignSelf`, margins)
+   * belong here: a `flex` on the anchor element itself only sizes it inside this wrapper.
+   */
+  anchorContainerStyle?: StyleProp<ViewStyle>;
   fullWidth?: boolean;
   /**
    * Called when the actual placement changes.
@@ -215,6 +221,9 @@ export function usePopoverMeasurement({
  *
  * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
+ * @property {StyleProp<ViewStyle>} anchorContainerStyle - Style of the view wrapping `anchor`.
+ * Use it for the anchor's layout in its parent, e.g. `flex: 1` to share a row with other views.
+ *
  * @property {ReactElement} children - A component displayed within the popover.
  *
  * @property {() => void} onBackdropPress - Called when popover is visible and the underlying view was touched.
@@ -268,6 +277,7 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
   children,
   placement = PopoverPlacements.BOTTOM,
   anchor,
+  anchorContainerStyle,
   fullWidth = false,
   visible = false,
   backdropStyle,
@@ -352,14 +362,20 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
 
   if (!everVisibleRef.current) {
     return (
-      <View ref={containerRef}>
+      <View
+        ref={containerRef}
+        style={anchorContainerStyle}
+      >
         {anchor()}
       </View>
     );
   }
 
   return (
-    <View ref={containerRef}>
+    <View
+      ref={containerRef}
+      style={anchorContainerStyle}
+    >
       <MeasureElement
         force={forceMeasure}
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
