@@ -32,3 +32,4 @@ website/build/
 website/static/storybook/
 
 .agent-device/
+website/qa/out/
