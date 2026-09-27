@@ -5,10 +5,12 @@ import { light, mapping } from '@ui-kitten/eva';
 import { ApplicationProvider } from '../../theme';
 import { MeasureElement } from '../../devsupport';
 import { Popover } from './popover.component';
+import { Modal } from '../modal/modal.component';
 
 /*
- * A popover that has never been visible renders only its anchor. Once shown it mounts the
- * measurement and modal machinery and keeps it mounted after hiding, so re-opening stays cheap.
+ * A popover that has never been visible renders its anchor and the anchor measurement only.
+ * Once shown it mounts the modal machinery and keeps it mounted after hiding, so re-opening
+ * stays cheap.
  */
 describe('@popover: lazy overlay', () => {
 
@@ -23,11 +25,11 @@ describe('@popover: lazy overlay', () => {
     </ApplicationProvider>
   );
 
-  it('should render only the anchor while it has never been visible', () => {
+  it('should render only the measured anchor while it has never been visible', () => {
     const component = render(<TestPopover visible={false} />);
 
     expect(component.getByTestId('anchor')).toBeTruthy();
-    expect(component.UNSAFE_queryAllByType(MeasureElement).length).toEqual(0);
+    expect(component.UNSAFE_queryAllByType(MeasureElement).length).toEqual(1);
     expect(component.UNSAFE_queryAllByType(RNModal).length).toEqual(0);
     expect(component.queryByText('content')).toBeNull();
   });
@@ -37,7 +39,7 @@ describe('@popover: lazy overlay', () => {
     component.rerender(<TestPopover visible={true} />);
 
     await waitFor(() => expect(component.getByText('content')).toBeTruthy());
-    expect(component.UNSAFE_queryAllByType(MeasureElement).length).toBeGreaterThan(0);
+    expect(component.UNSAFE_queryAllByType(MeasureElement).length).toBeGreaterThan(1);
     expect(component.getByTestId('anchor')).toBeTruthy();
   });
 
@@ -48,6 +50,6 @@ describe('@popover: lazy overlay', () => {
     component.rerender(<TestPopover visible={false} />);
 
     expect(component.queryByText('content')).toBeNull();
-    expect(component.UNSAFE_queryAllByType(MeasureElement).length).toBeGreaterThan(0);
+    expect(component.UNSAFE_queryAllByType(Modal).length).toEqual(1);
   });
 });
