@@ -148,6 +148,13 @@ describe('@measure: element position checks', () => {
     return onMeasure.mock.calls[onMeasure.mock.calls.length - 1][0];
   };
 
+  const mockReactNativeVersion = (version: { major: number; minor: number } | undefined): void => {
+    jest.spyOn(Platform, 'constants', 'get').mockReturnValue({
+      ...Platform.constants,
+      reactNativeVersion: version,
+    } as typeof Platform.constants);
+  };
+
   afterEach(() => {
     UIManager.measureInWindow = measureInWindowOriginal;
     StatusBar.currentHeight = statusBarHeightOriginal;
@@ -177,15 +184,52 @@ describe('@measure: element position checks', () => {
     expect(frame.size.height).toEqual(259);
   });
 
-  it('should add status bar height on edge-to-edge android', async () => {
+  it('should add status bar height on edge-to-edge android before react native 0.86', async () => {
     jest.replaceProperty(Platform, 'OS', 'android');
     mockDeviceInfo(DeviceInfo);
+    mockReactNativeVersion({ major: 0, minor: 81 });
     StatusBar.currentHeight = 52;
     mockMeasureInWindow(16, 413, 379, 46);
 
     const frame = await renderAndMeasure();
 
     expect(frame.origin.x).toEqual(16);
+    expect(frame.origin.y).toEqual(465);
+  });
+
+  it('should add status bar height on edge-to-edge android when the version is unknown', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+    mockDeviceInfo(DeviceInfo);
+    mockReactNativeVersion(undefined);
+    StatusBar.currentHeight = 52;
+    mockMeasureInWindow(16, 413, 379, 46);
+
+    const frame = await renderAndMeasure();
+
+    expect(frame.origin.y).toEqual(465);
+  });
+
+  it('should not add status bar height on edge-to-edge android since react native 0.86', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+    mockDeviceInfo(DeviceInfo);
+    mockReactNativeVersion({ major: 0, minor: 86 });
+    StatusBar.currentHeight = 52;
+    mockMeasureInWindow(16, 413, 379, 46);
+
+    const frame = await renderAndMeasure();
+
+    expect(frame.origin.y).toEqual(413);
+  });
+
+  it('should still add status bar height with shouldUseTopInsets since react native 0.86', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+    mockDeviceInfo(null);
+    mockReactNativeVersion({ major: 0, minor: 86 });
+    StatusBar.currentHeight = 52;
+    mockMeasureInWindow(16, 413, 379, 46);
+
+    const frame = await renderAndMeasure({ shouldUseTopInsets: true });
+
     expect(frame.origin.y).toEqual(465);
   });
 
