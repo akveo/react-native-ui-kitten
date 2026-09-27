@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/eva-icons",
   "description": "Eva Icons for UI Kitten / React Native",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
   "types": "./lib/typescript/commonjs/index.d.ts",
