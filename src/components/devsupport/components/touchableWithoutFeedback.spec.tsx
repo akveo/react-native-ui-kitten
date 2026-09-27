@@ -55,6 +55,28 @@ describe('@touchable-without-feedback: component checks', () => {
     expect(onMouseLeave).toHaveBeenCalledTimes(1);
   });
 
+  it('should keep a non-focusable touchable out of the keyboard tab order', () => {
+    const component = render(
+      <TouchableWithoutFeedback
+        testID='touchable'
+        focusable={false}
+      />,
+    );
+
+    // react-native-web's Pressable emits tabIndex 0 unless told otherwise, and View
+    // prefers tabIndex over focusable, so both must say "not a tab stop".
+    expect(host(component).props.focusable).toEqual(false);
+    expect(host(component).props.tabIndex).toEqual(-1);
+  });
+
+  it('should leave the tab order alone when focusable is not set', () => {
+    const component = render(
+      <TouchableWithoutFeedback testID='touchable' />,
+    );
+
+    expect(host(component).props.tabIndex).toBeUndefined();
+  });
+
   it('should derive hit slop from height when useDefaultHitSlop is set', () => {
     const component = render(
       <TouchableWithoutFeedback
