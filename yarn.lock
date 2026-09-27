@@ -3892,7 +3892,7 @@ __metadata:
   resolution: "@ui-kitten/components@workspace:src/components"
   dependencies:
     "@ui-kitten/mapping-base": ^6.0.0
-    "@ui-kitten/processor": ^6.0.0
+    "@ui-kitten/processor": ^6.1.0
     fecha: 3.0.3
     hoist-non-react-statics: ^3.2.1
     typescript: ^5.3.0
@@ -3973,7 +3973,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ui-kitten/processor@^6.0.0, @ui-kitten/processor@workspace:src/processor":
+"@ui-kitten/processor@^6.0.0, @ui-kitten/processor@^6.1.0, @ui-kitten/processor@workspace:src/processor":
   version: 0.0.0-use.local
   resolution: "@ui-kitten/processor@workspace:src/processor"
   languageName: unknown
