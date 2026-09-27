@@ -39,6 +39,16 @@ await c.click(h.cx, h.cy); await c.sleep(800);
 await clickText('FIRST'); await c.sleep(800);
 const s3 = await state();
 rep('pager responds again after show', /selected: 0, onSelect calls: 2$/.test(s3), s3);
+// ---- #1234 lazy pages must not bounce
+await c.goto(base + '/iframe.html?id=components-tab--tab-view-lazy&viewMode=story');
+await c.waitFor(`!!document.querySelector('${T('lazy-state')}')`);
+await c.sleep(600);
+await clickText('FOUR'); await c.sleep(900);
+await clickText('ONE'); await c.sleep(900);
+await clickText('THREE'); await c.sleep(900);
+const lazy = await c.ev(`document.querySelector('${T('lazy-state')}').textContent`);
+rep('lazy tabs land where tapped', /selected: 2, calls: 3,0,2$/.test(lazy), lazy);
+
 const errors = c.console.filter((m) => /error|Maximum update depth/i.test(m));
 rep('no console errors', errors.length === 0, errors.slice(0, 2).join(' | '));
 await c.close?.();
