@@ -50,6 +50,12 @@ export interface PopoverProps extends PopoverViewProps, PopoverModalProps, RNMod
   anchorContainerStyle?: StyleProp<ViewStyle>;
   fullWidth?: boolean;
   /**
+   * Whether the popover blocks the screen behind it. With `false` the content floats above the
+   * app without a backdrop: touches outside it reach the views underneath (so a neighbouring
+   * button gets its first tap) and `onBackdropPress` never fires. See `Modal`.
+   */
+  blocking?: boolean;
+  /**
    * Called when the actual placement changes.
    * This can differ from the requested placement if there's not enough space.
    * Useful for adjusting UI based on actual popover position.
@@ -231,6 +237,11 @@ export function usePopoverMeasurement({
  *
  * @property {boolean} fullWidth - Whether a content component should take the width of `anchor`.
  *
+ * @property {boolean} blocking - Whether the popover blocks the screen behind it. With `false` the content
+ * floats above the app without a backdrop: touches outside it reach the views underneath and
+ * `onBackdropPress` is never called. Dismiss it from your own state (an input blur, a selection).
+ * Defaults to true.
+ *
  * @property {string | PopoverPlacement} placement - Position of the content component relative to the `anchor`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start`, `bottom end`, `inner`, `inner top` or `inner bottom`.
@@ -279,6 +290,7 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
   anchor,
   anchorContainerStyle,
   fullWidth = false,
+  blocking = true,
   visible = false,
   backdropStyle,
   backdropAccessibilityLabel,
@@ -378,7 +390,9 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
     >
       <MeasureElement
         force={forceMeasure}
-        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
+        // The status bar compensation targets native modal windows; non-blocking content is laid
+        // out in the same coordinate space the anchor is measured in.
+        shouldUseTopInsets={blocking ? ModalService.getShouldUseTopInsets : false}
         onMeasure={onChildMeasure}
       >
         {anchor()}
@@ -394,6 +408,7 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
         onShow={onShow}
         onBackdropPress={onBackdropPress}
         renderInline={renderInline}
+        blocking={blocking}
       >
         {renderMeasuringPopoverElement()}
       </Modal>

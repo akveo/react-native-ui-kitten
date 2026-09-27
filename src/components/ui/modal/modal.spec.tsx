@@ -374,6 +374,27 @@ describe('@modal: panel checks', () => {
     warn.mockRestore();
   });
 
+  it('should float above the app without a native modal when not blocking', () => {
+    const component = render(
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
+        <Modal
+          visible={true}
+          blocking={false}
+        >
+          <Text>Suggestions</Text>
+        </Modal>
+      </ApplicationProvider>,
+    );
+
+    expect(component.UNSAFE_queryByType(RNModal)).toBeFalsy();
+    expect(component.queryByTestId('@backdrop')).toBeFalsy();
+    expect(component.getByTestId('@modal/overlay').props.pointerEvents).toEqual('box-none');
+    expect(component.queryByText('Suggestions')).toBeTruthy();
+  });
+
   it('should render inline when renderInline is set', () => {
     const component = render(
       <Provider>

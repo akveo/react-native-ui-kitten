@@ -71,7 +71,9 @@ const AutocompleteExample = () => {
 | `label` | `string \| number \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
 | `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the input. |
 | `children` | `AutocompleteItem[]` | - | Suggestion items. |
-| `placement` | `string \| PopoverPlacement` | `'inner top'` | Position of the suggestions list relative to the input. |
+| `placement` | `string \| PopoverPlacement` | `'bottom'` | Position of the suggestions list relative to the input. The `inner` placements cover the field. |
+| `onFocus` | `(event) => void` | `undefined` | Called when the input gains focus; the list opens when there are suggestions. |
+| `onBlur` | `(event) => void` | `undefined` | Called when the input loses focus; the list closes. |
 
 ### AutocompleteItem
 
