@@ -20,8 +20,8 @@ shot() { ad screenshot "$1" >/dev/null; }
 settle() { ad wait stable >/dev/null; }
 
 
-goto() { CUR="$1"; local n=0 r; while [ $n -lt 30 ]; do r=$(python3 $Q to "section-$1-title"); case "$r" in ok) return 0;; down\ *) ad scroll down --pixels ${r#down } >/dev/null;; up\ *) ad scroll up --pixels ${r#up } >/dev/null;; *) echo "goto $1: $r"; return 1;; esac; n=$((n+1)); done; echo "goto $1: FAILED ($r)"; return 1; }
-seeId() { local n=0 r noid=0; while [ $n -lt 30 ]; do r=$(python3 $Q to "$1"); case "$r" in ok) ad wait stable >/dev/null; return 0;; down\ *) ad scroll down --pixels ${r#down } >/dev/null;; up\ *) ad scroll up --pixels ${r#up } >/dev/null;; NOID) noid=$((noid+1)); if [ $noid -eq 1 ] && [ -n "$CUR" ]; then goto "$CUR" >/dev/null; else ad scroll down --pixels 500 >/dev/null; fi; if [ $noid -gt 8 ]; then echo "seeId $1: NOID"; return 1; fi;; esac; n=$((n+1)); done; echo "seeId $1: FAILED ($r)"; return 1; }
+goto() { CUR="$1"; local n=0 r; while [ $n -lt 90 ]; do r=$(python3 $Q to "section-$1-title"); case "$r" in ok) return 0;; down\ *) ad scroll down --pixels ${r#down } >/dev/null;; up\ *) ad scroll up --pixels ${r#up } >/dev/null;; *) echo "goto $1: $r"; return 1;; esac; n=$((n+1)); done; echo "goto $1: FAILED ($r)"; return 1; }
+seeId() { local n=0 r noid=0 stuck=0 before after; while [ $n -lt 90 ]; do r=$(python3 $Q to "$1"); case "$r" in ok) ad wait stable >/dev/null; return 0;; down\ *|up\ *) before=$(rectOf "$1" 2>/dev/null); ad scroll ${r%% *} --pixels ${r#* } >/dev/null; after=$(rectOf "$1" 2>/dev/null); if [ -n "$before" ] && [ "$before" = "$after" ]; then stuck=$((stuck+1)); [ $stuck -ge 2 ] && { ad wait stable >/dev/null; return 0; }; else stuck=0; fi;; NOID) noid=$((noid+1)); if [ $noid -eq 1 ] && [ -n "$CUR" ]; then goto "$CUR" >/dev/null; else ad scroll down --pixels 500 >/dev/null; fi; if [ $noid -gt 8 ]; then echo "seeId $1: NOID"; return 1; fi;; esac; n=$((n+1)); done; echo "seeId $1: FAILED ($r)"; return 1; }
 
 hasAny() { agent-device snapshot --raw | grep -qF -- "$1"; }
 
@@ -39,3 +39,10 @@ pressSwitch() { # Toggle's testID is on the row View; its touchable is the switc
 }
 
 pressNear() { local c; c=$(python3 $Q near "$1" "$2") || { echo "pressNear: no $2 near $1"; return 1; }; ad press $c >/dev/null; ad wait stable >/dev/null; }
+
+alignTop() { # alignTop <testID> : scroll so the node sits just under the header, so a tall section fits one screenshot
+  local x y w h top=130; [ "$AGENT_DEVICE_SESSION" = android ] && top=300
+  read -r x y w h <<< "$(rectOf "$1")" || return 0
+  if [ "$y" -gt $(( top + 40 )) ]; then ad scroll down --pixels $(( y - top )) >/dev/null; ad wait stable >/dev/null; fi
+  return 0
+}

@@ -1,13 +1,15 @@
-# usage: AGENT_DEVICE_SESSION=<ios|android> bash capture.sh <out-dir>   — screenshot + raw rect dump per section, all 4 theme combos
+# usage: AGENT_DEVICE_SESSION=<ios|android> bash capture.sh <out-dir> [sections...]   — screenshot + raw rect dump per section, all 4 theme combos
 source "$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)/adlib.sh"
-OUT=$1
-SECTIONS="Layout Button ButtonGroup Input InputAccessories CheckBox Toggle Radio RadioGroup Card Avatar Spinner ProgressBar CircularProgressBar Divider Icon List ListItem Menu MenuItem Select SelectSize SelectItem Popover Tooltip OverflowMenu Modal TopNavigation TopNavigationAction BottomNavigation BottomNavigationTab Tab TabBar TabView Drawer DrawerItem Calendar CalendarFilters CalendarMoment RangeCalendar RangeCalendarFilters Datepicker RangeDatepicker Autocomplete ViewPager"
+OUT=$1; shift
+ALL="Layout Button ButtonGroup Input InputAccessories CheckBox Toggle Radio RadioGroup Card Avatar Spinner ProgressBar CircularProgressBar Divider Icon List ListItem Menu MenuItem Select SelectSize SelectItem Popover Tooltip OverflowMenu Modal TopNavigation TopNavigationAction BottomNavigation BottomNavigationTab Tab TabBar TabView Drawer DrawerItem Calendar CalendarFilters CalendarMoment RangeCalendar RangeCalendarFilters Datepicker RangeDatepicker Autocomplete ViewPager IconGallery1 IconGallery2 IconGallery3 IconGallery4 IconGallery5"
+SECTIONS=${*:-$ALL}
 combo() { # $1 = dir name; $2 = whether to toggle theme; $3 = mapping
   local d=$OUT/$1; mkdir -p $d; rm -f /tmp/adq-lastdir
   echo "=== $1 label=$(txt theme-label) $(date +%T)"
   gototop
   for s in $SECTIONS; do
     seeId "section-$s-title" >/dev/null || { echo "skip $s"; continue; }
+    alignTop "section-$s-title"
     ad screenshot $d/$s.png >/dev/null
     ad snapshot --raw > $d/$s.raw.txt
   done

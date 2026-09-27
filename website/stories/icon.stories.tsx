@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Icon, Layout } from '@ui-kitten/components';
+import { evaIcons } from '@ui-kitten/eva-icons';
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
@@ -59,4 +60,23 @@ export const IconGallery: Story = {
       </Layout>
     );
   },
+};
+
+export const AllIcons: Story = {
+  render: () => (
+    <Layout
+      style={{ flexDirection: 'row', flexWrap: 'wrap', padding: 16 }}
+      testID='all-icons'
+    >
+      {Object.keys(evaIcons).map((name) => (
+        <Icon
+          key={name}
+          name={name}
+          style={{ width: 28, height: 28, margin: 8 }}
+          fill="#222B45"
+          testID={`all-icons-${name}`}
+        />
+      ))}
+    </Layout>
+  ),
 };
