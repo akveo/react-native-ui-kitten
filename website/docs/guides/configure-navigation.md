@@ -177,7 +177,41 @@ UI Kitten includes much more components that can be used with React Navigation:
 
 ## Note on the other navigation libraries
 
-Since React Navigation is not the only solution to perform routing within the React Native app, you might be interested in other navigation libraries like React Native Navigation by Wix. By default, UI Kitten is not well adopted to work with this library, and you may need to [improve its performance](/docs/guides/improving-performance).
+React Navigation is not the only routing solution. [React Native Navigation](https://wix.github.io/react-native-navigation/)
+by Wix works too, with one structural difference that matters for UI Kitten: every screen you
+register is a separate React root, so there is no single component above all screens where one
+`ApplicationProvider` could live.
+
+Wrap each registered screen in its own `ApplicationProvider` instead. The cost is negligible: the
+mapping is compiled lazily per component and cached, so the second provider does not process
+anything the first one already did.
+
+```js
+import React from 'react';
+import { Navigation } from 'react-native-navigation';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+
+const withProviders = (Screen) => (props) => (
+  <>
+    <IconRegistry icons={EvaIconsPack} />
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <Screen {...props} />
+    </ApplicationProvider>
+  </>
+);
+
+Navigation.registerComponent('Home', () => withProviders(HomeScreen));
+Navigation.registerComponent('Details', () => withProviders(DetailsScreen));
+```
+
+`Select`, `Autocomplete`, `Datepicker`, `Popover`, `Tooltip`, `OverflowMenu` and `Modal` present
+their content through the panel of the nearest `ApplicationProvider`, which with this setup is the
+screen that opened them. Sharing one provider across screens is what used to put a `Select` list on
+the wrong screen: the panel belonged to whichever root mounted first. If a screen must not carry a
+provider of its own, render `<ModalPanelContext.Provider value={null}>` around it so overlays fall
+back to rendering at the call site; see [where modal content renders](/docs/components/modal#where-the-content-renders).
 
 ---
 
