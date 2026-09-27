@@ -12,6 +12,7 @@ import {
   View,
   StyleProp,
   ViewStyle,
+  useWindowDimensions,
 } from 'react-native';
 import {
   Frame,
@@ -132,10 +133,16 @@ export function usePopoverMeasurement({
   }, [actualPlacement, onPlacementChange]);
 
   // Computed style for positioning
+  // The content is laid out at `left`, where Yoga only offers it the width that remains to the
+  // right (and, while it is still measured off screen, far more than the screen). Capping it at
+  // the window width makes the measured width independent of where the content sits, so the
+  // placement chosen from that measurement holds once the content moves there (#1693).
+  const { width: windowWidth } = useWindowDimensions();
+
   const contentFlexPosition = useMemo((): StyleProp<ViewStyle> => {
     const { x: left, y: top } = contentPosition;
-    return { left, top };
-  }, [contentPosition]);
+    return { left, top, maxWidth: windowWidth };
+  }, [contentPosition, windowWidth]);
 
   // Callback when anchor element is measured
   const onChildMeasure = useCallback((frame: Frame): void => {
@@ -165,7 +172,8 @@ export function usePopoverMeasurement({
       const placementOptions = findPlacementOptions(anchorFrame, childFrameRef.current);
       const computedPlacement = placementService.find(preferredPlacement, placementOptions);
 
-      const displayFrame = computedPlacement.frame(placementOptions);
+      // `find` falls back to the preferred placement when nothing fits; keep that frame on screen.
+      const displayFrame = placementService.fit(computedPlacement.frame(placementOptions), placementOptions.bounds);
       const newContentPosition = displayFrame.origin;
 
       // A move of at most one point is ignored: a fractional content size measures one point
