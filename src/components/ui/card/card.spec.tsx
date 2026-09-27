@@ -8,13 +8,18 @@
 import React from 'react';
 import { TouchableWeb } from '../../devsupport';
 import {
+  StyleProp,
+  StyleSheet,
   Text,
   TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
 import {
   fireEvent,
   render,
 } from '@testing-library/react-native';
+import type { ReactTestInstance } from 'react-test-renderer';
 import {
   light,
   mapping,
@@ -46,6 +51,51 @@ describe('@card: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  // The body is the closest host View above the children that carries the mapping padding.
+  const findBodyStyle = (child: ReactTestInstance): ViewStyle => {
+    let node: ReactTestInstance | null = child.parent;
+    while (node) {
+      const style = StyleSheet.flatten(node.props.style as StyleProp<ViewStyle>) as ViewStyle | undefined;
+      if (String(node.type) === 'View' && style?.paddingVertical !== undefined) {
+        return style;
+      }
+      node = node.parent;
+    }
+    throw new Error('card body not found');
+  };
+
+  it('should pad the body from the mapping', () => {
+    const component = render(
+      <TestCard>
+        <Text>
+          I love Babel
+        </Text>
+      </TestCard>,
+    );
+
+    const style = findBodyStyle(component.getByText('I love Babel'));
+
+    expect(style.paddingHorizontal).toEqual(24);
+    expect(style.paddingVertical).toEqual(16);
+  });
+
+  it('should style the body with contentContainerStyle', () => {
+    const component = render(
+      <TestCard contentContainerStyle={{ flexDirection: 'row', paddingHorizontal: 0, paddingVertical: 4 }}>
+        <View testID='cover' />
+        <Text>
+          I love Babel
+        </Text>
+      </TestCard>,
+    );
+
+    const style = findBodyStyle(component.getByText('I love Babel'));
+
+    expect(style.flexDirection).toEqual('row');
+    expect(style.paddingHorizontal).toEqual(0);
+    expect(style.paddingVertical).toEqual(4);
   });
 
   it('should render function component passed to header prop', () => {

@@ -8,9 +8,11 @@
 import React, { useCallback, useMemo } from 'react';
 import {
   GestureResponderEvent,
+  StyleProp,
   StyleSheet,
   View,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   EvaStatus,
@@ -33,6 +35,12 @@ type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
 
 export interface CardProps extends TouchableWebPropsWithoutChildren {
   children?: React.ReactNode;
+  /**
+   * Style of the view that wraps `children`.
+   * Overrides the body padding that the mapping applies, and takes flex properties
+   * such as `flexDirection` that should lay the children out.
+   */
+  contentContainerStyle?: StyleProp<ViewStyle>;
   /**
    * Function component to render above the content.
    */
@@ -69,6 +77,9 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @property {ReactNode} children - Component to render within the card.
  *
+ * @property {StyleProp<ViewStyle>} contentContainerStyle - Style of the view that wraps `children`.
+ * Overrides the body padding applied by the mapping and takes flex properties such as `flexDirection`.
+ *
  * @property {ReactElement | (ViewProps) => ReactElement} header - Function component
  * to render above the content.
  *
@@ -102,6 +113,7 @@ const CardComponent: React.FC<CardProps> = (props): TouchableWebElement => {
     appearance,
     status,
     style,
+    contentContainerStyle,
     children,
     accent,
     header,
@@ -186,7 +198,7 @@ const CardComponent: React.FC<CardProps> = (props): TouchableWebElement => {
         component={header}
       />
       {header && <Divider />}
-      <View style={[styles.content, componentStyle.body]}>
+      <View style={[styles.content, componentStyle.body, contentContainerStyle]}>
         {children}
       </View>
       {footer && <Divider />}

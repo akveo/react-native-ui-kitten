@@ -63,6 +63,7 @@ const CardExample = () => (
 | `footer` | `(props) => ReactElement` | `undefined` | Render function for the card footer. |
 | `accent` | `(props) => ReactElement` | `undefined` | Render function for the accent strip above the card. Its color follows `status`. |
 | `children` | `ReactNode` | - | Body content of the card. |
+| `contentContainerStyle` | `StyleProp<ViewStyle>` | `undefined` | Style of the view that wraps `children`. Overrides the body padding from the mapping and takes flex properties such as `flexDirection`. |
 
 Card also accepts all standard React Native `TouchableOpacity` props, including `onPress` and `disabled`.
 
