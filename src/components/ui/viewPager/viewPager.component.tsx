@@ -196,8 +196,15 @@ function ViewPagerComponent<ChildrenProps = {}>(
 
   const renderComponentChild = (source: React.ReactElement<ChildrenProps>, index: number): React.ReactElement => {
     const contentView = shouldLoadComponent(index) ? source : null;
+    // Pages other than the selected one are translated off screen but still mounted, so screen
+    // readers would walk into them (#1658). `aria-hidden` maps to `accessibilityElementsHidden`
+    // on iOS, `importantForAccessibility='no-hide-descendants'` on Android and `aria-hidden` on web.
     return (
-      <View key={index} style={styles.contentContainer}>
+      <View
+        key={index}
+        style={styles.contentContainer}
+        aria-hidden={index !== selectedIndex}
+      >
         {contentView}
       </View>
     );

@@ -212,8 +212,9 @@ describe('@tab-view: component checks', () => {
       <TestTabView />,
     );
 
+    // The non-selected page is mounted but hidden from assistive technology.
     expect(component.queryByText('Tab 0')).toBeTruthy();
-    expect(component.queryByText('Tab 1')).toBeTruthy();
+    expect(component.queryByText('Tab 1', { includeHiddenElements: true })).toBeTruthy();
   });
 
   it('should not render content elements if disabled by shouldLoadComponent prop', () => {
@@ -222,7 +223,7 @@ describe('@tab-view: component checks', () => {
     );
 
     expect(component.queryByText('Tab 0')).toBeTruthy();
-    expect(component.queryByText('Tab 1')).toBeFalsy();
+    expect(component.queryByText('Tab 1', { includeHiddenElements: true })).toBeFalsy();
   });
 
   it('should render tab indicator correctly', () => {
