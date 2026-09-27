@@ -23,6 +23,21 @@ export class Point {
     }
     return this.x === other.x && this.y === other.y;
   }
+
+  /**
+   * Whether both coordinates are within `tolerance` points of the other point.
+   *
+   * Native layout snaps a view with a fractional size to the pixel grid, so re-measuring it after
+   * moving it by a fraction can come back one point narrower or wider; a consumer that positions
+   * the view from that measurement then moves it again, and so on. Treating a move of at most one
+   * point as "did not move" breaks the cycle.
+   */
+  public isNear(other: Point, tolerance: number = 1): boolean {
+    if (!other) {
+      return false;
+    }
+    return Math.abs(this.x - other.x) <= tolerance && Math.abs(this.y - other.y) <= tolerance;
+  }
 }
 
 export class Size {

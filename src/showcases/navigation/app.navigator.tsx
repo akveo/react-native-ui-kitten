@@ -59,6 +59,7 @@ import { RangeDatepickerSimpleUsageShowcase } from '../components/datepicker/ran
 // Other components
 import { AutocompleteSimpleUsageShowcase } from '../components/autocomplete/autocompleteSimpleUsage.component';
 import { ViewPagerSimpleUsageShowcase } from '../components/viewPager/viewPagerSimpleUsage.component';
+import { ModalDecimalSizeShowcase } from '../components/modal/modalDecimalSize.component';
 import {
   IconGallery1Showcase,
   IconGallery2Showcase,
@@ -187,6 +188,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'IconGallery3', Component: IconGallery3Showcase },
   { title: 'IconGallery4', Component: IconGallery4Showcase },
   { title: 'IconGallery5', Component: IconGallery5Showcase },
+  { title: 'ModalDecimalSize', Component: ModalDecimalSizeShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;

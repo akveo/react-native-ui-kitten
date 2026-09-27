@@ -168,8 +168,10 @@ export function usePopoverMeasurement({
       const displayFrame = computedPlacement.frame(placementOptions);
       const newContentPosition = displayFrame.origin;
 
+      // A move of at most one point is ignored: a fractional content size measures one point
+      // wider or narrower depending on where it sits, and following that re-measures forever.
       if (
-        !newContentPosition.equals(contentPositionRef.current) ||
+        !newContentPosition.isNear(contentPositionRef.current) ||
         computedPlacement.rawValue !== actualPlacementRef.current.rawValue
       ) {
         setActualPlacement(computedPlacement);

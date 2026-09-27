@@ -101,6 +101,16 @@ describe('@measure: frame class instance checks', () => {
     expect(Frame.zero().equals(null)).toBeFalsy();
   });
 
+  it('point is near', () => {
+    expect(new Point(89, 289).isNear(new Point(90, 289))).toBeTruthy();
+    expect(new Point(89, 289).isNear(new Point(90, 290))).toBeTruthy();
+    expect(new Point(89, 289).isNear(new Point(91, 289))).toBeFalsy();
+    expect(new Point(89, 289).isNear(new Point(89, 291))).toBeFalsy();
+    expect(new Point(89, 289).isNear(new Point(92, 289), 3)).toBeTruthy();
+    expect(Point.outscreen().isNear(new Point(0, 0))).toBeFalsy();
+    expect(Point.zero().isNear(null)).toBeFalsy();
+  });
+
 });
 
 describe('@measure: element position checks', () => {
@@ -154,6 +164,17 @@ describe('@measure: element position checks', () => {
     expect(frame.origin.y).toEqual(413);
     expect(frame.size.width).toEqual(379);
     expect(frame.size.height).toEqual(46);
+  });
+
+  it('should round the measured frame to whole points', async () => {
+    mockMeasureInWindow(89.9047622680664, 289.1428527832031, 231.61904907226562, 259.4285583496094);
+
+    const frame = await renderAndMeasure();
+
+    expect(frame.origin.x).toEqual(90);
+    expect(frame.origin.y).toEqual(289);
+    expect(frame.size.width).toEqual(232);
+    expect(frame.size.height).toEqual(259);
   });
 
   it('should add status bar height on edge-to-edge android', async () => {
