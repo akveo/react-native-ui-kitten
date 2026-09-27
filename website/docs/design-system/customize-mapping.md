@@ -185,6 +185,121 @@ That's it. Now you're able to use UI Kitten Button without passing `appearance` 
 
 ---
 
+## Recipes
+
+The questions that come up most often, each with a mapping that works as is. A custom mapping only
+needs the keys you change: `meta` is required only when you add a new appearance, variant or state,
+and everything else is deep-merged over the Eva or Material mapping.
+
+### Round the corners of every Input
+
+`borderRadius` lives in the `size` variant group of `Input`, so override it per size:
+
+```json
+{
+  "components": {
+    "Input": {
+      "appearances": {
+        "default": {
+          "variantGroups": {
+            "size": {
+              "small": { "borderRadius": 20 },
+              "medium": { "borderRadius": 20 },
+              "large": { "borderRadius": 20 }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The same shape works for `Button`, `Select` and `Datepicker`, which also keep `borderRadius` under `size`.
+
+### Change the default text size
+
+`Text` renders the `p1` category unless told otherwise, and a category maps `fontSize`, `fontWeight`
+and `fontFamily`. Override the category you use:
+
+```json
+{
+  "components": {
+    "Text": {
+      "appearances": {
+        "default": {
+          "variantGroups": {
+            "category": {
+              "p1": { "fontSize": 17 },
+              "p2": { "fontSize": 15 }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Other components that show text (`Button`, `Input`, `ListItem`, `TopNavigation`, ...) size it through
+their own `textFontSize` / `titleFontSize` parameters, which reference the `text-*-font-size` strict
+tokens of the mapping (`Input` uses `text-subtitle-1-font-size`, a medium `Button`
+`text-subtitle-2-font-size`; look the parameter up in `mapping.json`). Those tokens can be overridden
+the same way, under the top-level `strict` key, which changes every component that references them:
+
+```json
+{
+  "strict": {
+    "text-paragraph-1-font-size": 17,
+    "text-subtitle-1-font-size": 17
+  }
+}
+```
+
+### Values computed at runtime (font scale, screen size)
+
+`customMapping` is a plain object, so it can be built in JavaScript rather than loaded from a JSON
+file. Compute it once, memoize it, and pass it to `ApplicationProvider`:
+
+```js
+import React from 'react';
+import { PixelRatio } from 'react-native';
+import * as eva from '@ui-kitten/eva';
+import { ApplicationProvider } from '@ui-kitten/components';
+
+const useScaledMapping = () => React.useMemo(() => {
+  const scale = Math.min(PixelRatio.getFontScale(), 1.3);
+  return {
+    strict: {
+      'text-paragraph-1-font-size': Math.round(15 * scale),
+      'text-subtitle-1-font-size': Math.round(15 * scale),
+    },
+  };
+}, []);
+
+export default () => {
+  const customMapping = useScaledMapping();
+  return (
+    <ApplicationProvider {...eva} theme={eva.light} customMapping={customMapping}>
+      {/* ... */}
+    </ApplicationProvider>
+  );
+};
+```
+
+Two things to keep in mind:
+
+- Memoize the object. A new `customMapping` identity makes the provider recompile the mapping and
+  every styled component recompute its style, which is what you want when the value changes and pure
+  waste when it is re-created on every render.
+- `@ui-kitten/metro-config` compiles the mapping at build time and hands the result to
+  `ApplicationProvider` as `styles` (the `{...eva}` spread carries it). When `styles` is present the
+  provider skips runtime compilation, and `customMapping` is ignored. For a mapping that depends on
+  runtime values, pass `mapping={eva.mapping}` instead of spreading `eva`, so the provider compiles at
+  runtime and merges your object; the cost is one lazy compilation per component on first use.
+
+---
+
 ## Related articles
 
 - [Create custom component mapping](/docs/design-system/custom-mapping)

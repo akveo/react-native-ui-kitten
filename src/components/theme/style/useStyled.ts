@@ -179,6 +179,7 @@ export function useStyled(
       variants,
       interactions,
       themeId,
+      styleCache.mappingId(mapping as object),
     );
 
     const cached = styleCache.get(cacheKey);

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>icon/component/overflow-menu</title>
+    <g id="icon/component/overflow-menu" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="dot-1" fill="#49A4F5" cx="45" cy="7" r="3"></circle>
+        <circle id="dot-2" fill="#49A4F5" cx="53" cy="7" r="3"></circle>
+        <circle id="dot-3" fill="#49A4F5" cx="61" cy="7" r="3"></circle>
+        <polygon id="indicator" fill="#FCAF5C" points="53 12 58 18 48 18"></polygon>
+        <rect id="menu" fill="#FCAF5C" x="14" y="18" width="48" height="42" rx="4"></rect>
+        <rect id="menu-shade" fill="#FF881E" x="14" y="56" width="48" height="4" rx="2"></rect>
+        <rect id="item-1" fill="#FFFFFF" x="22" y="26" width="32" height="5" rx="2.5"></rect>
+        <rect id="item-2" fill="#FFFFFF" x="22" y="37" width="24" height="5" rx="2.5"></rect>
+        <rect id="item-3" fill="#FFFFFF" x="22" y="48" width="28" height="5" rx="2.5"></rect>
+    </g>
+</svg>

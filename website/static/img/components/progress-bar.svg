@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>icon/component/progress-bar</title>
+    <g id="icon/component/progress-bar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="track" fill="#FDDCB9" x="2" y="26" width="60" height="12" rx="6"></rect>
+        <rect id="fill" fill="#FCAF5C" x="2" y="26" width="40" height="12" rx="6"></rect>
+        <path d="M8,38 C4.6862915,38 2,35.3137085 2,32 C2,31.3130868 2.11541823,30.6530658 2.32788663,30.0388105 C3.13718206,32.3341735 5.32574548,34 7.9,34 L42,34 L42,38 L8,38 Z" id="fill-shade" fill="#FF881E"></path>
+    </g>
+</svg>

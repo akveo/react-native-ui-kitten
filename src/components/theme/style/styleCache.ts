@@ -24,11 +24,28 @@ export class StyleCacheClass {
     this.maxSize = maxSize;
   }
 
+  private mappingIds = new WeakMap<object, number>();
+  private nextMappingId = 1;
+
+  /**
+   * Stable identifier of a compiled mapping (the `styles` object an ApplicationProvider hands
+   * down). Two providers with different `customMapping`s, or one provider whose `customMapping`
+   * changes at runtime, produce different objects and must not share cached styles.
+   */
+  mappingId(mapping: object): string {
+    let id = this.mappingIds.get(mapping);
+    if (id === undefined) {
+      id = this.nextMappingId++;
+      this.mappingIds.set(mapping, id);
+    }
+    return String(id);
+  }
+
   /**
    * Build a deterministic cache key from style parameters.
    *
-   * Key format: {componentName}::{appearance}::{variants}::{interactions}::{themeId}
-   * Example: "Button::filled::status:primary|size:medium::active::light"
+   * Key format: {componentName}::{appearance}::{variants}::{interactions}::{themeId}[::m{mappingId}]
+   * Example: "Button::filled::status:primary|size:medium::active::light::m1"
    */
   buildKey(
     componentName: string,
@@ -36,6 +53,7 @@ export class StyleCacheClass {
     variants: Record<string, string | boolean | undefined>,
     interactions: string[],
     themeId: string,
+    mappingId?: string,
   ): string {
     // Deterministic key: variant keys in sorted order, interactions sorted.
     let variantPairs = '';
@@ -49,7 +67,8 @@ export class StyleCacheClass {
 
     const interactionKey = interactions.length > 1 ? [...interactions].sort().join('|') : (interactions[0] ?? '');
 
-    return `${componentName}::${appearance ?? 'default'}::${variantPairs}::${interactionKey}::${themeId}`;
+    const key = `${componentName}::${appearance ?? 'default'}::${variantPairs}::${interactionKey}::${themeId}`;
+    return mappingId === undefined ? key : `${key}::m${mappingId}`;
   }
 
   /**
@@ -110,7 +129,7 @@ export class StyleCacheClass {
     const keysToDelete: string[] = [];
 
     for (const key of this.cache.keys()) {
-      if (key.endsWith(`::${themeId}`)) {
+      if (key.endsWith(`::${themeId}`) || key.includes(`::${themeId}::m`)) {
         keysToDelete.push(key);
       }
     }
