@@ -8,10 +8,12 @@
 import React from 'react';
 import {
   Button,
+  Dimensions,
   Modal as RNModal,
   ScrollView,
   StyleSheet,
   Text,
+  UIManager,
   View,
 } from 'react-native';
 import {
@@ -23,6 +25,7 @@ import {
   within,
 } from '@testing-library/react-native';
 import type { ReactTestInstance } from 'react-test-renderer';
+import * as RendererProxy from 'react-native/Libraries/ReactNative/RendererProxy';
 import {
   light,
   mapping,
@@ -39,6 +42,91 @@ import {
   Modal,
   ModalProps,
 } from './modal.component';
+
+describe('@modal: content position checks', () => {
+
+  type MeasureInWindowCallback = (x: number, y: number, width: number, height: number) => void;
+
+  const measureInWindowOriginal = UIManager.measureInWindow;
+
+  beforeEach(() => {
+    // The test renderer has no native nodes, so give MeasureElement a node handle
+    // to measure through the (mocked) UIManager.
+    jest.spyOn(RendererProxy, 'findNodeHandle').mockReturnValue(1);
+  });
+
+  afterEach(() => {
+    UIManager.measureInWindow = measureInWindowOriginal;
+    jest.restoreAllMocks();
+  });
+
+  const mockMeasureInWindow = (frames: number[][]): void => {
+    let call = 0;
+    UIManager.measureInWindow = (_node: number, callback: MeasureInWindowCallback): void => {
+      const [x, y, width, height] = frames[Math.min(call, frames.length - 1)];
+      call += 1;
+      callback(x, y, width, height);
+    };
+  };
+
+  const contentLeft = (api: RenderAPI): number => {
+    return StyleSheet.flatten(api.getByTestId('@modal/content').props.style).left as number;
+  };
+
+  const renderVisibleModal = (): RenderAPI => render(
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}
+    >
+      <Modal
+        testID='@modal/content'
+        visible={true}
+      >
+        <Text>
+          Content
+        </Text>
+      </Modal>
+    </ApplicationProvider>,
+  );
+
+  it('should not move the content when a re-measure differs by one point', () => {
+    // A view with a fractional width snaps to one point more or less depending on its left edge
+    // (#1767, #1802). Pick two widths whose centred origins differ by exactly one point.
+    const windowWidth = Dimensions.get('window').width;
+    const centeredLeft = (width: number): number => Math.floor((windowWidth - width) / 2);
+    const wide = 233;
+    const narrow = 232;
+    expect(Math.abs(centeredLeft(wide) - centeredLeft(narrow))).toEqual(1);
+
+    mockMeasureInWindow([
+      [centeredLeft(wide) + 0.4, 289.14, wide - 0.38, 259.43],
+      [centeredLeft(narrow) - 0.4, 289.14, narrow + 0.38, 259.43],
+    ]);
+    const api = renderVisibleModal();
+    const content = api.getByTestId('@modal/content');
+
+    act(() => fireEvent(content, 'layout'));
+    expect(contentLeft(api)).toEqual(centeredLeft(wide));
+
+    act(() => fireEvent(content, 'layout'));
+    act(() => fireEvent(content, 'layout'));
+    expect(contentLeft(api)).toEqual(centeredLeft(wide));
+  });
+
+  it('should move the content when a re-measure differs by more than one point', () => {
+    mockMeasureInWindow([
+      [90, 289, 232, 259],
+      [40, 289, 332, 259],
+    ]);
+    const api = renderVisibleModal();
+    const content = api.getByTestId('@modal/content');
+
+    act(() => fireEvent(content, 'layout'));
+    act(() => fireEvent(content, 'layout'));
+    expect(contentLeft(api)).toEqual(Math.floor((Dimensions.get('window').width - 332) / 2));
+  });
+
+});
 
 describe('@modal: component checks', () => {
 

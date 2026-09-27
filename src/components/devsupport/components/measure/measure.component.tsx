@@ -122,7 +122,14 @@ export const MeasureElement: React.FC<MeasureElementProps> = ({
       // measured frame in the modal coordinate space.
       const useTopInsets = shouldUseTopInsets || isAndroidEdgeToEdge();
       const originY = useTopInsets ? y + (StatusBar.currentHeight || 0) : y;
-      const frame: Frame = bindToWindow(new Frame(x, originY, w, h), Frame.window());
+      // Snap to whole points. Native layout lands fractional sizes on the pixel grid, so a content
+      // view measured at a fractional origin comes back a fraction narrower or wider than the last
+      // time; consumers that position the view from its measured frame then re-lay it out, and the
+      // two measurements alternate forever (Modal flickering by 1px, #1767 / #1802).
+      const frame: Frame = bindToWindow(
+        new Frame(Math.round(x), Math.round(originY), Math.round(w), Math.round(h)),
+        Frame.window(),
+      );
       onMeasure(frame);
     }
   };

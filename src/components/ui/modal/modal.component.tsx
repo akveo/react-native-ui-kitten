@@ -176,7 +176,10 @@ const ModalComponent: React.FC<ModalProps> = ({
 
   const onContentMeasure = useCallback((contentFrame: Frame): void => {
     const displayFrame: Frame = contentFrame.centerOf(Frame.window());
-    setContentPosition(displayFrame.origin);
+    // A fractional content size measures one point wider or narrower depending on where the
+    // content sits, so every re-position would trigger another measurement forever (the modal
+    // vibrating by 1px, #1767 / #1802). A move of at most one point is not a move.
+    setContentPosition((current) => current.isNear(displayFrame.origin) ? current : displayFrame.origin);
   }, []);
 
   const renderContentElement = (): React.ReactElement<ViewProps> => {
