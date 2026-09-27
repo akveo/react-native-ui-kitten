@@ -218,12 +218,10 @@ const RadioComponent: React.FC<RadioProps> = (props): TouchableWebElement => {
           />
         </View>
       </Animated.View>
-      {children && (
-        <FalsyText
-          style={componentStyle.text}
-          component={children}
-        />
-      )}
+      <FalsyText
+        style={componentStyle.text}
+        component={children}
+      />
     </TouchableWeb>
   );
 };
