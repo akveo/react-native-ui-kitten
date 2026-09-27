@@ -8,6 +8,7 @@
 import React from 'react';
 import { TouchableWeb } from '../../devsupport';
 import {
+  FlatList,
   Image,
   ImageProps,
   StyleSheet,
@@ -32,6 +33,7 @@ import {
   SelectRef,
 } from './select.component';
 import { SelectGroup } from './selectGroup.component';
+import { ListRef } from '../list/list.component';
 import {
   SelectItem,
   SelectItemProps,
@@ -393,6 +395,31 @@ I love Babel
 
     expect(component.queryByText('Option 1')).toBeFalsy();
     expect(component.queryByText('Option 2')).toBeFalsy();
+  });
+
+  it('should expose the options list through listRef and forward listProps', async () => {
+    const listRef = React.createRef<ListRef>();
+    const getItemLayout = (_data, index: number): { length: number; offset: number; index: number } => (
+      { length: 40, offset: 40 * index, index }
+    );
+    const component = render(
+      <TestSelect
+        listRef={listRef}
+        listProps={{ getItemLayout, initialNumToRender: 1, style: { maxHeight: 120 } }}
+      />,
+    );
+
+    expect(listRef.current).toBeNull();
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    await waitFor(() => component.queryByText('Option 1'));
+
+    const list = component.UNSAFE_getByType(FlatList);
+    expect(list.props.getItemLayout).toBe(getItemLayout);
+    expect(list.props.initialNumToRender).toEqual(1);
+    expect(StyleSheet.flatten(list.props.style)).toMatchObject({ maxHeight: 120 });
+    expect(list.props.data.length).toEqual(2);
+    expect(typeof listRef.current.scrollToIndex).toBe('function');
   });
 
   it('should render options when becomes focused', async () => {
