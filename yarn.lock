@@ -3919,11 +3919,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ui-kitten/eva-icons@workspace:src/eva-icons"
   dependencies:
-    react-native-eva-icons: ^1.3.1
     typescript: ^5.3.0
   peerDependencies:
     "@ui-kitten/components": ^6.0.0
-    react-native-svg: "*"
+    react-native-svg: ">=13.0.0"
   languageName: unknown
   linkType: soft
 
@@ -5395,6 +5394,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"deep-rename-keys@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "deep-rename-keys@npm:0.2.1"
+  dependencies:
+    kind-of: ^3.0.2
+    rename-keys: ^1.1.2
+  checksum: 34c838a7ee375e9579be2ba1de59a5ec5aef46bee96bb08cffdd8b6b3887d941bbfce0caccf3ecd7c5a74e6f3a70c7df0b469e732a97e5849a5149ddc1e2a062
+  languageName: node
+  linkType: hard
+
 "deepmerge@npm:^4.2.2, deepmerge@npm:^4.3.1":
   version: 4.3.1
   resolution: "deepmerge@npm:4.3.1"
@@ -6229,10 +6238,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eva-icons@npm:1.1.3":
+  version: 1.1.3
+  resolution: "eva-icons@npm:1.1.3"
+  checksum: 8dc017e5d2317c79d5e0ea8c901e3ecb6928ea642be098c701eef7a0f2ac3cb049b468b8e0b447aed575be5414fad3c9b2a08e80b967f18b59d830fad69fbd9c
+  languageName: node
+  linkType: hard
+
 "event-target-shim@npm:^5.0.0":
   version: 5.0.1
   resolution: "event-target-shim@npm:5.0.1"
   checksum: 1ffe3bb22a6d51bdeb6bf6f7cf97d2ff4a74b017ad12284cc9e6a279e727dc30a5de6bb613e5596ff4dc3e517841339ad09a7eec44266eccb1aa201a30448166
+  languageName: node
+  linkType: hard
+
+"eventemitter3@npm:^2.0.0":
+  version: 2.0.3
+  resolution: "eventemitter3@npm:2.0.3"
+  checksum: dfbf4a07144afea0712d8e6a7f30ae91beb7c12c36c3d480818488aafa437d9a331327461f82c12dfd60a4fbad502efc97f684089cda02809988b84a23630752
   languageName: node
   linkType: hard
 
@@ -7417,6 +7440,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-buffer@npm:^1.1.5":
+  version: 1.1.6
+  resolution: "is-buffer@npm:1.1.6"
+  checksum: 4a186d995d8bbf9153b4bd9ff9fd04ae75068fe695d29025d25e592d9488911eeece84eefbd8fa41b8ddcc0711058a71d4c466dcf6f1f6e1d83830052d8ca707
+  languageName: node
+  linkType: hard
+
 "is-callable@npm:^1.2.7":
   version: 1.2.7
   resolution: "is-callable@npm:1.2.7"
@@ -8423,6 +8453,15 @@ __metadata:
   dependencies:
     json-buffer: 3.0.1
   checksum: 74a24395b1c34bd44ad5cb2b49140d087553e170625240b86755a6604cd65aa16efdbdeae5cdb17ba1284a0fbb25ad06263755dbc71b8d8b06f74232ce3cdd72
+  languageName: node
+  linkType: hard
+
+"kind-of@npm:^3.0.2":
+  version: 3.2.2
+  resolution: "kind-of@npm:3.2.2"
+  dependencies:
+    is-buffer: ^1.1.5
+  checksum: e898df8ca2f31038f27d24f0b8080da7be274f986bc6ed176f37c77c454d76627619e1681f6f9d2e8d2fd7557a18ecc419a6bb54e422abcbb8da8f1a75e4b386
   languageName: node
   linkType: hard
 
@@ -10246,16 +10285,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-eva-icons@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "react-native-eva-icons@npm:1.3.1"
-  peerDependencies:
-    react: 16.5.0
-    react-native-svg: ^9.4.0
-  checksum: 01407b90e61b915b31ac416701cc1d1db12c0a58de6ee7704c89d51ab76ac87c0ae6d506cb2ae6958d525ba2e43d8b9f891177db9c0308a5f3fc8a43a53d9cce
-  languageName: node
-  linkType: hard
-
 "react-native-gesture-handler@npm:~2.28.0":
   version: 2.28.0
   resolution: "react-native-gesture-handler@npm:2.28.0"
@@ -10368,6 +10397,7 @@ __metadata:
     eslint-plugin-jest: ^28.11.0
     eslint-plugin-react-hooks: ^7.0.1
     eslint-plugin-react-native: ^4.1.0
+    eva-icons: 1.1.3
     jest: ^29.7.0
     metro-react-native-babel-preset: ^0.77.0
     react: 19.1.0
@@ -10376,6 +10406,7 @@ __metadata:
     react-native-svg: 15.12.1
     react-test-renderer: 19.1.0
     rimraf: ^5.0.0
+    svgson: ^5.3.1
     turbo: ^2.8.3
     typescript: ^5.3.0
   languageName: unknown
@@ -10591,6 +10622,13 @@ __metadata:
   bin:
     regjsparser: bin/parser
   checksum: 1cf09f6afde2b2d1c1e89e1ce3034e3ee8d9433912728dbaa48e123f5f43ce34e263b2a8ab228817dce85d676ee0c801a512101b015ac9ab80ed449cf7329d3a
+  languageName: node
+  linkType: hard
+
+"rename-keys@npm:^1.1.2":
+  version: 1.2.0
+  resolution: "rename-keys@npm:1.2.0"
+  checksum: 9d8e5ca3d1ae3fe6c0d7319a3fd80ded6ca34651e85bff27604982dcc750aed28d1a621374224a9c9072083769f5eab1fd86d1d5a53f54f96c7705c18267227b
   languageName: node
   linkType: hard
 
@@ -11528,6 +11566,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svgson@npm:^5.3.1":
+  version: 5.3.1
+  resolution: "svgson@npm:5.3.1"
+  dependencies:
+    deep-rename-keys: ^0.2.1
+    xml-reader: 2.4.3
+  checksum: 73af36409a28ff5339685b3d674366b4cd27df4ea22620fe5456b026d4d61fe34745c3edeae0f618657628d36a96c9f6277dd18d4062d5e285bcb4fb12c8520a
+  languageName: node
+  linkType: hard
+
 "tar@npm:^7.5.2, tar@npm:^7.5.4":
   version: 7.5.7
   resolution: "tar@npm:7.5.7"
@@ -12360,6 +12408,25 @@ __metadata:
     simple-plist: ^1.1.0
     uuid: ^7.0.3
   checksum: 908ff85851f81aec6e36ca24427db092e1cc068f052716e14de5e762196858039efabbe053a1abe8920184622501049e74a93618e8692b982f7604a9847db108
+  languageName: node
+  linkType: hard
+
+"xml-lexer@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "xml-lexer@npm:0.2.2"
+  dependencies:
+    eventemitter3: ^2.0.0
+  checksum: ec9d3f8cbc61ed93b7fc1052d05b23cfe5bfe0064a1146f89bc3a9cfbb0c80c6c40d795cc253b745cdbba0607271d14fa57d496a7754fe350a06a8fceae23359
+  languageName: node
+  linkType: hard
+
+"xml-reader@npm:2.4.3":
+  version: 2.4.3
+  resolution: "xml-reader@npm:2.4.3"
+  dependencies:
+    eventemitter3: ^2.0.0
+    xml-lexer: ^0.2.2
+  checksum: d4b4ca6eb2d61c17d2df2be73dd82a393ae88a4cd10c5152f9908bf3e3bafa5562ce4b63df31ef198bc9a7c8447d4c277c98622438da5b32abf55c2f15984bfa
   languageName: node
   linkType: hard
 

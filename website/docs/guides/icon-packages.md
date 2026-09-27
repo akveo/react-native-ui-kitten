@@ -96,6 +96,39 @@ As a result, you should have a Button looking similar to this:
 
 The complete list of available icons could be found on [Eva Icons page](https://akveo.github.io/eva-icons).
 
+### Bundle only the icons you use
+
+`EvaIconsPack` registers all 490 icons, and Metro puts every one of them in the bundle whether the app renders them or not. To ship only the icons an app uses, import them one by one and build a pack from that list:
+
+```jsx
+import { createEvaIconsPack } from '@ui-kitten/eva-icons';
+import home from '@ui-kitten/eva-icons/icons/home';
+import star from '@ui-kitten/eva-icons/icons/star';
+
+export const AppIconsPack = createEvaIconsPack([home, star]);
+```
+
+Register `AppIconsPack` in place of `EvaIconsPack` and use the icons as before: `<Icon name='star' />`. The registry reports any icon that is not in the list, so a missing import shows up as an error rather than an empty box. Module names match the icon names on the [Eva Icons page](https://akveo.github.io/eva-icons): `arrow-back-outline` is `@ui-kitten/eva-icons/icons/arrow-back-outline`.
+
+### Render an icon outside of `Icon`
+
+Each icon module is plain data. Pass it to `EvaIcon`, or wrap it once with `createEvaIcon`, to render it without the registry:
+
+```jsx
+import { EvaIcon, createEvaIcon } from '@ui-kitten/eva-icons';
+import star from '@ui-kitten/eva-icons/icons/star';
+
+const Star = createEvaIcon(star);
+
+export const Rating = () => (
+  <>
+    <EvaIcon icon={star} fill='#FFAA00' width={24} height={24} />
+    <Star fill='#FFAA00' width={24} height={24} />
+  </>
+);
+```
+
+
 ---
 
 ## 3rd party Icon packages

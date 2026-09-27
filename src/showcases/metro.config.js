@@ -25,9 +25,6 @@ const moduleDependencies = [
   path.resolve(workspaceRoot, 'node_modules/hoist-non-react-statics'),
   path.resolve(workspaceRoot, 'node_modules/fecha'),
 
-  // @ui-kitten/eva-icons
-  path.resolve(workspaceRoot, 'node_modules/react-native-eva-icons'),
-
   // external
   path.resolve(workspaceRoot, 'node_modules/react-is'),
   path.resolve(workspaceRoot, 'node_modules/source-map'),
