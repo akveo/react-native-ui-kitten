@@ -198,8 +198,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  // Title above subtitle, like the centered layout. A row here put the subtitle
+  // next to the title whenever `alignment` was not `center`.
   titleContainer: {
-    flexDirection: 'row',
     flex: 1,
   },
   leftControlContainer: {
