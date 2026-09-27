@@ -6,7 +6,11 @@
  */
 
 import React from 'react';
-import { GestureResponderHandlers, Text } from 'react-native';
+import {
+  GestureResponderHandlers,
+  Text,
+  View,
+} from 'react-native';
 import {
   act,
   fireEvent,
@@ -69,8 +73,9 @@ describe('@view-pager: component checks', () => {
       </TestViewPager>,
     );
 
+    // The non-selected page is mounted but hidden from assistive technology.
     expect(component.queryByText('Tab 0')).toBeTruthy();
-    expect(component.queryByText('Tab 1')).toBeTruthy();
+    expect(component.queryByText('Tab 1', { includeHiddenElements: true })).toBeTruthy();
   });
 
   it('should call shouldLoadComponent for each child', () => {
@@ -102,7 +107,31 @@ describe('@view-pager: component checks', () => {
     );
 
     expect(component.queryByText('Tab 0')).toBeTruthy();
-    expect(component.queryByText('Tab 1')).toBeFalsy();
+    expect(component.queryByText('Tab 1', { includeHiddenElements: true })).toBeFalsy();
+  });
+
+  it('should hide every page but the selected one from assistive technology', () => {
+    const component = render(
+      <TestViewPager selectedIndex={1}>
+        <Text>
+          Tab 0
+        </Text>
+        <Text>
+          Tab 1
+        </Text>
+        <Text>
+          Tab 2
+        </Text>
+      </TestViewPager>,
+    );
+
+    const pages = component.UNSAFE_getAllByType(View)
+      .filter(view => typeof view.props['aria-hidden'] === 'boolean');
+
+    expect(pages.map(page => page.props['aria-hidden'])).toEqual([true, false, true]);
+    expect(component.queryByText('Tab 1')).toBeTruthy();
+    expect(component.queryByText('Tab 0')).toBeFalsy();
+    expect(component.queryByText('Tab 0', { includeHiddenElements: true })).toBeTruthy();
   });
 
   it('should disable swipe gesture when swipeEnabled is false', () => {
