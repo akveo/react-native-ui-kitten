@@ -326,6 +326,10 @@ const styles = StyleSheet.create({
   },
   highlight: {
     position: 'absolute',
+    // Fabric on Android drops the border radius of a view whose background goes from
+    // transparent to a colour after mount (facebook/react-native#52415), which is exactly what
+    // the outline does on press and focus. Clipping keeps the highlight rounded.
+    overflow: 'hidden',
   },
   thumb: {
     position: 'absolute',

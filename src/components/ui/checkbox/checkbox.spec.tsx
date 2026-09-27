@@ -8,8 +8,10 @@
 import React from 'react';
 import { TouchableWeb } from '../../devsupport';
 import {
+  StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -244,6 +246,17 @@ describe('@checkbox component checks', () => {
       expect(component.getByRole('switch')).toBeTruthy();
       expect(component.getByRole('switch')).toHaveAccessibleName('Custom');
     });
+  });
+
+  it('should clip the outline highlight to its border radius', () => {
+    const component = render(<TestCheckBox />);
+    const highlight = component.UNSAFE_getAllByType(View)
+      .find((view) => StyleSheet.flatten(view.props.style).width === 32);
+
+    expect(StyleSheet.flatten(highlight.props.style)).toEqual(expect.objectContaining({
+      borderRadius: 6,
+      overflow: 'hidden',
+    }));
   });
 
 });

@@ -7,7 +7,12 @@
 
 import React from 'react';
 import { TouchableWeb } from '../../devsupport';
-import { Text, TouchableOpacity, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   fireEvent,
   render,
@@ -146,6 +151,17 @@ describe('@toggle: component checks', () => {
 
       expect(component.getByRole('switch')).toHaveAccessibleName('Custom');
     });
+  });
+
+  it('should clip the outline highlight to its border radius', () => {
+    const component = render(<TestToggle />);
+    const highlight = component.UNSAFE_getAllByType(View)
+      .find((view) => StyleSheet.flatten(view.props.style).width === 64);
+
+    expect(StyleSheet.flatten(highlight.props.style)).toEqual(expect.objectContaining({
+      borderRadius: 21,
+      overflow: 'hidden',
+    }));
   });
 
 });
