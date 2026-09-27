@@ -22,6 +22,12 @@ jobs:
 
       - run: yarn install --immutable
 
+      - name: Check generated Eva icons are up to date
+        run: |
+          yarn eva-icons:generate
+          git diff --exit-code -- src/eva-icons/icons
+          test -z "$(git ls-files --others --exclude-standard -- src/eva-icons/icons)"
+
       - run: yarn lint
 
       - run: yarn build

@@ -8,3 +8,7 @@ The Eva Design System processor (src/processor/) is derived from
 The Eva mapping packages (src/eva/, src/material/) are derived from
 @eva-design/eva and @eva-design/material, Copyright (c) akveo.com,
 licensed under the MIT License.
+
+The icon artwork in src/eva-icons/icons/ is generated from Eva Icons 1.1.3
+(https://github.com/akveo/eva-icons), Copyright (c) 2018 Akveo, licensed under
+the MIT License.

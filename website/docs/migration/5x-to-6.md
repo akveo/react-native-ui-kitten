@@ -132,6 +132,10 @@ After:
 
 These are the minimums the package refuses to install quietly below — not the versions it is developed against. v6 is built and tested on React 19.1, React Native 0.81 and Expo 54, and has been verified to bundle and run on Expo 57 with React Native 0.86. Install a matching `react-native-svg` yourself; on Expo use `npx expo install react-native-svg` so it tracks the SDK.
 
+:::tip @ui-kitten/eva-icons no longer needs `legacy-peer-deps`
+Up to 6.1, `@ui-kitten/eva-icons` depended on `react-native-eva-icons`, whose exact `react: 16.5.0` peer pin made npm 7+ fail with `ERESOLVE` and pushed projects to `legacy-peer-deps=true`, `overrides` or `packageExtensions` — often ending with two copies of React. From 6.2 the icons are generated into the package itself and the only peer dependency is `react-native-svg`. Remove those workarounds when you upgrade.
+:::
+
 ### lodash.merge is no longer transitive {#lodash-merge-is-no-longer-transitive}
 
 v5's `@ui-kitten/components` depended on `lodash.merge`, so an app importing it directly resolved without ever declaring it. v6 dropped that dependency.

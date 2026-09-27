@@ -44,7 +44,7 @@
 - **TypeScript first** — generated `.d.ts` files, exported ref types and prop types for every component.
 - **Cross-platform** — iOS, Android and the web via [React Native Web](https://necolas.github.io/react-native-web/).
 - **Accessible** — roles, states and values exposed to VoiceOver, TalkBack and screen readers. See the [accessibility guide](https://akveo.github.io/react-native-ui-kitten/docs/guides/accessibility) for current coverage.
-- **480+ Eva Icons** — optional SVG icon pack through `@ui-kitten/eva-icons`, or bring your own icon set.
+- **480+ Eva Icons** — optional SVG icon pack through `@ui-kitten/eva-icons`, register the full set or only the icons you import, or bring your own icon set.
 - **Dual CJS + ESM build** — works with Metro, Vite, Jest and Node without extra configuration.
 
 ## Installation
@@ -155,4 +155,4 @@ Questions and ideas belong in [GitHub Discussions](https://github.com/akveo/reac
 
 [MIT](LICENSE.txt).
 
-UI Kitten was created by the [Akveo](https://www.akveo.com) team. The v6 rewrite and current maintenance are by [Vlad Bataev](https://github.com/bataevvlad) and the [UI Kitten contributors](https://github.com/akveo/react-native-ui-kitten/graphs/contributors). The Eva processor and mapping packages are derived from `@eva-design/*`; see [NOTICE](NOTICE).
+UI Kitten was created by the [Akveo](https://www.akveo.com) team. The v6 rewrite and current maintenance are by [Vlad Bataev](https://github.com/bataevvlad) and the [UI Kitten contributors](https://github.com/akveo/react-native-ui-kitten/graphs/contributors). The Eva processor and mapping packages are derived from `@eva-design/*`; see [NOTICE](NOTICE). The icons in `@ui-kitten/eva-icons` are [Eva Icons](https://github.com/akveo/eva-icons) by Akveo, MIT licensed; see that package's LICENSE.

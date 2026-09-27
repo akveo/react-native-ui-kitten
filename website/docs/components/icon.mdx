@@ -68,6 +68,22 @@ Icon exposes an imperative API through a ref typed as `IconRef`:
 | `icons` | `IconPack \| IconPack[]` | - | One or more icon packs to register. |
 | `defaultIcons` | `string \| string[]` | `undefined` | Name of the pack, or packs, to use when `Icon` is rendered without an explicit `pack`. |
 
+## Eva Icons
+
+`@ui-kitten/eva-icons` ships the 490 [Eva Icons](https://akveo.github.io/eva-icons) as data modules plus one renderer, and depends only on `react-native-svg`.
+
+| Export | Type | Description |
+|--------|------|-------------|
+| `EvaIconsPack` | `IconPack` | Every Eva icon, for `<IconRegistry icons={EvaIconsPack} />`. Puts all 490 icons in the bundle. |
+| `createEvaIconsPack` | `(icons: IconData[], name?: string) => IconPack` | A pack with only the given icons. Pair with per-icon imports so nothing else is bundled. The pack name defaults to `'eva'`. |
+| `EvaIcon` | `React.Component<EvaIconProps>` | Renders one icon: `<EvaIcon icon={star} fill="#FFD700" width={24} height={24} />`. Accepts every `react-native-svg` prop; `style.tintColor` becomes the fill, as with `Icon`. |
+| `createEvaIcon` | `(icon: IconData) => React.Component<EvaIconSvgProps>` | Wraps an icon in a named standalone component. |
+| `evaIcons` | `Record<EvaIconName, IconData>` | Every icon keyed by name. |
+| `EvaIconName` | `string` union | The 490 icon names, for typing your own maps. |
+| `IconData` | `{ name; viewBox?; node: [tag, attributes][] }` | The data shape of one icon. |
+
+Each icon is also its own module, named after the icon: `import star from '@ui-kitten/eva-icons/icons/star'`, `import arrowBackOutline from '@ui-kitten/eva-icons/icons/arrow-back-outline'`. See [Bundle only the icons you use](/docs/guides/icon-packages#bundle-only-the-icons-you-use).
+
 ## Storybook
 
 Live examples coming soon via Storybook.

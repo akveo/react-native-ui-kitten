@@ -8,6 +8,6 @@
     "noEmit": false,
     "paths": {}
   },
-  "include": ["*.ts", "*.tsx"],
+  "include": ["*.ts", "*.tsx", "icons/**/*.ts"],
   "exclude": ["**/__tests__", "**/*.spec.*", "lib"]
 }
