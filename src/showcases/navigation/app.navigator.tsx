@@ -15,6 +15,7 @@ import { CardSimpleUsageShowcase } from '../components/card/cardSimpleUsage.comp
 import { CardLayoutShowcase } from '../components/card/cardLayout.component';
 import { TopNavigationSubtitleShowcase } from '../components/topNavigation/topNavigationSubtitle.component';
 import { TooltipEdgeShowcase } from '../components/tooltip/tooltipEdge.component';
+import { CalendarHermesShowcase } from '../components/calendar/calendarHermes.component';
 import { AvatarSimpleUsageShowcase } from '../components/avatar/avatarSimpleUsage.component';
 import { SpinnerSimpleUsageShowcase } from '../components/spinner/spinnerSimpleUsage.component';
 import { DividerSimpleUsageShowcase } from '../components/divider/dividerSimpleUsage.component';
@@ -195,6 +196,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'CardLayout', Component: CardLayoutShowcase },
   { title: 'TopNavigationSubtitle', Component: TopNavigationSubtitleShowcase },
   { title: 'TooltipEdge', Component: TooltipEdgeShowcase },
+  { title: 'CalendarHermes', Component: CalendarHermesShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;
