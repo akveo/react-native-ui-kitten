@@ -72,6 +72,8 @@ const SelectExample = () => {
 | `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Status of the control. |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the control. |
 | `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+| `listRef` | `Ref<ListRef>` | `undefined` | Ref of the `List` that renders the options. Set while the options are shown; call `scrollToIndex` from `onFocus`. |
+| `listProps` | `Omit<ListProps, 'data' \| 'renderItem'>` | `undefined` | Props forwarded to the options `List`, e.g. `getItemLayout` (needed by `scrollToIndex` for rows not rendered yet) or `initialScrollIndex`. Indices count the direct children of Select; a `SelectGroup` is one row. |
 
 Select exposes an imperative API through a ref typed as `SelectRef`, with `focus()`, `blur()`, `isFocused()` and `clear()`.
 
