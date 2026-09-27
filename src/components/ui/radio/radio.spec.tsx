@@ -8,8 +8,10 @@
 import React from 'react';
 import { TouchableWeb } from '../../devsupport';
 import {
+  StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -199,6 +201,17 @@ I love Babel
 
       expect(component.getByRole('radio')).toHaveAccessibleName('Custom');
     });
+  });
+
+  it('should clip the outline highlight to its border radius', () => {
+    const component = render(<TestRadio />);
+    const highlight = component.UNSAFE_getAllByType(View)
+      .find((view) => StyleSheet.flatten(view.props.style).width === 32);
+
+    expect(StyleSheet.flatten(highlight.props.style)).toEqual(expect.objectContaining({
+      borderRadius: 16,
+      overflow: 'hidden',
+    }));
   });
 
 });
