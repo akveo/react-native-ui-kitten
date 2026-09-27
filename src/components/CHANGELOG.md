@@ -1,5 +1,21 @@
 # @ui-kitten/components
 
+## 6.1.3
+
+### Patch Changes
+
+- [#1908](https://github.com/akveo/react-native-ui-kitten/pull/1908) [`c7c9d25`](https://github.com/akveo/react-native-ui-kitten/commit/c7c9d257fdb129fb76ba92c5731bccaa68d2ea42) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Autocomplete` no longer opens its suggestions in a modal. The list floats above the app through the `ApplicationProvider` panel without a backdrop, so the first tap on a button beside the field reaches that button instead of only closing the list, and the field is a single real `TextInput`: `onFocus` / `onBlur` are its own focus events and `onBlur` fires when it loses focus. The list closes on blur, on selection, on submit and when the keyboard is dismissed. The default `placement` is now `bottom` (the `inner` placements cover the field). `Modal` and `Popover` gain a `blocking` prop (default `true`) that exposes the same non-blocking presentation.
+
+- [#1905](https://github.com/akveo/react-native-ui-kitten/pull/1905) [`af419a3`](https://github.com/akveo/react-native-ui-kitten/commit/af419a391f044f2072c569c64cec9b6744bbc0f9) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Keep the `Datepicker` and `RangeDatepicker` calendar inside the window on screens narrower than the mapping's 344 dp calendar width (320 dp devices): the picker popover is clamped to the window width with an 8 dp inset on each side, and the `Calendar` / `RangeCalendar` container is capped at its parent width so day cells flex instead of the Saturday column being clipped at the right edge.
+
+- [#1902](https://github.com/akveo/react-native-ui-kitten/pull/1902) [`f31918b`](https://github.com/akveo/react-native-ui-kitten/commit/f31918be525df9309851c6401f06fd37d1a0632c) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Stop adding the status bar height to measured frames on edge-to-edge Android with React Native 0.86 and newer. React Native 0.86 changed Android `measureInWindow` to report positions from the top of an edge-to-edge window, the same coordinate space its `Modal` windows use, so the compensation that closed the gap on 0.81 through 0.85 now pushed every `Select`, `Popover`, `Tooltip`, `Autocomplete`, `Datepicker` and `OverflowMenu` down by one status bar. The offset is now applied only on the React Native versions that still measure below the status bar.
+
+- [#1903](https://github.com/akveo/react-native-ui-kitten/pull/1903) [`29c4424`](https://github.com/akveo/react-native-ui-kitten/commit/29c44246d822654e01beb949deca4de3a9769988) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Keep the press and focus highlight of `Toggle`, `CheckBox` and `Radio` rounded on Android. Fabric drops the border radius of a view whose background turns from transparent into a colour after it is mounted (facebook/react-native#52415, React Native 0.80 and newer), so the outline drew as a rectangle while pressed. The highlight now clips to its own shape.
+
+- [#1907](https://github.com/akveo/react-native-ui-kitten/pull/1907) [`8ed10a6`](https://github.com/akveo/react-native-ui-kitten/commit/8ed10a608cf82be5c313e9adc19e2057cdd7bd67) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Add `anchorContainerStyle` to `Popover` (and through it `Tooltip` and `OverflowMenu`). The anchor is rendered inside a wrapper view that is measured for placement, so `flex` on the anchor element only sized it inside that wrapper and two popovers could not share a row; the new prop styles the wrapper itself.
+
+- [#1906](https://github.com/akveo/react-native-ui-kitten/pull/1906) [`f73b265`](https://github.com/akveo/react-native-ui-kitten/commit/f73b265b3d1f72f6eebc97242e55cedefa4467cc) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Hide the non-selected `ViewPager` (and therefore `TabView`) pages from assistive technology. Every page stays mounted and translated off screen, so VoiceOver and TalkBack walked into pages the user could not see; the page wrappers now carry `aria-hidden` (`accessibilityElementsHidden` on iOS, `importantForAccessibility='no-hide-descendants'` on Android) for every index other than `selectedIndex`.
+
 ## 6.1.2
 
 ### Patch Changes
