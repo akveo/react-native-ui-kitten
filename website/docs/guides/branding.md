@@ -241,6 +241,17 @@ You may configure text categories with saving the consistency across UI Kitten c
 }
 ```
 
+### Font weights on Android
+
+Every text category sets `fontWeight` next to `fontFamily`, and some components add their own: `Button` labels are `bold`, headings are `700`–`800`, labels are `800`. iOS resolves the weight inside the font family. Android resolves it differently: for a weight of `700` or more React Native asks the family for a bold face, and when there is none it draws the system font instead. A font loaded at runtime with `expo-font` (`useFonts`, `loadAsync`) registers only a regular face, and a file copied to `assets/fonts` provides a bold face only from a file named `<family>_bold.ttf`. The symptom is a custom font that shows on paragraphs but not on headings, labels or button text, on Android only.
+
+To have every weight resolve on Android, register the faces under one family name:
+
+- **Expo**: use the `expo-font` config plugin instead of `useFonts` and list each file with its weight under `android.fonts[].fontDefinitions`. The plugin generates an XML font family and registers it with React Native, so `fontWeight` selects the face. On iOS list the same files under `ios.fonts` and use the family name the files declare.
+- **Bare React Native**: ship the faces as `assets/fonts/<family>.ttf`, `<family>_bold.ttf`, `<family>_italic.ttf` and `<family>_bold_italic.ttf`, or register an XML font family with `ReactFontManager.addCustomFont`.
+
+Then set only `text-font-family` to that family name; the weight tokens pick the face on both platforms. A separate family per weight, as in the example above, works on Android only when each family that carries a heavy weight token also ships a `_bold` file.
+
 ---
 
 ## Summary
