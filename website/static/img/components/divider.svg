@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>icon/component/divider</title>
+    <g id="icon/component/divider" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="line-top" fill="#FDDCB9" x="10" y="14" width="44" height="6" rx="3"></rect>
+        <rect id="line-top-short" fill="#FDDCB9" x="10" y="24" width="28" height="6" rx="3"></rect>
+        <rect id="divider" fill="#49A4F5" x="2" y="36" width="60" height="4" rx="2"></rect>
+        <rect id="line-bottom" fill="#FDDCB9" x="10" y="46" width="44" height="6" rx="3"></rect>
+    </g>
+</svg>

@@ -65,6 +65,27 @@ With a single step by configuring primary color, we made UI Kitten components be
 
 ![image](/img/articles/guides/branding-overview-primary.png)
 
+:::caution Override the transparent shades too
+Outline, ghost and disabled controls do not paint with `color-primary-500`. They use the six
+`color-primary-transparent-100` … `color-primary-transparent-600` tokens, which are literal `rgba(...)`
+values in the Eva theme rather than references to your `color-primary-*` shades. If you override only
+`color-primary-100` … `color-primary-900`, filled buttons turn orange while outline buttons keep the
+stock blue tint on hover and press. The Eva Colors export already contains the transparent shades; when
+you hand-write a theme, add them for every semantic color you change:
+
+```json
+{
+  "color-primary-500": "#FF6721",
+  "color-primary-transparent-100": "rgba(255, 103, 33, 0.08)",
+  "color-primary-transparent-200": "rgba(255, 103, 33, 0.16)",
+  "color-primary-transparent-300": "rgba(255, 103, 33, 0.24)",
+  "color-primary-transparent-400": "rgba(255, 103, 33, 0.32)",
+  "color-primary-transparent-500": "rgba(255, 103, 33, 0.40)",
+  "color-primary-transparent-600": "rgba(255, 103, 33, 0.48)"
+}
+```
+:::
+
 ---
 
 ## Backgrounds and Borders

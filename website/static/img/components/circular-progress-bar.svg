@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>icon/component/circular-progress-bar</title>
+    <g id="icon/component/circular-progress-bar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="track" stroke="#FDDCB9" stroke-width="8" cx="32" cy="32" r="22"></circle>
+        <path d="M32,10 C44.1502645,10 54,19.8497355 54,32 C54,40.1290653 49.5915746,47.2273349 43.0350727,51.0339329" id="progress" stroke="#FCAF5C" stroke-width="8" stroke-linecap="round"></path>
+        <path d="M32,10 C37.0262929,10 41.6549207,11.6853547 45.3556463,14.5203046" id="progress-shade" stroke="#FF881E" stroke-width="8" stroke-linecap="round"></path>
+        <text id="percent" font-family="Helvetica-Bold, Helvetica" font-size="13" font-weight="bold" fill="#49A4F5" text-anchor="middle" x="32" y="36.5">72</text>
+    </g>
+</svg>

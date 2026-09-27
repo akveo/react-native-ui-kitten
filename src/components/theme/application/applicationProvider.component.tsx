@@ -98,9 +98,20 @@ function createStyles(mapping: SchemaType, custom?: CustomSchemaType): ThemeStyl
  * );
  * ```
  */
+let didWarnIgnoredCustomMapping = false;
+
 export function ApplicationProvider(props: ApplicationProviderProps): React.ReactElement {
   const buildtimeStyles = (props as EvaBuildtimeProcessingProps).styles;
   const { mapping, customMapping } = props as EvaRuntimeProcessingProps;
+
+  if (buildtimeStyles && customMapping && !didWarnIgnoredCustomMapping && process.env.NODE_ENV !== 'production') {
+    didWarnIgnoredCustomMapping = true;
+    console.warn(
+      'ApplicationProvider received both `styles` (compiled by @ui-kitten/metro-config) and ' +
+      '`customMapping`; `customMapping` is ignored when `styles` is present. Pass `mapping` instead ' +
+      'of `styles` to merge a mapping at runtime, or move the customization into the file Metro compiles.',
+    );
+  }
 
   // Clear style cache when mapping or theme changes so components recompute
   const prevMappingRef = React.useRef(mapping);
