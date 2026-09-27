@@ -13,7 +13,8 @@
     "typecheck": "tsc",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build -o static/storybook",
-    "build:all": "yarn build:storybook && yarn build"
+    "build:all": "yarn build:storybook && yarn build",
+    "storybook:qa": "node qa/run.mjs qa/out http://localhost:6006"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
