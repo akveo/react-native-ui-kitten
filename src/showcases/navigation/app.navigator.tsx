@@ -59,6 +59,13 @@ import { RangeDatepickerSimpleUsageShowcase } from '../components/datepicker/ran
 // Other components
 import { AutocompleteSimpleUsageShowcase } from '../components/autocomplete/autocompleteSimpleUsage.component';
 import { ViewPagerSimpleUsageShowcase } from '../components/viewPager/viewPagerSimpleUsage.component';
+import {
+  IconGallery1Showcase,
+  IconGallery2Showcase,
+  IconGallery3Showcase,
+  IconGallery4Showcase,
+  IconGallery5Showcase,
+} from '../components/icon/iconGallery.component';
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <View
@@ -175,6 +182,11 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'RangeDatepicker', Component: RangeDatepickerSimpleUsageShowcase },
   { title: 'Autocomplete', Component: AutocompleteSimpleUsageShowcase },
   { title: 'ViewPager', Component: ViewPagerSimpleUsageShowcase },
+  { title: 'IconGallery1', Component: IconGallery1Showcase },
+  { title: 'IconGallery2', Component: IconGallery2Showcase },
+  { title: 'IconGallery3', Component: IconGallery3Showcase },
+  { title: 'IconGallery4', Component: IconGallery4Showcase },
+  { title: 'IconGallery5', Component: IconGallery5Showcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;

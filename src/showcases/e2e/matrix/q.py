@@ -11,6 +11,8 @@ for line in out.splitlines():
             n = json.loads(line)
             if isinstance(n.get('rect'), dict): nodes.append(n)
         except Exception: pass
+# showcase section order (app.navigator.tsx); Android exposes only visible nodes, so direction is derived from it
+ORDER = "Layout Button ButtonGroup Input InputAccessories CheckBox Toggle Radio RadioGroup Card Avatar Spinner ProgressBar CircularProgressBar Divider Icon List ListItem Menu MenuItem Select SelectSize SelectItem Popover Tooltip OverflowMenu Modal TopNavigation TopNavigationAction BottomNavigation BottomNavigationTab Tab TabBar TabView Drawer DrawerItem Calendar CalendarFilters CalendarMoment RangeCalendar RangeCalendarFilters Datepicker RangeDatepicker Autocomplete ViewPager IconGallery1 IconGallery2 IconGallery3 IconGallery4 IconGallery5".split()
 def ident(n): return n.get('identifier') or n.get('resourceId') or n.get('id') or ''
 def lab(n): return str(n.get('label') or n.get('text') or '') + '|' + str(n.get('value') or '')
 if mode == 'rect':
@@ -20,7 +22,6 @@ if mode == 'rect':
     print('NOID', file=sys.stderr); sys.exit(1)
 if mode == 'to':
     tgt = next((n for n in nodes if ident(n) == section), None)
-    ORDER = "Layout Button ButtonGroup Input InputAccessories CheckBox Toggle Radio RadioGroup Card Avatar Spinner ProgressBar CircularProgressBar Divider Icon List ListItem Menu MenuItem Select SelectSize SelectItem Popover Tooltip OverflowMenu Modal TopNavigation TopNavigationAction BottomNavigation BottomNavigationTab Tab TabBar TabView Drawer DrawerItem Calendar CalendarFilters CalendarMoment RangeCalendar RangeCalendarFilters Datepicker RangeDatepicker Autocomplete ViewPager".split()
     sv0 = next((n for n in nodes if ident(n) == 'showcase-scroll' or 'Scroll' in str(n.get('type'))), None)
     vh0 = sv0['rect']['height'] if sv0 else 800
     if tgt is None:
@@ -71,11 +72,10 @@ for i, (y, t) in enumerate(titles):
 if y0 is None:
     # Android exposes only visible nodes: the section title may have scrolled off. Bound the band by the
     # next visible section title (by showcase order) and let it start at the top of the tree.
-    ORDER2 = "Layout Button ButtonGroup Input InputAccessories CheckBox Toggle Radio RadioGroup Card Avatar Spinner ProgressBar CircularProgressBar Divider Icon List ListItem Menu MenuItem Select SelectSize SelectItem Popover Tooltip OverflowMenu Modal TopNavigation TopNavigationAction BottomNavigation BottomNavigationTab Tab TabBar TabView Drawer DrawerItem Calendar CalendarFilters CalendarMoment RangeCalendar RangeCalendarFilters Datepicker RangeDatepicker Autocomplete ViewPager".split()
-    if section not in ORDER2: print('NOSECTION', file=sys.stderr); sys.exit(2)
-    si = ORDER2.index(section)
-    later = [y for (y, t) in titles if t[8:-6] in ORDER2 and ORDER2.index(t[8:-6]) > si]
-    earlier = [y for (y, t) in titles if t[8:-6] in ORDER2 and ORDER2.index(t[8:-6]) < si]
+    if section not in ORDER: print('NOSECTION', file=sys.stderr); sys.exit(2)
+    si = ORDER.index(section)
+    later = [y for (y, t) in titles if t[8:-6] in ORDER and ORDER.index(t[8:-6]) > si]
+    earlier = [y for (y, t) in titles if t[8:-6] in ORDER and ORDER.index(t[8:-6]) < si]
     y0 = max(earlier) if earlier else -10**9
     y1 = min(later) if later else 10**9
 inrange = [n for n in nodes if y0 < n['rect']['y'] < y1 and n['rect'].get('height', 0) > 0]
