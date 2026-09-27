@@ -24,6 +24,15 @@ interface DeviceInfoModule {
   getConstants?: () => DeviceInfoConstants;
 }
 
+interface ReactNativeVersion {
+  major: number;
+  minor: number;
+}
+
+interface PlatformConstantsWithVersion {
+  reactNativeVersion?: ReactNativeVersion;
+}
+
 /**
  * Whether React Native draws the Android app edge-to-edge (React Native 0.81+ reports it through
  * the `DeviceInfo` constants). In that mode every native `Modal` window is presented edge-to-edge
@@ -41,6 +50,27 @@ const isAndroidEdgeToEdge = (): boolean => {
   const deviceInfo = NativeModules.DeviceInfo as DeviceInfoModule | null | undefined;
   const constants = deviceInfo?.getConstants?.();
   return constants?.isEdgeToEdge === true;
+};
+
+/**
+ * Whether Android `measureInWindow` still reports positions below the status bar in edge-to-edge
+ * mode. React Native 0.81 through 0.85 subtract the visible display frame from the root view
+ * offset, so an edge-to-edge window is measured from under the status bar while its `Modal`
+ * windows start at the top of the screen. React Native 0.86 stopped subtracting anything when
+ * edge-to-edge is on (`RootViewUtil.getViewportOffset`), so both coordinate spaces already match
+ * and adding the status bar height again pushes every popover down by one bar (#1894).
+ */
+const measuresBelowStatusBarInEdgeToEdge = (): boolean => {
+  const constants = Platform.constants as PlatformConstantsWithVersion | undefined;
+  const version = constants?.reactNativeVersion;
+  if (!version) {
+    return true;
+  }
+  return version.major === 0 && version.minor < 86;
+};
+
+const needsStatusBarOffset = (): boolean => {
+  return isAndroidEdgeToEdge() && measuresBelowStatusBarInEdgeToEdge();
 };
 
 export interface MeasureElementProps {
@@ -117,10 +147,11 @@ export const MeasureElement: React.FC<MeasureElementProps> = ({
         measureSelf();
       }
     } else {
-      // Modal windows with a translucent status bar (and every modal on edge-to-edge Android)
-      // start at the top of the screen, so the status bar height has to be added to land the
-      // measured frame in the modal coordinate space.
-      const useTopInsets = shouldUseTopInsets || isAndroidEdgeToEdge();
+      // Modal windows with a translucent status bar (and every modal on edge-to-edge Android
+      // before React Native 0.86) start at the top of the screen while the measurement does not,
+      // so the status bar height has to be added to land the measured frame in the modal
+      // coordinate space.
+      const useTopInsets = shouldUseTopInsets || needsStatusBarOffset();
       const originY = useTopInsets ? y + (StatusBar.currentHeight || 0) : y;
       // Snap to whole points. Native layout lands fractional sizes on the pixel grid, so a content
       // view measured at a fractional origin comes back a fraction narrower or wider than the last
