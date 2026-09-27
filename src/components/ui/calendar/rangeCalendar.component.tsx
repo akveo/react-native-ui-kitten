@@ -8,7 +8,7 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, memo } from 'react';
 import { View } from 'react-native';
 import { useStyled, StyleType } from '../../theme';
-import { BaseCalendarProps } from './baseCalendar.component';
+import { BaseCalendarProps } from './baseCalendar.props';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
 import { CalendarHeader } from './components/calendarHeader.component';
 import { CalendarMonthHeader } from './components/calendarMonthHeader.component';

@@ -29,7 +29,7 @@ import {
   StyledComponentProps,
   StyleType,
 } from '../../theme';
-import { BaseCalendarProps } from '../calendar/baseCalendar.component';
+import { BaseCalendarProps } from '../calendar/baseCalendar.props';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
 import { NativeDateService } from '../calendar/service/nativeDate.service';
