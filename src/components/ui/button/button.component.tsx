@@ -253,12 +253,10 @@ const ButtonComponent = React.forwardRef<TouchableWeb, ButtonProps>(
             component={accessoryLeft}
           />
         )}
-        {children && (
-          <FalsyText
-            style={componentStyle.text}
-            component={children}
-          />
-        )}
+        <FalsyText
+          style={componentStyle.text}
+          component={children}
+        />
         {accessoryRight && (
           <FalsyFC
             style={componentStyle.icon}

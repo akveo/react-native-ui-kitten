@@ -295,9 +295,10 @@ const ToggleComponent: React.FC<ToggleProps> = (props): React.ReactElement<ViewP
           </View>
       </TouchableWeb>
 
-      {children && (
-        <FalsyText style={componentStyle.text} component={children} />
-      )}
+      <FalsyText
+        style={componentStyle.text}
+        component={children}
+      />
     </View>
   );
 };
