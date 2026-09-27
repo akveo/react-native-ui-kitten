@@ -23,6 +23,7 @@ import {
   ViewStyle,
   Modal as RNModal,
   ModalProps as ReactNativeModalProps,
+  useWindowDimensions,
 } from 'react-native';
 import {
   Frame,
@@ -55,6 +56,13 @@ export interface ModalProps extends ViewProps, BackdropPresentingConfig, RNModal
    * Modals nested inside an inline modal render inline as well.
    */
   renderInline?: boolean;
+  /**
+   * Whether the presented content blocks the screen behind it. With `blocking={false}` the
+   * content floats above the app in the `ApplicationProvider` panel without a native modal or a
+   * backdrop: touches outside it reach the views underneath and `onBackdropPress` never fires.
+   * Falls back to the blocking native modal when the content renders inline.
+   */
+  blocking?: boolean;
   children?: React.ReactNode;
 }
 
@@ -106,6 +114,13 @@ export type ModalElement = React.ReactElement<ModalProps>;
  * @property {string} backdropAccessibilityLabel - Accessible name for the dismissable backdrop.
  * When omitted, the backdrop is hidden from assistive technology.
  *
+ * @property {boolean} blocking - Whether the content blocks the screen behind it. With `false`, the content
+ * floats above the app through the `ApplicationProvider` panel without a native modal or a backdrop: touches
+ * outside it reach the views underneath and `onBackdropPress` is never called. Use it for transient
+ * content such as suggestion lists that must not steal the first tap on a neighbouring control.
+ * Inline rendering (`renderInline`, or no `ApplicationProvider`) always blocks.
+ * Defaults to true.
+ *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ModalSimpleUsage
@@ -122,6 +137,7 @@ const ModalComponent: React.FC<ModalProps> = ({
   visible = false,
   shouldUseContainer = true,
   renderInline = false,
+  blocking = true,
   children,
   backdropStyle,
   backdropAccessibilityLabel,
@@ -143,6 +159,7 @@ const ModalComponent: React.FC<ModalProps> = ({
   const themeStore = useContext(ThemeStoreContext);
   const id = useId();
   const usePanel = !!registry && !renderInline;
+  const useOverlay = usePanel && !blocking;
   const itemContextValue = useMemo(() => ({ id }), [id]);
 
   if (registry === undefined && !renderInline && !didWarnMissingPanel && process.env.NODE_ENV !== 'production') {
@@ -187,8 +204,9 @@ const ModalComponent: React.FC<ModalProps> = ({
       <View
         // Scopes VoiceOver to the modal contents on iOS, and emits
         // `aria-modal` on the web. Android already gets this from the
-        // underlying native modal window.
-        aria-modal={true}
+        // underlying native modal window. Non-blocking content is not a
+        // modal: the rest of the screen stays reachable.
+        aria-modal={blocking}
         onAccessibilityEscape={onBackdropPress}
         {...viewProps}
         style={[style, styles.modalView, contentFlexPosition]}
@@ -201,11 +219,27 @@ const ModalComponent: React.FC<ModalProps> = ({
   const renderMeasuringContentElement = (): MeasuringElement => {
     return (
       <MeasureElement
-        shouldUseTopInsets={ModalService.getShouldUseTopInsets}
+        shouldUseTopInsets={useOverlay ? false : ModalService.getShouldUseTopInsets}
         onMeasure={onContentMeasure}
       >
         {renderContentElement()}
       </MeasureElement>
+    );
+  };
+
+  // Non-blocking content is a plain view in the panel, laid out over the whole window so that
+  // the window coordinates produced by `MeasureElement` apply directly. The panel usually sits
+  // at the window origin; when it does not (a header above `ApplicationProvider`), the view
+  // measures its own offset and shifts itself back to the origin.
+  const renderOverlay = (): React.ReactElement => {
+    const content = shouldUseContainer ? renderMeasuringContentElement() : children;
+    return (
+      <ModalPanelItemContext.Provider value={itemContextValue}>
+        <ModalOverlay>
+          {content}
+        </ModalOverlay>
+        <ModalPanelOutlet parentId={id} />
+      </ModalPanelItemContext.Provider>
     );
   };
 
@@ -261,7 +295,7 @@ const ModalComponent: React.FC<ModalProps> = ({
     <MappingContext.Provider value={mapping}>
       <ThemeStoreContext.Provider value={themeStore}>
         <ThemeContext.Provider value={theme}>
-          {renderRNModal()}
+          {useOverlay ? renderOverlay() : renderRNModal()}
         </ThemeContext.Provider>
       </ThemeStoreContext.Provider>
     </MappingContext.Provider>
@@ -295,6 +329,46 @@ const ModalComponent: React.FC<ModalProps> = ({
 };
 
 ModalComponent.displayName = 'Modal';
+
+interface ModalOverlayProps {
+  children?: React.ReactNode;
+}
+
+const ModalOverlay = ({ children }: ModalOverlayProps): React.ReactElement => {
+  const { width, height } = useWindowDimensions();
+  const [origin, setOrigin] = useState<Point>(Point.zero());
+
+  // Measured through the same helper as the anchors and the content, so the status bar
+  // compensation it applies on Android lands both in one coordinate space.
+  const onMeasure = useCallback((frame: Frame): void => {
+    setOrigin((current) => current.equals(frame.origin) ? current : frame.origin);
+  }, []);
+
+  return (
+    <MeasureElement onMeasure={onMeasure}>
+      <View
+        testID='@modal/overlay'
+        style={StyleSheet.absoluteFill}
+        pointerEvents='box-none'
+      >
+        <View
+          style={{
+            position: 'absolute',
+            left: -origin.x,
+            top: -origin.y,
+            width,
+            height,
+          }}
+          pointerEvents='box-none'
+        >
+          {children}
+        </View>
+      </View>
+    </MeasureElement>
+  );
+};
+
+ModalOverlay.displayName = 'ModalOverlay';
 
 export const Modal = React.memo(ModalComponent, areEqualProps);
 Modal.displayName = 'Modal';

@@ -64,6 +64,7 @@ const PopoverExample = () => {
 | `backdropStyle` | `ViewStyle` | `undefined` | Style applied to the backdrop. |
 | `children` | `ReactNode` | - | Content rendered inside the popover. |
 | `fullWidth` | `boolean` | `false` | Whether the popover matches the width of its anchor. |
+| `blocking` | `boolean` | `true` | Whether the popover blocks the screen behind it. With `false` there is no backdrop: touches outside the content reach the views underneath and `onBackdropPress` is never called. |
 | `onPlacementChange` | `(placement: PopoverPlacement) => void` | `undefined` | Called when the resolved placement differs from the requested one because of available space. |
 | `indicator` | `(props) => ReactElement` | `undefined` | Render function for the arrow pointing at the anchor. |
 | `contentContainerStyle` | `ViewStyle` | `undefined` | Style applied to the content container. |

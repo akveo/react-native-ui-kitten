@@ -7,6 +7,7 @@
 
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState, memo } from 'react';
 import {
+  Keyboard,
   ListRenderItemInfo,
   NativeSyntheticEvent,
   StyleSheet,
@@ -61,11 +62,13 @@ export interface AutocompleteRef {
  *
  * @property {(number) => void} onSelect - Called when option is pressed.
  *
- * @note Setting `keyboardShouldPersistTaps='handled'` on an enclosing `ScrollView`, `FlatList` or
- * `SectionList` is no longer required as of 6.0.0-beta.3; it is still harmless. The options popup
- * is presented through the `ApplicationProvider` panel, so it is no longer a React descendant of
- * the enclosing list and the first tap on an option selects it instead of only dismissing the
- * keyboard.
+ * @note The options list floats above the app through the `ApplicationProvider` panel without a
+ * backdrop: the first tap on an option selects it, and the first tap on a control next to the
+ * field reaches that control. The list closes when the input blurs, when an option is selected,
+ * on submit and when the keyboard is dismissed. With the React Native default
+ * `keyboardShouldPersistTaps='never'` on an enclosing `ScrollView`, a tap outside the focused
+ * input first dismisses the keyboard, which blurs the input and closes the list; set
+ * `keyboardShouldPersistTaps='handled'` on that list to let such a tap reach its target at once.
  *
  * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
@@ -91,12 +94,13 @@ export interface AutocompleteRef {
  *
  * @property {string | PopoverPlacement} placement - Position of the options list relative to the input field.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
- * `right end`, `bottom start` or `bottom end`.
+ * `right end`, `bottom start` or `bottom end`. The `inner` placements cover the field.
  * Defaults to *bottom*.
  *
- * @property {() => void} onFocus - Called when options list becomes visible.
+ * @property {(event) => void} onFocus - Called when the input field gains focus; the options list opens
+ * when there are options to show.
  *
- * @property {() => void} onBlur - Called when options list becomes invisible.
+ * @property {(event) => void} onBlur - Called when the input field loses focus; the options list closes.
  *
  * @property {InputProps} ...InputProps - Any props applied to Input component.
  *
@@ -118,15 +122,15 @@ export interface AutocompleteRef {
 const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
   children,
   onSelect,
-  placement = 'inner top',
+  placement = 'bottom',
   testID,
   onFocus: onFocusProp,
+  onBlur: onBlurProp,
   onSubmitEditing: onSubmitEditingProp,
   ...inputProps
 }, ref) => {
   const [listVisible, setListVisible] = useState(false);
   const inputRef = useRef<InputRef>(null);
-  const inputRefAnchor = useRef<InputRef>(null);
   const prevChildCountRef = useRef(React.Children.count(children));
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -161,6 +165,19 @@ const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
     prevChildCountRef.current = currentChildCount;
   }, [data.length, listVisible]);
 
+  // The list floats above the app without a backdrop (#1578), so nothing outside the component
+  // reports an outside tap. Closing the keyboard is the one signal the platform gives for
+  // "done with this field" that does not come through the input itself.
+  useEffect(() => {
+    if (!listVisible) {
+      return;
+    }
+    const subscription = Keyboard.addListener('keyboardDidHide', () => {
+      setListVisible(false);
+    });
+    return () => subscription.remove();
+  }, [listVisible]);
+
   const setOptionsListVisible = useCallback(() => {
     const hasData = data.length > 0;
     if (hasData) {
@@ -177,23 +194,15 @@ const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
     onFocusProp?.(event);
   }, [setOptionsListVisible, onFocusProp]);
 
-  const onAnchorInputFocus = useCallback((event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
-    inputRefAnchor.current?.blur();
-    setOptionsListVisible();
-    inputRef.current?.focus();
-    onFocusProp?.(event);
-  }, [setOptionsListVisible, onFocusProp]);
+  const onInputBlur = useCallback((event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
+    setOptionsListInvisible();
+    onBlurProp?.(event);
+  }, [setOptionsListInvisible, onBlurProp]);
 
   const onInputSubmitEditing = useCallback((e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
     setOptionsListInvisible();
     onSubmitEditingProp?.(e);
   }, [setOptionsListInvisible, onSubmitEditingProp]);
-
-  const onBackdropPress = useCallback((): void => {
-    inputRef.current?.blur();
-    inputRefAnchor.current?.blur();
-    setOptionsListInvisible();
-  }, [setOptionsListInvisible]);
 
   const onItemPress = useCallback((index: number): void => {
     if (onSelect) {
@@ -206,21 +215,6 @@ const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
     return React.cloneElement(info.item, { onPress: () => onItemPress(info.index) });
   }, [onItemPress]);
 
-  const renderAnchorInputElement = useCallback((): InputElement => {
-    return (
-      <View>
-        <Input
-          {...inputProps}
-          ref={inputRefAnchor}
-          testID='@autocomplete/input-anchor'
-          showSoftInputOnFocus={false}
-          onFocus={onAnchorInputFocus}
-          onSubmitEditing={onInputSubmitEditing}
-        />
-      </View>
-    );
-  }, [inputProps, onAnchorInputFocus, onInputSubmitEditing]);
-
   const renderInputElement = useCallback((): InputElement => {
     return (
       <View>
@@ -228,14 +222,13 @@ const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
           {...inputProps}
           ref={inputRef}
           testID='@autocomplete/input'
-          showSoftInputOnFocus={true}
-          autoFocus={true}
           onFocus={onInputFocus}
+          onBlur={onInputBlur}
           onSubmitEditing={onInputSubmitEditing}
         />
       </View>
     );
-  }, [inputProps, onInputFocus, onInputSubmitEditing]);
+  }, [inputProps, onInputFocus, onInputBlur, onInputSubmitEditing]);
 
   return (
     <Popover
@@ -244,19 +237,16 @@ const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
       testID={testID}
       visible={listVisible}
       fullWidth={true}
-      anchor={renderAnchorInputElement}
-      onBackdropPress={onBackdropPress}
+      blocking={false}
+      anchor={renderInputElement}
     >
-      <View>
-        {renderInputElement()}
-        <List
-          style={styles.list}
-          keyboardShouldPersistTaps='always'
-          data={data}
-          bounces={false}
-          renderItem={renderItem}
-        />
-      </View>
+      <List
+        style={styles.list}
+        keyboardShouldPersistTaps='always'
+        data={data}
+        bounces={false}
+        renderItem={renderItem}
+      />
     </Popover>
   );
 });

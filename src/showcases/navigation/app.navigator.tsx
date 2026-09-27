@@ -63,6 +63,7 @@ import { RangeDatepickerSimpleUsageShowcase } from '../components/datepicker/ran
 
 // Other components
 import { AutocompleteSimpleUsageShowcase } from '../components/autocomplete/autocompleteSimpleUsage.component';
+import { AutocompleteBlurShowcase } from '../components/autocomplete/autocompleteBlur.component';
 import { ViewPagerSimpleUsageShowcase } from '../components/viewPager/viewPagerSimpleUsage.component';
 import { ModalDecimalSizeShowcase } from '../components/modal/modalDecimalSize.component';
 import {
@@ -199,6 +200,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'TooltipEdge', Component: TooltipEdgeShowcase },
   { title: 'CalendarHermes', Component: CalendarHermesShowcase },
   { title: 'PopoverAnchorFlex', Component: PopoverAnchorFlexShowcase },
+  { title: 'AutocompleteBlur', Component: AutocompleteBlurShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;

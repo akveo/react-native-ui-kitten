@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
 | `children` | `ReactNode` | - | Content rendered inside the modal. |
 | `shouldUseContainer` | `boolean` | `true` | Whether the content is wrapped in a positioning container. Set to `false` to control layout yourself. |
 | `renderInline` | `boolean` | `false` | Render the native modal at the call site instead of through the `ApplicationProvider` panel. See [Where the content renders](#where-the-content-renders). |
+| `blocking` | `boolean` | `true` | Whether the content blocks the screen behind it. With `false` the content floats above the app through the `ApplicationProvider` panel without a native modal or a backdrop; touches outside it reach the views underneath. Inline rendering always blocks. |
 
 Modal also accepts all standard React Native `Modal` and `View` props.
 

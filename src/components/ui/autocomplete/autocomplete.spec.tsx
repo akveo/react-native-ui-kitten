@@ -9,11 +9,13 @@ import React from 'react';
 import {
   Image,
   ImageProps,
+  Keyboard,
   Text,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
 import {
+  act,
   fireEvent,
   render,
   waitFor,
@@ -300,7 +302,7 @@ describe('@autocomplete: component checks', () => {
     expect(onSelect).toBeCalledWith(1);
   });
 
-  it('should hide options when backdrop is pressed', async () => {
+  it('should not block the screen while options are visible', async () => {
     const component = render(
       <TestAutocomplete />,
     );
@@ -308,21 +310,51 @@ describe('@autocomplete: component checks', () => {
     fireEvent(component.UNSAFE_queryByType(TextInput), 'focus');
     await waitFor(() => expect(component.queryByText('Option 1')).toBeTruthy());
 
-    const backdrop = await waitFor(() => {
-      const el = component.queryByTestId('@backdrop');
-      expect(el).toBeTruthy();
-      return el;
-    });
-    // Backdrop uses PanResponder - call the handler directly
-    const responderRelease = backdrop.props.onResponderRelease;
-    if (responderRelease) {
-      responderRelease({ nativeEvent: {} });
-    }
+    // No backdrop: the first tap on anything beside the field reaches it (#1578).
+    expect(component.queryByTestId('@backdrop')).toBeFalsy();
+    expect(component.queryByTestId('@modal/overlay')).toBeTruthy();
+  });
+
+  it('should hide options when the input blurs', async () => {
+    const onBlur = jest.fn();
+    const component = render(
+      <TestAutocomplete onBlur={onBlur} />,
+    );
+
+    fireEvent(component.UNSAFE_queryByType(TextInput), 'focus');
+    await waitFor(() => expect(component.queryByText('Option 1')).toBeTruthy());
+
+    fireEvent(component.UNSAFE_queryByType(TextInput), 'blur');
 
     await waitFor(() => {
       expect(component.queryByText('Option 1')).toBeFalsy();
       expect(component.queryByText('Option 2')).toBeFalsy();
     });
+    // The field's own blur reaches the consumer (#1755).
+    expect(onBlur).toBeCalledTimes(1);
+  });
+
+  it('should hide options when the keyboard is dismissed', async () => {
+    const listeners: Record<string, () => void> = {};
+    const addListener = jest.spyOn(Keyboard, 'addListener').mockImplementation((event, handler) => {
+      listeners[event] = handler as () => void;
+      return { remove: jest.fn() } as never;
+    });
+
+    const component = render(
+      <TestAutocomplete />,
+    );
+
+    fireEvent(component.UNSAFE_queryByType(TextInput), 'focus');
+    await waitFor(() => expect(component.queryByText('Option 1')).toBeTruthy());
+    expect(listeners.keyboardDidHide).toBeTruthy();
+
+    act(() => {
+      listeners.keyboardDidHide();
+    });
+
+    await waitFor(() => expect(component.queryByText('Option 1')).toBeFalsy());
+    addListener.mockRestore();
   });
 
   it('should call onFocus', async () => {
