@@ -107,9 +107,16 @@ function ViewPagerComponent<ChildrenProps = {}>(
       useNativeDriver: Platform.OS !== 'web',
     });
     animation.start((result) => {
-      const currentSelectedIndex = contentOffsetValueRef.current / contentWidthRef.current;
-      if (currentSelectedIndex !== selectedIndexRef.current && onSelect && result.finished) {
-        onSelect(Math.round(currentSelectedIndex));
+      // A pager that is laid out at zero width (a screen react-native-web keeps mounted but hidden,
+      // for example) has no page width to divide by; reporting NaN here made the owner set NaN as
+      // the selected index, which scheduled the next animation, and so on for as long as the screen
+      // stayed hidden.
+      if (!result.finished || !onSelect || contentWidthRef.current <= 0) {
+        return;
+      }
+      const currentSelectedIndex = Math.round(contentOffsetValueRef.current / contentWidthRef.current);
+      if (Number.isFinite(currentSelectedIndex) && currentSelectedIndex !== selectedIndexRef.current) {
+        onSelect(currentSelectedIndex);
       }
     });
   }, [animationDuration, contentOffsetAnimatedValue, onSelect]);
@@ -174,7 +181,9 @@ function ViewPagerComponent<ChildrenProps = {}>(
 
   const onLayout = useCallback((event: LayoutChangeEvent) => {
     contentWidthRef.current = event.nativeEvent.layout.width / childrenArray.length;
-    scrollToIndex({ index: selectedIndexRef.current, animated: true });
+    if (contentWidthRef.current > 0) {
+      scrollToIndex({ index: selectedIndexRef.current, animated: true });
+    }
   }, [childrenArray.length, scrollToIndex]);
 
   const getContainerStyle = useCallback((): ViewStyle => {

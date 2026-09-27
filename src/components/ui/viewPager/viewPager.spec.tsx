@@ -7,7 +7,11 @@
 
 import React from 'react';
 import { GestureResponderHandlers, Text } from 'react-native';
-import { render } from '@testing-library/react-native';
+import {
+  act,
+  fireEvent,
+  render,
+} from '@testing-library/react-native';
 import {
   ViewPager,
   ViewPagerProps,
@@ -22,6 +26,36 @@ describe('@view-pager: component checks', () => {
   const TestViewPager = (props?: ViewPagerProps): React.ReactElement<ViewPagerProps> => (
     <ViewPager {...props} />
   );
+
+  it('should not report a selection while laid out at zero width', () => {
+    jest.useFakeTimers();
+    try {
+      const onSelect = jest.fn();
+      const component = render(
+        <TestViewPager
+          testID='pager'
+          selectedIndex={1}
+          onSelect={onSelect}
+        >
+          <Text>Tab 0</Text>
+          <Text>Tab 1</Text>
+        </TestViewPager>,
+      );
+      const pager = component.getByTestId('pager');
+
+      // A hidden screen on react-native-web lays the pager out at 0 x 0.
+      act(() => fireEvent(pager, 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: 0, height: 0 } } }));
+      act(() => jest.advanceTimersByTime(1000));
+      expect(onSelect).not.toHaveBeenCalled();
+
+      // Once it has a width again, page changes are reported as before.
+      act(() => fireEvent(pager, 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: 600, height: 400 } } }));
+      act(() => jest.advanceTimersByTime(1000));
+      expect(onSelect.mock.calls.every(([index]) => Number.isFinite(index))).toBe(true);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
 
   it('should render two tabs', () => {
     const component = render(
