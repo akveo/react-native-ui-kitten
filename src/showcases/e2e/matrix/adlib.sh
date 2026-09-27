@@ -21,7 +21,7 @@ settle() { ad wait stable >/dev/null; }
 
 
 goto() { CUR="$1"; local n=0 r; while [ $n -lt 30 ]; do r=$(python3 $Q to "section-$1-title"); case "$r" in ok) return 0;; down\ *) ad scroll down --pixels ${r#down } >/dev/null;; up\ *) ad scroll up --pixels ${r#up } >/dev/null;; *) echo "goto $1: $r"; return 1;; esac; n=$((n+1)); done; echo "goto $1: FAILED ($r)"; return 1; }
-seeId() { local n=0 r noid=0; while [ $n -lt 30 ]; do r=$(python3 $Q to "$1"); case "$r" in ok) return 0;; down\ *) ad scroll down --pixels ${r#down } >/dev/null;; up\ *) ad scroll up --pixels ${r#up } >/dev/null;; NOID) noid=$((noid+1)); if [ $noid -eq 1 ] && [ -n "$CUR" ]; then goto "$CUR" >/dev/null; else ad scroll down --pixels 500 >/dev/null; fi; if [ $noid -gt 8 ]; then echo "seeId $1: NOID"; return 1; fi;; esac; n=$((n+1)); done; echo "seeId $1: FAILED ($r)"; return 1; }
+seeId() { local n=0 r noid=0; while [ $n -lt 30 ]; do r=$(python3 $Q to "$1"); case "$r" in ok) ad wait stable >/dev/null; return 0;; down\ *) ad scroll down --pixels ${r#down } >/dev/null;; up\ *) ad scroll up --pixels ${r#up } >/dev/null;; NOID) noid=$((noid+1)); if [ $noid -eq 1 ] && [ -n "$CUR" ]; then goto "$CUR" >/dev/null; else ad scroll down --pixels 500 >/dev/null; fi; if [ $noid -gt 8 ]; then echo "seeId $1: NOID"; return 1; fi;; esac; n=$((n+1)); done; echo "seeId $1: FAILED ($r)"; return 1; }
 
 hasAny() { agent-device snapshot --raw | grep -qF -- "$1"; }
 

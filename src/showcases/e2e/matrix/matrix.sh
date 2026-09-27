@@ -313,12 +313,14 @@ Datepicker)
   ;;
 RangeDatepicker)
   goto RangeDatepicker; seeId range-datepicker
-  chk "open range picker" pressAt range-datepicker 200 52   # id tap refused on Android: the child touchable covers the container exactly
-  settle; chk "picker shown (RangeCalendar has no arrow labels, look for a weekday header)" bash -c "[ \"\$(agent-device snapshot --raw | grep -c '\"Su\"')\" -ge \$([ \"\$AGENT_DEVICE_SESSION\" = android ] && echo 1 || echo 2) ]"
+  sleep 1; chk "open range picker" pressAt range-datepicker 200 52   # id tap refused on Android: the child touchable covers the container exactly; settle first or the tap lands on the Datepicker above
+  settle; sleep 1; chk "picker shown (RangeCalendar has no arrow labels, look for a weekday header)" bash -c "[ \"\$(agent-device snapshot --raw | grep -c '\"Su\"')\" -ge \$([ \"\$AGENT_DEVICE_SESSION\" = android ] && echo 1 || echo 2) ]"
+  [ "$AGENT_DEVICE_SESSION" = android ] && chk "open popover is the RangeDatepicker's (no labelled arrows)" bash -c "[ \"\$(agent-device snapshot --raw | grep -c 'Next month')\" -eq 0 ]"
   chk "pick 5" pressBelow range-datepicker "5"
   chk "pick 9" pressBelow range-datepicker "9"
+  closeOverlay >/dev/null; settle   # read the echo only after closing: with the popover open Android's tree holds just the overlay window
   chk "range 5 to 9" [ "$(txt range-datepicker-value)" = "Range: 5 to 9" ]
-  closeOverlay >/dev/null; settle; chk "closed" [ "$(txt range-datepicker-value)" != "" ]
+  chk "closed (control shows the range)" hasAny "05/09/2026"
   shot $E/RangeDatepicker.png
   ;;
 Autocomplete)
