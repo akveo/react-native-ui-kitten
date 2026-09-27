@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
 } from '../../devsupport';
 import {
+  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -476,6 +477,15 @@ describe('@calendar: component checks', () => {
     }
 
     expect((componentRef.current.getPickerDate() as Date).getFullYear()).toEqual(2020);
+  });
+
+  it('should cap the container at the parent width so narrow screens do not clip a column', () => {
+    const component = render(<TestCalendar testID='calendar' />);
+
+    const containerStyle = StyleSheet.flatten(component.getByTestId('calendar').props.style);
+
+    expect(containerStyle.width).toEqual(expect.any(Number));
+    expect(containerStyle.maxWidth).toEqual('100%');
   });
 
 });

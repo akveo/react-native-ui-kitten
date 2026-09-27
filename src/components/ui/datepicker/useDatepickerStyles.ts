@@ -5,7 +5,14 @@
  */
 
 import { useMemo } from 'react';
+import { useWindowDimensions } from 'react-native';
 import { StyleType } from '../../theme';
+
+/**
+ * Space kept between the picker popover and each window edge when the window is narrower than
+ * the mapping's `popoverWidth` (#1784).
+ */
+export const DATEPICKER_POPOVER_WINDOW_INSET = 8;
 
 export interface DatepickerStyles {
   control: StyleType;
@@ -18,6 +25,8 @@ export interface DatepickerStyles {
 }
 
 export function useDatepickerStyles(evaStyle: StyleType): DatepickerStyles {
+  const { width: windowWidth } = useWindowDimensions();
+
   return useMemo(() => {
     const {
       textMarginHorizontal,
@@ -81,8 +90,11 @@ export function useDatepickerStyles(evaStyle: StyleType): DatepickerStyles {
       },
       popover: {
         width: popoverWidth,
+        // The calendar inside sizes the popover (its mapping width is 344); cap the popover at the
+        // window so the calendar, which is `maxWidth: '100%'`, shrinks with it on narrow screens.
+        maxWidth: windowWidth - 2 * DATEPICKER_POPOVER_WINDOW_INSET,
         marginBottom: captionMarginTop,
       },
     };
-  }, [evaStyle]);
+  }, [evaStyle, windowWidth]);
 }
