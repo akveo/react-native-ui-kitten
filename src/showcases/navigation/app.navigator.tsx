@@ -14,6 +14,7 @@ import { RadioGroupSimpleUsageShowcase } from '../components/radioGroup/radioGro
 import { CardSimpleUsageShowcase } from '../components/card/cardSimpleUsage.component';
 import { CardLayoutShowcase } from '../components/card/cardLayout.component';
 import { TopNavigationSubtitleShowcase } from '../components/topNavigation/topNavigationSubtitle.component';
+import { TooltipEdgeShowcase } from '../components/tooltip/tooltipEdge.component';
 import { AvatarSimpleUsageShowcase } from '../components/avatar/avatarSimpleUsage.component';
 import { SpinnerSimpleUsageShowcase } from '../components/spinner/spinnerSimpleUsage.component';
 import { DividerSimpleUsageShowcase } from '../components/divider/dividerSimpleUsage.component';
@@ -193,6 +194,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'ModalDecimalSize', Component: ModalDecimalSizeShowcase },
   { title: 'CardLayout', Component: CardLayoutShowcase },
   { title: 'TopNavigationSubtitle', Component: TopNavigationSubtitleShowcase },
+  { title: 'TooltipEdge', Component: TooltipEdgeShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;

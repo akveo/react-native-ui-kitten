@@ -24,6 +24,7 @@ import {
 } from '@ui-kitten/eva';
 import { ApplicationProvider } from '../../theme';
 import { Frame } from '../../devsupport';
+import { PopoverPlacementService } from './placement.service';
 import {
   Popover,
   PopoverProps,
@@ -248,6 +249,36 @@ describe('@popover: service checks', () => {
 
     expect(x).toEqual(4);
     expect(y).toEqual(6);
+  });
+
+});
+
+describe('@popover: service fit checks', () => {
+
+  const service = new PopoverPlacementService();
+  const bounds = new Frame(0, 0, 411, 838);
+
+  it('should keep a frame that already fits', () => {
+    const frame = new Frame(170, 560, 230, 52);
+    expect(service.fit(frame, bounds)).toBe(frame);
+  });
+
+  it('should move a frame that runs past the end back inside the bounds', () => {
+    const { origin } = service.fit(new Frame(263, 560, 230, 52), bounds);
+    expect(origin.x).toEqual(181);
+    expect(origin.y).toEqual(560);
+  });
+
+  it('should move a frame that starts before the bounds to their start', () => {
+    const { origin } = service.fit(new Frame(-80, -10, 230, 52), bounds);
+    expect(origin.x).toEqual(0);
+    expect(origin.y).toEqual(0);
+  });
+
+  it('should pin a frame larger than the bounds to their start', () => {
+    const { origin, size } = service.fit(new Frame(100, 20, 600, 52), bounds);
+    expect(origin.x).toEqual(0);
+    expect(size.width).toEqual(600);
   });
 
 });

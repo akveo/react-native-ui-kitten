@@ -31,6 +31,26 @@ export class PopoverPlacementService {
     return placement || preferredValue;
   }
 
+  /**
+   * Moves a frame inside `bounds` when no placement fits (a content wider than every gap next to
+   * the anchor, for example). A frame that already fits is returned as is; a frame larger than the
+   * bounds is pinned to their start so that at least its beginning stays visible.
+   */
+  public fit(frame: Frame, bounds: Frame): Frame {
+    const clamp = (origin: number, size: number, boundsOrigin: number, boundsSize: number): number => {
+      const max = boundsOrigin + boundsSize - size;
+      return Math.max(boundsOrigin, Math.min(origin, max));
+    };
+
+    const x = clamp(frame.origin.x, frame.size.width, bounds.origin.x, bounds.size.width);
+    const y = clamp(frame.origin.y, frame.size.height, bounds.origin.y, bounds.size.height);
+
+    if (x === frame.origin.x && y === frame.origin.y) {
+      return frame;
+    }
+    return new Frame(x, y, frame.size.width, frame.size.height);
+  }
+
   private findRecursive(
     placement: PopoverPlacement,
     families: string[],
