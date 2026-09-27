@@ -54,7 +54,9 @@ export class MomentDateService extends DateService<Moment> {
   }
 
   public createDate(year: number, month: number, date: number): Moment {
-    return moment.utc([year, month, date]);
+    // Local time, like `today()` and `parse()`. A UTC-mode moment here shifts the calendar's dates
+    // by the UTC offset whenever they are compared with or formatted next to those.
+    return moment([year, month, date]);
   }
 
   public format(date: Moment, format: string): string {

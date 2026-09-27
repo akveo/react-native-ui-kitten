@@ -179,6 +179,21 @@ describe('@moment-date: service checks', () => {
     expect(date.date()).toEqual(16);
   });
 
+  it('* should create date in local time, like today() and parse()', () => {
+    const date = dateService.createDate(2018, 6, 16);
+    expect(date.isUTC()).toBe(false);
+    expect(date.valueOf()).toEqual(new Date(2018, 6, 16).getTime());
+    expect(date.utcOffset()).toEqual(dateService.today().utcOffset());
+    expect(date.utcOffset()).toEqual(dateService.parse('07.16.2018', 'MM.DD.YYYY').utcOffset());
+  });
+
+  it('* should create today from its own parts', () => {
+    const today = dateService.today();
+    const rebuilt = dateService.createDate(today.year(), today.month(), today.date());
+    expect(dateService.isSameDay(rebuilt, today)).toBe(true);
+    expect(rebuilt.hour()).toBe(0);
+  });
+
   it('* should create date for two digit year', () => {
     const date = dateService.createDate(12, 6, 16);
     expect(dateService.getYear(date)).toBe(12);
