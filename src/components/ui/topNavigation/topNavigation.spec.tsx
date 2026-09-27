@@ -10,13 +10,18 @@ import { TouchableWeb } from '../../devsupport';
 import {
   Image,
   ImageProps,
+  StyleProp,
+  StyleSheet,
   Text,
   TouchableOpacity,
+  ViewStyle,
 } from 'react-native';
 import {
   fireEvent,
   render,
+  within,
 } from '@testing-library/react-native';
+import type { ReactTestInstance } from 'react-test-renderer';
 import {
   light,
   mapping,
@@ -230,6 +235,30 @@ describe('@top-navigation: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should stack the subtitle below the title for every alignment', () => {
+    const titleContainerStyle = (alignment?: 'start' | 'center'): ViewStyle => {
+      const component = render(
+        <TestTopNavigation
+          alignment={alignment}
+          title='I love Babel'
+          subtitle='I love Jest'
+        />,
+      );
+      // Both texts share the title container; walk up from the subtitle to the host view
+      // that also contains the title.
+      let node: ReactTestInstance | null = component.getByText('I love Jest').parent;
+      while (node && !(String(node.type) === 'View' && within(node).queryByText('I love Babel'))) {
+        node = node.parent;
+      }
+      expect(node).toBeTruthy();
+      return StyleSheet.flatten(node.props.style as StyleProp<ViewStyle>) as ViewStyle;
+    };
+
+    expect(titleContainerStyle().flexDirection).not.toEqual('row');
+    expect(titleContainerStyle('start').flexDirection).not.toEqual('row');
+    expect(titleContainerStyle('center').flexDirection).not.toEqual('row');
   });
 
   it('should render function component passed to accessoryLeft prop', () => {
