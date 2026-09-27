@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewProps } from 'react-native';
 import { Card, Layout, Text } from '@ui-kitten/components';
 
 const STATUSES = ['primary', 'success', 'info', 'warning', 'danger', 'basic'] as const;
@@ -12,6 +12,14 @@ const CardContent: React.FC<{ text: string }> = ({ text }) => (
   <Text>{text}</Text>
 );
 
+const CardHeader = (props: ViewProps): React.ReactElement => (
+  <Text {...props} category="h6">Header</Text>
+);
+
+const CardFooter = (props: ViewProps): React.ReactElement => (
+  <Text {...props} appearance="hint">Footer</Text>
+);
+
 export const CardSimpleUsageShowcase = (): React.ReactElement => {
   const [presses, setPresses] = React.useState(0);
   return (
@@ -21,8 +29,8 @@ export const CardSimpleUsageShowcase = (): React.ReactElement => {
       testID="card-pressable"
       style={styles.card}
       onPress={() => setPresses((n) => n + 1)}
-      header={(props) => <Text {...props} category="h6">Header</Text>}
-      footer={(props) => <Text {...props} appearance="hint">Footer</Text>}
+      header={CardHeader}
+      footer={CardFooter}
     >
       <CardContent text="Pressable card with header and footer" />
     </Card>
