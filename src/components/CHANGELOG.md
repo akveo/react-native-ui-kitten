@@ -1,5 +1,17 @@
 # @ui-kitten/components
 
+## 6.1.2
+
+### Patch Changes
+
+- [#1893](https://github.com/akveo/react-native-ui-kitten/pull/1893) [`c7efa0b`](https://github.com/akveo/react-native-ui-kitten/commit/c7efa0b8dc21e0be519da2b797d7193f02483f45) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Keep `Popover` and `Tooltip` content on screen. The content is now capped at the window width, so a long text measures the same wherever it is placed instead of one very wide line off screen, and when no placement fits next to the anchor the chosen frame is moved back inside the window rather than left cut off at the edge.
+
+- [#1896](https://github.com/akveo/react-native-ui-kitten/pull/1896) [`07f77ac`](https://github.com/akveo/react-native-ui-kitten/commit/07f77acdb6783e9d9d76485d806ea7a1d87181c4) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Style cache entries are now keyed by the compiled mapping as well, so a `customMapping` that changes at runtime restyles the components, and two `ApplicationProvider`s with different mappings no longer share styles. `ApplicationProvider` warns in development when `customMapping` is passed next to build-time `styles`, where it is ignored.
+
+- [#1892](https://github.com/akveo/react-native-ui-kitten/pull/1892) [`7fcbe88`](https://github.com/akveo/react-native-ui-kitten/commit/7fcbe88f6aa4ad81e5726fa643a1bdf8be38680d) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `TopNavigation` renders the subtitle below the title for the default (`start`) alignment. The title container was a row, so the subtitle sat next to the title unless `alignment='center'` was set.
+
+- [#1897](https://github.com/akveo/react-native-ui-kitten/pull/1897) [`9e38cc2`](https://github.com/akveo/react-native-ui-kitten/commit/9e38cc23a151b5ac8eae1de9115091ca4d9db8c4) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `ViewPager` and `TabView` stay quiet while laid out at zero width. On react-native-web a navigator keeps inactive screens mounted but hidden, and the pager used to report `NaN` as the selected index from there, which re-triggered its own animation in a loop and left the tabs unresponsive once the screen was shown again.
+
 ## 6.1.1
 
 ### Patch Changes
