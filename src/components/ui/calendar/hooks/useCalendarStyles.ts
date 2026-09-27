@@ -29,6 +29,10 @@ export function useCalendarStyles(evaStyle: StyleType): CalendarStyles {
   return useMemo(() => ({
     container: {
       width: evaStyle.width,
+      // The mapping width is a target, not a floor: a screen narrower than it (320 dp devices,
+      // #1784) must not push the last weekday column off the edge. Cells are `flex: 1`, so they
+      // absorb the difference.
+      maxWidth: '100%',
       paddingVertical: evaStyle.paddingVertical,
       borderColor: evaStyle.borderColor,
       borderWidth: evaStyle.borderWidth,

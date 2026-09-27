@@ -8,6 +8,7 @@
 import React from 'react';
 import { TouchableWithoutFeedback } from '../../devsupport';
 import {
+  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -688,6 +689,31 @@ describe('@datepicker: component checks', () => {
     fireEvent.press(rightArrow);
 
     expect(onVisibleDateChange).toBeCalled();
+  });
+
+  describe('popover width', () => {
+    const findViewMaxWidths = (api: RenderAPI): number[] => api.UNSAFE_getAllByType(View)
+      .map(view => StyleSheet.flatten(view.props.style)?.maxWidth)
+      .filter((maxWidth): maxWidth is number => typeof maxWidth === 'number');
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('should cap the popover at the window width minus the inset', async () => {
+      const dimensionsGet = Dimensions.get;
+      jest.spyOn(Dimensions, 'get').mockImplementation((dimension) => {
+        const actual = dimensionsGet.call(Dimensions, dimension);
+        return dimension === 'window' ? { ...actual, width: 320, height: 568 } : actual;
+      });
+
+      const component = render(<TestDatepicker />);
+
+      fireEvent.press(touchables.findInputTouchable(component));
+      await waitFor(() => component.UNSAFE_getByType(Calendar));
+
+      expect(findViewMaxWidths(component)).toContain(320 - 2 * 8);
+    });
   });
 
 });
