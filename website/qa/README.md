@@ -14,6 +14,7 @@ yarn storybook                                   # :6006
   --user-data-dir=/tmp/qa-chrome --window-size=1000,800 --no-first-run about:blank &
 yarn storybook:qa                                # node qa/run.mjs qa/out http://localhost:6006
 node qa/taborder.mjs                             # full keyboard Tab order + focusable list
+node qa/tabview.mjs                              # TabView: wheel-scrolls tab content, hides/shows the pager (#1397, #1498)
 ```
 
 `run.mjs` prints one `PASS` / `FAIL` line per check, writes crops of the interesting states into

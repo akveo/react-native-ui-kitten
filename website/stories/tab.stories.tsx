@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tab, TabBar, TabView, Text, Layout } from '@ui-kitten/components';
+import { ScrollView, View } from 'react-native';
+import { Button, Tab, TabBar, TabView, Text, Layout } from '@ui-kitten/components';
 
 const meta: Meta<typeof TabBar> = {
   title: 'Components/Tab',
@@ -46,6 +47,74 @@ export const TabViewDefault: Story = {
           </Layout>
         </Tab>
       </TabView>
+    );
+  },
+};
+
+const ROWS = Array.from({ length: 40 }, (_, index) => `Row ${index + 1}`);
+
+// #1498: content taller than the tab must scroll on the web. The TabView needs a bounded height
+// (here the parent's 320px) and its pages fill it, so the ScrollView inside has something to scroll.
+export const TabViewScroll: Story = {
+  name: 'TabView scrolling content',
+  render: () => {
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    return (
+      <View style={{ height: 320 }}>
+        <TabView style={{ flex: 1 }} selectedIndex={selectedIndex} onSelect={setSelectedIndex}>
+          <Tab title="Long">
+            <ScrollView testID="tab-scroll" style={{ flex: 1 }}>
+              {ROWS.map((row) => (
+                <Layout key={row} style={{ padding: 12 }} level="2">
+                  <Text category="p1">{row}</Text>
+                </Layout>
+              ))}
+            </ScrollView>
+          </Tab>
+          <Tab title="Short">
+            <Layout style={{ padding: 16 }}>
+              <Text category="p1">Short tab content</Text>
+            </Layout>
+          </Tab>
+        </TabView>
+      </View>
+    );
+  },
+};
+
+// #1397: a screen a web navigator keeps mounted but hidden lays the pager out at zero width; the
+// pager must stay quiet while hidden and respond again once shown.
+export const TabViewHidden: Story = {
+  name: 'TabView hidden and shown again',
+  render: () => {
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [hidden, setHidden] = useState(false);
+    const [selects, setSelects] = useState(0);
+    const onSelect = (index: number): void => {
+      setSelects((count) => count + 1);
+      setSelectedIndex(index);
+    };
+    return (
+      <View>
+        <Button testID="tab-hide" size="small" onPress={() => setHidden((value) => !value)}>
+          {hidden ? 'SHOW' : 'HIDE'}
+        </Button>
+        <Text testID="tab-state">{`selected: ${selectedIndex}, onSelect calls: ${selects}`}</Text>
+        <View style={hidden ? { display: 'none' } : undefined}>
+          <TabView selectedIndex={selectedIndex} onSelect={onSelect}>
+            <Tab title="First">
+              <Layout style={{ padding: 16 }}>
+                <Text category="p1">First tab content</Text>
+              </Layout>
+            </Tab>
+            <Tab title="Second">
+              <Layout style={{ padding: 16 }}>
+                <Text category="p1">Second tab content</Text>
+              </Layout>
+            </Tab>
+          </TabView>
+        </View>
+      </View>
     );
   },
 };
