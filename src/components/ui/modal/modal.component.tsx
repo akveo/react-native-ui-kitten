@@ -69,6 +69,20 @@ export interface ModalProps extends ViewProps, BackdropPresentingConfig, RNModal
 export type ModalElement = React.ReactElement<ModalProps>;
 
 /**
+ * React Native's `Modal` presents in portrait only when `supportedOrientations` is omitted (its
+ * native default), so a popover opened on an iPad held in landscape came up rotated (#1911).
+ * Every orientation is allowed by default; iOS still intersects this with the app's
+ * `UISupportedInterfaceOrientations`, so the modal follows whatever the app itself allows.
+ */
+const ALL_ORIENTATIONS: ReactNativeModalProps['supportedOrientations'] = [
+  'portrait',
+  'portrait-upside-down',
+  'landscape',
+  'landscape-left',
+  'landscape-right',
+];
+
+/**
  * A wrapper that presents content above an enclosing view.
  *
  * @extends React.FC
@@ -101,7 +115,8 @@ export type ModalElement = React.ReactElement<ModalProps>;
  * supportedOrientations -
  * Allows the modal to be rotated to any of the specified orientations.
  * On iOS, the modal is still restricted by what's specified
- * in your app's Info.plist's UISupportedInterfaceOrientations field
+ * in your app's Info.plist's UISupportedInterfaceOrientations field.
+ * Defaults to every orientation, so the modal follows the app.
  *
  * @property {() => void} onBackdropPress - Called when the modal is visible and the view below it was touched.
  * Useful when needed to close the modal on outside touches.
@@ -144,7 +159,7 @@ const ModalComponent: React.FC<ModalProps> = ({
   onBackdropPress,
   animationType,
   hardwareAccelerated,
-  supportedOrientations,
+  supportedOrientations = ALL_ORIENTATIONS,
   onShow,
   ...viewProps
 }) => {

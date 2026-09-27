@@ -347,6 +347,34 @@ describe('@modal: panel checks', () => {
     expect(hasAncestorOfType(modal, ScrollView)).toBe(false);
   });
 
+  it('should allow every orientation unless supportedOrientations is given', () => {
+    const component = render(
+      <Provider>
+        <Modal visible={true}>
+          <Text>content</Text>
+        </Modal>
+      </Provider>,
+    );
+
+    expect(component.UNSAFE_getByType(RNModal).props.supportedOrientations).toEqual([
+      'portrait',
+      'portrait-upside-down',
+      'landscape',
+      'landscape-left',
+      'landscape-right',
+    ]);
+
+    component.rerender(
+      <Provider>
+        <Modal visible={true} supportedOrientations={['portrait']}>
+          <Text>content</Text>
+        </Modal>
+      </Provider>,
+    );
+
+    expect(component.UNSAFE_getByType(RNModal).props.supportedOrientations).toEqual(['portrait']);
+  });
+
   it('should render inline without ApplicationProvider and warn once', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
 
