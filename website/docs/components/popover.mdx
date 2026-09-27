@@ -58,6 +58,7 @@ const PopoverExample = () => {
 |----------|------|---------|-------------|
 | `visible` | `boolean` | `false` | Whether the popover is visible. |
 | `anchor` | `() => ReactElement` | - | Render function for the anchor element the popover is positioned relative to. |
+| `anchorContainerStyle` | `ViewStyle` | `undefined` | Style of the view wrapping the anchor. Put the anchor's layout in its parent here, for example `flex: 1` so two popovers share a row. |
 | `onBackdropPress` | `() => void` | `undefined` | Called when the area outside the popover is pressed. |
 | `placement` | `'top' \| 'top start' \| 'top end' \| 'bottom' \| 'bottom start' \| 'bottom end' \| 'left' \| 'left start' \| 'left end' \| 'right' \| 'right start' \| 'right end' \| 'inner' \| 'inner top' \| 'inner bottom'` | `'bottom'` | Position of the popover relative to the anchor. |
 | `backdropStyle` | `ViewStyle` | `undefined` | Style applied to the backdrop. |

@@ -108,6 +108,18 @@ describe('@popover: component checks', () => {
     expect(touchables.findToggleButton(component)).toBeTruthy();
   });
 
+  it('should style the anchor wrapper with anchorContainerStyle', () => {
+    const component = render(
+      <TestPopover anchorContainerStyle={{ flex: 1, marginLeft: 7 }} />,
+    );
+
+    const wrapper = component.UNSAFE_getAllByType(View)
+      .find(view => StyleSheet.flatten(view.props.style)?.marginLeft === 7);
+
+    expect(StyleSheet.flatten(wrapper.props.style)).toMatchObject({ flex: 1 });
+    expect(wrapper.findByProps({ testID: '@popover/toggle-button' })).toBeTruthy();
+  });
+
   it('should not render content when not visible', () => {
     const component = render(
       <TestPopover visible={false} />,

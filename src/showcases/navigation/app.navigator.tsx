@@ -36,6 +36,7 @@ import { SelectItemSimpleUsageShowcase } from '../components/select/selectItemSi
 
 // Popover-based components
 import { PopoverSimpleUsageShowcase } from '../components/popover/popoverSimpleUsage.component';
+import { PopoverAnchorFlexShowcase } from '../components/popover/popoverAnchorFlex.component';
 import { TooltipSimpleUsageShowcase } from '../components/tooltip/tooltipSimpleUsage.component';
 import { OverflowMenuSimpleUsageShowcase } from '../components/overflowMenu/overflowMenuSimpleUsage.component';
 import { ModalSimpleUsageShowcase } from '../components/modal/modalSimpleUsage.component';
@@ -197,6 +198,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'TopNavigationSubtitle', Component: TopNavigationSubtitleShowcase },
   { title: 'TooltipEdge', Component: TooltipEdgeShowcase },
   { title: 'CalendarHermes', Component: CalendarHermesShowcase },
+  { title: 'PopoverAnchorFlex', Component: PopoverAnchorFlexShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;
