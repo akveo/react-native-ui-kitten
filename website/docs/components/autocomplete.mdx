@@ -74,6 +74,7 @@ const AutocompleteExample = () => {
 | `placement` | `string \| PopoverPlacement` | `'bottom'` | Position of the suggestions list relative to the input. The `inner` placements cover the field. |
 | `onFocus` | `(event) => void` | `undefined` | Called when the input gains focus; the list opens when there are suggestions. |
 | `onBlur` | `(event) => void` | `undefined` | Called when the input loses focus; the list closes. |
+| `testID` | `string` | `undefined` | Test id of the suggestions list. The input field uses `@@<testID>/input/input` (container `@@<testID>/input/container`); without it the field is `@@autocomplete/input/input`. |
 
 ### AutocompleteItem
 
