@@ -152,6 +152,11 @@ export interface DatepickerRef<D = Date> {
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
+ * @property {PopoverProps} popoverProps - Props for the Popover that shows the calendar,
+ * e.g. `fullWidth` (the calendar takes the width of the control), `style`, `blocking` or `anchorContainerStyle`.
+ * `visible`, `anchor` and `children` are managed by the picker; `placement` and `backdropStyle` set directly win;
+ * `onBackdropPress` is called before the picker closes.
+ *
  * @property {ComponentType | null} renderArrowLeft - Custom component which will be used
  * to render left arrow inside header instead of default one. Custom component must invoke onPress method from
  * props to keep calendar navigation functionality.
@@ -248,6 +253,7 @@ function DatepickerComponent<D = Date>(
     testID,
     backdropStyle,
     controlStyle,
+    popoverProps,
     placement = PopoverPlacements.BOTTOM_START,
     placeholder = 'dd/mm/yyyy',
     label,
@@ -338,10 +344,12 @@ function DatepickerComponent<D = Date>(
     onPressOut?.(event);
   }, [dispatch, onPressOut]);
 
+  const onBackdropPressProp = popoverProps?.onBackdropPress;
   const handleBackdropPress = useCallback((): void => {
+    onBackdropPressProp?.();
     setPickerInvisible();
     dispatch([]);
-  }, [setPickerInvisible, dispatch]);
+  }, [onBackdropPressProp, setPickerInvisible, dispatch]);
 
   const calendarProps = useMemo((): CalendarProps<D> => ({
     min,
@@ -419,7 +427,8 @@ function DatepickerComponent<D = Date>(
         component={label}
       />
       <Popover
-        style={[componentStyles.popover, styles.popover]}
+        {...popoverProps}
+        style={[componentStyles.popover, styles.popover, popoverProps?.style]}
         backdropStyle={backdropStyle}
         placement={placement}
         visible={visible}
