@@ -53,6 +53,8 @@ const AvatarExample = () => (
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `source` | `ImageSourcePropType` | - | Image source (local require or remote URI). |
+| `name` | `string` | `undefined` | Shown as initials (first letter of the first two words) when there is no `source` or the image fails to load; also the accessible name. |
+| `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Background and text colours of the initials frame. |
 | `shape` | `'round' \| 'rounded' \| 'square'` | `'round'` | Shape of the avatar. |
 | `size` | `'tiny' \| 'small' \| 'medium' \| 'large' \| 'giant'` | `'medium'` | Size of the avatar. |
 | `style` | `ImageStyle` | `undefined` | Additional styles applied to the avatar image. |
@@ -60,6 +62,17 @@ const AvatarExample = () => (
 | `ImageComponent` | `ComponentType` | `Image` | Component used to render the image. Pass a custom one to use a caching or SVG image library. |
 
 Avatar also accepts all props of the component given to `ImageComponent`, which by default is React Native's `Image`.
+
+## Initials
+
+Without a `source`, or when the image fails to load, `name` renders as initials in a frame of the same size and shape, coloured by `status`:
+
+```tsx
+<Avatar name="Jane Doe" status="primary" size="large" />
+<Avatar name="Jane Doe" source={{ uri: 'https://example.com/avatar.jpg' }} />
+```
+
+The text size per avatar `size` and the status colours come from the `Avatar` mapping (`textFontSize`, `backgroundColor`, `textColor`).
 
 ## Storybook
 

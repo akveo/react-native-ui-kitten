@@ -9,8 +9,13 @@ import React from 'react';
 import {
   Image,
   StyleSheet,
+  Text,
 } from 'react-native';
-import { render } from '@testing-library/react-native';
+import {
+  act,
+  fireEvent,
+  render,
+} from '@testing-library/react-native';
 import {
   light,
   mapping,
@@ -19,7 +24,16 @@ import { ApplicationProvider } from '../../theme';
 import {
   Avatar,
   AvatarProps,
+  initialsOf,
 } from './avatar.component';
+
+const themeValue = (name: string): string => {
+  let value: string = light[name];
+  while (typeof value === 'string' && value.startsWith('$')) {
+    value = light[value.slice(1)];
+  }
+  return value;
+};
 
 describe('@avatar: component checks', () => {
 
@@ -77,6 +91,119 @@ describe('@avatar: component checks', () => {
     const { borderRadius } = StyleSheet.flatten(avatar.props.style);
 
     expect(borderRadius).toEqual(0);
+  });
+
+  describe('initials', () => {
+    it('should derive initials from the first two words', () => {
+      expect(initialsOf('Jane Doe')).toEqual('JD');
+      expect(initialsOf('  ada   lovelace  byron ')).toEqual('AL');
+      expect(initialsOf('Plato')).toEqual('P');
+    });
+
+    it('should render initials instead of an image without a source', () => {
+      const component = render(
+        <TestAvatar
+          source={undefined}
+          name='Jane Doe'
+        />,
+      );
+
+      expect(component.UNSAFE_queryByType(Image)).toBeFalsy();
+      expect(component.queryByText('JD')).toBeTruthy();
+      expect(component.queryByLabelText('Jane Doe')).toBeTruthy();
+    });
+
+    it('should keep rendering the image when a name is set and the source loads', () => {
+      const component = render(
+        <TestAvatar name='Jane Doe' />,
+      );
+
+      expect(component.UNSAFE_queryByType(Image)).toBeTruthy();
+      expect(component.queryByText('JD')).toBeFalsy();
+    });
+
+    it('should fall back to initials when the image fails and forward onError', async () => {
+      const onError = jest.fn();
+      const component = render(
+        <TestAvatar
+          name='Jane Doe'
+          onError={onError}
+        />,
+      );
+
+      await act(async () => {
+        fireEvent(component.UNSAFE_getByType(Image), 'error', { nativeEvent: { error: 'boom' } });
+      });
+
+      expect(onError).toHaveBeenCalledTimes(1);
+      expect(component.UNSAFE_queryByType(Image)).toBeFalsy();
+      expect(component.queryByText('JD')).toBeTruthy();
+    });
+
+    it('should keep the fallback when the same uri is passed as a new object and retry on a new uri', async () => {
+      const Wrapper = ({ uri }: { uri: string }): React.ReactElement => (
+        <TestAvatar
+          name='Jane Doe'
+          source={{ uri }}
+        />
+      );
+      const component = render(<Wrapper uri='https://example.com/a.png' />);
+
+      await act(async () => {
+        fireEvent(component.UNSAFE_getByType(Image), 'error', { nativeEvent: { error: 'boom' } });
+      });
+      component.rerender(<Wrapper uri='https://example.com/a.png' />);
+
+      expect(component.queryByText('JD')).toBeTruthy();
+
+      component.rerender(<Wrapper uri='https://example.com/b.png' />);
+
+      expect(component.UNSAFE_queryByType(Image)).toBeTruthy();
+      expect(component.queryByText('JD')).toBeFalsy();
+    });
+
+    it('should render nothing but the image without a name', () => {
+      const component = render(
+        <TestAvatar source={undefined} />,
+      );
+
+      expect(component.UNSAFE_queryByType(Image)).toBeTruthy();
+      expect(component.UNSAFE_queryAllByType(Text).length).toEqual(0);
+    });
+
+    it('should size and shape the initials frame like the image', () => {
+      const component = render(
+        <TestAvatar
+          source={undefined}
+          name='Jane Doe'
+          size='giant'
+          shape='round'
+        />,
+      );
+
+      const frame = component.getByLabelText('Jane Doe');
+      const { width, height, borderRadius } = StyleSheet.flatten(frame.props.style);
+
+      expect(width).toEqual(height);
+      expect(borderRadius).toEqual(height / 2);
+      expect(StyleSheet.flatten(component.getByText('JD').props.style).fontSize)
+        .toEqual(mapping.components.Avatar.appearances.default.variantGroups.size.giant.textFontSize);
+    });
+
+    it('should colour the initials frame by status', () => {
+      const component = render(
+        <TestAvatar
+          source={undefined}
+          name='Jane Doe'
+          status='primary'
+        />,
+      );
+
+      const frame = component.getByLabelText('Jane Doe');
+
+      expect(StyleSheet.flatten(frame.props.style).backgroundColor).toEqual(themeValue('color-primary-default'));
+      expect(StyleSheet.flatten(component.getByText('JD').props.style).color).toEqual(themeValue('text-control-color'));
+    });
   });
 
 });
