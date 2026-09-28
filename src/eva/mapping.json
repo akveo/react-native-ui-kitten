@@ -2869,6 +2869,9 @@
                     "labelMarginBottom": {
                         "type": "number"
                     },
+                    "captionMarginTop": {
+                        "type": "number"
+                    },
                     "captionColor": {
                         "type": "string"
                     },
@@ -2951,6 +2954,7 @@
                         "iconHeight": 24,
                         "iconMarginHorizontal": 8,
                         "labelMarginBottom": 4,
+                        "captionMarginTop": 4,
                         "labelFontSize": "text-label-font-size",
                         "labelFontWeight": "text-label-font-weight",
                         "labelFontFamily": "text-label-font-family",

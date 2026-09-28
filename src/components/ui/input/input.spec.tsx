@@ -176,6 +176,28 @@ describe('@input: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
+  it('should space the caption from the field with the mapping captionMarginTop', () => {
+    const component = render(
+      <TestInput caption='I love Babel' />,
+    );
+
+    const caption = component.getByText('I love Babel');
+    const { marginTop } = StyleSheet.flatten(caption.props.style);
+
+    expect(marginTop).toEqual(mapping.components.Input.appearances.default.mapping.captionMarginTop);
+    expect(marginTop).toBeGreaterThan(0);
+  });
+
+  it('should render no caption element without a caption', () => {
+    const component = render(
+      <TestInput label='Label' />,
+    );
+
+    const texts = component.UNSAFE_queryAllByType(Text);
+
+    expect(texts.length).toEqual(1);
+  });
+
   it('should render component passed to caption prop', () => {
     const Caption = (props): React.ReactElement<ImageProps> => (
       <Image

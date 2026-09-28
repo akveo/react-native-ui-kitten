@@ -285,7 +285,6 @@ const InputComponent = React.forwardRef<InputRef, InputProps>(
         labelMarginBottom,
         labelFontWeight,
         labelFontFamily,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         captionMarginTop,
         captionColor,
         captionFontSize,
@@ -324,6 +323,7 @@ const InputComponent = React.forwardRef<InputRef, InputProps>(
           fontFamily: labelFontFamily,
         },
         captionLabel: {
+          marginTop: captionMarginTop,
           fontSize: captionFontSize,
           fontWeight: captionFontWeight,
           fontFamily: captionFontFamily,
