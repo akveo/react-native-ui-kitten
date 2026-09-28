@@ -172,6 +172,8 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
     } = props;
 
     const [listVisible, setListVisible] = useState(false);
+    const optionsListRef = useRef<ListRef | null>(null);
+    const scrollToSelectedPendingRef = useRef(false);
     const serviceRef = useRef(new SelectService());
     const expandAnimationRef = useRef(new Animated.Value(0));
 
@@ -195,6 +197,16 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
       }
       return Array.isArray(selectedIndex) ? selectedIndex : [selectedIndex];
     }, [selectedIndex]);
+
+    // Row of the options list that holds the (first) selected option: a grouped option lives
+    // inside the row of its group.
+    const selectedListIndex = useMemo((): number => {
+      const first = selectedIndices[0];
+      if (!first) {
+        return -1;
+      }
+      return first.section >= 0 ? first.section : first.row;
+    }, [selectedIndices]);
 
     const expandToRotateInterpolation = useMemo(() => {
       return expandAnimation.interpolate({
@@ -296,6 +308,7 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
     const setOptionsListVisible = useCallback(() => {
       const hasData = data.length > 0;
       if (hasData) {
+        scrollToSelectedPendingRef.current = true;
         setListVisible(true);
         dispatch([Interaction.ACTIVE]);
         createExpandAnimation(-CHEVRON_DEG_COLLAPSED).start(() => {
@@ -358,6 +371,43 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
     const onBackdropPress = useCallback(() => {
       setOptionsListInvisible();
     }, [setOptionsListInvisible]);
+
+    const setListRefs = useCallback((instance: ListRef | null): void => {
+      optionsListRef.current = instance;
+      if (typeof listRef === 'function') {
+        listRef(instance);
+      } else if (listRef) {
+        (listRef as React.MutableRefObject<ListRef | null>).current = instance;
+      }
+    }, [listRef]);
+
+    // The list mounts scrolled to the top every time it opens; bring the selected option into
+    // view once its content is laid out. A consumer `initialScrollIndex` takes over.
+    const onListContentSizeChange = useCallback((width: number, height: number): void => {
+      listProps?.onContentSizeChange?.(width, height);
+      if (!scrollToSelectedPendingRef.current) {
+        return;
+      }
+      scrollToSelectedPendingRef.current = false;
+      const index = selectedListIndex;
+      if (listProps?.initialScrollIndex !== undefined || index <= 0 || index >= data.length) {
+        return;
+      }
+      optionsListRef.current?.scrollToIndex({ index, animated: false, viewPosition: 0 });
+    }, [listProps, selectedListIndex, data.length]);
+
+    // Rows past the render window have no frame yet: jump near them by the average row
+    // height, then retry once the window has caught up.
+    const onListScrollToIndexFailed = useCallback((info: {
+      index: number;
+      highestMeasuredFrameIndex: number;
+      averageItemLength: number;
+    }): void => {
+      optionsListRef.current?.scrollToOffset({ offset: info.averageItemLength * info.index, animated: false });
+      setTimeout(() => {
+        optionsListRef.current?.scrollToIndex({ index: info.index, animated: false, viewPosition: 0 });
+      }, 50);
+    }, []);
 
     const cloneItemWithProps = useCallback((el: SelectItemElement, itemProps: SelectItemProps): SelectItemElement => {
       const nestedElements = React.Children.map(el.props.children, (nestedEl: SelectItemElement, index: number) => {
@@ -458,11 +508,13 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
             // `list` on native while the web keeps the exact ARIA role.
             {...buildAccessibilityProps({ role: 'listbox' as Role })}
             bounces={false}
+            onScrollToIndexFailed={onListScrollToIndexFailed}
             {...listProps}
-            ref={listRef}
+            ref={setListRefs}
             style={[staticStyles.list, listProps?.style]}
             data={data}
             renderItem={renderItem}
+            onContentSizeChange={onListContentSizeChange}
           />
         </Popover>
         <FalsyText
