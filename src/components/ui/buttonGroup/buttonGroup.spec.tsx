@@ -6,7 +6,10 @@
  */
 
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import {
+  fireEvent,
+  render,
+} from '@testing-library/react-native';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   light,
@@ -91,6 +94,105 @@ describe('@button-group: component checks', () => {
     }, 'success');
 
     expect(buttonStatus).toEqual('success');
+  });
+
+  it('should let child props win over the group props', () => {
+    const component = render(
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
+        <ButtonGroup
+          appearance='outline'
+          status='primary'
+          size='small'
+        >
+          <Button />
+          <Button
+            appearance='filled'
+            status='danger'
+            size='giant'
+          />
+        </ButtonGroup>
+      </ApplicationProvider>,
+    );
+
+    const [first, second] = component.UNSAFE_getAllByType(Button);
+
+    expect(first.props.appearance).toEqual('outline');
+    expect(first.props.status).toEqual('primary');
+    expect(first.props.size).toEqual('small');
+    expect(second.props.appearance).toEqual('filled');
+    expect(second.props.status).toEqual('danger');
+    expect(second.props.size).toEqual('giant');
+  });
+
+  it('should fill the selected button and keep the group appearance on the others', () => {
+    const component = render(
+      <TestButtonGroup
+        appearance='outline'
+        selectedIndex={1}
+      />,
+    );
+
+    const [first, second] = component.UNSAFE_getAllByType(Button);
+
+    expect(first.props.appearance).toEqual('outline');
+    expect(second.props.appearance).toEqual('filled');
+  });
+
+  it('should not fill any button without selectedIndex', () => {
+    const component = render(
+      <TestButtonGroup appearance='outline' />,
+    );
+
+    const appearances = component.UNSAFE_getAllByType(Button).map(button => button.props.appearance);
+
+    expect(appearances).toEqual(['outline', 'outline']);
+  });
+
+  it('should call onSelect with the pressed index after the button onPress', () => {
+    const calls: string[] = [];
+    const component = render(
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
+        <ButtonGroup onSelect={index => calls.push(`select:${index}`)}>
+          <Button testID='first' />
+          <Button
+            testID='second'
+            onPress={() => calls.push('press')}
+          />
+        </ButtonGroup>
+      </ApplicationProvider>,
+    );
+
+    fireEvent.press(component.getByTestId('second'));
+    fireEvent.press(component.getByTestId('first'));
+
+    expect(calls).toEqual(['press', 'select:1', 'select:0']);
+  });
+
+  it('should keep the button onPress when onSelect is not set', () => {
+    const onPress = jest.fn();
+    const component = render(
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
+        <ButtonGroup>
+          <Button
+            testID='first'
+            onPress={onPress}
+          />
+        </ButtonGroup>
+      </ApplicationProvider>,
+    );
+
+    fireEvent.press(component.getByTestId('first'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 
 });
