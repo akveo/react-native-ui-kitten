@@ -61,7 +61,11 @@ export interface ViewPagerRef {
  * whether particular view should be rendered.
  * Useful when providing "lazy" loading behavior.
  *
- * @property {(number) => void} onOffsetChange - Called when scroll offset changes.
+ * @property {(number) => void} onOffsetChange - Called when scroll offset changes, in pixels.
+ * The page position is `offset / pageWidth`, where a page is the `onLayout` width divided by the page count.
+ *
+ * @property {(LayoutChangeEvent) => void} onLayout - Called with the layout of the content strip:
+ * `pages x page width` wide.
  *
  * @property {number} animationDuration - Duration of animated transition.
  *
@@ -83,6 +87,7 @@ function ViewPagerComponent<ChildrenProps = {}>(
     onSelect,
     shouldLoadComponent = () => true,
     onOffsetChange,
+    onLayout: onLayoutProp,
     animationDuration = DEFAULT_DURATION,
     ...viewProps
   }: ViewPagerProps<ChildrenProps>,
@@ -179,12 +184,15 @@ function ViewPagerComponent<ChildrenProps = {}>(
     });
   }, [childrenArray.length, contentOffsetAnimatedValue, scrollToIndex]);
 
+  // The laid-out view is the content strip, `pages x page width` wide; the consumer's `onLayout`
+  // receives that same event (a page is `layout.width / pageCount`).
   const onLayout = useCallback((event: LayoutChangeEvent) => {
     contentWidthRef.current = event.nativeEvent.layout.width / childrenArray.length;
     if (contentWidthRef.current > 0) {
       scrollToIndex({ index: selectedIndexRef.current, animated: true });
     }
-  }, [childrenArray.length, scrollToIndex]);
+    onLayoutProp?.(event);
+  }, [childrenArray.length, scrollToIndex, onLayoutProp]);
 
   const getContainerStyle = useCallback((): ViewStyle => {
     return {

@@ -3632,6 +3632,110 @@
                 }
             }
         },
+        "PageIndicator": {
+            "meta": {
+                "scope": "all",
+                "parameters": {
+                    "paddingHorizontal": {
+                        "type": "number"
+                    },
+                    "paddingVertical": {
+                        "type": "number"
+                    },
+                    "dotWidth": {
+                        "type": "number"
+                    },
+                    "dotHeight": {
+                        "type": "number"
+                    },
+                    "dotBorderRadius": {
+                        "type": "number"
+                    },
+                    "dotMarginHorizontal": {
+                        "type": "number"
+                    },
+                    "dotBackgroundColor": {
+                        "type": "string"
+                    },
+                    "selectedDotWidth": {
+                        "type": "number"
+                    },
+                    "selectedDotBackgroundColor": {
+                        "type": "string"
+                    }
+                },
+                "appearances": {
+                    "default": {
+                        "default": true
+                    }
+                },
+                "variantGroups": {
+                    "status": {
+                        "basic": {
+                            "default": false
+                        },
+                        "primary": {
+                            "default": true
+                        },
+                        "success": {
+                            "default": false
+                        },
+                        "info": {
+                            "default": false
+                        },
+                        "warning": {
+                            "default": false
+                        },
+                        "danger": {
+                            "default": false
+                        },
+                        "control": {
+                            "default": false
+                        }
+                    }
+                },
+                "states": {}
+            },
+            "appearances": {
+                "default": {
+                    "mapping": {
+                        "paddingHorizontal": 8,
+                        "paddingVertical": 8,
+                        "dotWidth": 8,
+                        "dotHeight": 8,
+                        "dotBorderRadius": 4,
+                        "dotMarginHorizontal": 4,
+                        "dotBackgroundColor": "background-basic-color-4",
+                        "selectedDotWidth": 16
+                    },
+                    "variantGroups": {
+                        "status": {
+                            "basic": {
+                                "selectedDotBackgroundColor": "text-basic-color"
+                            },
+                            "primary": {
+                                "selectedDotBackgroundColor": "color-primary-default"
+                            },
+                            "success": {
+                                "selectedDotBackgroundColor": "color-success-default"
+                            },
+                            "info": {
+                                "selectedDotBackgroundColor": "color-info-default"
+                            },
+                            "warning": {
+                                "selectedDotBackgroundColor": "color-warning-default"
+                            },
+                            "danger": {
+                                "selectedDotBackgroundColor": "color-danger-default"
+                            },
+                            "control": {
+                                "selectedDotBackgroundColor": "color-control-default"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "Popover": {
             "meta": {
                 "scope": "all",

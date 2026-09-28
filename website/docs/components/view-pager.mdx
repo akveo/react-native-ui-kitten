@@ -56,9 +56,52 @@ const ViewPagerExample = () => {
 | `children` | `ReactNode[]` | - | Page content elements. |
 | `swipeEnabled` | `boolean` | `true` | Whether pages can be changed by swiping. |
 | `animationDuration` | `number` | `undefined` | Duration of the page transition animation, in milliseconds. |
-| `onOffsetChange` | `(offset: number) => void` | `undefined` | Called while the pager scrolls, with the current horizontal offset. |
+| `onOffsetChange` | `(offset: number) => void` | `undefined` | Called while the pager scrolls, with the current horizontal offset in pixels (`offset / pageWidth` is the page position). |
+| `onLayout` | `(event: LayoutChangeEvent) => void` | `undefined` | Called with the layout of the content strip, `pages x page width` wide. |
 
 ViewPager also accepts all standard React Native `View` props.
+
+## PageIndicator
+
+`PageIndicator` renders one dot per page and highlights the selected one. Feed it `selectedIndex` from the
+pager; for dots that follow the swipe, pass `progress` computed from `onOffsetChange` divided by the pager
+width. Pressing a dot calls `onSelect`.
+
+```tsx
+const [selectedIndex, setSelectedIndex] = useState(0);
+const [progress, setProgress] = useState(0);
+const [pageWidth, setPageWidth] = useState(0);
+
+<ViewPager
+  selectedIndex={selectedIndex}
+  onSelect={setSelectedIndex}
+  // The pager lays out its content strip, pages x page width wide.
+  onLayout={event => setPageWidth(event.nativeEvent.layout.width / pages.length)}
+  onOffsetChange={offset => pageWidth > 0 && setProgress(offset / pageWidth)}
+>
+  {pages}
+</ViewPager>
+<PageIndicator
+  pageCount={pages.length}
+  selectedIndex={selectedIndex}
+  progress={progress}
+  onSelect={setSelectedIndex}
+  dotAccessibilityLabel={(index, count) => `Page ${index + 1} of ${count}`}
+/>
+```
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `pageCount` | `number` | - | Number of pages, one dot each. |
+| `selectedIndex` | `number` | `0` | Index of the selected page. |
+| `progress` | `number` | `undefined` | Fractional page position while the pager scrolls (`offset / pageWidth`); the dots grow and shrink between pages. |
+| `onSelect` | `(index: number) => void` | `undefined` | Called with the index of a pressed dot. |
+| `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'primary'` | Colour of the selected dot. |
+| `dotStyle` | `ViewStyle` | `undefined` | Style of every dot, merged after the mapping. |
+| `dotAccessibilityLabel` | `(index, pageCount) => string` | `undefined` | Accessible name of a dot. |
+| `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
+
+The dot size, spacing, colours and the selected dot width come from the `PageIndicator` mapping (`dotWidth`, `dotHeight`, `dotBorderRadius`, `dotMarginHorizontal`, `dotBackgroundColor`, `selectedDotWidth`, `selectedDotBackgroundColor` per status).
 
 ## Storybook
 
