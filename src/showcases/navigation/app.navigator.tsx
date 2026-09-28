@@ -66,6 +66,7 @@ import { AutocompleteSimpleUsageShowcase } from '../components/autocomplete/auto
 import { AutocompleteBlurShowcase } from '../components/autocomplete/autocompleteBlur.component';
 import { ViewPagerSimpleUsageShowcase } from '../components/viewPager/viewPagerSimpleUsage.component';
 import { ModalDecimalSizeShowcase } from '../components/modal/modalDecimalSize.component';
+import { SelectPlacementShowcase } from '../components/select/selectPlacement.component';
 import {
   IconGallery1Showcase,
   IconGallery2Showcase,
@@ -201,6 +202,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'CalendarHermes', Component: CalendarHermesShowcase },
   { title: 'PopoverAnchorFlex', Component: PopoverAnchorFlexShowcase },
   { title: 'AutocompleteBlur', Component: AutocompleteBlurShowcase },
+  { title: 'SelectPlacement', Component: SelectPlacementShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;
