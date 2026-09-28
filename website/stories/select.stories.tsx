@@ -33,3 +33,19 @@ export const Default: Story = {
     </Select>
   ),
 };
+
+export const PlacementAndWidth: Story = {
+  args: {
+    placeholder: 'Opens above, wider than the control',
+    placement: 'top start',
+    popoverProps: { fullWidth: false, style: { width: 320 } },
+    style: { width: 200, marginTop: 200 },
+  },
+  render: (args) => (
+    <Select {...args}>
+      <SelectItem title="Narrow control, wide list, option 1" />
+      <SelectItem title="Narrow control, wide list, option 2" />
+      <SelectItem title="Narrow control, wide list, option 3" />
+    </Select>
+  ),
+};
