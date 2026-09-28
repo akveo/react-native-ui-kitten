@@ -62,6 +62,11 @@ export interface AutocompleteRef {
  *
  * @property {(number) => void} onSelect - Called when option is pressed.
  *
+ * @property {string} testID - Test id of the options list. The input field derives its own ids from it:
+ * the field is `@@<testID>/input/input` and its container `@@<testID>/input/container`, so several
+ * autocompletes on one screen stay distinguishable. Without a `testID` the field keeps the
+ * `@@autocomplete/input/input` id.
+ *
  * @note The options list floats above the app through the `ApplicationProvider` panel without a
  * backdrop: the first tap on an option selects it, and the first tap on a control next to the
  * field reaches that control. The list closes when the input blurs, when an option is selected,
@@ -221,14 +226,14 @@ const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
         <Input
           {...inputProps}
           ref={inputRef}
-          testID='@autocomplete/input'
+          testID={testID ? `@${testID}/input` : '@autocomplete/input'}
           onFocus={onInputFocus}
           onBlur={onInputBlur}
           onSubmitEditing={onInputSubmitEditing}
         />
       </View>
     );
-  }, [inputProps, onInputFocus, onInputBlur, onInputSubmitEditing]);
+  }, [inputProps, testID, onInputFocus, onInputBlur, onInputSubmitEditing]);
 
   return (
     <Popover
