@@ -17,6 +17,7 @@ import {
   render,
 } from '@testing-library/react-native';
 import {
+  dark,
   light,
   mapping,
 } from '@ui-kitten/eva';
@@ -203,6 +204,35 @@ describe('@avatar: component checks', () => {
 
       expect(StyleSheet.flatten(frame.props.style).backgroundColor).toEqual(themeValue('color-primary-default'));
       expect(StyleSheet.flatten(component.getByText('JD').props.style).color).toEqual(themeValue('text-control-color'));
+    });
+
+    it('should keep basic initials readable on the light frame in the dark theme', () => {
+      const darkValue = (name: string): string => {
+        let value: string = dark[name];
+        while (typeof value === 'string' && value.startsWith('$')) {
+          value = dark[value.slice(1)];
+        }
+        return value;
+      };
+
+      const component = render(
+        <ApplicationProvider
+          mapping={mapping}
+          theme={dark}
+        >
+          <Avatar
+            source={undefined}
+            name='Jane Doe'
+          />
+        </ApplicationProvider>,
+      );
+
+      const frame = component.getByLabelText('Jane Doe');
+      const textColor = StyleSheet.flatten(component.getByText('JD').props.style).color;
+
+      expect(StyleSheet.flatten(frame.props.style).backgroundColor).toEqual(darkValue('color-basic-default'));
+      expect(textColor).toEqual(darkValue('color-basic-800'));
+      expect(textColor).not.toEqual(darkValue('text-basic-color'));
     });
   });
 
