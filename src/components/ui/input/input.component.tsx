@@ -91,6 +91,11 @@ export interface InputProps extends TextInputPropsWithoutChildren {
    * Customizes the style of the text field.
    */
   textStyle?: StyleProp<TextStyle>;
+  /**
+   * Ref of the underlying React Native `TextInput`, for libraries that expect a native input
+   * (`setNativeProps`, `measure`, ...). The component ref stays the `InputRef` API.
+   */
+  textInputRef?: React.Ref<TextInput>;
 }
 
 export type InputElement = React.ReactElement<InputProps>;
@@ -148,6 +153,9 @@ export interface InputRef {
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes the style of the text field.
  *
+ * @property {React.Ref<TextInput>} textInputRef - Ref of the underlying React Native TextInput,
+ * for libraries that expect a native input. The component ref stays the `InputRef` API.
+ *
  * @property {TextInputProps} ...TextInputProps - Any props applied to TextInput component.
  *
  * @overview-example InputSimpleUsage
@@ -195,12 +203,22 @@ const InputComponent = React.forwardRef<InputRef, InputProps>(
       accessoryLeft,
       accessoryRight,
       testID,
+      textInputRef: textInputRefProp,
       onFocus: onFocusProp,
       onBlur: onBlurProp,
       ...textInputProps
     } = props;
 
     const textInputRef = useRef<TextInput>(null);
+
+    const setTextInputRefs = useCallback((instance: TextInput | null): void => {
+      textInputRef.current = instance;
+      if (typeof textInputRefProp === 'function') {
+        textInputRefProp(instance);
+      } else if (textInputRefProp) {
+        (textInputRefProp as React.MutableRefObject<TextInput | null>).current = instance;
+      }
+    }, [textInputRefProp]);
     const webEventResponderRef = useRef<WebEventResponderInstance | null>(null);
     const focusedRef = useRef(false);
 
@@ -353,7 +371,7 @@ const InputComponent = React.forwardRef<InputRef, InputProps>(
             component={accessoryLeft}
           />
           <TextInput
-            ref={textInputRef}
+            ref={setTextInputRefs}
             placeholderTextColor={componentStyle.placeholder.color}
             {...textInputProps}
             {...buildAccessibilityProps({

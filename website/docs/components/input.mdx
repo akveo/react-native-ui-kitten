@@ -71,6 +71,7 @@ const InputExample = () => {
 | `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory (e.g., icon). |
 | `disabled` | `boolean` | `false` | Whether the input is disabled. |
 | `textStyle` | `TextStyle` | `undefined` | Style applied to the input text. |
+| `textInputRef` | `Ref<TextInput>` | `undefined` | Ref of the underlying React Native `TextInput`, for libraries that expect a native input (`setNativeProps`, `measure`). The component ref stays the `InputRef` API. |
 | `appearance` | `'default'` | `'default'` | Appearance defined in the Eva mapping. |
 
 Input also accepts all standard React Native `TextInput` props, including `placeholder`.

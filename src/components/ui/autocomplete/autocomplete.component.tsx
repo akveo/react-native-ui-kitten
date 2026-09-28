@@ -102,7 +102,8 @@ export interface AutocompleteRef {
  *
  * @property {(event) => void} onBlur - Called when the input field loses focus; the options list closes.
  *
- * @property {InputProps} ...InputProps - Any props applied to Input component.
+ * @property {InputProps} ...InputProps - Any props applied to Input component, including `textInputRef`,
+ * the ref of the underlying React Native TextInput.
  *
  * @overview-example AutocompleteSimpleUsage
  * Autocomplete may contain options to be rendered within suggestions list.
