@@ -6,6 +6,10 @@ import { evaIcons } from '@ui-kitten/eva-icons';
 /**
  * Every Eva icon, 100 per page, so that a parity sweep can screenshot the whole set one screen at a
  * time. Pages are separate showcase sections (`IconGallery1` ... `IconGallery5`).
+ *
+ * The grids are hidden from accessibility: the sweep reads screenshots, and 500 icons would push
+ * the accessibility tree past the agent-device snapshot budget (1500 nodes), which cuts off
+ * everything enumerated after the root view, including presented modals.
  */
 const ICON_NAMES: string[] = Object.keys(evaIcons);
 const PAGE_SIZE = 100;
@@ -20,6 +24,8 @@ const IconGalleryPage = ({ page }: { page: number }): React.ReactElement => {
     <View
       style={styles.grid}
       testID={`icon-gallery-${page + 1}`}
+      accessibilityElementsHidden={true}
+      importantForAccessibility='no-hide-descendants'
     >
       {names.map((name) => (
         <Icon

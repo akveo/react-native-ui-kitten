@@ -324,13 +324,13 @@ RangeDatepicker)
   shot $E/RangeDatepicker.png
   ;;
 Autocomplete)
-  goto Autocomplete; seeId @@autocomplete/input-anchor/input
-  chk "focus" pid @@autocomplete/input-anchor/input
+  goto Autocomplete; seeId @@autocomplete/input/input
+  chk "focus" pid @@autocomplete/input/input
   chk "type inter" ad type "inter"
   chk "item 1 shown" ad wait 'id="autocomplete-item-1"' 4000
   chk "only one item" ad is absent 'id="autocomplete-item-2"'
   chk "press item" pid autocomplete-item-1; settle
-  chk "value Interstellar" [ "$(txt @@autocomplete/input-anchor/input)" = "Interstellar" ]
+  chk "value Interstellar" [ "$(txt @@autocomplete/input/input)" = "Interstellar" ]
   dismissKb
   ;;
 ViewPager)
