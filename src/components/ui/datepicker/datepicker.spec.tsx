@@ -32,6 +32,7 @@ import {
   DatepickerRef,
 } from './datepicker.component';
 import { Calendar } from '../calendar/calendar.component';
+import { Popover } from '../popover/popover.component';
 import { CalendarViewModes } from '../calendar/type';
 
 jest.mock('react-native', () => {
@@ -96,6 +97,51 @@ describe('@datepicker: component checks', () => {
     findInputTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0],
     findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
+
+  describe('popoverProps', () => {
+    it('should forward popoverProps to the calendar popover and merge its style', () => {
+      const component = render(
+        <TestDatepicker popoverProps={{ fullWidth: true, blocking: false, style: { borderRadius: 12 } }} />,
+      );
+
+      const popover = component.UNSAFE_getByType(Popover);
+
+      expect(popover.props.fullWidth).toEqual(true);
+      expect(popover.props.blocking).toEqual(false);
+      expect(StyleSheet.flatten(popover.props.style)).toMatchObject({ borderRadius: 12, borderWidth: 0 });
+    });
+
+    it('should let placement and backdropStyle set directly win over popoverProps', () => {
+      const component = render(
+        <TestDatepicker
+          placement='top'
+          backdropStyle={{ backgroundColor: 'red' }}
+          popoverProps={{ placement: 'left', backdropStyle: { backgroundColor: 'blue' } }}
+        />,
+      );
+
+      const popover = component.UNSAFE_getByType(Popover);
+
+      expect(popover.props.placement).toEqual('top');
+      expect(StyleSheet.flatten(popover.props.backdropStyle)).toMatchObject({ backgroundColor: 'red' });
+    });
+
+    it('should call popoverProps.onBackdropPress and still close the calendar', async () => {
+      const onBackdropPress = jest.fn();
+      const component = render(
+        <TestDatepicker popoverProps={{ onBackdropPress }} />,
+      );
+
+      fireEvent.press(touchables.findInputTouchable(component));
+      const backdrop = await waitFor(() => touchables.findBackdropTouchable(component));
+      await act(async () => {
+        backdrop.props.onResponderRelease({ nativeEvent: {} });
+      });
+
+      expect(onBackdropPress).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(component.UNSAFE_queryByType(Calendar)).toBeFalsy());
+    });
+  });
 
   it('should not render calendar when not focused', () => {
     const component = render(
