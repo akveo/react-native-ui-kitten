@@ -6,10 +6,21 @@
  */
 
 import React from 'react';
+import { LiteralUnion } from '../../devsupport/typings';
 import { ThemeContext } from './themeContext';
+import { KnownThemeKey } from './themeKeys';
 
 export type ThemeValue = string;
-export type ThemeType = Record<string, ThemeValue>;
+/**
+ * A theme token name: one of the tokens the bundled design systems define, or any custom token.
+ */
+export type ThemeKey = LiteralUnion<KnownThemeKey>;
+/**
+ * A theme: the known tokens are suggested by the editor, custom tokens are allowed through the
+ * `string` index signature (an intersection, not an interface, so the optional known keys do not
+ * conflict with the index signature in the emitted declarations).
+ */
+export type ThemeType = { [K in KnownThemeKey]?: ThemeValue } & Record<string, ThemeValue>;
 
 /**
  * Takes an actual theme provided by ApplicationProvider or ThemeProvider and
