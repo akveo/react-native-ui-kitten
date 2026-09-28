@@ -63,6 +63,21 @@
                     },
                     "height": {
                         "type": "number"
+                    },
+                    "backgroundColor": {
+                        "type": "string"
+                    },
+                    "textColor": {
+                        "type": "string"
+                    },
+                    "textFontSize": {
+                        "type": "number"
+                    },
+                    "textFontWeight": {
+                        "type": "string"
+                    },
+                    "textFontFamily": {
+                        "type": "string"
                     }
                 },
                 "appearances": {
@@ -98,13 +113,39 @@
                         "giant": {
                             "default": false
                         }
+                    },
+                    "status": {
+                        "basic": {
+                            "default": true
+                        },
+                        "primary": {
+                            "default": false
+                        },
+                        "success": {
+                            "default": false
+                        },
+                        "info": {
+                            "default": false
+                        },
+                        "warning": {
+                            "default": false
+                        },
+                        "danger": {
+                            "default": false
+                        },
+                        "control": {
+                            "default": false
+                        }
                     }
                 },
                 "states": {}
             },
             "appearances": {
                 "default": {
-                    "mapping": {},
+                    "mapping": {
+                        "textFontFamily": "text-font-family",
+                        "textFontWeight": "text-subtitle-1-font-weight"
+                    },
                     "variantGroups": {
                         "shape": {
                             "round": {
@@ -120,23 +161,58 @@
                         "size": {
                             "tiny": {
                                 "width": "size-tiny",
-                                "height": "size-tiny"
+                                "height": "size-tiny",
+                                "textFontSize": 10
                             },
                             "small": {
                                 "width": "size-small",
-                                "height": "size-small"
+                                "height": "size-small",
+                                "textFontSize": 13
                             },
                             "medium": {
                                 "width": "size-medium",
-                                "height": "size-medium"
+                                "height": "size-medium",
+                                "textFontSize": 16
                             },
                             "large": {
                                 "width": "size-large",
-                                "height": "size-large"
+                                "height": "size-large",
+                                "textFontSize": 22
                             },
                             "giant": {
                                 "width": "size-giant",
-                                "height": "size-giant"
+                                "height": "size-giant",
+                                "textFontSize": 30
+                            }
+                        },
+                        "status": {
+                            "basic": {
+                                "backgroundColor": "color-basic-default",
+                                "textColor": "text-basic-color"
+                            },
+                            "primary": {
+                                "backgroundColor": "color-primary-default",
+                                "textColor": "text-control-color"
+                            },
+                            "success": {
+                                "backgroundColor": "color-success-default",
+                                "textColor": "text-control-color"
+                            },
+                            "info": {
+                                "backgroundColor": "color-info-default",
+                                "textColor": "text-control-color"
+                            },
+                            "warning": {
+                                "backgroundColor": "color-warning-default",
+                                "textColor": "text-control-color"
+                            },
+                            "danger": {
+                                "backgroundColor": "color-danger-default",
+                                "textColor": "text-control-color"
+                            },
+                            "control": {
+                                "backgroundColor": "color-control-default",
+                                "textColor": "color-basic-800"
                             }
                         }
                     }

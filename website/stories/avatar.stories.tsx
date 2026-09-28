@@ -43,3 +43,27 @@ export const Rounded: Story = {
     size: 'large',
   },
 };
+
+export const Initials: Story = {
+  args: {
+    name: 'Jane Doe',
+    status: 'primary',
+    shape: 'round',
+    size: 'large',
+  },
+  argTypes: {
+    status: {
+      control: 'select',
+      options: ['basic', 'primary', 'success', 'info', 'warning', 'danger', 'control'],
+    },
+  },
+};
+
+export const InitialsFallback: Story = {
+  args: {
+    name: 'Broken Link',
+    status: 'danger',
+    size: 'large',
+    source: { uri: 'https://invalid.invalid/no-such-image.png' },
+  },
+};
