@@ -65,7 +65,7 @@ const InputExample = () => {
 | `status` | `'basic' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'control'` | `'basic'` | Semantic color applied to the input border and label. |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the input. |
 | `label` | `string \| number \| (props) => ReactElement` | `undefined` | Label displayed above the input. |
-| `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the input (e.g., validation message). |
+| `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the input (e.g., validation message). Spaced from the field by the mapping's `captionMarginTop` (4); a function caption receives it in the `style` prop, spread it to keep the spacing. |
 | `placeholder` | `string` | `undefined` | Placeholder text displayed when the input is empty. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the left accessory (e.g., icon). |
 | `accessoryRight` | `(props) => ReactElement` | `undefined` | Render function for the right accessory (e.g., icon). |
