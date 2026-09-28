@@ -3730,7 +3730,7 @@
                         "dotHeight": 8,
                         "dotBorderRadius": 4,
                         "dotMarginHorizontal": 4,
-                        "dotBackgroundColor": "background-basic-color-4",
+                        "dotBackgroundColor": "text-hint-color",
                         "selectedDotWidth": 16
                     },
                     "variantGroups": {
