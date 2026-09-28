@@ -256,6 +256,11 @@ export {
   type ViewPagerProps,
   type ViewPagerElement,
 } from './viewPager/viewPager.component';
+export {
+  PageIndicator,
+  type PageIndicatorProps,
+  type PageIndicatorElement,
+} from './viewPager/pageIndicator.component';
 export { DateService } from './calendar/service/date.service';
 export {
   NativeDateService,
