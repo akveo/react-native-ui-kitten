@@ -44,7 +44,23 @@ const ButtonGroupExample = () => (
 | `appearance` | `'filled' \| 'outline' \| 'ghost'` | `'filled'` | Visual style applied to all buttons in the group. |
 | `status` | `'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'basic' \| 'control'` | `'primary'` | Semantic color applied to all buttons in the group. |
 | `size` | `'tiny' \| 'small' \| 'medium' \| 'large' \| 'giant'` | `'medium'` | Size applied to all buttons in the group. |
-| `children` | `Button[]` | - | Button elements. |
+| `selectedIndex` | `number` | `undefined` | Index of the selected button. It renders `filled` (unless it sets its own `appearance`); the others keep the group appearance. |
+| `onSelect` | `(index: number) => void` | `undefined` | Called with the index of the pressed button, after that button's own `onPress`. |
+| `children` | `Button[]` | - | Button elements. `appearance`, `status` and `size` set on a child win over the group's. |
+
+## Toggle
+
+Combine `selectedIndex` and `onSelect` for a segmented toggle:
+
+```tsx
+const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+<ButtonGroup appearance="outline" selectedIndex={selectedIndex} onSelect={setSelectedIndex}>
+  <Button>Day</Button>
+  <Button>Week</Button>
+  <Button>Month</Button>
+</ButtonGroup>
+```
 
 ## Storybook
 
