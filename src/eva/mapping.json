@@ -188,7 +188,7 @@
                         "status": {
                             "basic": {
                                 "backgroundColor": "color-basic-default",
-                                "textColor": "text-basic-color"
+                                "textColor": "color-basic-800"
                             },
                             "primary": {
                                 "backgroundColor": "color-primary-default",
