@@ -69,6 +69,7 @@ import { ModalDecimalSizeShowcase } from '../components/modal/modalDecimalSize.c
 import { SelectScrollToSelectedShowcase } from '../components/select/selectScrollToSelected.component';
 import { SelectPlacementShowcase } from '../components/select/selectPlacement.component';
 import { ButtonGroupToggleShowcase } from '../components/buttonGroup/buttonGroupToggle.component';
+import { DatepickerFullWidthShowcase } from '../components/datepicker/datepickerFullWidth.component';
 import {
   IconGallery1Showcase,
   IconGallery2Showcase,
@@ -207,6 +208,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'SelectScrollToSelected', Component: SelectScrollToSelectedShowcase },
   { title: 'SelectPlacement', Component: SelectPlacementShowcase },
   { title: 'ButtonGroupToggle', Component: ButtonGroupToggleShowcase },
+  { title: 'DatepickerFullWidth', Component: DatepickerFullWidthShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;
