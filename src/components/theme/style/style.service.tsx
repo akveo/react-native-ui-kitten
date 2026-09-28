@@ -6,7 +6,10 @@
  */
 
 import { useMemo } from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+} from 'react-native';
 import {
   ThemeService,
   ThemeType,
@@ -49,6 +52,23 @@ export const useStyleSheet = <T extends Styles<T>>(styles: Styles<T>): T => {
   return useMemo(() => {
     return StyleService.createThemed(styles, theme);
   }, [theme]);
+};
+
+const FONT_FAMILY_KEY = /fontFamily$/i;
+const SYSTEM_FONT_FAMILY = 'System';
+
+/**
+ * `System` names the platform font. iOS resolves it as such, but React Native Android treats any
+ * `fontFamily` as a custom family: it rounds `fontWeight` to normal or bold (the asset lookup only
+ * knows `_bold` files) and falls back to the default typeface, so 500 and 600 render as 400.
+ * Without a `fontFamily` Android keeps the numeric weight on the default typeface. The key is kept
+ * (with `undefined`) so a flattened style still reports that the mapping set a font family.
+ */
+const withPlatformFontFamily = (key: string, value: unknown): unknown => {
+  if (Platform.OS === 'android' && value === SYSTEM_FONT_FAMILY && FONT_FAMILY_KEY.test(key)) {
+    return undefined;
+  }
+  return value;
 };
 
 /**
@@ -108,7 +128,7 @@ export class StyleService {
     const themed: StyleType = {};
     for (const key in style) {
       const value = style[key];
-      themed[key] = ThemeService.getValue(value, theme, value);
+      themed[key] = withPlatformFontFamily(key, ThemeService.getValue(value, theme, value));
     }
     return themed;
   };

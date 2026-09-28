@@ -252,6 +252,8 @@ To have every weight resolve on Android, register the faces under one family nam
 
 Then set only `text-font-family` to that family name; the weight tokens pick the face on both platforms. A separate family per weight, as in the example above, works on Android only when each family that carries a heavy weight token also ships a `_bold` file.
 
+The default `text-font-family` is `System`, the platform font. React Native Android treats any `fontFamily` name as a custom family and rounds the weight to regular or bold, so on Android Eva drops a `System` family from the resolved styles and lets the platform font keep the exact weight (`500`, `600`, …). A custom family name is passed through unchanged.
+
 ---
 
 ## Summary
