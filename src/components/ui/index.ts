@@ -96,6 +96,7 @@ export {
   type SelectListProps,
   type SelectElement,
   type SelectRef,
+  type SelectPopoverProps,
 } from './select/select.component';
 export {
   SelectGroup,

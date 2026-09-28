@@ -41,7 +41,11 @@ import {
   StyleType,
 } from '../../theme';
 import { List, ListProps, ListRef } from '../list/list.component';
-import { Popover } from '../popover/popover.component';
+import {
+  Popover,
+  PopoverProps,
+} from '../popover/popover.component';
+import { PopoverPlacement } from '../popover/type';
 import { ChevronDown } from '../shared/chevronDown.component';
 import { SelectGroupProps } from './selectGroup.component';
 import {
@@ -60,6 +64,17 @@ export interface SelectProps extends TouchableWebProps {
   onSelect?: (index: IndexPath | IndexPath[]) => void;
   value?: RenderProp<TextProps> | TextElement | string | number;
   multiSelect?: boolean;
+  /**
+   * Position of the options list relative to the control.
+   * Defaults to `bottom`.
+   */
+  placement?: PopoverPlacement | string;
+  /**
+   * Props for the `Popover` that shows the options, e.g. `fullWidth` (defaults to `true`),
+   * `blocking`, `anchorContainerStyle`, `backdropStyle` or `style`. `visible`, `anchor` and
+   * `children` are managed by Select; `onBackdropPress` is called before the list closes.
+   */
+  popoverProps?: SelectPopoverProps;
   placeholder?: RenderProp<TextProps> | TextElement | string | number;
   label?: RenderProp<TextProps> | TextElement | string | number;
   caption?: RenderProp<TextProps> | TextElement | string | number;
@@ -82,6 +97,8 @@ export interface SelectProps extends TouchableWebProps {
 }
 
 export type SelectListProps = Omit<ListProps, 'data' | 'renderItem'>;
+
+export type SelectPopoverProps = Partial<Omit<PopoverProps, 'visible' | 'anchor' | 'children'>>;
 
 export type SelectElement = React.ReactElement<SelectProps>;
 
@@ -114,6 +131,16 @@ const MAX_SCROLL_RETRIES = 5;
  * to render for the selected option(s).
  *
  * @property {boolean} multiSelect - Whether multiple selection is allowed. Defaults to false.
+ *
+ * @property {string | PopoverPlacement} placement - Position of the options list relative to the control.
+ * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
+ * `right end`, `bottom start` or `bottom end`.
+ * Defaults to *bottom*.
+ *
+ * @property {PopoverProps} popoverProps - Props for the Popover that shows the options,
+ * e.g. `fullWidth` (defaults to *true*, set `false` to size the list by its content), `blocking`,
+ * `anchorContainerStyle`, `backdropStyle` or `style`.
+ * `visible`, `anchor` and `children` are managed by Select; `onBackdropPress` is called before the list closes.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - Placeholder when no option selected.
  *
@@ -152,6 +179,8 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
       onSelect,
       value,
       multiSelect = false,
+      placement = 'bottom',
+      popoverProps,
       placeholder = 'Select Option',
       label,
       caption,
@@ -382,9 +411,11 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
       }
     }, [onSelect, service, multiSelect, selectedIndices, setOptionsListInvisible]);
 
+    const onBackdropPressProp = popoverProps?.onBackdropPress;
     const onBackdropPress = useCallback(() => {
+      onBackdropPressProp?.();
       setOptionsListInvisible();
-    }, [setOptionsListInvisible]);
+    }, [onBackdropPressProp, setOptionsListInvisible]);
 
     const setListRefs = useCallback((instance: ListRef | null): void => {
       optionsListRef.current = instance;
@@ -518,12 +549,14 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
           component={label}
         />
         <Popover
-          style={[staticStyles.popover, componentStyle.popover]}
-          visible={listVisible}
           fullWidth={true}
+          animationType='fade'
+          placement={placement}
+          {...popoverProps}
+          style={[staticStyles.popover, componentStyle.popover, popoverProps?.style]}
+          visible={listVisible}
           anchor={renderInputElement}
           onBackdropPress={onBackdropPress}
-          animationType="fade"
         >
           <List
             // ARIA expects combobox -> listbox -> option. `listbox` has no

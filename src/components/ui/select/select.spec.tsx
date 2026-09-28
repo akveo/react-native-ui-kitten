@@ -40,6 +40,7 @@ import {
   SelectItemProps,
 } from '../select/selectItem.component';
 import { CheckBox } from '../checkbox/checkbox.component';
+import { Popover } from '../popover/popover.component';
 
 /*
  * Mock UIManager since Select relies on native measurements
@@ -566,6 +567,48 @@ I love Babel
 
       expect(scrollToIndex).toHaveBeenCalledWith(expect.objectContaining({ index: 2 }));
     });
+  it('should open the options at the bottom, full width, by default', () => {
+    const component = render(
+      <TestSelect />,
+    );
+
+    const popover = component.UNSAFE_getByType(Popover);
+
+    expect(popover.props.placement).toEqual('bottom');
+    expect(popover.props.fullWidth).toEqual(true);
+  });
+
+  it('should forward placement and popoverProps to the options popover', () => {
+    const component = render(
+      <TestSelect
+        placement='top end'
+        popoverProps={{ fullWidth: false, blocking: false, style: { width: 300 } }}
+      />,
+    );
+
+    const popover = component.UNSAFE_getByType(Popover);
+
+    expect(popover.props.placement).toEqual('top end');
+    expect(popover.props.fullWidth).toEqual(false);
+    expect(popover.props.blocking).toEqual(false);
+    expect(StyleSheet.flatten(popover.props.style)).toMatchObject({ width: 300 });
+  });
+
+  it('should call popoverProps.onBackdropPress and still close the options', async () => {
+    const onBackdropPress = jest.fn();
+    const component = render(
+      <TestSelect popoverProps={{ onBackdropPress }} />,
+    );
+
+    fireEvent.press(touchables.findControlTouchable(component));
+    // The Modal backdrop is a PanResponder view, not a touchable.
+    const backdrop = await waitFor(() => component.getByTestId('@backdrop'));
+    await act(async () => {
+      backdrop.props.onResponderRelease({ nativeEvent: {} });
+    });
+
+    expect(onBackdropPress).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(component.queryByText('Option 1')).toBeFalsy());
   });
 
   it('should render options when becomes focused', async () => {
