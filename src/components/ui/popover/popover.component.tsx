@@ -28,6 +28,7 @@ import {
 import { ModalService } from '../../theme';
 import { Modal, ModalProps, RNModalProps } from '../modal/modal.component';
 import {
+  INDICATOR_EDGE_MARGIN,
   PopoverView,
   PopoverViewElement,
   PopoverViewProps,
@@ -90,6 +91,8 @@ export interface UsePopoverMeasurementResult {
   childFrame: Frame;
   actualPlacement: PopoverPlacement;
   contentPosition: Point;
+  /** Cross-axis distance from the content centre to the anchor centre, for the indicator. */
+  indicatorOffset: number;
   contentFlexPosition: StyleProp<ViewStyle>;
   forceMeasure: boolean;
   /** Attach to the anchor's `MeasureElement` so the hook can re-measure the anchor on demand. */
@@ -126,6 +129,7 @@ export function usePopoverMeasurement({
     PopoverPlacements.parse(placement)
   );
   const [contentPosition, setContentPosition] = useState<Point>(Point.outscreen());
+  const [indicatorOffset, setIndicatorOffset] = useState<number>(0);
 
   // Refs for values needed in callbacks without causing re-renders
   const childFrameRef = useRef<Frame>(childFrame);
@@ -223,6 +227,20 @@ export function usePopoverMeasurement({
       // `find` falls back to the preferred placement when nothing fits; keep that frame on screen.
       const displayFrame = placementService.fit(computedPlacement.frame(placementOptions), placementOptions.bounds);
       const newContentPosition = displayFrame.origin;
+
+      // The indicator points at the anchor's centre even after the content was moved to stay on
+      // screen (a tooltip near a screen edge, #1920); it stays inside the content's edges.
+      const isVertical = computedPlacement.flex().direction.startsWith('column');
+      const anchorCenter = isVertical
+        ? anchorFrame.origin.x + anchorFrame.size.width / 2
+        : anchorFrame.origin.y + anchorFrame.size.height / 2;
+      const contentCenter = isVertical
+        ? displayFrame.origin.x + displayFrame.size.width / 2
+        : displayFrame.origin.y + displayFrame.size.height / 2;
+      const contentExtent = isVertical ? displayFrame.size.width : displayFrame.size.height;
+      const travel = Math.max(0, contentExtent / 2 - INDICATOR_EDGE_MARGIN);
+      const newIndicatorOffset = Math.round(Math.max(-travel, Math.min(travel, anchorCenter - contentCenter)));
+      setIndicatorOffset((current) => current === newIndicatorOffset ? current : newIndicatorOffset);
 
       // A move of at most one point is ignored: a fractional content size measures one point
       // wider or narrower depending on where it sits, and following that re-measures forever.
@@ -338,6 +356,7 @@ export function usePopoverMeasurement({
     childFrame,
     actualPlacement,
     contentPosition,
+    indicatorOffset,
     contentFlexPosition,
     forceMeasure,
     anchorMeasureRef,
@@ -447,6 +466,7 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
   const {
     childFrame,
     actualPlacement,
+    indicatorOffset,
     contentFlexPosition,
     forceMeasure,
     anchorMeasureRef,
@@ -496,6 +516,7 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
         {...viewProps}
         contentContainerStyle={[contentContainerStyle, styles.popoverView, contentFlexPosition]}
         layoutDirection={PopoverPlacements.parse(actualPlacement).flex()}
+        indicatorOffset={indicatorOffset}
       >
         {renderContentElement()}
       </PopoverView>

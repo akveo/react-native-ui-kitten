@@ -30,6 +30,14 @@ type AnimatedViewStyle = ViewStyle;
 export interface PopoverViewProps extends ViewProps {
   contentContainerStyle?: StyleProp<AnimatedViewStyle>;
   layoutDirection?: FlexPlacement;
+  /**
+   * Distance, along the axis the content runs across (x for top/bottom placements, y for
+   * left/right), from the centre of the content to where the indicator should point. Set by
+   * `Popover` from the anchor position, so the indicator keeps pointing at the anchor when the
+   * content had to move to stay on screen. Without it the indicator follows the placement
+   * alignment.
+   */
+  indicatorOffset?: number;
   indicator?: (props: ViewProps) => React.ReactElement;
 }
 
@@ -37,6 +45,11 @@ export type PopoverViewElement = React.ReactElement<PopoverViewProps>;
 
 const INDICATOR_OFFSET = 8;
 const INDICATOR_WIDTH = 6;
+/**
+ * How far the indicator may travel from the centre of the content, measured from its edges: the
+ * indicator stays whole inside the content's rounded corners.
+ */
+export const INDICATOR_EDGE_MARGIN = INDICATOR_OFFSET + INDICATOR_WIDTH;
 
 /**
  * Internal view component for Popover that renders the content and indicator.
@@ -48,6 +61,7 @@ const PopoverViewComponent = forwardRef<View, PopoverViewProps>(({
   onLayout,
   indicator,
   layoutDirection,
+  indicatorOffset,
   ...viewProps
 }, ref) => {
   const { style: evaStyle } = useStyled('Popover', {});
@@ -79,7 +93,9 @@ const PopoverViewComponent = forwardRef<View, PopoverViewProps>(({
       };
     }
 
-    const { direction, alignment } = layoutDirection;
+    const { direction } = layoutDirection;
+    // With an anchor-based offset the indicator starts from the centre and is moved from there.
+    const alignment = indicatorOffset === undefined ? layoutDirection.alignment : 'center';
 
     const isVertical: boolean = direction.startsWith('column');
     const isStart: boolean = alignment.endsWith('start');
@@ -109,8 +125,17 @@ const PopoverViewComponent = forwardRef<View, PopoverViewProps>(({
       ],
     };
 
+    // The offset is applied first, i.e. in the container's coordinates, before the rotations that
+    // orient the indicator itself.
+    const offsetTransform = indicatorOffset === undefined
+      ? []
+      : isVertical
+        ? [{ translateX: RTLService.select(indicatorOffset, -indicatorOffset) }]
+        : [{ translateY: indicatorOffset }];
+
     const indicatorTransforms: TransformsStyle = {
       transform: [
+        ...offsetTransform,
         { rotate: `${indicatorRotate}deg` },
         { rotate: `${indicatorReverseRotate}deg` },
         // Translate indicator "to start" if we have `-start` alignment
@@ -128,7 +153,7 @@ const PopoverViewComponent = forwardRef<View, PopoverViewProps>(({
       content: contentTransforms,
       indicator: indicatorTransforms,
     };
-  }, [layoutDirection, indicator]);
+  }, [layoutDirection, indicator, indicatorOffset]);
 
   return (
     <View
