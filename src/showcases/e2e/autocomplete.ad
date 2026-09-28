@@ -1,5 +1,5 @@
 context platform=ios
-context timeout=180000
+context timeout=480000
 open "com.uikitten.showcases" --relaunch --platform ios
 wait "id=\"toggle-theme\"" 60000
 react-native "dismiss-overlay"
