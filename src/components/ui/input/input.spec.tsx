@@ -53,6 +53,31 @@ describe('@input: component checks', () => {
 
   TestInput.displayName = 'TestInput';
 
+  it('should expose the native TextInput through textInputRef (object ref)', () => {
+    const textInputRef = React.createRef<TextInput>();
+    const component = render(
+      <TestInput textInputRef={textInputRef} />,
+    );
+
+    expect(textInputRef.current).toBe(component.UNSAFE_getByType(TextInput).instance);
+    expect(typeof textInputRef.current.setNativeProps).toBe('function');
+  });
+
+  it('should expose the native TextInput through textInputRef (callback ref) and keep InputRef working', () => {
+    const textInputRef = jest.fn();
+    const componentRef = React.createRef<InputRef>();
+    const component = render(
+      <TestInput
+        ref={componentRef}
+        textInputRef={textInputRef}
+      />,
+    );
+
+    expect(textInputRef).toHaveBeenCalledWith(component.UNSAFE_getByType(TextInput).instance);
+    expect(typeof componentRef.current.focus).toBe('function');
+    expect(componentRef.current.isFocused()).toBeFalsy();
+  });
+
   it('should be able to call focus via ref', () => {
     const componentRef: React.RefObject<InputRef> = React.createRef();
     render(

@@ -72,6 +72,7 @@ const AutocompleteExample = () => {
 | `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the input. |
 | `children` | `AutocompleteItem[]` | - | Suggestion items. |
 | `placement` | `string \| PopoverPlacement` | `'bottom'` | Position of the suggestions list relative to the input. The `inner` placements cover the field. |
+| `textInputRef` | `Ref<TextInput>` | `undefined` | Ref of the underlying React Native `TextInput` (forwarded to `Input`). |
 | `onFocus` | `(event) => void` | `undefined` | Called when the input gains focus; the list opens when there are suggestions. |
 | `onBlur` | `(event) => void` | `undefined` | Called when the input loses focus; the list closes. |
 | `testID` | `string` | `undefined` | Test id of the suggestions list. The input field uses `@@<testID>/input/input` (container `@@<testID>/input/container`); without it the field is `@@autocomplete/input/input`. |

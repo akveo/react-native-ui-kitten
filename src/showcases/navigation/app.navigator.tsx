@@ -71,6 +71,7 @@ import { SelectPlacementShowcase } from '../components/select/selectPlacement.co
 import { ButtonGroupToggleShowcase } from '../components/buttonGroup/buttonGroupToggle.component';
 import { DatepickerFullWidthShowcase } from '../components/datepicker/datepickerFullWidth.component';
 import { AvatarInitialsShowcase } from '../components/avatar/avatarInitials.component';
+import { InputNativeRefShowcase } from '../components/input/inputNativeRef.component';
 import {
   IconGallery1Showcase,
   IconGallery2Showcase,
@@ -211,6 +212,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'ButtonGroupToggle', Component: ButtonGroupToggleShowcase },
   { title: 'DatepickerFullWidth', Component: DatepickerFullWidthShowcase },
   { title: 'AvatarInitials', Component: AvatarInitialsShowcase },
+  { title: 'InputNativeRef', Component: InputNativeRefShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;
