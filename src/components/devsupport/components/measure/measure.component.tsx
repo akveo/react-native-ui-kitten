@@ -91,6 +91,11 @@ export interface MeasureElementProps {
 }
 
 export type MeasuringElement = React.ReactElement;
+
+export interface MeasureElementRef {
+  /** Measures the child now; the result arrives through `onMeasure`. */
+  measure: () => void;
+}
 /**
  * Measures child element size and it's screen position asynchronously.
  * Returns measure result in `onMeasure` callback.
@@ -115,13 +120,13 @@ export type MeasuringElement = React.ReactElement;
  * but `force` property may be used to measure any time it's needed.
  * DON'T USE THIS FLAG IF THE COMPONENT RENDERS FIRST TIME OR YOU KNOW `onLayout` WILL BE CALLED.
  */
-export const MeasureElement: React.FC<MeasureElementProps> = ({
+export const MeasureElement = React.forwardRef<MeasureElementRef, MeasureElementProps>(({
   enabled = true,
   force,
   shouldUseTopInsets = false,
   onMeasure,
   children,
-}): MeasuringElement => {
+}, measureRef): MeasuringElement => {
 
   const ref = React.useRef({} as any);
   // On web, store the actual DOM element from the onLayout event target.
@@ -229,6 +234,8 @@ export const MeasureElement: React.FC<MeasureElementProps> = ({
     }
   });
 
+  React.useImperativeHandle(measureRef, () => ({ measure: measureSelf }));
+
   // Disabled: keep the ref (and, on web, the DOM node a later forced measurement needs), measure nothing.
   const captureWebDomNode = (event: any): void => {
     const target = event?.nativeEvent?.target;
@@ -242,4 +249,6 @@ export const MeasureElement: React.FC<MeasureElementProps> = ({
   const onLayoutHandler = enabled ? enabledLayoutHandler : disabledLayoutHandler;
 
   return React.cloneElement(children, { ref, onLayout: onLayoutHandler });
-};
+});
+
+MeasureElement.displayName = 'MeasureElement';
