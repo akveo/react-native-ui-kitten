@@ -7,6 +7,8 @@
 
 import React, { useState, useCallback, useMemo, useEffect, useRef, forwardRef, useImperativeHandle, memo } from 'react';
 import {
+  Keyboard,
+  KeyboardEvent,
   Platform,
   StyleSheet,
   View,
@@ -17,6 +19,7 @@ import {
 import {
   Frame,
   MeasureElement,
+  MeasureElementRef,
   MeasuringElement,
   Point,
   RenderFCProp,
@@ -74,6 +77,11 @@ export interface UsePopoverMeasurementOptions {
   placement: PopoverPlacement | string;
   fullWidth: boolean;
   visible: boolean;
+  /**
+   * Whether the content blocks the screen behind it. A non-blocking popover leaves the anchor
+   * scrollable, so its frame is tracked while the popover is open.
+   */
+  blocking?: boolean;
   onPlacementChange?: (placement: PopoverPlacement) => void;
 }
 
@@ -83,9 +91,20 @@ export interface UsePopoverMeasurementResult {
   contentPosition: Point;
   contentFlexPosition: StyleProp<ViewStyle>;
   forceMeasure: boolean;
+  /** Attach to the anchor's `MeasureElement` so the hook can re-measure the anchor on demand. */
+  anchorMeasureRef: React.RefObject<MeasureElementRef | null>;
   onChildMeasure: (frame: Frame) => void;
   onContentMeasure: (frame: Frame) => void;
 }
+
+/**
+ * The area the content may occupy: the window minus the software keyboard. Keyboard events report
+ * the keyboard height in the same points as the window, so the bottom edge moves up by that much.
+ */
+const boundsWithKeyboard = (keyboardHeight: number): Frame => {
+  const window = Frame.window();
+  return new Frame(0, 0, window.size.width, Math.max(0, window.size.height - keyboardHeight));
+};
 
 /**
  * Custom hook for popover measurement and placement logic.
@@ -95,6 +114,7 @@ export function usePopoverMeasurement({
   placement,
   fullWidth,
   visible,
+  blocking = true,
   onPlacementChange,
 }: UsePopoverMeasurementOptions): UsePopoverMeasurementResult {
   // State
@@ -114,6 +134,9 @@ export function usePopoverMeasurement({
   // The last measured content frame, kept so the placement can be redone when the anchor frame
   // arrives after the content was measured, or moves while the popover is open.
   const contentFrameRef = useRef<Frame | null>(null);
+  // Height of the software keyboard, subtracted from the placement bounds (#1919).
+  const keyboardHeightRef = useRef<number>(0);
+  const anchorMeasureRef = useRef<MeasureElementRef | null>(null);
 
   // Keep refs in sync with state
   childFrameRef.current = childFrame;
@@ -174,7 +197,7 @@ export function usePopoverMeasurement({
         width,
         contentFrame.size.height
       );
-      return new PlacementOptions(frame, anchorFrame, Frame.window(), Frame.zero());
+      return new PlacementOptions(frame, anchorFrame, boundsWithKeyboard(keyboardHeightRef.current), Frame.zero());
     },
     [fullWidth]
   );
@@ -183,6 +206,17 @@ export function usePopoverMeasurement({
   const placeContent = useCallback(
     (contentFrame: Frame, anchorFrame: Frame): void => {
       const placementOptions = findPlacementOptions(contentFrame, anchorFrame);
+
+      // An anchor scrolled out of the window has nothing to attach to: keep the content off screen
+      // rather than pinned to the window edge, and bring it back once the anchor returns. An anchor
+      // that is only covered by the keyboard still gets its content, clamped above the keyboard.
+      if (!anchorFrame.intersects(Frame.window())) {
+        if (!Point.outscreen().equals(contentPositionRef.current)) {
+          setContentPosition(Point.outscreen());
+        }
+        return;
+      }
+
       const computedPlacement = placementService.find(preferredPlacement, placementOptions);
 
       // `find` falls back to the preferred placement when nothing fits; keep that frame on screen.
@@ -217,6 +251,55 @@ export function usePopoverMeasurement({
     }
   }, [placeContent]);
 
+  // Places the content again from the frames already measured, e.g. after the bounds changed.
+  const replaceContent = useCallback((): void => {
+    if (visibleRef.current && contentFrameRef.current && !childFrameRef.current.equals(Frame.zero())) {
+      placeContent(contentFrameRef.current, childFrameRef.current);
+    }
+  }, [placeContent]);
+
+  // The keyboard shrinks the area the content may use, so a list that would open under it flips
+  // to the other side of the anchor instead. The anchor is measured again as well: the keyboard
+  // often scrolls or resizes the layout around it.
+  useEffect(() => {
+    const onKeyboardChange = (height: number) => (event?: KeyboardEvent): void => {
+      const next = height === 0 ? 0 : (event?.endCoordinates?.height ?? 0);
+      if (next === keyboardHeightRef.current) {
+        return;
+      }
+      keyboardHeightRef.current = next;
+      replaceContent();
+      anchorMeasureRef.current?.measure();
+    };
+    const subscriptions = [
+      Keyboard.addListener('keyboardWillShow', onKeyboardChange(1)),
+      Keyboard.addListener('keyboardDidShow', onKeyboardChange(1)),
+      Keyboard.addListener('keyboardWillHide', onKeyboardChange(0)),
+      Keyboard.addListener('keyboardDidHide', onKeyboardChange(0)),
+    ];
+    return () => subscriptions.forEach((subscription) => subscription.remove());
+  }, [replaceContent]);
+
+  // A non-blocking popover leaves the screen behind it scrollable, so the anchor can move while the
+  // content is open. Nothing reports a scroll to a descendant, so the anchor is measured once per
+  // frame while visible; `onChildMeasure` ignores an unchanged frame.
+  useEffect(() => {
+    if (!visible || blocking) {
+      return;
+    }
+    let handle: number | null = null;
+    const tick = (): void => {
+      anchorMeasureRef.current?.measure();
+      handle = requestAnimationFrame(tick);
+    };
+    handle = requestAnimationFrame(tick);
+    return () => {
+      if (handle !== null) {
+        cancelAnimationFrame(handle);
+      }
+    };
+  }, [visible, blocking]);
+
   // Callback when popover content is measured
   const onContentMeasure = useCallback(
     (contentFrame: Frame): void => {
@@ -238,6 +321,7 @@ export function usePopoverMeasurement({
     contentPosition,
     contentFlexPosition,
     forceMeasure,
+    anchorMeasureRef,
     onChildMeasure,
     onContentMeasure,
   };
@@ -271,11 +355,15 @@ export function usePopoverMeasurement({
  * @property {boolean} blocking - Whether the popover blocks the screen behind it. With `false` the content
  * floats above the app without a backdrop: touches outside it reach the views underneath and
  * `onBackdropPress` is never called. Dismiss it from your own state (an input blur, a selection).
+ * A non-blocking popover follows its anchor while the screen behind it scrolls, and hides the
+ * content while the anchor is out of view.
  * Defaults to true.
  *
  * @property {string | PopoverPlacement} placement - Position of the content component relative to the `anchor`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start`, `bottom end`, `inner`, `inner top` or `inner bottom`.
+ * When the content does not fit on that side of the anchor within the window minus the software
+ * keyboard, the opposite side is used; the placement is redone when the keyboard appears or hides.
  * Defaults to *bottom*.
  *
  * @property {(placement: PopoverPlacement) => void} onPlacementChange - Called when the actual placement changes.
@@ -342,12 +430,14 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
     actualPlacement,
     contentFlexPosition,
     forceMeasure,
+    anchorMeasureRef,
     onChildMeasure,
     onContentMeasure,
   } = usePopoverMeasurement({
     placement,
     fullWidth,
     visible,
+    blocking,
     onPlacementChange,
   });
 
@@ -413,6 +503,7 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
       style={anchorContainerStyle}
     >
       <MeasureElement
+        ref={anchorMeasureRef}
         enabled={everVisibleRef.current}
         force={forceMeasure}
         // The status bar compensation targets native modal windows; non-blocking content is laid
