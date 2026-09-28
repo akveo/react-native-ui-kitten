@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Select, SelectItem } from '@ui-kitten/components';
+import { IndexPath, Select, SelectItem } from '@ui-kitten/components';
 
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',
@@ -32,4 +32,26 @@ export const Default: Story = {
       <SelectItem title="Option 3" />
     </Select>
   ),
+};
+
+const ScrollToSelectedSelect = (args: React.ComponentProps<typeof Select>): React.ReactElement => {
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath | IndexPath[]>(new IndexPath(29));
+  return (
+    <Select
+      {...args}
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}
+    >
+      {Array.from({ length: 30 }, (_, index) => (
+        <SelectItem key={index} title={`Option ${index + 1}`} />
+      ))}
+    </Select>
+  );
+};
+
+export const ScrollToSelected: Story = {
+  args: {
+    label: 'Opens scrolled to the selected option',
+  },
+  render: (args) => <ScrollToSelectedSelect {...args} />,
 };
