@@ -61,6 +61,21 @@ describe('@view-pager: component checks', () => {
     }
   });
 
+  it('should forward onLayout to the consumer', () => {
+    const onLayout = jest.fn();
+    const component = render(
+      <TestViewPager onLayout={onLayout}>
+        <View />
+        <View />
+      </TestViewPager>,
+    );
+
+    const event = { nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 100 } } };
+    fireEvent(component.UNSAFE_getAllByType(View)[0], 'layout', event);
+
+    expect(onLayout).toHaveBeenCalledWith(event);
+  });
+
   it('should render two tabs', () => {
     const component = render(
       <TestViewPager>
