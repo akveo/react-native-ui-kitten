@@ -28,6 +28,11 @@ jobs:
           git diff --exit-code -- src/eva-icons/icons
           test -z "$(git ls-files --others --exclude-standard -- src/eva-icons/icons)"
 
+      - name: Check generated theme types are up to date
+        run: |
+          yarn theme-types:generate
+          git diff --exit-code -- src/eva/themes src/material/themes src/components/theme/theme/themeKeys.ts
+
       - run: yarn lint
 
       - run: yarn build

@@ -40,6 +40,23 @@ const ThemedComponent = () => {
 };
 ```
 
+### Typed tokens
+
+The theme object is typed with the token names of the bundled design systems, so the editor suggests
+`theme['color-primary-500']` and the `useThemeValue` selector argument, and a typo in a known token is
+still a plain string lookup rather than an error. Custom tokens keep working through the `string`
+index signature. `@ui-kitten/eva` exports `EvaThemeKey` / `EvaTheme` and `@ui-kitten/material` exports
+`MaterialThemeKey` / `MaterialTheme`; `@ui-kitten/components` exports `KnownThemeKey` (the union of both)
+and `ThemeKey` (`KnownThemeKey | string`).
+
+```tsx
+import type { EvaThemeKey } from '@ui-kitten/eva';
+import type { ThemeKey } from '@ui-kitten/components';
+
+const accent: EvaThemeKey = 'color-primary-500';
+const custom: ThemeKey = 'my-brand-color';
+```
+
 ## useStyleSheet
 
 Creates a memoized stylesheet that recalculates when the theme changes.
