@@ -1,5 +1,5 @@
-import React, { useCallback, useContext } from 'react';
-import { FlatList, ListRenderItemInfo, StyleSheet, View } from 'react-native';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import { FlatList, Linking, ListRenderItemInfo, StyleSheet, View } from 'react-native';
 import { Button, Layout, Text, Divider } from '@ui-kitten/components';
 import { AppMapping, AppTheme, ThemeContext } from '../services/theme.service';
 
@@ -220,7 +220,50 @@ const ListFooter = (): React.ReactElement => (
   </View>
 );
 
+/**
+ * `uikitten-showcases://section/<Title>` (the `title` of a section below) scrolls the list so that
+ * the section starts at the top. Replay scripts open it instead of counting scroll gestures, which
+ * break whenever a section is added above the one they need.
+ */
+const SECTION_LINK = /^uikitten-showcases:\/\/section\/([^/?#]+)/;
+
+const sectionIndexFromUrl = (url: string | null): number => {
+  const match = url ? SECTION_LINK.exec(url) : null;
+  if (!match) {
+    return -1;
+  }
+  const title = decodeURIComponent(match[1]);
+  return SECTIONS.findIndex(section => section.title === title);
+};
+
 export const AppNavigator = (): React.ReactElement => {
+  const listRef = useRef<FlatList<ShowcaseSection>>(null);
+
+  const scrollToSection = useCallback((index: number): void => {
+    if (index < 0) {
+      return;
+    }
+    listRef.current?.scrollToIndex({ index, animated: false, viewPosition: 0 });
+  }, []);
+
+  useEffect(() => {
+    // The initial URL arrives before the list has laid out its rows; the retry in
+    // `onScrollToIndexFailed` covers a row that has no frame yet.
+    Linking.getInitialURL().then(url => scrollToSection(sectionIndexFromUrl(url)));
+    const subscription = Linking.addEventListener('url', ({ url }) => {
+      scrollToSection(sectionIndexFromUrl(url));
+    });
+    return () => subscription.remove();
+  }, [scrollToSection]);
+
+  const onScrollToIndexFailed = useCallback(({ index, averageItemLength }: {
+    index: number;
+    averageItemLength: number;
+  }): void => {
+    listRef.current?.scrollToOffset({ offset: index * averageItemLength, animated: false });
+    setTimeout(() => scrollToSection(index), 250);
+  }, [scrollToSection]);
+
   const renderSection = useCallback(({ item }: ListRenderItemInfo<ShowcaseSection>): React.ReactElement => (
     <Section title={item.title}>
       <item.Component />
@@ -237,6 +280,7 @@ export const AppNavigator = (): React.ReactElement => {
         library's modal panel (the first tap on an Autocomplete option must select it).
       */}
       <FlatList
+        ref={listRef}
         data={SECTIONS}
         renderItem={renderSection}
         keyExtractor={keyExtractor}
@@ -245,6 +289,7 @@ export const AppNavigator = (): React.ReactElement => {
         contentContainerStyle={styles.scrollContent}
         initialNumToRender={SECTIONS.length}
         testID="showcase-scroll"
+        onScrollToIndexFailed={onScrollToIndexFailed}
       />
     </Layout>
   );

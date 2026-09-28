@@ -4,19 +4,7 @@ open "com.uikitten.showcases" --relaunch --platform android
 wait "id=\"toggle-theme\"" 60000
 react-native "dismiss-overlay"
 wait "id=\"section-Button-title\"" 10000
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
-scroll "down"
+open "uikitten-showcases://section/Popover" --platform android
 wait "id=\"section-Popover-title\"" 10000
 press "role=\"button\" label=\"TOGGLE POPOVER\" || label=\"TOGGLE POPOVER\""
 wait "label=\"Welcome to UI Kitten 😻\"" 5000
