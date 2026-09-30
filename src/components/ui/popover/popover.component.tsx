@@ -351,10 +351,11 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
     onPlacementChange,
   });
 
-  // The modal machinery is mounted the first time the popover becomes visible; until then a
-  // closed popover costs its anchor plus the measurement wrapper. The anchor stays wrapped in
-  // `MeasureElement` from the start so that its frame is known before the first open and the
-  // element tree keeps its shape (moving the anchor into the wrapper on open remounted it, #1910).
+  // The modal machinery is mounted the first time the popover becomes visible. The anchor stays
+  // wrapped in `MeasureElement` from the start so the element tree keeps its shape (moving the
+  // anchor into the wrapper on open remounted it, #1910), but the wrapper only measures once the
+  // popover has been shown: a closed popover costs its anchor, and the first open measures the
+  // anchor through the forced measurement (the content waits off screen until that frame arrives).
   const everVisibleRef = useRef<boolean>(visible);
   if (visible) {
     everVisibleRef.current = true;
@@ -412,6 +413,7 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
       style={anchorContainerStyle}
     >
       <MeasureElement
+        enabled={everVisibleRef.current}
         force={forceMeasure}
         // The status bar compensation targets native modal windows; non-blocking content is laid
         // out in the same coordinate space the anchor is measured in.
