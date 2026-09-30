@@ -21,7 +21,8 @@ export interface FalsyTextProps extends Omit<TextProps, 'children'> {
  * Helper component for optional text properties.
  *
  * Accepts same props as Text component,
- * and `component` which may be a string, a function, null or undefined.
+ * and `component` which may be a string, a number, a function, null or undefined.
+ * `null`, `undefined`, `false` and an empty string render nothing; `0` renders as text.
  *
  * If it is null or undefined, will render nothing.
  * If it is a function, will call it with props passed to this component.
@@ -78,7 +79,8 @@ export class FalsyText extends React.Component<FalsyTextProps> {
   public render(): React.ReactElement {
     const { component, ...textProps } = this.props;
 
-    if (!component) {
+    // `0` is a label (a counter, a price); only an absent or empty value renders nothing.
+    if (component === undefined || component === null || component === '' || (component as unknown) === false) {
       return null;
     }
 

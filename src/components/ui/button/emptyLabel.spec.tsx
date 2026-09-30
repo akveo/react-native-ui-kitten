@@ -53,4 +53,10 @@ describe('@controls: empty label', () => {
 
     expect(component.getByText('Label')).toBeTruthy();
   });
+
+  it.each(cases)('%s should render a 0 label as text', (_name, element) => {
+    const component = render(<Provider>{React.cloneElement(element, {}, 0)}</Provider>);
+
+    expect(component.getByText('0')).toBeTruthy();
+  });
 });
