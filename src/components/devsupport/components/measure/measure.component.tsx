@@ -234,7 +234,14 @@ export const MeasureElement = React.forwardRef<MeasureElementRef, MeasureElement
     }
   });
 
-  React.useImperativeHandle(measureRef, () => ({ measure: measureSelf }));
+  // A disabled wrapper measures nothing, on layout or on demand.
+  React.useImperativeHandle(measureRef, () => ({
+    measure: (): void => {
+      if (enabled) {
+        measureSelf();
+      }
+    },
+  }));
 
   // Disabled: keep the ref (and, on web, the DOM node a later forced measurement needs), measure nothing.
   const captureWebDomNode = (event: any): void => {

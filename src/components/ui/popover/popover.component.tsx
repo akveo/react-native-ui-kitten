@@ -7,6 +7,7 @@
 
 import React, { useState, useCallback, useMemo, useEffect, useRef, forwardRef, useImperativeHandle, memo } from 'react';
 import {
+  Dimensions,
   Keyboard,
   KeyboardEvent,
   Platform,
@@ -260,10 +261,14 @@ export function usePopoverMeasurement({
 
   // The keyboard shrinks the area the content may use, so a list that would open under it flips
   // to the other side of the anchor instead. The anchor is measured again as well: the keyboard
-  // often scrolls or resizes the layout around it.
+  // often scrolls or resizes the layout around it. Only an open popover listens: a closed one has
+  // nothing to place, and a screen full of closed Selects would otherwise re-measure every anchor
+  // on each keyboard event. Opening reads the keyboard that is already up.
   useEffect(() => {
-    const onKeyboardChange = (height: number) => (event?: KeyboardEvent): void => {
-      const next = height === 0 ? 0 : (event?.endCoordinates?.height ?? 0);
+    if (!visible) {
+      return;
+    }
+    const applyKeyboardHeight = (next: number): void => {
       if (next === keyboardHeightRef.current) {
         return;
       }
@@ -271,14 +276,28 @@ export function usePopoverMeasurement({
       replaceContent();
       anchorMeasureRef.current?.measure();
     };
+    keyboardHeightRef.current = Keyboard.isVisible() ? (Keyboard.metrics()?.height ?? 0) : 0;
+
+    const onShow = (event?: KeyboardEvent): void => applyKeyboardHeight(event?.endCoordinates?.height ?? 0);
+    const onHide = (): void => applyKeyboardHeight(0);
+    // iOS reports a keyboard that changes height without hiding (predictive bar, another keyboard
+    // type) only as a frame change; its visible height is what sits above the bottom of the screen.
+    const onFrameChange = (event?: KeyboardEvent): void => {
+      const screenY = event?.endCoordinates?.screenY;
+      if (screenY === undefined) {
+        return;
+      }
+      applyKeyboardHeight(Math.max(0, Dimensions.get('screen').height - screenY));
+    };
     const subscriptions = [
-      Keyboard.addListener('keyboardWillShow', onKeyboardChange(1)),
-      Keyboard.addListener('keyboardDidShow', onKeyboardChange(1)),
-      Keyboard.addListener('keyboardWillHide', onKeyboardChange(0)),
-      Keyboard.addListener('keyboardDidHide', onKeyboardChange(0)),
+      Keyboard.addListener('keyboardWillShow', onShow),
+      Keyboard.addListener('keyboardDidShow', onShow),
+      Keyboard.addListener('keyboardWillHide', onHide),
+      Keyboard.addListener('keyboardDidHide', onHide),
+      Keyboard.addListener('keyboardWillChangeFrame', onFrameChange),
     ];
     return () => subscriptions.forEach((subscription) => subscription.remove());
-  }, [replaceContent]);
+  }, [visible, replaceContent]);
 
   // A non-blocking popover leaves the screen behind it scrollable, so the anchor can move while the
   // content is open. Nothing reports a scroll to a descendant, so the anchor is measured once per
