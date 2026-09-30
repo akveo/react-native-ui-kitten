@@ -21,6 +21,16 @@ describe('@falsy-text: component checks', () => {
     expect(component.toJSON()).toBeNull();
   });
 
+  it.each([null, undefined, '', false])('should render nothing for %p', (value) => {
+    const component = render(wrap(<FalsyText component={value as unknown as string} />));
+    expect(component.toJSON()).toBeNull();
+  });
+
+  it('should render 0 as text', () => {
+    const component = render(wrap(<FalsyText component={0} />));
+    expect(component.getByText('0')).toBeTruthy();
+  });
+
   it('should render a plain RN Text when the parent supplies a complete text style', () => {
     const component = render(wrap(
       <FalsyText
