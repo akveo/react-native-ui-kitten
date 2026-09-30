@@ -74,6 +74,13 @@ const needsStatusBarOffset = (): boolean => {
 };
 
 export interface MeasureElementProps {
+  /**
+   * Whether the element is measured on layout. When `false` the child keeps its place in the tree
+   * and its ref, but nothing is measured (on web the DOM node is still captured for a later forced
+   * measurement). Lets a caller keep the tree shape stable while measuring only when needed.
+   * Defaults to `true`.
+   */
+  enabled?: boolean;
   force?: boolean;
   shouldUseTopInsets?: boolean;
   onMeasure: (frame: Frame) => void;
@@ -109,6 +116,7 @@ export type MeasuringElement = React.ReactElement;
  * DON'T USE THIS FLAG IF THE COMPONENT RENDERS FIRST TIME OR YOU KNOW `onLayout` WILL BE CALLED.
  */
 export const MeasureElement: React.FC<MeasureElementProps> = ({
+  enabled = true,
   force,
   shouldUseTopInsets = false,
   onMeasure,
@@ -216,12 +224,22 @@ export const MeasureElement: React.FC<MeasureElementProps> = ({
   // Use useLayoutEffect to measure synchronously after render when force is true
   // This avoids "Cannot update during an existing state transition" warning
   React.useLayoutEffect(() => {
-    if (force) {
+    if (enabled && force) {
       measureSelf();
     }
   });
 
-  const onLayoutHandler = Platform.OS === 'web' ? handleLayoutWeb : measureSelf;
+  // Disabled: keep the ref (and, on web, the DOM node a later forced measurement needs), measure nothing.
+  const captureWebDomNode = (event: any): void => {
+    const target = event?.nativeEvent?.target;
+    if (target instanceof HTMLElement) {
+      webDomNodeRef.current = target;
+    }
+  };
+
+  const disabledLayoutHandler = Platform.OS === 'web' ? captureWebDomNode : undefined;
+  const enabledLayoutHandler = Platform.OS === 'web' ? handleLayoutWeb : measureSelf;
+  const onLayoutHandler = enabled ? enabledLayoutHandler : disabledLayoutHandler;
 
   return React.cloneElement(children, { ref, onLayout: onLayoutHandler });
 };
