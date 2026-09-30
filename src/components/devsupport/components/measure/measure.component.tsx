@@ -74,6 +74,13 @@ const needsStatusBarOffset = (): boolean => {
 };
 
 export interface MeasureElementProps {
+  /**
+   * Whether the element is measured on layout. When `false` the child keeps its place in the tree
+   * and its ref, but nothing is measured (on web the DOM node is still captured for a later forced
+   * measurement). Lets a caller keep the tree shape stable while measuring only when needed.
+   * Defaults to `true`.
+   */
+  enabled?: boolean;
   force?: boolean;
   shouldUseTopInsets?: boolean;
   onMeasure: (frame: Frame) => void;
@@ -84,6 +91,11 @@ export interface MeasureElementProps {
 }
 
 export type MeasuringElement = React.ReactElement;
+
+export interface MeasureElementRef {
+  /** Measures the child now; the result arrives through `onMeasure`. */
+  measure: () => void;
+}
 /**
  * Measures child element size and it's screen position asynchronously.
  * Returns measure result in `onMeasure` callback.
@@ -108,12 +120,13 @@ export type MeasuringElement = React.ReactElement;
  * but `force` property may be used to measure any time it's needed.
  * DON'T USE THIS FLAG IF THE COMPONENT RENDERS FIRST TIME OR YOU KNOW `onLayout` WILL BE CALLED.
  */
-export const MeasureElement: React.FC<MeasureElementProps> = ({
+export const MeasureElement = React.forwardRef<MeasureElementRef, MeasureElementProps>(({
+  enabled = true,
   force,
   shouldUseTopInsets = false,
   onMeasure,
   children,
-}): MeasuringElement => {
+}, measureRef): MeasuringElement => {
 
   const ref = React.useRef({} as any);
   // On web, store the actual DOM element from the onLayout event target.
@@ -216,12 +229,33 @@ export const MeasureElement: React.FC<MeasureElementProps> = ({
   // Use useLayoutEffect to measure synchronously after render when force is true
   // This avoids "Cannot update during an existing state transition" warning
   React.useLayoutEffect(() => {
-    if (force) {
+    if (enabled && force) {
       measureSelf();
     }
   });
 
-  const onLayoutHandler = Platform.OS === 'web' ? handleLayoutWeb : measureSelf;
+  // A disabled wrapper measures nothing, on layout or on demand.
+  React.useImperativeHandle(measureRef, () => ({
+    measure: (): void => {
+      if (enabled) {
+        measureSelf();
+      }
+    },
+  }));
+
+  // Disabled: keep the ref (and, on web, the DOM node a later forced measurement needs), measure nothing.
+  const captureWebDomNode = (event: any): void => {
+    const target = event?.nativeEvent?.target;
+    if (target instanceof HTMLElement) {
+      webDomNodeRef.current = target;
+    }
+  };
+
+  const disabledLayoutHandler = Platform.OS === 'web' ? captureWebDomNode : undefined;
+  const enabledLayoutHandler = Platform.OS === 'web' ? handleLayoutWeb : measureSelf;
+  const onLayoutHandler = enabled ? enabledLayoutHandler : disabledLayoutHandler;
 
   return React.cloneElement(children, { ref, onLayout: onLayoutHandler });
-};
+});
+
+MeasureElement.displayName = 'MeasureElement';
