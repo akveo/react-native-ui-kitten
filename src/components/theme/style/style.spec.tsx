@@ -7,7 +7,6 @@
 
 import React from 'react';
 import {
-  Platform,
   TouchableOpacity,
   View,
   Text,
@@ -137,55 +136,14 @@ describe('@style-service: service method checks', () => {
     });
   });
 
-  describe('System font family', () => {
+  it('should resolve font families for the running platform', () => {
+    // Jest runs as iOS: `System` stays. The Android rule is covered in platformFontFamily.spec.ts.
+    const value = StyleService.createThemedEntry(
+      { fontFamily: 'text-font-family', fontWeight: '600' },
+      { 'text-font-family': 'System' },
+    );
 
-    const originalOS = Platform.OS;
-
-    const setOS = (os: typeof Platform.OS): void => {
-      Object.defineProperty(Platform, 'OS', { value: os, configurable: true, writable: true });
-    };
-
-    afterEach(() => {
-      setOS(originalOS);
-    });
-
-    const fontTheme = {
-      'text-font-family': 'System',
-      'custom-font-family': 'Roboto-Medium',
-      'label': 'System',
-    };
-
-    const fontMapping = {
-      fontFamily: 'text-font-family',
-      textFontFamily: 'text-font-family',
-      titleFontFamily: 'custom-font-family',
-      fontWeight: '600',
-      accessibilityLabel: 'label',
-    };
-
-    it('should drop the System family on Android and keep the key', () => {
-      setOS('android');
-
-      const value = StyleService.createThemedEntry(fontMapping, fontTheme);
-
-      expect(value).toEqual({
-        fontFamily: undefined,
-        textFontFamily: undefined,
-        titleFontFamily: 'Roboto-Medium',
-        fontWeight: '600',
-        accessibilityLabel: 'System',
-      });
-      expect('fontFamily' in value).toBe(true);
-    });
-
-    it('should keep the System family on iOS', () => {
-      setOS('ios');
-
-      const value = StyleService.createThemedEntry(fontMapping, fontTheme);
-
-      expect(value.fontFamily).toEqual('System');
-      expect(value.textFontFamily).toEqual('System');
-    });
+    expect(value).toEqual({ fontFamily: 'System', fontWeight: '600' });
   });
 
 });

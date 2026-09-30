@@ -68,7 +68,7 @@ const hasCompleteTextStyle = (props: TextProps): boolean => {
   const style: TextStyle = StyleSheet.flatten(props.style) || {};
 
   // `fontFamily` may be present with `undefined`: the mapping resolves `System` to no family on
-  // Android (see `StyleService.createThemedEntry`), which still means the style set it.
+  // Android (see `resolvePlatformFontFamily`), which still means the style set it.
   return style.color !== undefined
     && 'fontFamily' in style
     && style.fontSize !== undefined
