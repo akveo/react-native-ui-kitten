@@ -1,5 +1,5 @@
 import React from 'react';
-import { DeviceEventEmitter, Text, View } from 'react-native';
+import { DeviceEventEmitter, Dimensions, Keyboard, Text, View } from 'react-native';
 import {
   fireEvent,
   render,
@@ -142,5 +142,46 @@ describe('@popover: keyboard and anchor tracking', () => {
     global.measureCalls.length = 0;
     await new Promise((resolve) => setTimeout(resolve, 50));
     expect(global.measureCalls.length).toEqual(0);
+  });
+
+  it('should not measure a closed popover on keyboard events', () => {
+    const component = render(<TestPopover visible={false} />);
+    expect(component.getByTestId('anchor')).toBeTruthy();
+    global.measureCalls.length = 0;
+
+    DeviceEventEmitter.emit('keyboardDidShow', { endCoordinates: { height: 300, screenY: 1034, screenX: 0, width: 750 } });
+    DeviceEventEmitter.emit('keyboardDidHide', {});
+
+    expect(global.measureCalls.length).toEqual(0);
+  });
+
+  it('should place against a keyboard that was already up when it opened', async () => {
+    const isVisible = jest.spyOn(Keyboard, 'isVisible').mockReturnValue(true);
+    const metrics = jest.spyOn(Keyboard, 'metrics').mockReturnValue({ height: 300, screenX: 0, screenY: 1034, width: 750 });
+
+    const component = render(<TestPopover visible={false} />);
+    component.rerender(<TestPopover visible={true} />);
+    await waitFor(() => expect(component.getByText('content')).toBeTruthy());
+    global.measureCalls.shift()(10, 900, 200, 40);
+    fireEvent(component.UNSAFE_getByType(PopoverView), 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 100, height: 300 } },
+    });
+    global.measureCalls.pop()(-999, -999, 100, 300);
+
+    // No keyboard event arrives; the open popover still keeps the 300 point keyboard clear.
+    await waitFor(() => expect(contentPosition(component)).toEqual({ left: 60, top: 600 }));
+    isVisible.mockRestore();
+    metrics.mockRestore();
+  });
+
+  it('should follow a keyboard frame change without a show or hide', async () => {
+    const component = await open();
+    const screenHeight = Dimensions.get('screen').height;
+
+    // A frame change that leaves a 300 point keyboard visible (iOS predictive bar, keyboard type).
+    DeviceEventEmitter.emit('keyboardWillChangeFrame', {
+      endCoordinates: { height: 300, screenY: screenHeight - 300, screenX: 0, width: 750 },
+    });
+    await waitFor(() => expect(contentPosition(component)).toEqual({ left: 60, top: 600 }));
   });
 });
