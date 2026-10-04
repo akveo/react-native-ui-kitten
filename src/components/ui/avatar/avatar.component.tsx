@@ -71,8 +71,24 @@ export const initialsOf = (name: string): string => {
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
-    .map(word => word[0].toUpperCase())
+    // `Array.from` splits by code point, so an emoji or a letter outside the BMP stays whole.
+    .map(word => Array.from(word)[0].toUpperCase())
     .join('');
+};
+
+/**
+ * Whether `source` points at an image: a bundled asset, or at least one entry with a uri. A
+ * `{ uri: null }` / `''` source (a user without a photo) renders nothing and never fails.
+ */
+const hasImageSource = (source: ImageProps['source']): boolean => {
+  if (!source) {
+    return false;
+  }
+  if (typeof source === 'number') {
+    return true;
+  }
+  const sources = Array.isArray(source) ? source : [source];
+  return sources.some(item => Boolean(item?.uri));
 };
 
 const sourceKeyOf = (source: ImageProps['source']): string | number | undefined => {
@@ -196,14 +212,19 @@ export const Avatar = <P extends ImageProps = ImageProps>(
     onErrorProp?.(event);
   }, [onErrorProp]);
 
-  const showInitials = Boolean(name) && (!source || imageFailed);
+  // A source without a uri counts as missing (see `hasImageSource`); a whitespace-only name has no
+  // initials to show.
+  const hasImage = hasImageSource(source);
+  const initials = name ? initialsOf(name) : '';
+  const showInitials = initials.length > 0 && (!hasImage || imageFailed);
+  const { 'aria-label': ariaLabel, accessibilityLabel } = imageProps as ImageProps;
 
   if (showInitials) {
     return (
       <View
         accessible={true}
         role='img'
-        aria-label={name}
+        aria-label={ariaLabel ?? accessibilityLabel ?? name}
         testID={imageProps.testID}
         style={[styles.image, styles.initials, componentStyle.initials, componentStyle.container]}
       >
@@ -211,7 +232,7 @@ export const Avatar = <P extends ImageProps = ImageProps>(
           numberOfLines={1}
           style={componentStyle.text}
         >
-          {initialsOf(name)}
+          {initials}
         </Text>
       </View>
     );
@@ -219,7 +240,7 @@ export const Avatar = <P extends ImageProps = ImageProps>(
 
   return (
     <ImageComponent
-      aria-label={name}
+      aria-label={initials ? name : undefined}
       {...imageProps as P}
       onError={onError}
       style={[styles.image, componentStyle.container]}

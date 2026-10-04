@@ -101,6 +101,49 @@ describe('@avatar: component checks', () => {
       expect(initialsOf('Plato')).toEqual('P');
     });
 
+    it('should keep emoji and characters outside the BMP whole', () => {
+      expect(initialsOf('😀 bob')).toEqual('😀B');
+      expect(initialsOf('𝒜da Lovelace')).toEqual('𝒜L');
+    });
+
+    it('should treat a source without a uri as missing', () => {
+      for (const source of [{ uri: null }, { uri: '' }, [{ uri: '' }, { uri: undefined }, { uri: '' }]]) {
+        const component = render(
+          <TestAvatar
+            source={source as never}
+            name='Jane Doe'
+          />,
+        );
+        expect(component.queryByText('JD')).toBeTruthy();
+        expect(component.UNSAFE_queryByType(Image)).toBeNull();
+      }
+    });
+
+    it('should show nothing but the image for a whitespace-only name', () => {
+      const component = render(
+        <TestAvatar
+          source={undefined}
+          name='   '
+        />,
+      );
+
+      expect(component.UNSAFE_queryByType(Text)).toBeNull();
+      expect(component.UNSAFE_getByType(Image).props['aria-label']).toBeUndefined();
+    });
+
+    it('should prefer the consumer accessible name on the initials frame', () => {
+      const component = render(
+        <TestAvatar
+          source={undefined}
+          name='Jane Doe'
+          aria-label='Profile photo of Jane'
+        />,
+      );
+
+      expect(component.getByLabelText('Profile photo of Jane')).toBeTruthy();
+      expect(component.queryByLabelText('Jane Doe')).toBeNull();
+    });
+
     it('should render initials instead of an image without a source', () => {
       const component = render(
         <TestAvatar
