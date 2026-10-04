@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import {
   fireEvent,
   render,
@@ -9,6 +9,7 @@ import { light, mapping } from '@ui-kitten/eva';
 import { ApplicationProvider } from '../../theme';
 import { Popover } from './popover.component';
 import { PopoverView } from './popoverView.component';
+import { RTLService } from '../../devsupport';
 
 type MeasureCallback = (x: number, y: number, width: number, height: number) => void;
 
@@ -108,5 +109,42 @@ describe('@popover: indicator offset', () => {
 
     expect(contentPosition(component)).toEqual({ left: 160, top: 1020 });
     expect(popoverView(component).props.indicatorOffset).toEqual(136);
+  });
+
+  describe('PopoverView with an indicator offset', () => {
+
+    const renderView = (): ReturnType<typeof render> => render(
+      <ApplicationProvider mapping={mapping} theme={light}>
+        <PopoverView
+          testID='content'
+          layoutDirection={{ direction: 'column', alignment: 'flex-start' }}
+          indicatorOffset={40}
+          indicator={(props) => <View testID='indicator' {...props} />}
+        />
+      </ApplicationProvider>,
+    );
+
+    const translateX = (style): number | undefined => (StyleSheet.flatten(style).transform || [])
+      .map((entry) => entry.translateX)
+      .find((value) => value !== undefined && value !== 0);
+
+    it('should keep the placement alignment on the container and centre only the indicator', () => {
+      const component = renderView();
+      const indicator = component.getByTestId('indicator');
+      const container = component.getByTestId('content').parent?.parent;
+
+      expect(StyleSheet.flatten(container?.props.style).alignItems).toEqual('flex-start');
+      expect(StyleSheet.flatten(indicator.props.style).alignSelf).toEqual('center');
+      expect(translateX(indicator.props.style)).toEqual(40);
+    });
+
+    it('should not mirror the physical offset in right-to-left layouts', () => {
+      const isRTL = jest.spyOn(RTLService, 'isRTL').mockReturnValue(true);
+
+      const component = renderView();
+
+      expect(translateX(component.getByTestId('indicator').props.style)).toEqual(40);
+      isRTL.mockRestore();
+    });
   });
 });

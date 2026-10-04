@@ -94,8 +94,11 @@ const PopoverViewComponent = forwardRef<View, PopoverViewProps>(({
     }
 
     const { direction } = layoutDirection;
+    const hasIndicatorOffset = indicatorOffset !== undefined;
     // With an anchor-based offset the indicator starts from the centre and is moved from there.
-    const alignment = indicatorOffset === undefined ? layoutDirection.alignment : 'center';
+    // Only the indicator is centred (`alignSelf`); the container keeps the placement alignment so
+    // the content itself stays where the placement put it.
+    const alignment = hasIndicatorOffset ? 'center' : layoutDirection.alignment;
 
     const isVertical: boolean = direction.startsWith('column');
     const isStart: boolean = alignment.endsWith('start');
@@ -127,10 +130,13 @@ const PopoverViewComponent = forwardRef<View, PopoverViewProps>(({
 
     // The offset is applied first, i.e. in the container's coordinates, before the rotations that
     // orient the indicator itself.
-    const offsetTransform = indicatorOffset === undefined
+    // `indicatorOffset` is a physical distance (window coordinates, left to right) and React Native
+    // applies `translateX` physically in right-to-left layouts too, so it is not mirrored there
+    // (checked on iOS and Android with `I18nManager.forceRTL`).
+    const offsetTransform = !hasIndicatorOffset
       ? []
       : isVertical
-        ? [{ translateX: RTLService.select(indicatorOffset, -indicatorOffset) }]
+        ? [{ translateX: indicatorOffset }]
         : [{ translateY: indicatorOffset }];
 
     const indicatorTransforms: TransformsStyle = {
@@ -148,10 +154,10 @@ const PopoverViewComponent = forwardRef<View, PopoverViewProps>(({
     return {
       container: {
         flexDirection: direction,
-        alignItems: alignment,
+        alignItems: layoutDirection.alignment,
       },
       content: contentTransforms,
-      indicator: indicatorTransforms,
+      indicator: hasIndicatorOffset ? [{ alignSelf: 'center' }, indicatorTransforms] : indicatorTransforms,
     };
   }, [layoutDirection, indicator, indicatorOffset]);
 
