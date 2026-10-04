@@ -93,6 +93,7 @@ export {
 export {
   Select,
   type SelectProps,
+  type SelectListProps,
   type SelectElement,
   type SelectRef,
 } from './select/select.component';

@@ -40,7 +40,7 @@ import {
   useStyled,
   StyleType,
 } from '../../theme';
-import { List } from '../list/list.component';
+import { List, ListProps, ListRef } from '../list/list.component';
 import { Popover } from '../popover/popover.component';
 import { ChevronDown } from '../shared/chevronDown.component';
 import { SelectGroupProps } from './selectGroup.component';
@@ -68,7 +68,20 @@ export interface SelectProps extends TouchableWebProps {
   status?: EvaStatus;
   size?: EvaInputSize;
   appearance?: LiteralUnion<'default'>;
+  /**
+   * Ref of the `List` that renders the options, for `scrollToIndex` and the other list methods.
+   * The list is mounted while the options are shown, so the ref is set once the Select opens.
+   */
+  listRef?: React.Ref<ListRef>;
+  /**
+   * Props for the `List` that renders the options, e.g. `getItemLayout`, `initialScrollIndex` or
+   * `keyboardShouldPersistTaps`. List indices count the direct children of Select: a `SelectGroup`
+   * is a single row that renders its items. `data` and `renderItem` are managed by Select.
+   */
+  listProps?: SelectListProps;
 }
+
+export type SelectListProps = Omit<ListProps, 'data' | 'renderItem'>;
 
 export type SelectElement = React.ReactElement<SelectProps>;
 
@@ -117,6 +130,14 @@ const CHEVRON_ANIM_DURATION = 200;
  *
  * @property {boolean} disabled - Whether the component is disabled.
  *
+ * @property {React.Ref<ListRef>} listRef - Ref of the `List` that renders the options.
+ * Use it to call `scrollToIndex` when the Select opens (`onFocus`). Set while the options are shown.
+ *
+ * @property {ListProps} listProps - Props forwarded to the `List` that renders the options,
+ * e.g. `getItemLayout` (required by `scrollToIndex` for rows that are not rendered yet) or `initialScrollIndex`.
+ * List indices count the direct children of Select: a `SelectGroup` is a single row that renders its items.
+ * `data` and `renderItem` are managed by Select.
+ *
  * @overview-example SelectSimpleUsage
  * @overview-example SelectMultiSelect
  */
@@ -141,6 +162,8 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
       onMouseEnter: onMouseEnterProp,
       onMouseLeave: onMouseLeaveProp,
       onFocus: onFocusProp,
+      listRef,
+      listProps,
       onBlur: onBlurProp,
       onPressIn: onPressInProp,
       onPressOut: onPressOutProp,
@@ -434,9 +457,11 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
             // member in react-native's `AccessibilityRole`, so it degrades to
             // `list` on native while the web keeps the exact ARIA role.
             {...buildAccessibilityProps({ role: 'listbox' as Role })}
-            style={staticStyles.list}
-            data={data}
             bounces={false}
+            {...listProps}
+            ref={listRef}
+            style={[staticStyles.list, listProps?.style]}
+            data={data}
             renderItem={renderItem}
           />
         </Popover>
