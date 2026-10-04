@@ -91,6 +91,19 @@ export class Frame {
   }
 
   /**
+   * Whether the two frames share any area.
+   */
+  public intersects(other: Frame): boolean {
+    if (!other) {
+      return false;
+    }
+    return this.origin.x < other.origin.x + other.size.width
+      && other.origin.x < this.origin.x + this.size.width
+      && this.origin.y < other.origin.y + other.size.height
+      && other.origin.y < this.origin.y + this.size.height;
+  }
+
+  /**
    * Creates new frame aligned to left of other
    */
   public leftOf(other: Frame): Frame {

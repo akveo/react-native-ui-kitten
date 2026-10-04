@@ -17,6 +17,7 @@ export {
 export {
   MeasureElement,
   type MeasureElementProps,
+  type MeasureElementRef,
   type MeasuringElement,
 } from './components/measure/measure.component';
 export {
