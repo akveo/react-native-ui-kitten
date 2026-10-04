@@ -136,6 +136,16 @@ describe('@style-service: service method checks', () => {
     });
   });
 
+  it('should resolve font families for the running platform', () => {
+    // Jest runs as iOS: `System` stays. The Android rule is covered in platformFontFamily.spec.ts.
+    const value = StyleService.createThemedEntry(
+      { fontFamily: 'text-font-family', fontWeight: '600' },
+      { 'text-font-family': 'System' },
+    );
+
+    expect(value).toEqual({ fontFamily: 'System', fontWeight: '600' });
+  });
+
 });
 
 describe('@useStyled: functional component checks', () => {

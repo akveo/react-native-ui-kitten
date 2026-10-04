@@ -12,6 +12,7 @@ import {
   ThemeType,
   useTheme,
 } from '../theme/theme.service';
+import { resolvePlatformFontFamily } from './platformFontFamily';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type StyleType = Record<string, any>;
@@ -108,7 +109,7 @@ export class StyleService {
     const themed: StyleType = {};
     for (const key in style) {
       const value = style[key];
-      themed[key] = ThemeService.getValue(value, theme, value);
+      themed[key] = resolvePlatformFontFamily(key, ThemeService.getValue(value, theme, value));
     }
     return themed;
   };
