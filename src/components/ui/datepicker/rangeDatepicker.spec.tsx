@@ -153,6 +153,14 @@ describe('@range-datepicker: component checks', () => {
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
+  it('should space the caption with the mapping captionMarginTop', async () => {
+    const component = render(<TestRangeDatepicker caption='I love Babel' />);
+
+    const { marginTop } = StyleSheet.flatten(component.getByText('I love Babel').props.style);
+    expect(marginTop).toEqual(mapping.components.Datepicker.appearances.default.mapping.captionMarginTop);
+    expect(marginTop).toBeGreaterThan(0);
+  });
+
   it('should render caption as string', async () => {
     const component = render(
       <TestRangeDatepicker caption='I love Babel' />,

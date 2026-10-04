@@ -32,6 +32,7 @@ import {
   DatepickerRef,
 } from './datepicker.component';
 import { Calendar } from '../calendar/calendar.component';
+import { Popover } from '../popover/popover.component';
 import { CalendarViewModes } from '../calendar/type';
 
 jest.mock('react-native', () => {
@@ -201,6 +202,15 @@ describe('@datepicker: component checks', () => {
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should space the caption with the mapping captionMarginTop and leave the popover margin alone', async () => {
+    const component = render(<TestDatepicker caption='I love Babel' />);
+
+    const { marginTop } = StyleSheet.flatten(component.getByText('I love Babel').props.style);
+    expect(marginTop).toEqual(mapping.components.Datepicker.appearances.default.mapping.captionMarginTop);
+    expect(marginTop).toBeGreaterThan(0);
+    expect(StyleSheet.flatten(component.UNSAFE_getByType(Popover).props.style).marginBottom).toBeUndefined();
   });
 
   it('should render caption as string', async () => {
