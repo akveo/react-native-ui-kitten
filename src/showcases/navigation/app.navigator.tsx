@@ -68,6 +68,7 @@ import { ViewPagerSimpleUsageShowcase } from '../components/viewPager/viewPagerS
 import { ModalDecimalSizeShowcase } from '../components/modal/modalDecimalSize.component';
 import { SelectScrollToSelectedShowcase } from '../components/select/selectScrollToSelected.component';
 import { SelectPlacementShowcase } from '../components/select/selectPlacement.component';
+import { ButtonGroupToggleShowcase } from '../components/buttonGroup/buttonGroupToggle.component';
 import {
   IconGallery1Showcase,
   IconGallery2Showcase,
@@ -205,6 +206,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'AutocompleteBlur', Component: AutocompleteBlurShowcase },
   { title: 'SelectScrollToSelected', Component: SelectScrollToSelectedShowcase },
   { title: 'SelectPlacement', Component: SelectPlacementShowcase },
+  { title: 'ButtonGroupToggle', Component: ButtonGroupToggleShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;
