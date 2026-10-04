@@ -279,6 +279,7 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
         labelMarginBottom,
         labelFontWeight,
         labelFontFamily,
+        captionMarginTop,
         captionColor,
         captionFontSize,
         captionFontWeight,
@@ -326,6 +327,7 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
           color: labelColor,
         },
         caption: {
+          marginTop: captionMarginTop,
           fontSize: captionFontSize,
           fontWeight: captionFontWeight,
           fontFamily: captionFontFamily,

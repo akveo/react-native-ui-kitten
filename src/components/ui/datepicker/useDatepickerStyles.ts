@@ -83,6 +83,7 @@ export function useDatepickerStyles(evaStyle: StyleType): DatepickerStyles {
         fontWeight: labelFontWeight,
       },
       captionLabel: {
+        marginTop: captionMarginTop,
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
         fontFamily: captionFontFamily,
@@ -93,7 +94,6 @@ export function useDatepickerStyles(evaStyle: StyleType): DatepickerStyles {
         // The calendar inside sizes the popover (its mapping width is 344); cap the popover at the
         // window so the calendar, which is `maxWidth: '100%'`, shrinks with it on narrow screens.
         maxWidth: windowWidth - 2 * DATEPICKER_POPOVER_WINDOW_INSET,
-        marginBottom: captionMarginTop,
       },
     };
   }, [evaStyle, windowWidth]);
