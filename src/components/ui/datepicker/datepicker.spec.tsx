@@ -111,11 +111,12 @@ describe('@datepicker: component checks', () => {
       expect(StyleSheet.flatten(popover.props.style)).toMatchObject({ borderRadius: 12, borderWidth: 0 });
     });
 
-    it('should let placement and backdropStyle set directly win over popoverProps', () => {
+    it('should take placement and backdropStyle only from the picker props', () => {
       const component = render(
         <TestDatepicker
           placement='top'
           backdropStyle={{ backgroundColor: 'red' }}
+          // @ts-expect-error placement and backdropStyle are not part of DatepickerPopoverProps
           popoverProps={{ placement: 'left', backdropStyle: { backgroundColor: 'blue' } }}
         />,
       );

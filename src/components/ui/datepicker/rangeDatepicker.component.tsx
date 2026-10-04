@@ -148,7 +148,7 @@ export interface RangeDatepickerRef<D = Date> {
  *
  * @property {PopoverProps} popoverProps - Props for the Popover that shows the calendar,
  * e.g. `fullWidth` (the calendar takes the width of the control), `style`, `blocking` or `anchorContainerStyle`.
- * `visible`, `anchor` and `children` are managed by the picker; `placement` and `backdropStyle` set directly win;
+ * `visible`, `anchor` and `children` are managed by the picker; `placement` and `backdropStyle` are set through the picker props;
  * `onBackdropPress` is called before the picker closes.
  *
  * @property {ComponentType | null} renderArrowLeft - Custom component which will be used

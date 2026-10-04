@@ -60,15 +60,15 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   /**
    * Props for the `Popover` that shows the calendar, e.g. `fullWidth` (the calendar takes the
    * width of the control), `style`, `blocking` or `anchorContainerStyle`. `visible`, `anchor` and
-   * `children` are managed by the picker; `placement` and `backdropStyle` set directly win;
-   * `onBackdropPress` is called before the picker closes.
+   * `children` are managed by the picker; `placement` and `backdropStyle` are the picker props of
+   * the same name; `onBackdropPress` is called before the picker closes.
    */
   popoverProps?: DatepickerPopoverProps;
   onFocus?: () => void;
   onBlur?: () => void;
 }
 
-export type DatepickerPopoverProps = Partial<Omit<PopoverProps, 'visible' | 'anchor' | 'children'>>;
+export type DatepickerPopoverProps = Partial<Omit<PopoverProps, 'visible' | 'anchor' | 'children' | 'placement' | 'backdropStyle'>>;
 
 interface State {
   visible: boolean;
