@@ -73,6 +73,7 @@ describe('@page-indicator: component checks', () => {
       <TestPageIndicator
         selectedIndex={2}
         status='danger'
+        onSelect={jest.fn()}
       />,
     );
 
@@ -121,10 +122,49 @@ describe('@page-indicator: component checks', () => {
 
   it('should name the dots through dotAccessibilityLabel', () => {
     const component = render(
-      <TestPageIndicator dotAccessibilityLabel={(index, count) => `Page ${index + 1} of ${count}`} />,
+      <TestPageIndicator
+        onSelect={jest.fn()}
+        dotAccessibilityLabel={(index, count) => `Page ${index + 1} of ${count}`}
+      />,
     );
 
     expect(component.getByLabelText('Page 2 of 3')).toBeTruthy();
+  });
+
+  it('should expose a display-only indicator as one element naming the current page', () => {
+    const component = render(<TestPageIndicator selectedIndex={1} />);
+
+    const summary = component.getByLabelText('Page 2 of 3');
+    expect(summary.props.accessible).toEqual(true);
+    expect(summary.props.accessibilityRole).toEqual('text');
+    dotsOf(component).forEach((dot) => {
+      expect(dot.props.onPress).toBeUndefined();
+      expect(dot.props.accessibilityRole).toBeUndefined();
+      expect(dot.props.importantForAccessibility).toEqual('no');
+    });
+  });
+
+  it('should name the current page through dotAccessibilityLabel or a consumer label when display-only', () => {
+    const labelled = render(
+      <TestPageIndicator
+        progress={1.6}
+        dotAccessibilityLabel={(index, count) => `Slide ${index + 1}/${count}`}
+      />,
+    );
+    expect(labelled.getByLabelText('Slide 3/3')).toBeTruthy();
+
+    const own = render(<TestPageIndicator aria-label='Onboarding progress' />);
+    expect(own.getByLabelText('Onboarding progress')).toBeTruthy();
+  });
+
+  it('should keep the touch areas of neighbouring dots apart', () => {
+    const component = render(<TestPageIndicator onSelect={jest.fn()} />);
+
+    const { hitSlop } = dotsOf(component)[0].props;
+    const gap = 2 * evaMapping.mapping.dotMarginHorizontal;
+
+    expect(hitSlop.left + hitSlop.right).toBeLessThanOrEqual(gap);
+    expect(hitSlop.top).toBeGreaterThan(0);
   });
 
   it('should merge dotStyle after the mapping', () => {

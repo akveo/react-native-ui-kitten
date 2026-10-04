@@ -143,9 +143,29 @@ const PageIndicatorComponent: React.FC<PageIndicatorProps> = ({
 
   const dots = useMemo(() => Array.from({ length: Math.max(0, pageCount) }, (_, index) => index), [pageCount]);
 
+  // Without `onSelect` the dots only show the position: screen readers get one element that names
+  // the current page instead of a row of disabled buttons. With `onSelect` every dot is a button.
+  const interactive = Boolean(onSelect);
+  const currentIndex = Math.min(Math.max(0, Math.round(Number.isFinite(progress) ? progress : selectedIndex)), Math.max(0, pageCount - 1));
+  const summaryProps = interactive || pageCount <= 0 ? {} : {
+    accessible: true,
+    accessibilityRole: 'text' as const,
+    'aria-label': viewProps['aria-label']
+      ?? viewProps.accessibilityLabel
+      ?? dotAccessibilityLabel?.(currentIndex, pageCount)
+      ?? `Page ${currentIndex + 1} of ${pageCount}`,
+  };
+
+  // Touch areas reach halfway to the neighbouring dot, so they meet without overlapping.
+  const hitSlop = useMemo(() => {
+    const horizontal = componentStyle.dot.marginHorizontal ?? 0;
+    return { top: 8, bottom: 8, left: horizontal, right: horizontal };
+  }, [componentStyle.dot.marginHorizontal]);
+
   return (
     <View
       {...viewProps}
+      {...summaryProps}
       testID={testID}
       style={[styles.container, componentStyle.container, style]}
     >
@@ -153,6 +173,25 @@ const PageIndicatorComponent: React.FC<PageIndicatorProps> = ({
         const selection = selectionOf(index);
         const selected = selection >= 0.5;
         const width = componentStyle.dot.width + (componentStyle.selectedDot.width - componentStyle.dot.width) * selection;
+
+        const dotStyles = [
+          componentStyle.dot,
+          { width },
+          selected && { backgroundColor: componentStyle.selectedDot.backgroundColor },
+          dotStyle,
+        ];
+
+        if (!interactive) {
+          // Plain views: nothing to press, and nothing for a screen reader to stop on.
+          return (
+            <View
+              key={index}
+              testID={testID && `@${testID}/dot-${index}`}
+              importantForAccessibility='no'
+              style={dotStyles}
+            />
+          );
+        }
 
         return (
           <Pressable
@@ -163,15 +202,9 @@ const PageIndicatorComponent: React.FC<PageIndicatorProps> = ({
               label: dotAccessibilityLabel?.(index, pageCount),
             }, {})}
             testID={testID && `@${testID}/dot-${index}`}
-            hitSlop={8}
-            disabled={!onSelect}
+            hitSlop={hitSlop}
             onPress={() => onSelect?.(index)}
-            style={[
-              componentStyle.dot,
-              { width },
-              selected && { backgroundColor: componentStyle.selectedDot.backgroundColor },
-              dotStyle,
-            ]}
+            style={dotStyles}
           />
         );
       })}
