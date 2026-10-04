@@ -45,6 +45,7 @@ export {
 } from './theme/withStyles';
 export {
   type ThemeType,
+  type ThemeKey,
   useTheme,
 } from './theme/theme.service';
 export {
@@ -56,6 +57,7 @@ export {
   useThemeValue,
   useThemeValues,
 } from './theme/useThemeValue';
+export { type KnownThemeKey } from './theme/themeKeys';
 export {
   styleCache,
   StyleCacheClass,

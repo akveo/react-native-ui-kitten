@@ -34,7 +34,8 @@
     "e2e:android": "agent-device test src/showcases/e2e --platform android --reporter default --reporter junit:.agent-device/junit-android.xml --artifacts-dir .agent-device/test-artifacts",
     "e2e:matrix:ios": "agent-device open com.uikitten.showcases --platform ios --relaunch --session ios && AGENT_DEVICE_SESSION=ios bash src/showcases/e2e/matrix/matrix.sh .agent-device/qa/matrix/ios",
     "e2e:matrix:android": "adb reverse tcp:8081 tcp:8081; agent-device open com.uikitten.showcases --platform android --relaunch --metro-host localhost --metro-port 8081 --session android && AGENT_DEVICE_SESSION=android bash src/showcases/e2e/matrix/matrix.sh .agent-device/qa/matrix/android",
-    "eva-icons:generate": "node scripts/generate-eva-icons.js"
+    "eva-icons:generate": "node scripts/generate-eva-icons.js",
+    "theme-types:generate": "node scripts/generate-theme-types.js"
   },
   "dependencies": {
     "react": "19.1.0",
