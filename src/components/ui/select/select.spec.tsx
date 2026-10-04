@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {
+  act,
   fireEvent,
   render,
   RenderAPI,
@@ -469,17 +470,51 @@ I love Babel
       expect(scrollToIndex).toHaveBeenCalledWith(expect.objectContaining({ index: 24, animated: false }));
     });
 
-    it('should scroll to the first selected option of a multi select', async () => {
+    it('should scroll to the topmost selected option of a multi select', async () => {
       const component = render(
         <ManyOptions
           multiSelect={true}
-          selectedIndex={[new IndexPath(12), new IndexPath(20)]}
+          selectedIndex={[new IndexPath(20), new IndexPath(12)]}
         />,
       );
 
       await openAndLayout(component);
 
       expect(scrollToIndex).toHaveBeenCalledWith(expect.objectContaining({ index: 12 }));
+    });
+
+    it('should stop retrying a failed scroll after a few rounds', async () => {
+      jest.useFakeTimers();
+      const scrollToOffset = jest.spyOn(FlatList.prototype, 'scrollToOffset').mockImplementation(() => undefined);
+      const component = render(<ManyOptions selectedIndex={new IndexPath(24)} />);
+      await openAndLayout(component);
+      const list = component.UNSAFE_getByType(FlatList);
+      const failure = { index: 24, highestMeasuredFrameIndex: 9, averageItemLength: 40 };
+
+      // Every attempt fails: the first try plus five retries, then nothing more.
+      for (let attempt = 0; attempt < 10; attempt++) {
+        list.props.onScrollToIndexFailed(failure);
+        act(() => jest.advanceTimersByTime(60));
+      }
+
+      expect(scrollToIndex).toHaveBeenCalledTimes(6);
+      scrollToOffset.mockRestore();
+      jest.useRealTimers();
+    });
+
+    it('should drop a pending retry when the list closes', async () => {
+      jest.useFakeTimers();
+      const scrollToOffset = jest.spyOn(FlatList.prototype, 'scrollToOffset').mockImplementation(() => undefined);
+      const component = render(<ManyOptions selectedIndex={new IndexPath(24)} />);
+      await openAndLayout(component);
+
+      component.UNSAFE_getByType(FlatList).props.onScrollToIndexFailed({ index: 24, highestMeasuredFrameIndex: 9, averageItemLength: 40 });
+      act(() => component.getByTestId('@backdrop').props.onResponderRelease({ nativeEvent: {} }));
+      act(() => jest.advanceTimersByTime(200));
+
+      expect(scrollToIndex).toHaveBeenCalledTimes(1);
+      scrollToOffset.mockRestore();
+      jest.useRealTimers();
     });
 
     it('should not scroll without a selection or when the first option is selected', async () => {

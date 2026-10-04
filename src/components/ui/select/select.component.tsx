@@ -5,7 +5,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React, { ReactNode, useCallback, useMemo, useRef, useState, useImperativeHandle } from 'react';
+import React, { ReactNode, useCallback, useEffect, useMemo, useRef, useState, useImperativeHandle } from 'react';
 import {
   Animated,
   GestureResponderEvent,
@@ -95,6 +95,7 @@ export interface SelectRef {
 const CHEVRON_DEG_COLLAPSED = -180;
 const CHEVRON_DEG_EXPANDED = 0;
 const CHEVRON_ANIM_DURATION = 200;
+const MAX_SCROLL_RETRIES = 5;
 
 /**
  * A dropdown menu for selecting options.
@@ -174,6 +175,9 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
     const [listVisible, setListVisible] = useState(false);
     const optionsListRef = useRef<ListRef | null>(null);
     const scrollToSelectedPendingRef = useRef(false);
+    // Fallback retries used in this opening; the timer is dropped when the list closes or unmounts.
+    const scrollRetryCountRef = useRef(0);
+    const scrollRetryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const serviceRef = useRef(new SelectService());
     const expandAnimationRef = useRef(new Animated.Value(0));
 
@@ -198,15 +202,23 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
       return Array.isArray(selectedIndex) ? selectedIndex : [selectedIndex];
     }, [selectedIndex]);
 
-    // Row of the options list that holds the (first) selected option: a grouped option lives
-    // inside the row of its group.
+    // Row of the options list that holds the selected option, the topmost one for a multi select
+    // (selection order is not list order): a grouped option lives inside the row of its group.
     const selectedListIndex = useMemo((): number => {
-      const first = selectedIndices[0];
-      if (!first) {
-        return -1;
-      }
-      return first.section >= 0 ? first.section : first.row;
+      const rows = selectedIndices
+        .filter(Boolean)
+        .map((index): number => index.section >= 0 ? index.section : index.row);
+      return rows.length > 0 ? Math.min(...rows) : -1;
     }, [selectedIndices]);
+
+    const clearScrollRetry = useCallback((): void => {
+      if (scrollRetryTimerRef.current !== null) {
+        clearTimeout(scrollRetryTimerRef.current);
+        scrollRetryTimerRef.current = null;
+      }
+    }, []);
+
+    useEffect(() => clearScrollRetry, [clearScrollRetry]);
 
     const expandToRotateInterpolation = useMemo(() => {
       return expandAnimation.interpolate({
@@ -309,6 +321,7 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
       const hasData = data.length > 0;
       if (hasData) {
         scrollToSelectedPendingRef.current = true;
+        scrollRetryCountRef.current = 0;
         setListVisible(true);
         dispatch([Interaction.ACTIVE]);
         createExpandAnimation(-CHEVRON_DEG_COLLAPSED).start(() => {
@@ -318,12 +331,13 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
     }, [data.length, dispatch, createExpandAnimation, onFocusProp]);
 
     const setOptionsListInvisible = useCallback(() => {
+      clearScrollRetry();
       setListVisible(false);
       dispatch([]);
       createExpandAnimation(CHEVRON_DEG_EXPANDED).start(() => {
         onBlurProp?.(null);
       });
-    }, [dispatch, createExpandAnimation, onBlurProp]);
+    }, [dispatch, createExpandAnimation, onBlurProp, clearScrollRetry]);
 
     // Imperative handle for ref
     useImperativeHandle(ref, () => ({
@@ -397,17 +411,26 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
     }, [listProps, selectedListIndex, data.length]);
 
     // Rows past the render window have no frame yet: jump near them by the average row
-    // height, then retry once the window has caught up.
+    // height, then retry once the window has caught up. Each jump renders more rows and refines the
+    // average, so a long list needs a few rounds (two to three for the last of 30 options on iOS and
+    // Android: the first failure comes before any row is measured); after
+    // MAX_SCROLL_RETRIES the list stays at the approximate offset instead of looping.
     const onListScrollToIndexFailed = useCallback((info: {
       index: number;
       highestMeasuredFrameIndex: number;
       averageItemLength: number;
     }): void => {
       optionsListRef.current?.scrollToOffset({ offset: info.averageItemLength * info.index, animated: false });
-      setTimeout(() => {
+      if (scrollRetryCountRef.current >= MAX_SCROLL_RETRIES) {
+        return;
+      }
+      scrollRetryCountRef.current += 1;
+      clearScrollRetry();
+      scrollRetryTimerRef.current = setTimeout(() => {
+        scrollRetryTimerRef.current = null;
         optionsListRef.current?.scrollToIndex({ index: info.index, animated: false, viewPosition: 0 });
       }, 50);
-    }, []);
+    }, [clearScrollRetry]);
 
     const cloneItemWithProps = useCallback((el: SelectItemElement, itemProps: SelectItemProps): SelectItemElement => {
       const nestedElements = React.Children.map(el.props.children, (nestedEl: SelectItemElement, index: number) => {
