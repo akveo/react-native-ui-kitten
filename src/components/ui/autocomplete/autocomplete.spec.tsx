@@ -417,4 +417,40 @@ describe('@autocomplete: component checks', () => {
     componentRef.current.clear();
   });
 
+  it('should derive the input test ids from testID', () => {
+    const component = render(
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
+        <Autocomplete testID='from'>
+          <AutocompleteItem title='Option 1' />
+        </Autocomplete>
+        <Autocomplete testID='to'>
+          <AutocompleteItem title='Option 1' />
+        </Autocomplete>
+      </ApplicationProvider>,
+    );
+
+    expect(component.getByTestId('@@from/input/input')).toBeTruthy();
+    expect(component.getByTestId('@@to/input/input')).toBeTruthy();
+    expect(component.getByTestId('@@to/input/container')).toBeTruthy();
+    expect(component.queryByTestId('@@autocomplete/input/input')).toBeNull();
+  });
+
+  it('should keep the default input test id without testID', () => {
+    const component = render(
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
+        <Autocomplete>
+          <AutocompleteItem title='Option 1' />
+        </Autocomplete>
+      </ApplicationProvider>,
+    );
+
+    expect(component.getByTestId('@@autocomplete/input/input')).toBeTruthy();
+  });
+
 });
