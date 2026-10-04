@@ -72,7 +72,8 @@ export interface SelectProps extends TouchableWebProps {
   /**
    * Props for the `Popover` that shows the options, e.g. `fullWidth` (defaults to `true`),
    * `blocking`, `anchorContainerStyle`, `backdropStyle` or `style`. `visible`, `anchor` and
-   * `children` are managed by Select; `onBackdropPress` is called before the list closes.
+   * `children` are managed by Select and `placement` is the Select prop of the same name;
+   * `onBackdropPress` is called before the list closes.
    */
   popoverProps?: SelectPopoverProps;
   placeholder?: RenderProp<TextProps> | TextElement | string | number;
@@ -98,7 +99,7 @@ export interface SelectProps extends TouchableWebProps {
 
 export type SelectListProps = Omit<ListProps, 'data' | 'renderItem'>;
 
-export type SelectPopoverProps = Partial<Omit<PopoverProps, 'visible' | 'anchor' | 'children'>>;
+export type SelectPopoverProps = Partial<Omit<PopoverProps, 'visible' | 'anchor' | 'children' | 'placement'>>;
 
 export type SelectElement = React.ReactElement<SelectProps>;
 
@@ -140,7 +141,8 @@ const MAX_SCROLL_RETRIES = 5;
  * @property {PopoverProps} popoverProps - Props for the Popover that shows the options,
  * e.g. `fullWidth` (defaults to *true*, set `false` to size the list by its content), `blocking`,
  * `anchorContainerStyle`, `backdropStyle` or `style`.
- * `visible`, `anchor` and `children` are managed by Select; `onBackdropPress` is called before the list closes.
+ * `visible`, `anchor` and `children` are managed by Select, `placement` is set through the Select prop;
+ * `onBackdropPress` is called before the list closes.
  *
  * @property {ReactText | ReactElement | (TextProps) => ReactElement} placeholder - Placeholder when no option selected.
  *
@@ -551,8 +553,8 @@ const SelectComponent = React.forwardRef<SelectRef, SelectProps>(
         <Popover
           fullWidth={true}
           animationType='fade'
-          placement={placement}
           {...popoverProps}
+          placement={placement}
           style={[staticStyles.popover, componentStyle.popover, popoverProps?.style]}
           visible={listVisible}
           anchor={renderInputElement}

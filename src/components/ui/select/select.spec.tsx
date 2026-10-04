@@ -567,6 +567,8 @@ I love Babel
 
       expect(scrollToIndex).toHaveBeenCalledWith(expect.objectContaining({ index: 2 }));
     });
+  });
+
   it('should open the options at the bottom, full width, by default', () => {
     const component = render(
       <TestSelect />,
@@ -592,6 +594,18 @@ I love Babel
     expect(popover.props.fullWidth).toEqual(false);
     expect(popover.props.blocking).toEqual(false);
     expect(StyleSheet.flatten(popover.props.style)).toMatchObject({ width: 300 });
+  });
+
+  it('should take the placement only from the Select prop', () => {
+    const component = render(
+      <TestSelect
+        placement='top'
+        // @ts-expect-error placement is not part of SelectPopoverProps
+        popoverProps={{ placement: 'left' }}
+      />,
+    );
+
+    expect(component.UNSAFE_getByType(Popover).props.placement).toEqual('top');
   });
 
   it('should call popoverProps.onBackdropPress and still close the options', async () => {

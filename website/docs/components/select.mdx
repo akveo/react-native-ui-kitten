@@ -66,7 +66,7 @@ const SelectExample = () => {
 | `caption` | `string \| number \| (props) => ReactElement` | `undefined` | Caption displayed below the select. |
 | `multiSelect` | `boolean` | `false` | Whether multiple items can be selected. |
 | `placement` | `string \| PopoverPlacement` | `'bottom'` | Position of the options list relative to the control (`top`, `bottom start`, `left end`, ...). |
-| `popoverProps` | `Partial<Omit<PopoverProps, 'visible' \| 'anchor' \| 'children'>>` | `undefined` | Props for the options `Popover`: `fullWidth` (defaults to `true`; `false` sizes the list by its content), `blocking`, `anchorContainerStyle`, `backdropStyle`, `style`. `onBackdropPress` runs before the list closes. |
+| `popoverProps` | `Partial<Omit<PopoverProps, 'visible' \| 'anchor' \| 'children' \| 'placement'>>` | `undefined` | Props for the options `Popover` (`placement` is the Select prop): `fullWidth` (defaults to `true`; `false` sizes the list by its content), `blocking`, `anchorContainerStyle`, `backdropStyle`, `style`. `onBackdropPress` runs before the list closes. |
 | `value` | `string \| number \| (props) => ReactElement` | `undefined` | Display value text or render function. |
 | `children` | `SelectItem[] \| SelectGroup[]` | - | Select items and groups. |
 | `accessoryLeft` | `(props) => ReactElement` | `undefined` | Render function for the accessory shown at the start of the control. |
