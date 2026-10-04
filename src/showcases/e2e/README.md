@@ -18,3 +18,14 @@ target to its recorded ancestry and fail the replay when the tree shape differs 
 the LogBox overlay was present while recording). Delete those lines before committing so the plain
 `id=` / `label=` selectors drive the replay; also trim the `context` line to `platform=ios` plus
 `timeout=`, and drop `--metro-*` flags from `open` so the script works against a Release build.
+
+Reaching a section: open `uikitten-showcases://section/<Title>` (the `title` of the section in
+`src/showcases/navigation/app.navigator.tsx`) once the app is up, then wait for
+`id="section-<Title>-title"`. The showcase scrolls that section to the top, so the script does not
+depend on how many sections sit above it (`popover-android.ad` does this). A fixed number of
+`scroll` steps breaks whenever a section is added higher up.
+
+Running against a local Metro on a port other than 8081: `agent-device test` clears the app's
+dev-server binding when a script's `open` has no `--metro-*` flags, so a debug build falls back to
+`:8081` even with `test --metro-port`. Add the flags to the `open` lines of a scratch copy of the
+scripts (never to the committed ones, which must work against a Release build).
