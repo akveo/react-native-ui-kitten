@@ -1,5 +1,32 @@
 # @ui-kitten/eva
 
+## 6.2.0
+
+### Minor Changes
+
+- [#1926](https://github.com/akveo/react-native-ui-kitten/pull/1926) [`82b9931`](https://github.com/akveo/react-native-ui-kitten/commit/82b9931b926d4d909fc7a859405b3d96ebc7748e) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Avatar` gains `name` and `status`. Without a `source`, or when the image fails to load, `name` renders
+  as initials (the first letter of the first two words) in a frame of the same size and shape, coloured by
+  `status`, and is the avatar's accessible name. The Eva and Material `Avatar` mappings gain `textFontSize`
+  per size, `textFontFamily` / `textFontWeight`, and a `status` variant group with `backgroundColor` /
+  `textColor` (#1806).
+
+- [#1929](https://github.com/akveo/react-native-ui-kitten/pull/1929) [`c1bbc79`](https://github.com/akveo/react-native-ui-kitten/commit/c1bbc7950bd4052bb279846ee33e1ceda1738bf6) Thanks [@bataevvlad](https://github.com/bataevvlad)! - New `PageIndicator`: dots for a `ViewPager`, one per page, the selected one wider and coloured by `status`.
+  Feed it `selectedIndex`, optionally `progress` (`offset / pageWidth` from `onOffsetChange`) so the dots
+  follow the swipe, and `onSelect` to jump to a pressed dot. Dot size, spacing and colours come from the new
+  `PageIndicator` block of the Eva and Material mappings. `ViewPager` now forwards a consumer `onLayout` (the
+  layout of its content strip, pages x page width) instead of dropping it (#1355).
+
+- [#1928](https://github.com/akveo/react-native-ui-kitten/pull/1928) [`653516d`](https://github.com/akveo/react-native-ui-kitten/commit/653516d255776bd6cca3f700244ad9223f46deeb) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Typed theme tokens. `@ui-kitten/eva` exports `EvaThemeKey` (the union of every token in the light and dark
+  themes) and `EvaTheme`, and types `light` / `dark` with it; `@ui-kitten/material` does the same with
+  `MaterialThemeKey` / `MaterialTheme`. `@ui-kitten/components` exports `KnownThemeKey` (the union of both)
+  and `ThemeKey` (`KnownThemeKey | string`); `ThemeType`, `useTheme()` and the `useThemeValue` selectors
+  suggest the known tokens while custom tokens still type-check through the `string` index signature.
+  The types are generated from the theme JSON files (`yarn theme-types:generate`, checked in CI) (#1682).
+
+### Patch Changes
+
+- [#1921](https://github.com/akveo/react-native-ui-kitten/pull/1921) [`e42b131`](https://github.com/akveo/react-native-ui-kitten/commit/e42b131486c5661dcb51acb617a668f5e72f5e25) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Input`, `Select`, `Datepicker` and `RangeDatepicker` space their caption from the field by the mapping `captionMarginTop` (4 in Eva and Material); the token was defined but never applied, so captions sat flush under the field. The Eva mapping gains the token for `Input`, `Select` and `Datepicker` (Material already had it). The `Datepicker` popover no longer takes `captionMarginTop` as its bottom margin. Screens with captions move them 4 dp down.
+
 ## 6.0.2
 
 ### Patch Changes

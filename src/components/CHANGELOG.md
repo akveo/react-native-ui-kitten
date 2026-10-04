@@ -1,5 +1,78 @@
 # @ui-kitten/components
 
+## 6.2.0
+
+### Minor Changes
+
+- [#1926](https://github.com/akveo/react-native-ui-kitten/pull/1926) [`82b9931`](https://github.com/akveo/react-native-ui-kitten/commit/82b9931b926d4d909fc7a859405b3d96ebc7748e) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Avatar` gains `name` and `status`. Without a `source`, or when the image fails to load, `name` renders
+  as initials (the first letter of the first two words) in a frame of the same size and shape, coloured by
+  `status`, and is the avatar's accessible name. The Eva and Material `Avatar` mappings gain `textFontSize`
+  per size, `textFontFamily` / `textFontWeight`, and a `status` variant group with `backgroundColor` /
+  `textColor` (#1806).
+
+- [#1922](https://github.com/akveo/react-native-ui-kitten/pull/1922) [`e4413ec`](https://github.com/akveo/react-native-ui-kitten/commit/e4413ec7eda65d87754ecc2cd15fe234e1eb47a2) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `ButtonGroup` no longer overwrites `appearance`, `status` and `size` set on a child `Button`; the child's
+  values win over the group's. It also gains `selectedIndex` and `onSelect`: the selected button renders
+  `filled` while the others keep the group appearance, and `onSelect` receives the index of the pressed
+  button after that button's own `onPress`, which makes a segmented toggle a two-prop change (#1369).
+
+- [#1925](https://github.com/akveo/react-native-ui-kitten/pull/1925) [`71e6a27`](https://github.com/akveo/react-native-ui-kitten/commit/71e6a2752b00e5827fe59aedfd3afcf93acd9949) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Datepicker` and `RangeDatepicker` gain `popoverProps`, props for the `Popover` that shows the calendar:
+  `fullWidth` makes the calendar take the width of the control (the calendar already shrinks to its container
+  since 6.1.3), `style` is merged after the built-in popover style, and `blocking`, `anchorContainerStyle` or
+  `onBackdropPress` (called before the picker closes) pass through. `placement` and `backdropStyle` set directly
+  on the picker win (#1707).
+
+- [#1927](https://github.com/akveo/react-native-ui-kitten/pull/1927) [`30cdeb7`](https://github.com/akveo/react-native-ui-kitten/commit/30cdeb7350dbe4b1a99d690a1932c826c2990db2) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Input` gains `textInputRef`, a ref to the underlying React Native `TextInput`, for libraries that expect a
+  native input (`setNativeProps`, `measure`, ...). The component ref keeps the `InputRef` API (`focus`, `blur`,
+  `isFocused`, `clear`). `Autocomplete` forwards it to its `Input` (#1520).
+
+- [#1929](https://github.com/akveo/react-native-ui-kitten/pull/1929) [`c1bbc79`](https://github.com/akveo/react-native-ui-kitten/commit/c1bbc7950bd4052bb279846ee33e1ceda1738bf6) Thanks [@bataevvlad](https://github.com/bataevvlad)! - New `PageIndicator`: dots for a `ViewPager`, one per page, the selected one wider and coloured by `status`.
+  Feed it `selectedIndex`, optionally `progress` (`offset / pageWidth` from `onOffsetChange`) so the dots
+  follow the swipe, and `onSelect` to jump to a pressed dot. Dot size, spacing and colours come from the new
+  `PageIndicator` block of the Eva and Material mappings. `ViewPager` now forwards a consumer `onLayout` (the
+  layout of its content strip, pages x page width) instead of dropping it (#1355).
+
+- [#1916](https://github.com/akveo/react-native-ui-kitten/pull/1916) [`0fb3c97`](https://github.com/akveo/react-native-ui-kitten/commit/0fb3c9783370c11709ccb8775d9642b06498d178) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Select` accepts `listRef` and `listProps` (#1912): a ref to the `List` that renders the options and props forwarded to it such as `getItemLayout` or `initialScrollIndex`, so a long options list can be scrolled to the selected option when it opens.
+
+- [#1923](https://github.com/akveo/react-native-ui-kitten/pull/1923) [`c9a4c75`](https://github.com/akveo/react-native-ui-kitten/commit/c9a4c75fdecffeb923b07433d7492dc224cfd6c4) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Select` gains `placement` (default `bottom`, the same values as `Autocomplete` and `Datepicker`) and
+  `popoverProps`, props for the `Popover` that shows the options: `fullWidth` (still `true` by default; `false`
+  sizes the list by its content or `style`), `blocking`, `anchorContainerStyle`, `backdropStyle`, `style` and
+  `onBackdropPress`, which runs before the list closes (#1331).
+
+- [#1928](https://github.com/akveo/react-native-ui-kitten/pull/1928) [`653516d`](https://github.com/akveo/react-native-ui-kitten/commit/653516d255776bd6cca3f700244ad9223f46deeb) Thanks [@bataevvlad](https://github.com/bataevvlad)! - Typed theme tokens. `@ui-kitten/eva` exports `EvaThemeKey` (the union of every token in the light and dark
+  themes) and `EvaTheme`, and types `light` / `dark` with it; `@ui-kitten/material` does the same with
+  `MaterialThemeKey` / `MaterialTheme`. `@ui-kitten/components` exports `KnownThemeKey` (the union of both)
+  and `ThemeKey` (`KnownThemeKey | string`); `ThemeType`, `useTheme()` and the `useThemeValue` selectors
+  suggest the known tokens while custom tokens still type-check through the `string` index signature.
+  The types are generated from the theme JSON files (`yarn theme-types:generate`, checked in CI) (#1682).
+
+### Patch Changes
+
+- [#1930](https://github.com/akveo/react-native-ui-kitten/pull/1930) [`a8db98a`](https://github.com/akveo/react-native-ui-kitten/commit/a8db98a4c0f8864bd4ad9da8a495e1a29991c672) Thanks [@bataevvlad](https://github.com/bataevvlad)! - On Android, text with the default `System` font family now keeps its exact `fontWeight`. React Native Android treats any `fontFamily` as a custom family and rounds the weight to regular or bold, so `500` / `600` text (subtitles, labels, radio and checkbox text, avatar initials) rendered regular. Styles resolved from the theme now leave the family unset when it is `System` on Android; iOS and custom families are unchanged.
+
+- [#1931](https://github.com/akveo/react-native-ui-kitten/pull/1931) [`00168fa`](https://github.com/akveo/react-native-ui-kitten/commit/00168faf67b751e4879797be4ae31083b127a638) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Autocomplete` derives its input field's test ids from `testID` (`@@<testID>/input/input`, container `@@<testID>/input/container`) instead of the fixed `@@autocomplete/input/input`, so several autocompletes on one screen can be told apart in tests. Without a `testID` the field keeps the old id.
+
+- [#1917](https://github.com/akveo/react-native-ui-kitten/pull/1917) [`ce75d36`](https://github.com/akveo/react-native-ui-kitten/commit/ce75d36bc2f9531b232a0077bbe1018afd34578a) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Button`, `CheckBox`, `Radio` and `Toggle` render nothing for an empty string label instead of an empty text node inside their `View` (#1913), which react-native-web reported as "Unexpected text node".
+
+- [#1933](https://github.com/akveo/react-native-ui-kitten/pull/1933) [`ff7c701`](https://github.com/akveo/react-native-ui-kitten/commit/ff7c70135b51b458e5f0de664559bbb6d8ff7940) Thanks [@bataevvlad](https://github.com/bataevvlad)! - A numeric `0` label or title now renders as "0" instead of nothing. `FalsyText` (used for the labels, captions and titles of `Button`, `CheckBox`, `Radio`, `Toggle`, `Input`, `ListItem` and others) rendered nothing for any falsy value; it now skips only `null`, `undefined`, `false` and an empty string.
+
+  Apps that hide a text prop with a number and `&&` now show a stray "0": `` description={count && `${count} items`} `` renders "0" when `count` is 0, as React itself does for `{0 && ...}`. Use `count > 0 && ...` instead.
+
+- [#1921](https://github.com/akveo/react-native-ui-kitten/pull/1921) [`e42b131`](https://github.com/akveo/react-native-ui-kitten/commit/e42b131486c5661dcb51acb617a668f5e72f5e25) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Input`, `Select`, `Datepicker` and `RangeDatepicker` space their caption from the field by the mapping `captionMarginTop` (4 in Eva and Material); the token was defined but never applied, so captions sat flush under the field. The Eva mapping gains the token for `Input`, `Select` and `Datepicker` (Material already had it). The `Datepicker` popover no longer takes `captionMarginTop` as its bottom margin. Screens with captions move them 4 dp down.
+
+- [#1915](https://github.com/akveo/react-native-ui-kitten/pull/1915) [`4c78a53`](https://github.com/akveo/react-native-ui-kitten/commit/4c78a53a6abeb1d194c84d9a1d14f538a8adc66b) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Modal` and `Popover` (so also `Select`, `Datepicker`, `RangeDatepicker`, `OverflowMenu`, `Tooltip`) allow every orientation by default (#1911). React Native's `Modal` supports portrait only when `supportedOrientations` is omitted, so a popover opened while the device was in landscape came up rotated. iOS still restricts the modal to the orientations in the app's `Info.plist`.
+
+- [#1914](https://github.com/akveo/react-native-ui-kitten/pull/1914) [`6e656a9`](https://github.com/akveo/react-native-ui-kitten/commit/6e656a9c7c9491bc61742b51d44cf69c478db617) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Popover` (and `Select`, `Datepicker`, `Tooltip`, `OverflowMenu`) no longer draws its content at the window origin for a frame on the first open (#1910). The anchor keeps the same place in the element tree from the start, so opening the popover no longer remounts it (an `Autocomplete` field no longer loses focus on the first tap); a closed popover still measures nothing. The content stays off screen until the anchor frame is known and follows the anchor when its frame changes while open.
+
+- [#1920](https://github.com/akveo/react-native-ui-kitten/pull/1920) [`a524b74`](https://github.com/akveo/react-native-ui-kitten/commit/a524b7486667f9c9fc547b7abd32162344e633b2) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Tooltip` (and any `Popover` with an `indicator`) keeps its arrow pointing at the anchor when the content was moved to stay on screen, for example a wide tooltip on a button near a screen edge: the arrow follows the anchor centre instead of staying in the middle of the tooltip, and stays inside the tooltip's edges.
+
+- [#1919](https://github.com/akveo/react-native-ui-kitten/pull/1919) [`c9dd4e3`](https://github.com/akveo/react-native-ui-kitten/commit/c9dd4e351b0673eb34e4f801819d0d9e0701e8a1) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Popover` (and `Autocomplete`, `Select`, `Datepicker`, `Tooltip`, `OverflowMenu`) keeps its content out from under the software keyboard: the keyboard height is subtracted from the placement bounds, so a list that would open under the keyboard flips to the other side of the anchor, and the placement is redone when the keyboard appears or hides while the popover is open. A non-blocking popover (`Autocomplete`) now follows its anchor while the screen behind it scrolls, and hides the content while the anchor is out of view.
+
+- [#1924](https://github.com/akveo/react-native-ui-kitten/pull/1924) [`6ac1299`](https://github.com/akveo/react-native-ui-kitten/commit/6ac12994ccc4b325cea2803be7c8a36c5864e6c3) Thanks [@bataevvlad](https://github.com/bataevvlad)! - `Select` scrolls its options to the selected one when the list opens (the first selected option of a
+  multi-select, the group row of a grouped option), so a selection past the visible rows is in view on
+  reopen. A `listProps.initialScrollIndex` takes over when set (#822).
+
+- [#1934](https://github.com/akveo/react-native-ui-kitten/pull/1934) [`73e990f`](https://github.com/akveo/react-native-ui-kitten/commit/73e990f1ac4364faceb12531fcf2c263dee548e8) Thanks [@bataevvlad](https://github.com/bataevvlad)! - On web, clicking an `Autocomplete` option with the mouse selects it: the mouse-down no longer moves the focus away from the input, whose blur closed the list before the click arrived. `Modal` sets `pointerEvents` through its style, which removes react-native-web's "props.pointerEvents is deprecated" warning.
+
 ## 6.1.3
 
 ### Patch Changes
