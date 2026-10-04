@@ -10,6 +10,7 @@ import {
   Keyboard,
   ListRenderItemInfo,
   NativeSyntheticEvent,
+  Platform,
   StyleSheet,
   TextInputFocusEventData,
   TextInputSubmitEditingEventData,
@@ -43,6 +44,15 @@ export interface AutocompleteRef {
   isFocused: () => boolean;
   clear: () => void;
 }
+
+// On web a mouse-down on an option moves the focus away from the input before the press arrives;
+// the blur closes the list, so the press lands on nothing. Cancelling the mouse-down keeps the
+// input focused (its keyboard and caret stay) and lets the press select the option. Native taps
+// already keep the focus through `keyboardShouldPersistTaps`.
+const keepInputFocused = (event: { preventDefault: () => void }): void => event.preventDefault();
+const listWebProps = (): { onMouseDown?: typeof keepInputFocused } => (
+  Platform.OS === 'web' ? { onMouseDown: keepInputFocused } : {}
+);
 
 /**
  * Autocomplete is a normal text input enhanced by a panel of suggested options.
@@ -246,6 +256,7 @@ const AutocompleteComponent = forwardRef<AutocompleteRef, AutocompleteProps>(({
       anchor={renderInputElement}
     >
       <List
+        {...listWebProps()}
         style={styles.list}
         keyboardShouldPersistTaps='always'
         data={data}

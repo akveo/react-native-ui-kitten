@@ -419,7 +419,7 @@ describe('@modal: panel checks', () => {
 
     expect(component.UNSAFE_queryByType(RNModal)).toBeFalsy();
     expect(component.queryByTestId('@backdrop')).toBeFalsy();
-    expect(component.getByTestId('@modal/overlay').props.pointerEvents).toEqual('box-none');
+    expect(StyleSheet.flatten(component.getByTestId('@modal/overlay').props.style).pointerEvents).toEqual('box-none');
     expect(component.queryByText('Suggestions')).toBeTruthy();
   });
 

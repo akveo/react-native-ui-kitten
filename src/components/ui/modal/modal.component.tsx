@@ -363,8 +363,7 @@ const ModalOverlay = ({ children }: ModalOverlayProps): React.ReactElement => {
     <MeasureElement onMeasure={onMeasure}>
       <View
         testID='@modal/overlay'
-        style={StyleSheet.absoluteFill}
-        pointerEvents='box-none'
+        style={[StyleSheet.absoluteFill, styles.boxNone]}
       >
         <View
           style={{
@@ -373,8 +372,8 @@ const ModalOverlay = ({ children }: ModalOverlayProps): React.ReactElement => {
             top: -origin.y,
             width,
             height,
+            pointerEvents: 'box-none',
           }}
-          pointerEvents='box-none'
         >
           {children}
         </View>
@@ -391,5 +390,8 @@ Modal.displayName = 'Modal';
 const styles = StyleSheet.create({
   modalView: {
     position: 'absolute',
+  },
+  boxNone: {
+    pointerEvents: 'box-none',
   },
 });

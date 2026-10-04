@@ -10,6 +10,7 @@ import {
   Image,
   ImageProps,
   Keyboard,
+  Platform,
   Text,
   TextInput,
   TouchableOpacity,
@@ -34,6 +35,7 @@ import {
   AutocompleteItem,
   AutocompleteItemProps,
 } from './autocompleteItem.component';
+import { List } from '../list/list.component';
 import {
   TouchableWeb,
   TouchableWithoutFeedback,
@@ -453,4 +455,38 @@ describe('@autocomplete: component checks', () => {
     expect(component.getByTestId('@@autocomplete/input/input')).toBeTruthy();
   });
 
+
+  describe('web option press', () => {
+
+    const originalOS = Platform.OS;
+    const setOS = (os: typeof Platform.OS): void => {
+      Object.defineProperty(Platform, 'OS', { value: os, configurable: true, writable: true });
+    };
+
+    afterEach(() => setOS(originalOS));
+
+    const openList = async (): Promise<ReturnType<typeof render>> => {
+      const component = render(<TestAutocomplete />);
+      fireEvent(component.UNSAFE_queryByType(TextInput), 'focus');
+      await waitFor(() => expect(component.queryByText('Option 1')).toBeTruthy());
+      return component;
+    };
+
+    it('should keep the input focused when an option is pressed with the mouse on web', async () => {
+      setOS('web');
+      const component = await openList();
+      const preventDefault = jest.fn();
+
+      fireEvent(component.UNSAFE_getByType(List), 'mouseDown', { preventDefault });
+
+      expect(preventDefault).toHaveBeenCalled();
+    });
+
+    it('should not add a mouse handler on native', async () => {
+      setOS('ios');
+      const component = await openList();
+
+      expect(component.UNSAFE_getByType(List).props.onMouseDown).toBeUndefined();
+    });
+  });
 });
