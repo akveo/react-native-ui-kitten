@@ -48,3 +48,18 @@ export const WithLabel: Story = {
     );
   },
 };
+
+export const FullWidth: Story = {
+  render: () => {
+    const [date, setDate] = useState<Date | null>(null);
+    return (
+      <Datepicker
+        style={{ width: 420 }}
+        date={date}
+        onSelect={setDate}
+        placeholder="The calendar takes the width of the control"
+        popoverProps={{ fullWidth: true, style: { borderRadius: 16 } }}
+      />
+    );
+  },
+};

@@ -75,6 +75,7 @@ export {
   type RangeDatepickerElement,
   type RangeDatepickerRef,
 } from './datepicker/rangeDatepicker.component';
+export { type DatepickerPopoverProps } from './datepicker/baseDatepicker.component';
 export {
   Drawer,
   type DrawerProps,

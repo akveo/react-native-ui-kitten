@@ -33,7 +33,10 @@ import { BaseCalendarProps } from '../calendar/baseCalendar.props';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
 import { NativeDateService } from '../calendar/service/nativeDate.service';
-import { Popover } from '../popover/popover.component';
+import {
+  Popover,
+  PopoverProps,
+} from '../popover/popover.component';
 import {
   PopoverPlacement,
   PopoverPlacements,
@@ -54,9 +57,18 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   placeholder?: RenderProp<TextProps> | TextElement | string | number;
   placement?: PopoverPlacement | string;
   backdropStyle?: StyleProp<ViewStyle>;
+  /**
+   * Props for the `Popover` that shows the calendar, e.g. `fullWidth` (the calendar takes the
+   * width of the control), `style`, `blocking` or `anchorContainerStyle`. `visible`, `anchor` and
+   * `children` are managed by the picker; `placement` and `backdropStyle` are the picker props of
+   * the same name; `onBackdropPress` is called before the picker closes.
+   */
+  popoverProps?: DatepickerPopoverProps;
   onFocus?: () => void;
   onBlur?: () => void;
 }
+
+export type DatepickerPopoverProps = Partial<Omit<PopoverProps, 'visible' | 'anchor' | 'children' | 'placement' | 'backdropStyle'>>;
 
 interface State {
   visible: boolean;
@@ -236,6 +248,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       backdropStyle,
       controlStyle, // eslint-disable-line @typescript-eslint/no-unused-vars
       placement,
+      popoverProps,
       label,
       accessoryLeft, // eslint-disable-line @typescript-eslint/no-unused-vars
       accessoryRight, // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -255,7 +268,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
           component={label}
         />
         <Popover
-          style={[evaStyle.popover, styles.popover]}
+          {...popoverProps}
+          style={[evaStyle.popover, styles.popover, popoverProps?.style]}
           backdropStyle={backdropStyle}
           placement={placement}
           visible={this.state.visible}

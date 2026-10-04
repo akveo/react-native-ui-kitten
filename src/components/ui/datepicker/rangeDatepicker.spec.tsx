@@ -31,6 +31,7 @@ import {
   RangeDatepickerRef,
 } from './rangeDatepicker.component';
 import { RangeCalendar } from '../calendar/rangeCalendar.component';
+import { Popover } from '../popover/popover.component';
 import {
   CalendarRange,
   CalendarViewModes,
@@ -99,6 +100,33 @@ describe('@range-datepicker: component checks', () => {
     findInputTouchable: (api: RenderAPI) => api.UNSAFE_queryAllByType(TouchableWithoutFeedback)[0],
     findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
   };
+
+  it('should forward popoverProps to the calendar popover and merge its style', () => {
+    const component = render(
+      <TestRangeDatepicker popoverProps={{ fullWidth: true, style: { borderRadius: 12 } }} />,
+    );
+
+    const popover = component.UNSAFE_getByType(Popover);
+
+    expect(popover.props.fullWidth).toEqual(true);
+    expect(StyleSheet.flatten(popover.props.style)).toMatchObject({ borderRadius: 12, borderWidth: 0 });
+  });
+
+  it('should call popoverProps.onBackdropPress and still close the calendar', async () => {
+    const onBackdropPress = jest.fn();
+    const component = render(
+      <TestRangeDatepicker popoverProps={{ onBackdropPress }} />,
+    );
+
+    fireEvent.press(touchables.findInputTouchable(component));
+    const backdrop = await waitFor(() => touchables.findBackdropTouchable(component));
+    await act(async () => {
+      backdrop.props.onResponderRelease({ nativeEvent: {} });
+    });
+
+    expect(onBackdropPress).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(component.UNSAFE_queryByType(RangeCalendar)).toBeFalsy());
+  });
 
   it('should not render range calendar when not focused', () => {
     const component = render(

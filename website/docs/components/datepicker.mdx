@@ -89,6 +89,7 @@ const RangeDatepickerExample = () => {
 | `controlStyle` | `ViewStyle` | `undefined` | Style applied to the control that opens the calendar. |
 | `placement` | `PopoverPlacement \| string` | `'bottom start'` | Position of the calendar relative to the control. |
 | `backdropStyle` | `ViewStyle` | `undefined` | Style applied to the backdrop behind the calendar. |
+| `popoverProps` | `Partial<Omit<PopoverProps, 'visible' \| 'anchor' \| 'children' \| 'placement' \| 'backdropStyle'>>` | `undefined` | Props for the `Popover` that shows the calendar: `fullWidth` (the calendar takes the width of the control), `style`, `blocking`, `anchorContainerStyle`. `placement` and `backdropStyle` are the picker props; `onBackdropPress` runs before the picker closes. |
 | `autoDismiss` | `boolean` | `true` | Whether the calendar closes as soon as a date is selected. |
 | `onFocus` | `() => void` | `undefined` | Called when the calendar opens. |
 | `onBlur` | `() => void` | `undefined` | Called when the calendar closes. |
