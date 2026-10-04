@@ -224,6 +224,15 @@ describe('@autocomplete: component checks', () => {
 
   TestAutocomplete.displayName = 'TestAutocomplete';
 
+  it('should expose the native TextInput through textInputRef', () => {
+    const textInputRef = React.createRef<TextInput>();
+    const component = render(
+      <TestAutocomplete textInputRef={textInputRef} />,
+    );
+
+    expect(textInputRef.current).toBe(component.UNSAFE_getByType(TextInput).instance);
+  });
+
   it('should render TextInput', () => {
     const component = render(
       <TestAutocomplete />,
