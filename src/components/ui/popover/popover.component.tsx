@@ -110,11 +110,16 @@ export function usePopoverMeasurement({
   const childFrameRef = useRef<Frame>(childFrame);
   const contentPositionRef = useRef<Point>(contentPosition);
   const actualPlacementRef = useRef<PopoverPlacement>(actualPlacement);
+  const visibleRef = useRef<boolean>(visible);
+  // The last measured content frame, kept so the placement can be redone when the anchor frame
+  // arrives after the content was measured, or moves while the popover is open.
+  const contentFrameRef = useRef<Frame | null>(null);
 
   // Keep refs in sync with state
   childFrameRef.current = childFrame;
   contentPositionRef.current = contentPosition;
   actualPlacementRef.current = actualPlacement;
+  visibleRef.current = visible;
 
   // Service instance - stable across renders
   const placementService = useRef(new PopoverPlacementService()).current;
@@ -134,8 +139,11 @@ export function usePopoverMeasurement({
 
   // When becoming invisible, reset position to offscreen
   useEffect(() => {
-    if (!visible && !Point.outscreen().equals(contentPositionRef.current)) {
-      setContentPosition(Point.outscreen());
+    if (!visible) {
+      contentFrameRef.current = null;
+      if (!Point.outscreen().equals(contentPositionRef.current)) {
+        setContentPosition(Point.outscreen());
+      }
     }
   }, [visible]);
 
@@ -156,13 +164,6 @@ export function usePopoverMeasurement({
     return { left, top, maxWidth: windowWidth };
   }, [contentPosition, windowWidth]);
 
-  // Callback when anchor element is measured
-  const onChildMeasure = useCallback((frame: Frame): void => {
-    if (!frame.equals(childFrameRef.current)) {
-      setChildFrame(frame);
-    }
-  }, []);
-
   // Helper to calculate placement options
   const findPlacementOptions = useCallback(
     (contentFrame: Frame, anchorFrame: Frame): PlacementOptions => {
@@ -178,10 +179,10 @@ export function usePopoverMeasurement({
     [fullWidth]
   );
 
-  // Callback when popover content is measured
-  const onContentMeasure = useCallback(
-    (anchorFrame: Frame): void => {
-      const placementOptions = findPlacementOptions(anchorFrame, childFrameRef.current);
+  // Places the content next to the anchor from the two measured frames.
+  const placeContent = useCallback(
+    (contentFrame: Frame, anchorFrame: Frame): void => {
+      const placementOptions = findPlacementOptions(contentFrame, anchorFrame);
       const computedPlacement = placementService.find(preferredPlacement, placementOptions);
 
       // `find` falls back to the preferred placement when nothing fits; keep that frame on screen.
@@ -199,6 +200,36 @@ export function usePopoverMeasurement({
       }
     },
     [findPlacementOptions, placementService, preferredPlacement]
+  );
+
+  // Callback when anchor element is measured
+  const onChildMeasure = useCallback((frame: Frame): void => {
+    if (frame.equals(childFrameRef.current)) {
+      return;
+    }
+    childFrameRef.current = frame;
+    setChildFrame(frame);
+    // The content may have been measured before the anchor (the first open races the two
+    // measurements, #1910), or the anchor may move while the popover is open: place it again
+    // against the frame that just arrived.
+    if (visibleRef.current && contentFrameRef.current) {
+      placeContent(contentFrameRef.current, frame);
+    }
+  }, [placeContent]);
+
+  // Callback when popover content is measured
+  const onContentMeasure = useCallback(
+    (contentFrame: Frame): void => {
+      contentFrameRef.current = contentFrame;
+      // Until the anchor has been measured there is nothing to place the content against; it
+      // stays off screen instead of being drawn at the window origin and jumping into place once
+      // the anchor frame arrives (#1910).
+      if (childFrameRef.current.equals(Frame.zero())) {
+        return;
+      }
+      placeContent(contentFrame, childFrameRef.current);
+    },
+    [placeContent]
   );
 
   return {
@@ -260,7 +291,8 @@ export function usePopoverMeasurement({
  * supportedOrientations -
  * Allows the modal to be rotated to any of the specified orientations.
  * On iOS, the modal is still restricted by what's specified
- * in your app's Info.plist's UISupportedInterfaceOrientations field
+ * in your app's Info.plist's UISupportedInterfaceOrientations field.
+ * Defaults to every orientation, so the popover follows the app.
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
@@ -319,8 +351,11 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
     onPlacementChange,
   });
 
-  // Measurement and modal machinery are mounted the first time the popover becomes visible;
-  // until then a closed popover costs exactly its anchor.
+  // The modal machinery is mounted the first time the popover becomes visible. The anchor stays
+  // wrapped in `MeasureElement` from the start so the element tree keeps its shape (moving the
+  // anchor into the wrapper on open remounted it, #1910), but the wrapper only measures once the
+  // popover has been shown: a closed popover costs its anchor, and the first open measures the
+  // anchor through the forced measurement (the content waits off screen until that frame arrives).
   const everVisibleRef = useRef<boolean>(visible);
   if (visible) {
     everVisibleRef.current = true;
@@ -372,23 +407,13 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
     );
   };
 
-  if (!everVisibleRef.current) {
-    return (
-      <View
-        ref={containerRef}
-        style={anchorContainerStyle}
-      >
-        {anchor()}
-      </View>
-    );
-  }
-
   return (
     <View
       ref={containerRef}
       style={anchorContainerStyle}
     >
       <MeasureElement
+        enabled={everVisibleRef.current}
         force={forceMeasure}
         // The status bar compensation targets native modal windows; non-blocking content is laid
         // out in the same coordinate space the anchor is measured in.
@@ -397,21 +422,23 @@ const PopoverComponent = forwardRef<View, PopoverProps>(({
       >
         {anchor()}
       </MeasureElement>
-      <Modal
-        visible={visible}
-        shouldUseContainer={false}
-        backdropStyle={backdropStyle}
-        backdropAccessibilityLabel={backdropAccessibilityLabel}
-        animationType={animationType}
-        hardwareAccelerated={hardwareAccelerated}
-        supportedOrientations={supportedOrientations}
-        onShow={onShow}
-        onBackdropPress={onBackdropPress}
-        renderInline={renderInline}
-        blocking={blocking}
-      >
-        {renderMeasuringPopoverElement()}
-      </Modal>
+      {everVisibleRef.current && (
+        <Modal
+          visible={visible}
+          shouldUseContainer={false}
+          backdropStyle={backdropStyle}
+          backdropAccessibilityLabel={backdropAccessibilityLabel}
+          animationType={animationType}
+          hardwareAccelerated={hardwareAccelerated}
+          supportedOrientations={supportedOrientations}
+          onShow={onShow}
+          onBackdropPress={onBackdropPress}
+          renderInline={renderInline}
+          blocking={blocking}
+        >
+          {renderMeasuringPopoverElement()}
+        </Modal>
+      )}
     </View>
   );
 });
