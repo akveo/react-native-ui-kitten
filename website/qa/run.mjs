@@ -198,13 +198,13 @@ for (const [id, tag] of [['qa-checkbox', 'checkbox'], ['qa-toggle', 'toggle'], [
   const tn = await c.rect(T('qa-topnav-action')); await c.qa(); await c.click(tn.x + 12, tn.cy); const tnq = await c.qa();
   const tnInfo = await c.ev(`(() => { const e = document.querySelector('${T('qa-topnav-action')}'); const p = e.parentElement; return { tag: e.tagName, role: e.getAttribute('role'), cls: e.className.slice(0,60), html: e.outerHTML.slice(0, 300), parentRole: p.getAttribute('role'), parentRect: JSON.stringify(p.getBoundingClientRect()), topAt: (() => { const t = document.elementFromPoint(${tn.cx}, ${tn.cy}); return t && (t.tagName + '/' + (t.getAttribute('data-testid') || '') + '/' + t.getAttribute('role')); })() }; })()`);
   rep('top navigation action press', tnq.includes('topnav:press'), `size ${tn.w}x${tn.h} ${JSON.stringify(tnq)} ${JSON.stringify(tnInfo)}`);
-  await c.ev(`document.querySelector('${T('@@autocomplete/input-anchor/input')}').scrollIntoView({ block: 'center' })`); await c.sleep(200);
-  const ac = await c.rect(T('@@autocomplete/input-anchor/input')); await c.click(ac.x + 30, ac.cy); await c.sleep(200); await c.qa(); await c.type('an'); await c.sleep(400);
+  await c.ev(`document.querySelector('${T('@@qa-autocomplete/input/input')}').scrollIntoView({ block: 'center' })`); await c.sleep(200);
+  const ac = await c.rect(T('@@qa-autocomplete/input/input')); await c.click(ac.x + 30, ac.cy); await c.sleep(200); await c.qa(); await c.type('an'); await c.sleep(400);
   const opts = await c.ev(`['Banana','Apple','Cherry'].map(t => !![...document.querySelectorAll('*')].find(e => e.children.length === 0 && e.textContent.trim() === t && e.getBoundingClientRect().width > 0))`);
   await c.shot(`${E}/autocomplete-open.png`);
   rep('autocomplete list filters while typing', JSON.stringify(opts) === '[true,false,false]', JSON.stringify(opts));
   const ban = await c.rectText('Banana'); await c.qa(); await c.click(ban.cx, ban.cy); await c.sleep(300); const aq = await c.qa();
-  const acv = await c.ev(`document.querySelector('${T('@@autocomplete/input-anchor/input')}').value`);
+  const acv = await c.ev(`document.querySelector('${T('@@qa-autocomplete/input/input')}').value`);
   rep('autocomplete item press fills input', aq.includes('ac-select:Banana') && acv === 'Banana', JSON.stringify(aq) + ' val=' + acv);
 }
 // ---- Keyboard: Tab order, focus style, Enter/Space
