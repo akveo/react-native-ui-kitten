@@ -67,6 +67,7 @@ import { AutocompleteBlurShowcase } from '../components/autocomplete/autocomplet
 import { ViewPagerSimpleUsageShowcase } from '../components/viewPager/viewPagerSimpleUsage.component';
 import { ModalDecimalSizeShowcase } from '../components/modal/modalDecimalSize.component';
 import { SelectScrollToSelectedShowcase } from '../components/select/selectScrollToSelected.component';
+import { SelectPlacementShowcase } from '../components/select/selectPlacement.component';
 import {
   IconGallery1Showcase,
   IconGallery2Showcase,
@@ -203,6 +204,7 @@ const SECTIONS: ShowcaseSection[] = [
   { title: 'PopoverAnchorFlex', Component: PopoverAnchorFlexShowcase },
   { title: 'AutocompleteBlur', Component: AutocompleteBlurShowcase },
   { title: 'SelectScrollToSelected', Component: SelectScrollToSelectedShowcase },
+  { title: 'SelectPlacement', Component: SelectPlacementShowcase },
 ];
 
 const keyExtractor = (item: ShowcaseSection): string => item.title;
