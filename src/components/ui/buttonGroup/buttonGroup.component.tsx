@@ -36,7 +36,9 @@ export interface ButtonGroupProps extends ViewProps {
   appearance?: LiteralUnion<'filled' | 'outline' | 'ghost'>;
   /**
    * Index of the selected button. The selected button renders `filled`
-   * (unless it sets its own `appearance`), the others keep the group appearance.
+   * (unless it sets its own `appearance`), the others keep the group appearance, so use it
+   * with `appearance='outline'` or `'ghost'`: in a `filled` group every button looks the same.
+   * Each button also reports whether it is selected to assistive technologies.
    */
   selectedIndex?: number;
   /**
@@ -72,6 +74,8 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * @property {number} selectedIndex - Index of the selected button.
  * The selected button renders `filled`, the others keep the group appearance,
  * which turns the group into a toggle when combined with `onSelect`.
+ * Use it with `appearance` `outline` or `ghost`: in a `filled` group (the default) the selected
+ * button looks like the others. Screen readers announce each button as selected or not.
  *
  * @property {(number) => void} onSelect - Called with the index of the pressed button.
  *
@@ -157,6 +161,12 @@ const ButtonGroupComponent: React.FC<ButtonGroupProps> = ({
     };
 
     const isSelected = selectedIndex !== undefined && selectedIndex === index;
+    // With a selection, every button tells assistive technologies whether it is the selected one,
+    // unless the child already set that state itself.
+    const childSelected = element.props['aria-selected'] ?? element.props.accessibilityState?.selected;
+    const selectedState = selectedIndex !== undefined && childSelected === undefined
+      ? { 'aria-selected': isSelected }
+      : {};
     const childOnPress = element.props.onPress;
     const onPress = onSelect ? (event: GestureResponderEvent): void => {
       childOnPress?.(event);
@@ -171,6 +181,7 @@ const ButtonGroupComponent: React.FC<ButtonGroupProps> = ({
       size: element.props.size ?? size,
       status: element.props.status ?? status,
       onPress,
+      ...selectedState,
       style: [element.props.style, styles.button, shapeStyle, startShapeStyle, endShapeStyle],
     });
   }, [evaStyle, appearance, size, status, selectedIndex, onSelect, isFirstElement, isLastElement]);

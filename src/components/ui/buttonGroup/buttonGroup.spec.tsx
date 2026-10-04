@@ -21,6 +21,7 @@ import {
   ButtonGroupProps,
 } from './buttonGroup.component';
 import { Button } from '../button/button.component';
+import { TouchableWeb } from '../../devsupport';
 
 describe('@button-group: component checks', () => {
 
@@ -149,6 +150,40 @@ describe('@button-group: component checks', () => {
     const appearances = component.UNSAFE_getAllByType(Button).map(button => button.props.appearance);
 
     expect(appearances).toEqual(['outline', 'outline']);
+  });
+
+  it('should report the selected state of every button to assistive technologies', () => {
+    const component = render(
+      <TestButtonGroup
+        appearance='outline'
+        selectedIndex={1}
+      />,
+    );
+
+    const [first, second] = component.UNSAFE_getAllByType(TouchableWeb);
+
+    expect(first.props['aria-selected']).toEqual(false);
+    expect(second.props['aria-selected']).toEqual(true);
+  });
+
+  it('should leave the selected state alone without selectedIndex or when a child sets it', () => {
+    const plain = render(<TestButtonGroup appearance='outline' />);
+    expect(plain.UNSAFE_getAllByType(TouchableWeb).map((button) => button.props['aria-selected']))
+      .toEqual([undefined, undefined]);
+
+    const own = render(
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
+        <ButtonGroup selectedIndex={0}>
+          <Button aria-selected={false} />
+          <Button />
+        </ButtonGroup>
+      </ApplicationProvider>,
+    );
+    expect(own.UNSAFE_getAllByType(TouchableWeb).map((button) => button.props['aria-selected']))
+      .toEqual([false, false]);
   });
 
   it('should call onSelect with the pressed index after the button onPress', () => {
