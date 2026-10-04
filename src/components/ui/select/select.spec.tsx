@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {
+  act,
   fireEvent,
   render,
   RenderAPI,
@@ -420,6 +421,151 @@ I love Babel
     expect(StyleSheet.flatten(list.props.style)).toMatchObject({ maxHeight: 120 });
     expect(list.props.data.length).toEqual(2);
     expect(typeof listRef.current.scrollToIndex).toBe('function');
+  });
+
+  describe('scroll to the selected option on open', () => {
+    const ManyOptions = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<SelectRef>) => (
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}
+      >
+        <Select
+          ref={ref}
+          {...props}
+        >
+          {Array.from({ length: 30 }, (_, index) => (
+            <SelectItem
+              key={index}
+              title={`Option ${index + 1}`}
+            />
+          ))}
+        </Select>
+      </ApplicationProvider>
+    ));
+    ManyOptions.displayName = 'ManyOptions';
+
+    let scrollToIndex: jest.SpyInstance;
+
+    beforeEach(() => {
+      scrollToIndex = jest.spyOn(FlatList.prototype, 'scrollToIndex').mockImplementation(() => undefined);
+    });
+
+    afterEach(() => {
+      scrollToIndex.mockRestore();
+    });
+
+    const openAndLayout = async (component: RenderAPI): Promise<void> => {
+      fireEvent.press(touchables.findControlTouchable(component));
+      const list = await waitFor(() => component.UNSAFE_getByType(FlatList));
+      fireEvent(list, 'contentSizeChange', 300, 1200);
+    };
+
+    it('should scroll the list to the selected option', async () => {
+      const component = render(
+        <ManyOptions selectedIndex={new IndexPath(24)} />,
+      );
+
+      await openAndLayout(component);
+
+      expect(scrollToIndex).toHaveBeenCalledWith(expect.objectContaining({ index: 24, animated: false }));
+    });
+
+    it('should scroll to the topmost selected option of a multi select', async () => {
+      const component = render(
+        <ManyOptions
+          multiSelect={true}
+          selectedIndex={[new IndexPath(20), new IndexPath(12)]}
+        />,
+      );
+
+      await openAndLayout(component);
+
+      expect(scrollToIndex).toHaveBeenCalledWith(expect.objectContaining({ index: 12 }));
+    });
+
+    it('should stop retrying a failed scroll after a few rounds', async () => {
+      jest.useFakeTimers();
+      const scrollToOffset = jest.spyOn(FlatList.prototype, 'scrollToOffset').mockImplementation(() => undefined);
+      const component = render(<ManyOptions selectedIndex={new IndexPath(24)} />);
+      await openAndLayout(component);
+      const list = component.UNSAFE_getByType(FlatList);
+      const failure = { index: 24, highestMeasuredFrameIndex: 9, averageItemLength: 40 };
+
+      // Every attempt fails: the first try plus five retries, then nothing more.
+      for (let attempt = 0; attempt < 10; attempt++) {
+        list.props.onScrollToIndexFailed(failure);
+        act(() => jest.advanceTimersByTime(60));
+      }
+
+      expect(scrollToIndex).toHaveBeenCalledTimes(6);
+      scrollToOffset.mockRestore();
+      jest.useRealTimers();
+    });
+
+    it('should drop a pending retry when the list closes', async () => {
+      jest.useFakeTimers();
+      const scrollToOffset = jest.spyOn(FlatList.prototype, 'scrollToOffset').mockImplementation(() => undefined);
+      const component = render(<ManyOptions selectedIndex={new IndexPath(24)} />);
+      await openAndLayout(component);
+
+      component.UNSAFE_getByType(FlatList).props.onScrollToIndexFailed({ index: 24, highestMeasuredFrameIndex: 9, averageItemLength: 40 });
+      act(() => component.getByTestId('@backdrop').props.onResponderRelease({ nativeEvent: {} }));
+      act(() => jest.advanceTimersByTime(200));
+
+      expect(scrollToIndex).toHaveBeenCalledTimes(1);
+      scrollToOffset.mockRestore();
+      jest.useRealTimers();
+    });
+
+    it('should not scroll without a selection or when the first option is selected', async () => {
+      const component = render(
+        <ManyOptions />,
+      );
+      await openAndLayout(component);
+
+      const first = render(
+        <ManyOptions selectedIndex={new IndexPath(0)} />,
+      );
+      await openAndLayout(first);
+
+      expect(scrollToIndex).not.toHaveBeenCalled();
+    });
+
+    it('should leave scrolling to a consumer initialScrollIndex', async () => {
+      const component = render(
+        <ManyOptions
+          selectedIndex={new IndexPath(24)}
+          listProps={{ initialScrollIndex: 3, getItemLayout: (_data, index) => ({ length: 40, offset: 40 * index, index }) }}
+        />,
+      );
+
+      await openAndLayout(component);
+
+      expect(scrollToIndex).not.toHaveBeenCalled();
+    });
+
+    it('should scroll to the row of the group that holds the selected option', async () => {
+      const component = render(
+        <ApplicationProvider
+          mapping={mapping}
+          theme={light}
+        >
+          <Select selectedIndex={new IndexPath(1, 2)}>
+            <SelectItem title='Option 1' />
+            <SelectItem title='Option 2' />
+            <SelectGroup title='Group 3'>
+              <SelectItem title='Option 3.1' />
+              <SelectItem title='Option 3.2' />
+            </SelectGroup>
+            <SelectItem title='Option 4' />
+          </Select>
+        </ApplicationProvider>,
+      );
+
+      await openAndLayout(component);
+
+      expect(scrollToIndex).toHaveBeenCalledWith(expect.objectContaining({ index: 2 }));
+    });
   });
 
   it('should render options when becomes focused', async () => {

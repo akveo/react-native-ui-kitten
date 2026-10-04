@@ -59,7 +59,7 @@ const SelectExample = () => {
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `selectedIndex` | `IndexPath \| IndexPath[]` | `undefined` | The selected item index (or array for multi-select). |
+| `selectedIndex` | `IndexPath \| IndexPath[]` | `undefined` | The selected item index (or array for multi-select). When the list opens it scrolls to the selected option (the first one for multi-select, the group row for a grouped option); a `listProps.initialScrollIndex` takes over. |
 | `onSelect` | `(index: IndexPath \| IndexPath[]) => void` | - | Called when an item is selected. |
 | `placeholder` | `string \| number \| (props) => ReactElement` | `'Select Option'` | Placeholder displayed when no item is selected. |
 | `label` | `string \| number \| (props) => ReactElement` | `undefined` | Label displayed above the select. |
