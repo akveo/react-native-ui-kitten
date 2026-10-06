@@ -43,7 +43,7 @@
     "access": "public"
   },
   "bin": {
-    "ui-kitten": "./bin/ui-kitten"
+    "ui-kitten": "bin/ui-kitten"
   },
   "scripts": {
     "build": "bob build",

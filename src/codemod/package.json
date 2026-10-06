@@ -41,7 +41,7 @@
     "migration"
   ],
   "bin": {
-    "ui-kitten-codemod": "./bin/ui-kitten-codemod"
+    "ui-kitten-codemod": "bin/ui-kitten-codemod"
   },
   "scripts": {
     "build": "bob build",
