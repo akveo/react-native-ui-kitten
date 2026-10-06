@@ -3891,8 +3891,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ui-kitten/components@workspace:src/components"
   dependencies:
-    "@ui-kitten/mapping-base": ^6.0.0
-    "@ui-kitten/processor": ^6.1.0
+    "@ui-kitten/mapping-base": ^6.2.1
+    "@ui-kitten/processor": ^6.2.1
     fecha: 3.0.3
     hoist-non-react-statics: ^3.2.1
     typescript: ^5.3.0
@@ -3932,7 +3932,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ui-kitten/mapping-base@^6.0.0, @ui-kitten/mapping-base@workspace:src/mapping-base":
+"@ui-kitten/mapping-base@^6.2.1, @ui-kitten/mapping-base@workspace:src/mapping-base":
   version: 0.0.0-use.local
   resolution: "@ui-kitten/mapping-base@workspace:src/mapping-base"
   languageName: unknown
@@ -3948,8 +3948,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ui-kitten/metro-config@workspace:src/metro-config"
   dependencies:
-    "@ui-kitten/mapping-base": ^6.0.0
-    "@ui-kitten/processor": ^6.0.0
+    "@ui-kitten/mapping-base": ^6.2.1
+    "@ui-kitten/processor": ^6.2.1
     chalk: ^3.0.0
     commander: ^4.1.1
     typescript: ^5.3.0
@@ -3972,7 +3972,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ui-kitten/processor@^6.0.0, @ui-kitten/processor@^6.1.0, @ui-kitten/processor@workspace:src/processor":
+"@ui-kitten/processor@^6.2.1, @ui-kitten/processor@workspace:src/processor":
   version: 0.0.0-use.local
   resolution: "@ui-kitten/processor@workspace:src/processor"
   languageName: unknown

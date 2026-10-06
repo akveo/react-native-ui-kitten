@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/date-fns",
   "description": "date-fns services for UI Kitten",
-  "version": "6.0.0",
+  "version": "6.2.1",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
   "types": "./lib/typescript/commonjs/index.d.ts",
