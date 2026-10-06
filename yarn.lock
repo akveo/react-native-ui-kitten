@@ -3883,7 +3883,7 @@ __metadata:
   dependencies:
     ts-morph: ^24.0.0
   bin:
-    ui-kitten-codemod: ./bin/ui-kitten-codemod
+    ui-kitten-codemod: bin/ui-kitten-codemod
   languageName: unknown
   linkType: soft
 
@@ -3956,7 +3956,7 @@ __metadata:
   peerDependencies:
     metro-config: "*"
   bin:
-    ui-kitten: ./bin/ui-kitten
+    ui-kitten: bin/ui-kitten
   languageName: unknown
   linkType: soft
 
