@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/codemod",
   "description": "Codemod that upgrades an application from UI Kitten v5 to v6",
-  "version": "6.0.0",
+  "version": "6.2.1",
   "main": "./lib/commonjs/index.js",
   "types": "./index.ts",
   "source": "./index.ts",
