@@ -25,10 +25,6 @@ npx @ui-kitten/codemod          # dry run — nothing is written
 npx @ui-kitten/codemod --write  # apply
 ```
 
-:::note
-`@ui-kitten/codemod` is not published yet. Until it is, run it from a checkout of the UI Kitten repository instead of `npx`: `node src/codemod/bin/ui-kitten-codemod <path-to-your-app>`, with `--write` to apply.
-:::
-
 The codemod leaves a report naming everything it refused to change and why. The sections below are what that report links to.
 
 ### Migration Purposes

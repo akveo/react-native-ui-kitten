@@ -131,9 +131,25 @@ The `NODE_AUTH_TOKEN` env var (from the `NPM_TOKEN` repo secret) is what `action
 into `.npmrc`; it is used for registry reads, not for the publish. That secret expires **2026-11-05**
 and will need rotating.
 
-Writes to npm from a developer machine do not work at all (same 2FA-bypass error) — `npm publish`,
-`npm deprecate`, `npm unpublish` and `npm dist-tag add|rm` all return 403. Reads (`npm view`,
-`npm info`, `npm access list`) work with no auth.
+Writes to npm from a developer machine (`npm publish`, `npm deprecate`, `npm unpublish`,
+`npm dist-tag add|rm`) need an **interactive terminal**: after `npm login` (web flow) every write
+command prints `Authenticate your account at: https://www.npmjs.com/auth/cli/...` and waits for the
+browser. From a non-interactive shell (CI steps, agents, scripts piped through `yes`) the same
+commands return a bare `403 Forbidden`. Reads (`npm view`, `npm info`, `npm access list`) work
+with no auth.
+
+### Adding a package to the registry
+
+Trusted publishing only works for packages that already exist on npm, so a **new** `@ui-kitten/*`
+package cannot be created by `release.yml`. The first version is published by hand from an
+interactive terminal, then the workflow takes over:
+
+1. `yarn workspace @ui-kitten/<name> build`, then `cd src/<name> && npm publish --access public`
+   (web auth in the browser).
+2. On npmjs.com, open the package → Settings → Trusted publisher, add
+   `akveo/react-native-ui-kitten` / workflow `release.yml`.
+3. Only then merge the Version PR that bumps it. If the Version PR lands first, `changeset publish`
+   fails on that package with `404`/`403` and the run has to be re-triggered after steps 1–2.
 
 ## Toolchain constraints — read before bumping either of these
 

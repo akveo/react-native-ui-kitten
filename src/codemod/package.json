@@ -2,7 +2,6 @@
   "name": "@ui-kitten/codemod",
   "description": "Codemod that upgrades an application from UI Kitten v5 to v6",
   "version": "6.0.0",
-  "private": true,
   "main": "./lib/commonjs/index.js",
   "types": "./index.ts",
   "source": "./index.ts",
@@ -27,7 +26,7 @@
   ],
   "author": "UI Kitten Contributors",
   "license": "MIT",
-  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "homepage": "https://akveo.github.io/react-native-ui-kitten/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/akveo/react-native-ui-kitten.git"

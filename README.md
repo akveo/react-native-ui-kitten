@@ -121,12 +121,13 @@ Switch to `eva.dark`, or spread your own theme over it, and every component re-r
 | [`@ui-kitten/metro-config`](src/metro-config)    | [![npm](https://img.shields.io/npm/v/@ui-kitten/metro-config?label=)](https://www.npmjs.com/package/@ui-kitten/metro-config) | Metro plugin that precompiles Eva mappings at build time.                    |
 | [`@ui-kitten/processor`](src/processor)          | [![npm](https://img.shields.io/npm/v/@ui-kitten/processor?label=)](https://www.npmjs.com/package/@ui-kitten/processor)     | Mapping processor. Replaces `@eva-design/dss` and `@eva-design/processor`.   |
 | [`@ui-kitten/mapping-base`](src/mapping-base)    | [![npm](https://img.shields.io/npm/v/@ui-kitten/mapping-base?label=)](https://www.npmjs.com/package/@ui-kitten/mapping-base) | Shared mapping schema used by `eva` and `material`.                          |
+| [`@ui-kitten/codemod`](src/codemod)              | [![npm](https://img.shields.io/npm/v/@ui-kitten/codemod?label=)](https://www.npmjs.com/package/@ui-kitten/codemod)         | Rewrites a v5 app for v6 and reports what it could not touch.               |
 
 ## Migrating from v5
 
 Package names, component names and props are unchanged. The breaking changes are the move from class to function components (ref types), the removal of the `styled` decorator in favour of `useStyled`, and enforced peer dependencies. The [migration guide](https://akveo.github.io/react-native-ui-kitten/docs/migration/5x-to-6) lists every change with a fix.
 
-A codemod in [`src/codemod`](src/codemod) rewrites the mechanical parts and leaves a report of what it could not touch.
+`npx @ui-kitten/codemod` rewrites the mechanical parts and leaves a report of what it could not touch; add `--write` to apply. Source in [`src/codemod`](src/codemod).
 
 ## Documentation and examples
 
