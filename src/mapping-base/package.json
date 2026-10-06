@@ -21,7 +21,7 @@
     "!**/*.spec.*",
     "!**/tests/**"
   ],
-  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "homepage": "https://akveo.github.io/react-native-ui-kitten/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
